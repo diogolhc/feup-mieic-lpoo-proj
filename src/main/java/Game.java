@@ -12,16 +12,15 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class Game {
-    private final GUI gui;
     private final GameModel model;
     private final GameController controller;
     private final GameViewer viewer;
 
     public Game() throws IOException, FontFormatException, URISyntaxException {
-        this.gui = new LanternaGUI(40, 20);
+        GUI gui = new LanternaGUI(40, 20);
 
         this.model = new GameModel();
-        this.viewer = new GameViewer(this.gui);
+        this.viewer = new GameViewer(gui);
         this.controller = new GameController(this.viewer, this.model);
     }
 

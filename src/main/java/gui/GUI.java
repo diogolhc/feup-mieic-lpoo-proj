@@ -15,6 +15,18 @@ public interface GUI {
 
     void close() throws IOException;
 
+    void drawHorizontalFence(int x, int y);
+
+    void drawVerticalFence(int x, int y);
+
+    void drawTopLeftCornerFence(int x, int y);
+
+    void drawTopRightCornerFence(int x, int y);
+
+    void drawBottomLeftCornerFence(int x, int y);
+
+    void drawBottomRightCornerFence(int x, int y);
+
     enum ACTION {
         UP, RIGHT, DOWN, LEFT, QUIT, NONE;
     }

@@ -2,6 +2,8 @@ package gui;
 
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextCharacter;
+import com.googlecode.lanterna.TextColor;
+import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.TerminalScreen;
@@ -69,6 +71,22 @@ public class LanternaGUI implements GUI {
         return fontConfig;
     }
 
+    @Override
+    public void clear() {
+        screen.clear();
+    }
+
+    @Override
+    public void refresh() throws IOException {
+        screen.refresh();
+    }
+
+    @Override
+    public void close() throws IOException {
+        screen.close();
+    }
+
+
     private boolean isKeyStrokeType(KeyStroke keyStroke, KeyType type) {
         return keyStroke.getKeyType() == type;
     }
@@ -91,11 +109,6 @@ public class LanternaGUI implements GUI {
         return ACTION.NONE;
     }
 
-    @Override
-    public void drawFarmer(Position position) {
-        drawCharacter(position, '@');
-    }
-
     private void drawCharacter(int x, int y, char c) {
         screen.setCharacter(x, y, TextCharacter.fromCharacter(c)[0]);
     }
@@ -105,17 +118,55 @@ public class LanternaGUI implements GUI {
     }
 
     @Override
-    public void clear() {
-        screen.clear();
+    public void drawFarmer(Position position) {
+        drawCharacter(position, '@');
     }
 
     @Override
-    public void refresh() throws IOException {
-        screen.refresh();
+    public void drawHorizontalFence(int x, int y) {
+        TextGraphics graphics = screen.newTextGraphics();
+        graphics.setBackgroundColor(TextColor.Factory.fromString("#7EC850"));
+        graphics.setForegroundColor(TextColor.Factory.fromString("#846f46"));
+        graphics.putString(x, y, "#");
     }
 
     @Override
-    public void close() throws IOException {
-        screen.close();
+    public void drawVerticalFence(int x, int y) {
+        TextGraphics graphics = screen.newTextGraphics();
+        graphics.setBackgroundColor(TextColor.Factory.fromString("#7EC850"));
+        graphics.setForegroundColor(TextColor.Factory.fromString("#846f46"));
+        graphics.putString(x, y, "#");
+    }
+
+    @Override
+    public void drawTopLeftCornerFence(int x, int y) {
+        TextGraphics graphics = screen.newTextGraphics();
+        graphics.setBackgroundColor(TextColor.Factory.fromString("#7EC850"));
+        graphics.setForegroundColor(TextColor.Factory.fromString("#846f46"));
+        graphics.putString(x, y, "#");
+    }
+
+    @Override
+    public void drawTopRightCornerFence(int x, int y) {
+        TextGraphics graphics = screen.newTextGraphics();
+        graphics.setBackgroundColor(TextColor.Factory.fromString("#7EC850"));
+        graphics.setForegroundColor(TextColor.Factory.fromString("#846f46"));
+        graphics.putString(x, y, "#");
+    }
+
+    @Override
+    public void drawBottomLeftCornerFence(int x, int y) {
+        TextGraphics graphics = screen.newTextGraphics();
+        graphics.setBackgroundColor(TextColor.Factory.fromString("#7EC850"));
+        graphics.setForegroundColor(TextColor.Factory.fromString("#846f46"));
+        graphics.putString(x, y, "#");
+    }
+
+    @Override
+    public void drawBottomRightCornerFence(int x, int y) {
+        TextGraphics graphics = screen.newTextGraphics();
+        graphics.setBackgroundColor(TextColor.Factory.fromString("#7EC850"));
+        graphics.setForegroundColor(TextColor.Factory.fromString("#846f46"));
+        graphics.putString(x, y, "#");
     }
 }
