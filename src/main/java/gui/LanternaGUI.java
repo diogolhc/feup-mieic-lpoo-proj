@@ -93,7 +93,7 @@ public class LanternaGUI implements GUI {
 
     @Override
     public void drawFarmer(Position position) {
-        drawCharacter(position, 'F');
+        drawCharacter(position, '@');
     }
 
     private void drawCharacter(int x, int y, char c) {

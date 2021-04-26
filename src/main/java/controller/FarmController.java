@@ -1,5 +1,6 @@
 package controller;
 
+import gui.GUI;
 import model.Farm;
 
 public class FarmController {
@@ -13,5 +14,9 @@ public class FarmController {
 
     public FarmerController getFarmerController() {
         return this.farmerController;
+    }
+
+    public void doAction(GUI.ACTION action) {
+        this.farmerController.doAction(action);
     }
 }
