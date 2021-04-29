@@ -24,8 +24,6 @@ import java.net.URL;
 public class LanternaGUI implements GUI {
     private final TerminalScreen screen;
     private final TextGraphics graphics;
-    private static final TextColor fenceForeground = TextColor.Factory.fromString("#846f46");
-    private static final TextColor fenceBackground = TextColor.Factory.fromString("#7EC850");
 
     public LanternaGUI(int width, int height) throws IOException, FontFormatException, URISyntaxException {
         AWTTerminalFontConfiguration fontConfig = loadSquareFont();
@@ -90,6 +88,31 @@ public class LanternaGUI implements GUI {
         screen.close();
     }
 
+    @Override
+    public void setBackgroundColor(String color) {
+        graphics.setBackgroundColor(TextColor.Factory.fromString(color));
+
+    }
+
+    @Override
+    public void setForegroundColor(String color) {
+        graphics.setForegroundColor(TextColor.Factory.fromString(color));
+    }
+
+    @Override
+    public String getBackGroundColor(int x, int y) {
+        return graphics.getCharacter(x, y).getBackgroundColor().toString();
+    }
+
+    @Override
+    public String getForegroundColor(int x, int y) {
+        return graphics.getCharacter(x, y).getForegroundColor().toString();
+    }
+
+    @Override
+    public void drawChar(int x, int y, char character) {
+        graphics.setCharacter(x, y, character);
+    }
 
     private boolean isKeyStrokeType(KeyStroke keyStroke, KeyType type) {
         return keyStroke.getKeyType() == type;
@@ -113,6 +136,7 @@ public class LanternaGUI implements GUI {
         return ACTION.NONE;
     }
 
+    /*
     private void drawCharacter(int x, int y, char c) {
         graphics.setCharacter(x, y, c);
     }
@@ -126,28 +150,12 @@ public class LanternaGUI implements GUI {
         graphics.setForegroundColor(foregroundColor);
     }
 
+
     @Override
     public void drawFarmer(Position position) {
         graphics.setBackgroundColor(TextColor.Factory.fromString("#000000"));
         graphics.setForegroundColor(TextColor.Factory.fromString("#999999"));
         drawCharacter(position, '@');
     }
-
-    @Override
-    public void drawHorizontalFence(int x, int y) {
-        setColor(fenceBackground, fenceForeground);
-        graphics.putString(x, y, "-");
-    }
-
-    @Override
-    public void drawVerticalFence(int x, int y) {
-        setColor(fenceBackground, fenceForeground);
-        graphics.putString(x, y, "|");
-    }
-
-    @Override
-    public void drawCornerFence(int x, int y) {
-        setColor(fenceBackground, fenceForeground);
-        graphics.putString(x, y, "+");
-    }
+    */
 }

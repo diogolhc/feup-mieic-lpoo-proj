@@ -1,16 +1,20 @@
 package viewer;
 
 import gui.GUI;
+import gui.drawer.FencesDrawer;
 import model.Farm;
 import model.Farmer;
+import model.Position;
 
 import java.io.IOException;
 
 public class FarmViewer {
     public void draw(Farm farm, GUI gui) throws IOException {
         gui.clear();
+
         drawFarmer(farm.getFarmer(), new FarmerViewer(), gui);
         drawFences(farm, gui);
+
         gui.refresh();
     }
 
@@ -19,20 +23,7 @@ public class FarmViewer {
     }
 
     private void drawFences(Farm farm, GUI gui) {
-        int width = farm.getWidth();
-        int height = farm.getHeight();
-        for (int i = 1; i < width-1; i++) {
-            gui.drawHorizontalFence(i, 0);
-            gui.drawHorizontalFence(i, height-1);
-        }
-        for (int i = 1; i < height-1; i++) {
-            gui.drawVerticalFence(0, i);
-            gui.drawVerticalFence(width-1, i);
-        }
-
-        gui.drawCornerFence(0, 0);
-        gui.drawCornerFence(width-1, 0);
-        gui.drawCornerFence(0, height-1);
-        gui.drawCornerFence(width-1, height-1);
+        FencesDrawer fencesDrawer = new FencesDrawer(gui);
+        fencesDrawer.draw(new Position(0, 0), farm.getWidth(), farm.getHeight());
     }
 }
