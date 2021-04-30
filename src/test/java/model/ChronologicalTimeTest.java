@@ -1,6 +1,6 @@
 package model;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.*;
 
@@ -19,9 +19,9 @@ public class ChronologicalTimeTest {
     public void testGetDay() {
         ChronologicalTime time = new ChronologicalTime(0);
 
-        time.advance(24*60*60*2 + 1);
+        time.advance(24*60*2 + 1);
 
-        assertEquals(3, time.getDay());
+        assertEquals(2, time.getDay());
     }
 
     @Test
@@ -30,7 +30,7 @@ public class ChronologicalTimeTest {
 
         time.advance(24*60*60*2 + 60*2 + 1);
 
-        assertEquals(3, time.getHourOfDay());
+        assertEquals(2, time.getHourOfDay());
     }
 
     @Test

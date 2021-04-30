@@ -16,7 +16,7 @@ public class ChronologicalTime {
     }
 
     public int getDay() {
-        return minutes / 24;
+        return minutes / 60 / 24;
     }
 
     public int getHourOfDay() {
