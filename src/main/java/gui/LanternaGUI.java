@@ -26,13 +26,13 @@ public class LanternaGUI implements GUI {
     private final TextGraphics graphics;
 
     public LanternaGUI(int width, int height) throws IOException, FontFormatException, URISyntaxException {
-        AWTTerminalFontConfiguration fontConfig = loadSquareFont();
-        Terminal terminal = createTerminal(width, height, fontConfig);
-        screen = createScreen(terminal);
-        graphics = screen.newTextGraphics();
+        AWTTerminalFontConfiguration fontConfig = this.loadSquareFont();
+        Terminal terminal = this.createTerminal(width, height, fontConfig);
+        screen = this.createScreen(terminal);
+        graphics = this.screen.newTextGraphics();
     }
 
-    private TerminalScreen createScreen(Terminal terminal) throws IOException {
+    private static TerminalScreen createScreen(Terminal terminal) throws IOException {
         final TerminalScreen screen;
         screen = new TerminalScreen(terminal);
 
@@ -42,7 +42,7 @@ public class LanternaGUI implements GUI {
         return screen;
     }
 
-    private Terminal createTerminal(int width, int height, AWTTerminalFontConfiguration fontConfig) throws IOException {
+    private static Terminal createTerminal(int width, int height, AWTTerminalFontConfiguration fontConfig) throws IOException {
         TerminalSize terminalSize = new TerminalSize(width, height);
         Terminal terminal = new DefaultTerminalFactory()
                 .setInitialTerminalSize(terminalSize)
@@ -61,7 +61,7 @@ public class LanternaGUI implements GUI {
     }
 
     private AWTTerminalFontConfiguration loadSquareFont() throws URISyntaxException, FontFormatException, IOException {
-        URL resource = getClass().getClassLoader().getResource("square.ttf");
+        URL resource = this.getClass().getClassLoader().getResource("square.ttf");
         File fontFile = new File(resource.toURI());
         Font font = Font.createFont(Font.TRUETYPE_FONT, fontFile);
 
@@ -75,64 +75,71 @@ public class LanternaGUI implements GUI {
 
     @Override
     public void clear() {
-        screen.clear();
+        this.screen.clear();
     }
 
     @Override
     public void refresh() throws IOException {
-        screen.refresh();
+        this.screen.refresh();
     }
 
     @Override
     public void close() throws IOException {
-        screen.close();
+        this.screen.close();
     }
 
     @Override
     public void setBackgroundColor(String color) {
-        graphics.setBackgroundColor(TextColor.Factory.fromString(color));
+        this.graphics.setBackgroundColor(TextColor.Factory.fromString(color));
 
     }
 
     @Override
     public void setForegroundColor(String color) {
-        graphics.setForegroundColor(TextColor.Factory.fromString(color));
+        this.graphics.setForegroundColor(TextColor.Factory.fromString(color));
+    }
+
+    private static String getColorString(TextColor color) {
+        return "#"
+                + String.format("%02x", color.getRed())
+                + String.format("%02x", color.getGreen())
+                + String.format("%02x", color.getBlue());
     }
 
     @Override
     public String getBackGroundColor(int x, int y) {
-        return graphics.getCharacter(x, y).getBackgroundColor().toString();
+        return this.getColorString(this.graphics.getCharacter(x, y).getBackgroundColor());
     }
 
     @Override
     public String getForegroundColor(int x, int y) {
-        return graphics.getCharacter(x, y).getForegroundColor().toString();
+        return this.getColorString(this.graphics.getCharacter(x, y).getBackgroundColor());
     }
 
     @Override
     public void drawChar(int x, int y, char character) {
-        graphics.setCharacter(x, y, character);
+        this.graphics.setCharacter(x, y, character);
     }
 
-    private boolean isKeyStrokeType(KeyStroke keyStroke, KeyType type) {
+    private static boolean isKeyStrokeType(KeyStroke keyStroke, KeyType type) {
         return keyStroke.getKeyType() == type;
     }
 
-    private boolean isKeyStrokeCharacter(KeyStroke keyStroke, char c) {
+    private static boolean isKeyStrokeCharacter(KeyStroke keyStroke, char c) {
         return isKeyStrokeType(keyStroke, KeyType.Character) && keyStroke.getCharacter() == c;
     }
 
     @Override
     public ACTION getNextAction() throws IOException {
-        KeyStroke keyStroke = screen.readInput();
+        KeyStroke keyStroke = this.screen.readInput();
 
-        if (isKeyStrokeType(keyStroke, KeyType.EOF)) return ACTION.QUIT;
-        if (isKeyStrokeCharacter(keyStroke, 'q')) return ACTION.QUIT;
+        if (this.isKeyStrokeType(keyStroke, KeyType.EOF)) return ACTION.QUIT;
+        if (this.isKeyStrokeCharacter(keyStroke, 'q')) return ACTION.QUIT;
 
-        if (isKeyStrokeCharacter(keyStroke, 'w')) return ACTION.UP;
-        if (isKeyStrokeCharacter(keyStroke, 'd')) return ACTION.RIGHT;
-        if (isKeyStrokeCharacter(keyStroke, 's')) return ACTION.DOWN;
-        if (isKeyStrokeCharacter(keyStroke, 'a')) return ACTION.LEFT;
+        if (this.isKeyStrokeCharacter(keyStroke, 'w')) return ACTION.UP;
+        if (this.isKeyStrokeCharacter(keyStroke, 'd')) return ACTION.RIGHT;
+        if (this.isKeyStrokeCharacter(keyStroke, 's')) return ACTION.DOWN;
+        if (this.isKeyStrokeCharacter(keyStroke, 'a')) return ACTION.LEFT;
 
         return ACTION.NONE;
     }
