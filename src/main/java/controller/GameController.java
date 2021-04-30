@@ -8,6 +8,7 @@ import viewer.GameViewer;
 import java.io.IOException;
 
 public class GameController {
+    private final MouseListener mouseListener;
     private GameControllerState gameControllerState;
     private final GameViewer viewer;
     private final GameModel model;
@@ -15,11 +16,21 @@ public class GameController {
     public GameController(GameViewer viewer, GameModel model) {
         this.viewer = viewer;
         this.model = model;
-        this.gameControllerState = new FarmController(viewer, model);
+        this.gameControllerState = new FarmController(this);
+        this.mouseListener = new MouseListener();
+        viewer.setMouseListener(this.mouseListener);
     }
 
     public void setGameControllerState(GameControllerState state) {
         this.gameControllerState = state;
+    }
+
+    public MouseListener getMouseListener() {
+        return this.mouseListener;
+    }
+
+    public GameModel getModel() {
+        return this.model;
     }
 
     public void run() throws IOException {
@@ -33,5 +44,9 @@ public class GameController {
         }
 
         this.viewer.closeGUI();
+    }
+
+    public GameViewer getViewer() {
+        return this.viewer;
     }
 }

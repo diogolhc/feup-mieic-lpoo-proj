@@ -6,5 +6,5 @@ import model.GameModel;
 import java.io.IOException;
 
 public interface GameViewerState {
-    void draw(GameModel model, GUI gui) throws IOException;
+    void draw(GameModel model, GUI gui);
 }

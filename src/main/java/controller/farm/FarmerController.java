@@ -1,7 +1,7 @@
 package controller.farm;
 
 import gui.GUI;
-import model.Farm;
+import model.farm.Farm;
 import model.Position;
 
 public class FarmerController {

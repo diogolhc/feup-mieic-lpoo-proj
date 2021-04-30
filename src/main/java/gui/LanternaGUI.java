@@ -10,8 +10,11 @@ import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFrame;
+import controller.MouseListener;
 
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
@@ -20,12 +23,14 @@ import java.net.URISyntaxException;
 import java.net.URL;
 
 public class LanternaGUI implements GUI {
+    private static final int CHAR_SIZE = 25;
+    private final Terminal terminal;
     private final TerminalScreen screen;
     private final TextGraphics graphics;
 
     public LanternaGUI(int width, int height) throws IOException, FontFormatException, URISyntaxException {
         AWTTerminalFontConfiguration fontConfig = this.loadSquareFont();
-        Terminal terminal = this.createTerminal(width, height, fontConfig);
+        terminal = this.createTerminal(width, height, fontConfig);
         screen = this.createScreen(terminal);
         graphics = this.screen.newTextGraphics();
     }
@@ -146,5 +151,15 @@ public class LanternaGUI implements GUI {
         if (this.isKeyStrokeCharacter(keyStroke, ' ')) return ACTION.INTERACT;
 
         return ACTION.NONE;
+    }
+
+    @Override
+    public void setMouseListener(MouseListener mouseListener) {
+        ((AWTTerminalFrame) this.terminal).getComponent(0).addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                mouseListener.notifyClick(e.getX()/LanternaGUI.CHAR_SIZE, e.getY()/LanternaGUI.CHAR_SIZE);
+            }
+        });
     }
 }
