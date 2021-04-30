@@ -2,6 +2,7 @@ package viewer.farm;
 
 import gui.GUI;
 import gui.drawer.FencesDrawer;
+import gui.drawer.HouseDrawer;
 import model.*;
 import viewer.GameViewerState;
 
@@ -15,9 +16,14 @@ public class FarmViewer implements GameViewerState {
         fencesDrawer.draw(new Position(0, 0), farm.getWidth(), farm.getHeight());
     }
 
+    private void drawHouse(House house, HouseViewer houseViewer, GUI gui) {
+        houseViewer.draw(house, gui);
+    }
+
     @Override
     public void draw(GameModel model, GUI gui) {
         drawCropField(model.getFarm().getCropField(), new CropFieldViewer(), gui);
+        drawHouse(model.getFarm().getHouse(), new HouseViewer(), gui);
         drawFences(model.getFarm(), gui);
 
         drawFarmer(model.getFarm().getFarmer(), new FarmerViewer(), gui);

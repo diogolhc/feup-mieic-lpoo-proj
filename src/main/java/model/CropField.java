@@ -1,11 +1,10 @@
 package model;
 
-public class CropField {
+public class CropField extends InteractiveElement {
     public static final int CROP_FIELD_SIZE = 4;
-    private final Position topLeft;
 
     public CropField(Position topLeft) {
-        this.topLeft = topLeft;
+        super(topLeft);
     }
 
     public Position getPosition() {

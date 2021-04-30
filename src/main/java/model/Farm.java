@@ -3,6 +3,7 @@ package model;
 public class Farm {
     private final Farmer farmer;
     private final CropField cropField; // TODO Experimental, shouldn't exist in the final version
+    private final House house;  // TODO List of InteractiveElements
     private int width;
     private int height;
 
@@ -12,6 +13,7 @@ public class Farm {
         this.height = height;
         this.farmer = new Farmer(new Position(3, 3));
         this.cropField = new CropField(new Position(5, 1));
+        this.house = new House(new Position(5, 10));
     }
 
     public Farmer getFarmer() {
@@ -25,6 +27,7 @@ public class Farm {
         if (y <= 0 || y >= this.height-1) return false;
         // TODO check other objects
         if (!this.cropField.isTraversable(position)) return false;
+        if (!this.house.isTraversable(position)) return false;
         return true;
     }
 
@@ -39,4 +42,6 @@ public class Farm {
     public CropField getCropField() {
         return this.cropField;
     }
+
+    public House getHouse() { return house; }
 }
