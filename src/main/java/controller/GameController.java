@@ -16,7 +16,7 @@ public class GameController {
     public GameController(GameViewer viewer, GameModel model) {
         this.viewer = viewer;
         this.model = model;
-        this.gameControllerState = new FarmController(this, viewer);
+        this.gameControllerState = new FarmController(this);
         this.mouseListener = new MouseListener();
         viewer.setMouseListener(this.mouseListener);
     }
@@ -44,5 +44,9 @@ public class GameController {
         }
 
         this.viewer.closeGUI();
+    }
+
+    public GameViewer getViewer() {
+        return this.viewer;
     }
 }

@@ -14,7 +14,7 @@ public class MenuController implements GameControllerState {
         this.model = controller.getModel();
         this.controller = controller;
         for (Button button: model.getMenu().getButtons()) {
-            ButtonController buttonController = new ExperimentalButtonController(button);
+            ButtonController buttonController = new ExperimentalButtonController(controller, button);
             this.controller.getMouseListener().addListener(buttonController);
         }
     }

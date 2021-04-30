@@ -12,8 +12,8 @@ public class FarmController implements GameControllerState {
     private final GameModel model;
     private final CropFieldController cropFieldController;
 
-    public FarmController(GameController controller, GameViewer viewer) {
-        this.viewer = viewer;
+    public FarmController(GameController controller) {
+        this.viewer = controller.getViewer();
         this.model = controller.getModel();
         this.interactionController = new InteractionController();
         this.cropFieldController = new CropFieldController(controller, viewer, model.getFarm().getCropField());
