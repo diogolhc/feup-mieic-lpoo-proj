@@ -1,10 +1,7 @@
 package gui.drawer;
 
 import gui.GUI;
-import model.House;
 import model.Position;
-
-import java.io.File;
 
 public class HouseDrawer {
     private GUI gui;

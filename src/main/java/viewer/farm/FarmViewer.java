@@ -2,11 +2,11 @@ package viewer.farm;
 
 import gui.GUI;
 import gui.drawer.FencesDrawer;
-import gui.drawer.HouseDrawer;
 import model.*;
 import model.farm.CropField;
 import model.farm.Farm;
 import model.farm.Farmer;
+import model.farm.House;
 import viewer.GameViewerState;
 
 public class FarmViewer implements GameViewerState {

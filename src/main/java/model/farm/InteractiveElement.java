@@ -1,4 +1,6 @@
-package model;
+package model.farm;
+
+import model.Position;
 
 public abstract class InteractiveElement {
     protected final Position topLeft;

@@ -16,4 +16,5 @@ public class Farmer {
     public void setPosition(Position position) {
         this.position = position;
     }
+
 }
