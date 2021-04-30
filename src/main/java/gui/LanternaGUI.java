@@ -1,7 +1,6 @@
 package gui;
 
 import com.googlecode.lanterna.TerminalSize;
-import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
@@ -11,7 +10,6 @@ import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFrame;
-import model.Position;
 
 import java.awt.*;
 import java.awt.event.WindowAdapter;
@@ -121,6 +119,11 @@ public class LanternaGUI implements GUI {
         this.graphics.setCharacter(x, y, character);
     }
 
+    @Override
+    public void drawString(int x, int y, String string) {
+        this.graphics.putString(x, y, string);
+    }
+
     private static boolean isKeyStrokeType(KeyStroke keyStroke, KeyType type) {
         return keyStroke.getKeyType() == type;
     }
@@ -136,10 +139,11 @@ public class LanternaGUI implements GUI {
         if (this.isKeyStrokeType(keyStroke, KeyType.EOF)) return ACTION.QUIT;
         if (this.isKeyStrokeCharacter(keyStroke, 'q')) return ACTION.QUIT;
 
-        if (this.isKeyStrokeCharacter(keyStroke, 'w')) return ACTION.UP;
-        if (this.isKeyStrokeCharacter(keyStroke, 'd')) return ACTION.RIGHT;
-        if (this.isKeyStrokeCharacter(keyStroke, 's')) return ACTION.DOWN;
-        if (this.isKeyStrokeCharacter(keyStroke, 'a')) return ACTION.LEFT;
+        if (this.isKeyStrokeCharacter(keyStroke, 'w')) return ACTION.MOVE_UP;
+        if (this.isKeyStrokeCharacter(keyStroke, 'd')) return ACTION.MOVE_RIGHT;
+        if (this.isKeyStrokeCharacter(keyStroke, 's')) return ACTION.MOVE_DOWN;
+        if (this.isKeyStrokeCharacter(keyStroke, 'a')) return ACTION.MOVE_LEFT;
+        if (this.isKeyStrokeCharacter(keyStroke, ' ')) return ACTION.INTERACT;
 
         return ACTION.NONE;
     }

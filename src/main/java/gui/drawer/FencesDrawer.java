@@ -9,37 +9,13 @@ public class FencesDrawer {
     private final GUI gui;
     private static final String FENCES_COLOR = "#846f46";
     private static final String FENCES_BACKGROUND = "#7EC850";
-    private static final char HORIZONTAL_FENCE = '-';
-    private static final char VERTICAL_FENCE = '|';
-    private static final char CORNER_FENCE = '+';
 
     public FencesDrawer(GUI gui) {
         this.gui = gui;
     }
 
     public void draw(Position position, int width, int height) {
-        if (width > 2) {
-            HorizontalLineDrawer hLineDrawer = new HorizontalLineDrawer(
-                    this.gui, FENCES_BACKGROUND, FENCES_COLOR, HORIZONTAL_FENCE);
-            hLineDrawer.draw(position.getRight(), width - 2);
-            Position bottom = new Position(position.getX() + 1, position.getY() + height - 1);
-            hLineDrawer.draw(bottom, width - 2);
-        }
-
-        if (height > 2) {
-            VerticalLineDrawer vLineDrawer = new VerticalLineDrawer(
-                    this.gui, FENCES_BACKGROUND, FENCES_COLOR, VERTICAL_FENCE);
-            vLineDrawer.draw(position.getDown(), height - 2);
-            Position right = new Position(position.getX() + width - 1, position.getY() + 1);
-            vLineDrawer.draw(right, height - 2);
-        }
-
-        int x = position.getX();
-        int y = position.getY();
-
-        gui.drawChar(x, y, CORNER_FENCE);
-        gui.drawChar(x + width - 1, y, CORNER_FENCE);
-        gui.drawChar(x, y + height - 1, CORNER_FENCE);
-        gui.drawChar(x + width - 1, y + height - 1, CORNER_FENCE);
+        BoxDrawer drawer = new BoxDrawer(this.gui, FENCES_BACKGROUND, FENCES_COLOR);
+        drawer.draw(position, width, height);
     }
 }

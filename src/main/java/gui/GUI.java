@@ -19,10 +19,12 @@ public interface GUI {
 
     void drawChar(int x, int y, char character);
 
+    void drawString(int x, int y, String string);
+
     GUI.ACTION getNextAction() throws IOException;
 
     enum ACTION {
-        UP, RIGHT, DOWN, LEFT, QUIT, NONE;
+        NONE, QUIT, MOVE_UP, MOVE_RIGHT, MOVE_DOWN, MOVE_LEFT, INTERACT
     }
 
 }

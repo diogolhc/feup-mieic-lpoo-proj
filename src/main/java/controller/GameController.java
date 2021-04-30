@@ -15,7 +15,7 @@ public class GameController {
     public GameController(GameViewer viewer, GameModel model) {
         this.viewer = viewer;
         this.model = model;
-        this.gameControllerState = new FarmController();
+        this.gameControllerState = new FarmController(viewer, model);
     }
 
     public void setGameControllerState(GameControllerState state) {
@@ -29,7 +29,7 @@ public class GameController {
             GUI.ACTION action = viewer.getNextAction();
             if (action == GUI.ACTION.QUIT) break;
 
-            this.gameControllerState.doAction(model, action);
+            this.gameControllerState.doAction(action);
         }
 
         this.viewer.closeGUI();

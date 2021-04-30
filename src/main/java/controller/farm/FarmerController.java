@@ -12,25 +12,25 @@ public class FarmerController {
     }
 
     public void doAction(GUI.ACTION action) {
-        if (action == GUI.ACTION.UP) moveUp();
-        if (action == GUI.ACTION.RIGHT) moveRight();
-        if (action == GUI.ACTION.DOWN) moveDown();
-        if (action == GUI.ACTION.LEFT) moveLeft();
+        if (action == GUI.ACTION.MOVE_UP) moveUp();
+        if (action == GUI.ACTION.MOVE_RIGHT) moveRight();
+        if (action == GUI.ACTION.MOVE_DOWN) moveDown();
+        if (action == GUI.ACTION.MOVE_LEFT) moveLeft();
     }
 
-    public void moveLeft() {
+    private void moveLeft() {
         move(farm.getFarmer().getPosition().getLeft());
     }
 
-    public void moveRight() {
+    private void moveRight() {
         move(farm.getFarmer().getPosition().getRight());
     }
 
-    public void moveUp() {
+    private void moveUp() {
         move(farm.getFarmer().getPosition().getUp());
     }
 
-    public void moveDown() {
+    private void moveDown() {
         move(farm.getFarmer().getPosition().getDown());
     }
 
