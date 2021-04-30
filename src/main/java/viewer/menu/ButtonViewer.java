@@ -10,7 +10,6 @@ public class ButtonViewer {
     private int width;
 
     public ButtonViewer(GUI gui, String title, int width) {
-
         this.gui = gui;
         this.title = title;
         this.width = width;

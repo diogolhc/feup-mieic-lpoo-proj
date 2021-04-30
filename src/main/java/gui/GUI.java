@@ -1,5 +1,7 @@
 package gui;
 
+import controller.MouseListener;
+
 import java.io.IOException;
 
 public interface GUI {
@@ -22,6 +24,8 @@ public interface GUI {
     void drawString(int x, int y, String string);
 
     GUI.ACTION getNextAction() throws IOException;
+
+    void setMouseListener(MouseListener mouseListener);
 
     enum ACTION {
         NONE, QUIT, MOVE_UP, MOVE_RIGHT, MOVE_DOWN, MOVE_LEFT, INTERACT

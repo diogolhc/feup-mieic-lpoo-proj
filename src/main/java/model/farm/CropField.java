@@ -1,4 +1,6 @@
-package model;
+package model.farm;
+
+import model.Position;
 
 public class CropField {
     public static final int CROP_FIELD_SIZE = 4;

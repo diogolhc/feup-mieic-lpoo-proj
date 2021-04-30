@@ -2,7 +2,7 @@ package viewer.farm;
 
 import gui.GUI;
 import gui.drawer.CropFieldDrawer;
-import model.CropField;
+import model.farm.CropField;
 
 public class CropFieldViewer {
     public void draw(CropField cropField, GUI gui) {

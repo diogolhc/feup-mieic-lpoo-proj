@@ -1,6 +1,5 @@
 package controller.farm;
 
-import model.Farmer;
 import model.Position;
 
 import java.util.HashSet;
