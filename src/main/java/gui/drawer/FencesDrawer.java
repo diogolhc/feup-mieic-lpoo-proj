@@ -1,8 +1,6 @@
 package gui.drawer;
 
-import com.googlecode.lanterna.TextColor;
 import gui.GUI;
-import model.Farm;
 import model.Position;
 
 public class FencesDrawer {

@@ -2,7 +2,7 @@ package viewer.farm;
 
 import gui.GUI;
 import gui.drawer.FarmerDrawer;
-import model.Farmer;
+import model.farm.Farmer;
 
 public class FarmerViewer {
     public void draw(Farmer farmer, GUI gui) {

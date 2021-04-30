@@ -1,9 +1,13 @@
 package viewer;
 
+import com.googlecode.lanterna.terminal.swing.AWTTerminalFrame;
+import controller.MouseListener;
 import gui.GUI;
 import model.GameModel;
 import viewer.farm.FarmViewer;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 
 public class GameViewer {
@@ -33,5 +37,9 @@ public class GameViewer {
 
     public void closeGUI() throws IOException {
         gui.close();
+    }
+
+    public void setMouseListener(MouseListener mouseListener) {
+        this.gui.setMouseListener(mouseListener);
     }
 }

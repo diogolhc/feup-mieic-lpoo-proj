@@ -1,19 +1,28 @@
 package viewer.menu;
 
+import gui.GUI;
+import gui.drawer.TitleDrawer;
+import model.GameModel;
+import model.Position;
+import model.menu.Button;
 import viewer.GameViewerState;
 
-public abstract class MenuViewer implements GameViewerState {
-    // TODO generalize CropFieldViewer
+public class MenuViewer implements GameViewerState {
     /*
-    public abstract String getTitle();
-    public abstract Set<Button> getButtons();
+    TitleDrawer titleDrawer = new TitleDrawer(gui, "#000000", "#aaaaaa");
+        titleDrawer.draw(new Position(1, 1), "PLANT");
 
+    ButtonViewer buttonViewer = new ButtonViewer(gui, "WHEAT", 7);
+        buttonViewer.draw(new Position(1, 5));
+        */
     @Override
     public void draw(GameModel model, GUI gui) {
+        TitleDrawer titleDrawer = new TitleDrawer(gui, "#000000", "#aaaaaa");
+        titleDrawer.draw(new Position(1, 1), model.getMenu().getTitle());
 
-        gui.drawChar(0, 0, 'T');
-        gui.drawChar(1, 0, 'O');
-        gui.drawChar(2, 0, 'D');
-        gui.drawChar(3, 0, 'O');
-    }*/
+        for (Button button: model.getMenu().getButtons()) {
+            ButtonViewer buttonViewer = new ButtonViewer(gui, button.getTitle(), 7);
+            buttonViewer.draw(button.getTopLeft());
+        }
+    }
 }

@@ -1,5 +1,6 @@
 package controller.farm;
 
+import controller.GameController;
 import controller.GameControllerState;
 import gui.GUI;
 import model.GameModel;
@@ -11,11 +12,11 @@ public class FarmController implements GameControllerState {
     private final GameModel model;
     private final CropFieldController cropFieldController;
 
-    public FarmController(GameViewer viewer, GameModel model) {
-        this.viewer = viewer;
-        this.model = model;
+    public FarmController(GameController controller) {
+        this.viewer = controller.getViewer();
+        this.model = controller.getModel();
         this.interactionController = new InteractionController();
-        this.cropFieldController = new CropFieldController(viewer, model.getFarm().getCropField());
+        this.cropFieldController = new CropFieldController(controller, viewer, model.getFarm().getCropField());
         this.interactionController.addInteractionListener(this.cropFieldController);
     }
 
