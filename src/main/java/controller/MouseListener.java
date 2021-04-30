@@ -13,9 +13,15 @@ public class MouseListener {
         this.listeners = new HashSet<>();
     }
 
-    public void notifyClick(int x, int y) {
+    public void notifyMouseClick(int x, int y) {
         for (MouseClickObserver listener: listeners) {
             listener.notifyClick(new Position(x, y));
+        }
+    }
+
+    public void notifyMouseMovement(int x, int y) {
+        for (MouseClickObserver listener: listeners) {
+            listener.notifyPosition(new Position(x, y));
         }
     }
 

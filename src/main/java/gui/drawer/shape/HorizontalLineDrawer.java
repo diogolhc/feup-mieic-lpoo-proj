@@ -1,15 +1,15 @@
-package gui.drawer;
+package gui.drawer.shape;
 
 import gui.GUI;
 import model.Position;
 
-public class VerticalLineDrawer {
+public class HorizontalLineDrawer {
     private final GUI gui;
     private final String backgroundColor;
     private final String foregroundColor;
     private final char character;
 
-    public VerticalLineDrawer(GUI gui, String backgroundColor, String foregroundColor, char character) {
+    public HorizontalLineDrawer(GUI gui, String backgroundColor, String foregroundColor, char character) {
         this.gui = gui;
         this.backgroundColor = backgroundColor;
         this.foregroundColor = foregroundColor;
@@ -22,7 +22,7 @@ public class VerticalLineDrawer {
 
         for (int i = 0; i < length; i++) {
             this.gui.drawChar(position.getX(), position.getY(), character);
-            position = position.getDown();
+            position = position.getRight();
         }
     }
 }

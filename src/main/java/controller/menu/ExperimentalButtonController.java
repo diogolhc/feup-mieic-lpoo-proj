@@ -3,6 +3,7 @@ package controller.menu;
 import controller.GameController;
 import controller.farm.FarmController;
 import model.GameModel;
+import model.Position;
 import model.menu.Button;
 import viewer.GameViewer;
 import viewer.farm.FarmViewer;
@@ -20,7 +21,9 @@ public class ExperimentalButtonController extends ButtonController {
 
     @Override
     public void doButtonAction() {
-        System.out.printf("BUTTON PRESSED\n");
+        // TODO mouse can't update screen without key press for now (threads will be needed)
+        // for now just press any key at all after clicking somewhere with the mouse
+        this.controller.getModel().setMenu(null);
         this.controller.setGameControllerState(new FarmController(this.controller));
         this.viewer.setGameViewerState(new FarmViewer());
     }

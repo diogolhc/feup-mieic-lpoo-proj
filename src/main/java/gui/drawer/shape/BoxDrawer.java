@@ -1,6 +1,8 @@
-package gui.drawer;
+package gui.drawer.shape;
 
 import gui.GUI;
+import gui.drawer.shape.HorizontalLineDrawer;
+import gui.drawer.shape.VerticalLineDrawer;
 import model.Position;
 
 public class BoxDrawer {

@@ -1,7 +1,7 @@
 package viewer.menu;
 
 import gui.GUI;
-import gui.drawer.TitleDrawer;
+import gui.drawer.ui.TitleDrawer;
 import model.GameModel;
 import model.Position;
 import model.menu.Button;
@@ -21,8 +21,8 @@ public class MenuViewer implements GameViewerState {
         titleDrawer.draw(new Position(1, 1), model.getMenu().getTitle());
 
         for (Button button: model.getMenu().getButtons()) {
-            ButtonViewer buttonViewer = new ButtonViewer(gui, button.getTitle(), 7);
-            buttonViewer.draw(button.getTopLeft());
+            ButtonViewer buttonViewer = new ButtonViewer();
+            buttonViewer.draw(button, gui);
         }
     }
 }

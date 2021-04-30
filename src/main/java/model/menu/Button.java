@@ -35,11 +35,23 @@ public class Button {
         this.selected = false;
     }
 
+    public boolean isSelected() {
+        return this.selected;
+    }
+
     public Position getTopLeft() {
         return this.topLeft;
     }
 
     public String getTitle() {
         return this.title;
+    }
+
+    public int getWidth() {
+        return this.width;
+    }
+
+    public int getHeight() {
+        return this.height;
     }
 }

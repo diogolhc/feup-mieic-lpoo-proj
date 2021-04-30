@@ -1,6 +1,7 @@
-package gui.drawer;
+package gui.drawer.ui;
 
 import gui.GUI;
+import gui.drawer.shape.HorizontalLineDrawer;
 import model.Position;
 
 public class TitleDrawer {

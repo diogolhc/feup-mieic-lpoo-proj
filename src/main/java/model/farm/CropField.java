@@ -24,4 +24,14 @@ public class CropField extends InteractiveElement {
         if (position.equals(invalidPosition)) return false;
         return true;
     }
+
+    public boolean contains(Position position) {
+        int x = position.getX();
+        int y = position.getY();
+        int buttonLeft = this.topLeft.getX();
+        int buttonRight = buttonLeft + CROP_FIELD_SIZE - 1;
+        int buttonTop = this.topLeft.getY();
+        int buttonBottom = buttonTop + CROP_FIELD_SIZE - 1;
+        return (x >= buttonLeft && x <= buttonRight && y >= buttonTop && y <= buttonBottom);
+    }
 }

@@ -1,25 +1,22 @@
 package viewer.menu;
 
 import gui.GUI;
-import gui.drawer.BoxDrawer;
+import gui.drawer.shape.BoxDrawer;
+import gui.drawer.ui.button.ButtonDrawer;
+import gui.drawer.ui.button.SelectedButtonDrawer;
+import gui.drawer.ui.button.UnselectedButtonDrawer;
 import model.Position;
+import model.menu.Button;
 
 public class ButtonViewer {
-    private GUI gui;
-    private String title;
-    private int width;
+    public void draw(Button button, GUI gui) {
+        ButtonDrawer buttonDrawer;
+        if (button.isSelected()) {
+            buttonDrawer = new SelectedButtonDrawer(gui, button.getTitle(), button.getWidth(), button.getHeight());
+        } else {
+            buttonDrawer = new UnselectedButtonDrawer(gui, button.getTitle(), button.getWidth(), button.getHeight());
+        }
 
-    public ButtonViewer(GUI gui, String title, int width) {
-        this.gui = gui;
-        this.title = title;
-        this.width = width;
-    }
-
-    public void draw(Position position) {
-        BoxDrawer boxDrawer = new BoxDrawer(this.gui, "#000000", "#444444");
-        // TODO wrap button if title > width
-        boxDrawer.draw(position, this.width, 3);
-        Position titlePosition = position.getRight().getDown();
-        this.gui.drawString(titlePosition.getX(), titlePosition.getY(), this.title);
+        buttonDrawer.draw(button.getTopLeft());
     }
 }

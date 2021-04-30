@@ -22,11 +22,13 @@ public class CropFieldController implements InteractionListener {
 
     @Override
     public void notifyInteraction(Position position) {
-        Menu menu = new Menu("PLANT");
-        menu.addButton(new Button(new Position(1, 5), "WHEAT", 7));
+        if (cropField.contains(position)) {
+            Menu menu = new Menu("PLANT");
+            menu.addButton(new Button(new Position(1, 5), "WHEAT", 7));
 
-        this.controller.getModel().setMenu(menu);
-        this.viewer.setGameViewerState(new MenuViewer());
-        this.controller.setGameControllerState(new MenuController(this.controller));
+            this.controller.getModel().setMenu(menu);
+            this.viewer.setGameViewerState(new MenuViewer());
+            this.controller.setGameControllerState(new MenuController(this.controller));
+        }
     }
 }

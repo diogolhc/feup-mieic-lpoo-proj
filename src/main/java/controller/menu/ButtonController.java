@@ -19,4 +19,13 @@ public abstract class ButtonController implements MouseClickObserver {
             this.doButtonAction();
         }
     }
+
+    @Override
+    public void notifyPosition(Position mousePosition) {
+        if (this.button.contains(mousePosition)) {
+            this.button.select();
+        } else {
+            this.button.unselect();
+        }
+    }
 }

@@ -1,7 +1,7 @@
 package viewer.farm;
 
 import gui.GUI;
-import gui.drawer.FarmerDrawer;
+import gui.drawer.entity.FarmerDrawer;
 import model.farm.Farmer;
 
 public class FarmerViewer {

@@ -1,7 +1,7 @@
 package viewer.farm;
 
 import gui.GUI;
-import gui.drawer.FencesDrawer;
+import gui.drawer.entity.FencesDrawer;
 import model.*;
 import model.farm.CropField;
 import model.farm.Farm;

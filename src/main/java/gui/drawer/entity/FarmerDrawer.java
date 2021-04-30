@@ -1,4 +1,4 @@
-package gui.drawer;
+package gui.drawer.entity;
 
 import gui.GUI;
 import model.Position;

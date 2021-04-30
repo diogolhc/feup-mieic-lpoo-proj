@@ -1,6 +1,7 @@
-package gui.drawer;
+package gui.drawer.entity;
 
 import gui.GUI;
+import gui.drawer.shape.BoxDrawer;
 import model.Position;
 
 public class FencesDrawer {

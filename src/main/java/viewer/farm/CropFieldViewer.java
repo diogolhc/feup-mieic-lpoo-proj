@@ -1,7 +1,7 @@
 package viewer.farm;
 
 import gui.GUI;
-import gui.drawer.CropFieldDrawer;
+import gui.drawer.entity.CropFieldDrawer;
 import model.farm.CropField;
 
 public class CropFieldViewer {

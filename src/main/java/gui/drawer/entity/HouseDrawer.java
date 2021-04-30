@@ -1,6 +1,8 @@
-package gui.drawer;
+package gui.drawer.entity;
 
 import gui.GUI;
+import gui.drawer.shape.FilledRectangleDrawer;
+import gui.drawer.shape.RectangleDrawer;
 import model.Position;
 
 public class HouseDrawer {
