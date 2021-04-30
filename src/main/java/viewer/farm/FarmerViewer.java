@@ -1,4 +1,4 @@
-package viewer;
+package viewer.farm;
 
 import gui.GUI;
 import gui.drawer.FarmerDrawer;

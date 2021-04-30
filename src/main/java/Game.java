@@ -1,10 +1,7 @@
-import controller.FarmController;
 import controller.GameController;
 import gui.GUI;
 import gui.LanternaGUI;
-import model.Farm;
 import model.GameModel;
-import viewer.FarmViewer;
 import viewer.GameViewer;
 
 import java.awt.*;

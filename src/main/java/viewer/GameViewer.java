@@ -1,21 +1,30 @@
 package viewer;
 
 import gui.GUI;
-import model.Farm;
-import model.Farmer;
+import model.GameModel;
+import viewer.farm.FarmViewer;
 
 import java.io.IOException;
 
 public class GameViewer {
     private GUI gui;
+    GameViewerState gameViewerState;
 
     public GameViewer(GUI gui) {
         this.gui = gui;
+        this.gameViewerState = new FarmViewer();
     }
 
-    public void drawFarm(Farm farm) throws IOException {
-        FarmViewer farmViewer = new FarmViewer();
-        farmViewer.draw(farm, gui);
+    public void draw(GameModel model) throws IOException {
+        gui.clear();
+
+        this.gameViewerState.draw(model, gui);
+
+        gui.refresh();
+    }
+
+    public void setGameViewerState(GameViewerState state) {
+        this.gameViewerState = state;
     }
 
     public GUI.ACTION getNextAction() throws IOException {

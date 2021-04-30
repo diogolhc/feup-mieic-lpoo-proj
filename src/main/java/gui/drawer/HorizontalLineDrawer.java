@@ -4,10 +4,10 @@ import gui.GUI;
 import model.Position;
 
 public class HorizontalLineDrawer {
-    private GUI gui;
-    private String backgroundColor;
-    private String foregroundColor;
-    private char character;
+    private final GUI gui;
+    private final String backgroundColor;
+    private final String foregroundColor;
+    private final char character;
 
     public HorizontalLineDrawer(GUI gui, String backgroundColor, String foregroundColor, char character) {
         this.gui = gui;

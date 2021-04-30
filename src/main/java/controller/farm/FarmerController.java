@@ -1,4 +1,4 @@
-package controller;
+package controller.farm;
 
 import gui.GUI;
 import model.Farm;

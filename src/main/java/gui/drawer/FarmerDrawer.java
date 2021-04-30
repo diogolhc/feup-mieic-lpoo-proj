@@ -4,7 +4,7 @@ import gui.GUI;
 import model.Position;
 
 public class FarmerDrawer {
-    private GUI gui;
+    private final GUI gui;
     private static final String FARMER_COLOR = "#999999";
     private static final char FARMER_CHAR = '@';
 

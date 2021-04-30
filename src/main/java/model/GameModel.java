@@ -4,7 +4,7 @@ public class GameModel {
     private final Farm farm;
 
     public GameModel() {
-        this.farm = new Farm(10, 10);
+        this.farm = new Farm(40, 20);
     }
 
     public Farm getFarm() {

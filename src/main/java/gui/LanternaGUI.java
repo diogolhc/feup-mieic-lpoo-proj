@@ -122,6 +122,7 @@ public class LanternaGUI implements GUI {
         return isKeyStrokeType(keyStroke, KeyType.Character) && keyStroke.getCharacter() == c;
     }
 
+    @Override
     public ACTION getNextAction() throws IOException {
         KeyStroke keyStroke = screen.readInput();
 
@@ -135,27 +136,4 @@ public class LanternaGUI implements GUI {
 
         return ACTION.NONE;
     }
-
-    /*
-    private void drawCharacter(int x, int y, char c) {
-        graphics.setCharacter(x, y, c);
-    }
-
-    private void drawCharacter(Position position, char c) {
-        graphics.setCharacter(position.getX(), position.getY(), c);
-    }
-
-    private void setColor(TextColor backgroundColor, TextColor foregroundColor) {
-        graphics.setBackgroundColor(backgroundColor);
-        graphics.setForegroundColor(foregroundColor);
-    }
-
-
-    @Override
-    public void drawFarmer(Position position) {
-        graphics.setBackgroundColor(TextColor.Factory.fromString("#000000"));
-        graphics.setForegroundColor(TextColor.Factory.fromString("#999999"));
-        drawCharacter(position, '@');
-    }
-    */
 }
