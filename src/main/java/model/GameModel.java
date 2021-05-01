@@ -6,6 +6,7 @@ import model.menu.Menu;
 public class GameModel {
     private final Farm farm;
     private Menu menu;
+    private ChronologicalTime chronologicalTime; // TODO maybe it will not be like this, it may be inside of a HUD stats or smt
 
     public GameModel() {
         this.farm = new Farm(40, 20);
@@ -13,6 +14,7 @@ public class GameModel {
         // Options to get rid of null:
         //  1- Use of  a NULL OBJECT
         //  2- Extend game model with GameModelWithMenu or something similar (i prefer this one)
+        this.chronologicalTime = new ChronologicalTime();
     }
 
     public Farm getFarm() {
@@ -26,4 +28,9 @@ public class GameModel {
     public void setMenu(Menu menu) {
         this.menu = menu;
     }
+
+    public ChronologicalTime getChronologicalTime() {
+        return chronologicalTime;
+    }
+
 }

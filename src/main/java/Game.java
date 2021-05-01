@@ -14,7 +14,7 @@ public class Game {
     private final GameViewer viewer;
 
     public Game() throws IOException, FontFormatException, URISyntaxException {
-        GUI gui = new LanternaGUI(40, 20);
+        GUI gui = new LanternaGUI(40, 21);
 
         this.model = new GameModel();
         this.viewer = new GameViewer(gui);

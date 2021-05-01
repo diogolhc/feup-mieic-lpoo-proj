@@ -10,6 +10,7 @@ import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFrame;
+import com.googlecode.lanterna.terminal.swing.TerminalScrollController;
 import controller.MouseListener;
 
 import java.awt.*;
@@ -139,7 +140,9 @@ public class LanternaGUI implements GUI {
 
     @Override
     public ACTION getNextAction() throws IOException {
-        KeyStroke keyStroke = this.screen.readInput();
+        KeyStroke keyStroke = this.screen.pollInput();
+
+        if (keyStroke == null) return ACTION.NONE;
 
         if (this.isKeyStrokeType(keyStroke, KeyType.EOF)) return ACTION.QUIT;
         if (this.isKeyStrokeCharacter(keyStroke, 'q')) return ACTION.QUIT;

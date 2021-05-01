@@ -30,9 +30,15 @@ public class FarmViewer implements GameViewerState {
         drawFences(model.getFarm(), gui);
 
         drawFarmer(model.getFarm().getFarmer(), new FarmerViewer(), gui);
+
+        drawChronologicalTime(model.getChronologicalTime(), new ChronologicalTimeViewer(), gui); // TODO temporary
     }
 
     private void drawCropField(CropField cropField, CropFieldViewer cropFieldViewer, GUI gui) {
         cropFieldViewer.draw(cropField, gui);
+    }
+
+    private void drawChronologicalTime(ChronologicalTime chronologicalTime, ChronologicalTimeViewer chronologicalTimeViewer, GUI gui) {
+        chronologicalTimeViewer.draw(chronologicalTime, gui);
     }
 }

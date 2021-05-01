@@ -2,6 +2,7 @@ package controller;
 
 import controller.farm.FarmController;
 import gui.GUI;
+import model.ChronologicalTime;
 import model.GameModel;
 import viewer.GameViewer;
 
@@ -10,6 +11,7 @@ import java.io.IOException;
 public class GameController {
     private final MouseListener mouseListener;
     private GameControllerState gameControllerState;
+    private ChronologicalTimeController chronologicalTimeController;
     private final GameViewer viewer;
     private final GameModel model;
 
@@ -18,6 +20,7 @@ public class GameController {
         this.model = model;
         this.gameControllerState = new FarmController(this);
         this.mouseListener = new MouseListener();
+        this.chronologicalTimeController = new ChronologicalTimeController(1);
         viewer.setMouseListener(this.mouseListener);
     }
 
@@ -41,6 +44,7 @@ public class GameController {
             if (action == GUI.ACTION.QUIT) break;
 
             this.gameControllerState.doAction(action);
+            this.chronologicalTimeController.advanceTime(this.model.getChronologicalTime());
         }
 
         this.viewer.closeGUI();
