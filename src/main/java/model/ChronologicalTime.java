@@ -3,7 +3,7 @@ package model;
 public class ChronologicalTime {
     private int minutes;
 
-    ChronologicalTime(int minutes) {
+    public ChronologicalTime(int minutes) {
         this.minutes = minutes;
     }
 

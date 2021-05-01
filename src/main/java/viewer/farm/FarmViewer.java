@@ -3,7 +3,7 @@ package viewer.farm;
 import gui.GUI;
 import gui.drawer.entity.FencesDrawer;
 import model.*;
-import model.farm.CropField;
+import model.farm.crop_field.CropField;
 import model.farm.Farm;
 import model.farm.Farmer;
 import model.farm.House;

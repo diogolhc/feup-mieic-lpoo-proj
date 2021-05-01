@@ -1,6 +1,7 @@
 package model.farm;
 
 import model.Position;
+import model.farm.crop_field.CropField;
 
 public class Farm {
     private final Farmer farmer;

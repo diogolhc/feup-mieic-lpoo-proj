@@ -11,7 +11,7 @@ public class CropFieldDrawer {
     private final static String PATH_COLOR = "#be9b7b";
     private final static String SOIL_COLOR = "#372201";
     private final static String CROP_COLOR = "#aabb01";
-    private final static char CROP_CHAR = '#';
+    private final static char CROP_CHAR = ';';
 
     public CropFieldDrawer(GUI gui) {
         this.gui = gui;

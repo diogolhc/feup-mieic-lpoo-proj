@@ -1,10 +1,10 @@
 package controller.menu;
 
-import controller.MouseClickObserver;
+import controller.MouseObserver;
 import model.Position;
 import model.menu.Button;
 
-public abstract class ButtonController implements MouseClickObserver {
+public abstract class ButtonController implements MouseObserver {
     private Button button;
 
     public ButtonController(Button button) {

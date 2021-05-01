@@ -1,12 +1,25 @@
-package model.farm;
+package model.farm.crop_field;
 
 import model.Position;
+import model.farm.InteractiveElement;
+import model.farm.crop_field.state.CropFieldState;
+import model.farm.crop_field.state.NotPlanted;
 
 public class CropField extends InteractiveElement {
     public static final int CROP_FIELD_SIZE = 4;
+    private CropFieldState state;
 
     public CropField(Position topLeft) {
         super(topLeft);
+        this.state = new NotPlanted(this);
+    }
+
+    public void setState(CropFieldState state) {
+        this.state = state;
+    }
+
+    public CropFieldState getState() {
+        return this.state;
     }
 
     public Position getPosition() {

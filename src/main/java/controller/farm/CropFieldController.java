@@ -2,7 +2,7 @@ package controller.farm;
 
 import controller.GameController;
 import controller.menu.MenuController;
-import model.farm.CropField;
+import model.farm.crop_field.CropField;
 import model.Position;
 import model.menu.Button;
 import model.menu.Menu;
@@ -23,9 +23,7 @@ public class CropFieldController implements InteractionListener {
     @Override
     public void notifyInteraction(Position position) {
         if (cropField.contains(position)) {
-            Menu menu = new Menu("PLANT");
-            menu.addButton(new Button(new Position(1, 5), "WHEAT", 7));
-
+            Menu menu = cropField.getState().getInteractionMenu();
             this.controller.getModel().setMenu(menu);
             this.viewer.setGameViewerState(new MenuViewer());
             this.controller.setGameControllerState(new MenuController(this.controller));
