@@ -30,6 +30,10 @@ public class GameController {
         this.gameControllerState = state;
     }
 
+    public GameControllerState getGameControllerState() {
+        return gameControllerState;
+    }
+
     public MouseListener getMouseListener() {
         return this.mouseListener;
     }
