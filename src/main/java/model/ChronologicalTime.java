@@ -5,13 +5,13 @@ public class ChronologicalTime {
     private int hour;
     private int day;
 
-    ChronologicalTime(int day, int hour, int minute) {
+    public ChronologicalTime(int day, int hour, int minute) {
         this.day = day;
         this.hour = hour;
         this.minute = minute;
     }
 
-    ChronologicalTime() {
+    public ChronologicalTime() {
         this(0,0,0);
     }
 
