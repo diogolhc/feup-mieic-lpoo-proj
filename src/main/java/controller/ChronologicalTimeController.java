@@ -7,9 +7,9 @@ public class ChronologicalTimeController {
     private static final long SECS_TO_NANO = 1000000000;
     private long previousTime;
     private long leftOverTime;
-    private int realSecToGameMinutesRate;
+    private double realSecToGameMinutesRate;
 
-    ChronologicalTimeController(int realSecToGameMinutesRate) {
+    public ChronologicalTimeController(double realSecToGameMinutesRate) {
         this.realSecToGameMinutesRate = realSecToGameMinutesRate;
         this.previousTime = System.nanoTime();
         this.leftOverTime = 0;
@@ -17,7 +17,7 @@ public class ChronologicalTimeController {
 
     // TODO to use when farmer is sleeping for example
     public void accelerateTime(double rate) {
-        this.realSecToGameMinutesRate = (int)(rate * realSecToGameMinutesRate);
+        this.realSecToGameMinutesRate *= rate;
     }
 
     public void advanceTime(ChronologicalTime chronologicalTime) {
@@ -27,7 +27,7 @@ public class ChronologicalTimeController {
         this.previousTime = currentTime;
         this.leftOverTime = elapsedTime % SECS_TO_NANO;
 
-        chronologicalTime.advance(realSecToGameMinutesRate * (int)(elapsedTime / SECS_TO_NANO));
+        chronologicalTime.advance((int)(realSecToGameMinutesRate * (elapsedTime / SECS_TO_NANO)));
     }
 
 }

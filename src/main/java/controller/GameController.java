@@ -2,7 +2,7 @@ package controller;
 
 import controller.farm.FarmController;
 import gui.GUI;
-import model.ChronologicalTime;
+import model.AtmosphericTime;
 import model.GameModel;
 import viewer.GameViewer;
 
@@ -12,6 +12,7 @@ public class GameController {
     private final MouseListener mouseListener;
     private GameControllerState gameControllerState;
     private ChronologicalTimeController chronologicalTimeController;
+    private AtmosphericTimeController atmosphericTimeController;
     private final GameViewer viewer;
     private final GameModel model;
 
@@ -21,6 +22,7 @@ public class GameController {
         this.gameControllerState = new FarmController(this);
         this.mouseListener = new MouseListener();
         this.chronologicalTimeController = new ChronologicalTimeController(1);
+        this.atmosphericTimeController = new AtmosphericTimeController();
         viewer.setMouseListener(this.mouseListener);
     }
 
@@ -45,6 +47,7 @@ public class GameController {
 
             this.gameControllerState.doAction(action);
             this.chronologicalTimeController.advanceTime(this.model.getChronologicalTime());
+            this.atmosphericTimeController.updateTime(this.model.getAtmosphericTime(), this.model.getChronologicalTime().getDay());
         }
 
         this.viewer.closeGUI();

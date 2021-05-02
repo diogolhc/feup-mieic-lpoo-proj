@@ -5,13 +5,13 @@ public class ChronologicalTime {
     private int hour;
     private int day;
 
-    ChronologicalTime(int day, int hour, int minute) {
+    public ChronologicalTime(int day, int hour, int minute) {
         this.day = day;
         this.hour = hour;
         this.minute = minute;
     }
 
-    ChronologicalTime() {
+    public ChronologicalTime() {
         this(0,0,0);
     }
 
@@ -39,8 +39,9 @@ public class ChronologicalTime {
         return day;
     }
 
+    @Override
     public String toString() {
-        return String.format("Day %d  %02d:%02d", this.day, this.hour, this.minute);
+        return String.format("Day %03d  %02d:%02d", this.day, this.hour, this.minute);
     }
 
 }
