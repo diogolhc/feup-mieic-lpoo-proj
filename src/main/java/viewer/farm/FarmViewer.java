@@ -1,7 +1,9 @@
 package viewer.farm;
 
+import gui.Color;
 import gui.GUI;
 import gui.drawer.entity.FencesDrawer;
+import gui.drawer.shape.FilledRectangleDrawer;
 import model.*;
 import model.farm.building.BuildingSet;
 import model.farm.building.crop_field.CropField;
@@ -11,6 +13,7 @@ import model.farm.building.House;
 import viewer.GameViewer;
 
 public class FarmViewer extends GameViewer {
+    public static final Color GRASS_BACKGROUNG = new Color("#7EC850");
     private Farm farm;
 
     public FarmViewer(Farm farm) {
@@ -19,10 +22,17 @@ public class FarmViewer extends GameViewer {
 
     @Override
     public void draw(GUI gui) {
+        this.drawBackground(this.farm, gui);
         this.drawBuildings(this.farm.getBuildings(), gui);
         this.drawFences(this.farm, gui);
-        this.drawHUD(this.farm.getTime(), this.farm.getWeather(),new HUDViewer(), gui); // TODO temporary
+        this.drawHUD(this.farm.getTime(), this.farm.getWeather(), new HUDViewer(), gui); // TODO temporary
         this.drawFarmer(this.farm.getFarmer(), new FarmerViewer(), gui);
+    }
+
+    private void drawBackground(Farm farm, GUI gui) {
+        FilledRectangleDrawer backgroundDrawer = new FilledRectangleDrawer(
+                gui, GRASS_BACKGROUNG, GRASS_BACKGROUNG, ' ');
+        backgroundDrawer.draw(new Position(0, 0), farm.getWidth(), farm.getHeight());
     }
 
     private void drawFarmer(Farmer farmer, FarmerViewer farmerViewer, GUI gui) {
@@ -53,6 +63,9 @@ public class FarmViewer extends GameViewer {
 
     // TODO temporary
     private void drawHUD(IngameTime time, Weather weather, HUDViewer hudViewer, GUI gui) {
+        FilledRectangleDrawer backgroundDrawer = new FilledRectangleDrawer(
+                gui, new Color("#222222"), new Color("#222222"), ' ');
+        backgroundDrawer.draw(new Position(0, farm.getHeight()), farm.getWidth(), 1);
         hudViewer.draw(time, weather, gui);
     }
 
