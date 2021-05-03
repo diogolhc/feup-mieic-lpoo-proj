@@ -26,4 +26,13 @@ public class ChronologicalTime {
     public int getMinuteOfHour() {
         return minutes % 60;
     }
+
+    // TODO I don't know if this is the best way to go
+    public String toCountdownString() {
+        return new StringBuilder()
+                .append(minutes/60)
+                .append(':')
+                .append(minutes % 60)
+                .toString();
+    }
 }

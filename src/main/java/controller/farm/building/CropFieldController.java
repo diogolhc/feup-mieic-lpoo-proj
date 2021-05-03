@@ -13,6 +13,8 @@ import model.farm.building.crop_field.state.Planted;
 import model.farm.building.crop_field.state.ReadyToHarvest;
 import model.menu.Button;
 import model.menu.Menu;
+import model.menu.label.Label;
+import model.menu.label.LabelText;
 import viewer.GameViewer;
 import viewer.menu.MenuViewer;
 
@@ -46,13 +48,19 @@ public class CropFieldController extends BuildingController<CropField> {
     }
 
     private Menu getPlantedMenu(CropField cropField) {
-        Menu menu = new Menu("GROWING", new Position(1, 1), 20, 10);
-        Button closeMenuButton = new Button(new Position(20-3, 0), "X");
+        Menu menu = new Menu("GROWING", new Position(1, 1), 30, 10);
+        Button closeMenuButton = new Button(new Position(30-3, 0), "X");
         closeMenuButton.setCommand(new SetControllerStateCommand(controller, controller.getGameControllerState()));
         menu.addButton(closeMenuButton);
 
+        Label label = new Label(
+                new Position(1, 4),
+                () -> "REMAINING TIME: " + cropField.getRemainingTime().toCountdownString()
+        );
+        menu.addLabel(label);
+
         // TODO experimental
-        Button debugButton = new Button(new Position(1, 5), "TIME TRAVEL");
+        Button debugButton = new Button(new Position(1, 6), "TIME TRAVEL");
         debugButton.setCommand(new CompoundCommand()
                 .addCommand(() -> cropField.setState(new ReadyToHarvest(cropField, new Wheat())))
                 .addCommand(new SetControllerStateCommand(controller, controller.getGameControllerState())));

@@ -1,5 +1,6 @@
 package model.farm.building.crop_field;
 
+import model.ChronologicalTime;
 import model.Position;
 import model.farm.building.Building;
 import model.farm.building.crop_field.state.CropFieldState;
@@ -42,5 +43,9 @@ public class CropField extends Building {
         int buttonTop = this.getTopLeftPosition().getY();
         int buttonBottom = buttonTop + CROP_FIELD_SIZE - 1;
         return (x >= buttonLeft && x <= buttonRight && y >= buttonTop && y <= buttonBottom);
+    }
+
+    public ChronologicalTime getRemainingTime() {
+        return this.getState().getRemainingTime();
     }
 }

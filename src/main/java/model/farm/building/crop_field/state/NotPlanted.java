@@ -1,5 +1,6 @@
 package model.farm.building.crop_field.state;
 
+import model.ChronologicalTime;
 import model.Position;
 import model.farm.building.crop_field.CropField;
 import model.menu.Button;
@@ -10,5 +11,10 @@ public class NotPlanted implements CropFieldState {
 
     public NotPlanted(CropField cropField) {
         this.cropField = cropField;
+    }
+
+    @Override
+    public ChronologicalTime getRemainingTime() {
+        return new ChronologicalTime(0);
     }
 }

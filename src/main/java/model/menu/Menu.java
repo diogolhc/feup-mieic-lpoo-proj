@@ -1,12 +1,14 @@
 package model.menu;
 
 import model.Position;
+import model.menu.label.Label;
 
 import java.util.HashSet;
 import java.util.Set;
 
 public class Menu {
     private final Set<Button> buttons;
+    private final Set<Label> labels;
     private String title;
     private Position position;
     private int width;
@@ -19,6 +21,7 @@ public class Menu {
         this.width = width;
         this.height = height;
         this.buttons = new HashSet<>();
+        this.labels = new HashSet<>();
     }
 
     public String getTitle() {
@@ -31,6 +34,14 @@ public class Menu {
 
     public void addButton(Button button) {
         this.buttons.add(button);
+    }
+
+    public Set<Label> getLabels() {
+        return this.labels;
+    }
+
+    public void addLabel(Label label) {
+        this.labels.add(label);
     }
 
     public Position getTopLeftPosition() {

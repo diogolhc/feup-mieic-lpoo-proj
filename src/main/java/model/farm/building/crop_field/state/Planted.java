@@ -17,4 +17,9 @@ public class Planted implements CropFieldState {
         this.crop = crop;
         timeRemaining = this.crop.getGrowTime();
     }
+
+    @Override
+    public ChronologicalTime getRemainingTime() {
+        return timeRemaining;
+    }
 }

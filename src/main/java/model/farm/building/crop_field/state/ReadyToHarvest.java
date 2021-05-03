@@ -1,5 +1,6 @@
 package model.farm.building.crop_field.state;
 
+import model.ChronologicalTime;
 import model.Position;
 import model.farm.building.crop_field.CropField;
 import model.farm.building.crop_field.crop.Crop;
@@ -12,5 +13,10 @@ public class ReadyToHarvest implements CropFieldState {
 
     public ReadyToHarvest(CropField cropField, Crop crop) {
         this.cropField = cropField;
+    }
+
+    @Override
+    public ChronologicalTime getRemainingTime() {
+        return new ChronologicalTime(0);
     }
 }
