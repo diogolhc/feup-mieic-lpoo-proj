@@ -56,4 +56,8 @@ public class Position {
     public Position getTranslated(Position position) {
         return new Position(this.getX() + position.getX(), this.getY() + position.getY());
     }
+
+    public Position relativeTo(Position position) {
+        return this.getTranslated(new Position(-position.getX(), -position.getY()));
+    }
 }

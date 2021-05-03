@@ -12,7 +12,7 @@ public class GameController implements MouseListener {
     private GameControllerState gameControllerState;
     private GUI gui;
     private boolean running;
-    private static final int FPS = 20;
+    private static final int FPS = 50;
 
     public GameController(GUI gui) {
         this.gui = gui;
