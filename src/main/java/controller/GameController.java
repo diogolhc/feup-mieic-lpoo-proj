@@ -2,51 +2,50 @@ package controller;
 
 import controller.farm.FarmController;
 import gui.GUI;
-import model.GameModel;
-import viewer.GameViewer;
+import gui.MouseListener;
+import model.Position;
+import model.farm.Farm;
 
 import java.io.IOException;
 
-public class GameController {
-    private final MouseListener mouseListener;
+public class GameController implements MouseListener {
     private GameControllerState gameControllerState;
-    private final GameViewer viewer;
-    private final GameModel model;
+    private GUI gui;
 
-    public GameController(GameViewer viewer, GameModel model) {
-        this.viewer = viewer;
-        this.model = model;
-        this.gameControllerState = new FarmController(this);
-        this.mouseListener = new MouseListener();
-        viewer.setMouseListener(this.mouseListener);
+    public GameController(GUI gui) {
+        this.gui = gui;
+        this.gameControllerState = new FarmController(new Farm(40, 20), this);
+        this.gui.setMouseListener(this);
     }
 
     public void setGameControllerState(GameControllerState state) {
         this.gameControllerState = state;
     }
 
-    public MouseListener getMouseListener() {
-        return this.mouseListener;
-    }
-
-    public GameModel getModel() {
-        return this.model;
+    public GameControllerState getGameControllerState() {
+        return this.gameControllerState;
     }
 
     public void run() throws IOException {
         while (true) {
-            this.viewer.draw(model);
+            this.gameControllerState.getViewer().draw(gui);
 
-            GUI.ACTION action = viewer.getNextAction();
+            GUI.ACTION action = this.gui.getNextAction();
             if (action == GUI.ACTION.QUIT) break;
 
-            this.gameControllerState.doAction(action);
+            this.gameControllerState.reactKeyboard(action);
         }
 
-        this.viewer.closeGUI();
+        this.gui.close();
     }
 
-    public GameViewer getViewer() {
-        return this.viewer;
+    @Override
+    public void onMouseMovement(int x, int y) {
+        this.gameControllerState.reactMouseMovement(new Position(x, y));
+    }
+
+    @Override
+    public void onMouseClick(int x, int y) {
+        this.gameControllerState.reactMouseClick(new Position(x, y));
     }
 }

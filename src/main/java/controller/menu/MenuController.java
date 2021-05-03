@@ -3,24 +3,48 @@ package controller.menu;
 import controller.GameController;
 import controller.GameControllerState;
 import gui.GUI;
-import model.GameModel;
+import model.Position;
 import model.menu.Button;
+import model.menu.Menu;
+import viewer.GameViewer;
+import viewer.menu.MenuViewer;
 
 public class MenuController implements GameControllerState {
-    private GameModel model;
+    private Menu menu;
     private GameController controller;
 
-    public MenuController(GameController controller) {
-        this.model = controller.getModel();
+    public MenuController(Menu menu, GameController controller) {
+        this.menu = menu;
         this.controller = controller;
-        for (Button button: model.getMenu().getButtons()) {
-            ButtonController buttonController = new ExperimentalButtonController(controller, button);
-            this.controller.getMouseListener().addListener(buttonController);
+    }
+
+    protected Menu getMenu() {
+        return this.menu;
+    }
+
+    @Override
+    public void reactKeyboard(GUI.ACTION action) {
+        // TODO
+    }
+
+    @Override
+    public void reactMouseMovement(Position position) {
+        ButtonController buttonController = new ButtonController();
+        for (Button button: this.menu.getButtons()) {
+            buttonController.reactMouseMovement(button, position);
         }
     }
 
     @Override
-    public void doAction(GUI.ACTION action) {
+    public void reactMouseClick(Position position) {
+        ButtonController buttonController = new ButtonController();
+        for (Button button: this.menu.getButtons()) {
+            buttonController.reactMouseClick(button, position);
+        }
+    }
 
+    @Override
+    public GameViewer getViewer() {
+        return new MenuViewer(this.menu);
     }
 }

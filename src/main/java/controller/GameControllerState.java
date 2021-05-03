@@ -1,8 +1,12 @@
 package controller;
 
 import gui.GUI;
-import model.GameModel;
+import model.Position;
+import viewer.GameViewer;
 
 public interface GameControllerState {
-    void doAction(GUI.ACTION action);
+    void reactKeyboard(GUI.ACTION action);
+    void reactMouseMovement(Position position);
+    void reactMouseClick(Position position);
+    GameViewer getViewer();
 }

@@ -1,7 +1,5 @@
 package gui;
 
-import controller.MouseListener;
-
 import java.io.IOException;
 
 public interface GUI {

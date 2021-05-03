@@ -10,7 +10,6 @@ import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFrame;
-import controller.MouseListener;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -155,14 +154,14 @@ public class LanternaGUI implements GUI {
         ((AWTTerminalFrame) this.terminal).getComponent(0).addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                mouseListener.notifyMouseClick(e.getX()/LanternaGUI.CHAR_SIZE, e.getY()/LanternaGUI.CHAR_SIZE);
+                mouseListener.onMouseClick(e.getX()/LanternaGUI.CHAR_SIZE, e.getY()/LanternaGUI.CHAR_SIZE);
             }
         });
 
         ((AWTTerminalFrame) this.terminal).getComponent(0).addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseMoved(MouseEvent e) {
-                mouseListener.notifyMouseMovement(e.getX()/LanternaGUI.CHAR_SIZE, e.getY()/LanternaGUI.CHAR_SIZE);
+                mouseListener.onMouseMovement(e.getX()/LanternaGUI.CHAR_SIZE, e.getY()/LanternaGUI.CHAR_SIZE);
             }
         });
     }
