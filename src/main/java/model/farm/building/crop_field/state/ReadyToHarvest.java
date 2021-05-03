@@ -8,15 +8,19 @@ import model.menu.Button;
 import model.menu.Menu;
 
 public class ReadyToHarvest implements CropFieldState {
-    private CropField cropField;
     private Crop crop;
 
-    public ReadyToHarvest(CropField cropField, Crop crop) {
-        this.cropField = cropField;
+    public ReadyToHarvest(Crop crop) {
+        this.crop = crop;
     }
 
     @Override
     public ChronologicalTime getRemainingTime() {
         return new ChronologicalTime(0);
+    }
+
+    @Override
+    public Crop getCrop() {
+        return this.crop;
     }
 }

@@ -17,7 +17,7 @@ public class PlantCropCommand implements Command {
     @Override
     public void execute() {
         if (this.cropField.getState() instanceof NotPlanted) {
-            this.cropField.setState(new Planted(this.cropField, this.crop));
+            this.cropField.setState(new Planted(this.crop));
         }
     }
 }

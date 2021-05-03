@@ -1,13 +1,9 @@
 package model.menu.builder;
 
 import controller.GameController;
-import controller.command.Command;
 import controller.command.CompoundCommand;
-import controller.command.PlantCropCommand;
-import controller.command.SetControllerStateCommand;
 import model.Position;
 import model.farm.building.crop_field.CropField;
-import model.farm.building.crop_field.crop.Crop;
 import model.farm.building.crop_field.crop.Wheat;
 import model.farm.building.crop_field.state.ReadyToHarvest;
 import model.menu.Button;
@@ -34,7 +30,7 @@ public class CropFieldGrowingMenuBuilder extends PopupMenuBuilder {
         // TODO experimental
         Button debugButton = new Button(new Position(1, 6), "TIME TRAVEL");
         debugButton.setCommand(new CompoundCommand()
-                .addCommand(() -> cropField.setState(new ReadyToHarvest(cropField, new Wheat())))
+                .addCommand(() -> cropField.setState(new ReadyToHarvest(new Wheat())))
                 .addCommand(super.getClosePopupMenuCommand())
         );
         menu.addButton(debugButton);

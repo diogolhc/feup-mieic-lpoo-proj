@@ -14,7 +14,7 @@ public class HarvestCropCommand implements Command {
     @Override
     public void execute() {
         if (this.cropField.getState() instanceof ReadyToHarvest) {
-            this.cropField.setState(new NotPlanted(this.cropField));
+            this.cropField.setState(new NotPlanted());
         }
     }
 }

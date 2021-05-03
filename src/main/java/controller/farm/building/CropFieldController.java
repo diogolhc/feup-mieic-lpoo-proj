@@ -32,6 +32,7 @@ public class CropFieldController extends BuildingController<CropField> {
     @Override
     public Command getInteractionCommand(CropField cropField) {
         MenuBuilder menuBuilder;
+        // TODO would it make sense to create a method that returns a builder in the model?
         if (cropField.getState() instanceof NotPlanted) {
             menuBuilder = new PlantCropMenuBuilder(this.controller, cropField);
         } else if (cropField.getState() instanceof Planted) {

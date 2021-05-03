@@ -1,10 +1,14 @@
 package model.farm.building.crop_field;
 
+import gui.Color;
 import model.ChronologicalTime;
 import model.Position;
 import model.farm.building.Building;
+import model.farm.building.crop_field.crop.GrowthStage;
 import model.farm.building.crop_field.state.CropFieldState;
 import model.farm.building.crop_field.state.NotPlanted;
+
+import java.util.List;
 
 public class CropField extends Building {
     public static final int CROP_FIELD_SIZE = 4;
@@ -12,7 +16,7 @@ public class CropField extends Building {
 
     public CropField(Position topLeft) {
         super(topLeft);
-        this.state = new NotPlanted(this);
+        this.state = new NotPlanted();
     }
 
     public void setState(CropFieldState state) {
@@ -21,6 +25,18 @@ public class CropField extends Building {
 
     public CropFieldState getState() {
         return this.state;
+    }
+
+    public GrowthStage getCropGrowthStage() {
+        List<GrowthStage> growthStages = this.state.getCrop().getGrowthStages();
+        ChronologicalTime remainingTime = this.state.getRemainingTime();
+        for (GrowthStage stage: growthStages) {
+            if (remainingTime.getMinutes() <= stage.getStageStartTime().getMinutes()) {
+                return stage;
+            }
+        }
+
+        return growthStages.get(growthStages.size() - 1);
     }
 
     public boolean isTraversable(Position position) {

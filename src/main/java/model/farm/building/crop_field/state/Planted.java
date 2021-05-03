@@ -1,19 +1,13 @@
 package model.farm.building.crop_field.state;
 
 import model.ChronologicalTime;
-import model.Position;
-import model.farm.building.crop_field.CropField;
 import model.farm.building.crop_field.crop.Crop;
-import model.menu.Button;
-import model.menu.Menu;
 
 public class Planted implements CropFieldState {
-    private CropField cropField;
     private Crop crop;
     private ChronologicalTime timeRemaining;
 
-    public Planted(CropField cropField, Crop crop) {
-        this.cropField = cropField;
+    public Planted(Crop crop) {
         this.crop = crop;
         timeRemaining = this.crop.getGrowTime();
     }
@@ -21,5 +15,10 @@ public class Planted implements CropFieldState {
     @Override
     public ChronologicalTime getRemainingTime() {
         return timeRemaining;
+    }
+
+    @Override
+    public Crop getCrop() {
+        return this.crop;
     }
 }
