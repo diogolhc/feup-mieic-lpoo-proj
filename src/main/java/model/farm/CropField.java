@@ -13,6 +13,8 @@ public class CropField extends InteractiveElement {
         return topLeft;
     }
 
+    public int getSize() {return CROP_FIELD_SIZE; }
+
     public boolean isTraversable(Position position) {
         Position invalidPosition = this.topLeft.getRight().getDown();
         if (position.equals(invalidPosition)) return false;

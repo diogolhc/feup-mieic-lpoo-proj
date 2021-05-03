@@ -22,4 +22,6 @@ public class House extends InteractiveElement {
         return true;
     }
 
+    @Override
+    public int getSize() { return HOUSE_FIELD_SIZE; }
 }

@@ -21,7 +21,7 @@ public class MenuViewer implements GameViewerState {
         titleDrawer.draw(new Position(1, 1), model.getMenu().getTitle());
 
         for (Button button: model.getMenu().getButtons()) {
-            ButtonViewer buttonViewer = new ButtonViewer(gui, button.getTitle(), 7);
+            ButtonViewer buttonViewer = new ButtonViewer(gui, button.getTitle(), 9);
             buttonViewer.draw(button.getTopLeft());
         }
     }

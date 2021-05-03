@@ -8,6 +8,5 @@ public class HouseViewer {
     public void draw(House house, GUI gui) {
         HouseDrawer drawer = new HouseDrawer(gui);
         drawer.draw(house.getPosition());
-
     }
 }

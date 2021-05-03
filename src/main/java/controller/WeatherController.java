@@ -1,8 +1,7 @@
 package controller;
 
-
 import model.Weather;
-import model.ChronologicalTime;
+
 
 public class WeatherController {
     private int lastDay;
