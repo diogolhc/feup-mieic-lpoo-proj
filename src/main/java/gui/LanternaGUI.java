@@ -140,7 +140,8 @@ public class LanternaGUI implements GUI {
 
     @Override
     public ACTION getNextAction() throws IOException {
-        KeyStroke keyStroke = this.screen.pollInput();
+        // TODO input using other thread in order to not block the rest of the game (namely screen update)
+        KeyStroke keyStroke = this.screen.readInput();
 
         if (keyStroke == null) return ACTION.NONE;
 

@@ -3,14 +3,14 @@ package model;
 import model.farm.Farm;
 import model.menu.Menu;
 
-import static model.AtmosphericTime.TYPE.SUNNY;
+import static model.Weather.TYPE.SUNNY;
 
 public class GameModel {
     private final Farm farm;
     private Menu menu;
     // vv TODO maybe it will not be like this, it may be inside of a HUD stats or smt
     private ChronologicalTime chronologicalTime;
-    private AtmosphericTime atmosphericTime;
+    private Weather weather;
 
     public GameModel() {
         this.farm = new Farm(40, 20);
@@ -19,7 +19,7 @@ public class GameModel {
         //  1- Use of  a NULL OBJECT
         //  2- Extend game model with GameModelWithMenu or something similar (i prefer this one)
         this.chronologicalTime = new ChronologicalTime();
-        this.atmosphericTime = new AtmosphericTime(SUNNY);
+        this.weather = new Weather(SUNNY);
     }
 
     public Farm getFarm() {
@@ -38,8 +38,8 @@ public class GameModel {
         return chronologicalTime;
     }
 
-    public AtmosphericTime getAtmosphericTime() {
-        return atmosphericTime;
+    public Weather getWeather() {
+        return weather;
     }
 
 }

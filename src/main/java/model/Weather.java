@@ -1,10 +1,10 @@
 package model;
 
 
-public class AtmosphericTime {
+public class Weather {
     private TYPE type;
 
-    public AtmosphericTime(TYPE type) {
+    public Weather(TYPE type) {
         this.type = type;
     }
 
@@ -12,7 +12,7 @@ public class AtmosphericTime {
         this.type = type;
     }
 
-    public AtmosphericTime.TYPE getType() {
+    public Weather.TYPE getType() {
         return this.type;
     }
 
