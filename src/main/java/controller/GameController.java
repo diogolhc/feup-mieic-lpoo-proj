@@ -28,7 +28,7 @@ public class GameController implements MouseListener {
 
     public void run() throws IOException {
         while (true) {
-            this.gameControllerState.getViewer().draw(gui);
+            this.gameControllerState.getViewer().drawScreen(gui);
 
             GUI.ACTION action = this.gui.getNextAction();
             if (action == GUI.ACTION.QUIT) break;

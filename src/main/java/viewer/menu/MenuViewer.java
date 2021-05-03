@@ -19,7 +19,7 @@ public class MenuViewer extends GameViewer {
     }
 
     @Override
-    public void drawScreen(GUI gui) {
+    public void draw(GUI gui) {
         drawBackground(gui);
         drawTitle(gui);
         drawButtons(gui);

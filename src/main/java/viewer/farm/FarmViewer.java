@@ -18,7 +18,7 @@ public class FarmViewer extends GameViewer {
     }
 
     @Override
-    public void drawScreen(GUI gui) {
+    public void draw(GUI gui) {
         this.drawBuildings(this.farm.getBuildings(), gui);
         this.drawFences(this.farm, gui);
 

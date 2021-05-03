@@ -5,12 +5,12 @@ import gui.GUI;
 import java.io.IOException;
 
 public abstract class GameViewer {
-    public abstract void drawScreen(GUI gui);
+    public abstract void draw(GUI gui);
 
-    public void draw(GUI gui) throws IOException {
+    public void drawScreen(GUI gui) throws IOException {
         gui.clear();
 
-        this.drawScreen(gui);
+        this.draw(gui);
 
         gui.refresh();
     }
