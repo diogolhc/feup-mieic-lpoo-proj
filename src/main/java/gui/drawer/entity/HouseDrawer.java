@@ -1,5 +1,6 @@
 package gui.drawer.entity;
 
+import gui.Color;
 import gui.GUI;
 import gui.drawer.shape.FilledRectangleDrawer;
 import gui.drawer.shape.RectangleDrawer;
@@ -7,9 +8,9 @@ import model.Position;
 
 public class HouseDrawer {
     private GUI gui;
-    private final static String PATH_COLOR = "#be9b7b";
-    private final static String SOIL_COLOR = "#5c5c5c";
-    private final static String HOUSE_COLOR = "#c20000";
+    private final static Color PATH_COLOR = new Color("#be9b7b");
+    private final static Color SOIL_COLOR = new Color("#5c5c5c");
+    private final static Color HOUSE_COLOR = new Color("#c20000");
     private final static char HOUSE_CHAR = 'H';
 
 

@@ -11,13 +11,13 @@ public interface GUI {
 
     void close() throws IOException;
 
-    void setBackgroundColor(String color);
+    void setBackgroundColor(Color color);
 
-    void setForegroundColor(String color);
+    void setForegroundColor(Color color);
 
-    String getBackGroundColor(int x, int y);
+    Color getBackGroundColor(int x, int y);
 
-    String getForegroundColor(int x, int y);
+    Color getForegroundColor(int x, int y);
 
     void drawChar(int x, int y, char character);
 

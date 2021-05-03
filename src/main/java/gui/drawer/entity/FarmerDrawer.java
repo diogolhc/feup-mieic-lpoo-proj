@@ -1,11 +1,12 @@
 package gui.drawer.entity;
 
+import gui.Color;
 import gui.GUI;
 import model.Position;
 
 public class FarmerDrawer {
     private final GUI gui;
-    private static final String FARMER_COLOR = "#999999";
+    private static final Color FARMER_COLOR = new Color("#999999");
     private static final char FARMER_CHAR = '@';
 
     public FarmerDrawer(GUI gui) {
@@ -13,7 +14,7 @@ public class FarmerDrawer {
     }
 
     public void draw(Position position) {
-        String backgroundColor = gui.getBackGroundColor(position.getX(), position.getY());
+        Color backgroundColor = gui.getBackGroundColor(position.getX(), position.getY());
         gui.setBackgroundColor(backgroundColor);
         gui.setForegroundColor(FARMER_COLOR);
         gui.drawChar(position.getX(), position.getY(), FARMER_CHAR);

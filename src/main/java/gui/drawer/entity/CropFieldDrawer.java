@@ -1,5 +1,6 @@
 package gui.drawer.entity;
 
+import gui.Color;
 import gui.GUI;
 import gui.drawer.shape.FilledRectangleDrawer;
 import gui.drawer.shape.RectangleDrawer;
@@ -8,9 +9,9 @@ import model.Position;
 // TODO experimental
 public class CropFieldDrawer {
     private GUI gui;
-    private final static String PATH_COLOR = "#be9b7b";
-    private final static String SOIL_COLOR = "#372201";
-    private final static String CROP_COLOR = "#aabb01";
+    private final static Color PATH_COLOR = new Color("#be9b7b");
+    private final static Color SOIL_COLOR = new Color("#372201");
+    private final static Color CROP_COLOR = new Color("#aabb01");
     private final static char CROP_CHAR = ';';
 
     public CropFieldDrawer(GUI gui) {

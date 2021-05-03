@@ -1,15 +1,16 @@
 package gui.drawer.shape;
 
+import gui.Color;
 import gui.GUI;
 import model.Position;
 
 public class HorizontalLineDrawer {
     private final GUI gui;
-    private final String backgroundColor;
-    private final String foregroundColor;
+    private final Color backgroundColor;
+    private final Color foregroundColor;
     private final char character;
 
-    public HorizontalLineDrawer(GUI gui, String backgroundColor, String foregroundColor, char character) {
+    public HorizontalLineDrawer(GUI gui, Color backgroundColor, Color foregroundColor, char character) {
         this.gui = gui;
         this.backgroundColor = backgroundColor;
         this.foregroundColor = foregroundColor;

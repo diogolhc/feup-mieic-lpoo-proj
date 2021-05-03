@@ -89,14 +89,14 @@ public class LanternaGUI implements GUI {
     }
 
     @Override
-    public void setBackgroundColor(String color) {
-        this.graphics.setBackgroundColor(TextColor.Factory.fromString(color));
+    public void setBackgroundColor(Color color) {
+        this.graphics.setBackgroundColor(TextColor.Factory.fromString(color.toString()));
 
     }
 
     @Override
-    public void setForegroundColor(String color) {
-        this.graphics.setForegroundColor(TextColor.Factory.fromString(color));
+    public void setForegroundColor(Color color) {
+        this.graphics.setForegroundColor(TextColor.Factory.fromString(color.toString()));
     }
 
     private static String getColorString(TextColor color) {
@@ -107,13 +107,13 @@ public class LanternaGUI implements GUI {
     }
 
     @Override
-    public String getBackGroundColor(int x, int y) {
-        return this.getColorString(this.graphics.getCharacter(x, y).getBackgroundColor());
+    public Color getBackGroundColor(int x, int y) {
+        return new Color(this.getColorString(this.graphics.getCharacter(x, y).getBackgroundColor()));
     }
 
     @Override
-    public String getForegroundColor(int x, int y) {
-        return this.getColorString(this.graphics.getCharacter(x, y).getBackgroundColor());
+    public Color getForegroundColor(int x, int y) {
+        return new Color(this.getColorString(this.graphics.getCharacter(x, y).getBackgroundColor()));
     }
 
     @Override

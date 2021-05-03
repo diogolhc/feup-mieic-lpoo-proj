@@ -1,5 +1,6 @@
 package gui.drawer.ui.button;
 
+import gui.Color;
 import gui.GUI;
 import gui.drawer.shape.BoxDrawer;
 import model.Position;
@@ -9,10 +10,10 @@ public class ButtonDrawer {
     private final String title;
     private final int width;
     private int height;
-    private String backgroundColor;
-    private String foregroundColor;
+    private Color backgroundColor;
+    private Color foregroundColor;
 
-    public ButtonDrawer(GUI gui, String title, int width, int height, String backgroundColor, String foregroundColor) {
+    public ButtonDrawer(GUI gui, String title, int width, int height, Color backgroundColor, Color foregroundColor) {
         this.gui = gui;
         this.title = title;
         this.width = width;

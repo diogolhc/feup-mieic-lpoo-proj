@@ -1,5 +1,6 @@
 package gui.drawer.shape;
 
+import gui.Color;
 import gui.GUI;
 import gui.drawer.shape.HorizontalLineDrawer;
 import gui.drawer.shape.VerticalLineDrawer;
@@ -7,13 +8,13 @@ import model.Position;
 
 public class BoxDrawer {
     private final GUI gui;
-    private final String backgroundColor;
-    private final String foregroundColor;
+    private final Color backgroundColor;
+    private final Color foregroundColor;
     private static final char HORIZONTAL_LINE = '-';
     private static final char VERTICAL_LINE = '|';
     private static final char CORNER_LINE = '+';
 
-    public BoxDrawer(GUI gui, String backgroundColor, String foregroundColor) {
+    public BoxDrawer(GUI gui, Color backgroundColor, Color foregroundColor) {
         this.gui = gui;
         this.backgroundColor = backgroundColor;
         this.foregroundColor = foregroundColor;
