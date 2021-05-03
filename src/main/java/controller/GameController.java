@@ -33,7 +33,9 @@ public class GameController implements MouseListener {
             GUI.ACTION action = this.gui.getNextAction();
             if (action == GUI.ACTION.QUIT) break;
 
+
             this.gameControllerState.reactKeyboard(action);
+            this.gameControllerState.reactTimePassed();
         }
 
         this.gui.close();

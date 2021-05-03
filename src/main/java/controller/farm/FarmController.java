@@ -2,6 +2,8 @@ package controller.farm;
 
 import controller.GameController;
 import controller.GameControllerState;
+import controller.TimeController;
+import controller.WeatherController;
 import controller.farm.building.CropFieldController;
 import controller.farm.building.HouseController;
 import gui.GUI;
@@ -15,10 +17,14 @@ import viewer.farm.FarmViewer;
 public class FarmController implements GameControllerState {
     private Farm farm;
     private GameController controller;
+    private TimeController timeController;
+    private WeatherController weatherController; // TODO weather should not be part of GameController
 
     public FarmController(Farm farm, GameController controller) {
         this.farm = farm;
         this.controller = controller;
+        this.timeController = new TimeController(1);
+        this.weatherController = new WeatherController();
     }
 
     @Override
@@ -49,6 +55,12 @@ public class FarmController implements GameControllerState {
     @Override
     public void reactMouseClick(Position position) {
         // TODO
+    }
+
+    @Override
+    public void reactTimePassed() {
+        this.timeController.advanceTime(this.farm.getTime());
+        this.weatherController.updateTime(this.farm.getWeather(), this.farm.getTime().getDay());
     }
 
     @Override

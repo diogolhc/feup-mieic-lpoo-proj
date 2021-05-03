@@ -1,13 +1,19 @@
 package model.farm;
 
 import model.Position;
+import model.Time;
+import model.Weather;
 import model.farm.building.BuildingSet;
 import model.farm.building.House;
 import model.farm.building.crop_field.CropField;
 
+import static model.Weather.TYPE.SUNNY;
+
 public class Farm {
     private final Farmer farmer;
     private final BuildingSet buildings;
+    private final Time time;
+    private final Weather weather;
     private int width;
     private int height;
 
@@ -16,6 +22,9 @@ public class Farm {
         this.width = width;
         this.height = height;
         this.farmer = new Farmer(new Position(3, 3));
+
+        this.time = new Time();
+        this.weather = new Weather(SUNNY);
 
         // Hardcoded positions for testing
         this.buildings = new BuildingSet(new House(new Position(5, 10)));
@@ -45,5 +54,13 @@ public class Farm {
 
     public BuildingSet getBuildings() {
         return this.buildings;
+    }
+
+    public Time getTime() {
+        return time;
+    }
+
+    public Weather getWeather() {
+        return weather;
     }
 }

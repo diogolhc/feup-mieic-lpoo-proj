@@ -21,7 +21,7 @@ public class FarmViewer extends GameViewer {
     public void draw(GUI gui) {
         this.drawBuildings(this.farm.getBuildings(), gui);
         this.drawFences(this.farm, gui);
-
+        this.drawHUD(this.farm.getTime(), this.farm.getWeather(),new HUDViewer(), gui); // TODO temporary
         this.drawFarmer(this.farm.getFarmer(), new FarmerViewer(), gui);
     }
 
@@ -50,4 +50,10 @@ public class FarmViewer extends GameViewer {
     private void drawCropField(CropField cropField, CropFieldViewer cropFieldViewer, GUI gui) {
         cropFieldViewer.draw(cropField, gui);
     }
+
+    // TODO temporary
+    private void drawHUD(Time time, Weather weather, HUDViewer hudViewer, GUI gui) {
+        hudViewer.draw(time, weather, gui);
+    }
+
 }

@@ -10,7 +10,7 @@ public class Game {
     private final GameController controller;
 
     public Game() throws IOException, FontFormatException, URISyntaxException {
-        GUI gui = new LanternaGUI(40, 20);
+        GUI gui = new LanternaGUI(40, 21);
 
         this.controller = new GameController(gui);
     }
