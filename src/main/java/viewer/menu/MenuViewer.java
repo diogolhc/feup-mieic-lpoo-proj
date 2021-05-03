@@ -3,8 +3,6 @@ package viewer.menu;
 import gui.Color;
 import gui.GUI;
 import gui.drawer.shape.FilledRectangleDrawer;
-import gui.drawer.shape.RectangleDrawer;
-import gui.drawer.ui.TitleDrawer;
 import model.Position;
 import model.menu.Button;
 import model.menu.Menu;
@@ -22,22 +20,34 @@ public class MenuViewer extends GameViewer {
 
     @Override
     public void drawScreen(GUI gui) {
-        FilledRectangleDrawer backgroundDrawer = new FilledRectangleDrawer(
-                gui, MENU_BACKGROUND_COLOR, MENU_BACKGROUND_COLOR, ' ');
-        backgroundDrawer.draw(this.menu.getTopLeftPosition(), this.menu.getWidth(), this.menu.getHeight());
+        drawBackground(gui);
+        drawTitle(gui);
+        drawButtons(gui);
+        drawLabels(gui);
+    }
 
-        TitleDrawer titleDrawer = new TitleDrawer(gui);
-        Position titlePosition = this.menu.getTopLeftPosition().getRight().getDown();
-        titleDrawer.draw(titlePosition, this.menu.getTitle());
-
-        ButtonViewer buttonViewer = new ButtonViewer();
-        for (Button button: this.menu.getButtons()) {
-            buttonViewer.draw(this.menu, button, gui);
-        }
-
+    private void drawLabels(GUI gui) {
         LabelViewer labelViewer = new LabelViewer();
         for (Label label: this.menu.getLabels()) {
             labelViewer.draw(this.menu, label, gui);
         }
+    }
+
+    private void drawButtons(GUI gui) {
+        ButtonViewer buttonViewer = new ButtonViewer();
+        for (Button button: this.menu.getButtons()) {
+            buttonViewer.draw(this.menu, button, gui);
+        }
+    }
+
+    private void drawTitle(GUI gui) {
+        MenuTitleViewer menuTitleViewer = new MenuTitleViewer();
+        menuTitleViewer.draw(this.menu, gui);
+    }
+
+    private void drawBackground(GUI gui) {
+        FilledRectangleDrawer backgroundDrawer = new FilledRectangleDrawer(
+                gui, MENU_BACKGROUND_COLOR, MENU_BACKGROUND_COLOR, ' ');
+        backgroundDrawer.draw(this.menu.getTopLeftPosition(), this.menu.getWidth(), this.menu.getHeight());
     }
 }

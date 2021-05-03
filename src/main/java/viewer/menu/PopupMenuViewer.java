@@ -1,9 +1,6 @@
 package viewer.menu;
 
 import gui.GUI;
-import gui.drawer.ui.TitleDrawer;
-import model.Position;
-import model.menu.Button;
 import model.menu.Menu;
 import viewer.GameViewer;
 

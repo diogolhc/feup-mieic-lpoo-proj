@@ -70,8 +70,8 @@ public class CropFieldController extends BuildingController<CropField> {
     }
 
     private Menu getReadyToHarvest(CropField cropField) {
-        Menu menu = new Menu("READY TO HARVEST", new Position(1, 1), 20, 10);
-        Button closeMenuButton = new Button(new Position(20-3, 0), "X");
+        Menu menu = new Menu("READY TO HARVEST", new Position(1, 1), 30, 10);
+        Button closeMenuButton = new Button(new Position(30-3, 0), "X");
         closeMenuButton.setCommand(new SetControllerStateCommand(controller, controller.getGameControllerState()));
         menu.addButton(closeMenuButton);
 
