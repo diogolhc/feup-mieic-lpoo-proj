@@ -9,5 +9,6 @@ public abstract class InteractiveElement {
         this.topLeft = topLeft;
     }
 
+    public abstract int getSize();
     public abstract boolean isTraversable(Position position);
 }

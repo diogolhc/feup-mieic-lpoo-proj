@@ -2,7 +2,6 @@ package controller;
 
 
 import model.AtmosphericTime;
-import model.ChronologicalTime;
 
 public class AtmosphericTimeController {
     private int lastDay;

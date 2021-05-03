@@ -11,6 +11,7 @@ public class FarmController implements GameControllerState {
     private final GameViewer viewer;
     private final GameModel model;
     private final CropFieldController cropFieldController;
+    private final HouseController houseController;
 
     public FarmController(GameController controller) {
         this.viewer = controller.getViewer();
@@ -18,11 +19,15 @@ public class FarmController implements GameControllerState {
         this.interactionController = new InteractionController();
         this.cropFieldController = new CropFieldController(controller, viewer, model.getFarm().getCropField());
         this.interactionController.addInteractionListener(this.cropFieldController);
+        this.houseController = new HouseController(controller, viewer, model.getFarm().getHouse());
+        this.interactionController.addInteractionListener(this.houseController);
     }
 
     @Override
     public void doAction(GUI.ACTION action) {
-        if (action == GUI.ACTION.INTERACT) this.interactionController.notifyInteraction(this.model.getFarm().getFarmer().getPosition());
+        if (action == GUI.ACTION.INTERACT)
+            this.interactionController.notifyInteraction(this.model.getFarm().getFarmer().getPosition());
+
         FarmerController farmerController = new FarmerController(this.model.getFarm());
         farmerController.doAction(action);
     }
