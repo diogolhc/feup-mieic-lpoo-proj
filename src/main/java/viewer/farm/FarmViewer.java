@@ -52,7 +52,7 @@ public class FarmViewer extends GameViewer {
     }
 
     // TODO temporary
-    private void drawHUD(Time time, Weather weather, HUDViewer hudViewer, GUI gui) {
+    private void drawHUD(IngameTime time, Weather weather, HUDViewer hudViewer, GUI gui) {
         hudViewer.draw(time, weather, gui);
     }
 

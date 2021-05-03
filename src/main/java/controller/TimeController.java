@@ -1,6 +1,6 @@
 package controller;
 
-import model.Time;
+import model.IngameTime;
 
 
 public class TimeController {
@@ -20,7 +20,7 @@ public class TimeController {
         this.realSecToGameMinutesRate *= rate;
     }
 
-    public void advanceTime(Time time) {
+    public void advanceTime(IngameTime time) {
         long currentTime = System.nanoTime();
         long elapsedTime = currentTime - this.previousTime + this.leftOverTime;
 

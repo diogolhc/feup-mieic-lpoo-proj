@@ -5,11 +5,11 @@ import org.junit.jupiter.api.Test;
 import static org.junit.Assert.*;
 
 
-public class TimeTest {
+public class IngameTimeTest {
 
     @Test
     public void testAdvance1() {
-        Time time = new Time();
+        IngameTime time = new IngameTime();
 
         time.advance(15);
 
@@ -18,7 +18,7 @@ public class TimeTest {
 
     @Test
     public void testAdvance2() {
-        Time time = new Time();
+        IngameTime time = new IngameTime();
 
         time.advance(15*60);
 
@@ -27,7 +27,7 @@ public class TimeTest {
 
     @Test
     public void testAdvance3() {
-        Time time = new Time();
+        IngameTime time = new IngameTime();
 
         time.advance(24*60);
 
@@ -36,7 +36,7 @@ public class TimeTest {
 
     @Test
     public void testAdvance4() {
-        Time time = new Time();
+        IngameTime time = new IngameTime();
 
         time.advance(2*24*60 + 3);
 
@@ -45,7 +45,7 @@ public class TimeTest {
 
     @Test
     public void testAdvance5() {
-        Time time = new Time();
+        IngameTime time = new IngameTime();
 
         time.advance(60);
 
@@ -54,7 +54,7 @@ public class TimeTest {
 
     @Test
     public void testAdvance6() {
-        Time time = new Time();
+        IngameTime time = new IngameTime();
 
         time.advance(2*24*60 + 3*60 + 1);
 
@@ -63,7 +63,7 @@ public class TimeTest {
 
     @Test
     public void testAdvance7() {
-        Time time = new Time();
+        IngameTime time = new IngameTime();
 
         time.advance(2*24*60 + 1);
 

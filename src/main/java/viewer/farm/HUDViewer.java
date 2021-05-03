@@ -2,12 +2,12 @@ package viewer.farm;
 
 import gui.GUI;
 import model.Weather;
-import model.Time;
+import model.IngameTime;
 
 
 public class HUDViewer {
 
-    public void draw(Time time, Weather weather, GUI gui) {
+    public void draw(IngameTime time, Weather weather, GUI gui) {
         /* TODO these hardcoded values are just for debug purposes
         *   This is temporary */
         gui.drawString(0,20, time.toString());

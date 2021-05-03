@@ -1,7 +1,7 @@
 package model.farm;
 
 import model.Position;
-import model.Time;
+import model.IngameTime;
 import model.Weather;
 import model.farm.building.BuildingSet;
 import model.farm.building.House;
@@ -12,7 +12,7 @@ import static model.Weather.TYPE.SUNNY;
 public class Farm {
     private final Farmer farmer;
     private final BuildingSet buildings;
-    private final Time time;
+    private final IngameTime time;
     private final Weather weather;
     private int width;
     private int height;
@@ -23,7 +23,7 @@ public class Farm {
         this.height = height;
         this.farmer = new Farmer(new Position(3, 3));
 
-        this.time = new Time();
+        this.time = new IngameTime();
         this.weather = new Weather(SUNNY);
 
         // Hardcoded positions for testing
@@ -56,7 +56,7 @@ public class Farm {
         return this.buildings;
     }
 
-    public Time getTime() {
+    public IngameTime getTime() {
         return time;
     }
 

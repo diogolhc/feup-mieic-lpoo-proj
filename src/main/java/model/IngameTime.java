@@ -1,17 +1,17 @@
 package model;
 
-public class Time {
+public class IngameTime {
     private int minute;
     private int hour;
     private int day;
 
-    public Time(int day, int hour, int minute) {
+    public IngameTime(int day, int hour, int minute) {
         this.day = day;
         this.hour = hour;
         this.minute = minute;
     }
 
-    public Time() {
+    public IngameTime() {
         this(0,0,0);
     }
 
