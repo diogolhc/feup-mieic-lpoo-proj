@@ -1,12 +1,13 @@
 package model.farm;
 
 import model.Position;
-import model.farm.crop_field.CropField;
+import model.farm.building.BuildingSet;
+import model.farm.building.House;
+import model.farm.building.crop_field.CropField;
 
 public class Farm {
     private final Farmer farmer;
-    private final CropField cropField; // TODO Experimental, shouldn't exist in the final version
-    private final House house;  // TODO List of InteractiveElements
+    private final BuildingSet buildings;
     private int width;
     private int height;
 
@@ -15,8 +16,10 @@ public class Farm {
         this.width = width;
         this.height = height;
         this.farmer = new Farmer(new Position(3, 3));
-        this.cropField = new CropField(new Position(5, 1));
-        this.house = new House(new Position(5, 10));
+
+        // Hardcoded positions for testing
+        this.buildings = new BuildingSet(new House(new Position(5, 10)));
+        this.buildings.addCropField(new CropField(new Position(5, 1)));
     }
 
     public Farmer getFarmer() {
@@ -28,9 +31,7 @@ public class Farm {
         int y = position.getY();
         if (x <= 0 || x >= this.width-1) return false;
         if (y <= 0 || y >= this.height-1) return false;
-        // TODO check other objects
-        if (!this.cropField.isTraversable(position)) return false;
-        if (!this.house.isTraversable(position)) return false;
+        if (!this.buildings.isTraversable(position)) return false;
         return true;
     }
 
@@ -42,9 +43,7 @@ public class Farm {
         return this.height;
     }
 
-    public CropField getCropField() {
-        return this.cropField;
+    public BuildingSet getBuildings() {
+        return this.buildings;
     }
-
-    public House getHouse() { return house; }
 }

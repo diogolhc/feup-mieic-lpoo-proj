@@ -1,4 +1,4 @@
-package model.farm.crop_field.crop;
+package model.farm.building.crop_field.crop;
 
 import model.ChronologicalTime;
 

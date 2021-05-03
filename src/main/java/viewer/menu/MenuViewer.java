@@ -1,28 +1,35 @@
 package viewer.menu;
 
+import gui.Color;
 import gui.GUI;
+import gui.drawer.shape.FilledRectangleDrawer;
+import gui.drawer.shape.RectangleDrawer;
 import gui.drawer.ui.TitleDrawer;
-import model.GameModel;
 import model.Position;
 import model.menu.Button;
-import viewer.GameViewerState;
+import model.menu.Menu;
+import viewer.GameViewer;
 
-public class MenuViewer implements GameViewerState {
-    /*
-    TitleDrawer titleDrawer = new TitleDrawer(gui, "#000000", "#aaaaaa");
-        titleDrawer.draw(new Position(1, 1), "PLANT");
+public class MenuViewer extends GameViewer {
+    private Menu menu;
 
-    ButtonViewer buttonViewer = new ButtonViewer(gui, "WHEAT", 7);
-        buttonViewer.draw(new Position(1, 5));
-        */
+    public MenuViewer(Menu menu) {
+        this.menu = menu;
+    }
+
     @Override
-    public void draw(GameModel model, GUI gui) {
-        TitleDrawer titleDrawer = new TitleDrawer(gui, "#000000", "#aaaaaa");
-        titleDrawer.draw(new Position(1, 1), model.getMenu().getTitle());
+    public void drawScreen(GUI gui) {
+        FilledRectangleDrawer backgroundDrawer = new FilledRectangleDrawer(
+                gui, new Color("#222222"), new Color("#222222"), ' ');
+        backgroundDrawer.draw(this.menu.getTopLeftPosition(), this.menu.getWidth(), this.menu.getHeight());
 
-        for (Button button: model.getMenu().getButtons()) {
-            ButtonViewer buttonViewer = new ButtonViewer();
-            buttonViewer.draw(button, gui);
+        TitleDrawer titleDrawer = new TitleDrawer(gui);
+        Position titlePosition = this.menu.getTopLeftPosition().getRight().getDown();
+        titleDrawer.draw(titlePosition, this.menu.getTitle());
+
+        ButtonViewer buttonViewer = new ButtonViewer();
+        for (Button button: this.menu.getButtons()) {
+            buttonViewer.draw(this.menu, button, gui);
         }
     }
 }

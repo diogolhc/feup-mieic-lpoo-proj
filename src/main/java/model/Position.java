@@ -52,4 +52,8 @@ public class Position {
     public String toString() {
         return "Position(" + this.x + ", " + this.y + ")";
     }
+
+    public Position getTranslated(Position position) {
+        return new Position(this.getX() + position.getX(), this.getY() + position.getY());
+    }
 }

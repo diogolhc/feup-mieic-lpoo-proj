@@ -7,9 +7,10 @@ import gui.drawer.ui.button.SelectedButtonDrawer;
 import gui.drawer.ui.button.UnselectedButtonDrawer;
 import model.Position;
 import model.menu.Button;
+import model.menu.Menu;
 
 public class ButtonViewer {
-    public void draw(Button button, GUI gui) {
+    public void draw(Menu menu, Button button, GUI gui) {
         ButtonDrawer buttonDrawer;
         if (button.isSelected()) {
             buttonDrawer = new SelectedButtonDrawer(gui, button.getTitle(), button.getWidth(), button.getHeight());
@@ -17,6 +18,6 @@ public class ButtonViewer {
             buttonDrawer = new UnselectedButtonDrawer(gui, button.getTitle(), button.getWidth(), button.getHeight());
         }
 
-        buttonDrawer.draw(button.getTopLeft());
+        buttonDrawer.draw(button.getTopLeft().getTranslated(menu.getTopLeftPosition()));
     }
 }

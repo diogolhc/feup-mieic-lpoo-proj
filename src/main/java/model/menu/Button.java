@@ -1,20 +1,33 @@
 package model.menu;
 
+import controller.command.Command;
+import controller.command.NoOperationCommand;
 import model.Position;
 
 public class Button {
+    // TODO maybe 3 states: normal, hovered, pressing
     private boolean selected;
     private final Position topLeft;
     private final String title;
     private final int width;
     private final int height;
+    private Command command;
 
-    public Button(Position position, String title, int width) {
+    public Button(Position position, String title) {
         this.topLeft = position;
         this.title = title;
-        this.width = width;
+        this.width = title.length() + 2; // TODO
         this.height = 3; // TODO
+        this.command = new NoOperationCommand();
         this.selected = false;
+    }
+
+    public void setCommand(Command command) {
+        this.command = command;
+    }
+
+    public Command getCommand() {
+        return this.command;
     }
 
     public boolean contains(Position position) {
