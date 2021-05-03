@@ -13,6 +13,10 @@ import model.farm.building.crop_field.state.Planted;
 import model.farm.building.crop_field.state.ReadyToHarvest;
 import model.menu.Button;
 import model.menu.Menu;
+import model.menu.builder.CropFieldGrowingMenuBuilder;
+import model.menu.builder.HarvestMenuBuilder;
+import model.menu.builder.MenuBuilder;
+import model.menu.builder.PlantCropMenuBuilder;
 import model.menu.label.Label;
 import model.menu.label.LabelText;
 import viewer.GameViewer;
@@ -25,75 +29,15 @@ public class CropFieldController extends BuildingController<CropField> {
         this.controller = controller;
     }
 
-    private Menu getNotPlantedMenu(CropField cropField) {
-        Menu menu = new Menu("PLANT", new Position(1, 1), 20, 10);
-        Button closeMenuButton = new Button(new Position(20-3, 0), "X");
-        closeMenuButton.setCommand(new SetControllerStateCommand(controller, controller.getGameControllerState()));
-        menu.addButton(closeMenuButton);
-
-        Crop crops[] = {new Wheat()}; // TODO this is only for experimenting
-        int x = 1;
-        int y = 5;
-        for (Crop crop: crops) {
-            Button plantCropButton = new Button(new Position(x, y), crop.toString());
-            Command plantCropButtonCommand = new CompoundCommand()
-                    .addCommand(new PlantCropCommand(cropField, crop))
-                    .addCommand(new SetControllerStateCommand(controller, controller.getGameControllerState()));
-            plantCropButton.setCommand(plantCropButtonCommand);
-            menu.addButton(plantCropButton);
-            x+=10;
-        }
-
-        return menu;
-    }
-
-    private Menu getPlantedMenu(CropField cropField) {
-        Menu menu = new Menu("GROWING", new Position(1, 1), 30, 10);
-        Button closeMenuButton = new Button(new Position(30-3, 0), "X");
-        closeMenuButton.setCommand(new SetControllerStateCommand(controller, controller.getGameControllerState()));
-        menu.addButton(closeMenuButton);
-
-        Label label = new Label(
-                new Position(1, 4),
-                () -> "REMAINING TIME: " + cropField.getRemainingTime().toCountdownString()
-        );
-        menu.addLabel(label);
-
-        // TODO experimental
-        Button debugButton = new Button(new Position(1, 6), "TIME TRAVEL");
-        debugButton.setCommand(new CompoundCommand()
-                .addCommand(() -> cropField.setState(new ReadyToHarvest(cropField, new Wheat())))
-                .addCommand(new SetControllerStateCommand(controller, controller.getGameControllerState())));
-        menu.addButton(debugButton);
-
-        return menu;
-    }
-
-    private Menu getReadyToHarvest(CropField cropField) {
-        Menu menu = new Menu("READY TO HARVEST", new Position(1, 1), 30, 10);
-        Button closeMenuButton = new Button(new Position(30-3, 0), "X");
-        closeMenuButton.setCommand(new SetControllerStateCommand(controller, controller.getGameControllerState()));
-        menu.addButton(closeMenuButton);
-
-        Button harvestButton = new Button(new Position(1, 5), "HARVEST");
-        harvestButton.setCommand(new CompoundCommand()
-                .addCommand(new HarvestCropCommand(cropField))
-                .addCommand(new SetControllerStateCommand(controller, controller.getGameControllerState())));
-
-        menu.addButton(harvestButton);
-
-        return menu;
-    }
-
     @Override
     public Command getInteractionCommand(CropField cropField) {
-        Menu menu;
+        MenuBuilder menuBuilder;
         if (cropField.getState() instanceof NotPlanted) {
-            menu = getNotPlantedMenu(cropField);
+            menuBuilder = new PlantCropMenuBuilder(this.controller, cropField);
         } else if (cropField.getState() instanceof Planted) {
-            menu = getPlantedMenu(cropField);
+            menuBuilder = new CropFieldGrowingMenuBuilder(this.controller, cropField);
         } else if (cropField.getState() instanceof ReadyToHarvest) {
-            menu = getReadyToHarvest(cropField);
+            menuBuilder = new HarvestMenuBuilder(this.controller, cropField);
         } else {
             // This should never happen
             // TODO is throwing a RuntimeException ok?
@@ -101,6 +45,6 @@ public class CropFieldController extends BuildingController<CropField> {
                     "LOGIC ERROR: Unhandled CropFieldState: " + cropField.getState().getClass().toString());
         }
 
-        return new OpenPopupMenuCommand(this.controller, menu);
+        return new OpenPopupMenuCommand(this.controller, menuBuilder.buildMenu(new Position(1, 1)));
     }
 }
