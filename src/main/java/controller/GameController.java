@@ -10,7 +10,7 @@ import java.io.IOException;
 public class GameController {
     private final MouseListener mouseListener;
     private GameControllerState gameControllerState;
-    private ChronologicalTimeController chronologicalTimeController;
+    private TimeController timeController;
     private WeatherController weatherController;
     private final GameViewer viewer;
     private final GameModel model;
@@ -20,7 +20,7 @@ public class GameController {
         this.model = model;
         this.gameControllerState = new FarmController(this);
         this.mouseListener = new MouseListener();
-        this.chronologicalTimeController = new ChronologicalTimeController(1);
+        this.timeController = new TimeController(1);
         this.weatherController = new WeatherController();
         viewer.setMouseListener(this.mouseListener);
     }
@@ -49,8 +49,8 @@ public class GameController {
             if (action == GUI.ACTION.QUIT) break;
 
             this.gameControllerState.doAction(action);
-            this.chronologicalTimeController.advanceTime(this.model.getChronologicalTime());
-            this.weatherController.updateTime(this.model.getWeather(), this.model.getChronologicalTime().getDay());
+            this.timeController.advanceTime(this.model.getTime());
+            this.weatherController.updateTime(this.model.getWeather(), this.model.getTime().getDay());
         }
 
         this.viewer.closeGUI();

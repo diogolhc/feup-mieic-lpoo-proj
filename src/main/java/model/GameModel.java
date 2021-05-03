@@ -9,7 +9,7 @@ public class GameModel {
     private final Farm farm;
     private Menu menu;
     // vv TODO maybe it will not be like this, it may be inside of a HUD stats or smt
-    private ChronologicalTime chronologicalTime;
+    private Time time;
     private Weather weather;
 
     public GameModel() {
@@ -18,7 +18,7 @@ public class GameModel {
         // Options to get rid of null:
         //  1- Use of  a NULL OBJECT
         //  2- Extend game model with GameModelWithMenu or something similar (i prefer this one)
-        this.chronologicalTime = new ChronologicalTime();
+        this.time = new Time();
         this.weather = new Weather(SUNNY);
     }
 
@@ -34,8 +34,8 @@ public class GameModel {
         this.menu = menu;
     }
 
-    public ChronologicalTime getChronologicalTime() {
-        return chronologicalTime;
+    public Time getTime() {
+        return time;
     }
 
     public Weather getWeather() {

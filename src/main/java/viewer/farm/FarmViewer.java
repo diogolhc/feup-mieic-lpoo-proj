@@ -8,7 +8,7 @@ import model.farm.Farm;
 import model.farm.Farmer;
 import model.farm.House;
 import model.Weather;
-import model.ChronologicalTime;
+import model.Time;
 import viewer.GameViewerState;
 
 public class FarmViewer implements GameViewerState {
@@ -33,7 +33,7 @@ public class FarmViewer implements GameViewerState {
 
         drawFarmer(model.getFarm().getFarmer(), new FarmerViewer(), gui);
 
-        drawHUD(model.getChronologicalTime(), model.getWeather(),new HUDViewer(), gui); // TODO temporary
+        drawHUD(model.getTime(), model.getWeather(),new HUDViewer(), gui); // TODO temporary
     }
 
     private void drawCropField(CropField cropField, CropFieldViewer cropFieldViewer, GUI gui) {
@@ -41,8 +41,8 @@ public class FarmViewer implements GameViewerState {
     }
 
     // TODO temporary
-    private void drawHUD(ChronologicalTime chronologicalTime, Weather weather, HUDViewer hudViewer, GUI gui) {
-        hudViewer.draw(chronologicalTime, weather, gui);
+    private void drawHUD(Time time, Weather weather, HUDViewer hudViewer, GUI gui) {
+        hudViewer.draw(time, weather, gui);
     }
 
 }

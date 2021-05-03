@@ -1,15 +1,15 @@
 package controller;
 
-import model.ChronologicalTime;
+import model.Time;
 
 
-public class ChronologicalTimeController {
+public class TimeController {
     private static final long SECS_TO_NANO = 1000000000;
     private long previousTime;
     private long leftOverTime;
     private double realSecToGameMinutesRate;
 
-    public ChronologicalTimeController(double realSecToGameMinutesRate) {
+    public TimeController(double realSecToGameMinutesRate) {
         this.realSecToGameMinutesRate = realSecToGameMinutesRate;
         this.previousTime = System.nanoTime();
         this.leftOverTime = 0;
@@ -20,14 +20,14 @@ public class ChronologicalTimeController {
         this.realSecToGameMinutesRate *= rate;
     }
 
-    public void advanceTime(ChronologicalTime chronologicalTime) {
+    public void advanceTime(Time time) {
         long currentTime = System.nanoTime();
         long elapsedTime = currentTime - this.previousTime + this.leftOverTime;
 
         this.previousTime = currentTime;
         this.leftOverTime = elapsedTime % SECS_TO_NANO;
 
-        chronologicalTime.advance((int)(realSecToGameMinutesRate * (elapsedTime / SECS_TO_NANO)));
+        time.advance((int)(realSecToGameMinutesRate * (elapsedTime / SECS_TO_NANO)));
     }
 
 

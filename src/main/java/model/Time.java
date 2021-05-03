@@ -1,17 +1,17 @@
 package model;
 
-public class ChronologicalTime {
+public class Time {
     private int minute;
     private int hour;
     private int day;
 
-    public ChronologicalTime(int day, int hour, int minute) {
+    public Time(int day, int hour, int minute) {
         this.day = day;
         this.hour = hour;
         this.minute = minute;
     }
 
-    public ChronologicalTime() {
+    public Time() {
         this(0,0,0);
     }
 
