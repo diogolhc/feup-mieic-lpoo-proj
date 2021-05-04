@@ -24,11 +24,16 @@ public class CropFieldGrowingMenuBuilder extends PopupMenuBuilder {
 
         menu.addLabel(new Label(
                 new Position(1, 4),
+                () -> "CROP: " + cropField.getState().getCrop().toString()
+        ));
+
+        menu.addLabel(new Label(
+                new Position(1, 5),
                 () -> "REMAINING TIME: " + cropField.getRemainingTime().toCountdownString()
         ));
 
         // TODO experimental
-        Button debugButton = new Button(new Position(1, 6), "TIME TRAVEL");
+        Button debugButton = new Button(new Position(1, 7), "TIME TRAVEL");
         debugButton.setCommand(new CompoundCommand()
                 .addCommand(() -> cropField.setState(new ReadyToHarvest(new Wheat())))
                 .addCommand(super.getClosePopupMenuCommand())
@@ -38,7 +43,7 @@ public class CropFieldGrowingMenuBuilder extends PopupMenuBuilder {
 
     @Override
     protected int getHeight() {
-        return 10;
+        return 11;
     }
 
     @Override

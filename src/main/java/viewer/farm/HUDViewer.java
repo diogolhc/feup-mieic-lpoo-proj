@@ -15,7 +15,7 @@ public class HUDViewer {
         *   This is temporary */
         StringDrawer drawer = new StringDrawer(gui, new Color("#222222"), new Color("#ffffff"));
         drawer.draw(new Position(0, 20), time.toString());
-        drawer.draw(new Position(25, 20), weather.getType().name()); // TODO maybe use some kind of related char to the type (?)
+        drawer.draw(new Position(25, 20), weather.getType().name());
     }
 
 

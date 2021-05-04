@@ -21,14 +21,14 @@ public class Farm {
         // TODO width and height at least 5
         this.width = width;
         this.height = height;
-        this.farmer = new Farmer(new Position(3, 3));
+        this.farmer = new Farmer(new Position(3, 7));
 
-        this.time = new IngameTime();
+        this.time = new IngameTime(1, 8, 0);
         this.weather = new Weather(SUNNY);
 
         // Hardcoded positions for testing
-        this.buildings = new BuildingSet(new House(new Position(5, 10)));
-        this.buildings.addCropField(new CropField(new Position(5, 1)));
+        this.buildings = new BuildingSet(new House(new Position(1, 1)));
+        this.buildings.addCropField(new CropField(new Position(9, 1)));
     }
 
     public Farmer getFarmer() {

@@ -6,7 +6,7 @@ import model.Position;
 
 public class FarmerDrawer {
     private final GUI gui;
-    private static final Color FARMER_COLOR = new Color("#999999");
+    private static final Color FARMER_COLOR = new Color("#223366");
     private static final char FARMER_CHAR = '@';
 
     public FarmerDrawer(GUI gui) {

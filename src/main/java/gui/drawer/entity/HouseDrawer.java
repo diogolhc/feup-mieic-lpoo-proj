@@ -3,6 +3,7 @@ package gui.drawer.entity;
 import gui.Color;
 import gui.GUI;
 import gui.drawer.shape.FilledRectangleDrawer;
+import gui.drawer.shape.HorizontalLineDrawer;
 import gui.drawer.shape.RectangleDrawer;
 import model.Position;
 
@@ -25,19 +26,31 @@ public class HouseDrawer {
         int y = position.getY() + 1;
         backgroundDrawer.draw(new Position(x, y), width - 2, height - 2);
 
+        HorizontalLineDrawer roofFill = new HorizontalLineDrawer(gui, HOUSE_OUTLINE_COLOR, HOUSE_OUTLINE_COLOR, ' ');
+        roofFill.draw(new Position(x+1, y+2), 3);
+        roofFill.draw(new Position(x+2, y+1), 1);
+
+        FilledRectangleDrawer rectangleDrawer = new FilledRectangleDrawer(gui, new Color("#FFFFFF"), new Color("#FFFFFF"), ' ');
+        rectangleDrawer.draw(new Position(x+1, y+3), 3, 2);
+
         this.gui.setForegroundColor(HOUSE_OUTLINE_COLOR);
-        this.gui.drawChar(x + 2, y, '_');
-        this.gui.drawChar(x + 1, y + 1, '/');
-        this.gui.drawChar(x + 3, y + 1, '\\');
-        this.gui.drawChar(x, y + 2, '/');
-        this.gui.drawChar(x + 4, y + 2, '\\');
-        this.gui.drawChar(x, y + 3, '|');
-        this.gui.drawChar(x + 4, y + 3, '|');
-        this.gui.drawChar(x, y + 4, '|');
-        this.gui.drawChar(x + 4, y + 4, '|');
-        this.gui.drawChar(x + 2, y + 3, '.');
-        this.gui.drawChar(x + 3, y + 3, '.');
-        this.gui.drawChar(x + 2, y + 4, '|');
-        this.gui.drawChar(x + 3, y + 4, '|');
+        this.drawTransparentOutline(x + 2, y, '_');
+        this.drawTransparentOutline(x + 1, y + 1, '/');
+        this.drawTransparentOutline(x + 3, y + 1, '\\');
+        this.drawTransparentOutline(x, y + 2, '/');
+        this.drawTransparentOutline(x + 4, y + 2, '\\');
+        this.drawTransparentOutline(x, y + 3, '|');
+        this.drawTransparentOutline(x + 4, y + 3, '|');
+        this.drawTransparentOutline(x, y + 4, '|');
+        this.drawTransparentOutline(x + 4, y + 4, '|');
+        this.drawTransparentOutline(x + 2, y + 3, '.');
+        this.drawTransparentOutline(x + 3, y + 3, '.');
+        this.drawTransparentOutline(x + 2, y + 4, '|');
+        this.drawTransparentOutline(x + 3, y + 4, '|');
+    }
+
+    private void drawTransparentOutline(int x, int y, char c) {
+        this.gui.setBackgroundColor(this.gui.getBackGroundColor(x, y));
+        this.gui.drawChar(x, y, c);
     }
 }
