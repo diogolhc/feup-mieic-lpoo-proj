@@ -51,7 +51,7 @@ public class CropField extends Building {
         return true;
     }
 
-    public boolean contains(Position position) {
+    public boolean isInInteractiveZone(Position position) {
         int x = position.getX();
         int y = position.getY();
         int buttonLeft = this.getTopLeftPosition().getX();

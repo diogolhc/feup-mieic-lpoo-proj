@@ -8,7 +8,7 @@ public abstract class BuildingController<T extends Building> {
     public abstract Command getInteractionCommand(T building);
 
     public void reactInteraction(T building, Position position) {
-        if (building.contains(position)) {
+        if (building.isInInteractiveZone(position)) {
             getInteractionCommand(building).execute();
         }
     }

@@ -17,6 +17,12 @@ public class PopupMenuController extends MenuController {
     }
 
     @Override
+    public void reactTimePassed() {
+        // Popups should not stop the time of the things in the background
+        backState.reactTimePassed();
+    }
+
+    @Override
     public GameViewer getViewer() {
         return new PopupMenuViewer(this.getMenu(), this.backState.getViewer());
     }

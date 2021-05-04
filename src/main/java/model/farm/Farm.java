@@ -28,7 +28,7 @@ public class Farm {
 
         // Hardcoded positions for testing
         this.buildings = new BuildingSet(new House(new Position(1, 1)));
-        this.buildings.addCropField(new CropField(new Position(9, 1)));
+        this.buildings.addCropField(new CropField(new Position(10, 3)));
     }
 
     public Farmer getFarmer() {

@@ -17,5 +17,5 @@ public abstract class Building {
     //      that would have a contains() method.
     //      this would allow to reduce logic duplication because of most regions being rectangles
     public abstract boolean isTraversable(Position position);
-    public abstract boolean contains(Position position);
+    public abstract boolean isInInteractiveZone(Position position);
 }
