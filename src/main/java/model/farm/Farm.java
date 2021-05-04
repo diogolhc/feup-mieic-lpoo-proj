@@ -18,7 +18,7 @@ public class Farm {
     private int height;
 
     public Farm(int width, int height) {
-        // TODO width and height at least 5
+        // TODO minimum width and height or throw
         this.width = width;
         this.height = height;
         this.farmer = new Farmer(new Position(3, 7));

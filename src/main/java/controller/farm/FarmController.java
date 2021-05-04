@@ -18,7 +18,7 @@ public class FarmController implements GameControllerState {
     private Farm farm;
     private GameController controller;
     private TimeController timeController;
-    private WeatherController weatherController; // TODO weather should not be part of GameController
+    private WeatherController weatherController;
 
     public FarmController(Farm farm, GameController controller) {
         this.farm = farm;
@@ -48,14 +48,10 @@ public class FarmController implements GameControllerState {
     }
 
     @Override
-    public void reactMouseMovement(Position position) {
-        // TODO
-    }
+    public void reactMouseMovement(Position position) {}
 
     @Override
-    public void reactMouseClick(Position position) {
-        // TODO
-    }
+    public void reactMouseClick(Position position) {}
 
     @Override
     public void reactTimePassed() {

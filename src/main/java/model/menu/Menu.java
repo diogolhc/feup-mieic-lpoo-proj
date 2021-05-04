@@ -14,7 +14,6 @@ public class Menu {
     private int width;
     private int height;
 
-    // TODO MenuBuilder or even FluentFactory
     public Menu(String title, Position position, int width, int height) {
         this.title = title;
         this.position = position;

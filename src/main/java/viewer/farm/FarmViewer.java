@@ -25,8 +25,8 @@ public class FarmViewer extends GameViewer {
         this.drawBackground(this.farm, gui);
         this.drawBuildings(this.farm.getBuildings(), gui);
         this.drawFences(this.farm, gui);
-        this.drawHUD(this.farm.getTime(), this.farm.getWeather(), new HUDViewer(), gui); // TODO temporary
         this.drawFarmer(this.farm.getFarmer(), new FarmerViewer(), gui);
+        this.drawHUD(this.farm.getTime(), this.farm.getWeather(), new HUDViewer(), gui);
     }
 
     private void drawBackground(Farm farm, GUI gui) {
@@ -61,7 +61,6 @@ public class FarmViewer extends GameViewer {
         cropFieldViewer.draw(cropField, gui);
     }
 
-    // TODO temporary
     private void drawHUD(IngameTime time, Weather weather, HUDViewer hudViewer, GUI gui) {
         FilledRectangleDrawer backgroundDrawer = new FilledRectangleDrawer(
                 gui, new Color("#222222"), new Color("#222222"), ' ');

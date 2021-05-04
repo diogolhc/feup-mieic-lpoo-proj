@@ -59,7 +59,7 @@ public class GameController implements MouseListener {
         }
 
         this.gameControllerState.reactKeyboard(action);
-        this.gameControllerState.reactTimePassed(); // TODO this should not depend on controller state but instead on observers
+        this.gameControllerState.reactTimePassed(); // TODO use elapsedTimeSinceLastFrame
     }
 
     private void sleepRestOfFrame(int frameTime, long startTime) {

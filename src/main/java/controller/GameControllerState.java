@@ -8,6 +8,6 @@ public interface GameControllerState {
     void reactKeyboard(GUI.ACTION action);
     void reactMouseMovement(Position position);
     void reactMouseClick(Position position);
-    void reactTimePassed(); // TODO this is just temporary to solve merge conflict
+    void reactTimePassed();
     GameViewer getViewer();
 }
