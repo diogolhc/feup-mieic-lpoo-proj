@@ -13,7 +13,7 @@ public interface GUI {
 
     void setForegroundColor(Color color);
 
-    Color getBackGroundColor(int x, int y);
+    Color getBackgroundColor(int x, int y);
 
     Color getForegroundColor(int x, int y);
 

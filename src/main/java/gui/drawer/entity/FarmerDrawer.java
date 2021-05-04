@@ -14,7 +14,7 @@ public class FarmerDrawer {
     }
 
     public void draw(Position position) {
-        Color backgroundColor = gui.getBackGroundColor(position.getX(), position.getY());
+        Color backgroundColor = gui.getBackgroundColor(position.getX(), position.getY());
         gui.setBackgroundColor(backgroundColor);
         gui.setForegroundColor(FARMER_COLOR);
         gui.drawChar(position.getX(), position.getY(), FARMER_CHAR);

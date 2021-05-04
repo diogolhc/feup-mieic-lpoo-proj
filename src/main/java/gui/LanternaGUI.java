@@ -24,11 +24,17 @@ public class LanternaGUI implements GUI {
     private final TerminalScreen screen;
     private final TextGraphics graphics;
 
+    public LanternaGUI(Terminal terminal, TerminalScreen screen) {
+        this.terminal = terminal;
+        this.screen = screen;
+        this.graphics = this.screen.newTextGraphics();
+    }
+
     public LanternaGUI(int width, int height) throws IOException, FontFormatException, URISyntaxException {
         AWTTerminalFontConfiguration fontConfig = this.loadSquareFont();
-        terminal = this.createTerminal(width, height, fontConfig);
-        screen = this.createScreen(terminal);
-        graphics = this.screen.newTextGraphics();
+        this.terminal = this.createTerminal(width, height, fontConfig);
+        this.screen = this.createScreen(terminal);
+        this.graphics = this.screen.newTextGraphics();
     }
 
     private static TerminalScreen createScreen(Terminal terminal) throws IOException {
@@ -106,7 +112,7 @@ public class LanternaGUI implements GUI {
     }
 
     @Override
-    public Color getBackGroundColor(int x, int y) {
+    public Color getBackgroundColor(int x, int y) {
         return new Color(this.getColorString(this.graphics.getCharacter(x, y).getBackgroundColor()));
     }
 

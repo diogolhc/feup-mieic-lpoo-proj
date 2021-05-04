@@ -1,8 +1,7 @@
 package model;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.Assert.*;
 
 
 public class IngameTimeTest {
@@ -13,7 +12,7 @@ public class IngameTimeTest {
 
         time.advance(15);
 
-        assertEquals(15, time.getMinute());
+        Assertions.assertEquals(15, time.getMinute());
     }
 
     @Test
@@ -22,7 +21,7 @@ public class IngameTimeTest {
 
         time.advance(15*60);
 
-        assertEquals(0, time.getMinute());
+        Assertions.assertEquals(0, time.getMinute());
     }
 
     @Test
@@ -31,7 +30,7 @@ public class IngameTimeTest {
 
         time.advance(24*60);
 
-        assertEquals(0, time.getMinute());
+        Assertions.assertEquals(0, time.getMinute());
     }
 
     @Test
@@ -40,7 +39,7 @@ public class IngameTimeTest {
 
         time.advance(2*24*60 + 3);
 
-        assertEquals(3, time.getMinute());
+        Assertions.assertEquals(3, time.getMinute());
     }
 
     @Test
@@ -49,7 +48,7 @@ public class IngameTimeTest {
 
         time.advance(60);
 
-        assertEquals(1, time.getHour());
+        Assertions.assertEquals(1, time.getHour());
     }
 
     @Test
@@ -58,7 +57,7 @@ public class IngameTimeTest {
 
         time.advance(2*24*60 + 3*60 + 1);
 
-        assertEquals(3, time.getHour());
+        Assertions.assertEquals(3, time.getHour());
     }
 
     @Test
@@ -67,7 +66,7 @@ public class IngameTimeTest {
 
         time.advance(2*24*60 + 1);
 
-        assertEquals(2, time.getDay());
+        Assertions.assertEquals(2, time.getDay());
     }
 
 
