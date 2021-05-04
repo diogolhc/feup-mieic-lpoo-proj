@@ -17,6 +17,4 @@ public class HUDViewer {
         drawer.draw(new Position(0, 20), time.toString());
         drawer.draw(new Position(25, 20), weather.getType().name());
     }
-
-
 }

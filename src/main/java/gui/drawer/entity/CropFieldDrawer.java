@@ -6,7 +6,6 @@ import gui.drawer.shape.FilledRectangleDrawer;
 import gui.drawer.shape.RectangleDrawer;
 import model.Position;
 
-// TODO experimental
 public class CropFieldDrawer {
     private GUI gui;
     private final static Color PATH_COLOR = new Color("#be9b7b");

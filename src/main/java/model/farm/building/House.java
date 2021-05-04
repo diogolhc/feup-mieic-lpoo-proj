@@ -9,6 +9,7 @@ public class House extends Building {
         super(topLeft);
     }
 
+    @Override
     public boolean isTraversable(Position position) {
         position = position.relativeTo(this.getTopLeftPosition());
         int x = position.getX();

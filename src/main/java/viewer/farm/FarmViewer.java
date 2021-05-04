@@ -62,6 +62,7 @@ public class FarmViewer extends GameViewer {
     }
 
     private void drawHUD(IngameTime time, Weather weather, HUDViewer hudViewer, GUI gui) {
+        // TODO background drawer inside HUDViewer
         FilledRectangleDrawer backgroundDrawer = new FilledRectangleDrawer(
                 gui, new Color("#222222"), new Color("#222222"), ' ');
         backgroundDrawer.draw(new Position(0, farm.getHeight()), farm.getWidth(), 1);

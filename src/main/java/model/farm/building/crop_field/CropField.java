@@ -39,6 +39,7 @@ public class CropField extends Building {
         return growthStages.get(growthStages.size() - 1);
     }
 
+    @Override
     public boolean isTraversable(Position position) {
         Position invalidPosition = this.getTopLeftPosition().getRight().getDown();
         if (position.equals(invalidPosition)) return false;
@@ -51,6 +52,7 @@ public class CropField extends Building {
         return true;
     }
 
+    @Override
     public boolean isInInteractiveZone(Position position) {
         int x = position.getX();
         int y = position.getY();
