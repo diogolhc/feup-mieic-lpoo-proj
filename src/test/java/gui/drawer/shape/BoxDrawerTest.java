@@ -1,4 +1,4 @@
-package gui.drawer.string;
+package gui.drawer.shape;
 
 import gui.Color;
 import gui.GUI;
@@ -6,10 +6,11 @@ import model.Position;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestFactory;
 import org.mockito.Mockito;
 
-public class UnderlinedStringDrawerTest {
+import javax.swing.*;
+
+public class BoxDrawerTest {
     private GUI gui;
     private Color backgroundColors[][] = new Color[10][10];
     private Color foregroundColors[][] = new Color[10][10];
@@ -72,52 +73,55 @@ public class UnderlinedStringDrawerTest {
     }
 
     @Test
-    void drawUnderlined() {
-        Color BACK = new Color("#123456");
+    void drawBox() {
         Color DEFAULT = new Color("#000000");
-        Color FRONT = new Color("#FEDCBA");
         Color WHITE = new Color("#FFFFFF");
+        Color BACK = new Color("#123456");
+        Color FRONT = new Color("#FEDCBA");
 
-        char character = '_';
-        UnderlinedStringDrawer drawer = new UnderlinedStringDrawer(gui, BACK, FRONT, character);
-        drawer.draw(new Position(5, 7), "HELLO");
+        char HORIZONTAL_LINE = '-';
+        char VERTICAL_LINE = '|';
+        char CORNER_LINE = '+';
+    
+        BoxDrawer boxDrawer = new BoxDrawer(gui, BACK, FRONT);
+        boxDrawer.draw(new Position(0, 0), 5, 5);
 
         Color expectedBg[][] = {
+                {BACK, BACK, BACK, BACK, BACK, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT},
+                {BACK, DEFAULT, DEFAULT, DEFAULT, BACK, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT},
+                {BACK, DEFAULT, DEFAULT, DEFAULT, BACK, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT},
+                {BACK, DEFAULT, DEFAULT, DEFAULT, BACK, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT},
+                {BACK, BACK, BACK, BACK, BACK, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT},
                 {DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT},
                 {DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT},
                 {DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT},
                 {DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT},
-                {DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT},
-                {DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT},
-                {DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT},
-                {DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, BACK, BACK, BACK, BACK, BACK},
-                {DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, BACK, BACK, BACK, BACK, BACK},
                 {DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT}
         };
 
         Color expectedFg[][] = {
+                {FRONT, FRONT, FRONT, FRONT, FRONT, WHITE, WHITE, WHITE, WHITE, WHITE},
+                {FRONT, WHITE, WHITE, WHITE, FRONT, WHITE, WHITE, WHITE, WHITE, WHITE},
+                {FRONT, WHITE, WHITE, WHITE, FRONT, WHITE, WHITE, WHITE, WHITE, WHITE},
+                {FRONT, WHITE, WHITE, WHITE, FRONT, WHITE, WHITE, WHITE, WHITE, WHITE},
+                {FRONT, FRONT, FRONT, FRONT, FRONT, WHITE, WHITE, WHITE, WHITE, WHITE},
                 {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
                 {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
                 {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
                 {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
-                {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
-                {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
-                {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
-                {WHITE, WHITE, WHITE, WHITE, WHITE, FRONT, FRONT, FRONT, FRONT, FRONT},
-                {WHITE, WHITE, WHITE, WHITE, WHITE, FRONT, FRONT, FRONT, FRONT, FRONT},
                 {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE}
         };
 
         char expectedChars[][] = {
+                {CORNER_LINE, HORIZONTAL_LINE, HORIZONTAL_LINE, HORIZONTAL_LINE, CORNER_LINE, ' ', ' ', ' ', ' ', ' '},
+                {VERTICAL_LINE, ' ', ' ', ' ', VERTICAL_LINE, ' ', ' ', ' ', ' ', ' '},
+                {VERTICAL_LINE, ' ', ' ', ' ', VERTICAL_LINE, ' ', ' ', ' ', ' ', ' '},
+                {VERTICAL_LINE, ' ', ' ', ' ', VERTICAL_LINE, ' ', ' ', ' ', ' ', ' '},
+                {CORNER_LINE, HORIZONTAL_LINE, HORIZONTAL_LINE, HORIZONTAL_LINE, CORNER_LINE, ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', 'H', 'E', 'L', 'L', 'O'},
-                {' ', ' ', ' ', ' ', ' ', '_', '_', '_', '_', '_'},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
         };
 
@@ -129,67 +133,60 @@ public class UnderlinedStringDrawerTest {
     }
 
     @Test
-    void drawMultipleUnderlined() {
-        Color BACK = new Color("#123456");
-        Color BACK2 = new Color("#144436");
-        Color BACK3 = new Color("#123999");
-
+    void drawMultipleBoxes() {
         Color DEFAULT = new Color("#000000");
-
-        Color FRONT = new Color("#FEDCAA");
-        Color FRONT2 = new Color("#FEDCBA");
-        Color FRONT3 = new Color("#FEDEBA");
-
         Color WHITE = new Color("#FFFFFF");
+        Color BACK = new Color("#123456");
+        Color BACK2 = new Color("#144778");
+        Color FRONT = new Color("#FEDCBA");
+        Color FRONT2 = new Color("#FEFBAD");
 
-        char character = '_';
-        char character1 = '-';
-        char character2 = '=';
+        char HORIZONTAL_LINE = '-';
+        char VERTICAL_LINE = '|';
+        char CORNER_LINE = '+';
 
-        UnderlinedStringDrawer drawer = new UnderlinedStringDrawer(gui, BACK, FRONT, character);
-        UnderlinedStringDrawer drawer2 = new UnderlinedStringDrawer(gui, BACK2, FRONT2, character1);
-        UnderlinedStringDrawer drawer3 = new UnderlinedStringDrawer(gui, BACK3, FRONT3, character2);
+        BoxDrawer boxDrawer = new BoxDrawer(gui, BACK, FRONT);
+        BoxDrawer boxDrawer2 = new BoxDrawer(gui, BACK2, FRONT2);
 
-        drawer.draw(new Position(5, 7), "HELLO");
-        drawer2.draw(new Position(0, 0), "HI");
-        drawer3.draw(new Position(3, 3), "OIE");
+        boxDrawer.draw(new Position(0, 0), 5, 5);
+        boxDrawer2.draw(new Position(3, 3), 4, 4);
 
         Color expectedBg[][] = {
-                {BACK2, BACK2, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT},
-                {BACK2, BACK2, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT},
+                {BACK, BACK, BACK, BACK, BACK, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT},
+                {BACK, DEFAULT, DEFAULT, DEFAULT, BACK, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT},
+                {BACK, DEFAULT, DEFAULT, DEFAULT, BACK, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT},
+                {BACK, DEFAULT, DEFAULT, BACK2, BACK2, BACK2, BACK2, DEFAULT, DEFAULT, DEFAULT},
+                {BACK, BACK, BACK, BACK2, BACK, DEFAULT, BACK2, DEFAULT, DEFAULT, DEFAULT},
+                {DEFAULT, DEFAULT, DEFAULT, BACK2, DEFAULT, DEFAULT, BACK2, DEFAULT, DEFAULT, DEFAULT},
+                {DEFAULT, DEFAULT, DEFAULT, BACK2, BACK2, BACK2, BACK2, DEFAULT, DEFAULT, DEFAULT},
                 {DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT},
-                {DEFAULT, DEFAULT, DEFAULT, BACK3, BACK3, BACK3, DEFAULT, DEFAULT, DEFAULT, DEFAULT},
-                {DEFAULT, DEFAULT, DEFAULT, BACK3, BACK3, BACK3, DEFAULT, DEFAULT, DEFAULT, DEFAULT},
                 {DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT},
-                {DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT},
-                {DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, BACK, BACK, BACK, BACK, BACK},
-                {DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, BACK, BACK, BACK, BACK, BACK},
                 {DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT}
         };
 
         Color expectedFg[][] = {
-                {FRONT2, FRONT2, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
-                {FRONT2, FRONT2, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
+                {FRONT, FRONT, FRONT, FRONT, FRONT, WHITE, WHITE, WHITE, WHITE, WHITE},
+                {FRONT, WHITE, WHITE, WHITE, FRONT, WHITE, WHITE, WHITE, WHITE, WHITE},
+                {FRONT, WHITE, WHITE, WHITE, FRONT, WHITE, WHITE, WHITE, WHITE, WHITE},
+                {FRONT, WHITE, WHITE, FRONT2, FRONT2, FRONT2, FRONT2, WHITE, WHITE, WHITE},
+                {FRONT, FRONT, FRONT, FRONT2, FRONT, WHITE, FRONT2, WHITE, WHITE, WHITE},
+                {WHITE, WHITE, WHITE, FRONT2, WHITE, WHITE, FRONT2, WHITE, WHITE, WHITE},
+                {WHITE, WHITE, WHITE, FRONT2, FRONT2, FRONT2, FRONT2, WHITE, WHITE, WHITE},
                 {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
-                {WHITE, WHITE, WHITE, FRONT3, FRONT3, FRONT3, WHITE, WHITE, WHITE, WHITE},
-                {WHITE, WHITE, WHITE, FRONT3, FRONT3, FRONT3, WHITE, WHITE, WHITE, WHITE},
                 {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
-                {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
-                {WHITE, WHITE, WHITE, WHITE, WHITE, FRONT, FRONT, FRONT, FRONT, FRONT},
-                {WHITE, WHITE, WHITE, WHITE, WHITE, FRONT, FRONT, FRONT, FRONT, FRONT},
                 {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE}
         };
 
         char expectedChars[][] = {
-                {'H', 'I', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {character1, character1, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                {CORNER_LINE, HORIZONTAL_LINE, HORIZONTAL_LINE, HORIZONTAL_LINE, CORNER_LINE, ' ', ' ', ' ', ' ', ' '},
+                {VERTICAL_LINE, ' ', ' ', ' ', VERTICAL_LINE, ' ', ' ', ' ', ' ', ' '},
+                {VERTICAL_LINE, ' ', ' ', ' ', VERTICAL_LINE, ' ', ' ', ' ', ' ', ' '},
+                {VERTICAL_LINE, ' ', ' ', CORNER_LINE, HORIZONTAL_LINE, HORIZONTAL_LINE, CORNER_LINE, ' ', ' ', ' '},
+                {CORNER_LINE, HORIZONTAL_LINE, HORIZONTAL_LINE, VERTICAL_LINE, CORNER_LINE, ' ', VERTICAL_LINE, ' ', ' ', ' '},
+                {' ', ' ', ' ', VERTICAL_LINE, ' ', ' ', VERTICAL_LINE, ' ', ' ', ' '},
+                {' ', ' ', ' ', CORNER_LINE, HORIZONTAL_LINE, HORIZONTAL_LINE, CORNER_LINE, ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', 'O', 'I', 'E', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', character2, character2, character2, ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', 'H', 'E', 'L', 'L', 'O'},
-                {' ', ' ', ' ', ' ', ' ', character, character, character, character, character},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
         };
 
@@ -199,5 +196,5 @@ public class UnderlinedStringDrawerTest {
             Assertions.assertArrayEquals(expectedFg[i], this.foregroundColors[i]);
         }
     }
-}
 
+}
