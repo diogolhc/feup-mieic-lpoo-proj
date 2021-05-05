@@ -3,12 +3,21 @@ package gui;
 import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
+import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.Terminal;
+import com.googlecode.lanterna.terminal.swing.AWTTerminalFrame;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
+import java.io.IOException;
 
 class LanternaGUITest {
     private Terminal terminal;
@@ -105,12 +114,51 @@ class LanternaGUITest {
     }
 
     @Test
-    void getNextAction() {
-        // TODO
+    void getNextAction() throws IOException {
+        Mockito.when(screen.pollInput()).thenReturn(KeyStroke.fromString("w"));
+        Assertions.assertEquals(GUI.ACTION.MOVE_UP, gui.getNextAction());
+        Mockito.when(screen.pollInput()).thenReturn(KeyStroke.fromString("s"));
+        Assertions.assertEquals(GUI.ACTION.MOVE_DOWN, gui.getNextAction());
+        Mockito.when(screen.pollInput()).thenReturn(KeyStroke.fromString("a"));
+        Assertions.assertEquals(GUI.ACTION.MOVE_LEFT, gui.getNextAction());
+        Mockito.when(screen.pollInput()).thenReturn(KeyStroke.fromString("d"));
+        Assertions.assertEquals(GUI.ACTION.MOVE_RIGHT, gui.getNextAction());
+        Mockito.when(screen.pollInput()).thenReturn(KeyStroke.fromString("<Space>"));
+        Assertions.assertEquals(GUI.ACTION.INTERACT, gui.getNextAction());
+        Mockito.when(screen.pollInput()).thenReturn(null);
+        Assertions.assertEquals(GUI.ACTION.NONE, gui.getNextAction());
+        Mockito.when(screen.pollInput()).thenReturn(KeyStroke.fromString("."));
+        Assertions.assertEquals(GUI.ACTION.NONE, gui.getNextAction());
     }
 
     @Test
-    void mouseListener() {
-        // TODO
+    void mouseListenerClick() {
+        //MouseListener mouseListener = Mockito.mock(MouseListener.class);
+
+        /*
+        Mockito.doAnswer(invocation -> {
+            //MouseAdapter adapter = invocation.getArgument(0);
+            //adapter.mouseClicked(new MouseEvent(null, 0, 0, 0, 49, 39, 0, false));
+            return null;
+        }).when((AWTTerminalFrame) terminal).getComponent(0).addMouseListener(Mockito.any());
+        */
+
+        //gui.setMouseListener(mouseListener);
+
+
+        //Mockito.verify(mouseListener, Mockito.times(1)).onMouseClick(2, 2);
+    }
+
+    @Test
+    void mouseListenerMove() {
+        /*
+        MouseListener mouseListener = Mockito.mock(MouseListener.class);
+
+        Mockito.doAnswer(invocation -> {
+            MouseMotionListener adapter = invocation.getArgument(0);
+            adapter.mouseMoved(new MouseEvent(null, 0, 0, 0, 50, 39, 0, false));
+            return null;
+        }).when((AWTTerminalFrame) terminal).getComponent(0).addMouseMotionListener(Mockito.any());
+        */
     }
 }
