@@ -6,6 +6,7 @@ import model.Position;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestFactory;
 import org.mockito.Mockito;
 
 public class UnderlinedStringDrawerTest {
@@ -193,7 +194,6 @@ public class UnderlinedStringDrawerTest {
             Assertions.assertArrayEquals(expectedChars[i], this.characters[i]);
             Assertions.assertArrayEquals(expectedFg[i], this.foregroundColors[i]);
         }
-
-
     }
 }
+
