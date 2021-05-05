@@ -2,9 +2,7 @@ package gui.drawer.string;
 
 import gui.Color;
 import gui.GUI;
-import gui.drawer.shape.HorizontalLineDrawer;
 import model.Position;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -12,9 +10,11 @@ import org.mockito.Mockito;
 public class StringDrawerTest {
     private GUI gui;
 
+
     @BeforeEach
     void setUp() {
         this.gui = Mockito.mock(GUI.class);
+
     }
 
     @Test
