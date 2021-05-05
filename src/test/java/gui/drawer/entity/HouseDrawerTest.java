@@ -32,10 +32,12 @@ class HouseDrawerTest {
             this.currentBackgroundColor = invocation.getArgument(0);
             return null;
         }).when(gui).setBackgroundColor(Mockito.any());
+
         Mockito.doAnswer(invocation -> {
             this.currentForegroundColor = invocation.getArgument(0);
             return null;
         }).when(gui).setForegroundColor(Mockito.any());
+
         Mockito.doAnswer(invocation -> {
             int x = invocation.getArgument(0);
             int y = invocation.getArgument(1);
@@ -45,6 +47,7 @@ class HouseDrawerTest {
             this.characters[y][x] = c;
             return null;
         }).when(gui).drawChar(Mockito.anyInt(), Mockito.anyInt(), Mockito.anyChar());
+
         Mockito.doAnswer(invocation -> {
             String s = invocation.getArgument(2);
             int x = invocation.getArgument(0);
@@ -58,11 +61,13 @@ class HouseDrawerTest {
             }
             return null;
         }).when(gui).drawString(Mockito.anyInt(), Mockito.anyInt(), Mockito.anyString());
+
         Mockito.doAnswer(invocation -> {
             int x = invocation.getArgument(0);
             int y = invocation.getArgument(1);
             return this.backgroundColors[y][x];
         }).when(gui).getBackgroundColor(Mockito.anyInt(), Mockito.anyInt());
+
         Mockito.doAnswer(invocation -> {
             int x = invocation.getArgument(0);
             int y = invocation.getArgument(1);
@@ -121,5 +126,49 @@ class HouseDrawerTest {
     @Test
     void drawOtherPosition() {
         // TODO
+
+        HouseDrawer drawer = new HouseDrawer(gui);
+        drawer.draw(new Position(2, 2));
+
+        Color BLACK = new Color("#000000");
+        Color PATH = new Color("#be9b7b");
+        Color FLOOR = new Color("#777777");
+        Color DOOR = new Color("#82490b");
+        Color WALL = new Color("#eeeeef");
+        Color ROOF = new Color("#c20000");
+
+        Color expectedBg[][] = {
+                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, BLACK, ROOF, ROOF, ROOF, ROOF, ROOF, BLACK, BLACK},
+                {BLACK, BLACK, ROOF, ROOF, ROOF, ROOF, ROOF, ROOF, ROOF, BLACK},
+                {BLACK, BLACK, WALL, WALL, WALL, WALL, WALL, WALL, WALL, BLACK},
+                {BLACK, BLACK, WALL, WALL, WALL, WALL, WALL, WALL, WALL, BLACK},
+                {BLACK, BLACK, WALL, WALL, WALL, WALL, DOOR, WALL, WALL, BLACK},
+                {BLACK, BLACK, WALL, WALL, WALL, WALL, DOOR, WALL, WALL, BLACK},
+                {BLACK, BLACK, FLOOR, FLOOR, FLOOR, FLOOR, PATH, FLOOR, FLOOR, BLACK},
+                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
+        };
+
+        char expectedChars[][] = {
+                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                {' ', ' ', ' ', ' ', ' ', ' ', '\'', ' ', ' ', ' '},
+                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        };
+
+        for (int i = 0; i < 10; i++) {
+            Assertions.assertArrayEquals(expectedBg[i], this.backgroundColors[i]);
+            Assertions.assertArrayEquals(expectedChars[i], this.characters[i]);
+        }
+
+        Assertions.assertEquals(BLACK, this.foregroundColors[7][6]);
     }
 }
