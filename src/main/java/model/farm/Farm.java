@@ -63,4 +63,5 @@ public class Farm {
     public Weather getWeather() {
         return weather;
     }
+
 }

@@ -1,20 +1,20 @@
 package model.farm.building.crop_field.crop;
 
 import gui.Color;
-import model.ChronologicalTime;
+import model.IngameTime;
 
 public class GrowthStage {
-    private ChronologicalTime stageStartTime;
+    private IngameTime stageStartTime;
     private char stageChar;
     private Color stageColor;
 
-    public GrowthStage(ChronologicalTime stageStartTime, char stageChar, Color stageColor) {
+    public GrowthStage(IngameTime stageStartTime, char stageChar, Color stageColor) {
         this.stageStartTime = stageStartTime;
         this.stageChar = stageChar;
         this.stageColor = stageColor;
     }
 
-    public ChronologicalTime getStageStartTime() {
+    public IngameTime getStageStartTime() {
         return this.stageStartTime;
     }
 

@@ -1,11 +1,11 @@
 package model.farm.building.crop_field.state;
 
-import model.ChronologicalTime;
+import model.IngameTime;
 import model.farm.building.crop_field.crop.Crop;
 
 public class Planted implements CropFieldState {
     private Crop crop;
-    private ChronologicalTime timeRemaining;
+    private IngameTime timeRemaining;
 
     public Planted(Crop crop) {
         this.crop = crop;
@@ -13,8 +13,13 @@ public class Planted implements CropFieldState {
     }
 
     @Override
-    public ChronologicalTime getRemainingTime() {
+    public IngameTime getRemainingTime() {
         return timeRemaining;
+    }
+
+    @Override
+    public void setRemainingTime(IngameTime time) {
+        this.timeRemaining = time;
     }
 
     @Override

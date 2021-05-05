@@ -1,7 +1,7 @@
 package model.farm.building.crop_field;
 
 import gui.Color;
-import model.ChronologicalTime;
+import model.IngameTime;
 import model.Position;
 import model.farm.building.Building;
 import model.farm.building.crop_field.crop.GrowthStage;
@@ -29,9 +29,9 @@ public class CropField extends Building {
 
     public GrowthStage getCropGrowthStage() {
         List<GrowthStage> growthStages = this.state.getCrop().getGrowthStages();
-        ChronologicalTime remainingTime = this.state.getRemainingTime();
+        IngameTime remainingTime = this.state.getRemainingTime();
         for (GrowthStage stage: growthStages) {
-            if (remainingTime.getMinutes() <= stage.getStageStartTime().getMinutes()) {
+            if (remainingTime.getMinute() <= stage.getStageStartTime().getMinute()) {
                 return stage;
             }
         }
@@ -63,7 +63,11 @@ public class CropField extends Building {
         return (x >= buttonLeft && x <= buttonRight && y >= buttonTop && y <= buttonBottom);
     }
 
-    public ChronologicalTime getRemainingTime() {
-        return this.getState().getRemainingTime();
+    public IngameTime getRemainingTime() {
+        return this.state.getRemainingTime();
+    }
+
+    public void setRemainingTime(IngameTime time) {
+        this.state.setRemainingTime(time);
     }
 }

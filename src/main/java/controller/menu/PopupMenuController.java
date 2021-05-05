@@ -17,9 +17,9 @@ public class PopupMenuController extends MenuController {
     }
 
     @Override
-    public void reactTimePassed() {
+    public void reactTimePassed(long elapsedTimeSinceLastFrame) {
         // Popups should not stop the time of the things in the background
-        backState.reactTimePassed();
+        backState.reactTimePassed(elapsedTimeSinceLastFrame);
     }
 
     @Override

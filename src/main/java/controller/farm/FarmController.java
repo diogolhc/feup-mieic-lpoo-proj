@@ -2,13 +2,16 @@ package controller.farm;
 
 import controller.GameController;
 import controller.GameControllerState;
-import controller.TimeController;
+import controller.time.RealTimeToInGameTimeConverter;
+import controller.time.oper.InGameTimeOper;
+import controller.time.oper.InGameTimeSubtraction;
+import controller.time.oper.InGameTimeSum;
 import controller.weather.SunnyController;
 import controller.weather.WeatherController;
 import controller.farm.building.CropFieldController;
 import controller.farm.building.HouseController;
-import controller.weather.WindstormController;
 import gui.GUI;
+import model.IngameTime;
 import model.Position;
 import model.farm.Farm;
 import model.farm.building.BuildingSet;
@@ -19,13 +22,13 @@ import viewer.farm.FarmViewer;
 public class FarmController implements GameControllerState {
     private Farm farm;
     private GameController controller;
-    private TimeController timeController;
+    private RealTimeToInGameTimeConverter realTimeToInGameTimeConverter;
     private WeatherController weatherController;
 
     public FarmController(Farm farm, GameController controller) {
         this.farm = farm;
         this.controller = controller;
-        this.timeController = new TimeController(1);
+        this.realTimeToInGameTimeConverter = new RealTimeToInGameTimeConverter(1);
         this.weatherController = new SunnyController(1); // TODO maybe pass this value by argument ?
     }
 
@@ -60,8 +63,16 @@ public class FarmController implements GameControllerState {
     public void reactMouseClick(Position position) {}
 
     @Override
-    public void reactTimePassed() {
-        this.timeController.advanceTime(this.farm.getTime());
+    public void reactTimePassed(long elapsedTimeSinceLastFrame) {
+        IngameTime elapsedTime = this.realTimeToInGameTimeConverter.convert(elapsedTimeSinceLastFrame);
+        InGameTimeOper sum = new InGameTimeSum();
+        InGameTimeOper subtraction = new InGameTimeSubtraction();
+
+        this.farm.getTime().set(sum.apply(this.farm.getTime(), elapsedTime));
+        for (CropField cropField : this.farm.getBuildings().getCropFields()) {
+            cropField.setRemainingTime(subtraction.apply(cropField.getRemainingTime(), elapsedTime));
+        }
+
         this.weatherController.updateWeather(this, this.farm.getWeather(), this.farm.getTime().getDay());
     }
 

@@ -44,7 +44,7 @@ public class MenuController implements GameControllerState {
     }
 
     @Override
-    public void reactTimePassed() {}
+    public void reactTimePassed(long elapsedTimeSinceLastFrame) {}
 
     @Override
     public GameViewer getViewer() {

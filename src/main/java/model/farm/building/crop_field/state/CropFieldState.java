@@ -1,11 +1,10 @@
 package model.farm.building.crop_field.state;
 
-import gui.Color;
-import model.ChronologicalTime;
+import model.IngameTime;
 import model.farm.building.crop_field.crop.Crop;
-import model.menu.Menu;
 
 public interface CropFieldState {
-    ChronologicalTime getRemainingTime();
+    IngameTime getRemainingTime();
+    void setRemainingTime(IngameTime time);
     Crop getCrop();
 }

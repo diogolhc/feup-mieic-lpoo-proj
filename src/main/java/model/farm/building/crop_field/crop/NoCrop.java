@@ -1,20 +1,19 @@
 package model.farm.building.crop_field.crop;
 
 import gui.Color;
-import model.ChronologicalTime;
+import model.IngameTime;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class NoCrop implements Crop {
     private static final List<GrowthStage> GROWTH_STAGES = Arrays.asList(
-            new GrowthStage(new ChronologicalTime(0), ' ', new Color("#000000"))
+            new GrowthStage(new IngameTime(0), ' ', new Color("#000000"))
     );
 
     @Override
-    public ChronologicalTime getGrowTime() {
-        return new ChronologicalTime(0);
+    public IngameTime getGrowTime() {
+        return new IngameTime(0);
     }
 
     @Override

@@ -1,11 +1,7 @@
 package model.farm.building.crop_field.state;
 
-import model.ChronologicalTime;
-import model.Position;
-import model.farm.building.crop_field.CropField;
+import model.IngameTime;
 import model.farm.building.crop_field.crop.Crop;
-import model.menu.Button;
-import model.menu.Menu;
 
 public class ReadyToHarvest implements CropFieldState {
     private Crop crop;
@@ -15,9 +11,12 @@ public class ReadyToHarvest implements CropFieldState {
     }
 
     @Override
-    public ChronologicalTime getRemainingTime() {
-        return new ChronologicalTime(0);
+    public IngameTime getRemainingTime() {
+        return new IngameTime(0);
     }
+
+    @Override
+    public void setRemainingTime(IngameTime time) {}
 
     @Override
     public Crop getCrop() {
