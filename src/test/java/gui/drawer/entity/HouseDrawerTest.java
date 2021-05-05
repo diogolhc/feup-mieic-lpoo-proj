@@ -99,7 +99,6 @@ class HouseDrawerTest {
                 {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
                 {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
                 {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
-                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
         };
 
         char expectedChars[][] = {
@@ -125,7 +124,6 @@ class HouseDrawerTest {
 
     @Test
     void drawOtherPosition() {
-        // TODO
 
         HouseDrawer drawer = new HouseDrawer(gui);
         drawer.draw(new Position(2, 2));
@@ -147,7 +145,6 @@ class HouseDrawerTest {
                 {BLACK, BLACK, WALL, WALL, WALL, WALL, DOOR, WALL, WALL, BLACK},
                 {BLACK, BLACK, WALL, WALL, WALL, WALL, DOOR, WALL, WALL, BLACK},
                 {BLACK, BLACK, FLOOR, FLOOR, FLOOR, FLOOR, PATH, FLOOR, FLOOR, BLACK},
-                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
                 {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
         };
 
