@@ -2,14 +2,13 @@ package gui.drawer.shape;
 
 import gui.Color;
 import gui.GUI;
-import gui.drawer.entity.HouseDrawer;
 import model.Position;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-public class HorizontalLineDrawerTest {
+public class FilledRectangleDrawerTest {
     private GUI gui;
     private Color backgroundColors[][] = new Color[10][10];
     private Color foregroundColors[][] = new Color[10][10];
@@ -79,15 +78,15 @@ public class HorizontalLineDrawerTest {
         Color BACK = new Color("#123456");
         Color FRONT = new Color("#FEDCBA");
 
-        HorizontalLineDrawer drawer = new HorizontalLineDrawer(gui, BACK, FRONT, 'x');
-        drawer.draw(new Position(0, 0), 5);
+        FilledRectangleDrawer drawer = new FilledRectangleDrawer(gui, BACK, FRONT, '+');
+        drawer.draw(new Position(0, 0), 5, 6);
 
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
-                if (j == 0 && i <= 4) {
+                if (i <= 4 && j <= 5) {
                     Assertions.assertEquals(BACK, backgroundColors[j][i]);
                     Assertions.assertEquals(FRONT, foregroundColors[j][i]);
-                    Assertions.assertEquals('x', characters[j][i]);
+                    Assertions.assertEquals('+', characters[j][i]);
                 } else {
                     Assertions.assertEquals(BLACK, backgroundColors[j][i]);
                     Assertions.assertEquals(WHITE, foregroundColors[j][i]);
@@ -104,15 +103,15 @@ public class HorizontalLineDrawerTest {
         Color BACK = new Color("#123456");
         Color FRONT = new Color("#FEDCBA");
 
-        HorizontalLineDrawer drawer = new HorizontalLineDrawer(gui, BACK, FRONT, 'x');
-        drawer.draw(new Position(6, 3), 2);
+        FilledRectangleDrawer drawer = new FilledRectangleDrawer(gui, BACK, FRONT, '+');
+        drawer.draw(new Position(3, 3), 2, 2);
 
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
-                if (j == 3 && i >= 6 && i <= 7) {
+                if (i >= 3 && i <= 4 && j >= 3 && j <= 4) {
                     Assertions.assertEquals(BACK, backgroundColors[j][i]);
                     Assertions.assertEquals(FRONT, foregroundColors[j][i]);
-                    Assertions.assertEquals('x', characters[j][i]);
+                    Assertions.assertEquals('+', characters[j][i]);
                 } else {
                     Assertions.assertEquals(BLACK, backgroundColors[j][i]);
                     Assertions.assertEquals(WHITE, foregroundColors[j][i]);
@@ -129,18 +128,18 @@ public class HorizontalLineDrawerTest {
         Color BACK = new Color("#123456");
         Color FRONT = new Color("#FEDCBA");
 
-        HorizontalLineDrawer drawer = new HorizontalLineDrawer(gui, BACK, FRONT, 'x');
-        drawer.draw(new Position(2, 3), 1);
-        drawer.draw(new Position(4, 2), 6);
-        drawer.draw(new Position(4, 7), 3);
-        drawer.draw(new Position(4, 7), 6);
+        FilledRectangleDrawer drawer = new FilledRectangleDrawer(gui, BACK, FRONT, '+');
+        drawer.draw(new Position(2, 0), 2, 10);
+        drawer.draw(new Position(1, 3), 6, 3);
+        drawer.draw(new Position(5, 3), 2, 2);
+        drawer.draw(new Position(7, 6), 1, 1);
 
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
-                if ((i >= 4 && i <= 9 && (j == 2 || j == 7)) || (i == 2 && j == 3)) {
+                if ((i >= 2 && i <= 3) || (i >= 1 && i <= 6 && j >= 3 && j <= 5) || (i == 7 && j == 6)) {
                     Assertions.assertEquals(BACK, backgroundColors[j][i]);
                     Assertions.assertEquals(FRONT, foregroundColors[j][i]);
-                    Assertions.assertEquals('x', characters[j][i]);
+                    Assertions.assertEquals('+', characters[j][i]);
                 } else {
                     Assertions.assertEquals(BLACK, backgroundColors[j][i]);
                     Assertions.assertEquals(WHITE, foregroundColors[j][i]);
@@ -161,32 +160,28 @@ public class HorizontalLineDrawerTest {
         Color BACK3 = new Color("#123458");
         Color FRONT3 = new Color("#FEDCBC");
 
-        HorizontalLineDrawer drawer1 = new HorizontalLineDrawer(gui, BACK1, FRONT1, 'x');
-        HorizontalLineDrawer drawer2 = new HorizontalLineDrawer(gui, BACK2, FRONT2, 'y');
-        HorizontalLineDrawer drawer3 = new HorizontalLineDrawer(gui, BACK3, FRONT3, 'z');
-        drawer1.draw(new Position(0, 0), 10);
-        drawer2.draw(new Position(0, 1), 10);
-        drawer3.draw(new Position(0, 2), 10);
-        drawer1.draw(new Position(1, 3), 5);
-        drawer1.draw(new Position(1, 4), 5);
-        drawer2.draw(new Position(6, 3), 4);
-        drawer2.draw(new Position(2, 4), 1);
-        drawer3.draw(new Position(4, 4), 3);
+        FilledRectangleDrawer drawer1 = new FilledRectangleDrawer(gui, BACK1, FRONT1, '+');
+        FilledRectangleDrawer drawer2 = new FilledRectangleDrawer(gui, BACK2, FRONT2, 'x');
+        FilledRectangleDrawer drawer3 = new FilledRectangleDrawer(gui, BACK3, FRONT3, ':');
+        drawer1.draw(new Position(2, 0), 2, 10);
+        drawer2.draw(new Position(5, 3), 2, 2);
+        drawer3.draw(new Position(1, 3), 6, 3);
+        drawer2.draw(new Position(7, 6), 1, 1);
 
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
-                if (j == 0 || (j == 3 && i >= 1 && i <= 5) || (j == 4 && (i == 1 || i == 3))) {
+                if (i >= 2 && i <= 3 && (j <= 2 || j >= 6)) {
                     Assertions.assertEquals(BACK1, backgroundColors[j][i]);
                     Assertions.assertEquals(FRONT1, foregroundColors[j][i]);
-                    Assertions.assertEquals('x', characters[j][i]);
-                } else if (j == 1 || (j == 3 && i >= 6) || (j == 4 && i == 2)) {
+                    Assertions.assertEquals('+', characters[j][i]);
+                } else if (i == 7 && j == 6) {
                     Assertions.assertEquals(BACK2, backgroundColors[j][i]);
                     Assertions.assertEquals(FRONT2, foregroundColors[j][i]);
-                    Assertions.assertEquals('y', characters[j][i]);
-                } else if (j == 2 || (j == 4 && i >= 4 && i <= 6)) {
+                    Assertions.assertEquals('x', characters[j][i]);
+                } else if (i >= 1 && i <= 6 && j >= 3 && j <= 5) {
                     Assertions.assertEquals(BACK3, backgroundColors[j][i]);
                     Assertions.assertEquals(FRONT3, foregroundColors[j][i]);
-                    Assertions.assertEquals('z', characters[j][i]);
+                    Assertions.assertEquals(':', characters[j][i]);
                 } else {
                     Assertions.assertEquals(BLACK, backgroundColors[j][i]);
                     Assertions.assertEquals(WHITE, foregroundColors[j][i]);
