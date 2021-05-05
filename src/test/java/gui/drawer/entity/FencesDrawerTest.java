@@ -77,7 +77,7 @@ public class FencesDrawerTest {
     }
 
     @Test
-    void drawFences() {
+    void draw() {
         FencesDrawer drawer = new FencesDrawer(gui);
         drawer.draw(new Position(2, 2), 5, 5);
 

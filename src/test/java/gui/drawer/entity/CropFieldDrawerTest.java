@@ -79,17 +79,14 @@ public class CropFieldDrawerTest {
 
 
     @Test
-    void drawNoCropFieldAtOrigin() {
-        GrowthStage noCrop = new GrowthStage(new ChronologicalTime(0), ' ', new Color("#000000"));
-
-        CropFieldDrawer drawer = new CropFieldDrawer(gui);
-        drawer.draw(new Position(0, 0), noCrop.getStageColor(), noCrop.getStageChar());
-
+    void drawNoCropAtOrigin() {
         Color BLACK = new Color("#000000");
         Color WHITE = new Color("#FFFFFF");
         Color PATH = new Color("#be9b7b");
         Color SOIL_COLOR = new Color("#372201");
-        Color STAGE_COLOR = new Color("#000000");
+
+        CropFieldDrawer drawer = new CropFieldDrawer(gui);
+        drawer.draw(new Position(0, 0), WHITE, ' ');
 
         Color expectedBg[][] = {
                 {PATH, PATH, PATH, PATH, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
@@ -104,51 +101,23 @@ public class CropFieldDrawerTest {
                 {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
         };
 
-        Color expectedFg[][] = {
-                {PATH, PATH, PATH, PATH, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
-                {PATH, STAGE_COLOR, STAGE_COLOR, PATH, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
-                {PATH, STAGE_COLOR, STAGE_COLOR, PATH, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
-                {PATH, PATH, PATH, PATH, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
-                {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
-                {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
-                {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
-                {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
-                {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
-                {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
-        };
-
-        char expectedChars[][] = {
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-        };
-
         for (int i = 0; i < 10; i++) {
-            Assertions.assertArrayEquals(expectedBg[i], this.backgroundColors[i]);
-            Assertions.assertArrayEquals(expectedChars[i], this.characters[i]);
-            Assertions.assertArrayEquals(expectedFg[i], this.foregroundColors[i]);
+            for (int j = 0; j < 10; j++) {
+                Assertions.assertEquals(' ', this.characters[j][i]);
+                Assertions.assertEquals(expectedBg[j][i], this.backgroundColors[j][i]);
+            }
         }
     }
 
     @Test
-    void drawNoCropFieldAtPosition() {
-        GrowthStage noCrop = new GrowthStage(new ChronologicalTime(0), ' ', new Color("#000000"));
-
-        CropFieldDrawer drawer = new CropFieldDrawer(gui);
-        drawer.draw(new Position(2, 2), noCrop.getStageColor(), noCrop.getStageChar());
-
+    void drawNoCropAtPosition() {
         Color BLACK = new Color("#000000");
         Color WHITE = new Color("#FFFFFF");
         Color PATH = new Color("#be9b7b");
         Color SOIL_COLOR = new Color("#372201");
-        Color STAGE_COLOR = new Color("#000000");
+
+        CropFieldDrawer drawer = new CropFieldDrawer(gui);
+        drawer.draw(new Position(2, 2), WHITE, ' ');
 
         Color expectedBg[][] = {
                 {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
@@ -163,53 +132,25 @@ public class CropFieldDrawerTest {
                 {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
         };
 
-        Color expectedFg[][] = {
-                {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
-                {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
-                {WHITE, WHITE, PATH, PATH, PATH, PATH, WHITE, WHITE, WHITE, WHITE},
-                {WHITE, WHITE, PATH, STAGE_COLOR, STAGE_COLOR, PATH, WHITE, WHITE, WHITE, WHITE},
-                {WHITE, WHITE, PATH, STAGE_COLOR, STAGE_COLOR, PATH, WHITE, WHITE, WHITE, WHITE},
-                {WHITE, WHITE, PATH, PATH, PATH, PATH, WHITE, WHITE, WHITE, WHITE},
-                {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
-                {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
-                {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
-                {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE}
-        };
-
-
-        char expectedChars[][] = {
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-        };
 
         for (int i = 0; i < 10; i++) {
-            Assertions.assertArrayEquals(expectedBg[i], this.backgroundColors[i]);
-            Assertions.assertArrayEquals(expectedChars[i], this.characters[i]);
-            Assertions.assertArrayEquals(expectedFg[i], this.foregroundColors[i]);
+            for (int j = 0; j < 10; j++) {
+                Assertions.assertEquals(' ', this.characters[j][i]);
+                Assertions.assertEquals(expectedBg[j][i], this.backgroundColors[j][i]);
+            }
         }
     }
 
     @Test
-    void drawWheatFieldAtPosition() {
-        GrowthStage wheatCrop = new GrowthStage(new ChronologicalTime(0), ':', new Color("#696606"));
-
-        CropFieldDrawer drawer = new CropFieldDrawer(gui);
-        drawer.draw(new Position(2, 2), wheatCrop.getStageColor(), wheatCrop.getStageChar());
-
+    void drawWithCrop() {
         Color BLACK = new Color("#000000");
-        Color WHITE = new Color("#FFFFFF");
         Color PATH = new Color("#be9b7b");
         Color SOIL_COLOR = new Color("#372201");
         Color STAGE_COLOR = new Color("#696606");
 
+        CropFieldDrawer drawer = new CropFieldDrawer(gui);
+        drawer.draw(new Position(2, 2), STAGE_COLOR, '#');
+
         Color expectedBg[][] = {
                 {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
                 {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
@@ -223,26 +164,12 @@ public class CropFieldDrawerTest {
                 {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
         };
 
-        Color expectedFg[][] = {
-                {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
-                {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
-                {WHITE, WHITE, PATH, PATH, PATH, PATH, WHITE, WHITE, WHITE, WHITE},
-                {WHITE, WHITE, PATH, STAGE_COLOR, STAGE_COLOR, PATH, WHITE, WHITE, WHITE, WHITE},
-                {WHITE, WHITE, PATH, STAGE_COLOR, STAGE_COLOR, PATH, WHITE, WHITE, WHITE, WHITE},
-                {WHITE, WHITE, PATH, PATH, PATH, PATH, WHITE, WHITE, WHITE, WHITE},
-                {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
-                {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
-                {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
-                {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE}
-        };
-
-
         char expectedChars[][] = {
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ':', ':', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ':', ':', ' ', ' ', ' ', ' ', ' '},
+                {' ', ' ', ' ', '#', '#', ' ', ' ', ' ', ' ', ' '},
+                {' ', ' ', ' ', '#', '#', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
@@ -253,7 +180,11 @@ public class CropFieldDrawerTest {
         for (int i = 0; i < 10; i++) {
             Assertions.assertArrayEquals(expectedBg[i], this.backgroundColors[i]);
             Assertions.assertArrayEquals(expectedChars[i], this.characters[i]);
-            Assertions.assertArrayEquals(expectedFg[i], this.foregroundColors[i]);
         }
+
+        Assertions.assertEquals(STAGE_COLOR, this.foregroundColors[3][3]);
+        Assertions.assertEquals(STAGE_COLOR, this.foregroundColors[3][4]);
+        Assertions.assertEquals(STAGE_COLOR, this.foregroundColors[4][3]);
+        Assertions.assertEquals(STAGE_COLOR, this.foregroundColors[4][4]);
     }
 }

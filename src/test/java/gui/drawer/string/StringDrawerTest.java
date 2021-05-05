@@ -31,8 +31,6 @@ public class StringDrawerTest {
 
     @Test
     void drawMultiple() {
-        Color BLACK = new Color("#000000");
-        Color WHITE = new Color("#FFFFFF");
         Color BACK1 = new Color("#123456");
         Color FRONT1 = new Color("#FEDCBA");
         Color BACK2 = new Color("#123457");
