@@ -3,9 +3,11 @@ package controller.farm;
 import controller.GameController;
 import controller.GameControllerState;
 import controller.TimeController;
-import controller.WeatherController;
+import controller.weather.SunnyController;
+import controller.weather.WeatherController;
 import controller.farm.building.CropFieldController;
 import controller.farm.building.HouseController;
+import controller.weather.WindstormController;
 import gui.GUI;
 import model.Position;
 import model.farm.Farm;
@@ -24,7 +26,7 @@ public class FarmController implements GameControllerState {
         this.farm = farm;
         this.controller = controller;
         this.timeController = new TimeController(1);
-        this.weatherController = new WeatherController();
+        this.weatherController = new SunnyController(1); // TODO maybe pass this value by argument ?
     }
 
     @Override
@@ -47,6 +49,10 @@ public class FarmController implements GameControllerState {
         houseController.reactInteraction(farmBuildings.getHouse(), farmerPosition);
     }
 
+    public void setWeatherController(WeatherController weatherController) {
+        this.weatherController = weatherController;
+    }
+
     @Override
     public void reactMouseMovement(Position position) {}
 
@@ -56,7 +62,7 @@ public class FarmController implements GameControllerState {
     @Override
     public void reactTimePassed() {
         this.timeController.advanceTime(this.farm.getTime());
-        this.weatherController.updateTime(this.farm.getWeather(), this.farm.getTime().getDay());
+        this.weatherController.updateTime(this, this.farm.getWeather(), this.farm.getTime().getDay());
     }
 
     @Override
