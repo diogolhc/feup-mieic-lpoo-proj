@@ -72,27 +72,26 @@ public class UnderlinedStringDrawerTest {
     }
 
     @Test
-    void drawUnderlined() {
+    void draw() {
         Color BACK = new Color("#123456");
-        Color DEFAULT = new Color("#000000");
+        Color BLACK = new Color("#000000");
         Color FRONT = new Color("#FEDCBA");
         Color WHITE = new Color("#FFFFFF");
 
-        char character = '_';
-        UnderlinedStringDrawer drawer = new UnderlinedStringDrawer(gui, BACK, FRONT, character);
+        UnderlinedStringDrawer drawer = new UnderlinedStringDrawer(gui, BACK, FRONT, '_');
         drawer.draw(new Position(5, 7), "HELLO");
 
         Color expectedBg[][] = {
-                {DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT},
-                {DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT},
-                {DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT},
-                {DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT},
-                {DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT},
-                {DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT},
-                {DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT},
-                {DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, BACK, BACK, BACK, BACK, BACK},
-                {DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, BACK, BACK, BACK, BACK, BACK},
-                {DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT}
+                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, BLACK, BLACK, BLACK, BACK, BACK, BACK, BACK, BACK},
+                {BLACK, BLACK, BLACK, BLACK, BLACK, BACK, BACK, BACK, BACK, BACK},
+                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK}
         };
 
         Color expectedFg[][] = {
@@ -129,42 +128,39 @@ public class UnderlinedStringDrawerTest {
     }
 
     @Test
-    void drawMultipleUnderlined() {
-        Color BACK = new Color("#123456");
+    void drawMultiple() {
+        Color BLACK = new Color("#000000");
+        Color WHITE = new Color("#FFFFFF");
+        Color BACK1 = new Color("#123456");
         Color BACK2 = new Color("#144436");
         Color BACK3 = new Color("#123999");
-
-        Color DEFAULT = new Color("#000000");
-
-        Color FRONT = new Color("#FEDCAA");
+        Color FRONT1 = new Color("#FEDCAA");
         Color FRONT2 = new Color("#FEDCBA");
         Color FRONT3 = new Color("#FEDEBA");
 
-        Color WHITE = new Color("#FFFFFF");
+        char character1 = '_';
+        char character2 = '-';
+        char character3 = '=';
 
-        char character = '_';
-        char character1 = '-';
-        char character2 = '=';
-
-        UnderlinedStringDrawer drawer = new UnderlinedStringDrawer(gui, BACK, FRONT, character);
-        UnderlinedStringDrawer drawer2 = new UnderlinedStringDrawer(gui, BACK2, FRONT2, character1);
-        UnderlinedStringDrawer drawer3 = new UnderlinedStringDrawer(gui, BACK3, FRONT3, character2);
+        UnderlinedStringDrawer drawer = new UnderlinedStringDrawer(gui, BACK1, FRONT1, character1);
+        UnderlinedStringDrawer drawer2 = new UnderlinedStringDrawer(gui, BACK2, FRONT2, character2);
+        UnderlinedStringDrawer drawer3 = new UnderlinedStringDrawer(gui, BACK3, FRONT3, character3);
 
         drawer.draw(new Position(5, 7), "HELLO");
         drawer2.draw(new Position(0, 0), "HI");
         drawer3.draw(new Position(3, 3), "OIE");
 
         Color expectedBg[][] = {
-                {BACK2, BACK2, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT},
-                {BACK2, BACK2, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT},
-                {DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT},
-                {DEFAULT, DEFAULT, DEFAULT, BACK3, BACK3, BACK3, DEFAULT, DEFAULT, DEFAULT, DEFAULT},
-                {DEFAULT, DEFAULT, DEFAULT, BACK3, BACK3, BACK3, DEFAULT, DEFAULT, DEFAULT, DEFAULT},
-                {DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT},
-                {DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT},
-                {DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, BACK, BACK, BACK, BACK, BACK},
-                {DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, BACK, BACK, BACK, BACK, BACK},
-                {DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT}
+                {BACK2, BACK2, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
+                {BACK2, BACK2, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, BLACK, BACK3, BACK3, BACK3, BLACK, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, BLACK, BACK3, BACK3, BACK3, BLACK, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, BLACK, BLACK, BLACK, BACK1, BACK1, BACK1, BACK1, BACK1},
+                {BLACK, BLACK, BLACK, BLACK, BLACK, BACK1, BACK1, BACK1, BACK1, BACK1},
+                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK}
         };
 
         Color expectedFg[][] = {
@@ -175,21 +171,21 @@ public class UnderlinedStringDrawerTest {
                 {WHITE, WHITE, WHITE, FRONT3, FRONT3, FRONT3, WHITE, WHITE, WHITE, WHITE},
                 {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
                 {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
-                {WHITE, WHITE, WHITE, WHITE, WHITE, FRONT, FRONT, FRONT, FRONT, FRONT},
-                {WHITE, WHITE, WHITE, WHITE, WHITE, FRONT, FRONT, FRONT, FRONT, FRONT},
+                {WHITE, WHITE, WHITE, WHITE, WHITE, FRONT1, FRONT1, FRONT1, FRONT1, FRONT1},
+                {WHITE, WHITE, WHITE, WHITE, WHITE, FRONT1, FRONT1, FRONT1, FRONT1, FRONT1},
                 {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE}
         };
 
         char expectedChars[][] = {
                 {'H', 'I', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {character1, character1, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                {character2, character2, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', 'O', 'I', 'E', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', character2, character2, character2, ' ', ' ', ' ', ' '},
+                {' ', ' ', ' ', character3, character3, character3, ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', 'H', 'E', 'L', 'L', 'O'},
-                {' ', ' ', ' ', ' ', ' ', character, character, character, character, character},
+                {' ', ' ', ' ', ' ', ' ', character1, character1, character1, character1, character1},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
         };
 

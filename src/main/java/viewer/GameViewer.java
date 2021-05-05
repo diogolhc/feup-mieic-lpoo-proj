@@ -9,9 +9,7 @@ public abstract class GameViewer {
 
     public void drawScreen(GUI gui) throws IOException {
         gui.clear();
-
         this.draw(gui);
-
         gui.refresh();
     }
 }

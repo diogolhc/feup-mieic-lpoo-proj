@@ -33,7 +33,7 @@ public class MenuController implements GameControllerState {
     public void reactMouseMovement(Position position) {
         ButtonController buttonController = new ButtonController();
         for (Button button: this.menu.getButtons()) {
-            buttonController.reactMouseMovement(button, position.relativeTo(menu.getTopLeftPosition()));
+            buttonController.reactMouseMovement(button, position.getRelativeTo(menu.getTopLeftPosition()));
         }
     }
 
@@ -41,7 +41,7 @@ public class MenuController implements GameControllerState {
     public void reactMouseClick(Position position) {
         ButtonController buttonController = new ButtonController();
         for (Button button: this.menu.getButtons()) {
-            buttonController.reactMouseClick(button, position.relativeTo(menu.getTopLeftPosition()));
+            buttonController.reactMouseClick(button, position.getRelativeTo(menu.getTopLeftPosition()));
         }
     }
 

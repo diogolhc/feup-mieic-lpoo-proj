@@ -11,7 +11,7 @@ public class House extends Building {
 
     @Override
     public boolean isTraversable(Position position) {
-        position = position.relativeTo(this.getTopLeftPosition());
+        position = position.getRelativeTo(this.getTopLeftPosition());
         int x = position.getX();
         int y = position.getY();
         if (y == 0 && x >= 1 && x <= 5) return false;
