@@ -18,7 +18,7 @@ public class Farm {
     private int height;
 
     public Farm(int width, int height) {
-        // TODO minimum width and height or throw
+        // TODO probably a builder. Hardcoded just for testing
         this.width = width;
         this.height = height;
         this.farmer = new Farmer(new Position(3, 7));
@@ -26,7 +26,6 @@ public class Farm {
         this.time = new IngameTime(1, 8, 0);
         this.weather = new Weather(SUNNY);
 
-        // Hardcoded positions for testing
         this.buildings = new BuildingSet(new House(new Position(1, 1)));
         this.buildings.addCropField(new CropField(new Position(10, 3)));
     }
