@@ -6,16 +6,16 @@ import model.Position;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
-class HouseDrawerTest {
+public class FarmerDrawerTest {
     private GUI gui;
     private Color backgroundColors[][] = new Color[10][10];
     private Color foregroundColors[][] = new Color[10][10];
     private char characters[][] = new char[10][10];
     private Color currentBackgroundColor = new Color("#000000");
     private Color currentForegroundColor = new Color("#FFFFFF");
+
 
     @BeforeEach
     void setUp() {
@@ -76,88 +76,51 @@ class HouseDrawerTest {
         }).when(gui).getForegroundColor(Mockito.anyInt(), Mockito.anyInt());
     }
 
-
     @Test
-    void drawAtOrigin() {
-        HouseDrawer drawer = new HouseDrawer(gui);
-        drawer.draw(new Position(0, 0));
-
-        Color BLACK = new Color("#000000");
-        Color PATH = new Color("#be9b7b");
-        Color FLOOR = new Color("#777777");
-        Color DOOR = new Color("#82490b");
-        Color WALL = new Color("#eeeeef");
-        Color ROOF = new Color("#c20000");
-
-        Color expectedBg[][] = {
-                {BLACK, ROOF, ROOF, ROOF, ROOF, ROOF, BLACK, BLACK, BLACK, BLACK},
-                {ROOF, ROOF, ROOF, ROOF, ROOF, ROOF, ROOF, BLACK, BLACK, BLACK},
-                {WALL, WALL, WALL, WALL, WALL, WALL, WALL, BLACK, BLACK, BLACK},
-                {WALL, WALL, WALL, WALL, WALL, WALL, WALL, BLACK, BLACK, BLACK},
-                {WALL, WALL, WALL, WALL, DOOR, WALL, WALL, BLACK, BLACK, BLACK},
-                {WALL, WALL, WALL, WALL, DOOR, WALL, WALL, BLACK, BLACK, BLACK},
-                {FLOOR, FLOOR, FLOOR, FLOOR, PATH, FLOOR, FLOOR, BLACK, BLACK, BLACK},
-                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
-                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
-                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
-        };
-
-        char expectedChars[][] = {
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', '\'', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-        };
-
-        for (int i = 0; i < 10; i++) {
-            Assertions.assertArrayEquals(expectedBg[i], this.backgroundColors[i]);
-            Assertions.assertArrayEquals(expectedChars[i], this.characters[i]);
-        }
-
-        Assertions.assertEquals(BLACK, this.foregroundColors[5][4]);
-    }
-
-    @Test
-    void drawOtherPosition() {
-
-        HouseDrawer drawer = new HouseDrawer(gui);
+    void drawFarmerAtPosition() {
+        FarmerDrawer drawer = new FarmerDrawer(gui);
         drawer.draw(new Position(2, 2));
 
         Color BLACK = new Color("#000000");
-        Color PATH = new Color("#be9b7b");
-        Color FLOOR = new Color("#777777");
-        Color DOOR = new Color("#82490b");
-        Color WALL = new Color("#eeeeef");
-        Color ROOF = new Color("#c20000");
+        Color WHITE = new Color("#FFFFFF");
+        Color farmerColor = new Color("#223366");
 
         Color expectedBg[][] = {
                 {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
                 {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
-                {BLACK, BLACK, BLACK, ROOF, ROOF, ROOF, ROOF, ROOF, BLACK, BLACK},
-                {BLACK, BLACK, ROOF, ROOF, ROOF, ROOF, ROOF, ROOF, ROOF, BLACK},
-                {BLACK, BLACK, WALL, WALL, WALL, WALL, WALL, WALL, WALL, BLACK},
-                {BLACK, BLACK, WALL, WALL, WALL, WALL, WALL, WALL, WALL, BLACK},
-                {BLACK, BLACK, WALL, WALL, WALL, WALL, DOOR, WALL, WALL, BLACK},
-                {BLACK, BLACK, WALL, WALL, WALL, WALL, DOOR, WALL, WALL, BLACK},
-                {BLACK, BLACK, FLOOR, FLOOR, FLOOR, FLOOR, PATH, FLOOR, FLOOR, BLACK},
+                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
                 {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
         };
+
+        Color expectedFg[][] = {
+                {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
+                {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
+                {WHITE, WHITE, farmerColor, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
+                {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
+                {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
+                {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
+                {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
+                {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
+                {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
+                {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE}
+        };
+
 
         char expectedChars[][] = {
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                {' ', ' ', '@', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', '\'', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
         };
@@ -165,8 +128,8 @@ class HouseDrawerTest {
         for (int i = 0; i < 10; i++) {
             Assertions.assertArrayEquals(expectedBg[i], this.backgroundColors[i]);
             Assertions.assertArrayEquals(expectedChars[i], this.characters[i]);
+            Assertions.assertArrayEquals(expectedFg[i], this.foregroundColors[i]);
         }
 
-        Assertions.assertEquals(BLACK, this.foregroundColors[7][6]);
     }
 }
