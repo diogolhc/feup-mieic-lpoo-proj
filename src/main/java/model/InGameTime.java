@@ -42,10 +42,6 @@ public class InGameTime {
 
     // TODO I don't know if this is the best way to go
     public String toCountdownString() {
-        return new StringBuilder()
-                .append(this.getHourOfDay())
-                .append(':')
-                .append(this.getMinuteOfHour())
-                .toString();
+        return String.format("%02d:%02d", this.getHourOfDay(), this.getMinuteOfHour());
     }
 }
