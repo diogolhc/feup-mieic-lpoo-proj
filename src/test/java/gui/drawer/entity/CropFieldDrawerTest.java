@@ -2,7 +2,7 @@ package gui.drawer.entity;
 
 import gui.Color;
 import gui.GUI;
-import model.IngameTime;
+import model.InGameTime;
 import model.Position;
 import model.farm.building.crop_field.crop.GrowthStage;
 import org.junit.jupiter.api.Assertions;
@@ -80,7 +80,7 @@ public class CropFieldDrawerTest {
 
     @Test
     void drawNoCropFieldAtOrigin() {
-        GrowthStage noCrop = new GrowthStage(new IngameTime(0), ' ', new Color("#000000"));
+        GrowthStage noCrop = new GrowthStage(new InGameTime(0), ' ', new Color("#000000"));
 
         CropFieldDrawer drawer = new CropFieldDrawer(gui);
         drawer.draw(new Position(0, 0), noCrop.getStageColor(), noCrop.getStageChar());
@@ -139,7 +139,7 @@ public class CropFieldDrawerTest {
 
     @Test
     void drawNoCropFieldAtPosition() {
-        GrowthStage noCrop = new GrowthStage(new IngameTime(0), ' ', new Color("#000000"));
+        GrowthStage noCrop = new GrowthStage(new InGameTime(0), ' ', new Color("#000000"));
 
         CropFieldDrawer drawer = new CropFieldDrawer(gui);
         drawer.draw(new Position(2, 2), noCrop.getStageColor(), noCrop.getStageChar());
@@ -199,7 +199,7 @@ public class CropFieldDrawerTest {
 
     @Test
     void drawWheatFieldAtPosition() {
-        GrowthStage wheatCrop = new GrowthStage(new IngameTime(0), ':', new Color("#696606"));
+        GrowthStage wheatCrop = new GrowthStage(new InGameTime(0), ':', new Color("#696606"));
 
         CropFieldDrawer drawer = new CropFieldDrawer(gui);
         drawer.draw(new Position(2, 2), wheatCrop.getStageColor(), wheatCrop.getStageChar());

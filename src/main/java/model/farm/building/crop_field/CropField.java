@@ -1,12 +1,12 @@
 package model.farm.building.crop_field;
 
-import gui.Color;
-import model.IngameTime;
+import model.InGameTime;
 import model.Position;
 import model.farm.building.Building;
 import model.farm.building.crop_field.crop.GrowthStage;
 import model.farm.building.crop_field.state.CropFieldState;
 import model.farm.building.crop_field.state.NotPlanted;
+import model.farm.building.crop_field.state.ReadyToHarvest;
 
 import java.util.List;
 
@@ -29,7 +29,7 @@ public class CropField extends Building {
 
     public GrowthStage getCropGrowthStage() {
         List<GrowthStage> growthStages = this.state.getCrop().getGrowthStages();
-        IngameTime remainingTime = this.state.getRemainingTime();
+        InGameTime remainingTime = this.state.getRemainingTime();
         for (GrowthStage stage: growthStages) {
             if (remainingTime.getMinute() <= stage.getStageStartTime().getMinute()) {
                 return stage;
@@ -63,11 +63,20 @@ public class CropField extends Building {
         return (x >= buttonLeft && x <= buttonRight && y >= buttonTop && y <= buttonBottom);
     }
 
-    public IngameTime getRemainingTime() {
+    public InGameTime getRemainingTime() {
         return this.state.getRemainingTime();
     }
 
-    public void setRemainingTime(IngameTime time) {
+    public void setRemainingTime(InGameTime time) {
+        InGameTime beforeTime = this.state.getRemainingTime();
         this.state.setRemainingTime(time);
+        this.updateState(beforeTime);
     }
+
+    private void updateState(InGameTime beforeTime) {
+        if (beforeTime.getMinute() > 0 && this.state.getRemainingTime().getMinute() == 0) {
+            this.state = new ReadyToHarvest(this.state.getCrop());
+        }
+    }
+
 }

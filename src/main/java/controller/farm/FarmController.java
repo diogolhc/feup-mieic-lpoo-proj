@@ -11,7 +11,7 @@ import controller.weather.WeatherController;
 import controller.farm.building.CropFieldController;
 import controller.farm.building.HouseController;
 import gui.GUI;
-import model.IngameTime;
+import model.InGameTime;
 import model.Position;
 import model.farm.Farm;
 import model.farm.building.BuildingSet;
@@ -64,13 +64,14 @@ public class FarmController implements GameControllerState {
 
     @Override
     public void reactTimePassed(long elapsedTimeSinceLastFrame) {
-        IngameTime elapsedTime = this.realTimeToInGameTimeConverter.convert(elapsedTimeSinceLastFrame);
+        InGameTime elapsedTime = this.realTimeToInGameTimeConverter.convert(elapsedTimeSinceLastFrame);
         InGameTimeOper sum = new InGameTimeSum();
         InGameTimeOper subtraction = new InGameTimeSubtraction();
 
         this.farm.getTime().set(sum.apply(this.farm.getTime(), elapsedTime));
         for (CropField cropField : this.farm.getBuildings().getCropFields()) {
-            cropField.setRemainingTime(subtraction.apply(cropField.getRemainingTime(), elapsedTime));
+            InGameTime remainingTime = subtraction.apply(cropField.getRemainingTime(), elapsedTime);
+            cropField.setRemainingTime(remainingTime);
         }
 
         this.weatherController.updateWeather(this, this.farm.getWeather(), this.farm.getTime().getDay());

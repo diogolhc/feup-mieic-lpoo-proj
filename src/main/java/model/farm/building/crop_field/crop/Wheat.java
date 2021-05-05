@@ -1,22 +1,22 @@
 package model.farm.building.crop_field.crop;
 
 import gui.Color;
-import model.IngameTime;
+import model.InGameTime;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class Wheat implements Crop {
     private static final List<GrowthStage> GROWTH_STAGES = Arrays.asList(
-            new GrowthStage(new IngameTime(0), '#', new Color("#aabb01")),
-            new GrowthStage(new IngameTime(8), '\\', new Color("#C5D534")),
-            new GrowthStage(new IngameTime(12), ';', new Color("#9E9516")),
-            new GrowthStage(new IngameTime(15), ':', new Color("#696606"))
+            new GrowthStage(new InGameTime(0), '#', new Color("#aabb01")),
+            new GrowthStage(new InGameTime(8), '\\', new Color("#C5D534")),
+            new GrowthStage(new InGameTime(12), ';', new Color("#9E9516")),
+            new GrowthStage(new InGameTime(15), ':', new Color("#696606"))
     );
 
     @Override
-    public IngameTime getGrowTime() {
-        return new IngameTime(15);
+    public InGameTime getGrowTime() {
+        return new InGameTime(15);
     }
 
     @Override

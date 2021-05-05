@@ -5,12 +5,12 @@ import gui.GUI;
 import gui.drawer.string.StringDrawer;
 import model.Position;
 import model.weather.Weather;
-import model.IngameTime;
+import model.InGameTime;
 
 
 public class HUDViewer {
 
-    public void draw(IngameTime time, Weather weather, GUI gui) {
+    public void draw(InGameTime time, Weather weather, GUI gui) {
         /* TODO these hardcoded values are just for debug purposes
         *   This is temporary */
         StringDrawer drawer = new StringDrawer(gui, new Color("#222222"), new Color("#ffffff"));

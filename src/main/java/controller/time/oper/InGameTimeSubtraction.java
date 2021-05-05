@@ -1,13 +1,13 @@
 package controller.time.oper;
 
-import model.IngameTime;
+import model.InGameTime;
 
 public class InGameTimeSubtraction implements InGameTimeOper {
     @Override
-    public IngameTime apply(IngameTime time1, IngameTime time2) {
+    public InGameTime apply(InGameTime time1, InGameTime time2) {
         if (time1.getMinute() > time2.getMinute())
-            return new IngameTime(time1.getMinute() - time2.getMinute());
+            return new InGameTime(time1.getMinute() - time2.getMinute());
         else
-            return new IngameTime(0);
+            return new InGameTime(0);
     }
 }

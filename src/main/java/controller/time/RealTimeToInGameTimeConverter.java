@@ -1,6 +1,6 @@
 package controller.time;
 
-import model.IngameTime;
+import model.InGameTime;
 
 public class RealTimeToInGameTimeConverter {
     private static final long SECS_TO_MILLI = 1000;
@@ -21,11 +21,11 @@ public class RealTimeToInGameTimeConverter {
         this.realSecToGameMinutesRate *= rate;
     }
 
-    public IngameTime convert(long elapsedTimeSinceLastFrameMilliSeconds) {
+    public InGameTime convert(long elapsedTimeSinceLastFrameMilliSeconds) {
         long time = elapsedTimeSinceLastFrameMilliSeconds + this.leftOverTimeMilliSecs;
         this.leftOverTimeMilliSecs = time % SECS_TO_MILLI;
 
-        return new IngameTime((int)((time / SECS_TO_MILLI) * realSecToGameMinutesRate));
+        return new InGameTime((int)((time / SECS_TO_MILLI) * realSecToGameMinutesRate));
     }
 
 }

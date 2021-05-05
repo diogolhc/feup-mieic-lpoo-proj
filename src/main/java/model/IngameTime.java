@@ -1,21 +1,21 @@
 package model;
 
-public class IngameTime {
+public class InGameTime {
     private int minutes;
 
-    public IngameTime(int minutes) {
+    public InGameTime(int minutes) {
         this.minutes = minutes;
     }
 
-    public IngameTime(int day, int hour, int minute) {
+    public InGameTime(int day, int hour, int minute) {
         this(minute + (hour + day*24)*60);
     }
 
-    public IngameTime() {
+    public InGameTime() {
         this(0);
     }
 
-    public void set(IngameTime time) {
+    public void set(InGameTime time) {
         this.minutes = time.getMinute();
     }
 

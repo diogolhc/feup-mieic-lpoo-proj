@@ -1,6 +1,6 @@
 package model.farm.building.crop_field.crop;
 
-import model.IngameTime;
+import model.InGameTime;
 
 import java.util.List;
 
@@ -8,6 +8,6 @@ import java.util.List;
 //      1) public interface Crop with many classes that just return constant values
 //      2) public class Crop with many public static final Crop instances?
 public interface Crop {
-    IngameTime getGrowTime();
+    InGameTime getGrowTime();
     List<GrowthStage> getGrowthStages();
 }

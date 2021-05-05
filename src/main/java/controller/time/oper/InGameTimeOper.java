@@ -1,7 +1,7 @@
 package controller.time.oper;
 
-import model.IngameTime;
+import model.InGameTime;
 
 public interface InGameTimeOper {
-    IngameTime apply(IngameTime time1, IngameTime time2);
+    InGameTime apply(InGameTime time1, InGameTime time2);
 }
