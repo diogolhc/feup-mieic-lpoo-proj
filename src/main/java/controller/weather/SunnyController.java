@@ -1,7 +1,10 @@
 package controller.weather;
 
 import controller.farm.FarmController;
-import model.Weather;
+import model.weather.Cloudy;
+import model.weather.Rainy;
+import model.weather.Sunny;
+import model.weather.Weather;
 
 public class SunnyController extends WeatherController {
     public SunnyController(int currentDay) {
@@ -9,7 +12,7 @@ public class SunnyController extends WeatherController {
     }
 
     @Override
-    public void updateTime(FarmController farmController, Weather weather, int currentDay) {
+    public void updateWeather(FarmController farmController, Weather weather, int currentDay) {
         if (currentDay <= this.lastDay)
             return;
 
@@ -17,10 +20,10 @@ public class SunnyController extends WeatherController {
 
         double chance = Math.random();
         if (chance < 0.1) {
-            weather.setType(Weather.TYPE.RAINY);
+            weather.setWeatherCondition(new Rainy());
             farmController.setWeatherController(new RainyController(currentDay));
         } else if (chance < 0.4) {
-            weather.setType(Weather.TYPE.CLOUDY);
+            weather.setWeatherCondition(new Cloudy());
             farmController.setWeatherController(new CloudyController(currentDay));
         }
         // else maintains SUNNY

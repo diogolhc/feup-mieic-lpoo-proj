@@ -4,7 +4,7 @@ import gui.Color;
 import gui.GUI;
 import gui.drawer.string.StringDrawer;
 import model.Position;
-import model.Weather;
+import model.weather.Weather;
 import model.IngameTime;
 
 
@@ -15,6 +15,6 @@ public class HUDViewer {
         *   This is temporary */
         StringDrawer drawer = new StringDrawer(gui, new Color("#222222"), new Color("#ffffff"));
         drawer.draw(new Position(0, 20), time.toString());
-        drawer.draw(new Position(25, 20), weather.getType().name());
+        drawer.draw(new Position(25, 20), weather.getWeatherCondition().getWeather());
     }
 }

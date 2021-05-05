@@ -1,7 +1,7 @@
 package controller.weather;
 
 import controller.farm.FarmController;
-import model.Weather;
+import model.weather.Weather;
 
 
 public abstract class WeatherController {
@@ -11,6 +11,5 @@ public abstract class WeatherController {
         this.lastDay = currentDay;
     }
 
-    public abstract void updateTime(FarmController farmController, Weather weather, int currentDay);
-
+    public abstract void updateWeather(FarmController farmController, Weather weather, int currentDay);
 }

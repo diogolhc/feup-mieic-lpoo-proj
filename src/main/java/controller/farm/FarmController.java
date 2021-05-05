@@ -62,7 +62,7 @@ public class FarmController implements GameControllerState {
     @Override
     public void reactTimePassed() {
         this.timeController.advanceTime(this.farm.getTime());
-        this.weatherController.updateTime(this, this.farm.getWeather(), this.farm.getTime().getDay());
+        this.weatherController.updateWeather(this, this.farm.getWeather(), this.farm.getTime().getDay());
     }
 
     @Override

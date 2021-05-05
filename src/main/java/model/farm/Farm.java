@@ -2,12 +2,12 @@ package model.farm;
 
 import model.Position;
 import model.IngameTime;
-import model.Weather;
+import model.weather.Sunny;
+import model.weather.Weather;
 import model.farm.building.BuildingSet;
 import model.farm.building.House;
 import model.farm.building.crop_field.CropField;
 
-import static model.Weather.TYPE.SUNNY;
 
 public class Farm {
     private final Farmer farmer;
@@ -24,7 +24,7 @@ public class Farm {
         this.farmer = new Farmer(new Position(3, 7));
 
         this.time = new IngameTime(1, 8, 0);
-        this.weather = new Weather(SUNNY);
+        this.weather = new Weather(new Sunny());
 
         // Hardcoded positions for testing
         this.buildings = new BuildingSet(new House(new Position(1, 1)));
