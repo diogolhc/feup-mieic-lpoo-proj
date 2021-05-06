@@ -1,4 +1,4 @@
-package controller.weather;
+package controller.farm.weather;
 
 import controller.farm.FarmController;
 import model.weather.*;
@@ -30,7 +30,5 @@ public class CloudyController extends WeatherController{
             farmController.setWeatherController(new WindstormController(currentDay));
         }
         // else maintains CLOUDY
-
     }
-
 }

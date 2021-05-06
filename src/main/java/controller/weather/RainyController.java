@@ -1,4 +1,4 @@
-package controller.weather;
+package controller.farm.weather;
 
 import controller.farm.FarmController;
 import model.weather.*;
