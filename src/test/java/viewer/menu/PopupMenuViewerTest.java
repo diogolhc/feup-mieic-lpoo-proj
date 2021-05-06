@@ -28,7 +28,7 @@ public class PopupMenuViewerTest {
     }
 
     @Test
-    void drawBackViewerBeforePopup() throws IOException {
+    void drawBackViewerBeforePopup() {
         viewer.draw(gui);
 
         // Menu is accessed when drawing the popup

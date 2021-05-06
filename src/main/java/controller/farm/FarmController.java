@@ -24,10 +24,10 @@ public class FarmController implements GameControllerState {
     private RealTimeToInGameTimeConverter realTimeToInGameTimeConverter;
     private WeatherController weatherController;
 
-    public FarmController(Farm farm, GameController controller) {
+    public FarmController(Farm farm, GameController controller, double realSecToGameMinutesRate) {
         this.farm = farm;
         this.controller = controller;
-        this.realTimeToInGameTimeConverter = new RealTimeToInGameTimeConverter(1);
+        this.realTimeToInGameTimeConverter = new RealTimeToInGameTimeConverter(realSecToGameMinutesRate);
         this.weatherController = new SunnyController(1); // TODO maybe pass this value by argument ?
     }
 

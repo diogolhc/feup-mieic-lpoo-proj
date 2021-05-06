@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class BuildingSet {
     private final Set<CropField> cropFields;
-    private final House house;
+    private House house;
 
     public BuildingSet(House house) {
         this.cropFields = new HashSet<>();
@@ -26,6 +26,10 @@ public class BuildingSet {
 
     public House getHouse() {
         return this.house;
+    }
+
+    public void setHouse(House house) {
+        this.house = house;
     }
 
     public boolean isTraversable(Position position) {
