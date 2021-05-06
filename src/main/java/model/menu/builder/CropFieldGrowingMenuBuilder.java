@@ -2,10 +2,10 @@ package model.menu.builder;
 
 import controller.GameController;
 import controller.command.CompoundCommand;
+import controller.command.HarvestCropCommand;
+import controller.command.RemoveCropCommand;
 import model.Position;
 import model.farm.building.crop_field.CropField;
-import model.farm.building.crop_field.crop.Wheat;
-import model.farm.building.crop_field.state.ReadyToHarvest;
 import model.menu.Button;
 import model.menu.Menu;
 import model.menu.label.Label;
@@ -32,13 +32,12 @@ public class CropFieldGrowingMenuBuilder extends PopupMenuBuilder {
                 () -> "REMAINING TIME: " + cropField.getRemainingTime().toCountdownString()
         ));
 
-        // TODO experimental
-        Button debugButton = new Button(new Position(1, 7), "TIME TRAVEL");
-        debugButton.setCommand(new CompoundCommand()
-                .addCommand(() -> cropField.setState(new ReadyToHarvest(new Wheat())))
+        Button removeCropButton = new Button(new Position(1, 7), "REMOVE CROP");
+        removeCropButton.setCommand(new CompoundCommand()
+                .addCommand(new RemoveCropCommand(cropField))
                 .addCommand(super.getClosePopupMenuCommand())
         );
-        menu.addButton(debugButton);
+        menu.addButton(removeCropButton);
     }
 
     @Override

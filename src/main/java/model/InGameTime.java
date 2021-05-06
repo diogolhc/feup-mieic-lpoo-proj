@@ -42,9 +42,12 @@ public class InGameTime {
         return String.format("Day %03d  %02d:%02d", this.getDay(), this.getHourOfDay(), this.getMinuteOfHour());
     }
 
-    // TODO I don't know if this is the best way to go
     public String toCountdownString() {
-        return String.format("%02d:%02d", this.getHourOfDay(), this.getMinuteOfHour());
+        if (this.getDay() == 0) {
+            return String.format("%02d:%02d", this.getHourOfDay(), this.getMinuteOfHour());
+        } else {
+            return String.format("%d:%02d:%02d", this.getDay(), this.getHourOfDay(), this.getMinuteOfHour());
+        }
     }
 
     @Override
