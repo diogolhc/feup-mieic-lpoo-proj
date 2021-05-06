@@ -68,15 +68,6 @@ public class CropField extends Building {
     }
 
     public void setRemainingTime(InGameTime time) {
-        InGameTime beforeTime = this.state.getRemainingTime();
         this.state.setRemainingTime(time);
-        this.updateState(beforeTime);
     }
-
-    private void updateState(InGameTime beforeTime) {
-        if (beforeTime.getMinute() > 0 && this.state.getRemainingTime().getMinute() == 0) {
-            this.state = new ReadyToHarvest(this.state.getCrop());
-        }
-    }
-
 }

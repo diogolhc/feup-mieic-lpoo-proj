@@ -66,12 +66,12 @@ public class FarmController implements GameControllerState {
     public void reactTimePassed(long elapsedTimeSinceLastFrame) {
         InGameTime elapsedTime = this.realTimeToInGameTimeConverter.convert(elapsedTimeSinceLastFrame);
         InGameTimeOper sum = new InGameTimeSum();
-        InGameTimeOper subtraction = new InGameTimeSubtraction();
 
         this.farm.getTime().set(sum.apply(this.farm.getTime(), elapsedTime));
+
+        CropFieldController cropFieldController = new CropFieldController(this.controller);
         for (CropField cropField : this.farm.getBuildings().getCropFields()) {
-            InGameTime remainingTime = subtraction.apply(cropField.getRemainingTime(), elapsedTime);
-            cropField.setRemainingTime(remainingTime);
+            cropFieldController.reactTimePassed(cropField, elapsedTime);
         }
 
         this.weatherController.updateWeather(this, this.farm.getWeather(), this.farm.getTime().getDay());

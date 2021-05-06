@@ -4,6 +4,9 @@ import controller.GameController;
 import controller.command.*;
 import controller.farm.building.BuildingController;
 import controller.menu.MenuController;
+import controller.time.oper.InGameTimeOper;
+import controller.time.oper.InGameTimeSubtraction;
+import model.InGameTime;
 import model.farm.building.crop_field.CropField;
 import model.Position;
 import model.farm.building.crop_field.crop.Crop;
@@ -47,5 +50,11 @@ public class CropFieldController extends BuildingController<CropField> {
         }
 
         return new OpenPopupMenuCommand(this.controller, menuBuilder.buildMenu(new Position(1, 1)));
+    }
+
+    public void reactTimePassed(CropField cropField, InGameTime elapsedTime) {
+        InGameTimeOper subtraction = new InGameTimeSubtraction();
+        InGameTime remainingTime = subtraction.apply(cropField.getRemainingTime(), elapsedTime);
+        cropField.setRemainingTime(remainingTime);
     }
 }
