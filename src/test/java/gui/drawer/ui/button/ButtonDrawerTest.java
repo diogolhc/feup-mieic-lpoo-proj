@@ -136,10 +136,10 @@ public class ButtonDrawerTest {
     void drawUnselectedButtonInPosition() {
         Color BLACK = new Color("#000000");
         Color WHITE = new Color("#FFFFFF");
-        Color BACK = new Color("#cfd8dc");
-        Color FRONT = new Color("#00c853");
+        Color BACK = new Color("#90a4ae");
+        Color FRONT = new Color("#263238");
 
-        SelectedButtonDrawer buttonDrawer = new SelectedButtonDrawer(gui, "Hello", 7, 7);
+        UnselectedButtonDrawer buttonDrawer = new UnselectedButtonDrawer(gui, "Hello", 7, 7);
         buttonDrawer.draw(new Position(2, 2));
 
         char HORIZONTAL_LINE = '-';
