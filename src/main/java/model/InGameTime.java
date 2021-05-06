@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Objects;
+
 public class InGameTime {
     private int minutes;
 
@@ -44,4 +46,18 @@ public class InGameTime {
     public String toCountdownString() {
         return String.format("%02d:%02d", this.getHourOfDay(), this.getMinuteOfHour());
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        InGameTime time = (InGameTime) o;
+        return this.minutes == time.getMinute();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.minutes);
+    }
+
 }

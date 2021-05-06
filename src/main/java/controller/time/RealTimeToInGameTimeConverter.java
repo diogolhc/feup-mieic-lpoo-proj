@@ -16,6 +16,10 @@ public class RealTimeToInGameTimeConverter {
         this.realSecToGameMinutesRate = realSecToGameMinutesRate;
     }
 
+    public double getRate() {
+        return this.realSecToGameMinutesRate;
+    }
+
     // TODO to use when farmer is sleeping for example
     public void accelerateTime(double rate) {
         this.realSecToGameMinutesRate *= rate;
