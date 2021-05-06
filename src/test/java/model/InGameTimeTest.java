@@ -9,7 +9,7 @@ public class InGameTimeTest {
     private InGameTime time;
 
     @BeforeEach
-    void detUp() {
+    void setUp() {
         time = new InGameTime(3,2, 1);
     }
 

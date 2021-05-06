@@ -9,16 +9,25 @@ import model.farm.Farm;
 import java.io.IOException;
 
 public class GameController implements MouseListener {
+    private static final int FPS = 50;
     private GameControllerState gameControllerState;
     private GUI gui;
     private boolean running;
-    private static final int FPS = 50;
 
-    public GameController(GUI gui) {
+    private GameController(GUI gui) {
         this.gui = gui;
-        this.gameControllerState = new FarmController(new Farm(40, 20), this);
         this.gui.setMouseListener(this);
         this.running = true;
+    }
+
+    public GameController(GUI gui, GameControllerState initialState) {
+        this(gui);
+        this.gameControllerState = initialState;
+    }
+
+    public GameController(GUI gui, Farm farm) {
+        this(gui);
+        this.gameControllerState = new FarmController(farm, this);
     }
 
     public void setGameControllerState(GameControllerState state) {
@@ -39,7 +48,7 @@ public class GameController implements MouseListener {
 
         while (running) {
             long startTime = System.currentTimeMillis();
-            this.runFrame(startTime, lastFrameStartTime);
+            this.runFrame(startTime - lastFrameStartTime);
             this.sleepRestOfFrame(frameTime, startTime);
             lastFrameStartTime = startTime;
         }
@@ -47,9 +56,7 @@ public class GameController implements MouseListener {
         this.gui.close();
     }
 
-    private void runFrame(long startTime, long lastFrameStartTime) throws IOException {
-        long elapsedTimeSinceLastFrame = startTime - lastFrameStartTime;
-
+    public void runFrame(long elapsedTimeSinceLastFrame) throws IOException {
         this.gameControllerState.getViewer().drawScreen(gui);
 
         GUI.ACTION action = this.gui.getNextAction();

@@ -1,9 +1,8 @@
-package controller.weather;
+package controller.farm.weather;
 
 import controller.farm.FarmController;
 import model.weather.Cloudy;
 import model.weather.Rainy;
-import model.weather.Sunny;
 import model.weather.Weather;
 
 public class SunnyController extends WeatherController {
