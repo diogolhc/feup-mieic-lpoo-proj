@@ -40,6 +40,19 @@ the weather can change, with possible weathers being sunny, cloudy, rainy,
 windstorm and thunderstorm. For now, even though the weather may be seen
 in the HUD bar, it has no other game effect.
 
+### The farm with the farmer next to his home and a cropfield.
+
+![docs/screenshots/farm.png](screenshots/farm.png)
+
+### An example of a popup menu
+
+![docs/screenshots/popup_menu.png](screenshots/popup_menu.png)
+
+### A wheat crop in one of its earlier growth stages
+
+![docs/screenshots/crop_growing.png](screenshots/crop_growing.png)
+
+
 ## PLANNED FEATURES
 
 - **More crops** -
