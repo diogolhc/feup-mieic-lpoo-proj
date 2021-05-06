@@ -1,7 +1,10 @@
 .idea/
 .gradle/
 out/
-build/
+build/*
+!build/reports
+build/reports/*
+!build/reports/pitest
 *.iml
 gradle/
 gradlew.bat

@@ -6,7 +6,7 @@ import model.InGameTime;
 import java.util.Arrays;
 import java.util.List;
 
-public class NoCrop implements Crop {
+public class NoCrop extends Crop {
     private static final List<GrowthStage> GROWTH_STAGES = Arrays.asList(
             new GrowthStage(new InGameTime(0), ' ', new Color("#000000"))
     );
@@ -19,5 +19,10 @@ public class NoCrop implements Crop {
     @Override
     public List<GrowthStage> getGrowthStages() {
         return GROWTH_STAGES;
+    }
+
+    @Override
+    public String toString() {
+        return "";
     }
 }

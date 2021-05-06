@@ -6,7 +6,7 @@ import model.InGameTime;
 import java.util.Arrays;
 import java.util.List;
 
-public class Wheat implements Crop {
+public class Wheat extends Crop {
     private static final List<GrowthStage> GROWTH_STAGES = Arrays.asList(
             new GrowthStage(new InGameTime(0), '#', new Color("#aabb01")),
             new GrowthStage(new InGameTime(8), '\\', new Color("#C5D534")),

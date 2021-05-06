@@ -9,7 +9,7 @@ public class InGameTimeTest {
     private InGameTime time;
 
     @BeforeEach
-    void detUp() {
+    void setUp() {
         time = new InGameTime(3,2, 1);
     }
 
@@ -35,8 +35,8 @@ public class InGameTimeTest {
 
     @Test
     public void testCountDownFormat() {
-        Assertions.assertEquals("3:02:01", time.toCountdownString());
+        Assertions.assertEquals(time.toCountdownString(), "3:02:01");
+        InGameTime time2 = new InGameTime(0, 5, 40);
+        Assertions.assertEquals(time2.toCountdownString(), "05:40");
     }
-
-
 }

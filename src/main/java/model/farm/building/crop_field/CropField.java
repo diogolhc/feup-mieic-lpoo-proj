@@ -28,15 +28,8 @@ public class CropField extends Building {
     }
 
     public GrowthStage getCropGrowthStage() {
-        List<GrowthStage> growthStages = this.state.getCrop().getGrowthStages();
         InGameTime remainingTime = this.state.getRemainingTime();
-        for (GrowthStage stage: growthStages) {
-            if (remainingTime.getMinute() <= stage.getStageStartTime().getMinute()) {
-                return stage;
-            }
-        }
-
-        return growthStages.get(growthStages.size() - 1);
+        return this.state.getCrop().getGrowthStage(remainingTime);
     }
 
     @Override
@@ -56,11 +49,11 @@ public class CropField extends Building {
     public boolean isInInteractiveZone(Position position) {
         int x = position.getX();
         int y = position.getY();
-        int buttonLeft = this.getTopLeftPosition().getX();
-        int buttonRight = buttonLeft + CROP_FIELD_SIZE - 1;
-        int buttonTop = this.getTopLeftPosition().getY();
-        int buttonBottom = buttonTop + CROP_FIELD_SIZE - 1;
-        return (x >= buttonLeft && x <= buttonRight && y >= buttonTop && y <= buttonBottom);
+        int left = this.getTopLeftPosition().getX();
+        int right = left + CROP_FIELD_SIZE - 1;
+        int top = this.getTopLeftPosition().getY();
+        int bottom = top + CROP_FIELD_SIZE - 1;
+        return (x >= left && x <= right && y >= top && y <= bottom);
     }
 
     public InGameTime getRemainingTime() {

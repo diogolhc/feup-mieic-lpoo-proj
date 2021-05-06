@@ -145,11 +145,11 @@ public class RectangleDrawerTest {
         drawer2.draw(new Position(5, 2), 5, 2);
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
-                if ( (i == 2 || i == 3) && (j >= 5 && j <= 9)) {
+                if ((i == 2 || i == 3) && (j >= 5 && j <= 9)) {
                     Assertions.assertEquals(BACK2, backgroundColors[i][j]);
                     Assertions.assertEquals(FRONT2, foregroundColors[i][j]);
                     Assertions.assertEquals('y', characters[i][j]);
-                } else if ( (i >= 2 && i <= 3) && (j == 5 || j == 9)) {
+                } else if ((i >= 2 && i <= 3) && (j == 5 || j == 9)) {
                     Assertions.assertEquals(BACK2, backgroundColors[i][j]);
                     Assertions.assertEquals(FRONT2, foregroundColors[i][j]);
                     Assertions.assertEquals('y', characters[i][j]);

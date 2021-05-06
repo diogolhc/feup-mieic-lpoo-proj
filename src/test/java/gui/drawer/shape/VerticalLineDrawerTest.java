@@ -142,7 +142,7 @@ public class VerticalLineDrawerTest {
 
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
-                if (j == 6 && i >= 3 && i <= 5) { // so vai ate 5 porque o draw3 desenha por cima
+                if (j == 6 && i >= 3 && i <= 5) {
                     Assertions.assertEquals(BACK, backgroundColors[i][j]);
                     Assertions.assertEquals(FRONT, foregroundColors[i][j]);
                     Assertions.assertEquals('x', characters[i][j]);
