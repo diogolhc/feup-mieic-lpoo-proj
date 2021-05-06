@@ -13,8 +13,6 @@ public class RemoveCropCommand implements Command {
 
     @Override
     public void execute() {
-        if (this.cropField.getState() instanceof Planted) {
-            this.cropField.setState(new NotPlanted());
-        }
+        this.cropField.setState(new NotPlanted());
     }
 }

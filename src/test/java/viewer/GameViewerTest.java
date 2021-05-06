@@ -26,5 +26,6 @@ public class GameViewerTest {
         verifier.verify(gui).clear();
         verifier.verify(viewer).draw(gui);
         verifier.verify(gui).refresh();
+        verifier.verifyNoMoreInteractions();
     }
 }
