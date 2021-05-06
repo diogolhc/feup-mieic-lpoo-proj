@@ -5,7 +5,6 @@ import controller.command.NoOperationCommand;
 import model.Position;
 
 public class Button {
-    // TODO maybe 3 states: normal, hovered, pressing
     private boolean selected;
     private final Position topLeft;
     private final String title;
@@ -16,8 +15,8 @@ public class Button {
     public Button(Position position, String title) {
         this.topLeft = position;
         this.title = title;
-        this.width = title.length() + 2; // TODO
-        this.height = 3; // TODO
+        this.width = title.length() + 2;
+        this.height = 3;
         this.command = new NoOperationCommand();
         this.selected = false;
     }
