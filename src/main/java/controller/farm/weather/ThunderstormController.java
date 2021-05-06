@@ -11,13 +11,12 @@ public class ThunderstormController extends WeatherController {
     }
 
     @Override
-    public void updateWeather(FarmController farmController, Weather weather, int currentDay) {
+    public void updateWeather(FarmController farmController, Weather weather, int currentDay, double chance) {
         if (currentDay <= this.lastDay)
             return;
 
         this.lastDay = currentDay;
 
-        double chance = Math.random();
         if (chance < 0.45) {
             weather.setWeatherCondition(new Cloudy());
             farmController.setWeatherController(new CloudyController(currentDay));

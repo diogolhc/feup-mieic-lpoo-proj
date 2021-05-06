@@ -73,7 +73,7 @@ public class FarmController implements GameControllerState {
             cropFieldController.reactTimePassed(cropField, elapsedTime);
         }
 
-        this.weatherController.updateWeather(this, this.farm.getWeather(), this.farm.getTime().getDay());
+        this.weatherController.updateWeather(this, this.farm.getWeather(), this.farm.getTime().getDay(), Math.random());
     }
 
     @Override

@@ -11,5 +11,9 @@ public abstract class WeatherController {
         this.lastDay = currentDay;
     }
 
-    public abstract void updateWeather(FarmController farmController, Weather weather, int currentDay);
+    public int getLastDay() {
+        return lastDay;
+    }
+
+    public abstract void updateWeather(FarmController farmController, Weather weather, int currentDay, double chance);
 }
