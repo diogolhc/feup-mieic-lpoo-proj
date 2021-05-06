@@ -18,7 +18,7 @@ public class MenuController implements GameControllerState {
         this.menu = menu;
     }
 
-    protected Menu getMenu() {
+    public Menu getMenu() {
         return this.menu;
     }
 
