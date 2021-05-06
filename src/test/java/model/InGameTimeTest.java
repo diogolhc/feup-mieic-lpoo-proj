@@ -15,22 +15,22 @@ public class InGameTimeTest {
 
     @Test
     public void testGetDay() {
-        Assertions.assertEquals(time.getDay(), 3);
+        Assertions.assertEquals(3, time.getDay());
     }
 
     @Test
     public void testGetHourOfDay() {
-        Assertions.assertEquals(time.getHourOfDay(), 2);
+        Assertions.assertEquals(2, time.getHourOfDay());
     }
 
     @Test
     public void testGetMinuteOfHour() {
-        Assertions.assertEquals(time.getMinuteOfHour(), 1);
+        Assertions.assertEquals(1, time.getMinuteOfHour());
     }
 
     @Test
     public void testStringFormat() {
-        Assertions.assertEquals(time.toString(), "Day 003  02:01");
+        Assertions.assertEquals("Day 003  02:01", time.toString());
     }
 
     @Test

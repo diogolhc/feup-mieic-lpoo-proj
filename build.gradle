@@ -10,6 +10,9 @@ repositories {
 
 pitest {
     junit5PluginVersion = '0.12'
+    targetClasses = ['controller.*', 'gui.*', 'model.*', 'viewer.*', 'Game']
+    timestampedReports = false
+    outputFormats = ['HTML']
 }
 
 application {

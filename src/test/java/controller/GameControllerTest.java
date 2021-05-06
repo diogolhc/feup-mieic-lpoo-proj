@@ -47,7 +47,7 @@ public class GameControllerTest {
 
         Mockito.verify(viewer, Mockito.times(2)).drawScreen(gui);
         Mockito.verify(state, Mockito.times(1)).reactKeyboard(GUI.ACTION.INTERACT);
-        Mockito.verify(state, Mockito.times(2)).reactTimePassed(250);
+        Mockito.verify(state, Mockito.times(1)).reactTimePassed(250);
     }
 
     @Test

@@ -19,19 +19,19 @@ class RealTimeToInGameTimeConverterTest {
     void accelerateTime() {
         this.realTimeToInGameTimeConverter.accelerateTime(3);
 
-        Assertions.assertEquals(this.realTimeToInGameTimeConverter.getRate(), 6);
+        Assertions.assertEquals(6, this.realTimeToInGameTimeConverter.getRate());
     }
 
     @Test
     void convert() {
-        Assertions.assertEquals(this.realTimeToInGameTimeConverter.convert(1000), new InGameTime(2));
+        Assertions.assertEquals(new InGameTime(2), this.realTimeToInGameTimeConverter.convert(1000));
     }
 
     @Test
     void accelerateAndConvert() {
         this.realTimeToInGameTimeConverter.accelerateTime(10);
 
-        Assertions.assertEquals(this.realTimeToInGameTimeConverter.convert(2000), new InGameTime(40));
+        Assertions.assertEquals(new InGameTime(40), this.realTimeToInGameTimeConverter.convert(2000));
     }
 
     @Test
@@ -40,7 +40,7 @@ class RealTimeToInGameTimeConverterTest {
         this.realTimeToInGameTimeConverter.convert(200);
         this.realTimeToInGameTimeConverter.convert(300);
 
-        Assertions.assertEquals(this.realTimeToInGameTimeConverter.convert(400), new InGameTime(2));
+        Assertions.assertEquals(new InGameTime(2), this.realTimeToInGameTimeConverter.convert(400));
     }
 
     @Test
@@ -51,7 +51,7 @@ class RealTimeToInGameTimeConverterTest {
         this.realTimeToInGameTimeConverter.convert(200);
         this.realTimeToInGameTimeConverter.convert(300);
 
-        Assertions.assertEquals(this.realTimeToInGameTimeConverter.convert(400), new InGameTime(20));
+        Assertions.assertEquals(new InGameTime(20), this.realTimeToInGameTimeConverter.convert(400));
     }
 
 }
