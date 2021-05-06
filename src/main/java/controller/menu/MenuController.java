@@ -13,11 +13,9 @@ import viewer.menu.MenuViewer;
 
 public class MenuController implements GameControllerState {
     private Menu menu;
-    private GameController controller;
 
-    public MenuController(Menu menu, GameController controller) {
+    public MenuController(Menu menu) {
         this.menu = menu;
-        this.controller = controller;
     }
 
     protected Menu getMenu() {
@@ -25,9 +23,7 @@ public class MenuController implements GameControllerState {
     }
 
     @Override
-    public void reactKeyboard(GUI.ACTION action) {
-        // TODO
-    }
+    public void reactKeyboard(GUI.ACTION action) {}
 
     @Override
     public void reactMouseMovement(Position position) {

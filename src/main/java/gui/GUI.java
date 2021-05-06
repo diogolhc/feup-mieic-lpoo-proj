@@ -26,7 +26,7 @@ public interface GUI {
     void setMouseListener(MouseListener mouseListener);
 
     enum ACTION {
-        NONE, QUIT, MOVE_UP, MOVE_RIGHT, MOVE_DOWN, MOVE_LEFT, INTERACT
+        NONE, QUIT, MOVE_UP, MOVE_RIGHT, MOVE_DOWN, MOVE_LEFT, BACK, INTERACT
     }
 
 }
