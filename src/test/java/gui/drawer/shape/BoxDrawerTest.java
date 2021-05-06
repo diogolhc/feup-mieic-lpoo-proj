@@ -8,8 +8,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import javax.swing.*;
-
 public class BoxDrawerTest {
     private GUI gui;
     private Color backgroundColors[][] = new Color[10][10];
