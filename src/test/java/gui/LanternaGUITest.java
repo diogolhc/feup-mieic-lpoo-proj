@@ -6,17 +6,11 @@ import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.Terminal;
-import com.googlecode.lanterna.terminal.swing.AWTTerminalFrame;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
-import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
 import java.io.IOException;
 
 class LanternaGUITest {
@@ -77,16 +71,14 @@ class LanternaGUITest {
 
     @Test
     void drawString() {
-        gui.setForegroundColor(new Color("#00FF56"));
         gui.drawString(1, 2, "HELLO WORLD");
-
-        Mockito.verify(tg, Mockito.times(1)).setForegroundColor(new TextColor.RGB(0, 255, 86));
         Mockito.verify(tg, Mockito.times(1)).putString(1, 2, "HELLO WORLD");
     }
 
     @Test
     void drawChar() {
-        // TODO
+        gui.drawChar(3, 4, 'h');
+        Mockito.verify(tg, Mockito.times(1)).setCharacter(3, 4, 'h');
     }
 
     @Test

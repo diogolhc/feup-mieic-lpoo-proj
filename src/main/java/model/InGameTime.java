@@ -39,7 +39,7 @@ public class InGameTime {
 
     @Override
     public String toString() {
-        return String.format("Day %03d  %02d:%02d", this.getDay(), this.getHourOfDay(), this.getMinuteOfHour());
+        return String.format("DAY %03d  %02d:%02d", this.getDay(), this.getHourOfDay(), this.getMinuteOfHour());
     }
 
     public String toCountdownString() {

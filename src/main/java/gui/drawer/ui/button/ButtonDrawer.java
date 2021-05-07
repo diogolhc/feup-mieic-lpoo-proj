@@ -24,7 +24,7 @@ public class ButtonDrawer {
 
     public void draw(Position position) {
         BoxDrawer boxDrawer = new BoxDrawer(this.gui, backgroundColor, foregroundColor);
-        // TODO handle when title doesn't fit
+        // TODO handle when title doesn't fit (go to next line)
         boxDrawer.draw(position, this.width, this.height);
         Position titlePosition = position.getRight().getDown();
         this.gui.drawString(titlePosition.getX(), titlePosition.getY(), this.title);
