@@ -1,11 +1,10 @@
 package controller.time;
 
+import controller.RealTimeToInGameTimeConverter;
 import model.InGameTime;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class RealTimeToInGameTimeConverterTest {
     private RealTimeToInGameTimeConverter realTimeToInGameTimeConverter;

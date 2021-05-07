@@ -37,6 +37,17 @@ public class InGameTime {
         return minutes % 60;
     }
 
+    public InGameTime add(InGameTime inGameTime) {
+        this.minutes += inGameTime.getMinute();
+        return this;
+    }
+
+    public InGameTime subtract(InGameTime inGameTime) {
+        this.minutes -= inGameTime.getMinute();
+        if (this.minutes < 0) this.minutes = 0;
+        return this;
+    }
+
     @Override
     public String toString() {
         return String.format("DAY %03d  %02d:%02d", this.getDay(), this.getHourOfDay(), this.getMinuteOfHour());

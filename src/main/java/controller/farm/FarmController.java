@@ -2,9 +2,7 @@ package controller.farm;
 
 import controller.GameController;
 import controller.GameControllerState;
-import controller.time.RealTimeToInGameTimeConverter;
-import controller.time.oper.InGameTimeOper;
-import controller.time.oper.InGameTimeSum;
+import controller.RealTimeToInGameTimeConverter;
 import controller.farm.weather.SunnyController;
 import controller.farm.weather.WeatherController;
 import controller.farm.building.CropFieldController;
@@ -64,9 +62,8 @@ public class FarmController implements GameControllerState {
     @Override
     public void reactTimePassed(long elapsedTimeSinceLastFrame) {
         InGameTime elapsedTime = this.realTimeToInGameTimeConverter.convert(elapsedTimeSinceLastFrame);
-        InGameTimeOper sum = new InGameTimeSum();
 
-        this.farm.getTime().set(sum.apply(this.farm.getTime(), elapsedTime));
+        this.farm.getTime().add(elapsedTime);
 
         CropFieldController cropFieldController = new CropFieldController(this.controller);
         for (CropField cropField : this.farm.getBuildings().getCropFields()) {
