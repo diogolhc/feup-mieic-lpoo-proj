@@ -26,7 +26,8 @@ public class FarmController implements GameControllerState {
         this.farm = farm;
         this.controller = controller;
         this.realTimeToInGameTimeConverter = new RealTimeToInGameTimeConverter(realSecToGameMinutesRate);
-        this.weatherController = new SunnyController(1); // TODO maybe pass this value by argument ?
+        this.weatherController = new SunnyController(1); // TODO this won't be needed after refactoring Weather
+                                                                  //      and weather controller
     }
 
     @Override
