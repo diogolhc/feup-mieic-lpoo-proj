@@ -62,7 +62,7 @@ class LanternaGUITest {
             TextColor bg = this.backgroundColors[x][y];
             TextColor fg = this.foregroundColors[x][y];
             char c = this.characters[x][y];
-            return TextCharacter.fromCharacter(c, fg, bg);
+            return TextCharacter.fromCharacter(c, fg, bg)[0];
         });
 
         gui = new LanternaGUI(terminal, screen);
@@ -83,18 +83,18 @@ class LanternaGUITest {
 
     @Test
     void backGroundColorMatches() {
-        gui.setBackgroundColor(new Color("#FF0000"));
+        gui.setBackgroundColor(new Color("#ff0000"));
         gui.drawChar(0, 0, ' ');
-        gui.setBackgroundColor(new Color("#0000FF"));
+        gui.setBackgroundColor(new Color("#0000ff"));
         gui.drawChar(5, 0, ' ');
         gui.drawChar(5, 1, '.');
         gui.drawChar(5, 2, ';');
-        gui.setBackgroundColor(new Color("#00FF00"));
+        gui.setBackgroundColor(new Color("#00ff00"));
         gui.drawChar(6, 1, ' ');
         gui.drawChar(5, 1, '=');
 
         // TODO fix this
-        //Assertions.assertEquals(gui.getBackgroundColor(0, 0).toString(), "#FF0000");
+        Assertions.assertEquals("#ff0000", gui.getBackgroundColor(0, 0).toString());
 
         Mockito.verify(tg, Mockito.times(3)).setBackgroundColor(Mockito.any());
         Mockito.verify(tg, Mockito.times(6)).setCharacter(Mockito.anyInt(), Mockito.anyInt(), Mockito.anyChar());
