@@ -1,4 +1,4 @@
-package controller.time;
+package controller;
 
 import controller.RealTimeToInGameTimeConverter;
 import model.InGameTime;

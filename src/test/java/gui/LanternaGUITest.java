@@ -93,16 +93,12 @@ class LanternaGUITest {
         gui.drawChar(6, 1, ' ');
         gui.drawChar(5, 1, '=');
 
-        // TODO fix this
         Assertions.assertEquals("#ff0000", gui.getBackgroundColor(0, 0).toString());
+        Assertions.assertEquals("#00ff00", gui.getBackgroundColor(5, 1).toString());
+        Assertions.assertEquals("#0000ff", gui.getBackgroundColor(5, 2).toString());
 
         Mockito.verify(tg, Mockito.times(3)).setBackgroundColor(Mockito.any());
         Mockito.verify(tg, Mockito.times(6)).setCharacter(Mockito.anyInt(), Mockito.anyInt(), Mockito.anyChar());
-    }
-
-    @Test
-    void foregroundGroundColorMatches() {
-        // TODO
     }
 
     @Test
@@ -121,36 +117,5 @@ class LanternaGUITest {
         Assertions.assertEquals(GUI.ACTION.NONE, gui.getNextAction());
         Mockito.when(screen.pollInput()).thenReturn(KeyStroke.fromString("."));
         Assertions.assertEquals(GUI.ACTION.NONE, gui.getNextAction());
-    }
-
-    @Test
-    void mouseListenerClick() {
-        //MouseListener mouseListener = Mockito.mock(MouseListener.class);
-
-        /*
-        Mockito.doAnswer(invocation -> {
-            //MouseAdapter adapter = invocation.getArgument(0);
-            //adapter.mouseClicked(new MouseEvent(null, 0, 0, 0, 49, 39, 0, false));
-            return null;
-        }).when((AWTTerminalFrame) terminal).getComponent(0).addMouseListener(Mockito.any());
-        */
-
-        //gui.setMouseListener(mouseListener);
-
-
-        //Mockito.verify(mouseListener, Mockito.times(1)).onMouseClick(2, 2);
-    }
-
-    @Test
-    void mouseListenerMove() {
-        /*
-        MouseListener mouseListener = Mockito.mock(MouseListener.class);
-
-        Mockito.doAnswer(invocation -> {
-            MouseMotionListener adapter = invocation.getArgument(0);
-            adapter.mouseMoved(new MouseEvent(null, 0, 0, 0, 50, 39, 0, false));
-            return null;
-        }).when((AWTTerminalFrame) terminal).getComponent(0).addMouseMotionListener(Mockito.any());
-        */
     }
 }

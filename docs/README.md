@@ -26,6 +26,9 @@ clicked with the mouse (and are highlighted when hovered with the mouse).
 These popups do not occupy the whole screen, so it is still possible to see
 part of the farm. When a popup is opened, time in the farm passes as normal.
 Right now, the menus implemented are used to plant, remove or harvest crops.
+Note that, even though the popup menus themselves are implemented, their
+automatic closing when the associated crop field changes state is not yet
+implemented.
 - **Crop field** - The crop field is used to plant crops. Right now, only
 wheat can be planted. After planting, the crop takes some time to grow, during
 which the farmer may remove the crop if he changes his mind. The gradual growth
@@ -189,6 +192,15 @@ The use of the Decorator pattern to solve this problem has the following benefit
 - PopupMenuControllers implement GameControllerState, so they may wrap other popups.
 Nesting popups may be useful in the future, for example, to open confirmation windows
 inside popup menus.
+However, in the case of the popup menu for a crop field in the Planted state,
+if its state changes to ReadyToHarvest while the menu is open, it has no way
+of knowing it, and thus will remain open even though its existance no longer
+makes sense. This is not caused by oversight, but is actually a longstanding
+issue that remained even after rethinking the implementation design of the menus.
+It is not known whether it is a fundamental flaw of the currently chosen design,
+however no good solution (i.e. not hacky) was found for this problem as of the
+time of the delivery of the intermediate report. This issue will be fixed after
+the delivery intermediate report.
 
 ### Action of the buttons
 #### Problem in Context
@@ -209,11 +221,10 @@ for which it has a setter and a getter, but it is not responsible for executing 
 There are many concrete commands executing actions on some receiver. The button
 controller is responsible for retrieving and executing the command associated with
 the button when it detects a click. With this pattern, the model just stores an object
-without executing any action, thus conserving the **MVC architectural pattern**.
-The **Single Responsibility Principle** is also conserved, as the invoker isn't responsible
-for knowing the concrete action associated with each button, but instead it just executes
-the stored action, while the model is not responsible for executing the action but instead
-just storing it.
+without executing any action. Besides, the **Single Responsibility Principle** is also
+conserved, as the invoker isn't responsible for knowing the concrete action associated
+with each button, but instead it just executes the stored action, while the model is
+not responsible for executing the action but instead just storing it.
 
 #### Implementation
 The following diagrams shows how the pattern’s roles were mapped to the application classes.
@@ -244,6 +255,15 @@ is clicked.
 - The commands are stand-alone objects that may be used to solve other problems
 regarding generic actions other than buttons (for example, interactions between
 the farmer and buildings).
+There is a downside to this approach:
+- Although the button doesn't have to know or execute the Command, it has to store it.
+Because the Command is part of the controller and the button (part of the model) depends
+on it, there is still a violation of the MVC, even though it is not as big as the one
+described in the section "Problem in Context". As such, this dependency must be eliminated,
+however, as of the time of the delivery of the intermediate report, it is not yet known
+a good solution for refactoring. A possibility might involve having different
+instances of ButtonController in a MenuController, one for each Button in the Menu,
+and store the Command inside those ButtonControllers.
 It also has the consequence that each different action will require a different
 Command instance. This can be a negative consequence if there are too many
 different needed commands.
@@ -336,7 +356,6 @@ be inserted without breaking existing code.
 >> refactoringSugestion1
 >
 > ### CodeSmell2 ...
-
 
 ## TESTING
 

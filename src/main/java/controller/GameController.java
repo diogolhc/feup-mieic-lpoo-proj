@@ -27,7 +27,7 @@ public class GameController implements MouseListener {
 
     public GameController(GUI gui, Farm farm) {
         this(gui);
-        this.gameControllerState = new FarmController(farm, this, 1);
+        this.gameControllerState = new FarmController(farm, this, 1*60*12);
     }
 
     public void setGameControllerState(GameControllerState state) {
