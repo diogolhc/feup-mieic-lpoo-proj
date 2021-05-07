@@ -1,4 +1,4 @@
-package model.menu.builder;
+package controller.menu.builder;
 
 import model.Position;
 import model.menu.Menu;

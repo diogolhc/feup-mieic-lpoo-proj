@@ -1,8 +1,7 @@
-package model.menu.builder;
+package controller.menu.builder;
 
 import controller.GameController;
 import controller.command.CompoundCommand;
-import controller.command.HarvestCropCommand;
 import controller.command.RemoveCropCommand;
 import model.Position;
 import model.farm.building.crop_field.CropField;
