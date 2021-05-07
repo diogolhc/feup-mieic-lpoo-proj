@@ -55,16 +55,46 @@ in the HUD bar, it has no other game effect.
 
 ## PLANNED FEATURES
 
-- **More crops** -
-- **Resting** -
-- **Saving game** -
-- **Weather effects** -
-- **Inventory and warehouse** -
-- **Market** -
-- **Animals** -
-- **Building** -
-- **Tools** -
-- **Upgrades** -
+- **More crops** - Instead of just being able to plant wheat, plant other
+crops with different attributes, such as corn, tomatoes, carrots, potatoes...
+- **Resting** - The farmer may enter the house to rest at any time, making
+the in game time go faster so that the player doesn't have to wait so long for
+the crops to grow.
+- **Saving game** - The house may also be used to save the current game state,
+which will be stored in a predefined file.
+- **Main menu and pause menu** - When the game starts, instead of directly
+opening the farm, open the main menu, where a new game may be created, if
+there is currently a save, it may be loaded, and the player may exit the game.
+Additionally, while in game, the player may pause the game with the ESCAPE button,
+which will stop time in game and open a popup menu asking if the user wants to return
+to the main menu.
+- **Weather effects** - The current weather may affect the crop fields and animals
+(positively or negatively). For example, a sunny weather may dry the plants, but
+a windstorm may damage them.
+- **Inventory and warehouse** - When the farmer harvests crops or gets products
+from animals, they are stored in the warehouse. The farmer may go to the warehouse
+to see the products currently stored. Be careful, however, as there is a limit
+to the amount to products stored in the warehouse. It might be a good idea to
+sell items before that limit is reached, because if there is not enough space
+for more products, any new products obtained will be discarded.
+- **Market and currency** - The market is where the farmer may go to sell the
+products obtained in order to get money and to expand the farm by building more
+crop fields or stockyards. Any new constructions must be placed without
+intersecting existing constructions.
+- **Animals** - Besides crop fields, the farm may also have stockyards. The
+animals must be fed in order to produce something. For example, the farmer may
+feed cows with wheat, wait some time, and then obtain milk from the cows.
+- **Tools** - Some tools may be bought (and possibly upgraded) from the market
+to aid the farmer in his work. There are many possible examples. A water bucket may
+be filled in a fountain and used to water the plants the animals (which gives
+bonuses). A hoe may be used to plow crop fields before planting crops (and thus
+get a bonus). A knife may possibly be used to kill animals and get meat.
+Scissors may be used to get wool from sheep.
+- **Upgrades** - At the market there may be a possibility to buy upgrades
+to the main buildings. Upgrading the House will make the time pass faster
+while resting (it's easier to rest in a comfortable house). Upgrading the
+market will increase the sell price of items and decrease the buying price.
+Upgrading the warehouse will increase its capacity.
 
 ## DESIGN
 
