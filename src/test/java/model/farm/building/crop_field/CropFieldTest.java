@@ -20,10 +20,18 @@ public class CropFieldTest {
         field = new CropField(new Position(4, 5));
     }
 
-//    @Test
-//    void isTraversable() {
-//        // TODO
-//    }
+    @Test
+    void isTraversable() {
+        Assertions.assertTrue(this.field.isTraversable(new Position(3, 3)));
+        Assertions.assertTrue(this.field.isTraversable(new Position(4, 5)));
+        Assertions.assertTrue(this.field.isTraversable(new Position(5, 5)));
+        Assertions.assertTrue(this.field.isTraversable(new Position(4, 6)));
+        Assertions.assertFalse(this.field.isTraversable(new Position(5, 6)));
+        Assertions.assertFalse(this.field.isTraversable(new Position(6, 6)));
+        Assertions.assertFalse(this.field.isTraversable(new Position(5, 7)));
+        Assertions.assertFalse(this.field.isTraversable(new Position(6, 7)));
+
+    }
 
 //    @Test
 //    void isInInteractiveZone() {

@@ -6,9 +6,7 @@ import model.farm.building.Building;
 import model.farm.building.crop_field.crop.GrowthStage;
 import model.farm.building.crop_field.state.CropFieldState;
 import model.farm.building.crop_field.state.NotPlanted;
-import model.farm.building.crop_field.state.ReadyToHarvest;
 
-import java.util.List;
 
 public class CropField extends Building {
     public static final int CROP_FIELD_SIZE = 4;
