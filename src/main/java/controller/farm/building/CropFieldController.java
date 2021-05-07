@@ -2,28 +2,16 @@ package controller.farm.building;
 
 import controller.GameController;
 import controller.command.*;
-import controller.farm.building.BuildingController;
-import controller.menu.MenuController;
-import controller.time.oper.InGameTimeOper;
-import controller.time.oper.InGameTimeSubtraction;
 import model.InGameTime;
 import model.farm.building.crop_field.CropField;
 import model.Position;
-import model.farm.building.crop_field.crop.Crop;
-import model.farm.building.crop_field.crop.Wheat;
 import model.farm.building.crop_field.state.NotPlanted;
 import model.farm.building.crop_field.state.Planted;
 import model.farm.building.crop_field.state.ReadyToHarvest;
-import model.menu.Button;
-import model.menu.Menu;
 import model.menu.builder.CropFieldGrowingMenuBuilder;
 import model.menu.builder.HarvestMenuBuilder;
 import model.menu.builder.MenuBuilder;
 import model.menu.builder.PlantCropMenuBuilder;
-import model.menu.label.Label;
-import model.menu.label.LabelText;
-import viewer.GameViewer;
-import viewer.menu.MenuViewer;
 
 public class CropFieldController extends BuildingController<CropField> {
     private final GameController controller;
@@ -53,8 +41,7 @@ public class CropFieldController extends BuildingController<CropField> {
     }
 
     public void reactTimePassed(CropField cropField, InGameTime elapsedTime) {
-        InGameTimeOper subtraction = new InGameTimeSubtraction();
-        InGameTime remainingTime = subtraction.apply(cropField.getRemainingTime(), elapsedTime);
-        cropField.setRemainingTime(remainingTime);
+        cropField.setRemainingTime(cropField.getRemainingTime().subtract(elapsedTime));
     }
+
 }
