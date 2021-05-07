@@ -22,7 +22,8 @@ public class PlantCropMenuBuilder extends PopupMenuBuilder {
     protected void addButtonsAndLabels(Menu menu) {
         super.addButtonsAndLabels(menu);
 
-        Crop crops[] = {new Wheat()}; // TODO this is only for experimenting
+        Crop crops[] = {new Wheat()}; // TODO this is temporary until crops as Crop instances loaded from file
+                                      //      instead of subclasses are implemented
         int x = 1;
         int y = 5;
         for (Crop crop: crops) {

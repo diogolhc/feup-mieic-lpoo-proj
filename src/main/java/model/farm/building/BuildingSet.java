@@ -10,12 +10,12 @@ public class BuildingSet {
     private final Set<CropField> cropFields;
     private House house;
 
-    public BuildingSet() {
-        this.cropFields = new HashSet<>();
+    public BuildingSet(House house) {
+        this(house, new HashSet<>());
     }
 
-    public BuildingSet(House house) {
-        this.cropFields = new HashSet<>();
+    public BuildingSet(House house, Set<CropField> cropFields) {
+        this.cropFields = cropFields;
         this.house = house;
     }
 

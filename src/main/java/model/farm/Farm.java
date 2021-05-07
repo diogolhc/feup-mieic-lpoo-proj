@@ -11,16 +11,16 @@ import model.farm.building.crop_field.CropField;
 
 public class Farm {
     private Farmer farmer;
-    private BuildingSet buildings;
+    private final BuildingSet buildings;
     private InGameTime time;
     private Weather weather;
     private int width;
     private int height;
 
-    public Farm(int width, int height) {
-        // TODO probably a builder. Hardcoded just for testing
+    public Farm(int width, int height, BuildingSet buildings) {
         this.width = width;
         this.height = height;
+        this.buildings = buildings;
     }
 
     public Farmer getFarmer() {
@@ -60,31 +60,11 @@ public class Farm {
         this.weather = weather;
     }
 
-    public void setBuildings(BuildingSet buildings) {
-        this.buildings = buildings;
-    }
-
     public void setFarmer(Farmer farmer) {
         this.farmer = farmer;
     }
 
     public void setTime(InGameTime time) {
         this.time = time;
-    }
-
-    public void addCrop(CropField cropField) {
-        this.buildings.addCropField(cropField);
-    }
-
-    public void setHouse(House house) {
-        this.buildings.setHouse(house);
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
-    public void setWidth(int width) {
-        this.width = width;
     }
 }

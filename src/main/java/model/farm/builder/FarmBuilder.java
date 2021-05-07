@@ -1,31 +1,35 @@
 package model.farm.builder;
 
+import model.InGameTime;
 import model.farm.Farm;
+import model.farm.Farmer;
+import model.farm.building.BuildingSet;
+import model.farm.building.House;
+import model.farm.building.crop_field.CropField;
+import model.weather.Weather;
+
+import java.util.Set;
 
 public abstract class FarmBuilder {
 
     public Farm buildFarm() {
-        Farm farm = new Farm(this.getWidth(), this.getHeight());
-        setBuildings(farm);
-        setCrops(farm);
-        setHouse(farm);
-        setFarmer(farm);
-        setWeather(farm);
-        setTime(farm);
+        BuildingSet buildingSet = new BuildingSet(this.getHouse(), this.getCropFields());
+        Farm farm = new Farm(this.getWidth(), this.getHeight(), buildingSet);
+        farm.setFarmer(this.getFarmer());
+        farm.setTime(this.getTime());
+        farm.setWeather(this.getWeather());
         return farm;
     }
 
-    protected abstract void setTime(Farm farm);
+    protected abstract InGameTime getTime();
 
-    protected abstract void setWeather(Farm farm);
+    protected abstract Weather getWeather();
 
-    protected abstract void setBuildings(Farm farm);
+    protected abstract Farmer getFarmer();
 
-    protected abstract void setFarmer(Farm farm);
+    protected abstract House getHouse();
 
-    protected abstract void setHouse(Farm farm);
-
-    protected abstract void setCrops(Farm farm);
+    protected abstract Set<CropField> getCropFields();
 
     protected abstract int getWidth();
 

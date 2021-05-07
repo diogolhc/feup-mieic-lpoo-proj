@@ -1,9 +1,8 @@
 import controller.GameController;
-import controller.farm.FarmController;
 import gui.GUI;
 import gui.LanternaGUI;
 import model.farm.Farm;
-import model.farm.builder.DefaultFarmBuilder;
+import model.farm.builder.NewGameFarmBuilder;
 
 import java.awt.*;
 import java.io.IOException;
@@ -15,7 +14,7 @@ public class Game {
     public Game() throws IOException, FontFormatException, URISyntaxException {
         GUI gui = new LanternaGUI(40, 21);
 
-        Farm farm = new DefaultFarmBuilder().buildFarm();
+        Farm farm = new NewGameFarmBuilder().buildFarm();
 
         this.controller = new GameController(gui, farm);
     }
