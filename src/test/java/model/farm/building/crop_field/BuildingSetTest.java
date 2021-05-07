@@ -12,7 +12,8 @@ public class BuildingSetTest {
 
     @BeforeEach
     public void setUp() {
-        buildingSet = new BuildingSet(new House(new Position(5, 5)));
+        buildingSet = new BuildingSet();
+        buildingSet.setHouse(new House(new Position(5, 5)));
         buildingSet.addCropField(new CropField(new Position(0, 0)));
         buildingSet.addCropField(new CropField(new Position(1 ,4)));
     }

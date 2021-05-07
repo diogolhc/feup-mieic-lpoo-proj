@@ -17,6 +17,10 @@ public class Farm {
     private int width;
     private int height;
 
+    public Farm(int width, int height) {
+        this(width, height, new BuildingSet());
+    }
+
     public Farm(int width, int height, BuildingSet buildings) {
         this.width = width;
         this.height = height;

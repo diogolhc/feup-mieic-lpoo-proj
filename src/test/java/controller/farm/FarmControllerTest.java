@@ -23,6 +23,7 @@ public class FarmControllerTest {
     @BeforeEach
     public void setUp() {
         farm = new Farm(6, 8);
+        farm.setTime(new InGameTime(0, 0, 0));
         cropField = Mockito.mock(CropField.class);
         Mockito.when(cropField.getRemainingTime()).thenReturn(new InGameTime(0));
         farm.getBuildings().addCropField(cropField);
@@ -32,7 +33,6 @@ public class FarmControllerTest {
 
     @Test
     public void reactTimePassed() {
-        farm.getTime().set(new InGameTime(0, 0, 0));
         controller.reactTimePassed(67000);
         Assertions.assertEquals(new InGameTime(0, 1, 7), farm.getTime());
         controller.reactTimePassed(1000);

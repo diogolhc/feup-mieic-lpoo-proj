@@ -1,6 +1,8 @@
 package model.farm;
 
 import model.Position;
+import model.farm.building.BuildingSet;
+import model.farm.building.House;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,6 +13,7 @@ public class FarmTest {
     @BeforeEach
     void setUp() {
         farm = new Farm(40, 20);
+        farm.getBuildings().setHouse(new House(new Position(1, 1)));
     }
 
     @Test
@@ -37,6 +40,5 @@ public class FarmTest {
     void obstructedByBuilding() {
         Assertions.assertFalse(farm.isTraversable(new Position(4, 4)));
         Assertions.assertFalse(farm.isTraversable(new Position(3, 6)));
-        Assertions.assertFalse(farm.isTraversable(new Position(11, 4)));
     }
 }

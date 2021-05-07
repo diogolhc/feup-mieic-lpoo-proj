@@ -3,6 +3,7 @@ package controller.farm;
 import gui.GUI;
 import model.Position;
 import model.farm.Farm;
+import model.farm.Farmer;
 import model.farm.building.House;
 import model.farm.building.crop_field.CropField;
 import org.junit.jupiter.api.Assertions;
@@ -16,7 +17,8 @@ public class FarmerControllerTest {
     @BeforeEach
     public void setUp() {
         farm = new Farm(20, 20);
-        farm.getFarmer().setPosition(new Position(10, 10));
+        farm.getBuildings().setHouse(new House(new Position(1, 1)));
+        farm.setFarmer(new Farmer(new Position(10, 10)));
         controller = new FarmerController(farm);
     }
 
