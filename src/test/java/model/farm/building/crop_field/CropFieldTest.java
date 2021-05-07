@@ -33,10 +33,25 @@ public class CropFieldTest {
 
     }
 
-//    @Test
-//    void isInInteractiveZone() {
-//        // TODO
-//    }
+    @Test
+    void isInInteractiveZone() {
+        Assertions.assertFalse(this.field.isInInteractiveZone(new Position(3, 3)));
+        Assertions.assertFalse(this.field.isInInteractiveZone(new Position(3, 5)));
+        Assertions.assertFalse(this.field.isInInteractiveZone(new Position(8, 8)));
+
+        Assertions.assertTrue(this.field.isInInteractiveZone(new Position(4, 5)));
+        Assertions.assertTrue(this.field.isInInteractiveZone(new Position(5, 5)));
+        Assertions.assertTrue(this.field.isInInteractiveZone(new Position(6, 5)));
+        Assertions.assertTrue(this.field.isInInteractiveZone(new Position(7, 5)));
+
+        Assertions.assertTrue(this.field.isInInteractiveZone(new Position(4, 6)));
+        Assertions.assertTrue(this.field.isInInteractiveZone(new Position(4, 7)));
+        Assertions.assertTrue(this.field.isInInteractiveZone(new Position(4, 8)));
+
+        Assertions.assertTrue(this.field.isInInteractiveZone(new Position(5, 6)));
+        Assertions.assertTrue(this.field.isInInteractiveZone(new Position(7, 8)));
+
+    }
 
     @Test
     void getGrowthStageDefault() {
