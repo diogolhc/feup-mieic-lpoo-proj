@@ -98,21 +98,235 @@ Upgrading the warehouse will increase its capacity.
 
 ## DESIGN
 
-> ### Problem1
->> #### Problem in Context
->> pic1
->
->> #### The Pattern
->> tp1
->
->> #### Implementation
->> i1
->
->> #### Consequences
->> c1
->
-> ### Problem2 ...
+### Transition between screens (for example between the game and menus)
+#### Problem in Context
+When applying the MVC architectural pattern, one problem that arises is
+that, depending on the state of the game (for example whether a menu is opened),
+different controls, views or even models may be used. Handling all those
+possibilities in the GameController class would be a violation of the
+**Single Responsibility Principle** and require **heavy use of conditionals** to
+determine the appropriate behavior based on the context.
 
+#### The Pattern
+We have applied the State pattern. With this pattern, each possible state of
+the controller is represented in a different subclass of GameControllerState.
+Each concrete state controls its own behavior regarding the keyboard, the mouse
+and the passage of time, and has a viewer and the relevant model associated.
+The state can be set in the GameController class so that it is possible to
+switch to a different state of the application by switching to another subclass.
+This pattern allowed to address the identified problems because the code related
+to each particular state can be separated in different classes (**Single Responsibility Principle**),
+new states that may be introduced in the future can be in their own class instead of
+changing the existing classes (**Open/Closed Principle**), and the heavy use of conditionals is avoided.
+
+#### Implementation
+The following diagram shows how the pattern’s roles were mapped to the application classes.
+![diagrams/implementation_p1.png](diagrams/implementation_p1.png)
+
+These classes can be found in the following files:
+- [GameController](../src/main/java/controller/GameController.java)
+- [GameControllerState](../src/main/java/controller/GameControllerState.java)
+- [FarmController](../src/main/java/controller/farm/FarmController.java)
+- [MenuController](../src/main/java/controller/menu/MenuController.java)
+- [PopupMenuController](../src/main/java/controller/menu/PopupMenuController.java)
+
+#### Consequences
+The use of the State pattern to solve this problem has the following benefits:
+- The possible states of the controller become explicit in the code, instead of relying
+on flags and conditionals. The code is more organized and it is easier to navigate
+to each state's logic.
+- Polymorphism is used to select the correct state. New states can be added simply
+by creating a new class implementing GameControllerState with the desired functionality.
+- Each controller state may have its own model and viewer associated.
+- If two or more states are very similar, code duplication may be avoided
+using inheritance.
+
+### Popup menus
+#### Problem in Context
+Some actions in the game result in a popup menu being opened. Popup menus
+are a state of the controller that attaches new behavior to the previous state.
+Creating a new subclass of the base state for each popup menu would lead to
+**code duplication**. Adding the popup logic to the existing states
+would be a violation of the **Single Responsibility Principle** and also
+of the **Open/Closed Principle** as each new popup would imply modifying
+the superclass.
+
+#### The Pattern
+We solved this problem with the Decorator pattern. The PopupMenuController class
+is a decorator that wraps the previous state of the controller, removing its
+reactions to the keyboard and mouse (but not to the passage of time) and adding its own.
+This new controller has a viewer that is itself a decorator of GameViewer, which
+shows the popup menu on top of the previous viewer. The popup may be closed
+by setting the GameController state to the PopupMenuController's inner state.
+With this pattern, the behavior of existing states was extended without making
+a new subclass for each. Furthermore, the **Single Responsibility Principle**
+and the **Open/Closed Principle** are conserved as this new class has the sole
+responsibility of adding/removing behavior to existing classes at runtime instead  
+of modifying their code directly.
+
+#### Implementation
+The following diagrams shows how the pattern’s roles were mapped to the application classes.
+The first diagram shows the use of the decorator pattern in the controller. The second one
+shows the use of the decorator pattern in the viewer.
+![diagrams/implementation_p2a.png](diagrams/implementation_p2a.png)
+
+These classes can be found in the following files:
+- [GameController](../src/main/java/controller/GameController.java)
+- [GameControllerState](../src/main/java/controller/GameControllerState.java)
+- [FarmController](../src/main/java/controller/farm/FarmController.java)
+- [MenuController](../src/main/java/controller/menu/MenuController.java)
+- [PopupMenuController](../src/main/java/controller/menu/PopupMenuController.java)
+
+![diagrams/implementation_p2b.png](diagrams/implementation_p2b.png)
+- [GameViewer](../src/main/java/viewer/GameViewer.java)
+- [FarmViewer](../src/main/java/viewer/farm/FarmViewer.java)
+- [MenuViewer](../src/main/java/viewer/menu/MenuViewer.java)
+- [PopupMenuViewer](../src/main/java/viewer/menu/PopupMenuViewer.java)
+
+#### Consequences
+The use of the Decorator pattern to solve this problem has the following benefits:
+- New states of the controller can have popup menus using this same decorator.
+- PopupMenuControllers implement GameControllerState, so they may wrap other popups.
+Nesting popups may be useful in the future, for example, to open confirmation windows
+inside popup menus.
+
+### Action of the buttons
+#### Problem in Context
+The menus are composed of a list of buttons and labels. Each button is intended
+to produce a certain action specific to that button on click. This means that
+it must store in some way that action, so that the controller can execute it
+when reacting to a mouse click on that button. Otherwise, there would be no
+way for the controller to know how to respond to that click. One possibility
+would be to delegate to each button the execution of its action, however,
+as the button is part of the model, that would violate the **MVC pattern**, as the
+model should just store the content of the game and not control it (thus also
+violating the **Single Responsibility Principle**).
+
+#### The Pattern
+We used the Command pattern to tackle this problem. It turns each action into a
+stand-alone object that contains all information about it. Each button stores a command
+for which it has a setter and a getter, but it is not responsible for executing it.
+There are many concrete commands executing actions on some receiver. The button
+controller is responsible for retrieving and executing the command associated with
+the button when it detects a click. With this pattern, the model just stores an object
+without executing any action, thus conserving the **MVC architectural pattern**.
+The **Single Responsibility Principle** is also conserved, as the invoker isn't responsible
+for knowing the concrete action associated with each button, but instead it just executes
+the stored action, while the model is not responsible for executing the action but instead
+just storing it.
+
+#### Implementation
+The following diagrams shows how the pattern’s roles were mapped to the application classes.
+Only some of the commands and respective receivers were included in the diagram.
+![diagrams/implementation_p3.png](diagrams/implementation_p3.png)
+
+These classes can be found in the following files:
+- [ButtonController](../src/main/java/controller/menu/ButtonController.java)
+- [Button](../src/main/java/model/menu/Button.java)
+- [Command](../src/main/java/controller/command/Command.java)
+- [CompoundCommand](../src/main/java/controller/command/CompoundCommand.java)
+- [HarvestCropCommand](../src/main/java/controller/command/HarvestCropCommand.java)
+- [PlantCropCommand](../src/main/java/controller/command/PlantCropCommand.java)
+- [OpenPopupMenuCommand](../src/main/java/controller/command/OpenPopupMenuCommand.java)
+- [SetControllerStateCommand](../src/main/java/controller/command/SetControllerStateCommand.java)
+- [CropField](../src/main/java/model/farm/building/crop_field/CropField.java)
+- [GameController](../src/main/java/controller/GameController.java)
+
+#### Consequences
+The use of the Command pattern to solve this problem has the following benefits:
+- The responsibilities of creating the action, storing the action, invoking
+the action and performing the action are all separated in different classes.
+This is a benefit, because those steps happen in different moments of the program
+(conserves the **Single Responsibility Principle** ).
+- New commands can be added without breaking existing code (**Open/Closed Principle**)
+- After the command is created, its execution can be deferred until the button
+is clicked.
+- The commands are stand-alone objects that may be used to solve other problems
+regarding generic actions other than buttons (for example, interactions between
+the farmer and buildings).
+It also has the consequence that each different action will require a different
+Command instance. This can be a negative consequence if there are too many
+different needed commands.
+
+### Some buttons execute multiple actions
+#### Problem in Context
+Some buttons have actions that may be divided into multiple existing
+simpler actions. An example of this is when a button to plant a crop
+is clicked. This button must produce the action of planting the crop
+but also of closing the popup menu. Creating a different command for
+every such action might lead to **code duplication** when the existing
+commands could have been reused.
+
+#### The Pattern
+We used the Composite pattern to tackle this problem. A new command
+CompoundCommand contains a list of commands and when executed it
+executes all commands in that list in order. This allows the buttons
+that need to execute complex actions to create a CompoundCommand and
+add to it all the simpler commands that composes it, thus reducing
+code duplication and creation of other command classes.
+
+#### Implementation
+The following diagram shows how the pattern’s roles were mapped to the application classes.
+![diagrams/implementation_p4.png](diagrams/implementation_p4.png)
+
+These classes can be found in the following files:
+- [Command](../src/main/java/controller/command/Command.java)
+- [CompoundCommand](../src/main/java/controller/command/CompoundCommand.java)
+- [HarvestCropCommand](../src/main/java/controller/command/HarvestCropCommand.java)
+- [SetControllerStateCommand](../src/main/java/controller/command/SetControllerStateCommand.java)
+
+#### Consequences
+The use of the Composite pattern to solve this problem has the following benefits:
+- A button may store a command that is actually composed of many smaller commands
+without having to know it.
+- Code duplication is reduced as instead of many complex commands there is only
+need to implement a set simpler ones.
+
+### Define interaction of each building
+#### Problem in Context
+Each building in the game, such as the house and the crop field, may have
+an interactive zone and an action associated with that interaction. The controller
+of each building would then have two responsibilities: checking whether the
+given position is inside the interactive zone and if so do the action of that building.
+This is a violation of the **Single Responsibility Principle** and also results
+in **code duplication** as each building would reuse the same logic to check if
+the given position is inside the interactive zone. This would in turn result in
+the **Shotgun Surgery** code smell, as if that check were to change, every building
+controller would be affected.
+
+#### The Pattern
+To solve this problem we took advantage of the Command interface and applied
+the Factory Method pattern. The BuildingController is an abstract class that
+declares an abstract method to return a Command representing the interaction
+action and implements a method to react to the interaction of a generic building.
+There is a controller extending this class for each building, implementing
+the abstract method to return the relevant Command.
+This way, the creation of the Command is separated from its execution, as the
+later requires checking whether the interaction took place at that building's
+interactive zone, thus conserving the **Single Responsibility Principle**. The
+**code duplication** is also avoided because that check is done in the BuildingController
+class instead of being in every concrete building's controller.
+
+#### Implementation
+The following diagram shows how the pattern’s roles were mapped to the application classes.
+Only some of the commands were included in the diagram.
+![diagrams/implementation_p5.png](diagrams/implementation_p5.png)
+
+These classes can be found in the following files:
+- [BuildingController](../src/main/java/controller/farm/building/BuildingController.java)
+- [Command](../src/main/java/controller/command/Command.java)
+- [CropFieldController](../src/main/java/controller/farm/building/CropFieldController.java)
+- [HouseController](../src/main/java/controller/farm/building/HouseController.java)
+
+#### Consequences
+The use of the Composite pattern to solve this problem has the following benefits:
+- The creation of the Command and its use are not tightly coupled.
+- All subclasses of BuildingController (including new ones) only need to
+define its interaction command and not the logic to detect an interaction
+thus preserving the **Single Responsibility Principle**.
+- The Command of the interaction for each building is independent from the
+others, thus preserving the **Open/Closed Principle** as new buildings can
+be inserted without breaking existing code.
 
 ## KNOWN CODE SMELLS AND REFACTORING SUGGESTIONS
 
