@@ -6,23 +6,23 @@ import model.weather.Rainy;
 import model.weather.Weather;
 
 public class SunnyController extends WeatherController {
-    public SunnyController(int currentDay) {
-        super(currentDay);
+    public SunnyController(int nextMinute) {
+        super(nextMinute);
     }
 
     @Override
-    public void updateWeather(FarmController farmController, Weather weather, int currentDay, double chance) {
-        if (currentDay <= this.lastDay)
+    public void updateWeather(FarmController farmController, Weather weather, int currentMin, double chanceWeather, double chanceNextMinute) {
+        if (currentMin < this.nextMinute)
             return;
 
-        this.lastDay = currentDay;
+        this.nextMinute = currentMin + minNextMin + (int)(chanceNextMinute * (maxNextMin-minNextMin));
 
-        if (chance < 0.1) {
+        if (chanceWeather < 0.1) {
             weather.setWeatherCondition(new Rainy());
-            farmController.setWeatherController(new RainyController(currentDay));
-        } else if (chance < 0.4) {
+            farmController.setWeatherController(new RainyController(this.nextMinute));
+        } else if (chanceWeather < 0.4) {
             weather.setWeatherCondition(new Cloudy());
-            farmController.setWeatherController(new CloudyController(currentDay));
+            farmController.setWeatherController(new CloudyController(this.nextMinute));
         }
         // else maintains SUNNY
 
