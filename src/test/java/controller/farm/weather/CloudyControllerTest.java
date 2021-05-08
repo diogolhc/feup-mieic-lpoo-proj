@@ -1,15 +1,10 @@
 package controller.farm.weather;
 
-import controller.farm.FarmController;
+import controller.farm.weather.state.*;
 import model.weather.*;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class CloudyControllerTest {
     WeatherControllerState weatherControllerState;

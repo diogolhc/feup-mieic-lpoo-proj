@@ -403,7 +403,7 @@ can then be loaded from the file.
 
 ### Duplicate code
 
-The classes in [controller.weather](../src/main/java/controller/farm/weather)
+The classes in [controller.weather.state](../src/main/java/controller/farm/weather/state)
 have very similar logic in their *updateWeather* methods. Besides being
 **Duplicate code**, it is a **long chain of if statements** that makes it harder
 to add more weathers or modify the behavior of existing ones.
@@ -415,7 +415,7 @@ of weather change. This means that weather instance passed to *updateWeather*
 may contain the information relative to those probabilities. Replace the chained
 if statements with a for loop iterating through all probabilities and
 respective weather changes. Finally, we can use **Collapse Hierarchy** to merge
-all the classes in [controller.weather](../src/main/java/controller/farm/weather),
+all the classes in [controller.weather.state](../src/main/java/controller/farm/weather/state),
 because at this point they will have identical *updateWeather* methods.
 
 ## OTHER KNOWN PROBLEMS

@@ -1,19 +1,21 @@
-package controller.farm.weather;
+package controller.farm.weather.state;
 
+import controller.farm.weather.WeatherController;
 import model.weather.Cloudy;
 import model.weather.Rainy;
 import model.weather.Weather;
 
-public class WindstormController implements WeatherControllerState{
+
+public class ThunderstormController implements WeatherControllerState {
     @Override
     public void updateWeather(WeatherController weatherController, Weather weather, double chanceWeather) {
-        if (chanceWeather < 0.49) {
+        if (chanceWeather < 0.45) {
             weather.setWeatherCondition(new Cloudy());
             weatherController.setWeatherControllerState(new CloudyController());
-        } else if (chanceWeather < 0.98) {
+        } else if (chanceWeather < 0.9) {
             weather.setWeatherCondition(new Rainy());
             weatherController.setWeatherControllerState(new RainyController());
         }
-        // else maintains WINDSTORM
+        // else maintains THUNDERSTORM
     }
 }
