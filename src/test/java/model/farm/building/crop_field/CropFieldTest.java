@@ -38,6 +38,7 @@ public class CropFieldTest {
         Assertions.assertFalse(this.field.isInInteractiveZone(new Position(3, 3)));
         Assertions.assertFalse(this.field.isInInteractiveZone(new Position(3, 5)));
         Assertions.assertFalse(this.field.isInInteractiveZone(new Position(8, 8)));
+        Assertions.assertFalse(this.field.isInInteractiveZone(new Position(5, 9)));
 
         Assertions.assertTrue(this.field.isInInteractiveZone(new Position(4, 5)));
         Assertions.assertTrue(this.field.isInInteractiveZone(new Position(5, 5)));

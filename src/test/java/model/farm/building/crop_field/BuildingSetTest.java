@@ -14,8 +14,8 @@ public class BuildingSetTest {
     public void setUp() {
         buildingSet = new BuildingSet();
         buildingSet.setHouse(new House(new Position(5, 5)));
-        buildingSet.addCropField(new CropField(new Position(0, 0)));
-        buildingSet.addCropField(new CropField(new Position(1 ,4)));
+        buildingSet.addCropField(new CropField(new Position(0, 0)))
+                .addCropField(new CropField(new Position(1 ,4)));
     }
 
     @Test

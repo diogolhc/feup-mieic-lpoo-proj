@@ -32,7 +32,6 @@ public class CropFieldController extends BuildingController<CropField> {
             menuBuilder = new HarvestMenuBuilder(this.controller, cropField);
         } else {
             // This should never happen
-            // TODO is throwing a RuntimeException ok?
             throw new RuntimeException(
                     "LOGIC ERROR: Unhandled CropFieldState: " + cropField.getState().getClass().toString());
         }

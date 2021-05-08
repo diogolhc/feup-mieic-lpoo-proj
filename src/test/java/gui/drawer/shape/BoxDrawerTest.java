@@ -148,11 +148,12 @@ public class BoxDrawerTest {
 
         boxDrawer.draw(new Position(0, 0), 5, 5);
         boxDrawer2.draw(new Position(3, 3), 4, 4);
+        boxDrawer.draw(new Position(2, 2), 1, 1);
 
         Color expectedBg[][] = {
                 {BACK, BACK, BACK, BACK, BACK, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT},
                 {BACK, DEFAULT, DEFAULT, DEFAULT, BACK, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT},
-                {BACK, DEFAULT, DEFAULT, DEFAULT, BACK, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT},
+                {BACK, DEFAULT, BACK, DEFAULT, BACK, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT},
                 {BACK, DEFAULT, DEFAULT, BACK2, BACK2, BACK2, BACK2, DEFAULT, DEFAULT, DEFAULT},
                 {BACK, BACK, BACK, BACK2, BACK, DEFAULT, BACK2, DEFAULT, DEFAULT, DEFAULT},
                 {DEFAULT, DEFAULT, DEFAULT, BACK2, DEFAULT, DEFAULT, BACK2, DEFAULT, DEFAULT, DEFAULT},
@@ -165,7 +166,7 @@ public class BoxDrawerTest {
         Color expectedFg[][] = {
                 {FRONT, FRONT, FRONT, FRONT, FRONT, WHITE, WHITE, WHITE, WHITE, WHITE},
                 {FRONT, WHITE, WHITE, WHITE, FRONT, WHITE, WHITE, WHITE, WHITE, WHITE},
-                {FRONT, WHITE, WHITE, WHITE, FRONT, WHITE, WHITE, WHITE, WHITE, WHITE},
+                {FRONT, WHITE, FRONT, WHITE, FRONT, WHITE, WHITE, WHITE, WHITE, WHITE},
                 {FRONT, WHITE, WHITE, FRONT2, FRONT2, FRONT2, FRONT2, WHITE, WHITE, WHITE},
                 {FRONT, FRONT, FRONT, FRONT2, FRONT, WHITE, FRONT2, WHITE, WHITE, WHITE},
                 {WHITE, WHITE, WHITE, FRONT2, WHITE, WHITE, FRONT2, WHITE, WHITE, WHITE},
@@ -178,7 +179,7 @@ public class BoxDrawerTest {
         char expectedChars[][] = {
                 {CORNER_LINE, HORIZONTAL_LINE, HORIZONTAL_LINE, HORIZONTAL_LINE, CORNER_LINE, ' ', ' ', ' ', ' ', ' '},
                 {VERTICAL_LINE, ' ', ' ', ' ', VERTICAL_LINE, ' ', ' ', ' ', ' ', ' '},
-                {VERTICAL_LINE, ' ', ' ', ' ', VERTICAL_LINE, ' ', ' ', ' ', ' ', ' '},
+                {VERTICAL_LINE, ' ', CORNER_LINE, ' ', VERTICAL_LINE, ' ', ' ', ' ', ' ', ' '},
                 {VERTICAL_LINE, ' ', ' ', CORNER_LINE, HORIZONTAL_LINE, HORIZONTAL_LINE, CORNER_LINE, ' ', ' ', ' '},
                 {CORNER_LINE, HORIZONTAL_LINE, HORIZONTAL_LINE, VERTICAL_LINE, CORNER_LINE, ' ', VERTICAL_LINE, ' ', ' ', ' '},
                 {' ', ' ', ' ', VERTICAL_LINE, ' ', ' ', VERTICAL_LINE, ' ', ' ', ' '},

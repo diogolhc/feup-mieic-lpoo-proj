@@ -7,6 +7,7 @@ import model.InGameTime;
 import model.Position;
 import model.farm.building.crop_field.CropField;
 import model.farm.building.crop_field.crop.Crop;
+import model.farm.building.crop_field.state.CropFieldState;
 import model.farm.building.crop_field.state.NotPlanted;
 import model.farm.building.crop_field.state.Planted;
 import model.farm.building.crop_field.state.ReadyToHarvest;
@@ -52,7 +53,7 @@ public class CropFieldControllerTest {
     }
 
     @Test
-    public void reactInteractionInZoneReadyToHarves() {
+    public void reactInteractionInZoneReadyToHarvest() {
         cropField.setState(new ReadyToHarvest(Mockito.mock(Crop.class)));
         cropFieldController.reactInteraction(cropField, new Position(13, 12));
         ArgumentCaptor<GameControllerState> captor = ArgumentCaptor.forClass(GameControllerState.class);
@@ -66,6 +67,13 @@ public class CropFieldControllerTest {
     public void reactInteractionOutOfZone() {
         cropFieldController.reactInteraction(cropField, new Position(9, 10));
         Mockito.verify(gameController, Mockito.never()).setGameControllerState(Mockito.any());
+    }
+
+    @Test
+    public void reactInteractionInZoneUnknownState() {
+        cropField.setState(Mockito.mock(CropFieldState.class));
+        Assertions.assertThrows(RuntimeException.class,
+                () -> cropFieldController.reactInteraction(cropField, new Position(10, 11)));
     }
 
     @Test

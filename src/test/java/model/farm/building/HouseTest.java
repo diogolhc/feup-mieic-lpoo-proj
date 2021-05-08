@@ -26,7 +26,10 @@ public class HouseTest {
 
         Assertions.assertFalse(house.isTraversable(new Position(3, 3)));
         Assertions.assertFalse(house.isTraversable(new Position(1, 0)));
+        Assertions.assertFalse(house.isTraversable(new Position(6, 4)));
+        Assertions.assertFalse(house.isTraversable(new Position(5, 0)));
         Assertions.assertFalse(house.isTraversable(new Position(0, 1)));
+        Assertions.assertFalse(house.isTraversable(new Position(0, 5)));
         Assertions.assertFalse(house.isTraversable(new Position(4, 5)));
 
         Assertions.assertTrue(house2.isTraversable(new Position(6, 7+House.HOUSE_SIZE)));
