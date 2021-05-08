@@ -99,6 +99,27 @@ while resting (it's easier to rest in a comfortable house). Upgrading the
 market will increase the sell price of items and decrease the buying price.
 Upgrading the warehouse will increase its capacity.
 
+### Main menu Mockup
+
+![mockups/main_menu.png](mockups/main_menu.png)
+
+### Farm with buildings, crop fields and animals
+
+![mockups/farm_buildings_cropfields_animals.png](mockups/farm_buildings_cropfields_animals.png)
+
+### Sell menu
+
+![mockups/sell_menu.png](mockups/sell_menu.png)
+
+### Select place for new building
+
+When the player wants to build a new building, he can control a rectangle
+that represents the space occupied by the new building. In this case the
+rectangle is red because the current place overlaps with existing buildings,
+thus the player cannot select that place.
+
+![mockups/place_build.png](mockups/place_build.png)
+
 ## DESIGN
 
 ### Transition between screens (for example between the game and menus)
