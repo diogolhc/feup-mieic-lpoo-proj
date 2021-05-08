@@ -13,9 +13,9 @@ public abstract class Building {
         return this.topLeft;
     }
 
-    // TODO another possibility would be to return a Region (i.e. TraversableRegion and InteractiveRegion)
+    // TODO another possibility would be to return a Region (i.e. getTraversableRegion and getInteractiveRegion)
     //      that would have a contains() method.
-    //      this would allow to reduce logic duplication because of most regions being rectangles
+    //      this would allow to reduce logic duplication in the future because of most regions being rectangles
     public abstract boolean isTraversable(Position position);
     public abstract boolean isInInteractiveZone(Position position);
 }
