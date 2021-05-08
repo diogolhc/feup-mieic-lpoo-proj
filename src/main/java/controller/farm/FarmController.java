@@ -7,6 +7,7 @@ import controller.farm.weather.SunnyController;
 import controller.farm.weather.WeatherController;
 import controller.farm.building.CropFieldController;
 import controller.farm.building.HouseController;
+import controller.farm.weather.WeatherControllerState;
 import gui.GUI;
 import model.InGameTime;
 import model.Position;
@@ -26,8 +27,7 @@ public class FarmController implements GameControllerState {
         this.farm = farm;
         this.controller = controller;
         this.realTimeToInGameTimeConverter = new RealTimeToInGameTimeConverter(realSecToGameMinutesRate);
-        this.weatherController = new SunnyController(0); // TODO this won't be needed after refactoring Weather
-                                                                  //      and weather controller
+        this.weatherController = new WeatherController(this.farm.getWeather());
     }
 
     @Override
@@ -50,10 +50,6 @@ public class FarmController implements GameControllerState {
         houseController.reactInteraction(farmBuildings.getHouse(), farmerPosition);
     }
 
-    public void setWeatherController(WeatherController weatherController) {
-        this.weatherController = weatherController;
-    }
-
     @Override
     public void reactMouseMovement(Position position) {}
 
@@ -71,7 +67,7 @@ public class FarmController implements GameControllerState {
             cropFieldController.reactTimePassed(cropField, elapsedTime);
         }
 
-        this.weatherController.updateWeather(this, this.farm.getWeather(), this.farm.getTime().getMinute(), Math.random(), Math.random());
+        this.weatherController.reactTimePassed(elapsedTime);
     }
 
     @Override

@@ -1,64 +1,45 @@
 package controller.farm.weather;
 
-import controller.farm.FarmController;
 import model.weather.Cloudy;
 import model.weather.Rainy;
 import model.weather.Weather;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class ThunderstormControllerTest {
+    WeatherControllerState weatherControllerState;
     WeatherController weatherController;
-    FarmController farmController;
     Weather weather;
 
     @BeforeEach
     void setUp() {
-        this.weatherController = new ThunderstormController(1);
-        this.farmController = Mockito.mock(FarmController.class);
+        this.weatherControllerState = new ThunderstormController();
+        this.weatherController = Mockito.mock(WeatherController.class);
         this.weather = Mockito.mock(Weather.class);
     }
 
     @Test
-    void updateWeatherSameDay() {
-        this.weatherController.updateWeather(farmController, weather, 0, 0.1, 0);
-
-        Mockito.verify(farmController, Mockito.never()).setWeatherController(Mockito.any());
-        Mockito.verify(weather, Mockito.never()).setWeatherCondition(Mockito.any());
-    }
-
-    @Test
     void updateWeatherSame() {
-        this.weatherController.updateWeather(farmController, weather, 1, 0.95, 0);
+        this.weatherControllerState.updateWeather(weatherController, weather, 0.95);
 
-        Mockito.verify(farmController, Mockito.never()).setWeatherController(Mockito.any());
+        Mockito.verify(weatherController, Mockito.never()).setWeatherControllerState(Mockito.any());
         Mockito.verify(weather, Mockito.never()).setWeatherCondition(Mockito.any());
     }
 
     @Test
     void updateWeatherCloudy() {
-        this.weatherController.updateWeather(farmController, weather, 1, 0.1, 0);
+        this.weatherControllerState.updateWeather(weatherController, weather, 0.1);
 
-        ArgumentCaptor<CloudyController> argumentCaptor = ArgumentCaptor.forClass(CloudyController.class);
-        Mockito.verify(farmController).setWeatherController(argumentCaptor.capture());
-        Assertions.assertEquals(1 + WeatherController.minNextMin, argumentCaptor.getValue().getNextMinute());
-
+        Mockito.verify(weatherController).setWeatherControllerState(Mockito.isA(CloudyController.class));
         Mockito.verify(weather).setWeatherCondition(Mockito.isA(Cloudy.class));
     }
 
     @Test
     void updateWeatherRainy() {
-        this.weatherController.updateWeather(farmController, weather, 1, 0.5, 1);
+        this.weatherControllerState.updateWeather(weatherController, weather, 0.5);
 
-        ArgumentCaptor<RainyController> argumentCaptor = ArgumentCaptor.forClass(RainyController.class);
-        Mockito.verify(farmController).setWeatherController(argumentCaptor.capture());
-        Assertions.assertEquals(1 + WeatherController.maxNextMin, argumentCaptor.getValue().getNextMinute());
-
+        Mockito.verify(weatherController).setWeatherControllerState(Mockito.isA(RainyController.class));
         Mockito.verify(weather).setWeatherCondition(Mockito.isA(Rainy.class));
     }
 

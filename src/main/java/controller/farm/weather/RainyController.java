@@ -3,33 +3,22 @@ package controller.farm.weather;
 import controller.farm.FarmController;
 import model.weather.*;
 
-public class RainyController extends WeatherController {
-    public RainyController(int nextMinute) {
-        super(nextMinute);
-    }
-
+public class RainyController implements WeatherControllerState {
     @Override
-    public void updateWeather(FarmController farmController, Weather weather, int currentMin, double chanceWeather, double chanceNextMinute) {
-        if (currentMin < this.nextMinute)
-            return;
-
-        this.nextMinute = currentMin + minNextMin + (int)(chanceNextMinute * (maxNextMin-minNextMin));
-
+    public void updateWeather(WeatherController weatherController, Weather weather, double chanceWeather) {
         if (chanceWeather < 0.1) {
             weather.setWeatherCondition(new Sunny());
-            farmController.setWeatherController(new SunnyController(this.nextMinute));
+            weatherController.setWeatherControllerState(new SunnyController());
         } else if (chanceWeather < 0.4) {
             weather.setWeatherCondition(new Cloudy());
-            farmController.setWeatherController(new CloudyController(this.nextMinute));
+            weatherController.setWeatherControllerState(new CloudyController());
         } else if (chanceWeather < 0.5) {
             weather.setWeatherCondition(new Thunderstorm());
-            farmController.setWeatherController(new ThunderstormController(this.nextMinute));
+            weatherController.setWeatherControllerState(new ThunderstormController());
         } else if (chanceWeather < 0.52) {
             weather.setWeatherCondition(new Windstorm());
-            farmController.setWeatherController(new WindstormController(this.nextMinute));
+            weatherController.setWeatherControllerState(new WindstormController());
         }
         // else maintains RAINY
-
     }
-
 }
