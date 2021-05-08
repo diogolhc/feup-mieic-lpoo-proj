@@ -5,15 +5,17 @@ import model.weather.Weather;
 
 
 public abstract class WeatherController {
-    protected int lastDay;
+    protected static final int minNextMin = 10; // TODO adjust these values (?)
+    protected static final int maxNextMin = 100;
+    protected int nextMinute;
 
-    public WeatherController(int currentDay) {
-        this.lastDay = currentDay;
+    public WeatherController(int nextMinute) {
+        this.nextMinute = nextMinute;
     }
 
-    public int getLastDay() {
-        return lastDay;
+    public int getNextMinute() {
+        return nextMinute;
     }
 
-    public abstract void updateWeather(FarmController farmController, Weather weather, int currentDay, double chance);
+    public abstract void updateWeather(FarmController farmController, Weather weather, int currentMin, double chanceWeather, double chanceNextMinute);
 }

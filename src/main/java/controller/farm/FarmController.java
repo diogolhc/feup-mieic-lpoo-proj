@@ -26,7 +26,7 @@ public class FarmController implements GameControllerState {
         this.farm = farm;
         this.controller = controller;
         this.realTimeToInGameTimeConverter = new RealTimeToInGameTimeConverter(realSecToGameMinutesRate);
-        this.weatherController = new SunnyController(1); // TODO this won't be needed after refactoring Weather
+        this.weatherController = new SunnyController(0); // TODO this won't be needed after refactoring Weather
                                                                   //      and weather controller
     }
 
@@ -71,7 +71,7 @@ public class FarmController implements GameControllerState {
             cropFieldController.reactTimePassed(cropField, elapsedTime);
         }
 
-        this.weatherController.updateWeather(this, this.farm.getWeather(), this.farm.getTime().getDay(), Math.random());
+        this.weatherController.updateWeather(this, this.farm.getWeather(), this.farm.getTime().getMinute(), Math.random(), Math.random());
     }
 
     @Override

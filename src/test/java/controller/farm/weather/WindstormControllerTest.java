@@ -18,14 +18,14 @@ class WindstormControllerTest {
 
     @BeforeEach
     void setUp() {
-        this.weatherController = new WindstormController(0);
+        this.weatherController = new WindstormController(1);
         this.farmController = Mockito.mock(FarmController.class);
         this.weather = Mockito.mock(Weather.class);
     }
 
     @Test
-    void updateWeatherSameDay() {
-        this.weatherController.updateWeather(farmController, weather, 0, 0.1);
+    void updateWeatherBeforeTime() {
+        this.weatherController.updateWeather(farmController, weather, 0, 0.1, 0);
 
         Mockito.verify(farmController, Mockito.never()).setWeatherController(Mockito.any());
         Mockito.verify(weather, Mockito.never()).setWeatherCondition(Mockito.any());
@@ -33,7 +33,7 @@ class WindstormControllerTest {
 
     @Test
     void updateWeatherSame() {
-        this.weatherController.updateWeather(farmController, weather, 1, 0.99);
+        this.weatherController.updateWeather(farmController, weather, 1, 0.99, 0);
 
         Mockito.verify(farmController, Mockito.never()).setWeatherController(Mockito.any());
         Mockito.verify(weather, Mockito.never()).setWeatherCondition(Mockito.any());
@@ -41,22 +41,22 @@ class WindstormControllerTest {
 
     @Test
     void updateWeatherCloudy() {
-        this.weatherController.updateWeather(farmController, weather, 1, 0.1);
+        this.weatherController.updateWeather(farmController, weather, 1, 0.1, 0);
 
         ArgumentCaptor<CloudyController> argumentCaptor = ArgumentCaptor.forClass(CloudyController.class);
         Mockito.verify(farmController).setWeatherController(argumentCaptor.capture());
-        Assertions.assertEquals(1, argumentCaptor.getValue().getLastDay());
+        Assertions.assertEquals(1 + WeatherController.minNextMin, argumentCaptor.getValue().getNextMinute());
 
         Mockito.verify(weather).setWeatherCondition(Mockito.isA(Cloudy.class));
     }
 
     @Test
     void updateWeatherRainy() {
-        this.weatherController.updateWeather(farmController, weather, 1, 0.5);
+        this.weatherController.updateWeather(farmController, weather, 1, 0.5, 1);
 
         ArgumentCaptor<RainyController> argumentCaptor = ArgumentCaptor.forClass(RainyController.class);
         Mockito.verify(farmController).setWeatherController(argumentCaptor.capture());
-        Assertions.assertEquals(1, argumentCaptor.getValue().getLastDay());
+        Assertions.assertEquals(1 + WeatherController.maxNextMin, argumentCaptor.getValue().getNextMinute());
 
         Mockito.verify(weather).setWeatherCondition(Mockito.isA(Rainy.class));
     }
