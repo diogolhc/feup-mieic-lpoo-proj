@@ -194,13 +194,13 @@ Nesting popups may be useful in the future, for example, to open confirmation wi
 inside popup menus.
 However, in the case of the popup menu for a crop field in the Planted state,
 if its state changes to ReadyToHarvest while the menu is open, it has no way
-of knowing it, and thus will remain open even though its existance no longer
+of knowing it, and thus will remain open even though its existence no longer
 makes sense. This is not caused by oversight, but is actually a longstanding
-issue that remained even after rethinking the implementation design of the menus.
-It is not known whether it is a fundamental flaw of the currently chosen design,
-however no good solution (i.e. not hacky) was found for this problem as of the
-time of the delivery of the intermediate report. This issue will be fixed after
-the delivery intermediate report.
+issue that remained even after trying to think of alternatives to the implementation
+design of the menus. It is not known whether it is a fundamental flaw of the
+currently chosen design, however no good solution (i.e. not hacky) was found
+for this problem as of the time of the delivery of the intermediate report.
+This issue will be fixed after the delivery intermediate report.
 
 ### Action of the buttons
 #### Problem in Context
@@ -350,12 +350,58 @@ be inserted without breaking existing code.
 
 ## KNOWN CODE SMELLS AND REFACTORING SUGGESTIONS
 
-> ### CodeSmell1
->> descrição1
->
->> refactoringSugestion1
->
-> ### CodeSmell2 ...
+### Middle man
+
+Many of the viewer classes (for example, [FarmerViewer](../src/main/java/viewer/farm/FarmerViewer.java))
+are **Middle Men** as their sole purpose is to delegate the drawing work
+to the respective drawer (gui) class. This adds needless complexity to the program
+and also makes testing the viewers harder (if the viewer is just delegating
+work to the drawer, its tests would be almost identical to the ones of the
+drawer and it can't be tested isolated from the drawer).
+
+To improve the code, for each viewer we can use **Inline Class**,
+inlining the respective drawer class into the viewer class. In the concrete
+example given, the draw method of [FarmerDrawer](../src/main/java/gui/drawer/entity/FarmerDrawer.java)  
+would be moved to [FarmerViewer](../src/main/java/viewer/farm/FarmerViewer.java),
+replacing the viewer's *draw()* method that only delegates work.
+After that, [FarmerDrawer](../src/main/java/gui/drawer/entity/FarmerDrawer.java)
+should be removed.
+
+### Data class
+
+The classes in [model.weather](../src/main/java/model/weather) and in
+[model.farm.building.crop_field.crop](../src/main/java/model/farm/building/crop_field/crop)
+are **Data classes** that only store constants and include getters for
+those constants. These classes only bloat the code and could be replaced
+with concrete instances of a single class.
+
+A solution can be, for each of the mentioned packages, to store the relevant
+constants in a file and use **Collapse Hierarchy**, merging the classes
+of each of those packages into a single class. The set of concrete instances
+can then be loaded from the file.
+
+### Duplicate code
+
+The classes in [controller.weather](../src/main/java/controller/farm/weather)
+have very similar logic in their *updateWeather* methods. Besides being
+**Duplicate code**, it is a **long chain of if statements** that makes it harder
+to add more weathers or modify the behavior of existing ones.
+
+To solve this problem, it is a good idea first to solve the **Data Class** code
+smell identified in the previous section in the package [model.weather](../src/main/java/model/weather).
+The created file that stores the constants for each weather may also store the probabilities
+of weather change. This means that weather instance passed to *updateWeather*
+may contain the information relative to those probabilities. Replace the chained
+if statements with a for loop iterating through all probabilities and
+respective weather changes. Finally, we can use **Collapse Hierarchy** to merge
+all the classes in [controller.weather](../src/main/java/controller/farm/weather),
+because at this point they will have identical *updateWeather* methods.
+
+## OTHER KNOWN PROBLEMS
+
+- The tests created for the drawer classes are actually integration tests rather
+than unit tests. They will be replaced with actual unit tests after refactoring
+the drawers and viewers class (see **Middle Man** section of the known code smells).
 
 ## TESTING
 
@@ -367,6 +413,6 @@ be inserted without breaking existing code.
 
 ## SELF-EVALUATION
 
-- Diogo Costa: %
-- Pedro Gonçalo Correia: %
-- Rui Alves: %
+- Diogo Costa: 33%
+- Pedro Gonçalo Correia: 34%
+- Rui Alves: 33%
