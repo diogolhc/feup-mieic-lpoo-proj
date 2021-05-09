@@ -276,6 +276,7 @@ is clicked.
 - The commands are stand-alone objects that may be used to solve other problems
 regarding generic actions other than buttons (for example, interactions between
 the farmer and buildings).
+
 There is a downside to this approach:
 - Although the button doesn't have to know or execute the Command, it has to store it.
 Because the Command is part of the controller and the button (part of the model) depends
@@ -382,7 +383,7 @@ drawer and it can't be tested isolated from the drawer).
 
 To improve the code, for each viewer we can use **Inline Class**,
 inlining the respective drawer class into the viewer class. In the concrete
-example given, the draw method of [FarmerDrawer](../src/main/java/gui/drawer/entity/FarmerDrawer.java)  
+example given, the draw method of [FarmerDrawer](../src/main/java/gui/drawer/entity/FarmerDrawer.java)
 would be moved to [FarmerViewer](../src/main/java/viewer/farm/FarmerViewer.java),
 replacing the viewer's *draw()* method that only delegates work.
 After that, [FarmerDrawer](../src/main/java/gui/drawer/entity/FarmerDrawer.java)
@@ -414,9 +415,11 @@ The created file that stores the constants for each weather may also store the p
 of weather change. This means that weather instance passed to *updateWeather*
 may contain the information relative to those probabilities. Replace the chained
 if statements with a for loop iterating through all probabilities and
-respective weather changes. Finally, we can use **Collapse Hierarchy** to merge
+respective weather changes. Then, we can use **Collapse Hierarchy** to merge
 all the classes in [controller.weather.state](../src/main/java/controller/farm/weather/state),
-because at this point they will have identical *updateWeather* methods.
+because at this point they will have identical *updateWeather* methods. Finally,
+the resulting class can be inlined in [WeatherController](../src/main/java/controller/farm/weather/WeatherController.java)
+because it no longer makes sense to have a state.
 
 ## OTHER KNOWN PROBLEMS
 
