@@ -444,5 +444,5 @@ be refactored in some way based on the known problems described in this report.
 ## SELF-EVALUATION
 
 - Diogo Costa: 33%
-- Pedro Gonçalo Correia: 34%
-- Rui Alves: 33%
+- Pedro Gonçalo Correia: 37%
+- Rui Alves: 30%
