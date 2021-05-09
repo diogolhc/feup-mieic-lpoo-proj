@@ -428,7 +428,8 @@ same responsibility.
 - The tests created for the drawer classes are actually integration tests rather
 than unit tests. They will be replaced with actual unit tests after refactoring
 the drawers and viewers class (see **Middle Man** section of the known code smells).
-- There are not many viewer tests because of the code smell identified in the previous section.
+- There are not many viewer tests because of the code smell identified in the beginning
+of the previous section.
 - There aren't tests for the MenuBuilder classes because it is likely that they will
 be refactored in some way based on the known problems described in this report.
 
