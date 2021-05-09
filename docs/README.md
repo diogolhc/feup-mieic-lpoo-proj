@@ -213,6 +213,7 @@ The use of the Decorator pattern to solve this problem has the following benefit
 - PopupMenuControllers implement GameControllerState, so they may wrap other popups.
 Nesting popups may be useful in the future, for example, to open confirmation windows
 inside popup menus.
+
 However, in the case of the popup menu for a crop field in the Planted state,
 if its state changes to ReadyToHarvest while the menu is open, it has no way
 of knowing it, and thus will remain open even though its existence no longer
@@ -419,13 +420,17 @@ respective weather changes. Then, we can use **Collapse Hierarchy** to merge
 all the classes in [controller.weather.state](../src/main/java/controller/farm/weather/state),
 because at this point they will have identical *updateWeather* methods. Finally,
 the resulting class can be inlined in [WeatherController](../src/main/java/controller/farm/weather/WeatherController.java)
-because it no longer makes sense to have a state.
+because it no longer makes sense to have a state and thus both classes have the
+same responsibility.
 
 ## OTHER KNOWN PROBLEMS
 
 - The tests created for the drawer classes are actually integration tests rather
 than unit tests. They will be replaced with actual unit tests after refactoring
 the drawers and viewers class (see **Middle Man** section of the known code smells).
+- There are not many viewer tests because of the code smell identified in the previous section.
+- There aren't tests for the MenuBuilder classes because it is likely that they will
+be refactored in some way based on the known problems described in this report.
 
 ## TESTING
 

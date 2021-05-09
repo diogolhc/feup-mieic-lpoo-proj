@@ -42,13 +42,13 @@ public class WeatherController {
 
     public void reactTimePassed(InGameTime time) {
         this.nextMinute -= time.getMinute();
-        if (this.nextMinute <= 0)
+        if (this.nextMinute <= 0) {
             this.updateWeatherState(Math.random());
+            this.nextMinute = minNextMin + (int)(Math.random() * (maxNextMin-minNextMin));
+        }
     }
 
     private void updateWeatherState(double chance) {
         this.weatherControllerState.updateWeather(this, this.weather, chance);
-        this.nextMinute = minNextMin + (int)(Math.random() * (maxNextMin-minNextMin));
     }
-
 }
