@@ -4,30 +4,32 @@ import controller.GameController;
 import controller.command.CompoundCommand;
 import controller.command.PlantCropCommand;
 import model.Position;
+import model.farm.Farm;
 import model.farm.building.crop_field.CropField;
-import model.farm.building.crop_field.crop.Crop;
-import model.farm.building.crop_field.crop.Wheat;
+import model.farm.crop.Crop;
 import model.menu.Button;
 import model.menu.Menu;
 
+import java.util.List;
+
 public class PlantCropMenuBuilder extends PopupMenuBuilder {
+    private List<Crop> crops;
     private CropField cropField;
 
-    public PlantCropMenuBuilder(GameController controller, CropField cropField) {
+    public PlantCropMenuBuilder(GameController controller, List<Crop> crops, CropField cropField) {
         super(controller);
         this.cropField = cropField;
+        this.crops = crops;
     }
 
     @Override
     protected void addButtonsAndLabels(Menu menu) {
         super.addButtonsAndLabels(menu);
 
-        Crop crops[] = {new Wheat()}; // TODO this is temporary until crops as Crop instances loaded from file
-                                      //      instead of subclasses are implemented
         int x = 1;
         int y = 5;
-        for (Crop crop: crops) {
-            Button plantCropButton = new Button(new Position(x, y), crop.toString());
+        for (Crop crop: this.crops) {
+            Button plantCropButton = new Button(new Position(x, y), crop.getName());
             plantCropButton.setCommand(new CompoundCommand()
                     .addCommand(new PlantCropCommand(this.cropField, crop))
                     .addCommand(super.getClosePopupMenuCommand())

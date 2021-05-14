@@ -2,7 +2,7 @@ package model;
 
 import java.util.Objects;
 
-public class InGameTime {
+public class InGameTime implements Comparable<InGameTime> {
     private int minutes;
 
     public InGameTime(int minutes) {
@@ -74,4 +74,8 @@ public class InGameTime {
         return Objects.hash(this.minutes);
     }
 
+    @Override
+    public int compareTo(InGameTime inGameTime) {
+        return Integer.compare(this.minutes, inGameTime.minutes);
+    }
 }

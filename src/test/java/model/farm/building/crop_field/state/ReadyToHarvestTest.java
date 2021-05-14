@@ -1,7 +1,7 @@
 package model.farm.building.crop_field.state;
 
 import model.InGameTime;
-import model.farm.building.crop_field.crop.Crop;
+import model.farm.crop.Crop;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

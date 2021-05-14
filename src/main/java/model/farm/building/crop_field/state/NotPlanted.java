@@ -1,8 +1,7 @@
 package model.farm.building.crop_field.state;
 
 import model.InGameTime;
-import model.farm.building.crop_field.crop.Crop;
-import model.farm.building.crop_field.crop.NoCrop;
+import model.farm.crop.Crop;
 
 public class NotPlanted implements CropFieldState {
     @Override
@@ -15,6 +14,6 @@ public class NotPlanted implements CropFieldState {
 
     @Override
     public Crop getCrop() {
-        return new NoCrop();
+        return Crop.NO_CROP;
     }
 }

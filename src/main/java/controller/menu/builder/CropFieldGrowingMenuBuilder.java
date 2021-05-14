@@ -23,7 +23,7 @@ public class CropFieldGrowingMenuBuilder extends PopupMenuBuilder {
 
         menu.addLabel(new Label(
                 new Position(1, 4),
-                () -> "CROP: " + cropField.getState().getCrop().toString()
+                () -> "CROP: " + cropField.getState().getCrop().getName()
         ));
 
         menu.addLabel(new Label(

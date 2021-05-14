@@ -2,9 +2,7 @@ package gui.drawer.entity;
 
 import gui.Color;
 import gui.GUI;
-import model.InGameTime;
 import model.Position;
-import model.farm.building.crop_field.crop.GrowthStage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

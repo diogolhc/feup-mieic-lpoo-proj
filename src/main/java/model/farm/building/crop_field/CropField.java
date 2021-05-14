@@ -3,7 +3,7 @@ package model.farm.building.crop_field;
 import model.InGameTime;
 import model.Position;
 import model.farm.building.Building;
-import model.farm.building.crop_field.crop.GrowthStage;
+import model.farm.crop.GrowthStage;
 import model.farm.building.crop_field.state.CropFieldState;
 import model.farm.building.crop_field.state.NotPlanted;
 
@@ -27,7 +27,7 @@ public class CropField extends Building {
 
     public GrowthStage getCropGrowthStage() {
         InGameTime remainingTime = this.state.getRemainingTime();
-        return this.state.getCrop().getGrowthStage(remainingTime);
+        return this.state.getCrop().getCurrentGrowthStage(remainingTime);
     }
 
     @Override

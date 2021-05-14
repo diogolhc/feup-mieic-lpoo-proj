@@ -6,8 +6,10 @@ import model.farm.Farmer;
 import model.farm.building.BuildingSet;
 import model.farm.building.House;
 import model.farm.building.crop_field.CropField;
+import model.farm.crop.Crop;
 import model.weather.Weather;
 
+import java.util.List;
 import java.util.Set;
 
 public abstract class FarmBuilder {
@@ -18,6 +20,7 @@ public abstract class FarmBuilder {
         farm.setFarmer(this.getFarmer());
         farm.setTime(this.getTime());
         farm.setWeather(this.getWeather());
+        farm.setCrops(this.getCrops());
         return farm;
     }
 
@@ -30,6 +33,8 @@ public abstract class FarmBuilder {
     protected abstract House getHouse();
 
     protected abstract Set<CropField> getCropFields();
+
+    protected abstract List<Crop> getCrops();
 
     protected abstract int getWidth();
 

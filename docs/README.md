@@ -393,7 +393,7 @@ should be removed.
 ### Data class
 
 The classes in [model.weather](../src/main/java/model/weather) and in
-[model.farm.building.crop_field.crop](../src/main/java/model/farm/building/crop_field/crop)
+[model.farm.crop](../src/main/java/model/farm/building/crop_field/crop)
 are **Data classes** that only store constants and include getters for
 those constants. These classes only bloat the code and could be replaced
 with concrete instances of a single class.
