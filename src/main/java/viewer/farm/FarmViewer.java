@@ -10,7 +10,7 @@ import model.farm.building.crop_field.CropField;
 import model.farm.Farm;
 import model.farm.Farmer;
 import model.farm.building.House;
-import model.weather.Weather;
+import model.farm.Weather;
 import viewer.GameViewer;
 
 public class FarmViewer extends GameViewer {

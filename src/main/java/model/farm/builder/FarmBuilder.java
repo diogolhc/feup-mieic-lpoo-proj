@@ -7,7 +7,7 @@ import model.farm.building.BuildingSet;
 import model.farm.building.House;
 import model.farm.building.crop_field.CropField;
 import model.farm.crop.Crop;
-import model.weather.Weather;
+import model.farm.Weather;
 
 import java.util.List;
 import java.util.Set;
@@ -19,14 +19,15 @@ public abstract class FarmBuilder {
         Farm farm = new Farm(this.getWidth(), this.getHeight(), buildingSet);
         farm.setFarmer(this.getFarmer());
         farm.setTime(this.getTime());
-        farm.setWeather(this.getWeather());
+        farm.setWeatherStates(this.getWeatherStates());
+        farm.setWeather(farm.getWeatherStates().get(0)); // TODO this will not be like this
         farm.setCrops(this.getCrops());
         return farm;
     }
 
     protected abstract InGameTime getTime();
 
-    protected abstract Weather getWeather();
+    protected abstract List<Weather> getWeatherStates();
 
     protected abstract Farmer getFarmer();
 

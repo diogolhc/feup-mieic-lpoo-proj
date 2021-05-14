@@ -3,9 +3,8 @@ package controller.farm;
 import controller.GameController;
 import model.InGameTime;
 import model.farm.Farm;
+import model.farm.Weather;
 import model.farm.building.crop_field.CropField;
-import model.weather.Sunny;
-import model.weather.Weather;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,7 +20,7 @@ public class FarmControllerTest {
     public void setUp() {
         farm = new Farm(6, 8);
         farm.setTime(new InGameTime(0, 0, 0));
-        farm.setWeather(new Weather(new Sunny()));
+        farm.setWeather(new Weather("SUNNY"));
         cropField = Mockito.mock(CropField.class);
         Mockito.when(cropField.getRemainingTime()).thenReturn(new InGameTime(0));
         farm.getBuildings().addCropField(cropField);

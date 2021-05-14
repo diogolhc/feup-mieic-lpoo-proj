@@ -3,7 +3,6 @@ package controller.farm;
 import controller.GameController;
 import controller.GameControllerState;
 import controller.RealTimeToInGameTimeConverter;
-import controller.farm.weather.WeatherController;
 import controller.farm.building.CropFieldController;
 import controller.farm.building.HouseController;
 import gui.GUI;
@@ -19,13 +18,13 @@ public class FarmController implements GameControllerState {
     private Farm farm;
     private GameController controller;
     private RealTimeToInGameTimeConverter realTimeToInGameTimeConverter;
-    private WeatherController weatherController;
+    WeatherController weatherController;
 
     public FarmController(Farm farm, GameController controller, double realSecToGameMinutesRate) {
         this.farm = farm;
         this.controller = controller;
         this.realTimeToInGameTimeConverter = new RealTimeToInGameTimeConverter(realSecToGameMinutesRate);
-        this.weatherController = new WeatherController(this.farm.getWeather());
+        this.weatherController = new WeatherController(this.farm); // TODO should this be done in a different way?
     }
 
     @Override

@@ -8,28 +8,31 @@ import model.farm.building.House;
 import model.farm.building.crop_field.CropField;
 import model.farm.crop.Crop;
 import model.farm.crop.GrowthStage;
-import model.weather.Sunny;
-import model.weather.Weather;
+import model.farm.Weather;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 // TODO after implementing loading save from file, this class
 //      may be substituted with loading from a file in resources
 public class NewGameFarmBuilder extends FarmBuilder {
     private final List<String> cropsLines;
+    private final List<String> weatherLines;
 
     // TODO check invalid formats?
-    public NewGameFarmBuilder() throws IOException {
+    public NewGameFarmBuilder() throws IOException, URISyntaxException {
         URL resource = NewGameFarmBuilder.class.getResource("/game/crops.data");
-        BufferedReader br = new BufferedReader(new FileReader(resource.getFile()));
+        BufferedReader br = new BufferedReader(new FileReader(resource.toURI().getPath()));
         this.cropsLines = this.readLines(br);
+
+        resource = NewGameFarmBuilder.class.getResource("/game/weather.data");
+        br = new BufferedReader(new FileReader(resource.toURI().getPath()));
+        this.weatherLines = this.readLines(br);
     }
 
     private static List<String> readLines(BufferedReader br) throws IOException {
@@ -50,8 +53,45 @@ public class NewGameFarmBuilder extends FarmBuilder {
     }
 
     @Override
-    protected Weather getWeather() {
-        return new Weather(new Sunny());
+    protected List<Weather> getWeatherStates() {
+        List<Weather> weathers = new ArrayList<>();
+        if (this.weatherLines.isEmpty()) return weathers;
+
+        int numWeatherStates = Integer.parseInt(this.weatherLines.get(0));
+
+        int line = 1;
+        for (int i = 0; i < numWeatherStates; i++) {
+            String name = this.weatherLines.get(line++);
+            double humidity = Double.parseDouble(this.weatherLines.get(line++));
+
+            Weather weather = new Weather(name, humidity);
+
+            int index;
+            if ((index = weathers.indexOf(weather)) != -1) {
+                weather = weathers.get(index);
+            } else {
+                weathers.add(weather);
+            }
+
+            int numChanges = Integer.parseInt(this.weatherLines.get(line++));
+            for (int j = 0; j < numChanges; j++) {
+                String name2 = this.weatherLines.get(line++);
+                double probability = Double.parseDouble(this.weatherLines.get(line++));
+
+                Weather weather2 = new Weather(name2);
+
+                if ((index = weathers.indexOf(weather2)) != -1) {
+                    weather2 = weathers.get(index);
+                } else {
+                    weathers.add(weather2);
+                }
+
+                weather.addWeatherChangePossibility(weather2, probability);
+            }
+
+        }
+
+        return weathers;
     }
 
     @Override
