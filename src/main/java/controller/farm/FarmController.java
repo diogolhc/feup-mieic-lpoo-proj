@@ -5,6 +5,8 @@ import controller.GameControllerState;
 import controller.RealTimeToInGameTimeConverter;
 import controller.farm.building.CropFieldController;
 import controller.farm.building.HouseController;
+import controller.farm.building.MarketController;
+import controller.farm.building.WarehouseController;
 import gui.GUI;
 import model.InGameTime;
 import model.Position;
@@ -45,6 +47,12 @@ public class FarmController implements GameControllerState {
 
         HouseController houseController = new HouseController(this.controller);
         houseController.reactInteraction(farmBuildings.getHouse(), farmerPosition);
+
+        MarketController marketController = new MarketController(this.controller);
+        marketController.reactInteraction(farmBuildings.getMarket(), farmerPosition);
+
+        WarehouseController warehouseController = new WarehouseController(this.controller);
+        warehouseController.reactInteraction(farmBuildings.getWarehouse(), farmerPosition);
     }
 
     @Override

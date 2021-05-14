@@ -9,12 +9,16 @@ import java.util.Set;
 public class BuildingSet {
     private final Set<CropField> cropFields;
     private House house;
+    private Market market;
+    private Warehouse warehouse;
 
     public BuildingSet() {
         this.cropFields = new HashSet<>();
     }
 
-    public BuildingSet(House house, Set<CropField> cropFields) {
+    public BuildingSet(House house, Market market, Warehouse warehouse, Set<CropField> cropFields) {
+        this.market = market;
+        this.warehouse = warehouse;
         this.cropFields = cropFields;
         this.house = house;
     }
@@ -34,6 +38,22 @@ public class BuildingSet {
 
     public void setHouse(House house) {
         this.house = house;
+    }
+
+    public Market getMarket() {
+        return this.market;
+    }
+
+    public void setMarket(Market market) {
+        this.market = market;
+    }
+
+    public Warehouse getWarehouse() {
+        return this.warehouse;
+    }
+
+    public void setWarehouse(Warehouse warehouse) {
+        this.warehouse = warehouse;
     }
 
     public boolean isTraversable(Position position) {

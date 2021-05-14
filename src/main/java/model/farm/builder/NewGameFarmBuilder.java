@@ -5,6 +5,8 @@ import model.InGameTime;
 import model.Position;
 import model.farm.Farmer;
 import model.farm.building.House;
+import model.farm.building.Market;
+import model.farm.building.Warehouse;
 import model.farm.building.crop_field.CropField;
 import model.farm.crop.Crop;
 import model.farm.crop.GrowthStage;
@@ -100,19 +102,29 @@ public class NewGameFarmBuilder extends FarmBuilder {
     }
 
     @Override
+    protected Warehouse getWarehouse() {
+        return new Warehouse(new Position(18, 1));
+    }
+
+    @Override
+    protected Market getMarket() {
+        return new Market(new Position(10, 1));
+    }
+
+    @Override
     protected InGameTime getTime() {
         return new InGameTime(1, 8, 0);
     }
 
     @Override
     protected House getHouse() {
-        return new House(new Position(1, 1));
+        return new House(new Position(2, 1));
     }
 
     @Override
     protected Set<CropField> getCropFields() {
         Set<CropField> cropFields = new HashSet<>();
-        cropFields.add(new CropField(new Position(10, 3)));
+        cropFields.add(new CropField(new Position(2, 10)));
         return cropFields;
     }
 

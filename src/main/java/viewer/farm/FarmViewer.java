@@ -5,6 +5,8 @@ import gui.GUI;
 import gui.drawer.shape.FilledRectangleDrawer;
 import model.*;
 import model.farm.building.BuildingSet;
+import model.farm.building.Market;
+import model.farm.building.Warehouse;
 import model.farm.building.crop_field.CropField;
 import model.farm.Farm;
 import model.farm.Farmer;
@@ -46,11 +48,21 @@ public class FarmViewer extends GameViewer {
 
     private void drawBuildings(BuildingSet buildings, GUI gui) {
         this.drawHouse(buildings.getHouse(), new HouseViewer(), gui);
+        this.drawMarket(buildings.getMarket(), new MarketViewer(), gui);
+        this.drawWarehouse(buildings.getWarehouse(), new WarehouseViewer(), gui);
 
         CropFieldViewer cropFieldViewer = new CropFieldViewer();
         for (CropField cropField: buildings.getCropFields()) {
             this.drawCropField(cropField, cropFieldViewer, gui);
         }
+    }
+
+    private void drawWarehouse(Warehouse warehouse, WarehouseViewer warehouseViewer, GUI gui) {
+        warehouseViewer.draw(warehouse, gui);
+    }
+
+    private void drawMarket(Market market, MarketViewer marketViewer, GUI gui) {
+        marketViewer.draw(market, gui);
     }
 
     private void drawHouse(House house, HouseViewer houseViewer, GUI gui) {
