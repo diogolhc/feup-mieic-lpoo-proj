@@ -9,6 +9,7 @@ import model.menu.label.Label;
 import java.util.ArrayList;
 import java.util.List;
 
+// TODO rename to MenuControllerBuilder
 public abstract class MenuBuilder {
     public MenuController buildMenu(Position position) {
         Menu menu = new Menu(this.getTitle(), position, this.getWidth(), this.getHeight());

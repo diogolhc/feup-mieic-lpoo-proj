@@ -5,8 +5,12 @@ import controller.command.Command;
 import controller.command.CompoundCommand;
 import controller.command.RemoveCropCommand;
 import controller.menu.ButtonController;
+import controller.menu.MenuController;
+import controller.menu.PopupMenuController;
+import controller.menu.PopupMenuControllerWithClosingCondition;
 import model.Position;
 import model.farm.building.crop_field.CropField;
+import model.farm.building.crop_field.state.ReadyToHarvest;
 import model.menu.Button;
 import model.menu.Menu;
 import model.menu.label.Label;
@@ -19,6 +23,20 @@ public class CropFieldGrowingMenuBuilder extends PopupMenuBuilder {
     public CropFieldGrowingMenuBuilder(GameController controller, CropField cropField) {
         super(controller);
         this.cropField = cropField;
+    }
+
+    @Override
+    protected MenuController getMenuController(Menu menu) {
+        // TODO make this its own class
+        Command closingCondition = () -> {
+            if (cropField.getState() instanceof ReadyToHarvest) {
+                MenuController newController = new HarvestMenuBuilder(this.controller, cropField)
+                        .buildMenu(new Position(1, 1));
+                this.controller.setGameControllerState(newController);
+            }
+        };
+        return new PopupMenuControllerWithClosingCondition(menu, this.controller,
+                this.controller.getGameControllerState(), closingCondition);
     }
 
     @Override
