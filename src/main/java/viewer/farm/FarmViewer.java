@@ -2,7 +2,6 @@ package viewer.farm;
 
 import gui.Color;
 import gui.GUI;
-import gui.drawer.entity.FencesDrawer;
 import gui.drawer.shape.FilledRectangleDrawer;
 import model.*;
 import model.farm.building.BuildingSet;
@@ -41,8 +40,8 @@ public class FarmViewer extends GameViewer {
     }
 
     private void drawFences(Farm farm, GUI gui) {
-        FencesDrawer fencesDrawer = new FencesDrawer(gui);
-        fencesDrawer.draw(new Position(0, 0), farm.getWidth(), farm.getHeight());
+        FencesViewer fencesViewer = new FencesViewer();
+        fencesViewer.draw(new Position(0, 0), farm.getWidth(), farm.getHeight(), gui);
     }
 
     private void drawBuildings(BuildingSet buildings, GUI gui) {

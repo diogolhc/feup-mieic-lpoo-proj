@@ -2,7 +2,6 @@ package gui.drawer.shape;
 
 import gui.Color;
 import gui.GUI;
-import gui.drawer.entity.HouseDrawer;
 import model.Position;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

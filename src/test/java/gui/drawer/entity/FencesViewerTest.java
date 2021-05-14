@@ -7,8 +7,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import viewer.farm.FencesViewer;
 
-public class FencesDrawerTest {
+public class FencesViewerTest {
 
     private GUI gui;
     private Color backgroundColors[][] = new Color[10][10];
@@ -78,7 +79,7 @@ public class FencesDrawerTest {
 
     @Test
     void draw() {
-        FencesDrawer drawer = new FencesDrawer(gui);
+        FencesViewer drawer = new FencesViewer(gui);
         drawer.draw(new Position(2, 2), 5, 5);
 
         Color BLACK = new Color("#000000");

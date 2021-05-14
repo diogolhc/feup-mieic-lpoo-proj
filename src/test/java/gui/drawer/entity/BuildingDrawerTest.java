@@ -6,10 +6,9 @@ import model.Position;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
-class HouseDrawerTest {
+class BuildingDrawerTest {
     private GUI gui;
     private Color backgroundColors[][] = new Color[10][10];
     private Color foregroundColors[][] = new Color[10][10];
@@ -79,7 +78,7 @@ class HouseDrawerTest {
 
     @Test
     void drawAtOrigin() {
-        HouseDrawer drawer = new HouseDrawer(gui);
+        BuildingDrawer drawer = new BuildingDrawer(gui);
         drawer.draw(new Position(0, 0));
 
         Color BLACK = new Color("#000000");
@@ -126,7 +125,7 @@ class HouseDrawerTest {
     @Test
     void drawOtherPosition() {
 
-        HouseDrawer drawer = new HouseDrawer(gui);
+        BuildingDrawer drawer = new BuildingDrawer(gui);
         drawer.draw(new Position(2, 2));
 
         Color BLACK = new Color("#000000");

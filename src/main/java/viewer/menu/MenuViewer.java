@@ -36,7 +36,7 @@ public class MenuViewer extends GameViewer {
     private void drawButtons(GUI gui) {
         ButtonViewer buttonViewer = new ButtonViewer();
         for (Button button: this.menu.getButtons()) {
-            buttonViewer.draw(this.menu, button, gui);
+            buttonViewer.draw(this.menu.getTopLeftPosition(), button, gui);
         }
     }
 

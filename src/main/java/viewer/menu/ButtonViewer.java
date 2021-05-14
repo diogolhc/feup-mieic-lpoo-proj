@@ -1,23 +1,37 @@
 package viewer.menu;
 
+import gui.Color;
 import gui.GUI;
 import gui.drawer.shape.BoxDrawer;
-import gui.drawer.ui.button.ButtonDrawer;
-import gui.drawer.ui.button.SelectedButtonDrawer;
-import gui.drawer.ui.button.UnselectedButtonDrawer;
+import gui.drawer.string.StringDrawer;
 import model.Position;
 import model.menu.Button;
 import model.menu.Menu;
 
 public class ButtonViewer {
-    public void draw(Menu menu, Button button, GUI gui) {
-        ButtonDrawer buttonDrawer;
+    private static final Color SELECTED_BUTTON_FOREGROUND = new Color("#00c853");
+    private static final Color SELECTED_BUTTON_BACKGROUND = new Color("#cfd8dc");
+    private static final Color UNSELECTED_BUTTON_FOREGROUND = new Color("#263238");
+    private static final Color UNSELECTED_BUTTON_BACKGROUND = new Color("#90a4ae");
+
+    public void draw(Position menuPosition, Button button, GUI gui) {
+        Position position = button.getTopLeft().getTranslated(menuPosition);
+        Color backgroundColor, foregroundColor;
+
         if (button.isSelected()) {
-            buttonDrawer = new SelectedButtonDrawer(gui, button.getTitle(), button.getWidth(), button.getHeight());
+            backgroundColor = SELECTED_BUTTON_BACKGROUND;
+            foregroundColor = SELECTED_BUTTON_FOREGROUND;
         } else {
-            buttonDrawer = new UnselectedButtonDrawer(gui, button.getTitle(), button.getWidth(), button.getHeight());
+            backgroundColor = UNSELECTED_BUTTON_BACKGROUND;
+            foregroundColor = UNSELECTED_BUTTON_FOREGROUND;
         }
 
-        buttonDrawer.draw(button.getTopLeft().getTranslated(menu.getTopLeftPosition()));
+        // TODO handle when title doesn't fit? (go to next line) (maybe this is overkill and won't be needed)
+        BoxDrawer boxDrawer = new BoxDrawer(gui, backgroundColor, foregroundColor);
+        boxDrawer.draw(position, button.getWidth(), button.getHeight());
+
+        Position titlePosition = position.getRight().getDown();
+        StringDrawer stringDrawer = new StringDrawer(gui, backgroundColor, foregroundColor);
+        stringDrawer.draw(titlePosition, button.getTitle());
     }
 }
