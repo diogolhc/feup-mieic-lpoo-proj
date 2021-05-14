@@ -12,12 +12,17 @@ import controller.menu.builder.CropFieldGrowingMenuBuilder;
 import controller.menu.builder.HarvestMenuBuilder;
 import controller.menu.builder.MenuBuilder;
 import controller.menu.builder.PlantCropMenuBuilder;
+import model.farm.crop.Crop;
+
+import java.util.List;
 
 public class CropFieldController extends BuildingController<CropField> {
     private final GameController controller;
+    private List<Crop> crops;
 
-    public CropFieldController(GameController controller) {
+    public CropFieldController(GameController controller, List<Crop> crops) {
         this.controller = controller;
+        this.crops = crops;
     }
 
     @Override
@@ -25,7 +30,7 @@ public class CropFieldController extends BuildingController<CropField> {
         MenuBuilder menuBuilder;
 
         if (cropField.getState() instanceof NotPlanted) {
-            menuBuilder = new PlantCropMenuBuilder(this.controller, cropField);
+            menuBuilder = new PlantCropMenuBuilder(this.controller, crops, cropField);
         } else if (cropField.getState() instanceof Planted) {
             menuBuilder = new CropFieldGrowingMenuBuilder(this.controller, cropField);
         } else if (cropField.getState() instanceof ReadyToHarvest) {

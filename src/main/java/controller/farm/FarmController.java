@@ -39,7 +39,7 @@ public class FarmController implements GameControllerState {
         Position farmerPosition = this.farm.getFarmer().getPosition();
         BuildingSet farmBuildings = this.farm.getBuildings();
 
-        CropFieldController cropFieldController = new CropFieldController(this.controller);
+        CropFieldController cropFieldController = new CropFieldController(this.controller, this.farm.getCrops());
         for (CropField cropField: farmBuildings.getCropFields()) {
             cropFieldController.reactInteraction(cropField, farmerPosition);
         }
@@ -60,7 +60,7 @@ public class FarmController implements GameControllerState {
 
         this.farm.getTime().add(elapsedTime);
 
-        CropFieldController cropFieldController = new CropFieldController(this.controller);
+        CropFieldController cropFieldController = new CropFieldController(this.controller, this.farm.getCrops());
         for (CropField cropField : this.farm.getBuildings().getCropFields()) {
             cropFieldController.reactTimePassed(cropField, elapsedTime);
         }

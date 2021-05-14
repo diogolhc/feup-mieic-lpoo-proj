@@ -6,7 +6,7 @@ import controller.menu.PopupMenuController;
 import model.InGameTime;
 import model.Position;
 import model.farm.building.crop_field.CropField;
-import model.farm.building.crop_field.crop.Crop;
+import model.farm.crop.Crop;
 import model.farm.building.crop_field.state.CropFieldState;
 import model.farm.building.crop_field.state.NotPlanted;
 import model.farm.building.crop_field.state.Planted;

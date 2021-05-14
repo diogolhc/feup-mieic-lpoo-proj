@@ -3,9 +3,8 @@ package model.farm.building.crop_field;
 import gui.Color;
 import model.InGameTime;
 import model.Position;
-import model.farm.building.crop_field.crop.Crop;
-import model.farm.building.crop_field.crop.GrowthStage;
-import model.farm.building.crop_field.crop.NoCrop;
+import model.farm.crop.Crop;
+import model.farm.crop.GrowthStage;
 import model.farm.building.crop_field.state.CropFieldState;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -56,7 +55,7 @@ public class CropFieldTest {
 
     @Test
     void getGrowthStageDefault() {
-        Crop crop = new NoCrop();
+        Crop crop = Crop.NO_CROP;
         Assertions.assertSame(crop.getGrowthStages().get(0), field.getCropGrowthStage());
     }
 
@@ -72,7 +71,7 @@ public class CropFieldTest {
         Mockito.when(state.getRemainingTime()).thenReturn(new InGameTime(5));
         Mockito.when(state.getCrop()).thenReturn(crop);
 
-        Mockito.when(crop.getGrowthStage(time)).thenReturn(growthStage);
+        Mockito.when(crop.getCurrentGrowthStage(time)).thenReturn(growthStage);
 
 
         Assertions.assertSame(growthStage, field.getCropGrowthStage());

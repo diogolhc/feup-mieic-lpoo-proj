@@ -2,11 +2,12 @@ package model.farm;
 
 import model.Position;
 import model.InGameTime;
-import model.weather.Sunny;
+import model.farm.crop.Crop;
 import model.weather.Weather;
 import model.farm.building.BuildingSet;
-import model.farm.building.House;
-import model.farm.building.crop_field.CropField;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Farm {
@@ -14,6 +15,7 @@ public class Farm {
     private final BuildingSet buildings;
     private InGameTime time;
     private Weather weather;
+    private List<Crop> crops;
     private int width;
     private int height;
 
@@ -25,6 +27,7 @@ public class Farm {
         this.width = width;
         this.height = height;
         this.buildings = buildings;
+        this.crops = new ArrayList<>();
     }
 
     public Farmer getFarmer() {
@@ -70,5 +73,13 @@ public class Farm {
 
     public void setTime(InGameTime time) {
         this.time = time;
+    }
+
+    public void setCrops(List<Crop> crops) {
+        this.crops = crops;
+    }
+
+    public List<Crop> getCrops() {
+        return this.crops;
     }
 }

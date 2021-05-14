@@ -3,7 +3,7 @@ package viewer.farm;
 import gui.GUI;
 import gui.drawer.entity.CropFieldDrawer;
 import model.farm.building.crop_field.CropField;
-import model.farm.building.crop_field.crop.GrowthStage;
+import model.farm.crop.GrowthStage;
 
 public class CropFieldViewer {
     public void draw(CropField cropField, GUI gui) {
