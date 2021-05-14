@@ -8,10 +8,10 @@ import model.Position;
 import model.farm.building.crop_field.state.NotPlanted;
 import model.farm.building.crop_field.state.Planted;
 import model.farm.building.crop_field.state.ReadyToHarvest;
-import controller.menu.builder.CropFieldGrowingMenuBuilder;
-import controller.menu.builder.HarvestMenuBuilder;
-import controller.menu.builder.MenuBuilder;
-import controller.menu.builder.PlantCropMenuBuilder;
+import controller.menu.builder.CropFieldGrowingMenuControllerBuilder;
+import controller.menu.builder.HarvestMenuControllerBuilder;
+import controller.menu.builder.MenuControllerBuilder;
+import controller.menu.builder.PlantCropMenuControllerBuilder;
 import model.farm.crop.Crop;
 
 import java.util.List;
@@ -27,21 +27,21 @@ public class CropFieldController extends BuildingController<CropField> {
 
     @Override
     public Command getInteractionCommand(CropField cropField) {
-        MenuBuilder menuBuilder;
+        MenuControllerBuilder menuControllerBuilder;
 
         if (cropField.getState() instanceof NotPlanted) {
-            menuBuilder = new PlantCropMenuBuilder(this.controller, crops, cropField);
+            menuControllerBuilder = new PlantCropMenuControllerBuilder(this.controller, crops, cropField);
         } else if (cropField.getState() instanceof Planted) {
-            menuBuilder = new CropFieldGrowingMenuBuilder(this.controller, cropField);
+            menuControllerBuilder = new CropFieldGrowingMenuControllerBuilder(this.controller, cropField);
         } else if (cropField.getState() instanceof ReadyToHarvest) {
-            menuBuilder = new HarvestMenuBuilder(this.controller, cropField);
+            menuControllerBuilder = new HarvestMenuControllerBuilder(this.controller, cropField);
         } else {
             // This should never happen
             throw new RuntimeException(
                     "LOGIC ERROR: Unhandled CropFieldState: " + cropField.getState().getClass().toString());
         }
 
-        return new SetControllerStateCommand(this.controller, menuBuilder.buildMenu(new Position(1, 1)));
+        return new SetControllerStateCommand(this.controller, menuControllerBuilder.buildMenu(new Position(1, 1)));
     }
 
     public void reactTimePassed(CropField cropField, InGameTime elapsedTime) {

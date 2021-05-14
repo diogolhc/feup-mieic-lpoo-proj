@@ -6,15 +6,13 @@ import controller.menu.ButtonController;
 import model.Position;
 import model.farm.building.crop_field.CropField;
 import model.menu.Button;
-import model.menu.Menu;
-import model.menu.label.Label;
 
 import java.util.List;
 
-public class HarvestMenuBuilder extends PopupMenuBuilder {
+public class HarvestMenuControllerBuilder extends PopupMenuControllerBuilder {
     private CropField cropField;
 
-    public HarvestMenuBuilder(GameController controller, CropField cropField) {
+    public HarvestMenuControllerBuilder(GameController controller, CropField cropField) {
         super(controller);
         this.cropField = cropField;
     }

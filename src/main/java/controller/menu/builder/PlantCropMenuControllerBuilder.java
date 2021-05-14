@@ -4,23 +4,19 @@ import controller.GameController;
 import controller.command.Command;
 import controller.command.CompoundCommand;
 import controller.command.PlantCropCommand;
-import controller.command.RemoveCropCommand;
 import controller.menu.ButtonController;
 import model.Position;
-import model.farm.Farm;
 import model.farm.building.crop_field.CropField;
 import model.farm.crop.Crop;
 import model.menu.Button;
-import model.menu.Menu;
-import model.menu.label.Label;
 
 import java.util.List;
 
-public class PlantCropMenuBuilder extends PopupMenuBuilder {
+public class PlantCropMenuControllerBuilder extends PopupMenuControllerBuilder {
     private List<Crop> crops;
     private CropField cropField;
 
-    public PlantCropMenuBuilder(GameController controller, List<Crop> crops, CropField cropField) {
+    public PlantCropMenuControllerBuilder(GameController controller, List<Crop> crops, CropField cropField) {
         super(controller);
         this.cropField = cropField;
         this.crops = crops;

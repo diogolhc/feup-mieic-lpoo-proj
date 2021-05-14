@@ -10,13 +10,12 @@ import model.Position;
 import model.menu.Button;
 import model.menu.Menu;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public abstract class PopupMenuBuilder extends MenuBuilder {
+public abstract class PopupMenuControllerBuilder extends MenuControllerBuilder {
     protected GameController controller;
 
-    public PopupMenuBuilder(GameController controller) {
+    public PopupMenuControllerBuilder(GameController controller) {
         this.controller = controller;
     }
 
