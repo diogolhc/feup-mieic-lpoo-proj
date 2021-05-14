@@ -8,8 +8,8 @@ import java.util.Map;
 
 
 public class WeatherController {
-    private static final int minNextMin = 1; // TODO adjust these values (?)
-    private static final int maxNextMin = 5;
+    private static final int minNextMin = 15; // TODO adjust these values (?)
+    private static final int maxNextMin = 120;
     private int nextMinute;
     Farm farm;
 

@@ -58,6 +58,9 @@ public class BuildingSet {
 
     public boolean isTraversable(Position position) {
         if (!this.house.isTraversable(position)) return false;
+        if (!this.market.isTraversable(position)) return false;
+        if (!this.warehouse.isTraversable(position)) return false;
+
         for (CropField cropField: this.cropFields) {
             if (!cropField.isTraversable(position)) return false;
         }
