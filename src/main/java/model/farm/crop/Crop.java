@@ -10,22 +10,9 @@ import java.util.List;
 public class Crop {
     public static final Crop NO_CROP = new Crop("", new InGameTime(0), Arrays.asList(new GrowthStage()));
 
-    private String name;
-    private InGameTime growTime;
-    private List<GrowthStage> growthStages;
-
-    public Crop(String name, InGameTime growTime) {
-        this(name, growTime, new ArrayList<>());
-    }
-
-    @Override
-    public String toString() {
-        return "Crop{" +
-                "name='" + name + '\'' +
-                ", growTime=" + growTime +
-                ", growthStages=" + growthStages +
-                '}';
-    }
+    private final String name;
+    private final InGameTime growTime;
+    private final List<GrowthStage> growthStages;
 
     public Crop(String name, InGameTime growTime, List<GrowthStage> growthStages) {
         this.name = name;
@@ -45,12 +32,7 @@ public class Crop {
     }
 
     public InGameTime getGrowTime() {
-        return this.growTime;
-    }
-
-    public void addGrowStage(GrowthStage growthStage) {
-        this.growthStages.add(growthStage);
-        Collections.sort(this.growthStages);
+        return growTime;
     }
 
     public String getName() {

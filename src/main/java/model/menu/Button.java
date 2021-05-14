@@ -10,23 +10,13 @@ public class Button {
     private final String title;
     private final int width;
     private final int height;
-    private Command command;
 
     public Button(Position position, String title) {
         this.topLeft = position;
         this.title = title;
         this.width = title.length() + 2;
         this.height = 3;
-        this.command = new NoOperationCommand();
         this.selected = false;
-    }
-
-    public void setCommand(Command command) {
-        this.command = command;
-    }
-
-    public Command getCommand() {
-        return this.command;
     }
 
     public boolean contains(Position position) {

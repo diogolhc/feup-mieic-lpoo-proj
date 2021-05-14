@@ -3,7 +3,7 @@ package model;
 import java.util.Objects;
 
 public class InGameTime implements Comparable<InGameTime> {
-    private int minutes;
+    private final int minutes;
 
     public InGameTime(int minutes) {
         this.minutes = minutes;
@@ -17,8 +17,8 @@ public class InGameTime implements Comparable<InGameTime> {
         this(0);
     }
 
-    public void set(InGameTime time) {
-        this.minutes = time.getMinute();
+    public InGameTime(InGameTime growTime) {
+        this.minutes = growTime.minutes;
     }
 
     public int getMinute() {
@@ -38,14 +38,13 @@ public class InGameTime implements Comparable<InGameTime> {
     }
 
     public InGameTime add(InGameTime inGameTime) {
-        this.minutes += inGameTime.getMinute();
-        return this;
+        return new InGameTime(this.minutes + inGameTime.minutes);
     }
 
     public InGameTime subtract(InGameTime inGameTime) {
-        this.minutes -= inGameTime.getMinute();
-        if (this.minutes < 0) this.minutes = 0;
-        return this;
+        int minutes = this.minutes - inGameTime.minutes;
+        if (minutes < 0) minutes = 0;
+        return new InGameTime(minutes);
     }
 
     @Override

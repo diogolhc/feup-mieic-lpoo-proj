@@ -1,14 +1,18 @@
 package controller.menu.builder;
 
 import controller.GameController;
+import controller.command.Command;
 import controller.command.CompoundCommand;
 import controller.command.PlantCropCommand;
+import controller.command.RemoveCropCommand;
+import controller.menu.ButtonController;
 import model.Position;
 import model.farm.Farm;
 import model.farm.building.crop_field.CropField;
 import model.farm.crop.Crop;
 import model.menu.Button;
 import model.menu.Menu;
+import model.menu.label.Label;
 
 import java.util.List;
 
@@ -23,20 +27,21 @@ public class PlantCropMenuBuilder extends PopupMenuBuilder {
     }
 
     @Override
-    protected void addButtonsAndLabels(Menu menu) {
-        super.addButtonsAndLabels(menu);
+    protected List<ButtonController> getButtons() {
+        List<ButtonController> buttons = super.getButtons();
 
         int x = 1;
         int y = 5;
         for (Crop crop: this.crops) {
             Button plantCropButton = new Button(new Position(x, y), crop.getName());
-            plantCropButton.setCommand(new CompoundCommand()
+            Command plantCropButtonCommand = new CompoundCommand()
                     .addCommand(new PlantCropCommand(this.cropField, crop))
-                    .addCommand(super.getClosePopupMenuCommand())
-            );
-            menu.addButton(plantCropButton);
-            x+=10;
+                    .addCommand(super.getClosePopupMenuCommand());
+            buttons.add(new ButtonController(plantCropButton, plantCropButtonCommand));
+            y+=4;
         }
+
+        return buttons;
     }
 
     @Override

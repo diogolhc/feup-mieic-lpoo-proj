@@ -41,7 +41,7 @@ public class CropFieldController extends BuildingController<CropField> {
                     "LOGIC ERROR: Unhandled CropFieldState: " + cropField.getState().getClass().toString());
         }
 
-        return new OpenPopupMenuCommand(this.controller, menuBuilder.buildMenu(new Position(1, 1)));
+        return new SetControllerStateCommand(this.controller, menuBuilder.buildMenu(new Position(1, 1)));
     }
 
     public void reactTimePassed(CropField cropField, InGameTime elapsedTime) {
