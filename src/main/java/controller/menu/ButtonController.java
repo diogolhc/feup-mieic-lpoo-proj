@@ -1,20 +1,33 @@
 package controller.menu;
 
+import controller.command.Command;
 import model.Position;
 import model.menu.Button;
 
 public class ButtonController {
-    public void reactMouseClick(Button button, Position mousePosition) {
-        if (button.contains(mousePosition)) {
-            button.getCommand().execute();
+    private final Button button;
+    private final Command command;
+
+    public ButtonController(Button button, Command command) {
+        this.button = button;
+        this.command = command;
+    }
+
+    public void reactMouseClick(Position mousePosition) {
+        if (this.button.contains(mousePosition)) {
+            this.command.execute();
         }
     }
 
-    public void reactMouseMovement(Button button, Position mousePosition) {
-        if (button.contains(mousePosition)) {
-            button.select();
+    public void reactMouseMovement(Position mousePosition) {
+        if (this.button.contains(mousePosition)) {
+            this.button.select();
         } else {
-            button.unselect();
+            this.button.unselect();
         }
+    }
+
+    public Button getButton() {
+        return this.button;
     }
 }

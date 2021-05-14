@@ -4,9 +4,9 @@ import gui.Color;
 import model.InGameTime;
 
 public class GrowthStage implements Comparable<GrowthStage> {
-    private InGameTime stageStartTime;
-    private char stageChar;
-    private Color stageColor;
+    private final InGameTime stageStartTime;
+    private final char stageChar;
+    private final Color stageColor;
 
     public GrowthStage(InGameTime stageStartTime, char stageChar, Color stageColor) {
         this.stageStartTime = stageStartTime;
@@ -16,6 +16,12 @@ public class GrowthStage implements Comparable<GrowthStage> {
 
     public GrowthStage() {
         this(new InGameTime(0), ' ', new Color("#000000"));
+    }
+
+    public GrowthStage(GrowthStage stage) {
+        this.stageStartTime = stage.stageStartTime;
+        this.stageChar = stage.stageChar;
+        this.stageColor = stage.stageColor;
     }
 
     public InGameTime getStageStartTime() {
