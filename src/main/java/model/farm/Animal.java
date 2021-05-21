@@ -2,7 +2,7 @@ package model.farm;
 
 import model.Position;
 
-public class Animal extends AnimatedElement{
+public abstract class Animal {
     private Position position;
 
     public Animal(Position position) {
@@ -17,4 +17,5 @@ public class Animal extends AnimatedElement{
         this.position = position;
     }
 
+    public abstract void eat();  // Stockyards have food and animals will decrease its food;
 }

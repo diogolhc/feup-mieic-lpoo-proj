@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Stockyard extends Building {
-    public static final int STOCKYARD_SIZE = 6;
+    public static final int STOCKYARD_SIZE = 7;
     private List<Animal> animals;
 
     public Stockyard(Position topLeft) {
@@ -29,15 +29,15 @@ public class Stockyard extends Building {
         position = position.getRelativeTo(this.getTopLeftPosition());
         int x = position.getX();
         int y = position.getY();
-        if (y == 0 && x >= 0 && x <= 5) return false;
-        if (y >= 1 && y <= 5 && x >= 0 && x <= 5) return false;
+        if (y == 0 && x >= 0 && x <= 6) return false;
+        if (y >= 1 && y <= 6 && x >= 0 && x <= 6) return false;
 
         return true;
     }
 
     @Override
     public boolean isInInteractiveZone(Position position) {
-        return position.equals(this.getTopLeftPosition().getTranslated(new Position(3, 6)));
+        return position.equals(this.getTopLeftPosition().getTranslated(new Position(-1, 3)));
     }
 
 }
