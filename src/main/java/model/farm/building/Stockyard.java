@@ -1,26 +1,26 @@
 package model.farm.building;
 
 import model.Position;
-import model.farm.Animal;
+import model.farm.Animals.Animal;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Stockyard extends Building {
+public class Stockyard<T extends Animal> extends Building {
     public static final int STOCKYARD_SIZE = 7;
-    private List<Animal> animals;
+    private List<T> animals;
 
     public Stockyard(Position topLeft) {
         super(topLeft);
-        this.animals = new ArrayList<Animal>();
+        this.animals = new ArrayList<T>();
     }
 
-    public Stockyard(Position topleft, List<Animal> animals) {
+    public Stockyard(Position topleft, List<T> animals) {
         super(topleft);
         this.animals = animals;
     }
 
-    public void addAnimal(Animal animal) {
+    public void addAnimal(T animal) {
         this.animals.add(animal);
     }
 

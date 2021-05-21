@@ -1,12 +1,15 @@
-package model.farm;
+package model.farm.Animals;
 
 import model.Position;
 
 public abstract class Animal {
+    //TODO HOW SHOULD ANIMALS DIE AND CHECK WHICH ALIMENTS THEY GIVE (MILK, CORN, EGGS...)
     private Position position;
+    private Hunger hunger;
 
-    public Animal(Position position) {
+    public Animal(Position position, Hunger hunger) {
         this.position = position;
+        this.hunger = hunger;
     }
 
     public Position getPosition() {
@@ -17,5 +20,5 @@ public abstract class Animal {
         this.position = position;
     }
 
-    public abstract void eat();  // Stockyards have food and animals will decrease its food;
+    public abstract char getChar();
 }

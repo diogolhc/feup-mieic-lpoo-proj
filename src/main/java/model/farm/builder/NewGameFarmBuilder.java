@@ -133,6 +133,7 @@ public class NewGameFarmBuilder extends FarmBuilder {
     protected Set<Stockyard> getStockyards() {
         Set<Stockyard> stockyards = new HashSet<>();
         stockyards.add(new Stockyard(new Position(30, 2)));
+        stockyards.add(new Stockyard(new Position(30, 10)));
         return stockyards;
     }
 

@@ -23,6 +23,6 @@ public class StockyardController extends BuildingController<Stockyard> {
     }
 
     public void reactTimePassed(Stockyard stockyard) {
-        // TODO Make animals of stockyard move
+        // TODO Make animals of stockyard move and increse its Hunger
     }
 }
