@@ -3,15 +3,13 @@ package controller.farm;
 import controller.GameController;
 import controller.GameControllerState;
 import controller.RealTimeToInGameTimeConverter;
-import controller.farm.building.CropFieldController;
-import controller.farm.building.HouseController;
-import controller.farm.building.MarketController;
-import controller.farm.building.WarehouseController;
+import controller.farm.building.*;
 import gui.GUI;
 import model.InGameTime;
 import model.Position;
 import model.farm.Farm;
 import model.farm.building.BuildingSet;
+import model.farm.building.Stockyard;
 import model.farm.building.crop_field.CropField;
 import viewer.GameViewer;
 import viewer.farm.FarmViewer;
@@ -45,6 +43,11 @@ public class FarmController implements GameControllerState {
             cropFieldController.reactInteraction(cropField, farmerPosition);
         }
 
+        StockyardController stockyardController = new StockyardController(this.controller);
+        for (Stockyard stockyard : farmBuildings.getStockyards()) {
+            stockyardController.reactInteraction(stockyard, farmerPosition);
+        }
+
         HouseController houseController = new HouseController(this.controller);
         houseController.reactInteraction(farmBuildings.getHouse(), farmerPosition);
 
@@ -53,6 +56,7 @@ public class FarmController implements GameControllerState {
 
         WarehouseController warehouseController = new WarehouseController(this.controller);
         warehouseController.reactInteraction(farmBuildings.getWarehouse(), farmerPosition);
+
     }
 
     @Override

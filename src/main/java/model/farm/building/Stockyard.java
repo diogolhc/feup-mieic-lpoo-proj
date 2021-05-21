@@ -37,7 +37,7 @@ public class Stockyard extends Building {
 
     @Override
     public boolean isInInteractiveZone(Position position) {
-        return position.equals(this.getTopLeftPosition().getTranslated(new Position(4, 5)));
+        return position.equals(this.getTopLeftPosition().getTranslated(new Position(3, 6)));
     }
 
 }
