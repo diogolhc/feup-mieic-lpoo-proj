@@ -2,14 +2,11 @@ package controller.farm.building;
 
 import controller.GameController;
 import controller.command.Command;
-import controller.command.NoOperationCommand;
-import controller.menu.MenuController;
+import controller.command.SetControllerStateCommand;
+import controller.menu.builder.SleepMenuControllerBuilder;
+import controller.menu.builder.MenuControllerBuilder;
 import model.Position;
 import model.farm.building.House;
-import model.farm.building.crop_field.CropField;
-import model.menu.Button;
-import model.menu.Menu;
-import viewer.menu.MenuViewer;
 
 public class HouseController extends BuildingController<House> {
     private final GameController controller;
@@ -20,8 +17,9 @@ public class HouseController extends BuildingController<House> {
 
     @Override
     public Command getInteractionCommand(House house) {
-        // TODO
-        System.out.println("House interaction not implemented");
-        return new NoOperationCommand();
+        MenuControllerBuilder menuControllerBuilder;
+        menuControllerBuilder = new SleepMenuControllerBuilder(this.controller, house);
+
+        return new SetControllerStateCommand(this.controller, menuControllerBuilder.buildMenu(new Position(1,1)));
     }
 }

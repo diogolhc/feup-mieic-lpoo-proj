@@ -63,6 +63,9 @@ public class FarmController implements GameControllerState {
 
     @Override
     public void reactTimePassed(long elapsedTimeSinceLastFrame) {
+        // TODO this smells bad :(
+        this.realTimeToInGameTimeConverter.setSleeping(this.farm.getBuildings().getHouse().getSleeping());
+
         InGameTime elapsedTime = this.realTimeToInGameTimeConverter.convert(elapsedTimeSinceLastFrame);
 
         this.farm.setTime(this.farm.getTime().add(elapsedTime));

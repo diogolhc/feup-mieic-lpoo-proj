@@ -4,16 +4,15 @@ import model.InGameTime;
 
 public class RealTimeToInGameTimeConverter {
     private static final long SECS_TO_MILLI = 1000;
+    private double sleepMultiplier;
+    private double baseRate;
     private double realSecToGameMinutesRate;
     private long leftOverTimeMs;
 
     public RealTimeToInGameTimeConverter(double realSecToGameMinutesRate) {
-        this.realSecToGameMinutesRate = realSecToGameMinutesRate;
+        this.sleepMultiplier = 15; // TODO this hardcoded bad
+        this.realSecToGameMinutesRate = this.baseRate = realSecToGameMinutesRate;
         this.leftOverTimeMs = 0;
-    }
-
-    public void setRate(double realSecToGameMinutesRate) {
-        this.realSecToGameMinutesRate = realSecToGameMinutesRate;
     }
 
     public double getRate() {
@@ -34,4 +33,8 @@ public class RealTimeToInGameTimeConverter {
         return new InGameTime((int)((time / SECS_TO_MILLI) * realSecToGameMinutesRate));
     }
 
+    public void setSleeping(boolean sleeping) {
+        if (sleeping) this.realSecToGameMinutesRate = this.sleepMultiplier * this.baseRate;
+        else this.realSecToGameMinutesRate = this.baseRate;
+    }
 }

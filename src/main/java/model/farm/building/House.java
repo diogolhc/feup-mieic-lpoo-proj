@@ -4,9 +4,11 @@ import model.Position;
 
 public class House extends Building {
     public static final int HOUSE_SIZE = 6;
+    private boolean sleeping;
 
     public House(Position topLeft) {
         super(topLeft);
+        sleeping = false;
     }
 
     @Override
@@ -24,4 +26,13 @@ public class House extends Building {
     public boolean isInInteractiveZone(Position position) {
         return position.equals(this.getTopLeftPosition().getTranslated(new Position(4, 6)));
     }
+
+    public void setSleeping(boolean sleeping) {
+        this.sleeping = sleeping;
+    }
+
+    public boolean getSleeping() {
+        return this.sleeping;
+    }
+
 }
