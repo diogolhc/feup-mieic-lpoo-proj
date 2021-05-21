@@ -3,10 +3,7 @@ package model.farm.builder;
 import model.InGameTime;
 import model.farm.Farm;
 import model.farm.Farmer;
-import model.farm.building.BuildingSet;
-import model.farm.building.House;
-import model.farm.building.Market;
-import model.farm.building.Warehouse;
+import model.farm.building.*;
 import model.farm.building.crop_field.CropField;
 import model.farm.crop.Crop;
 import model.farm.Weather;
@@ -21,8 +18,13 @@ public abstract class FarmBuilder {
         buildingSet.setHouse(this.getHouse());
         buildingSet.setMarket(this.getMarket());
         buildingSet.setWarehouse(this.getWarehouse());
+
         for (CropField cropField: this.getCropFields()) {
             buildingSet.addCropField(cropField);
+        }
+
+        for (Stockyard stockyard : this.getStockyards()) {
+            buildingSet.addStockyard(stockyard);
         }
 
         Farm farm = new Farm(this.getWidth(), this.getHeight(), buildingSet);
@@ -47,6 +49,8 @@ public abstract class FarmBuilder {
     protected abstract House getHouse();
 
     protected abstract Set<CropField> getCropFields();
+
+    protected abstract Set<Stockyard> getStockyards();
 
     protected abstract List<Crop> getCrops();
 

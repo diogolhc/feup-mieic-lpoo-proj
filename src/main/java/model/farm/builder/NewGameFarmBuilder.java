@@ -6,6 +6,7 @@ import model.Position;
 import model.farm.Farmer;
 import model.farm.building.House;
 import model.farm.building.Market;
+import model.farm.building.Stockyard;
 import model.farm.building.Warehouse;
 import model.farm.building.crop_field.CropField;
 import model.farm.crop.Crop;
@@ -126,6 +127,13 @@ public class NewGameFarmBuilder extends FarmBuilder {
         Set<CropField> cropFields = new HashSet<>();
         cropFields.add(new CropField(new Position(2, 10)));
         return cropFields;
+    }
+
+    @Override
+    protected Set<Stockyard> getStockyards() {
+        Set<Stockyard> stockyards = new HashSet<>();
+        stockyards.add(new Stockyard(new Position(30, 2)));
+        return stockyards;
     }
 
     @Override
