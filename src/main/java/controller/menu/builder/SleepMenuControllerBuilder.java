@@ -2,21 +2,23 @@ package controller.menu.builder;
 
 import controller.GameController;
 import controller.GameControllerState;
+import controller.RealTimeToInGameTimeConverter;
 import controller.command.*;
 import controller.menu.ButtonController;
-import controller.menu.PopupMenuController;
 import model.Position;
 import model.farm.building.House;
 import model.menu.Button;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SleepMenuControllerBuilder extends PopupMenuControllerBuilder {
     private House house;
+    private RealTimeToInGameTimeConverter timeConverter;
 
-    public SleepMenuControllerBuilder(GameController controller, House house) {
+    public SleepMenuControllerBuilder(GameController controller, RealTimeToInGameTimeConverter timeConverter,
+                                      House house) {
         super(controller);
+        this.timeConverter = timeConverter;
         this.house = house;
     }
 
@@ -26,7 +28,7 @@ public class SleepMenuControllerBuilder extends PopupMenuControllerBuilder {
 
         Button sleepButton = new Button(new Position(1, 5), "SLEEP");
         Command sleepCommand = new CompoundCommand()
-                .addCommand(new SleepCommand(house, true))
+                .addCommand(new SetTimeRateCommand(this.timeConverter, this.house.getSleepRate()))
                 .addCommand(new SetControllerStateCommand(this.controller, this.getStopSleepState()));
 
         buttons.add(new ButtonController(sleepButton, sleepCommand));
@@ -35,7 +37,7 @@ public class SleepMenuControllerBuilder extends PopupMenuControllerBuilder {
 
     private GameControllerState getStopSleepState() {
         PopupMenuControllerBuilder popupMenuControllerBuilder;
-        popupMenuControllerBuilder = new StopSleepMenuControllerBuilder(this.controller, house);
+        popupMenuControllerBuilder = new StopSleepMenuControllerBuilder(this.controller, this.timeConverter);
         return popupMenuControllerBuilder.buildMenu(new Position(1,1));
     }
 

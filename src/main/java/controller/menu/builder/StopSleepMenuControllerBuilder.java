@@ -1,6 +1,7 @@
 package controller.menu.builder;
 
 import controller.GameController;
+import controller.RealTimeToInGameTimeConverter;
 import controller.command.*;
 import controller.menu.ButtonController;
 import model.Position;
@@ -11,10 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StopSleepMenuControllerBuilder extends PopupMenuControllerBuilder {
-    private House house;
-    public StopSleepMenuControllerBuilder(GameController controller, House house) {
+    private RealTimeToInGameTimeConverter timeConverter;
+
+    public StopSleepMenuControllerBuilder(GameController controller, RealTimeToInGameTimeConverter timeConverter) {
         super(controller);
-        this.house = house;
+        this.timeConverter = timeConverter;
     }
 
     @Override
@@ -23,7 +25,7 @@ public class StopSleepMenuControllerBuilder extends PopupMenuControllerBuilder {
 
         Button sleepButton = new Button(new Position(1, 5), "STOP SLEEP");
         Command sleepCommand = new CompoundCommand()
-                .addCommand(new SleepCommand(house, false))
+                .addCommand(new SetTimeRateCommand(timeConverter, 1))
                 .addCommand(this.getClosePopupMenuCommand());
 
         buttons.add(new ButtonController(sleepButton, sleepCommand));

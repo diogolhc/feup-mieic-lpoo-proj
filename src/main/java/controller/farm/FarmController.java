@@ -22,7 +22,7 @@ public class FarmController implements GameControllerState {
     private RealTimeToInGameTimeConverter realTimeToInGameTimeConverter;
     WeatherController weatherController;
 
-    public FarmController(Farm farm, GameController controller, double realSecToGameMinutesRate) {
+    public FarmController(Farm farm, GameController controller, long realSecToGameMinutesRate) {
         this.farm = farm;
         this.controller = controller;
         this.realTimeToInGameTimeConverter = new RealTimeToInGameTimeConverter(realSecToGameMinutesRate);
@@ -45,7 +45,7 @@ public class FarmController implements GameControllerState {
             cropFieldController.reactInteraction(cropField, farmerPosition);
         }
 
-        HouseController houseController = new HouseController(this.controller);
+        HouseController houseController = new HouseController(this.controller, this.realTimeToInGameTimeConverter);
         houseController.reactInteraction(farmBuildings.getHouse(), farmerPosition);
 
         MarketController marketController = new MarketController(this.controller);
@@ -63,9 +63,6 @@ public class FarmController implements GameControllerState {
 
     @Override
     public void reactTimePassed(long elapsedTimeSinceLastFrame) {
-        // TODO this smells bad :(
-        this.realTimeToInGameTimeConverter.setSleeping(this.farm.getBuildings().getHouse().getSleeping());
-
         InGameTime elapsedTime = this.realTimeToInGameTimeConverter.convert(elapsedTimeSinceLastFrame);
 
         this.farm.setTime(this.farm.getTime().add(elapsedTime));

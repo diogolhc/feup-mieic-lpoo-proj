@@ -4,11 +4,9 @@ import model.Position;
 
 public class House extends Building {
     public static final int HOUSE_SIZE = 6;
-    private boolean sleeping;
 
     public House(Position topLeft) {
         super(topLeft);
-        sleeping = false;
     }
 
     @Override
@@ -27,12 +25,9 @@ public class House extends Building {
         return position.equals(this.getTopLeftPosition().getTranslated(new Position(4, 6)));
     }
 
-    public void setSleeping(boolean sleeping) {
-        this.sleeping = sleeping;
+    public long getSleepRate() {
+        // TODO in the future, this could depend on the House level
+        //      if the upgrades feature were to be implemented
+        return 15;
     }
-
-    public boolean getSleeping() {
-        return this.sleeping;
-    }
-
 }

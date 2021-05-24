@@ -4,37 +4,28 @@ import model.InGameTime;
 
 public class RealTimeToInGameTimeConverter {
     private static final long SECS_TO_MILLI = 1000;
-    private double sleepMultiplier;
-    private double baseRate;
-    private double realSecToGameMinutesRate;
+    private long baseRate;
+    private long rateMultiplier;
     private long leftOverTimeMs;
 
-    public RealTimeToInGameTimeConverter(double realSecToGameMinutesRate) {
-        this.sleepMultiplier = 15; // TODO this hardcoded bad
-        this.realSecToGameMinutesRate = this.baseRate = realSecToGameMinutesRate;
+    public RealTimeToInGameTimeConverter(long realSecToGameMinutesRate) {
+        this.baseRate = realSecToGameMinutesRate;
+        this.rateMultiplier = 1;
         this.leftOverTimeMs = 0;
     }
 
-    public double getRate() {
-        return this.realSecToGameMinutesRate;
+    public long getRate() {
+        return this.baseRate * this.rateMultiplier;
     }
 
-    // TODO to use when farmer is sleeping for example
-    //      the base rate will have to be stored so that it
-    //      can be later reset (setBaseRate()?)
-    public void accelerateTime(double rate) {
-        this.realSecToGameMinutesRate *= rate;
+    public void setRateMultiplier(long rateMultiplier) {
+        this.rateMultiplier = rateMultiplier;
     }
 
     public InGameTime convert(long elapsedTimeSinceLastFrameMilliSeconds) {
-        long time = elapsedTimeSinceLastFrameMilliSeconds + this.leftOverTimeMs;
-        this.leftOverTimeMs = time % SECS_TO_MILLI;
+        long convertedTime = elapsedTimeSinceLastFrameMilliSeconds * this.getRate() + this.leftOverTimeMs;
+        this.leftOverTimeMs = convertedTime % SECS_TO_MILLI;
 
-        return new InGameTime((int)((time / SECS_TO_MILLI) * realSecToGameMinutesRate));
-    }
-
-    public void setSleeping(boolean sleeping) {
-        if (sleeping) this.realSecToGameMinutesRate = this.sleepMultiplier * this.baseRate;
-        else this.realSecToGameMinutesRate = this.baseRate;
+        return new InGameTime((int)(convertedTime / SECS_TO_MILLI));
     }
 }

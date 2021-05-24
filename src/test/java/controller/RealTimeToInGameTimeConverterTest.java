@@ -1,6 +1,5 @@
 package controller;
 
-import controller.RealTimeToInGameTimeConverter;
 import model.InGameTime;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,7 +15,7 @@ class RealTimeToInGameTimeConverterTest {
 
     @Test
     void accelerateTime() {
-        this.realTimeToInGameTimeConverter.accelerateTime(3);
+        this.realTimeToInGameTimeConverter.setMultiplier(3);
 
         Assertions.assertEquals(6, this.realTimeToInGameTimeConverter.getRate());
     }
@@ -28,7 +27,7 @@ class RealTimeToInGameTimeConverterTest {
 
     @Test
     void accelerateAndConvert() {
-        this.realTimeToInGameTimeConverter.accelerateTime(10);
+        this.realTimeToInGameTimeConverter.setMultiplier(10);
 
         Assertions.assertEquals(new InGameTime(40), this.realTimeToInGameTimeConverter.convert(2000));
     }
@@ -44,7 +43,7 @@ class RealTimeToInGameTimeConverterTest {
 
     @Test
     void convertSeveralTimesWithAccelerate() {
-        this.realTimeToInGameTimeConverter.accelerateTime(10);
+        this.realTimeToInGameTimeConverter.setMultiplier(10);
 
         this.realTimeToInGameTimeConverter.convert(100);
         this.realTimeToInGameTimeConverter.convert(200);
