@@ -2,24 +2,33 @@ package model.farm.building;
 
 import model.Position;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
 public class BuildingSet {
     private final Set<CropField> cropFields; // TODO because of hashset, we probably need to implement hash for cropfields
+    private final Set<Stockyard> stockyards;
     private House house;
     private Market market;
     private Warehouse warehouse;
 
     public BuildingSet() {
         this.cropFields = new HashSet<>();
+        this.stockyards = new HashSet<>();
     }
 
-    public BuildingSet(House house, Market market, Warehouse warehouse, Set<CropField> cropFields) {
+    public BuildingSet(House house, Market market, Warehouse warehouse, Set<CropField> cropFields, Set<Stockyard> stockyards) {
         this.market = market;
         this.warehouse = warehouse;
         this.cropFields = cropFields;
         this.house = house;
+        this.stockyards = stockyards;
+    }
+
+    public BuildingSet addStockyard(Stockyard stockyard) {
+        this.stockyards.add(stockyard);
+        return this;
     }
 
     public BuildingSet addCropField(CropField cropField) {
@@ -30,6 +39,8 @@ public class BuildingSet {
     public Set<CropField> getCropFields() {
         return this.cropFields;
     }
+
+    public Set<Stockyard> getStockyards() { return this.stockyards; }
 
     public House getHouse() {
         return this.house;
@@ -62,6 +73,9 @@ public class BuildingSet {
 
         for (CropField cropField: this.cropFields) {
             if (!cropField.isTraversable(position)) return false;
+        }
+        for (Stockyard stockyard : this.stockyards) {
+            if (!stockyard.isTraversable(position)) return false;
         }
         return true;
     }

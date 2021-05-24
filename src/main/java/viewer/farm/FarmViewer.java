@@ -8,9 +8,9 @@ import model.farm.building.BuildingSet;
 import model.farm.building.Market;
 import model.farm.building.Warehouse;
 import model.farm.building.CropField;
+import model.farm.building.*;
 import model.farm.Farm;
 import model.farm.Farmer;
-import model.farm.building.House;
 import model.farm.Weather;
 import viewer.GameViewer;
 
@@ -55,6 +55,11 @@ public class FarmViewer extends GameViewer {
         for (CropField cropField: buildings.getCropFields()) {
             this.drawCropField(cropField, cropFieldViewer, gui);
         }
+
+        StockyardViewer stockyardViewer = new StockyardViewer();
+        for (Stockyard stockyard : buildings.getStockyards()) {
+            this.drawStockyard(stockyard, stockyardViewer, gui);
+        }
     }
 
     private void drawWarehouse(Warehouse warehouse, WarehouseViewer warehouseViewer, GUI gui) {
@@ -71,6 +76,10 @@ public class FarmViewer extends GameViewer {
 
     private void drawCropField(CropField cropField, CropFieldViewer cropFieldViewer, GUI gui) {
         cropFieldViewer.draw(cropField, gui);
+    }
+
+    private void drawStockyard(Stockyard stockyard, StockyardViewer stockyardViewer, GUI gui) {
+        stockyardViewer.draw(stockyard, gui);
     }
 
     private void drawHUD(InGameTime time, Weather weather, HUDViewer hudViewer, GUI gui) {
