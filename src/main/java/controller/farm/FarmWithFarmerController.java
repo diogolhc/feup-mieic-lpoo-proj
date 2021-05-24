@@ -56,20 +56,6 @@ public class FarmWithFarmerController extends FarmController {
     }
 
     @Override
-    public void reactTimePassed(long elapsedTimeSinceLastFrame) {
-        InGameTime elapsedTime = this.realTimeToInGameTimeConverter.convert(elapsedTimeSinceLastFrame);
-
-        this.farm.setTime(this.farm.getTime().add(elapsedTime));
-
-        CropFieldController cropFieldController = new CropFieldController(this.controller, this.farm);
-        for (CropField cropField : this.farm.getBuildings().getCropFields()) {
-            cropFieldController.reactTimePassed(cropField, elapsedTime);
-        }
-
-        this.weatherController.reactTimePassed(elapsedTime);
-    }
-
-    @Override
     public GameViewer getViewer() {
         return new FarmWithFarmerViewer(this.farm);
     }
