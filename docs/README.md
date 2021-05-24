@@ -150,7 +150,7 @@ The following diagram shows how the pattern’s roles were mapped to the applica
 These classes can be found in the following files:
 - [GameController](../src/main/java/controller/GameController.java)
 - [GameControllerState](../src/main/java/controller/GameControllerState.java)
-- [FarmController](../src/main/java/controller/farm/FarmController.java)
+- [FarmController](../src/main/java/controller/farm/FarmWithFarmerController.java)
 - [MenuController](../src/main/java/controller/menu/MenuController.java)
 - [PopupMenuController](../src/main/java/controller/menu/PopupMenuController.java)
 
@@ -197,7 +197,7 @@ shows the use of the decorator pattern in the viewer.
 These classes can be found in the following files:
 - [GameController](../src/main/java/controller/GameController.java)
 - [GameControllerState](../src/main/java/controller/GameControllerState.java)
-- [FarmController](../src/main/java/controller/farm/FarmController.java)
+- [FarmController](../src/main/java/controller/farm/FarmWithFarmerController.java)
 - [MenuController](../src/main/java/controller/menu/MenuController.java)
 - [PopupMenuController](../src/main/java/controller/menu/PopupMenuController.java)
 

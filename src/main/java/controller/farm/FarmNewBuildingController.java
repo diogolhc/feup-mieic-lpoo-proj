@@ -9,21 +9,26 @@ import gui.GUI;
 import model.InGameTime;
 import model.Position;
 import model.farm.Farm;
+import model.farm.building.Building;
 import model.farm.building.BuildingSet;
 import model.farm.building.CropField;
 import viewer.GameViewer;
+import viewer.farm.FarmNewBuildingViewer;
 import viewer.farm.FarmWithFarmerViewer;
 
-public class FarmWithFarmerController extends FarmController {
-    public FarmWithFarmerController(Farm farm, GameController controller, long realSecToGameMinutesRate) {
-        super(farm, controller, realSecToGameMinutesRate);
+public class FarmNewBuildingController extends FarmController {
+    private Building newBuilding;
+
+    public FarmNewBuildingController(FarmController farmController, Building newBuilding) {
+        super(farmController);
+        this.newBuilding = newBuilding;
     }
 
     @Override
     public void reactKeyboard(GUI.ACTION action) {
-        if (action == GUI.ACTION.INTERACT) reactInteraction();
-        FarmerController farmerController = new FarmerController(this.farm);
-        farmerController.doAction(action);
+        if (action == GUI.ACTION.INTERACT) chooseBuildingPlace();
+        NewBuildingController newBuildingController = new NewBuildingController(this.farm, this.newBuilding);
+        newBuildingController.doAction(action);
     }
 
     @Override
@@ -32,41 +37,12 @@ public class FarmWithFarmerController extends FarmController {
     @Override
     public void reactMouseClick(Position position) {}
 
-    private void reactInteraction() {
-        Position farmerPosition = this.farm.getFarmer().getPosition();
-        BuildingSet farmBuildings = this.farm.getBuildings();
-
-        CropFieldController cropFieldController = new CropFieldController(this.controller, this.farm);
-        for (CropField cropField: farmBuildings.getCropFields()) {
-            cropFieldController.reactInteraction(cropField, farmerPosition);
-        }
-
-        HouseController houseController = new HouseController(this.controller, this.realTimeToInGameTimeConverter);
-        houseController.reactInteraction(farmBuildings.getHouse(), farmerPosition);
-
-        MarketController marketController = new MarketController(this.controller, this.farm);
-        marketController.reactInteraction(farmBuildings.getMarket(), farmerPosition);
-
-        WarehouseController warehouseController = new WarehouseController(this.controller, this.farm);
-        warehouseController.reactInteraction(farmBuildings.getWarehouse(), farmerPosition);
-    }
-
-    @Override
-    public void reactTimePassed(long elapsedTimeSinceLastFrame) {
-        InGameTime elapsedTime = this.realTimeToInGameTimeConverter.convert(elapsedTimeSinceLastFrame);
-
-        this.farm.setTime(this.farm.getTime().add(elapsedTime));
-
-        CropFieldController cropFieldController = new CropFieldController(this.controller, this.farm);
-        for (CropField cropField : this.farm.getBuildings().getCropFields()) {
-            cropFieldController.reactTimePassed(cropField, elapsedTime);
-        }
-
-        this.weatherController.reactTimePassed(elapsedTime);
+    private void chooseBuildingPlace() {
+        // TODO
     }
 
     @Override
     public GameViewer getViewer() {
-        return new FarmWithFarmerViewer(this.farm);
+        return new FarmNewBuildingViewer(this.farm, this.newBuilding);
     }
 }

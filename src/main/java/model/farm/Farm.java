@@ -37,11 +37,16 @@ public class Farm {
         return this.farmer;
     }
 
-    public boolean isTraversable(Position position) {
+    public boolean isInsideLimits(Position position) {
         int x = position.getX();
         int y = position.getY();
         if (x <= 0 || x >= this.width-1) return false;
         if (y <= 0 || y >= this.height-1) return false;
+        return true;
+    }
+
+    public boolean isTraversable(Position position) {
+        if (!this.isInsideLimits(position)) return false;
         if (!this.buildings.isTraversable(position)) return false;
         return true;
     }

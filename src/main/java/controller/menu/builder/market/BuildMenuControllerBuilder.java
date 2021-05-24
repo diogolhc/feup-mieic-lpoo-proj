@@ -1,30 +1,36 @@
 package controller.menu.builder.market;
 
 import controller.GameController;
+import controller.GameControllerState;
 import controller.command.Command;
-import controller.command.CompoundCommand;
-import controller.command.PlantCropCommand;
 import controller.command.SellItemCommand;
+import controller.command.SetControllerStateCommand;
+import controller.farm.FarmController;
+import controller.farm.FarmNewBuildingController;
 import controller.menu.ButtonController;
 import controller.menu.builder.PopupMenuControllerBuilder;
 import model.Position;
+import model.farm.Currency;
 import model.farm.Farm;
-import model.farm.Inventory;
-import model.farm.item.Crop;
+import model.farm.building.CropField;
 import model.farm.item.Item;
 import model.menu.Button;
 import model.menu.label.Label;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class SellMenuControllerBuilder extends PopupMenuControllerBuilder {
+public class BuildMenuControllerBuilder extends PopupMenuControllerBuilder {
     private final Farm farm;
-    private final List<Item> items;
+    private FarmController farmController;
 
-    public SellMenuControllerBuilder(GameController controller, Farm farm) {
+    // TODO should this be here?
+    private static final Currency CROPFIELD_BUILD_PRICE = new Currency(1500);
+
+    public BuildMenuControllerBuilder(GameController controller, FarmController farmController, Farm farm) {
         super(controller);
-        this.items = farm.getItems();
+        this.farmController = farmController;
         this.farm = farm;
     }
 
@@ -32,26 +38,15 @@ public class SellMenuControllerBuilder extends PopupMenuControllerBuilder {
     protected List<ButtonController> getButtons() {
         List<ButtonController> buttons = super.getButtons();
 
+        int y = 4;
+        int x = 1;
 
-        int y = 6;
-        for (Item item: items) {
-            int x = 1;
+        Button buildCropFieldButton = new Button(new Position(x, y), "CROPFIELD");
+        Command buildCropFieldCommand = new SetControllerStateCommand(this.controller,
+                new FarmNewBuildingController(this.farmController, new CropField(new Position(1, 1))));
+        buttons.add(new ButtonController(buildCropFieldButton, buildCropFieldCommand));
 
-            Button sell1Button = new Button(new Position(x, y), "x1");
-            Command sell1Command = new SellItemCommand(this.farm, item, 1);
-            buttons.add(new ButtonController(sell1Button, sell1Command));
-
-            x += sell1Button.getWidth() + 1;
-            Button sell10Button = new Button(new Position(x, y), "x10");
-            Command sell10Command = new SellItemCommand(this.farm, item, 10);
-            buttons.add(new ButtonController(sell10Button, sell10Command));
-
-            x += sell10Button.getWidth() + 1;
-            Button sell100Button = new Button(new Position(x, y), "x100");
-            Command sell100Command = new SellItemCommand(this.farm, item, 100);
-            buttons.add(new ButtonController(sell100Button, sell100Command));
-            y+=5;
-        }
+        //y+=5;
 
         return buttons;
     }
@@ -60,25 +55,19 @@ public class SellMenuControllerBuilder extends PopupMenuControllerBuilder {
     protected List<Label> getLabels() {
         List<Label> labels = super.getLabels();
 
-        int y = 4;
-        for (Item item: items) {
-            labels.add(new Label(
-                    new Position(1, y),
-                    () -> String.format("%1$-6s %2$4s %3$5s",
-                            item.getName(),
-                            "x" + this.farm.getInventory().getAmount(item),
-                            item.getSellPrice().toString()
-                    )
-            ));
-            y += 5;
-        }
+        int y = 5;
+        labels.add(new Label(
+                new Position(14, y),
+                () -> CROPFIELD_BUILD_PRICE.toString()
+        ));
+        //y += 4;
 
         return labels;
     }
 
     @Override
     protected int getHeight() {
-        return 5 + items.size() * 6;
+        return 8;
     }
 
     @Override
@@ -88,6 +77,6 @@ public class SellMenuControllerBuilder extends PopupMenuControllerBuilder {
 
     @Override
     protected String getTitle() {
-        return "SELL";
+        return "BUILD";
     }
 }

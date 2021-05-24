@@ -2,19 +2,27 @@ package viewer.farm;
 
 import gui.Color;
 import gui.GUI;
+import gui.drawer.shape.FilledRectangleDrawer;
 import model.Position;
-import model.farm.Farmer;
+import model.farm.building.Building;
 
-public class FarmerViewer {
-    private static final Color FARMER_COLOR = new Color("#223366");
-    private static final char FARMER_CHAR = '@';
+public class NewBuildingZoneViewer {
+    private static final Color AVAILABLE_ZONE_COLOR = new Color("#03ac13");
+    private static final Color UNAVAILABLE_ZONE_COLOR = new Color("#e3242b");
 
-    public void draw(Farmer farmer, GUI gui) {
-        Position position = farmer.getPosition();
+    public void draw(Building newBuilding, GUI gui) {
+        Position position = newBuilding.getTopLeftPosition();
+        int width = newBuilding.getWidth();
+        int height = newBuilding.getHeight();
 
-        Color backgroundColor = gui.getBackgroundColor(position.getX(), position.getY());
-        gui.setBackgroundColor(backgroundColor);
-        gui.setForegroundColor(FARMER_COLOR);
-        gui.drawChar(position.getX(), position.getY(), FARMER_CHAR);
+        Color zoneColor;
+        if (true) { // TODO
+            zoneColor = AVAILABLE_ZONE_COLOR;
+        } else {
+            zoneColor = UNAVAILABLE_ZONE_COLOR;
+        }
+
+        FilledRectangleDrawer rectangleDrawer = new FilledRectangleDrawer(gui, zoneColor, zoneColor, ' ');
+        rectangleDrawer.draw(position, width, height);
     }
 }

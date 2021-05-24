@@ -56,12 +56,12 @@ public class BuildingSet {
     }
 
     public boolean isTraversable(Position position) {
-        if (!this.house.isTraversable(position)) return false;
-        if (!this.market.isTraversable(position)) return false;
-        if (!this.warehouse.isTraversable(position)) return false;
+        if (this.house.getUntraversableRegion().contains(position)) return false;
+        if (this.market.getUntraversableRegion().contains(position)) return false;
+        if (this.warehouse.getUntraversableRegion().contains(position)) return false;
 
         for (CropField cropField: this.cropFields) {
-            if (!cropField.isTraversable(position)) return false;
+            if (cropField.getUntraversableRegion().contains(position)) return false;
         }
         return true;
     }

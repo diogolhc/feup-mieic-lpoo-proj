@@ -6,6 +6,7 @@ import controller.command.Command;
 import controller.command.CompoundCommand;
 import controller.command.SetControllerStateCommand;
 import controller.command.SetTimeRateCommand;
+import controller.farm.FarmController;
 import controller.menu.ButtonController;
 import controller.menu.builder.PopupMenuControllerBuilder;
 import controller.menu.builder.house.StopSleepMenuControllerBuilder;
@@ -21,10 +22,12 @@ import java.util.List;
 
 public class MarketMenuControllerBuilder extends PopupMenuControllerBuilder {
     private final Farm farm;
+    private FarmController farmController;
 
-    public MarketMenuControllerBuilder(GameController controller, Farm farm) {
+    public MarketMenuControllerBuilder(GameController controller, Farm farm, FarmController farmController) {
         super(controller);
         this.farm = farm;
+        this.farmController = farmController;
     }
 
     @Override
@@ -32,12 +35,11 @@ public class MarketMenuControllerBuilder extends PopupMenuControllerBuilder {
         List<ButtonController> buttons = super.getButtons();
 
         Button buildButton = new Button(new Position(1, 4), "BUILD");
-        Command buildCommand = new SetControllerStateCommand(this.controller, this.getSellMenuState());
+        Command buildCommand = new SetControllerStateCommand(this.controller, this.getBuildMenuState());
         buttons.add(new ButtonController(buildButton, buildCommand));
 
-
         Button sellButton = new Button(new Position(1, 8), "SELL");
-        Command sellCommand = new SetControllerStateCommand(this.controller, this.getBuildMenuState());
+        Command sellCommand = new SetControllerStateCommand(this.controller, this.getSellMenuState());
         buttons.add(new ButtonController(sellButton, sellCommand));
 
         return buttons;
@@ -51,7 +53,7 @@ public class MarketMenuControllerBuilder extends PopupMenuControllerBuilder {
 
     private GameControllerState getBuildMenuState() {
         PopupMenuControllerBuilder popupMenuControllerBuilder;
-        popupMenuControllerBuilder = new SellMenuControllerBuilder(this.controller, this.farm);
+        popupMenuControllerBuilder = new BuildMenuControllerBuilder(this.controller, this.farmController, this.farm);
         return popupMenuControllerBuilder.buildMenu(new Position(1,1));
     }
 

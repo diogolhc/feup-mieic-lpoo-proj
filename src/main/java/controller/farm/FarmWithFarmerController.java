@@ -1,8 +1,6 @@
 package controller.farm;
 
 import controller.GameController;
-import controller.GameControllerState;
-import controller.RealTimeToInGameTimeConverter;
 import controller.farm.building.CropFieldController;
 import controller.farm.building.HouseController;
 import controller.farm.building.MarketController;
@@ -14,19 +12,15 @@ import model.farm.Farm;
 import model.farm.building.BuildingSet;
 import model.farm.building.CropField;
 import viewer.GameViewer;
-import viewer.farm.FarmViewer;
+import viewer.farm.FarmWithFarmerViewer;
 
-public class FarmController implements GameControllerState {
-    private Farm farm;
-    private GameController controller;
-    private RealTimeToInGameTimeConverter realTimeToInGameTimeConverter;
-    WeatherController weatherController;
+public class FarmWithFarmerController extends FarmController {
+    public FarmWithFarmerController(FarmController farmController) {
+        super(farmController);
+    }
 
-    public FarmController(Farm farm, GameController controller, long realSecToGameMinutesRate) {
-        this.farm = farm;
-        this.controller = controller;
-        this.realTimeToInGameTimeConverter = new RealTimeToInGameTimeConverter(realSecToGameMinutesRate);
-        this.weatherController = new WeatherController(this.farm); // TODO should this be done in a different way?
+    public FarmWithFarmerController(Farm farm, GameController controller, long realSecToGameMinutesRate) {
+        super(farm, controller, realSecToGameMinutesRate);
     }
 
     @Override
@@ -35,6 +29,12 @@ public class FarmController implements GameControllerState {
         FarmerController farmerController = new FarmerController(this.farm);
         farmerController.doAction(action);
     }
+
+    @Override
+    public void reactMouseMovement(Position position) {}
+
+    @Override
+    public void reactMouseClick(Position position) {}
 
     private void reactInteraction() {
         Position farmerPosition = this.farm.getFarmer().getPosition();
@@ -56,12 +56,6 @@ public class FarmController implements GameControllerState {
     }
 
     @Override
-    public void reactMouseMovement(Position position) {}
-
-    @Override
-    public void reactMouseClick(Position position) {}
-
-    @Override
     public void reactTimePassed(long elapsedTimeSinceLastFrame) {
         InGameTime elapsedTime = this.realTimeToInGameTimeConverter.convert(elapsedTimeSinceLastFrame);
 
@@ -77,6 +71,6 @@ public class FarmController implements GameControllerState {
 
     @Override
     public GameViewer getViewer() {
-        return new FarmViewer(this.farm);
+        return new FarmWithFarmerViewer(this.farm);
     }
 }

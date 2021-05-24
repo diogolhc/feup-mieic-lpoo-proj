@@ -6,10 +6,9 @@ import model.farm.Weather;
 
 import java.util.Map;
 
-
 public class WeatherController {
-    private static final int minNextMin = 15; // TODO adjust these values (?)
-    private static final int maxNextMin = 120;
+    private static final int MIN_NEXT_MINUTE = 15; // TODO adjust these values (?)
+    private static final int MAX_NEXT_MINUTE = 120;
     private int nextMinute;
     Farm farm;
 
@@ -22,7 +21,7 @@ public class WeatherController {
         this.nextMinute -= time.getMinute();
         if (this.nextMinute <= 0) {
             this.updateWeatherState(Math.random());
-            this.nextMinute = minNextMin + (int)(Math.random() * (maxNextMin-minNextMin));
+            this.nextMinute = MIN_NEXT_MINUTE + (int)(Math.random() * (MAX_NEXT_MINUTE - MIN_NEXT_MINUTE));
         }
     }
 
@@ -40,5 +39,4 @@ public class WeatherController {
         }
 
     }
-
 }

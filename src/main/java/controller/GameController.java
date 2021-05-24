@@ -1,6 +1,6 @@
 package controller;
 
-import controller.farm.FarmController;
+import controller.farm.FarmWithFarmerController;
 import gui.GUI;
 import gui.MouseListener;
 import model.Position;
@@ -27,7 +27,7 @@ public class GameController implements MouseListener {
 
     public GameController(GUI gui, Farm farm) {
         this(gui);
-        this.gameControllerState = new FarmController(farm, this, 1);
+        this.gameControllerState = new FarmWithFarmerController(farm, this, 1);
     }
 
     public void setGameControllerState(GameControllerState state) {

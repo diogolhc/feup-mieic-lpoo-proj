@@ -10,10 +10,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-public class FarmControllerTest {
+public class FarmWithFarmerControllerTest {
     private Farm farm;
     private CropField cropField;
-    private FarmController controller;
+    private FarmWithFarmerController controller;
     private GameController gameController;
 
     @BeforeEach
@@ -25,7 +25,7 @@ public class FarmControllerTest {
         Mockito.when(cropField.getRemainingTime()).thenReturn(new InGameTime(0));
         farm.getBuildings().addCropField(cropField);
         gameController = Mockito.mock(GameController.class);
-        controller = new FarmController(farm, gameController, 1);
+        controller = new FarmWithFarmerController(farm, gameController, 1);
     }
 
     @Test

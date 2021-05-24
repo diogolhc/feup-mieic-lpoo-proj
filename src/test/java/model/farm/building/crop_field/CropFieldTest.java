@@ -22,35 +22,35 @@ public class CropFieldTest {
 
     @Test
     void isTraversable() {
-        Assertions.assertTrue(this.field.isTraversable(new Position(3, 3)));
-        Assertions.assertTrue(this.field.isTraversable(new Position(4, 5)));
-        Assertions.assertTrue(this.field.isTraversable(new Position(5, 5)));
-        Assertions.assertTrue(this.field.isTraversable(new Position(4, 6)));
-        Assertions.assertFalse(this.field.isTraversable(new Position(5, 6)));
-        Assertions.assertFalse(this.field.isTraversable(new Position(6, 6)));
-        Assertions.assertFalse(this.field.isTraversable(new Position(5, 7)));
-        Assertions.assertFalse(this.field.isTraversable(new Position(6, 7)));
+        Assertions.assertTrue(this.field.getTraversableRegion(new Position(3, 3)));
+        Assertions.assertTrue(this.field.getTraversableRegion(new Position(4, 5)));
+        Assertions.assertTrue(this.field.getTraversableRegion(new Position(5, 5)));
+        Assertions.assertTrue(this.field.getTraversableRegion(new Position(4, 6)));
+        Assertions.assertFalse(this.field.getTraversableRegion(new Position(5, 6)));
+        Assertions.assertFalse(this.field.getTraversableRegion(new Position(6, 6)));
+        Assertions.assertFalse(this.field.getTraversableRegion(new Position(5, 7)));
+        Assertions.assertFalse(this.field.getTraversableRegion(new Position(6, 7)));
 
     }
 
     @Test
     void isInInteractiveZone() {
-        Assertions.assertFalse(this.field.isInInteractiveZone(new Position(3, 3)));
-        Assertions.assertFalse(this.field.isInInteractiveZone(new Position(3, 5)));
-        Assertions.assertFalse(this.field.isInInteractiveZone(new Position(8, 8)));
-        Assertions.assertFalse(this.field.isInInteractiveZone(new Position(5, 9)));
+        Assertions.assertFalse(this.field.getInteractiveRegion(new Position(3, 3)));
+        Assertions.assertFalse(this.field.getInteractiveRegion(new Position(3, 5)));
+        Assertions.assertFalse(this.field.getInteractiveRegion(new Position(8, 8)));
+        Assertions.assertFalse(this.field.getInteractiveRegion(new Position(5, 9)));
 
-        Assertions.assertTrue(this.field.isInInteractiveZone(new Position(4, 5)));
-        Assertions.assertTrue(this.field.isInInteractiveZone(new Position(5, 5)));
-        Assertions.assertTrue(this.field.isInInteractiveZone(new Position(6, 5)));
-        Assertions.assertTrue(this.field.isInInteractiveZone(new Position(7, 5)));
+        Assertions.assertTrue(this.field.getInteractiveRegion(new Position(4, 5)));
+        Assertions.assertTrue(this.field.getInteractiveRegion(new Position(5, 5)));
+        Assertions.assertTrue(this.field.getInteractiveRegion(new Position(6, 5)));
+        Assertions.assertTrue(this.field.getInteractiveRegion(new Position(7, 5)));
 
-        Assertions.assertTrue(this.field.isInInteractiveZone(new Position(4, 6)));
-        Assertions.assertTrue(this.field.isInInteractiveZone(new Position(4, 7)));
-        Assertions.assertTrue(this.field.isInInteractiveZone(new Position(4, 8)));
+        Assertions.assertTrue(this.field.getInteractiveRegion(new Position(4, 6)));
+        Assertions.assertTrue(this.field.getInteractiveRegion(new Position(4, 7)));
+        Assertions.assertTrue(this.field.getInteractiveRegion(new Position(4, 8)));
 
-        Assertions.assertTrue(this.field.isInInteractiveZone(new Position(5, 6)));
-        Assertions.assertTrue(this.field.isInInteractiveZone(new Position(7, 8)));
+        Assertions.assertTrue(this.field.getInteractiveRegion(new Position(5, 6)));
+        Assertions.assertTrue(this.field.getInteractiveRegion(new Position(7, 8)));
 
     }
 
