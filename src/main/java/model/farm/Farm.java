@@ -4,6 +4,7 @@ import model.Position;
 import model.InGameTime;
 import model.farm.item.Crop;
 import model.farm.building.BuildingSet;
+import model.farm.item.Item;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +44,12 @@ public class Farm {
         if (y <= 0 || y >= this.height-1) return false;
         if (!this.buildings.isTraversable(position)) return false;
         return true;
+    }
+
+    public List<Item> getItems() {
+        List<Item> items = new ArrayList<>();
+        items.addAll(this.crops);
+        return items;
     }
 
     public int getWidth() {

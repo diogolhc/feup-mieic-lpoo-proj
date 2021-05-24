@@ -4,7 +4,7 @@ import controller.GameController;
 import controller.RealTimeToInGameTimeConverter;
 import controller.command.Command;
 import controller.command.SetControllerStateCommand;
-import controller.menu.builder.SleepMenuControllerBuilder;
+import controller.menu.builder.house.SleepMenuControllerBuilder;
 import controller.menu.builder.MenuControllerBuilder;
 import model.Position;
 import model.farm.building.House;

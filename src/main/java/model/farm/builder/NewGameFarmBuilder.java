@@ -151,6 +151,7 @@ public class NewGameFarmBuilder extends FarmBuilder {
             InGameTime cropGrowthTime = parseTimeString(tokens[1]);
             int numberOfStages = Integer.parseInt(tokens[2]);
             int baseHarvestAmount = Integer.parseInt(tokens[3]);
+            Currency sellPrice = new Currency(Integer.parseInt(tokens[4]));
 
             List<CropGrowthStage> growthStages = new ArrayList<>();
             currentLine++;
@@ -158,7 +159,7 @@ public class NewGameFarmBuilder extends FarmBuilder {
                 growthStages.add(parseGrowthStage(this.cropsLines.get(currentLine)));
                 currentLine++;
             }
-            crops.add(new Crop(cropName, cropGrowthTime, growthStages, baseHarvestAmount));
+            crops.add(new Crop(cropName, cropGrowthTime, growthStages, baseHarvestAmount, sellPrice));
         }
 
         return crops;

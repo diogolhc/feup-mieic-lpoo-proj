@@ -35,4 +35,16 @@ public class Currency {
     public String toString() {
         return this.coins + "C";
     }
+
+    public Currency add(Currency currency) {
+        return new Currency(this.coins + currency.coins);
+    }
+
+    public Currency subtract(Currency currency) {
+        return new Currency(this.coins - currency.coins);
+    }
+
+    public Currency multiply(int amount) {
+        return new Currency(this.coins * amount);
+    }
 }

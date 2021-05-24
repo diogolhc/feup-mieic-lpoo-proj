@@ -48,7 +48,7 @@ public class FarmController implements GameControllerState {
         HouseController houseController = new HouseController(this.controller, this.realTimeToInGameTimeConverter);
         houseController.reactInteraction(farmBuildings.getHouse(), farmerPosition);
 
-        MarketController marketController = new MarketController(this.controller);
+        MarketController marketController = new MarketController(this.controller, this.farm);
         marketController.reactInteraction(farmBuildings.getMarket(), farmerPosition);
 
         WarehouseController warehouseController = new WarehouseController(this.controller, this.farm);

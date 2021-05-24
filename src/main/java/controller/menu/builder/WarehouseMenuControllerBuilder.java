@@ -23,8 +23,7 @@ public class WarehouseMenuControllerBuilder extends PopupMenuControllerBuilder {
 
     public WarehouseMenuControllerBuilder(GameController controller, Farm farm) {
         super(controller);
-        this.items = new ArrayList<>();
-        this.items.addAll(farm.getCrops());
+        this.items = farm.getItems();
         this.inventory = farm.getInventory();
     }
 

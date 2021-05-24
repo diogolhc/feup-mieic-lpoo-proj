@@ -1,10 +1,12 @@
 package model.farm.item;
 
+import model.farm.Currency;
+
 import java.util.Objects;
 
 public abstract class Item {
     public abstract String getName();
-    //public Currency getSellPrice(); TODO implement currency
+    public abstract Currency getSellPrice();
 
     @Override
     public boolean equals(Object o) {
