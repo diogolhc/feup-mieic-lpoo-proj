@@ -3,9 +3,11 @@ package controller.farm.building;
 import controller.GameController;
 import controller.command.Command;
 import controller.command.NoOperationCommand;
+import controller.command.OpenPopupMenuCommand;
 import controller.command.SetControllerStateCommand;
 import controller.farm.FarmController;
 import controller.menu.builder.MenuControllerBuilder;
+import controller.menu.builder.PopupMenuControllerBuilder;
 import controller.menu.builder.WarehouseMenuControllerBuilder;
 import controller.menu.builder.market.MarketMenuControllerBuilder;
 import model.Position;
@@ -27,10 +29,9 @@ public class MarketController extends BuildingController<Market> {
     public Command getInteractionCommand(Market market) {
         if (this.controller.getGameControllerState() instanceof FarmController) {
             FarmController farmController = (FarmController) this.controller.getGameControllerState();
-            MenuControllerBuilder menuControllerBuilder = new MarketMenuControllerBuilder(
+            PopupMenuControllerBuilder menuControllerBuilder = new MarketMenuControllerBuilder(
                     this.controller, this.farm, farmController);
-            return new SetControllerStateCommand(this.controller,
-                    menuControllerBuilder.buildMenu(new Position(1, 1)));
+            return new OpenPopupMenuCommand(this.controller, menuControllerBuilder);
         } else {
             // This never happens because the interaction command is retrieved after
             // a farmer interaction (which happens in FarmWithFarmerController)

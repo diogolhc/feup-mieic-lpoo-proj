@@ -1,31 +1,27 @@
 package controller.farm;
 
-import controller.GameController;
-import controller.farm.building.CropFieldController;
-import controller.farm.building.HouseController;
-import controller.farm.building.MarketController;
-import controller.farm.building.WarehouseController;
+import controller.menu.builder.AlertMenuControllerBuilder;
 import gui.GUI;
-import model.InGameTime;
 import model.Position;
-import model.farm.Farm;
+import model.farm.Currency;
 import model.farm.building.Building;
-import model.farm.building.BuildingSet;
 import model.farm.building.CropField;
 import viewer.GameViewer;
 import viewer.farm.FarmNewBuildingViewer;
-import viewer.farm.FarmWithFarmerViewer;
 
 public class FarmNewBuildingController extends FarmController {
     private Building newBuilding;
+    private Currency price;
 
-    public FarmNewBuildingController(FarmController farmController, Building newBuilding) {
+    public FarmNewBuildingController(FarmController farmController, Building newBuilding, Currency price) {
         super(farmController);
         this.newBuilding = newBuilding;
+        this.price = price;
     }
 
     @Override
     public void reactKeyboard(GUI.ACTION action) {
+        if (action == GUI.ACTION.BACK) returnToFarmerController();
         if (action == GUI.ACTION.INTERACT) chooseBuildingPlace();
         NewBuildingController newBuildingController = new NewBuildingController(this.farm, this.newBuilding);
         newBuildingController.doAction(action);
@@ -37,8 +33,27 @@ public class FarmNewBuildingController extends FarmController {
     @Override
     public void reactMouseClick(Position position) {}
 
+    private void returnToFarmerController() {
+        this.controller.setGameControllerState(new FarmWithFarmerController(this));
+    }
+
     private void chooseBuildingPlace() {
-        // TODO
+        if (farm.getBuildings().isOccupied(this.newBuilding.getOccupiedRegion())) {
+            this.controller.setGameControllerState(new AlertMenuControllerBuilder(this.controller,
+                    "CHOSEN PLACE IS ALREADY OCCUPIED").buildMenu(new Position(1, 1)));
+        } else {
+            if (this.newBuilding instanceof CropField) {
+                this.farm.getBuildings().addCropField((CropField) this.newBuilding);
+            } else {
+                // This should never happen
+                throw new RuntimeException(
+                        "LOGIC ERROR: Unhandled new building type: " + this.newBuilding.getClass().toString());
+            }
+
+            this.farm.setCurrency(this.farm.getCurrency().subtract(this.price));
+
+            returnToFarmerController();
+        }
     }
 
     @Override

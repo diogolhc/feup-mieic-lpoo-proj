@@ -3,9 +3,9 @@ package model.region;
 import model.Position;
 
 public class RectangleRegion implements Region {
-    private Position topLeft;
-    private int width;
-    private int height;
+    private final Position topLeft;
+    private final int width;
+    private final int height;
 
     public RectangleRegion(Position topLeft, int width, int height) {
         this.topLeft = topLeft;
@@ -27,6 +27,20 @@ public class RectangleRegion implements Region {
         if (left1 > right2 || left2 > right1) return false;
         if (top1 > bottom2 || top2 > bottom1) return false;
         return true;
+    }
+
+    public boolean contains(RectangleRegion region) {
+        int left1 = this.topLeft.getX();
+        int right1 = left1 + this.width - 1;
+        int top1 = this.topLeft.getY();
+        int bottom1 = top1 + this.height - 1;
+
+        int left2 = region.topLeft.getX();
+        int right2 = left2 + region.width - 1;
+        int top2 = region.topLeft.getY();
+        int bottom2 = top2 + region.height - 1;
+
+        return left2 >= left1 && right2 <= right1 && top2 >= top1 && bottom2 <= bottom1;
     }
 
     @Override

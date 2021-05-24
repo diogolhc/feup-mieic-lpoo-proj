@@ -5,6 +5,8 @@ import model.InGameTime;
 import model.farm.item.Crop;
 import model.farm.building.BuildingSet;
 import model.farm.item.Item;
+import model.region.RectangleRegion;
+import model.region.Region;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,16 +39,12 @@ public class Farm {
         return this.farmer;
     }
 
-    public boolean isInsideLimits(Position position) {
-        int x = position.getX();
-        int y = position.getY();
-        if (x <= 0 || x >= this.width-1) return false;
-        if (y <= 0 || y >= this.height-1) return false;
-        return true;
+    public RectangleRegion getInsideRegion() {
+        return new RectangleRegion(new Position(1, 1), this.width - 2, this.height - 2);
     }
 
     public boolean isTraversable(Position position) {
-        if (!this.isInsideLimits(position)) return false;
+        if (!this.getInsideRegion().contains(position)) return false;
         if (!this.buildings.isTraversable(position)) return false;
         return true;
     }

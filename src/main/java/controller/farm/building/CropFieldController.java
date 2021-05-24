@@ -2,6 +2,7 @@ package controller.farm.building;
 
 import controller.GameController;
 import controller.command.*;
+import controller.menu.builder.PopupMenuControllerBuilder;
 import model.InGameTime;
 import model.farm.Farm;
 import model.farm.building.CropField;
@@ -25,7 +26,7 @@ public class CropFieldController extends BuildingController<CropField> {
 
     @Override
     public Command getInteractionCommand(CropField cropField) {
-        MenuControllerBuilder menuControllerBuilder;
+        PopupMenuControllerBuilder menuControllerBuilder;
 
         if (cropField.getState() instanceof NotPlanted) {
             menuControllerBuilder = new PlantCropMenuControllerBuilder(this.controller, this.farm.getCrops(), cropField);
@@ -39,7 +40,7 @@ public class CropFieldController extends BuildingController<CropField> {
                     "LOGIC ERROR: Unhandled CropFieldState: " + cropField.getState().getClass().toString());
         }
 
-        return new SetControllerStateCommand(this.controller, menuControllerBuilder.buildMenu(new Position(1, 1)));
+        return new OpenPopupMenuCommand(this.controller, menuControllerBuilder);
     }
 
     public void reactTimePassed(CropField cropField, InGameTime elapsedTime) {

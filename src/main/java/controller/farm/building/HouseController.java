@@ -3,7 +3,9 @@ package controller.farm.building;
 import controller.GameController;
 import controller.RealTimeToInGameTimeConverter;
 import controller.command.Command;
+import controller.command.OpenPopupMenuCommand;
 import controller.command.SetControllerStateCommand;
+import controller.menu.builder.PopupMenuControllerBuilder;
 import controller.menu.builder.house.SleepMenuControllerBuilder;
 import controller.menu.builder.MenuControllerBuilder;
 import model.Position;
@@ -20,9 +22,9 @@ public class HouseController extends BuildingController<House> {
 
     @Override
     public Command getInteractionCommand(House house) {
-        MenuControllerBuilder menuControllerBuilder;
+        PopupMenuControllerBuilder menuControllerBuilder;
         menuControllerBuilder = new SleepMenuControllerBuilder(this.controller, timeConverter, house);
 
-        return new SetControllerStateCommand(this.controller, menuControllerBuilder.buildMenu(new Position(1,1)));
+        return new OpenPopupMenuCommand(this.controller, menuControllerBuilder);
     }
 }

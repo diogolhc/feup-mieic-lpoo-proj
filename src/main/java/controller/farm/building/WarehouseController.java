@@ -3,6 +3,7 @@ package controller.farm.building;
 import controller.GameController;
 import controller.command.Command;
 import controller.command.NoOperationCommand;
+import controller.command.OpenPopupMenuCommand;
 import controller.command.SetControllerStateCommand;
 import controller.menu.builder.*;
 import model.Position;
@@ -24,7 +25,7 @@ public class WarehouseController extends BuildingController<Warehouse> {
 
     @Override
     public Command getInteractionCommand(Warehouse warehouse) {
-        MenuControllerBuilder menuControllerBuilder = new WarehouseMenuControllerBuilder(this.controller, farm);
-        return new SetControllerStateCommand(this.controller, menuControllerBuilder.buildMenu(new Position(1, 1)));
+        PopupMenuControllerBuilder menuControllerBuilder = new WarehouseMenuControllerBuilder(this.controller, farm);
+        return new OpenPopupMenuCommand(this.controller, menuControllerBuilder);
     }
 }

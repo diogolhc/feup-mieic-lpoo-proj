@@ -2,6 +2,7 @@ package model.farm.building;
 
 import model.InGameTime;
 import model.Position;
+import model.farm.Currency;
 import model.farm.item.CropGrowthStage;
 import model.farm.building.crop_field_state.CropFieldState;
 import model.farm.building.crop_field_state.NotPlanted;

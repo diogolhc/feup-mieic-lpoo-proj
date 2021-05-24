@@ -3,11 +3,13 @@ package controller.menu.builder.market;
 import controller.GameController;
 import controller.GameControllerState;
 import controller.command.Command;
+import controller.command.OpenPopupMenuCommand;
 import controller.command.SellItemCommand;
 import controller.command.SetControllerStateCommand;
 import controller.farm.FarmController;
 import controller.farm.FarmNewBuildingController;
 import controller.menu.ButtonController;
+import controller.menu.builder.AlertMenuControllerBuilder;
 import controller.menu.builder.PopupMenuControllerBuilder;
 import model.Position;
 import model.farm.Currency;
@@ -42,8 +44,15 @@ public class BuildMenuControllerBuilder extends PopupMenuControllerBuilder {
         int x = 1;
 
         Button buildCropFieldButton = new Button(new Position(x, y), "CROPFIELD");
-        Command buildCropFieldCommand = new SetControllerStateCommand(this.controller,
-                new FarmNewBuildingController(this.farmController, new CropField(new Position(1, 1))));
+        Command buildCropFieldCommand;
+        if (this.farm.getCurrency().canBuy(CROPFIELD_BUILD_PRICE)) {
+            buildCropFieldCommand = new SetControllerStateCommand(this.controller, new FarmNewBuildingController(
+                    this.farmController, new CropField(new Position(1, 1)), CROPFIELD_BUILD_PRICE));
+        } else {
+            buildCropFieldCommand = new OpenPopupMenuCommand(this.controller,
+                    new AlertMenuControllerBuilder(this.controller, "NOT ENOUGH MONEY"));
+        }
+
         buttons.add(new ButtonController(buildCropFieldButton, buildCropFieldCommand));
 
         //y+=5;

@@ -38,8 +38,10 @@ public class NewBuildingController {
     }
 
     private void move(Position position) {
-        if (farm.isInsideLimits(position)) {
-            newBuilding.setTopLeftPosition(position);
+        Position oldPosition = newBuilding.getTopLeftPosition();
+        newBuilding.setTopLeftPosition(position);
+        if (!farm.getInsideRegion().contains(newBuilding.getOccupiedRegion())) {
+            newBuilding.setTopLeftPosition(oldPosition);
         }
     }
 }

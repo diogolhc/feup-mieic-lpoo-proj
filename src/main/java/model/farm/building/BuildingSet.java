@@ -1,8 +1,11 @@
 package model.farm.building;
 
 import model.Position;
+import model.region.RectangleRegion;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class BuildingSet {
@@ -55,14 +58,28 @@ public class BuildingSet {
         this.warehouse = warehouse;
     }
 
-    public boolean isTraversable(Position position) {
-        if (this.house.getUntraversableRegion().contains(position)) return false;
-        if (this.market.getUntraversableRegion().contains(position)) return false;
-        if (this.warehouse.getUntraversableRegion().contains(position)) return false;
+    public List<Building> getAllBuildings() {
+        List<Building> buildings = new ArrayList<>();
+        buildings.add(this.house);
+        buildings.add(this.market);
+        buildings.add(this.warehouse);
+        buildings.addAll(this.cropFields);
+        return buildings;
+    }
 
-        for (CropField cropField: this.cropFields) {
-            if (cropField.getUntraversableRegion().contains(position)) return false;
+    public boolean isTraversable(Position position) {
+        for (Building building: this.getAllBuildings()) {
+            if (building.getUntraversableRegion().contains(position)) return false;
         }
+
         return true;
+    }
+
+    public boolean isOccupied(RectangleRegion region) {
+        for (Building building: this.getAllBuildings()) {
+            if (building.getOccupiedRegion().intersects(region)) return true;
+        }
+
+        return false;
     }
 }
