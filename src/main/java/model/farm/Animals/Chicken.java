@@ -1,11 +1,10 @@
 package model.farm.Animals;
 
-import gui.Color;
 import model.Position;
 
-public class Cow extends Animal{
+public class Chicken extends Animal {
 
-    public Cow(Position position, Hunger hunger, char identifier) {
+    public Chicken(Position position, Hunger hunger, char identifier) {
         super(position, hunger);
         this.identifier = identifier;
     }

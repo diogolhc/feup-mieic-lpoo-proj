@@ -6,6 +6,7 @@ import gui.drawer.shape.BoxDrawer;
 import gui.drawer.shape.FilledRectangleDrawer;
 import gui.drawer.shape.VerticalLineDrawer;
 import model.Position;
+import model.farm.Animals.Animal;
 import model.farm.building.Stockyard;
 
 public class StockyardViewer {
@@ -24,6 +25,11 @@ public class StockyardViewer {
 
         gui.setBackgroundColor(PATH_COLOR);
         gui.drawChar(stockyard.getTopLeftPosition().getX() - 1, stockyard.getTopLeftPosition().getY() + 3, ' ');
-        //VerticalLineDrawer verticalLineDrawer = new VerticalLineDrawer(gui, )
+
+        for (Object animal : stockyard.getAnimals()) {
+            AnimalViewer animalViewer = new AnimalViewer();
+            animalViewer.draw((Animal) animal, gui);
+        }
     }
+
 }

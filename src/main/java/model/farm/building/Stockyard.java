@@ -24,6 +24,10 @@ public class Stockyard<T extends Animal> extends Building {
         this.animals.add(animal);
     }
 
+    public List<T> getAnimals() {
+        return animals;
+    }
+
     @Override
     public boolean isTraversable(Position position) {
         position = position.getRelativeTo(this.getTopLeftPosition());
