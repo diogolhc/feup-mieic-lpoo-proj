@@ -58,6 +58,12 @@ public class BuildingSet {
         this.warehouse = warehouse;
     }
 
+    public List<Building> getDemolishableBuildings() {
+        List<Building> buildings = new ArrayList<>();
+        buildings.addAll(this.cropFields);
+        return buildings;
+    }
+
     public List<Building> getAllBuildings() {
         List<Building> buildings = new ArrayList<>();
         buildings.add(this.house);
@@ -81,5 +87,9 @@ public class BuildingSet {
         }
 
         return false;
+    }
+
+    public void removeCropField(CropField cropField) {
+        this.cropFields.remove(cropField);
     }
 }

@@ -6,6 +6,7 @@ import controller.command.NoOperationCommand;
 import controller.command.OpenPopupMenuCommand;
 import controller.command.SetControllerStateCommand;
 import controller.farm.FarmController;
+import controller.menu.builder.AlertMenuControllerBuilder;
 import controller.menu.builder.MenuControllerBuilder;
 import controller.menu.builder.PopupMenuControllerBuilder;
 import controller.menu.builder.WarehouseMenuControllerBuilder;
@@ -38,5 +39,11 @@ public class MarketController extends BuildingController<Market> {
             throw new RuntimeException(
                     "LOGIC ERROR: Open market in invalid state: " + this.controller.getGameControllerState().getClass().toString());
         }
+    }
+
+    @Override
+    public Command getDemolishCommand(Market market) {
+        return new OpenPopupMenuCommand(this.controller, new AlertMenuControllerBuilder(this.controller,
+                "MARKET CANNOT BE DEMOLISHED"));
     }
 }

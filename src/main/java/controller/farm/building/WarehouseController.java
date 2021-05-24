@@ -28,4 +28,10 @@ public class WarehouseController extends BuildingController<Warehouse> {
         PopupMenuControllerBuilder menuControllerBuilder = new WarehouseMenuControllerBuilder(this.controller, farm);
         return new OpenPopupMenuCommand(this.controller, menuControllerBuilder);
     }
+
+    @Override
+    public Command getDemolishCommand(Warehouse warehouse) {
+        return new OpenPopupMenuCommand(this.controller, new AlertMenuControllerBuilder(this.controller,
+                "WAREHOUSE CANNOT BE DEMOLISHED"));
+    }
 }

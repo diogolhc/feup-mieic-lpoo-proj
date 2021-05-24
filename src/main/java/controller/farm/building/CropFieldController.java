@@ -1,7 +1,11 @@
 package controller.farm.building;
 
 import controller.GameController;
+import controller.GameControllerState;
 import controller.command.*;
+import controller.farm.FarmDemolishController;
+import controller.farm.FarmWithFarmerController;
+import controller.menu.builder.AlertMenuControllerBuilder;
 import controller.menu.builder.PopupMenuControllerBuilder;
 import model.InGameTime;
 import model.farm.Farm;
@@ -41,6 +45,23 @@ public class CropFieldController extends BuildingController<CropField> {
         }
 
         return new OpenPopupMenuCommand(this.controller, menuControllerBuilder);
+    }
+
+    @Override
+    public Command getDemolishCommand(CropField cropField) {
+        if (this.farm.getBuildings().getCropFields().size() == 1) {
+            return new OpenPopupMenuCommand(this.controller, new AlertMenuControllerBuilder(this.controller,
+                    "CANNOT DEMOLISH LAST\nCROPFIELD: MUST HAVE\nAT LEAST ONE"));
+        } else {
+            GameControllerState gameControllerState = this.controller.getGameControllerState();
+            if (gameControllerState instanceof FarmDemolishController) {
+                gameControllerState = new FarmWithFarmerController((FarmDemolishController) gameControllerState);
+            }
+
+            return new CompoundCommand()
+                    .addCommand(() -> this.farm.getBuildings().removeCropField(cropField))
+                    .addCommand(new SetControllerStateCommand(this.controller, gameControllerState));
+        }
     }
 
     public void reactTimePassed(CropField cropField, InGameTime elapsedTime) {

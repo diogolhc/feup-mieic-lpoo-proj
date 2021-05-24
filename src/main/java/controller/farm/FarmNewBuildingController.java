@@ -22,7 +22,7 @@ public class FarmNewBuildingController extends FarmController {
     @Override
     public void reactKeyboard(GUI.ACTION action) {
         if (action == GUI.ACTION.BACK) returnToFarmerController();
-        if (action == GUI.ACTION.INTERACT) chooseBuildingPlace();
+        if (action == GUI.ACTION.INTERACT) reactInteraction();
         NewBuildingController newBuildingController = new NewBuildingController(this.farm, this.newBuilding);
         newBuildingController.doAction(action);
     }
@@ -37,7 +37,7 @@ public class FarmNewBuildingController extends FarmController {
         this.controller.setGameControllerState(new FarmWithFarmerController(this));
     }
 
-    private void chooseBuildingPlace() {
+    private void reactInteraction() {
         if (farm.getBuildings().isOccupied(this.newBuilding.getOccupiedRegion())) {
             this.controller.setGameControllerState(new AlertMenuControllerBuilder(this.controller,
                     "CHOSEN PLACE IS ALREADY OCCUPIED").buildMenu(new Position(1, 1)));

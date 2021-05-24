@@ -7,6 +7,7 @@ import controller.command.OpenPopupMenuCommand;
 import controller.command.SellItemCommand;
 import controller.command.SetControllerStateCommand;
 import controller.farm.FarmController;
+import controller.farm.FarmDemolishController;
 import controller.farm.FarmNewBuildingController;
 import controller.menu.ButtonController;
 import controller.menu.builder.AlertMenuControllerBuilder;
@@ -43,6 +44,13 @@ public class BuildMenuControllerBuilder extends PopupMenuControllerBuilder {
         int y = 4;
         int x = 1;
 
+        Button demolishButton = new Button(new Position(x, y), "DEMOLISH");
+        Command demolishCommand;
+        demolishCommand = new SetControllerStateCommand(this.controller, new FarmDemolishController(this.farmController));
+        buttons.add(new ButtonController(demolishButton, demolishCommand));
+
+        y += 4;
+
         Button buildCropFieldButton = new Button(new Position(x, y), "CROPFIELD");
         Command buildCropFieldCommand;
         if (this.farm.getCurrency().canBuy(CROPFIELD_BUILD_PRICE)) {
@@ -64,7 +72,7 @@ public class BuildMenuControllerBuilder extends PopupMenuControllerBuilder {
     protected List<Label> getLabels() {
         List<Label> labels = super.getLabels();
 
-        int y = 5;
+        int y = 9;
         labels.add(new Label(
                 new Position(14, y),
                 () -> CROPFIELD_BUILD_PRICE.toString()
@@ -76,7 +84,7 @@ public class BuildMenuControllerBuilder extends PopupMenuControllerBuilder {
 
     @Override
     protected int getHeight() {
-        return 8;
+        return 12;
     }
 
     @Override
