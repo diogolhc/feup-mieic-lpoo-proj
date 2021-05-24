@@ -3,9 +3,11 @@ package model.farm.Animals;
 import model.Position;
 
 public abstract class Animal {
-    //TODO HOW SHOULD ANIMALS DIE AND CHECK WHICH ALIMENTS THEY GIVE (MILK, CORN, EGGS...)
+    //TODO HOW SHOULD ANIMALS DIE AND CHECK WHICH ALIMENTS THEY GIVE (MILK, CORN, EGGS...)???
     private Position position;
     private Hunger hunger;
+    protected char identifier;    //TODO SHOULD WE HAVE A CHAR TO REPRESENT EACH ANIMAL? OR STOCKYARD CONTROLLER SHOULD NOTICE IT?
+    //private FoodItem typeOfFood; //TODO Animals eat this type of food
 
     public Animal(Position position, Hunger hunger) {
         this.position = position;
@@ -19,6 +21,8 @@ public abstract class Animal {
     public void setPosition(Position position) {
         this.position = position;
     }
+
+    public abstract void setChar(char identifier);
 
     public abstract char getChar();
 }
