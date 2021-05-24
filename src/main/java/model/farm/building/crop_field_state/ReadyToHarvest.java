@@ -1,13 +1,15 @@
-package model.farm.building.crop_field.state;
+package model.farm.building.crop_field_state;
 
 import model.InGameTime;
-import model.farm.crop.Crop;
+import model.farm.item.Crop;
 
 public class ReadyToHarvest implements CropFieldState {
     private Crop crop;
+    private int harvestAmount;
 
-    public ReadyToHarvest(Crop crop) {
+    public ReadyToHarvest(Crop crop, int harvestAmount) {
         this.crop = crop;
+        this.harvestAmount = harvestAmount;
     }
 
     @Override
@@ -21,5 +23,10 @@ public class ReadyToHarvest implements CropFieldState {
     @Override
     public Crop getCrop() {
         return this.crop;
+    }
+
+    @Override
+    public int getHarvestAmount() {
+        return this.harvestAmount;
     }
 }

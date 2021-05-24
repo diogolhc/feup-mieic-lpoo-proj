@@ -1,11 +1,12 @@
-package model.farm.building.crop_field;
+package model.farm.building;
 
 import model.InGameTime;
 import model.Position;
-import model.farm.building.Building;
-import model.farm.crop.GrowthStage;
-import model.farm.building.crop_field.state.CropFieldState;
-import model.farm.building.crop_field.state.NotPlanted;
+import model.farm.item.CropGrowthStage;
+import model.farm.building.crop_field_state.CropFieldState;
+import model.farm.building.crop_field_state.NotPlanted;
+
+import java.util.Objects;
 
 
 public class CropField extends Building {
@@ -25,7 +26,7 @@ public class CropField extends Building {
         return this.state;
     }
 
-    public GrowthStage getCropGrowthStage() {
+    public CropGrowthStage getCropGrowthStage() {
         InGameTime remainingTime = this.state.getRemainingTime();
         return this.state.getCrop().getCurrentGrowthStage(remainingTime);
     }

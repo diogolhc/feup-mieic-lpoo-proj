@@ -7,7 +7,7 @@ import model.*;
 import model.farm.building.BuildingSet;
 import model.farm.building.Market;
 import model.farm.building.Warehouse;
-import model.farm.building.crop_field.CropField;
+import model.farm.building.CropField;
 import model.farm.Farm;
 import model.farm.Farmer;
 import model.farm.building.House;

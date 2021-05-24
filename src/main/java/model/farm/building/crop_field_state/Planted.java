@@ -1,17 +1,19 @@
-package model.farm.building.crop_field.state;
+package model.farm.building.crop_field_state;
 
 import model.InGameTime;
-import model.farm.building.crop_field.CropField;
-import model.farm.crop.Crop;
+import model.farm.building.CropField;
+import model.farm.item.Crop;
 
 public class Planted implements CropFieldState {
     private final CropField cropField;
     private final Crop crop;
     private InGameTime timeRemaining;
+    private int harvestAmount;
 
     public Planted(CropField cropField, Crop crop) {
         this.cropField = cropField;
         this.crop = crop;
+        this.harvestAmount = this.crop.getBaseHarvestAmount();
         timeRemaining = this.crop.getGrowTime();
     }
 
@@ -24,12 +26,17 @@ public class Planted implements CropFieldState {
     public void setRemainingTime(InGameTime time) {
         this.timeRemaining = time;
         if (this.timeRemaining.getMinute() <= 0) {
-            this.cropField.setState(new ReadyToHarvest(this.crop));
+            this.cropField.setState(new ReadyToHarvest(this.crop, this.harvestAmount));
         }
     }
 
     @Override
     public Crop getCrop() {
         return this.crop;
+    }
+
+    @Override
+    public int getHarvestAmount() {
+        return this.harvestAmount;
     }
 }

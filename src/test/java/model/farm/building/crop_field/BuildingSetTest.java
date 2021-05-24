@@ -2,6 +2,7 @@ package model.farm.building.crop_field;
 
 import model.Position;
 import model.farm.building.BuildingSet;
+import model.farm.building.CropField;
 import model.farm.building.House;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

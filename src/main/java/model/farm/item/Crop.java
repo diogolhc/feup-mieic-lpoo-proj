@@ -1,28 +1,30 @@
-package model.farm.crop;
+package model.farm.item;
 
 import model.InGameTime;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class Crop {
-    public static final Crop NO_CROP = new Crop("", new InGameTime(0), Arrays.asList(new GrowthStage()));
+public class Crop extends Item {
+    public static final Crop NO_CROP = new Crop("", new InGameTime(0),
+            Arrays.asList(new CropGrowthStage()), 0);
 
     private final String name;
     private final InGameTime growTime;
-    private final List<GrowthStage> growthStages;
+    private final List<CropGrowthStage> growthStages;
+    private final int baseHarvestAmount;
 
-    public Crop(String name, InGameTime growTime, List<GrowthStage> growthStages) {
+    public Crop(String name, InGameTime growTime, List<CropGrowthStage> growthStages, int baseHarvestAmount) {
         this.name = name;
         this.growTime = growTime;
         this.growthStages = growthStages;
+        this.baseHarvestAmount = baseHarvestAmount;
         Collections.sort(this.growthStages);
     }
 
-    public GrowthStage getCurrentGrowthStage(InGameTime remainingTime) {
-        for (GrowthStage stage: this.growthStages) {
+    public CropGrowthStage getCurrentGrowthStage(InGameTime remainingTime) {
+        for (CropGrowthStage stage: this.growthStages) {
             if (remainingTime.getMinute() <= stage.getStageStartTime().getMinute()) {
                 return stage;
             }
@@ -35,7 +37,12 @@ public class Crop {
         return growTime;
     }
 
+    @Override
     public String getName() {
         return this.name;
+    }
+
+    public int getBaseHarvestAmount() {
+        return this.baseHarvestAmount;
     }
 }

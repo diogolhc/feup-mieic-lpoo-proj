@@ -1,8 +1,7 @@
 package controller.command;
 
-import model.farm.building.crop_field.CropField;
-import model.farm.building.crop_field.state.NotPlanted;
-import model.farm.building.crop_field.state.Planted;
+import model.farm.building.CropField;
+import model.farm.building.crop_field_state.NotPlanted;
 
 public class RemoveCropCommand implements Command {
     private CropField cropField;

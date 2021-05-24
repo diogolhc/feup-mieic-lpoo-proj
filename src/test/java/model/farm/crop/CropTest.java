@@ -2,6 +2,8 @@ package model.farm.crop;
 
 import gui.Color;
 import model.InGameTime;
+import model.farm.item.Crop;
+import model.farm.item.CropGrowthStage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,7 +14,7 @@ import java.util.List;
 
 public class CropTest {
     private Crop crop;
-    private List<GrowthStage> growthStages;
+    private List<CropGrowthStage> growthStages;
 
     @BeforeEach
     void setUp() {
@@ -21,11 +23,11 @@ public class CropTest {
         Mockito.when(crop.getCurrentGrowthStage(Mockito.any())).thenCallRealMethod();
         Mockito.when(crop.getGrowthStages()).thenReturn(growthStages);
 
-        growthStages.add(new GrowthStage(new InGameTime(0), 'a', new Color("#000001")));
-        growthStages.add(new GrowthStage(new InGameTime(5), 'b', new Color("#000002")));
-        growthStages.add(new GrowthStage(new InGameTime(6), 'c', new Color("#000003")));
-        growthStages.add(new GrowthStage(new InGameTime(8), 'd', new Color("#000004")));
-        growthStages.add(new GrowthStage(new InGameTime(20), 'e', new Color("#000005")));
+        growthStages.add(new CropGrowthStage(new InGameTime(0), 'a', new Color("#000001")));
+        growthStages.add(new CropGrowthStage(new InGameTime(5), 'b', new Color("#000002")));
+        growthStages.add(new CropGrowthStage(new InGameTime(6), 'c', new Color("#000003")));
+        growthStages.add(new CropGrowthStage(new InGameTime(8), 'd', new Color("#000004")));
+        growthStages.add(new CropGrowthStage(new InGameTime(20), 'e', new Color("#000005")));
     }
 
     @Test

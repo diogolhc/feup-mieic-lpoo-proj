@@ -2,7 +2,7 @@ package model.farm;
 
 import model.Position;
 import model.InGameTime;
-import model.farm.crop.Crop;
+import model.farm.item.Crop;
 import model.farm.building.BuildingSet;
 
 import java.util.ArrayList;
@@ -15,6 +15,7 @@ public class Farm {
     private InGameTime time;
     private List<Weather> weathers;
     private Weather weather;
+    private Inventory inventory;
     private List<Crop> crops;
     private int width;
     private int height;
@@ -91,4 +92,11 @@ public class Farm {
         return this.weathers;
     }
 
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
+    }
+
+    public Inventory getInventory() {
+        return this.inventory;
+    }
 }

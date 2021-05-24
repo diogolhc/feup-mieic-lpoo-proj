@@ -8,8 +8,9 @@ import controller.menu.ButtonController;
 import controller.menu.MenuController;
 import controller.menu.PopupMenuControllerWithClosingCondition;
 import model.Position;
-import model.farm.building.crop_field.CropField;
-import model.farm.building.crop_field.state.ReadyToHarvest;
+import model.farm.Farm;
+import model.farm.building.CropField;
+import model.farm.building.crop_field_state.ReadyToHarvest;
 import model.menu.Button;
 import model.menu.Menu;
 import model.menu.label.Label;
@@ -17,17 +18,19 @@ import model.menu.label.Label;
 import java.util.List;
 
 public class CropFieldGrowingMenuControllerBuilder extends PopupMenuControllerBuilder {
+    private Farm farm;
     private CropField cropField;
 
-    public CropFieldGrowingMenuControllerBuilder(GameController controller, CropField cropField) {
+    public CropFieldGrowingMenuControllerBuilder(GameController controller, Farm farm, CropField cropField) {
         super(controller);
+        this.farm = farm;
         this.cropField = cropField;
     }
 
     @Override
     protected MenuController getMenuController(Menu menu) {
-        MenuController harvestMenuController = new HarvestMenuControllerBuilder(this.controller, cropField)
-                .buildMenu(new Position(1, 1));
+        MenuController harvestMenuController = new HarvestMenuControllerBuilder(
+                this.controller, this.farm.getInventory(), this.cropField).buildMenu(new Position(1, 1));
 
         Command closingCondition = () -> {
             if (cropField.getState() instanceof ReadyToHarvest) {

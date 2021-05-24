@@ -1,13 +1,12 @@
 package model.farm.building;
 
 import model.Position;
-import model.farm.building.crop_field.CropField;
 
 import java.util.HashSet;
 import java.util.Set;
 
 public class BuildingSet {
-    private final Set<CropField> cropFields;
+    private final Set<CropField> cropFields; // TODO because of hashset, we probably need to implement hash for cropfields
     private House house;
     private Market market;
     private Warehouse warehouse;

@@ -1,9 +1,9 @@
 package controller.command;
 
-import model.farm.building.crop_field.CropField;
-import model.farm.crop.Crop;
-import model.farm.building.crop_field.state.NotPlanted;
-import model.farm.building.crop_field.state.Planted;
+import model.farm.building.CropField;
+import model.farm.item.Crop;
+import model.farm.building.crop_field_state.NotPlanted;
+import model.farm.building.crop_field_state.Planted;
 
 public class PlantCropCommand implements Command {
     private CropField cropField;

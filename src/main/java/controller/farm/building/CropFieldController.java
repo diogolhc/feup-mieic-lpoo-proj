@@ -3,26 +3,27 @@ package controller.farm.building;
 import controller.GameController;
 import controller.command.*;
 import model.InGameTime;
-import model.farm.building.crop_field.CropField;
+import model.farm.Farm;
+import model.farm.building.CropField;
 import model.Position;
-import model.farm.building.crop_field.state.NotPlanted;
-import model.farm.building.crop_field.state.Planted;
-import model.farm.building.crop_field.state.ReadyToHarvest;
+import model.farm.building.crop_field_state.NotPlanted;
+import model.farm.building.crop_field_state.Planted;
+import model.farm.building.crop_field_state.ReadyToHarvest;
 import controller.menu.builder.CropFieldGrowingMenuControllerBuilder;
 import controller.menu.builder.HarvestMenuControllerBuilder;
 import controller.menu.builder.MenuControllerBuilder;
 import controller.menu.builder.PlantCropMenuControllerBuilder;
-import model.farm.crop.Crop;
+import model.farm.item.Crop;
 
 import java.util.List;
 
 public class CropFieldController extends BuildingController<CropField> {
     private final GameController controller;
-    private List<Crop> crops;
+    private Farm farm;
 
-    public CropFieldController(GameController controller, List<Crop> crops) {
+    public CropFieldController(GameController controller, Farm farm) {
         this.controller = controller;
-        this.crops = crops;
+        this.farm = farm;
     }
 
     @Override
@@ -30,11 +31,11 @@ public class CropFieldController extends BuildingController<CropField> {
         MenuControllerBuilder menuControllerBuilder;
 
         if (cropField.getState() instanceof NotPlanted) {
-            menuControllerBuilder = new PlantCropMenuControllerBuilder(this.controller, crops, cropField);
+            menuControllerBuilder = new PlantCropMenuControllerBuilder(this.controller, this.farm.getCrops(), cropField);
         } else if (cropField.getState() instanceof Planted) {
-            menuControllerBuilder = new CropFieldGrowingMenuControllerBuilder(this.controller, cropField);
+            menuControllerBuilder = new CropFieldGrowingMenuControllerBuilder(this.controller, this.farm, cropField);
         } else if (cropField.getState() instanceof ReadyToHarvest) {
-            menuControllerBuilder = new HarvestMenuControllerBuilder(this.controller, cropField);
+            menuControllerBuilder = new HarvestMenuControllerBuilder(this.controller, farm.getInventory(), cropField);
         } else {
             // This should never happen
             throw new RuntimeException(

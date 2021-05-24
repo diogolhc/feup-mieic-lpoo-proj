@@ -6,8 +6,8 @@ import controller.command.CompoundCommand;
 import controller.command.PlantCropCommand;
 import controller.menu.ButtonController;
 import model.Position;
-import model.farm.building.crop_field.CropField;
-import model.farm.crop.Crop;
+import model.farm.building.CropField;
+import model.farm.item.Crop;
 import model.menu.Button;
 
 import java.util.List;

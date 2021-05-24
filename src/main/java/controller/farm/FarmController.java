@@ -12,7 +12,7 @@ import model.InGameTime;
 import model.Position;
 import model.farm.Farm;
 import model.farm.building.BuildingSet;
-import model.farm.building.crop_field.CropField;
+import model.farm.building.CropField;
 import viewer.GameViewer;
 import viewer.farm.FarmViewer;
 
@@ -40,7 +40,7 @@ public class FarmController implements GameControllerState {
         Position farmerPosition = this.farm.getFarmer().getPosition();
         BuildingSet farmBuildings = this.farm.getBuildings();
 
-        CropFieldController cropFieldController = new CropFieldController(this.controller, this.farm.getCrops());
+        CropFieldController cropFieldController = new CropFieldController(this.controller, this.farm);
         for (CropField cropField: farmBuildings.getCropFields()) {
             cropFieldController.reactInteraction(cropField, farmerPosition);
         }
@@ -51,7 +51,7 @@ public class FarmController implements GameControllerState {
         MarketController marketController = new MarketController(this.controller);
         marketController.reactInteraction(farmBuildings.getMarket(), farmerPosition);
 
-        WarehouseController warehouseController = new WarehouseController(this.controller);
+        WarehouseController warehouseController = new WarehouseController(this.controller, this.farm);
         warehouseController.reactInteraction(farmBuildings.getWarehouse(), farmerPosition);
     }
 
@@ -67,7 +67,7 @@ public class FarmController implements GameControllerState {
 
         this.farm.setTime(this.farm.getTime().add(elapsedTime));
 
-        CropFieldController cropFieldController = new CropFieldController(this.controller, this.farm.getCrops());
+        CropFieldController cropFieldController = new CropFieldController(this.controller, this.farm);
         for (CropField cropField : this.farm.getBuildings().getCropFields()) {
             cropFieldController.reactTimePassed(cropField, elapsedTime);
         }

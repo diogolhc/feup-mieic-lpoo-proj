@@ -4,16 +4,19 @@ import controller.GameController;
 import controller.command.*;
 import controller.menu.ButtonController;
 import model.Position;
-import model.farm.building.crop_field.CropField;
+import model.farm.Inventory;
+import model.farm.building.CropField;
 import model.menu.Button;
 
 import java.util.List;
 
 public class HarvestMenuControllerBuilder extends PopupMenuControllerBuilder {
+    private Inventory inventory;
     private CropField cropField;
 
-    public HarvestMenuControllerBuilder(GameController controller, CropField cropField) {
+    public HarvestMenuControllerBuilder(GameController controller, Inventory inventory, CropField cropField) {
         super(controller);
+        this.inventory = inventory;
         this.cropField = cropField;
     }
 
@@ -23,7 +26,7 @@ public class HarvestMenuControllerBuilder extends PopupMenuControllerBuilder {
 
         Button harvestButton = new Button(new Position(1, 5), "HARVEST");
         Command harvestButtonCommand = new CompoundCommand()
-                .addCommand(new HarvestCropCommand(cropField))
+                .addCommand(new HarvestCropCommand(inventory, cropField))
                 .addCommand(super.getClosePopupMenuCommand());
         buttons.add(new ButtonController(harvestButton, harvestButtonCommand));
 

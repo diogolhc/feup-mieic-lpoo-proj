@@ -1,24 +1,24 @@
-package model.farm.crop;
+package model.farm.item;
 
 import gui.Color;
 import model.InGameTime;
 
-public class GrowthStage implements Comparable<GrowthStage> {
+public class CropGrowthStage implements Comparable<CropGrowthStage> {
     private final InGameTime stageStartTime;
     private final char stageChar;
     private final Color stageColor;
 
-    public GrowthStage(InGameTime stageStartTime, char stageChar, Color stageColor) {
+    public CropGrowthStage(InGameTime stageStartTime, char stageChar, Color stageColor) {
         this.stageStartTime = stageStartTime;
         this.stageChar = stageChar;
         this.stageColor = stageColor;
     }
 
-    public GrowthStage() {
+    public CropGrowthStage() {
         this(new InGameTime(0), ' ', new Color("#000000"));
     }
 
-    public GrowthStage(GrowthStage stage) {
+    public CropGrowthStage(CropGrowthStage stage) {
         this.stageStartTime = stage.stageStartTime;
         this.stageChar = stage.stageChar;
         this.stageColor = stage.stageColor;
@@ -37,7 +37,7 @@ public class GrowthStage implements Comparable<GrowthStage> {
     }
 
     @Override
-    public int compareTo(GrowthStage growthStage) {
+    public int compareTo(CropGrowthStage growthStage) {
         return this.stageStartTime.compareTo(growthStage.stageStartTime);
     }
 }

@@ -7,13 +7,12 @@ import model.farm.Farmer;
 import model.farm.building.House;
 import model.farm.building.Market;
 import model.farm.building.Warehouse;
-import model.farm.building.crop_field.CropField;
-import model.farm.crop.Crop;
-import model.farm.crop.GrowthStage;
+import model.farm.building.CropField;
+import model.farm.item.Crop;
+import model.farm.item.CropGrowthStage;
 import model.farm.Weather;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -102,6 +101,11 @@ public class NewGameFarmBuilder extends FarmBuilder {
     }
 
     @Override
+    protected int getInventoryCapacity() {
+        return 350;
+    }
+
+    @Override
     protected Warehouse getWarehouse() {
         return new Warehouse(new Position(18, 1));
     }
@@ -139,25 +143,27 @@ public class NewGameFarmBuilder extends FarmBuilder {
             String cropName = tokens[0];
             InGameTime cropGrowthTime = parseTimeString(tokens[1]);
             int numberOfStages = Integer.parseInt(tokens[2]);
-            List<GrowthStage> growthStages = new ArrayList<>();
+            int baseHarvestAmount = Integer.parseInt(tokens[3]);
+
+            List<CropGrowthStage> growthStages = new ArrayList<>();
             currentLine++;
             for (int i = 0; i < numberOfStages; i++) {
                 growthStages.add(parseGrowthStage(this.cropsLines.get(currentLine)));
                 currentLine++;
             }
-            crops.add(new Crop(cropName, cropGrowthTime, growthStages));
+            crops.add(new Crop(cropName, cropGrowthTime, growthStages, baseHarvestAmount));
         }
 
         return crops;
     }
 
     // TODO is this supposed to be here or in respective class?
-    private static GrowthStage parseGrowthStage(String s) {
+    private static CropGrowthStage parseGrowthStage(String s) {
         String tokens[] = s.split(" ");
         InGameTime stageTime = parseTimeString(tokens[0]);
         char stageChar = tokens[1].charAt(0);
         Color stageColor = new Color(tokens[2]);
-        return new GrowthStage(stageTime, stageChar, stageColor);
+        return new CropGrowthStage(stageTime, stageChar, stageColor);
     }
 
     // TODO is this supposed to be here or in respective class?

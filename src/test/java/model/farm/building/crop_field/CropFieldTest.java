@@ -3,9 +3,10 @@ package model.farm.building.crop_field;
 import gui.Color;
 import model.InGameTime;
 import model.Position;
-import model.farm.crop.Crop;
-import model.farm.crop.GrowthStage;
-import model.farm.building.crop_field.state.CropFieldState;
+import model.farm.building.CropField;
+import model.farm.item.Crop;
+import model.farm.item.CropGrowthStage;
+import model.farm.building.crop_field_state.CropFieldState;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -63,7 +64,7 @@ public class CropFieldTest {
     void getGrowthStage() {
         CropFieldState state = Mockito.mock(CropFieldState.class);
         Crop crop = Mockito.mock(Crop.class);
-        GrowthStage growthStage = new GrowthStage(new InGameTime(7), 'c', new Color("#FFFFFF"));
+        CropGrowthStage growthStage = new CropGrowthStage(new InGameTime(7), 'c', new Color("#FFFFFF"));
         InGameTime time = new InGameTime(5);
 
         field.setState(state);
