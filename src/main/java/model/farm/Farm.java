@@ -16,6 +16,7 @@ public class Farm {
     private List<Weather> weathers;
     private Weather weather;
     private Inventory inventory;
+    private Currency currency;
     private List<Crop> crops;
     private int width;
     private int height;
@@ -98,5 +99,13 @@ public class Farm {
 
     public Inventory getInventory() {
         return this.inventory;
+    }
+
+    public Currency getCurrency() {
+        return this.currency;
+    }
+
+    public void setCurrency(Currency currency) {
+        this.currency = currency;
     }
 }

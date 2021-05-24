@@ -3,7 +3,9 @@ package model.farm.builder;
 import gui.Color;
 import model.InGameTime;
 import model.Position;
+import model.farm.Currency;
 import model.farm.Farmer;
+import model.farm.Inventory;
 import model.farm.building.House;
 import model.farm.building.Market;
 import model.farm.building.Warehouse;
@@ -101,8 +103,13 @@ public class NewGameFarmBuilder extends FarmBuilder {
     }
 
     @Override
-    protected int getInventoryCapacity() {
-        return 350;
+    protected Inventory getInventory() {
+        return new Inventory(350);
+    }
+
+    @Override
+    protected Currency getCurrency() {
+        return new Currency(0);
     }
 
     @Override

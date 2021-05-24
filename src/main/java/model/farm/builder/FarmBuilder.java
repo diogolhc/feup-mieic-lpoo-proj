@@ -1,16 +1,13 @@
 package model.farm.builder;
 
 import model.InGameTime;
-import model.farm.Farm;
-import model.farm.Farmer;
-import model.farm.Inventory;
+import model.farm.*;
 import model.farm.building.BuildingSet;
 import model.farm.building.House;
 import model.farm.building.Market;
 import model.farm.building.Warehouse;
 import model.farm.building.CropField;
 import model.farm.item.Crop;
-import model.farm.Weather;
 
 import java.util.List;
 import java.util.Set;
@@ -32,11 +29,14 @@ public abstract class FarmBuilder {
         farm.setWeatherStates(this.getWeatherStates());
         farm.setWeather(farm.getWeatherStates().get(0)); // TODO this will not be like this
         farm.setCrops(this.getCrops());
-        farm.setInventory(new Inventory(this.getInventoryCapacity()));
+        farm.setInventory(this.getInventory());
+        farm.setCurrency(this.getCurrency());
         return farm;
     }
 
-    protected abstract int getInventoryCapacity();
+    protected abstract Currency getCurrency();
+
+    protected abstract Inventory getInventory();
 
     protected abstract Warehouse getWarehouse();
 

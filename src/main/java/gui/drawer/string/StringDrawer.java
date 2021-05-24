@@ -16,9 +16,9 @@ public class StringDrawer {
         this.foregroundColor = foregroundColor;
     }
 
-    public void draw(Position position, String title) {
+    public void draw(Position position, String s) {
         this.gui.setBackgroundColor(this.backgroundColor);
         this.gui.setForegroundColor(this.foregroundColor);
-        this.gui.drawString(position.getX(), position.getY(), title);
+        this.gui.drawString(position.getX(), position.getY(), s);
     }
 }

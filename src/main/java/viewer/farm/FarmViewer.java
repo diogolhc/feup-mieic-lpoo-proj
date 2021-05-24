@@ -4,6 +4,7 @@ import gui.Color;
 import gui.GUI;
 import gui.drawer.shape.FilledRectangleDrawer;
 import model.*;
+import model.farm.Currency;
 import model.farm.building.BuildingSet;
 import model.farm.building.Market;
 import model.farm.building.Warehouse;
@@ -28,7 +29,7 @@ public class FarmViewer extends GameViewer {
         this.drawBuildings(this.farm.getBuildings(), gui);
         this.drawFences(this.farm, gui);
         this.drawFarmer(this.farm.getFarmer(), new FarmerViewer(), gui);
-        this.drawHUD(this.farm.getTime(), this.farm.getWeather(), new HUDViewer(), gui);
+        this.drawHUD(this.farm.getTime(), this.farm.getWeather(), this.farm.getCurrency(), new HUDViewer(), gui);
     }
 
     private void drawBackground(Farm farm, GUI gui) {
@@ -73,12 +74,12 @@ public class FarmViewer extends GameViewer {
         cropFieldViewer.draw(cropField, gui);
     }
 
-    private void drawHUD(InGameTime time, Weather weather, HUDViewer hudViewer, GUI gui) {
+    private void drawHUD(InGameTime time, Weather weather, Currency currency, HUDViewer hudViewer, GUI gui) {
         // TODO background drawer inside HUDViewer
         FilledRectangleDrawer backgroundDrawer = new FilledRectangleDrawer(
                 gui, new Color("#222222"), new Color("#222222"), ' ');
         backgroundDrawer.draw(new Position(0, farm.getHeight()), farm.getWidth(), 1);
-        hudViewer.draw(time, weather, gui);
+        hudViewer.draw(time, weather, currency, gui);
     }
 
 }
