@@ -15,11 +15,11 @@ import model.farm.building.House;
 import model.farm.Weather;
 import viewer.GameViewer;
 
-public class FarmWithFarmerViewer extends GameViewer {
+public class FarmViewer extends GameViewer {
     public static final Color GRASS_BACKGROUNG = new Color("#7EC850");
     private Farm farm;
 
-    public FarmWithFarmerViewer(Farm farm) {
+    public FarmViewer(Farm farm) {
         this.farm = farm;
     }
 
