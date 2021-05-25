@@ -6,7 +6,7 @@ import controller.command.NoOperationCommand;
 import model.InGameTime;
 import model.farm.building.Stockyard;
 import model.farm.building.CropField;
-dssdds
+
 public class StockyardController extends BuildingController<Stockyard> {
 
     private final GameController controller;
