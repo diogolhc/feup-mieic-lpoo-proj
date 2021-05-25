@@ -10,19 +10,23 @@ import java.util.Set;
 
 public class BuildingSet {
     private final Set<CropField> cropFields; // TODO because of hashset, we probably need to implement hash for cropfields
+    private final Set<Stockyard> stockyards; //      same goes for stockyards
     private House house;
     private Market market;
     private Warehouse warehouse;
 
     public BuildingSet() {
         this.cropFields = new HashSet<>();
+        this.stockyards = new HashSet<>();
     }
 
-    public BuildingSet(House house, Market market, Warehouse warehouse, Set<CropField> cropFields) {
+    // TODO This smells bad :(
+    public BuildingSet(House house, Market market, Warehouse warehouse, Set<CropField> cropFields, Set<Stockyard> stockyards) {
         this.market = market;
         this.warehouse = warehouse;
         this.cropFields = cropFields;
         this.house = house;
+        this.stockyards = stockyards;
     }
 
     public BuildingSet addCropField(CropField cropField) {
@@ -30,9 +34,16 @@ public class BuildingSet {
         return this;
     }
 
+    public BuildingSet addStockyard(Stockyard stockyard) {
+        this.stockyards.add(stockyard);
+        return this;
+    }
+
     public Set<CropField> getCropFields() {
         return this.cropFields;
     }
+
+    public Set<Stockyard> getStockyards() { return this.stockyards; }
 
     public House getHouse() {
         return this.house;
@@ -61,6 +72,7 @@ public class BuildingSet {
     public List<Building> getDemolishableBuildings() {
         List<Building> buildings = new ArrayList<>();
         buildings.addAll(this.cropFields);
+        buildings.addAll(this.stockyards);
         return buildings;
     }
 
@@ -70,6 +82,7 @@ public class BuildingSet {
         buildings.add(this.market);
         buildings.add(this.warehouse);
         buildings.addAll(this.cropFields);
+        buildings.addAll(this.stockyards);
         return buildings;
     }
 
@@ -91,5 +104,9 @@ public class BuildingSet {
 
     public void removeCropField(CropField cropField) {
         this.cropFields.remove(cropField);
+    }
+
+    public void removeStockyard(Stockyard stockyard) {
+        this.stockyards.remove(stockyard);
     }
 }

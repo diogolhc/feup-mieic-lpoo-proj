@@ -6,10 +6,9 @@ import gui.drawer.shape.FilledRectangleDrawer;
 import model.InGameTime;
 import model.Position;
 import model.farm.Currency;
-import model.farm.Farm;
-import model.farm.Farmer;
-import model.farm.Weather;
 import model.farm.building.*;
+import model.farm.Farm;
+import model.farm.Weather;
 import viewer.GameViewer;
 
 public class FarmViewer extends GameViewer {
@@ -48,6 +47,11 @@ public class FarmViewer extends GameViewer {
         for (CropField cropField: buildings.getCropFields()) {
             this.drawCropField(cropField, cropFieldViewer, gui);
         }
+
+        StockyardViewer stockyardViewer = new StockyardViewer();
+        for (Stockyard stockyard : buildings.getStockyards()) {
+            this.drawStockyard(stockyard, stockyardViewer, gui);
+        }
     }
 
     private void drawWarehouse(Warehouse warehouse, WarehouseViewer warehouseViewer, GUI gui) {
@@ -66,6 +70,10 @@ public class FarmViewer extends GameViewer {
         cropFieldViewer.draw(cropField, gui);
     }
 
+    private void drawStockyard(Stockyard stockyard, StockyardViewer stockyardViewer, GUI gui) {
+        stockyardViewer.draw(stockyard, gui);
+    }
+
     private void drawHUD(InGameTime time, Weather weather, Currency currency, HUDViewer hudViewer, GUI gui) {
         // TODO background drawer inside HUDViewer
         FilledRectangleDrawer backgroundDrawer = new FilledRectangleDrawer(
@@ -73,5 +81,4 @@ public class FarmViewer extends GameViewer {
         backgroundDrawer.draw(new Position(0, farm.getHeight()), farm.getWidth(), 1);
         hudViewer.draw(time, weather, currency, gui);
     }
-
 }

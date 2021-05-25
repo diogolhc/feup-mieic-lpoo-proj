@@ -1,16 +1,14 @@
 package controller.farm;
 
 import controller.GameController;
-import controller.farm.building.CropFieldController;
-import controller.farm.building.HouseController;
-import controller.farm.building.MarketController;
-import controller.farm.building.WarehouseController;
+import controller.farm.building.*;
 import gui.GUI;
 import model.InGameTime;
 import model.Position;
 import model.farm.Farm;
 import model.farm.building.BuildingSet;
 import model.farm.building.CropField;
+import model.farm.building.Stockyard;
 import viewer.GameViewer;
 import viewer.farm.FarmWithFarmerViewer;
 
@@ -43,6 +41,11 @@ public class FarmWithFarmerController extends FarmController {
         CropFieldController cropFieldController = new CropFieldController(this.controller, this.farm);
         for (CropField cropField: farmBuildings.getCropFields()) {
             cropFieldController.reactInteraction(cropField, farmerPosition);
+        }
+
+        StockyardController stockyardController = new StockyardController(this.controller);
+        for (Stockyard stockyard : farmBuildings.getStockyards()) {
+            stockyardController.reactInteraction(stockyard, farmerPosition);
         }
 
         HouseController houseController = new HouseController(this.controller, this.realTimeToInGameTimeConverter);

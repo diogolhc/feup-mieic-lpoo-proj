@@ -4,10 +4,14 @@ import gui.Color;
 import model.InGameTime;
 import model.Position;
 import model.farm.Currency;
+import model.farm.Animals.Chicken;
+import model.farm.Animals.Cow;
+import model.farm.Animals.Hunger;
 import model.farm.Farmer;
 import model.farm.Inventory;
 import model.farm.building.House;
 import model.farm.building.Market;
+import model.farm.building.Stockyard;
 import model.farm.building.Warehouse;
 import model.farm.building.CropField;
 import model.farm.item.Crop;
@@ -137,6 +141,20 @@ public class NewGameFarmBuilder extends FarmBuilder {
         Set<CropField> cropFields = new HashSet<>();
         cropFields.add(new CropField(new Position(2, 10)));
         return cropFields;
+    }
+
+    @Override
+    protected Set<Stockyard> getStockyards() {
+        Set<Stockyard> stockyards = new HashSet<>();
+
+        Stockyard<Cow> cowStockyard = new Stockyard<Cow>(new Position(30, 2));
+        cowStockyard.addAnimal(new Cow(new Position(31, 3), new Hunger(100), 'C'));
+        stockyards.add(cowStockyard);
+
+        Stockyard<Chicken> chickenStockyard = new Stockyard<Chicken>(new Position(30, 10));
+        chickenStockyard.addAnimal(new Chicken(new Position(31, 11), new Hunger(100), 'G'));
+        stockyards.add(chickenStockyard);
+        return stockyards;
     }
 
     @Override
