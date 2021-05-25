@@ -5,20 +5,25 @@ import controller.GameControllerState;
 import controller.command.*;
 import controller.farm.FarmDemolishController;
 import controller.farm.FarmWithFarmerController;
-import controller.menu.builder.AlertMenuControllerBuilder;
-import model.InGameTime;
+import controller.command.Command;
+import controller.command.NoOperationCommand;
+import controller.farm.AnimalController;
 import model.farm.Farm;
+import model.farm.animal.Animal;
 import model.farm.building.Stockyard;
-import model.farm.building.CropField;
 
 public class StockyardController extends BuildingController<Stockyard> {
     private final GameController controller;
+    private final AnimalController animalController;
     private Farm farm;
-
 
     public StockyardController(GameController controller, Farm farm) {
         this.controller = controller;
-        this.farm = farm;
+        this.animalController = new AnimalController();
+    }
+
+    public void resetLastMovement() {
+        animalController.reset();
     }
 
     @Override
@@ -40,7 +45,8 @@ public class StockyardController extends BuildingController<Stockyard> {
                 .addCommand(new SetControllerStateCommand(this.controller, gameControllerState));
     }
 
-    public void reactTimePassed(Stockyard stockyard) {
-        // TODO Make animals of stockyard move and increse its Hunger
+    public void reactTimePassed(Stockyard<? extends Animal> stockyard) {
+        // TODO Make animals of stockyard move and decrease its Hunger
+        animalController.reactTimePassed(stockyard);
     }
 }

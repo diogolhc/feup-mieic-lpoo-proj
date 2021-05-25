@@ -1,8 +1,8 @@
 package model.farm.building;
 
 import model.Position;
-import model.farm.Animals.Animal;
-import model.region.EdificeUntraversableRegion;
+import model.farm.animal.Animal;
+import model.menu.Button;
 import model.region.PositionRegion;
 import model.region.RectangleRegion;
 import model.region.Region;
@@ -39,6 +39,12 @@ public class Stockyard<T extends Animal> extends Building {
         return animals;
     }
 
+    public boolean emptyPosition(Position position) {
+        for (Animal animal : animals) {
+            if (animal.getPosition().equals(position)) return false;
+        }
+        return true;
+    }
 
     @Override
     public int getWidth() {
@@ -58,5 +64,12 @@ public class Stockyard<T extends Animal> extends Building {
     @Override
     public Region getInteractiveRegion() {
         return new PositionRegion(this.getTopLeftPosition().getTranslated(new Position(-1, 3)));
+    }
+
+    public Region getAnimalsRegion() {
+        return new RectangleRegion(
+                this.getTopLeftPosition().getTranslated(new Position(1, 1)),
+                this.getWidth() - 2,
+                this.getHeight() - 2);
     }
 }

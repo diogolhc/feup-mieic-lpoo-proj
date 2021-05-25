@@ -2,6 +2,15 @@ package model.farm.builder;
 
 import model.InGameTime;
 import model.farm.*;
+import model.farm.animal.Animal;
+import model.farm.Farm;
+import model.farm.Farmer;
+import model.farm.Inventory;
+import model.farm.building.BuildingSet;
+import model.farm.building.House;
+import model.farm.building.Market;
+import model.farm.building.Warehouse;
+import model.farm.building.CropField;
 import model.farm.item.Crop;
 import model.farm.building.*;
 import model.farm.Weather;
@@ -54,7 +63,7 @@ public abstract class FarmBuilder {
 
     protected abstract Set<CropField> getCropFields();
 
-    protected abstract Set<Stockyard> getStockyards();
+    protected abstract Set<Stockyard<? extends Animal>> getStockyards();
 
     protected abstract List<Crop> getCrops();
 

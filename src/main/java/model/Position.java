@@ -60,4 +60,20 @@ public class Position {
     public Position getRelativeTo(Position position) {
         return this.getTranslated(new Position(-position.getX(), -position.getY()));
     }
+
+    public Position getRandomNeighbour() {
+        int n = (int) (Math.random() * 4);
+        switch (n) {
+            case 0:
+                return new Position(x, y - 1);
+            case 1:
+                return new Position(x + 1, y);
+            case 2:
+                return new Position(x, y + 1);
+            case 3:
+                return new Position(x - 1, y);
+            default:
+                return new Position(x, y);
+        }
+    }
 }
