@@ -3,21 +3,15 @@ package model.farm.builder;
 import gui.Color;
 import model.InGameTime;
 import model.Position;
+import model.farm.*;
 import model.farm.Currency;
-import model.farm.animal.Animal;
-import model.farm.animal.Chicken;
-import model.farm.animal.Cow;
-import model.farm.animal.Hunger;
-import model.farm.Farmer;
-import model.farm.Inventory;
 import model.farm.building.House;
 import model.farm.building.Market;
-import model.farm.building.Stockyard;
 import model.farm.building.Warehouse;
 import model.farm.building.CropField;
+import model.farm.item.AnimalProduct;
 import model.farm.item.Crop;
 import model.farm.item.CropGrowthStage;
-import model.farm.Weather;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -30,6 +24,7 @@ import java.util.*;
 //      may be substituted with loading from a file in resources
 public class NewGameFarmBuilder extends FarmBuilder {
     private final List<String> cropsLines;
+    private final List<String> livestockLines;
     private final List<String> weatherLines;
 
     // TODO check invalid formats?
@@ -41,6 +36,10 @@ public class NewGameFarmBuilder extends FarmBuilder {
         resource = NewGameFarmBuilder.class.getResource("/game/weather.data");
         br = new BufferedReader(new FileReader(resource.toURI().getPath()));
         this.weatherLines = this.readLines(br);
+
+        resource = NewGameFarmBuilder.class.getResource("/game/livestock.data");
+        br = new BufferedReader(new FileReader(resource.toURI().getPath()));
+        this.livestockLines = this.readLines(br);
     }
 
     private static List<String> readLines(BufferedReader br) throws IOException {
@@ -113,6 +112,40 @@ public class NewGameFarmBuilder extends FarmBuilder {
     }
 
     @Override
+    protected List<Livestock> getLivestockTypes() {
+        List<Livestock> livestockTypes = new ArrayList<>();
+        if (this.livestockLines.isEmpty()) return livestockTypes;
+
+        int currentLine = 0;
+        while (currentLine < this.livestockLines.size()) {
+            Livestock livestock = new Livestock();
+            String[] tokens = this.livestockLines.get(currentLine).split(" ");
+            livestock.setAnimalName(tokens[0]);
+            livestock.setAnimalChar(tokens[1].charAt(0));
+            livestock.setStockyardWidth(Integer.parseInt(tokens[2]));
+            livestock.setStockyardHeight(Integer.parseInt(tokens[3]));
+
+            currentLine++;
+            tokens = this.livestockLines.get(currentLine).split(" ");
+            livestock.setFoodCrop(new Crop(tokens[0], new InGameTime(), new ArrayList<>(), 0, new Currency())); // TODO
+            livestock.setRequiredFood(Integer.parseInt(tokens[1]));
+
+            currentLine++;
+            tokens = this.livestockLines.get(currentLine).split(" ");
+            AnimalProduct product = new AnimalProduct(
+                    tokens[0],
+                    parseTimeString(tokens[1]),
+                    Integer.parseInt(tokens[2]),
+                    new Currency(Integer.parseInt(tokens[3])));
+
+            livestock.setProducedItem(product);
+            livestockTypes.add(livestock);
+        }
+
+        return livestockTypes;
+    }
+
+    @Override
     protected Currency getCurrency() {
         return new Currency(999999);
     }
@@ -142,22 +175,6 @@ public class NewGameFarmBuilder extends FarmBuilder {
         Set<CropField> cropFields = new HashSet<>();
         cropFields.add(new CropField(new Position(2, 10)));
         return cropFields;
-    }
-
-    @Override
-    protected Set<Stockyard<? extends Animal>> getStockyards() {
-        Set<Stockyard<? extends Animal>> stockyards = new HashSet<Stockyard<? extends Animal>>();
-
-        Stockyard<Cow> cowStockyard = new Stockyard<Cow>(new Position(30, 2));
-        cowStockyard.addAnimal(new Cow(new Position(31, 3), new Hunger(20), 'M'));
-        cowStockyard.addAnimal(new Cow(new Position(31, 6), new Hunger(25), 'M'));
-        stockyards.add(cowStockyard);
-
-        Stockyard<Chicken> chickenStockyard = new Stockyard<Chicken>(new Position(30, 10));
-        chickenStockyard.addAnimal(new Chicken(new Position(31, 11), new Hunger(100), 'C'));
-        stockyards.add(chickenStockyard);
-
-        return stockyards;
     }
 
     @Override

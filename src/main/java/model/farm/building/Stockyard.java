@@ -1,8 +1,10 @@
 package model.farm.building;
 
 import model.Position;
-import model.farm.animal.Animal;
-import model.menu.Button;
+import model.farm.Animal;
+import model.farm.Livestock;
+import model.farm.item.Crop;
+import model.farm.item.Item;
 import model.region.PositionRegion;
 import model.region.RectangleRegion;
 import model.region.Region;
@@ -10,37 +12,33 @@ import model.region.Region;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Stockyard<T extends Animal> extends Building {
-    private List<T> animals;
-    private int width;
-    private int height;
+public class Stockyard extends Building {
+    private final Livestock livestockType;
+    private final List<Animal> animals;
 
-    public Stockyard(Position topLeft) {
-        this(topLeft, 7, 7);
-    }
-
-    public Stockyard(Position topLeft, int width, int height) {
+    public Stockyard(Position topLeft, Livestock livestockType) {
         super(topLeft);
-        this.animals = new ArrayList<T>();
-        this.width = width;
-        this.height = height;
+        this.livestockType = livestockType;
+        this.animals = new ArrayList<>();
     }
 
-    public Stockyard(Position topleft, List<T> animals) {
-        this(topleft, 7, 7);
-        this.animals = animals;
+    public void addAnimal() {
+        // TODO make sure position is different from all other animals
+        this.animals.add(new Animal(new Position(0, 0)));
     }
 
-    public void addAnimal(T animal) {
-        this.animals.add(animal);
+    public void removeAnimal() {
+        if (this.animals.size() > 0) {
+            this.animals.remove(0);
+        }
     }
 
-    public List<T> getAnimals() {
-        return animals;
+    public List<Animal> getAnimals() {
+        return this.animals;
     }
 
     public boolean emptyPosition(Position position) {
-        for (Animal animal : animals) {
+        for (Animal animal: animals) {
             if (animal.getPosition().equals(position)) return false;
         }
         return true;
@@ -48,12 +46,12 @@ public class Stockyard<T extends Animal> extends Building {
 
     @Override
     public int getWidth() {
-        return this.width;
+        return this.livestockType.getStockyardWidth();
     }
 
     @Override
     public int getHeight() {
-        return this.height;
+        return this.livestockType.getStockyardHeight();
     }
 
     @Override
@@ -71,5 +69,9 @@ public class Stockyard<T extends Animal> extends Building {
                 this.getTopLeftPosition().getTranslated(new Position(1, 1)),
                 this.getWidth() - 2,
                 this.getHeight() - 2);
+    }
+
+    public Livestock getLivestockType() {
+        return this.livestockType;
     }
 }

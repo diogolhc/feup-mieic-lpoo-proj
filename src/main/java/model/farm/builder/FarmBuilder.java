@@ -2,7 +2,7 @@ package model.farm.builder;
 
 import model.InGameTime;
 import model.farm.*;
-import model.farm.animal.Animal;
+import model.farm.Animal;
 import model.farm.Farm;
 import model.farm.Farmer;
 import model.farm.Inventory;
@@ -30,10 +30,6 @@ public abstract class FarmBuilder {
             buildingSet.addCropField(cropField);
         }
 
-        for (Stockyard stockyard : this.getStockyards()) {
-            buildingSet.addStockyard(stockyard);
-        }
-
         Farm farm = new Farm(this.getWidth(), this.getHeight(), buildingSet);
         farm.setFarmer(this.getFarmer());
         farm.setTime(this.getTime());
@@ -42,8 +38,14 @@ public abstract class FarmBuilder {
         farm.setCrops(this.getCrops());
         farm.setInventory(this.getInventory());
         farm.setCurrency(this.getCurrency());
+        farm.setLivestockTypes(this.getLivestockTypes());
+        for (Livestock livestock: farm.getLivestockTypes()) {
+            livestock.setFoodCrop(farm.getCrops().get(farm.getCrops().indexOf(livestock.getFoodCrop())));
+        }
         return farm;
     }
+
+    protected abstract List<Livestock> getLivestockTypes();
 
     protected abstract Currency getCurrency();
 
@@ -62,8 +64,6 @@ public abstract class FarmBuilder {
     protected abstract House getHouse();
 
     protected abstract Set<CropField> getCropFields();
-
-    protected abstract Set<Stockyard<? extends Animal>> getStockyards();
 
     protected abstract List<Crop> getCrops();
 

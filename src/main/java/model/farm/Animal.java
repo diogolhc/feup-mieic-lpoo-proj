@@ -2,10 +2,11 @@ package model.farm;
 
 import model.Position;
 
-public class Farmer {
+// TODO maybe this could be unified with Farmer?
+public class Animal {
     private Position position;
 
-    public Farmer(Position position) {
+    public Animal(Position position) {
         this.position = position;
     }
 

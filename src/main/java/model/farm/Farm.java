@@ -21,6 +21,7 @@ public class Farm {
     private Inventory inventory;
     private Currency currency;
     private List<Crop> crops;
+    private List<Livestock> livestockTypes;
     private int width;
     private int height;
 
@@ -33,6 +34,7 @@ public class Farm {
         this.height = height;
         this.buildings = buildings;
         this.crops = new ArrayList<>();
+        this.livestockTypes = new ArrayList<>();
     }
 
     public Farmer getFarmer() {
@@ -52,6 +54,9 @@ public class Farm {
     public List<Item> getItems() {
         List<Item> items = new ArrayList<>();
         items.addAll(this.crops);
+        for (Livestock livestock: livestockTypes) {
+            items.add(livestock.getProducedItem());
+        }
         return items;
     }
 
@@ -93,6 +98,14 @@ public class Farm {
 
     public List<Crop> getCrops() {
         return this.crops;
+    }
+
+    public List<Livestock> getLivestockTypes() {
+        return livestockTypes;
+    }
+
+    public void setLivestockTypes(List<Livestock> livestockTypes) {
+        this.livestockTypes = livestockTypes;
     }
 
     public void setWeatherStates(List<Weather> weathers) {

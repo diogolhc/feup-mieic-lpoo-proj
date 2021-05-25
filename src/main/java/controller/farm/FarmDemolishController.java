@@ -1,9 +1,6 @@
 package controller.farm;
 
-import controller.farm.building.CropFieldController;
-import controller.farm.building.HouseController;
-import controller.farm.building.MarketController;
-import controller.farm.building.WarehouseController;
+import controller.farm.building.*;
 import controller.menu.builder.AlertMenuControllerBuilder;
 import gui.GUI;
 import model.Position;
@@ -12,6 +9,7 @@ import model.farm.DemolishMarker;
 import model.farm.building.Building;
 import model.farm.building.BuildingSet;
 import model.farm.building.CropField;
+import model.farm.building.Stockyard;
 import viewer.GameViewer;
 import viewer.farm.FarmDemolishViewer;
 import viewer.farm.FarmNewBuildingViewer;
@@ -53,6 +51,12 @@ public class FarmDemolishController extends FarmController {
         List<CropField> cropFields = new ArrayList<>(farmBuildings.getCropFields());
         for (CropField cropField: cropFields) {
             cropFieldController.reactDemolish(cropField, demolishPosition);
+        }
+
+        StockyardController stockyardController = new StockyardController(this.controller, this.farm);
+        List<Stockyard> stockyards = new ArrayList<>(farmBuildings.getStockyards());
+        for (Stockyard stockyard: stockyards) {
+            stockyardController.reactDemolish(stockyard, demolishPosition);
         }
 
         HouseController houseController = new HouseController(this.controller, this.realTimeToInGameTimeConverter);

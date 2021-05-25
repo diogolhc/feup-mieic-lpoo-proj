@@ -8,8 +8,9 @@ import controller.farm.FarmWithFarmerController;
 import controller.command.Command;
 import controller.command.NoOperationCommand;
 import controller.farm.AnimalController;
+import model.InGameTime;
 import model.farm.Farm;
-import model.farm.animal.Animal;
+import model.farm.Animal;
 import model.farm.building.Stockyard;
 
 public class StockyardController extends BuildingController<Stockyard> {
@@ -45,8 +46,7 @@ public class StockyardController extends BuildingController<Stockyard> {
                 .addCommand(new SetControllerStateCommand(this.controller, gameControllerState));
     }
 
-    public void reactTimePassed(Stockyard<? extends Animal> stockyard) {
-        // TODO Make animals of stockyard move and decrease its Hunger
-        animalController.reactTimePassed(stockyard);
+    public void reactTimePassed(Stockyard stockyard, InGameTime elapsedTime) {
+        animalController.reactTimePassed(stockyard, elapsedTime);
     }
 }
