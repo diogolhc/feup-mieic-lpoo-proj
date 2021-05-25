@@ -140,11 +140,11 @@ public class NewGameFarmBuilder extends FarmBuilder {
     protected Set<Stockyard> getStockyards() {
         Set<Stockyard> stockyards = new HashSet<>();
 
-        Stockyard<Cow> cowStockyard = new Stockyard<Cow>(new Position(30, 2));
+        Stockyard<Cow> cowStockyard = new Stockyard<>(new Position(30, 2));
         cowStockyard.addAnimal(new Cow(new Position(31, 3), new Hunger(20), 'M'));
         stockyards.add(cowStockyard);
 
-        Stockyard<Chicken> chickenStockyard = new Stockyard<Chicken>(new Position(30, 10));
+        Stockyard<Chicken> chickenStockyard = new Stockyard<>(new Position(30, 10));
         chickenStockyard.addAnimal(new Chicken(new Position(31, 11), new Hunger(100), 'C'));
         stockyards.add(chickenStockyard);
         return stockyards;
