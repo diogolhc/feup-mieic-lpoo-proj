@@ -9,9 +9,10 @@ public abstract class Animal {
     protected char identifier;    //TODO SHOULD WE HAVE A CHAR TO REPRESENT EACH ANIMAL? OR STOCKYARD CONTROLLER SHOULD NOTICE IT?
     //private FoodItem typeOfFood; //TODO Animals eat this type of food
 
-    public Animal(Position position, Hunger hunger) {
+    public Animal(Position position, Hunger hunger, char identifier) {
         this.position = position;
         this.hunger = hunger;
+        this.identifier = identifier;
     }
 
     public Position getPosition() {
@@ -22,7 +23,14 @@ public abstract class Animal {
         this.position = position;
     }
 
+    public void setHunger(Hunger hunger) { this.hunger = hunger; }
+
+    public Hunger getHunger() { return this.hunger; }
+
     public abstract void setChar(char identifier);
 
     public abstract char getChar();
+
+    public abstract boolean isDead();
+
 }

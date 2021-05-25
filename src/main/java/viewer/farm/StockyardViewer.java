@@ -15,7 +15,7 @@ public class StockyardViewer {
     private static final Color BACKGROUND_COLOR = new Color("#be9b7b");
     private final static Color PATH_COLOR = new Color("#be9b7b");
 
-    public void draw(Stockyard stockyard, GUI gui) {
+    public void draw(Stockyard<? extends Animal> stockyard, GUI gui) {
 
         BoxDrawer drawer = new BoxDrawer(gui, FENCES_BACKGROUND, FENCES_COLOR);
         drawer.draw(stockyard.getTopLeftPosition(), Stockyard.STOCKYARD_SIZE, Stockyard.STOCKYARD_SIZE);
@@ -26,9 +26,9 @@ public class StockyardViewer {
         gui.setBackgroundColor(PATH_COLOR);
         gui.drawChar(stockyard.getTopLeftPosition().getX() - 1, stockyard.getTopLeftPosition().getY() + 3, ' ');
 
-        for (Object animal : stockyard.getAnimals()) {
+        for (Animal animal : stockyard.getAnimals()) {
             AnimalViewer animalViewer = new AnimalViewer();
-            animalViewer.draw((Animal) animal, gui);
+            animalViewer.draw(animal, gui);
         }
     }
 

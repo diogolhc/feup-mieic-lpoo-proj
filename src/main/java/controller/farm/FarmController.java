@@ -19,12 +19,14 @@ public class FarmController implements GameControllerState {
     private GameController controller;
     private RealTimeToInGameTimeConverter realTimeToInGameTimeConverter;
     WeatherController weatherController;
+    private long lastMovement;
 
     public FarmController(Farm farm, GameController controller, long realSecToGameMinutesRate) {
         this.farm = farm;
         this.controller = controller;
         this.realTimeToInGameTimeConverter = new RealTimeToInGameTimeConverter(realSecToGameMinutesRate);
         this.weatherController = new WeatherController(this.farm); // TODO should this be done in a different way?
+        lastMovement = 0;
     }
 
     @Override
@@ -44,7 +46,7 @@ public class FarmController implements GameControllerState {
         }
 
         HouseController houseController = new HouseController(this.controller, this.realTimeToInGameTimeConverter);
-        StockyardController stockyardController = new StockyardController(this.controller);
+        StockyardController stockyardController = new StockyardController(this.controller, this.farm);
         for (Stockyard stockyard : farmBuildings.getStockyards()) {
             stockyardController.reactInteraction(stockyard, farmerPosition);
         }
@@ -74,6 +76,15 @@ public class FarmController implements GameControllerState {
         for (CropField cropField : this.farm.getBuildings().getCropFields()) {
             cropFieldController.reactTimePassed(cropField, elapsedTime);
         }
+
+        StockyardController stockyardController = new StockyardController(this.controller, this.farm);
+
+        for (Stockyard stockyard : this.farm.getBuildings().getStockyards()) {
+            stockyardController.reactTimePassed(stockyard);
+        }
+
+        stockyardController.resetLastMovement();
+
 
         this.weatherController.reactTimePassed(elapsedTime);
     }

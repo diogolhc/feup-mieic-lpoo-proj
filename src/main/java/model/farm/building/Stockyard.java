@@ -34,7 +34,8 @@ public class Stockyard<T extends Animal> extends Building {
         int x = position.getX();
         int y = position.getY();
         if (y == 0 && x >= 0 && x <= 6) return false;
-        if (y >= 1 && y <= 6 && x >= 0 && x <= 6) return false;
+        if (y >= 1 && y <= 5 && (x == 0 || x == 6)) return false;
+        if (y == 6 && x >= 0 && x <= 6) return false;
 
         return true;
     }
