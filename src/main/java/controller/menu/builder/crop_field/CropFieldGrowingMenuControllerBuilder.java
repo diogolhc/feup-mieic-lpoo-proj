@@ -47,7 +47,7 @@ public class CropFieldGrowingMenuControllerBuilder extends PopupMenuControllerBu
     protected List<ButtonController> getButtons() {
         List<ButtonController> buttons = super.getButtons();
 
-        Button removeCropButton = new Button(new Position(1, 7), "REMOVE CROP");
+        Button removeCropButton = new Button(new Position(1, 8), "REMOVE CROP");
         Command removeCropButtonCommand = new CompoundCommand()
                 .addCommand(new RemoveCropCommand(cropField))
                 .addCommand(super.getClosePopupMenuCommand());
@@ -70,12 +70,17 @@ public class CropFieldGrowingMenuControllerBuilder extends PopupMenuControllerBu
                 () -> "REMAINING TIME: " + cropField.getRemainingTime().toCountdownString()
         ));
 
+        labels.add( new Label(
+                new Position(1, 6),
+                () -> "QUANTITY: " + cropField.getHarvestAmount()
+        ));
+
         return labels;
     }
 
     @Override
     protected int getHeight() {
-        return 11;
+        return 12;
     }
 
     @Override

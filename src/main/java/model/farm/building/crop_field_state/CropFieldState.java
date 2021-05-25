@@ -8,4 +8,5 @@ public interface CropFieldState {
     void setRemainingTime(InGameTime time);
     Crop getCrop();
     int getHarvestAmount();
+    void changeHarvestAmount(double harvestAmount);
 }

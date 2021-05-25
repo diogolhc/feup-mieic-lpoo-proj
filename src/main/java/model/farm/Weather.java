@@ -5,12 +5,12 @@ import java.util.Map;
 
 public class Weather {
     private String name;
-    private double humidityRate; // TODO decide when using
+    private double weatherEffect;
     Map<Weather, Double> weatherChangeProbabilities;
 
-    public Weather(String name, double humidityRate) {
+    public Weather(String name, double weatherEffect) {
         this.name = name;
-        this.humidityRate = humidityRate;
+        this.weatherEffect = weatherEffect;
         this.weatherChangeProbabilities = new HashMap<>();
     }
 
@@ -22,8 +22,8 @@ public class Weather {
         return name;
     }
 
-    public double getHumidityRate() {
-        return humidityRate;
+    public double getWeatherEffect() {
+        return weatherEffect;
     }
 
     public Map<Weather, Double> getWeatherChangeProbabilities() {
@@ -42,4 +42,7 @@ public class Weather {
         return this.name.equals(weather.getName());
     }
 
+    public void setWeatherEffect(double weatherEffect) {
+        this.weatherEffect = weatherEffect;
+    }
 }
