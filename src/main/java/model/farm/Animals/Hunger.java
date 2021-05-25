@@ -12,8 +12,8 @@ public class Hunger {
         this.hunger = hunger;
     }
 
-    public void decreaseHunger(int hunger) {
-        this.hunger -= hunger;
+    public void decreaseHunger(int decrease) {
+        this.hunger = this.hunger > decrease ? this.hunger - decrease : 0;
     }
 
     public void increaseHunger(int hunger) {
