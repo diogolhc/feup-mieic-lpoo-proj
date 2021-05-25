@@ -13,7 +13,7 @@ public class AnimalController {
         lastHungerDecrease = lastHungerDecrease > 20 ? 0 : lastHungerDecrease;
     }
 
-    public void reactTimePassed(Stockyard<? extends Animal> stockyard) {
+    public void reactTimePassed(Stockyard<? extends Animal> stockyard, long elapsedTime) {
         // TODO Make animals of stockyard move and decrease its Hunger
         if (lastMovement >= 100) {
             for (Animal animal : stockyard.getAnimals()) {

@@ -33,9 +33,9 @@ public class StockyardController extends BuildingController<Stockyard> {
         return new NoOperationCommand();
     }
 
-    public void reactTimePassed(Stockyard<? extends Animal> stockyard) {
+    public void reactTimePassed(Stockyard<? extends Animal> stockyard, long elapsedTime) {
         // TODO Make animals of stockyard move and decrease its Hunger
-        animalController.reactTimePassed(stockyard);
+        animalController.reactTimePassed(stockyard, elapsedTime);
 
     }
 }
