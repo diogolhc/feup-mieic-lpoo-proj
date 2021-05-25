@@ -39,9 +39,12 @@ public abstract class FarmBuilder {
         farm.setInventory(this.getInventory());
         farm.setCurrency(this.getCurrency());
         farm.setLivestockTypes(this.getLivestockTypes());
+
+        /*
         for (Livestock livestock: farm.getLivestockTypes()) {
             livestock.setFoodCrop(farm.getCrops().get(farm.getCrops().indexOf(livestock.getFoodCrop())));
-        }
+        }*/
+
         return farm;
     }
 

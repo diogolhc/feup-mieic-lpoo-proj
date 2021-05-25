@@ -140,6 +140,7 @@ public class NewGameFarmBuilder extends FarmBuilder {
 
             livestock.setProducedItem(product);
             livestockTypes.add(livestock);
+            currentLine++;
         }
 
         return livestockTypes;
