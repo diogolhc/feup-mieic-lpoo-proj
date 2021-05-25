@@ -3,6 +3,7 @@ package model.farm.builder;
 import gui.Color;
 import model.InGameTime;
 import model.Position;
+import model.farm.Animals.Animal;
 import model.farm.Animals.Chicken;
 import model.farm.Animals.Cow;
 import model.farm.Animals.Hunger;
@@ -137,16 +138,17 @@ public class NewGameFarmBuilder extends FarmBuilder {
     }
 
     @Override
-    protected Set<Stockyard> getStockyards() {
-        Set<Stockyard> stockyards = new HashSet<>();
+    protected Set<Stockyard<? extends Animal>> getStockyards() {
+        Set<Stockyard<? extends Animal>> stockyards = new HashSet<Stockyard<? extends Animal>>();
 
-        Stockyard<Cow> cowStockyard = new Stockyard<>(new Position(30, 2));
+        Stockyard<Cow> cowStockyard = new Stockyard<Cow>(new Position(30, 2));
         cowStockyard.addAnimal(new Cow(new Position(31, 3), new Hunger(20), 'M'));
         stockyards.add(cowStockyard);
 
-        Stockyard<Chicken> chickenStockyard = new Stockyard<>(new Position(30, 10));
+        Stockyard<Chicken> chickenStockyard = new Stockyard<Chicken>(new Position(30, 10));
         chickenStockyard.addAnimal(new Chicken(new Position(31, 11), new Hunger(100), 'C'));
         stockyards.add(chickenStockyard);
+
         return stockyards;
     }
 

@@ -1,6 +1,7 @@
 package model.farm.builder;
 
 import model.InGameTime;
+import model.farm.Animals.Animal;
 import model.farm.Farm;
 import model.farm.Farmer;
 import model.farm.Inventory;
@@ -58,7 +59,7 @@ public abstract class FarmBuilder {
 
     protected abstract Set<CropField> getCropFields();
 
-    protected abstract Set<Stockyard> getStockyards();
+    protected abstract Set<Stockyard<? extends Animal>> getStockyards();
 
     protected abstract List<Crop> getCrops();
 

@@ -6,11 +6,11 @@ import model.farm.building.Stockyard;
 
 public class AnimalController {
     private static int lastMovement = 0;
+    private static int lastHungerDecrease = 0;
 
-    public void resetLastMovement() {
-        if (lastMovement > 100) {
-            this.lastMovement = 0;
-        }
+    public void reset() {
+        lastMovement = lastMovement > 100 ? 0 : lastMovement;
+        lastHungerDecrease = lastHungerDecrease > 20 ? 0 : lastHungerDecrease;
     }
 
     public void reactTimePassed(Stockyard<? extends Animal> stockyard) {
@@ -27,9 +27,11 @@ public class AnimalController {
         }
         lastMovement++;
 
-        for (Animal animal : stockyard.getAnimals()) {
-            if (!animal.isDead()) {
-                animal.decreaseHunger();
+        if (lastHungerDecrease >= 20) {
+            for (Animal animal : stockyard.getAnimals()) {
+                if (!animal.isDead()) {
+                    animal.decreaseHunger();
+                }
             }
         }
     }

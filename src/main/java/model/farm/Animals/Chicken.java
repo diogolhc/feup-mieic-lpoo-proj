@@ -4,7 +4,7 @@ import model.Position;
 
 public class Chicken extends Animal {
     public static final int eatingRate = 1;
-    public static final int starvingRate = 0;
+    public static final int starvingRate = 1;
 
 
     public Chicken(Position position, Hunger hunger, char identifier) {

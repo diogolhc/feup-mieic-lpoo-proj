@@ -23,7 +23,7 @@ public class StockyardController extends BuildingController<Stockyard> {
     }
 
     public void resetLastMovement() {
-        animalController.resetLastMovement();
+        animalController.reset();
     }
 
     @Override
