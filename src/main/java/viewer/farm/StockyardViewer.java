@@ -2,25 +2,18 @@ package viewer.farm;
 
 import gui.Color;
 import gui.GUI;
-import gui.drawer.shape.BoxDrawer;
-import gui.drawer.shape.FilledRectangleDrawer;
-import gui.drawer.shape.VerticalLineDrawer;
-import model.Position;
 import model.farm.Animals.Animal;
 import model.farm.building.Stockyard;
 
 public class StockyardViewer {
-    private static final Color FENCES_COLOR = new Color("#695836");
-    private static final Color FENCES_BACKGROUND = new Color("#7EC850");
-    private static final Color BACKGROUND_COLOR = new Color("#be9b7b");
-    private final static Color PATH_COLOR = new Color("#be9b7b");
+    private static final Color PATH_COLOR = new Color("#be9b7b");
+    private static final Color FENCE_DOOR_COLOR = PATH_COLOR;
 
     public void draw(Stockyard stockyard, GUI gui) {
+        FencesViewer fencesViewer = new FencesViewer();
+        fencesViewer.draw(stockyard.getTopLeftPosition(), stockyard.getWidth(), stockyard.getHeight(), gui);
 
-        BoxDrawer drawer = new BoxDrawer(gui, FENCES_BACKGROUND, FENCES_COLOR);
-        drawer.draw(stockyard.getTopLeftPosition(), Stockyard.STOCKYARD_SIZE, Stockyard.STOCKYARD_SIZE);
-
-        gui.setForegroundColor(PATH_COLOR);
+        gui.setForegroundColor(FENCE_DOOR_COLOR);
         gui.drawChar(stockyard.getTopLeftPosition().getX(), stockyard.getTopLeftPosition().getY()+3, '|');
 
         gui.setBackgroundColor(PATH_COLOR);
@@ -31,5 +24,4 @@ public class StockyardViewer {
             animalViewer.draw((Animal) animal, gui);
         }
     }
-
 }

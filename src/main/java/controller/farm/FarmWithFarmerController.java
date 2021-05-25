@@ -43,7 +43,7 @@ public class FarmWithFarmerController extends FarmController {
             cropFieldController.reactInteraction(cropField, farmerPosition);
         }
 
-        StockyardController stockyardController = new StockyardController(this.controller);
+        StockyardController stockyardController = new StockyardController(this.controller, this.farm);
         for (Stockyard stockyard : farmBuildings.getStockyards()) {
             stockyardController.reactInteraction(stockyard, farmerPosition);
         }
