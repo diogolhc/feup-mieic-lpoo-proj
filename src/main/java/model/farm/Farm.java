@@ -2,6 +2,7 @@ package model.farm;
 
 import model.Position;
 import model.InGameTime;
+import model.farm.building.Stockyard;
 import model.farm.item.Crop;
 import model.farm.building.BuildingSet;
 import model.farm.item.Item;
@@ -130,5 +131,11 @@ public class Farm {
 
     public void setCurrency(Currency currency) {
         this.currency = currency;
+    }
+
+    public void setStockyards(List<Stockyard> stockyards){
+        for (Stockyard stockyard : stockyards) {
+            this.buildings.addStockyard(stockyard);
+        }
     }
 }

@@ -24,7 +24,9 @@ public class Stockyard extends Building {
 
     public void addAnimal() {
         // TODO make sure position is different from all other animals
-        this.animals.add(new Animal(new Position(0, 0)));
+        // TODO THis is just here to debug
+        Position position = new Position(getTopLeftPosition().getX() + 1, getTopLeftPosition().getY() + 1);
+        this.animals.add(new Animal(position));
     }
 
     public void removeAnimal() {

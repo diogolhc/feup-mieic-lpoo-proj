@@ -5,10 +5,7 @@ import model.InGameTime;
 import model.Position;
 import model.farm.*;
 import model.farm.Currency;
-import model.farm.building.House;
-import model.farm.building.Market;
-import model.farm.building.Warehouse;
-import model.farm.building.CropField;
+import model.farm.building.*;
 import model.farm.item.AnimalProduct;
 import model.farm.item.Crop;
 import model.farm.item.CropGrowthStage;
@@ -144,6 +141,19 @@ public class NewGameFarmBuilder extends FarmBuilder {
         }
 
         return livestockTypes;
+    }
+
+    @Override
+    protected List<Stockyard> getStockyards() {
+        List<Stockyard> stockyards = new ArrayList<>();
+        int x = 30, y = 3;
+        for (Livestock livestock : getLivestockTypes()) {
+            Stockyard stockyard = new Stockyard(new Position(30, y), livestock);
+            stockyard.addAnimal();
+            stockyards.add(stockyard);
+            y += 8;
+        }
+        return stockyards;
     }
 
     @Override
