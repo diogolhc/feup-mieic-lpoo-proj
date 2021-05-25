@@ -28,6 +28,14 @@ public class Stockyard<T extends Animal> extends Building {
         return animals;
     }
 
+
+    public boolean emptyPosition(Position position) {
+        for (Animal animal : animals) {
+            if (animal.getPosition().equals(position)) return false;
+        }
+        return true;
+    }
+
     @Override
     public boolean isTraversable(Position position) {
         position = position.getRelativeTo(this.getTopLeftPosition());

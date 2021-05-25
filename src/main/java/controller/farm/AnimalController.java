@@ -19,7 +19,7 @@ public class AnimalController {
             for (Animal animal : stockyard.getAnimals()) {
                 if (!animal.isDead()) {
                     Position newPosition = animal.getPosition().getRandomNeighbour();
-                    if (stockyard.isTraversable(newPosition)) {
+                    if (stockyard.isTraversable(newPosition) && stockyard.emptyPosition(newPosition)) {
                         animal.setPosition(newPosition);
                     }
                 }
