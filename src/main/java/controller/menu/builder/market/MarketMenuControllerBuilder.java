@@ -6,7 +6,6 @@ import controller.command.*;
 import controller.farm.FarmController;
 import controller.menu.ButtonController;
 import controller.menu.builder.PopupMenuControllerBuilder;
-import controller.menu.builder.house.StopSleepMenuControllerBuilder;
 import model.Position;
 import model.farm.Farm;
 import model.farm.Inventory;

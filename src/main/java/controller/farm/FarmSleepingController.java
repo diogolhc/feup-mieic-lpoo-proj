@@ -12,6 +12,7 @@ import model.farm.Farm;
 import model.farm.building.BuildingSet;
 import model.farm.building.CropField;
 import viewer.GameViewer;
+import viewer.farm.FarmSleepingViewer;
 import viewer.farm.FarmViewer;
 import viewer.farm.FarmWithFarmerViewer;
 
@@ -42,6 +43,6 @@ public class FarmSleepingController extends FarmController {
 
     @Override
     public GameViewer getViewer() {
-        return new FarmViewer(this.farm);
+        return new FarmSleepingViewer(this.farm);
     }
 }
