@@ -5,9 +5,9 @@ import model.farm.item.Crop;
 
 public class ReadyToHarvest implements CropFieldState {
     private Crop crop;
-    private int harvestAmount;
+    private double harvestAmount; // double so that small but in great quantity changes can have an effect
 
-    public ReadyToHarvest(Crop crop, int harvestAmount) {
+    public ReadyToHarvest(Crop crop, double harvestAmount) {
         this.crop = crop;
         this.harvestAmount = harvestAmount;
     }
@@ -27,6 +27,12 @@ public class ReadyToHarvest implements CropFieldState {
 
     @Override
     public int getHarvestAmount() {
-        return this.harvestAmount;
+        return (int)this.harvestAmount;
+    }
+
+    @Override
+    public void changeHarvestAmount(double harvestAmount) {
+        this.harvestAmount += harvestAmount;
+        this.harvestAmount = this.harvestAmount < 0 ? 0 : this.harvestAmount;
     }
 }

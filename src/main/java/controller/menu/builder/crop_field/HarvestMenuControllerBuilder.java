@@ -8,6 +8,7 @@ import model.Position;
 import model.farm.Inventory;
 import model.farm.building.CropField;
 import model.menu.Button;
+import model.menu.label.Label;
 
 import java.util.List;
 
@@ -22,10 +23,28 @@ public class HarvestMenuControllerBuilder extends PopupMenuControllerBuilder {
     }
 
     @Override
+    protected List<Label> getLabels() {
+        List<Label> labels = super.getLabels();
+
+        labels.add(new Label(
+                new Position(1, 4),
+                () -> "CROP: " + cropField.getState().getCrop().getName()
+        ));
+
+
+        labels.add( new Label(
+                new Position(1, 5),
+                () -> "QUANTITY: " + cropField.getHarvestAmount()
+        ));
+
+        return labels;
+    }
+
+    @Override
     protected List<ButtonController> getButtons() {
         List<ButtonController> buttons = super.getButtons();
 
-        Button harvestButton = new Button(new Position(1, 5), "HARVEST");
+        Button harvestButton = new Button(new Position(1, 7), "HARVEST");
         Command harvestButtonCommand = new CompoundCommand()
                 .addCommand(new HarvestCropCommand(inventory, cropField))
                 .addCommand(super.getClosePopupMenuCommand());
@@ -36,7 +55,7 @@ public class HarvestMenuControllerBuilder extends PopupMenuControllerBuilder {
 
     @Override
     protected int getHeight() {
-        return 10;
+        return 12;
     }
 
     @Override

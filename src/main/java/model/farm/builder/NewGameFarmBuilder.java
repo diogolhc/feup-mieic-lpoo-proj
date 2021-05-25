@@ -66,13 +66,13 @@ public class NewGameFarmBuilder extends FarmBuilder {
         int line = 1;
         for (int i = 0; i < numWeatherStates; i++) {
             String name = this.weatherLines.get(line++);
-            double humidity = Double.parseDouble(this.weatherLines.get(line++));
-
-            Weather weather = new Weather(name, humidity);
+            double weatherEffect = Double.parseDouble(this.weatherLines.get(line++));
+            Weather weather = new Weather(name, weatherEffect);
 
             int index;
             if ((index = weathers.indexOf(weather)) != -1) {
                 weather = weathers.get(index);
+                weather.setWeatherEffect(weatherEffect);
             } else {
                 weathers.add(weather);
             }

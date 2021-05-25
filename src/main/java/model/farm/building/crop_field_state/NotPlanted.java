@@ -21,4 +21,7 @@ public class NotPlanted implements CropFieldState {
     public int getHarvestAmount() {
         return 0;
     }
+
+    @Override
+    public void changeHarvestAmount(double harvestAmount) {}
 }

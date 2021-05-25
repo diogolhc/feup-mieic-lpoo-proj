@@ -63,4 +63,13 @@ public class CropField extends Building {
     public void setRemainingTime(InGameTime time) {
         this.state.setRemainingTime(time);
     }
+
+    public void changeHarvestAmount(double quantity) {
+        this.state.changeHarvestAmount(quantity);
+    }
+
+    public int getHarvestAmount() {
+        return this.state.getHarvestAmount();
+    }
+
 }

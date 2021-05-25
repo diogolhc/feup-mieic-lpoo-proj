@@ -8,7 +8,7 @@ public class Planted implements CropFieldState {
     private final CropField cropField;
     private final Crop crop;
     private InGameTime timeRemaining;
-    private int harvestAmount;
+    private double harvestAmount; // double so that small but in great quantity changes can have an effect
 
     public Planted(CropField cropField, Crop crop) {
         this.cropField = cropField;
@@ -37,6 +37,12 @@ public class Planted implements CropFieldState {
 
     @Override
     public int getHarvestAmount() {
-        return this.harvestAmount;
+        return (int)this.harvestAmount;
+    }
+
+    @Override
+    public void changeHarvestAmount(double harvestAmount) {
+        this.harvestAmount += harvestAmount;
+        this.harvestAmount = this.harvestAmount < 0 ? 0 : this.harvestAmount;
     }
 }
