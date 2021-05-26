@@ -3,6 +3,7 @@ package model.farm.building;
 import model.Position;
 import model.farm.Animal;
 import model.farm.Livestock;
+import model.farm.building.stockyard_state.NotProducing;
 import model.farm.building.stockyard_state.StockyardState;
 import model.farm.item.Crop;
 import model.farm.item.Item;
@@ -22,6 +23,7 @@ public class Stockyard extends Building {
         super(topLeft);
         this.livestockType = livestockType;
         this.animals = new ArrayList<>();
+        this.state = new NotProducing();
     }
 
     public void addAnimal() {

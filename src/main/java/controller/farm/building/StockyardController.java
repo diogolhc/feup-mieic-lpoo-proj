@@ -9,12 +9,17 @@ import controller.command.Command;
 import controller.command.NoOperationCommand;
 import controller.farm.AnimalController;
 import controller.menu.builder.PopupMenuControllerBuilder;
+import controller.menu.builder.stockyard.CollectMenuControllerBuilder;
 import controller.menu.builder.stockyard.FeedAnimalsMenuControllerBuilder;
+//import controller.menu.builder.stockyard.ProducingMenuControllerBuilder;
+import controller.menu.builder.stockyard.ProducingMenuControllerBuilder;
 import model.InGameTime;
 import model.farm.Farm;
 import model.farm.Animal;
 import model.farm.building.Stockyard;
 import model.farm.building.stockyard_state.NotProducing;
+import model.farm.building.stockyard_state.Producing;
+import model.farm.building.stockyard_state.ReadyToCollect;
 
 public class StockyardController extends BuildingController<Stockyard> {
     private final GameController controller;
@@ -24,6 +29,7 @@ public class StockyardController extends BuildingController<Stockyard> {
     public StockyardController(GameController controller, Farm farm) {
         this.controller = controller;
         this.animalController = new AnimalController();
+        this.farm = farm;
     }
 
     public void resetLastMovement() {
@@ -33,13 +39,21 @@ public class StockyardController extends BuildingController<Stockyard> {
     @Override
     public Command getInteractionCommand(Stockyard stockyard) {
         PopupMenuControllerBuilder menuControllerBuilder;
-        menuControllerBuilder = new FeedAnimalsMenuControllerBuilder(this.controller, stockyard, stockyard.getLivestockType().getFoodCrop());
 
         if (stockyard.getState() instanceof NotProducing) {
             menuControllerBuilder = new FeedAnimalsMenuControllerBuilder(this.controller, stockyard, stockyard.getLivestockType().getFoodCrop());
+        } else if ( stockyard.getState() instanceof Producing) {
+            menuControllerBuilder = new ProducingMenuControllerBuilder(this.controller, farm, stockyard);
+        } else if (stockyard.getState() instanceof ReadyToCollect) {
+            menuControllerBuilder = new CollectMenuControllerBuilder(this.controller, farm.getInventory(), stockyard);
+        } else {
+            // This should never happen
+            throw new RuntimeException(
+                    "LOGIC ERROR: Unhandled CropFieldState: " + stockyard.getState().getClass().toString());
         }
+
         // TODO
-        System.out.println("Stockyard interaction not implemented yet");
+        System.out.println(stockyard.getState());
         return new OpenPopupMenuCommand(this.controller, menuControllerBuilder);
     }
 
