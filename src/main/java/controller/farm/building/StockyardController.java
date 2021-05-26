@@ -52,8 +52,6 @@ public class StockyardController extends BuildingController<Stockyard> {
                     "LOGIC ERROR: Unhandled CropFieldState: " + stockyard.getState().getClass().toString());
         }
 
-        // TODO
-        System.out.println(stockyard.getState());
         return new OpenPopupMenuCommand(this.controller, menuControllerBuilder);
     }
 
@@ -71,6 +69,6 @@ public class StockyardController extends BuildingController<Stockyard> {
 
     public void reactTimePassed(Stockyard stockyard, InGameTime elapsedTime) {
         animalController.reactTimePassed(stockyard, elapsedTime);
-
+        stockyard.getState().setRemainingTime(stockyard.getState().getRemainingTime().subtract(elapsedTime));
     }
 }
