@@ -1,18 +1,14 @@
 package controller.farm;
 
 import controller.farm.building.*;
-import controller.menu.builder.AlertMenuControllerBuilder;
 import gui.GUI;
 import model.Position;
-import model.farm.Currency;
 import model.farm.DemolishMarker;
-import model.farm.building.Building;
 import model.farm.building.BuildingSet;
 import model.farm.building.CropField;
 import model.farm.building.Stockyard;
 import viewer.GameViewer;
 import viewer.farm.FarmDemolishViewer;
-import viewer.farm.FarmNewBuildingViewer;
 
 import java.util.ArrayList;
 import java.util.List;

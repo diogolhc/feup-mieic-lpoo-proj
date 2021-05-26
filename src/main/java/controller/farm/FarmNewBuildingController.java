@@ -1,11 +1,9 @@
 package controller.farm;
 
-import controller.menu.builder.AlertMenuControllerBuilder;
+import controller.menu.builder.info.AlertMenuControllerBuilder;
 import gui.GUI;
 import model.Position;
-import model.farm.Currency;
 import model.farm.building.Buildable;
-import model.farm.building.Building;
 import model.farm.building.CropField;
 import model.farm.building.Stockyard;
 import viewer.GameViewer;

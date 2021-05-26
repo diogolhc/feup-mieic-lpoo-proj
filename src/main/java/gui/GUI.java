@@ -9,6 +9,10 @@ public interface GUI {
 
     void close() throws IOException;
 
+    int getWindowWidth();
+
+    int getWindowHeight();
+
     void setBackgroundColor(Color color);
 
     void setForegroundColor(Color color);

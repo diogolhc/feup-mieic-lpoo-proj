@@ -48,12 +48,6 @@ public class GameController implements MouseListener {
         this.running = false;
     }
 
-    public void pauseGame() {
-        PopupMenuControllerBuilder menuControllerBuilder;
-        menuControllerBuilder = new PauseMenuControllerBuilder(this);
-        new OpenPopupMenuCommand(this, menuControllerBuilder).execute();
-    }
-
     public void run() throws IOException {
         int frameTime = 1000/FPS;
         long lastFrameStartTime = System.currentTimeMillis();
@@ -99,5 +93,13 @@ public class GameController implements MouseListener {
     @Override
     public void onMouseClick(int x, int y) {
         this.gameControllerState.reactMouseClick(new Position(x, y));
+    }
+
+    public int getWindowWidth() {
+        return this.gui.getWindowWidth();
+    }
+
+    public int getWindowHeight() {
+        return this.gui.getWindowHeight();
     }
 }

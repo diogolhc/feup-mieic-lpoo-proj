@@ -6,7 +6,7 @@ import controller.command.CompoundCommand;
 import controller.command.OpenPopupMenuCommand;
 import controller.command.PlantCropCommand;
 import controller.menu.ButtonController;
-import controller.menu.builder.AlertMenuControllerBuilder;
+import controller.menu.builder.info.AlertMenuControllerBuilder;
 import controller.menu.builder.PopupMenuControllerBuilder;
 import model.Position;
 import model.farm.Farm;

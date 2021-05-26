@@ -1,7 +1,10 @@
 package controller.farm;
 
 import controller.GameController;
+import controller.command.OpenPopupMenuCommand;
 import controller.farm.building.*;
+import controller.menu.builder.PauseMenuControllerBuilder;
+import controller.menu.builder.PopupMenuControllerBuilder;
 import gui.GUI;
 import model.InGameTime;
 import model.Position;
@@ -23,7 +26,7 @@ public class FarmWithFarmerController extends FarmController {
 
     @Override
     public void reactKeyboard(GUI.ACTION action) {
-        if (action == GUI.ACTION.BACK) this.controller.pauseGame();
+        if (action == GUI.ACTION.BACK) pauseGame();
         if (action == GUI.ACTION.INTERACT) reactInteraction();
         FarmerController farmerController = new FarmerController(this.farm);
         farmerController.doAction(action);
@@ -34,6 +37,12 @@ public class FarmWithFarmerController extends FarmController {
 
     @Override
     public void reactMouseClick(Position position) {}
+
+    private void pauseGame() {
+        PopupMenuControllerBuilder menuControllerBuilder;
+        menuControllerBuilder = new PauseMenuControllerBuilder(this.controller);
+        new OpenPopupMenuCommand(this.controller, menuControllerBuilder).execute();
+    }
 
     private void reactInteraction() {
         Position farmerPosition = this.farm.getFarmer().getPosition();

@@ -1,4 +1,4 @@
-package controller.menu.builder;
+package controller.menu.builder.info;
 
 import controller.GameController;
 import controller.command.Command;
@@ -7,6 +7,7 @@ import controller.command.RemoveCropCommand;
 import controller.menu.ButtonController;
 import controller.menu.MenuController;
 import controller.menu.PopupMenuControllerWithClosingCondition;
+import controller.menu.builder.PopupMenuControllerBuilder;
 import controller.menu.builder.crop_field.HarvestMenuControllerBuilder;
 import gui.Color;
 import model.Position;
@@ -20,23 +21,9 @@ import model.menu.label.LabelText;
 
 import java.util.*;
 
-public class AlertMenuControllerBuilder extends PopupMenuControllerBuilder {
-    private final List<String> lines;
-    private final int messageHeight;
-    private final int messageWidth;
-
+public class AlertMenuControllerBuilder extends InfoMenuControllerBuilder {
     public AlertMenuControllerBuilder(GameController controller, String message) {
-        super(controller);
-
-        this.lines = Arrays.asList(message.split("\n"));
-        List<Integer> lineWidths = new ArrayList<>();
-        for (String line: this.lines) {
-            lineWidths.add(line.length());
-        }
-        this.messageHeight = lineWidths.size();
-        int messageWidth = Collections.max(lineWidths);
-        if (messageWidth < 4) messageWidth = 4;
-        this.messageWidth = messageWidth;
+        super(controller, "ALERT", message);
     }
 
     @Override
@@ -52,35 +39,16 @@ public class AlertMenuControllerBuilder extends PopupMenuControllerBuilder {
     }
 
     @Override
-    protected List<Label> getLabels() {
-        List<Label> labels = super.getLabels();
-
-        int y = 4;
-        for (String line: this.lines) {
-            labels.add(new Label(new Position(1, y), line));
-            y += 1;
-        }
-
-        return labels;
-    }
-
-    @Override
     protected int getHeight() {
-        return messageHeight + 9;
+        return super.getHeight() + 4;
     }
 
     @Override
     protected int getWidth() {
-        return messageWidth + 2;
-    }
-
-    @Override
-    protected String getTitle() {
-        return "ALERT";
-    }
-
-    @Override
-    protected Color getColor() {
-        return new Color("#2C2C2C");
+        if (super.getWidth() >= 6) {
+            return super.getWidth();
+        } else {
+            return 6;
+        }
     }
 }

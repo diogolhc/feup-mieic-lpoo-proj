@@ -30,6 +30,10 @@ public abstract class MenuControllerBuilder {
         return menuController;
     }
 
+    public MenuController buildMenu() {
+        return this.buildMenu(new Position(0, 0));
+    }
+
     protected abstract MenuController getMenuController(Menu menu);
 
     protected List<ButtonController> getButtons() {
