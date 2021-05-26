@@ -1,9 +1,7 @@
 package model.farm.building.stockyard_state;
 
-import gui.Color;
 import model.InGameTime;
 import model.farm.building.Stockyard;
-import model.farm.building.crop_field_state.ReadyToHarvest;
 import model.farm.item.AnimalProduct;
 
 public class Producing implements StockyardState {

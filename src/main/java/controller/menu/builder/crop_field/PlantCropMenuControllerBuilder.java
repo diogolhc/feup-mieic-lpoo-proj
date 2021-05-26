@@ -49,7 +49,7 @@ public class PlantCropMenuControllerBuilder extends PopupMenuControllerBuilder {
             buttons.add(new ButtonController(plantCropButton, plantCropButtonCommand));
 
             if (y == 4) {
-                y += 6;
+                y += 7;
             } else {
                 y = 4;
                 x += COLUMN_WIDTH + 3;
@@ -73,14 +73,14 @@ public class PlantCropMenuControllerBuilder extends PopupMenuControllerBuilder {
                     () -> String.format("%1$4s", crop.getPlantPrice().toString())
             ));
             labels.add(new Label(
-                    new Position(x, y+3),
+                    new Position(x, y+4),
                     () -> String.format("%1$s %2$3s",
                             crop.getGrowTime().toCountdownString(),
                             "x" + crop.getBaseHarvestAmount())
             ));
 
             if (y == 4) {
-                y += 6;
+                y += 7;
             } else {
                 y = 4;
                 x += COLUMN_WIDTH + 3;
@@ -92,7 +92,7 @@ public class PlantCropMenuControllerBuilder extends PopupMenuControllerBuilder {
 
     @Override
     protected int getHeight() {
-        return 15;
+        return 17;
     }
 
     @Override
