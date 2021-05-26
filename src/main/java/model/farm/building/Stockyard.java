@@ -30,7 +30,7 @@ public class Stockyard extends Buildable {
     public void addAnimal() {
         // TODO make sure position is different from all other animals
         // TODO THis is just here to debug
-        Position position = new Position(getTopLeftPosition().getX() + 1, getTopLeftPosition().getY() + 1);
+        Position position = new Position(getTopLeftPosition().getX() + 2, getTopLeftPosition().getY() + 1);
         this.animals.add(new Animal(position));
     }
 
@@ -51,6 +51,7 @@ public class Stockyard extends Buildable {
         return true;
     }
 
+
     @Override
     public int getWidth() {
         return this.livestockType.getStockyardWidth();
@@ -63,12 +64,13 @@ public class Stockyard extends Buildable {
 
     @Override
     public Region getUntraversableRegion() {
-        return new RectangleRegion(this.getTopLeftPosition(), this.getWidth(), this.getHeight());
+        Position position = new Position(this.getTopLeftPosition().getX() + 1, this.getTopLeftPosition().getY());
+        return new RectangleRegion(position, this.getWidth() - 1, this.getHeight());
     }
 
     @Override
     public Region getInteractiveRegion() {
-        return new PositionRegion(this.getTopLeftPosition().getTranslated(new Position(-1, 3)));
+        return new PositionRegion(this.getTopLeftPosition().getTranslated(new Position(0, 3)));
     }
 
     @Override
@@ -78,8 +80,8 @@ public class Stockyard extends Buildable {
 
     public Region getAnimalsRegion() {
         return new RectangleRegion(
-                this.getTopLeftPosition().getTranslated(new Position(1, 1)),
-                this.getWidth() - 2,
+                this.getTopLeftPosition().getTranslated(new Position(2, 1)),
+                this.getWidth() - 3,
                 this.getHeight() - 2);
     }
 
