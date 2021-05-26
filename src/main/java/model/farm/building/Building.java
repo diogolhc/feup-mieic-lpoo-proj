@@ -4,7 +4,9 @@ import model.Position;
 import model.region.RectangleRegion;
 import model.region.Region;
 
-public abstract class Building {
+import java.io.Serializable;
+
+public abstract class Building implements Serializable {
     private Position topLeft;
 
     public Building(Position topLeft) {

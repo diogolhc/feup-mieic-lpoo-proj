@@ -34,7 +34,7 @@ public class MainMenuControllerBuilder extends MenuControllerBuilder {
         buttons.add(new ButtonController(newGameButton, newGameCommand));
 
         Button loadGameButton = new Button(new Position(10, 11), "LOAD GAME");
-        Command loadGameCommand = new NoOperationCommand();
+        Command loadGameCommand = new LoadGameCommand(gameController);
 
         buttons.add(new ButtonController(loadGameButton, loadGameCommand));
 

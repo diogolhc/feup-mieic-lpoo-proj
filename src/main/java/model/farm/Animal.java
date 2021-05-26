@@ -2,8 +2,10 @@ package model.farm;
 
 import model.Position;
 
+import java.io.Serializable;
+
 // TODO maybe this could be unified with Farmer?
-public class Animal {
+public class Animal implements Serializable {
     private Position position;
 
     public Animal(Position position) {

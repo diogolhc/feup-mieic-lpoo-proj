@@ -3,7 +3,9 @@ package model.farm.item;
 import gui.Color;
 import model.InGameTime;
 
-public class CropGrowthStage implements Comparable<CropGrowthStage> {
+import java.io.Serializable;
+
+public class CropGrowthStage implements Comparable<CropGrowthStage>, Serializable {
     private final InGameTime stageStartTime;
     private final char stageChar;
     private final Color stageColor;

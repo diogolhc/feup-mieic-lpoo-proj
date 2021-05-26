@@ -5,6 +5,8 @@ import model.region.EdificeUntraversableRegion;
 import model.region.PositionRegion;
 import model.region.Region;
 
+import java.io.Serializable;
+
 public class House extends Building {
     public House(Position topLeft) {
         super(topLeft);

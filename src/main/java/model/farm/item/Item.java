@@ -2,9 +2,10 @@ package model.farm.item;
 
 import model.farm.Currency;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public abstract class Item {
+public abstract class Item implements Serializable {
     public abstract String getName();
     public abstract Currency getSellPrice();
 

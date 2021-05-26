@@ -7,8 +7,7 @@ import controller.command.OpenPopupMenuCommand;
 import controller.farm.FarmController;
 import controller.menu.builder.AlertMenuControllerBuilder;
 import controller.menu.builder.PopupMenuControllerBuilder;
-import controller.menu.builder.house.SleepMenuControllerBuilder;
-import controller.menu.builder.market.MarketMenuControllerBuilder;
+import controller.menu.builder.house.HouseMenuControllerBuilder;
 import model.farm.building.House;
 
 public class HouseController extends BuildingController<House> {
@@ -24,7 +23,7 @@ public class HouseController extends BuildingController<House> {
     public Command getInteractionCommand(House house) {
         if (this.controller.getGameControllerState() instanceof FarmController) {
             FarmController farmController = (FarmController) this.controller.getGameControllerState();
-            PopupMenuControllerBuilder menuControllerBuilder = new SleepMenuControllerBuilder(
+            PopupMenuControllerBuilder menuControllerBuilder = new HouseMenuControllerBuilder(
                     this.controller, farmController, timeConverter, house);
             return new OpenPopupMenuCommand(this.controller, menuControllerBuilder);
         } else {

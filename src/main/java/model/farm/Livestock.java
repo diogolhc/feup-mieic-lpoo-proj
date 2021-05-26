@@ -5,7 +5,9 @@ import model.farm.item.AnimalProduct;
 import model.farm.item.Crop;
 import model.farm.item.Item;
 
-public class Livestock {
+import java.io.Serializable;
+
+public class Livestock implements Serializable {
     private String animalName;
     private char animalChar;
     private Crop foodCrop;

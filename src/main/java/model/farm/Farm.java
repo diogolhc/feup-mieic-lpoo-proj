@@ -7,13 +7,13 @@ import model.farm.item.Crop;
 import model.farm.building.BuildingSet;
 import model.farm.item.Item;
 import model.region.RectangleRegion;
-import model.region.Region;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class Farm {
+public class Farm implements Serializable {
     private Farmer farmer;
     private final BuildingSet buildings;
     private InGameTime time;

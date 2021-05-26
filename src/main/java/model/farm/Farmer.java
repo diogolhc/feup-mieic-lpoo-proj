@@ -2,7 +2,9 @@ package model.farm;
 
 import model.Position;
 
-public class Farmer {
+import java.io.Serializable;
+
+public class Farmer implements Serializable {
     private Position position;
 
     public Farmer(Position position) {

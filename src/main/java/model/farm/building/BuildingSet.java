@@ -3,12 +3,13 @@ package model.farm.building;
 import model.Position;
 import model.region.RectangleRegion;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class BuildingSet {
+public class BuildingSet implements Serializable {
     private final Set<CropField> cropFields; // TODO because of hashset, we probably need to implement hash for cropfields
     private final Set<Stockyard> stockyards; //      same goes for stockyards
     private House house;

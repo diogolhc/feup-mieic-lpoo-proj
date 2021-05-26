@@ -1,8 +1,9 @@
 package gui;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Color {
+public class Color implements Serializable {
     String color;
     public Color(String color) {
         // TODO check if color is valid

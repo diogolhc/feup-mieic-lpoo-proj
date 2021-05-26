@@ -2,10 +2,11 @@ package model.farm;
 
 import model.farm.item.Item;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Inventory {
+public class Inventory implements Serializable {
     private Map<Item, Integer> items;
     private int capacity;
     private int occupied;

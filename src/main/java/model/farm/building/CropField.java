@@ -9,6 +9,7 @@ import model.farm.building.crop_field_state.NotPlanted;
 import model.region.RectangleRegion;
 import model.region.Region;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 

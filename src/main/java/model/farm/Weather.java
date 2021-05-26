@@ -1,9 +1,10 @@
 package model.farm;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Weather {
+public class Weather implements Serializable {
     private String name;
     private double weatherEffect;
     Map<Weather, Double> weatherChangeProbabilities;

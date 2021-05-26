@@ -1,6 +1,8 @@
 package model.farm;
 
-public class Currency {
+import java.io.Serializable;
+
+public class Currency implements Serializable {
     private static final int MAX_CURRENCY = 999999;
     private static final int MAX_STRING_LENGTH = 7;
     private final int coins;
