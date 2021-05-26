@@ -23,6 +23,7 @@ public class FarmWithFarmerController extends FarmController {
 
     @Override
     public void reactKeyboard(GUI.ACTION action) {
+        if (action == GUI.ACTION.BACK) this.controller.pauseGame();
         if (action == GUI.ACTION.INTERACT) reactInteraction();
         FarmerController farmerController = new FarmerController(this.farm);
         farmerController.doAction(action);
