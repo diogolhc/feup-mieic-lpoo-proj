@@ -65,12 +65,12 @@ public class AlertMenuControllerBuilder extends PopupMenuControllerBuilder {
 
     @Override
     protected int getHeight() {
-        return messageHeight + 9;
+        return messageHeight + 11;
     }
 
     @Override
     protected int getWidth() {
-        return messageWidth + 2;
+        return messageWidth + 5;
     }
 
     @Override
