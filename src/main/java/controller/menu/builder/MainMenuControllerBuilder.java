@@ -25,10 +25,6 @@ public class MainMenuControllerBuilder extends MenuControllerBuilder {
         this.height = height;
     }
 
-    public MenuController buildMenu() {
-        return super.buildMenu(new Position(0, 0));
-    }
-
     @Override
     protected List<ButtonController> getButtons() {
         List<ButtonController> buttons = super.getButtons();
@@ -44,7 +40,7 @@ public class MainMenuControllerBuilder extends MenuControllerBuilder {
         buttons.add(new ButtonController(loadGameButton, loadGameCommand));
 
         Button exitGameButton = new Button(new Position(10, 16), "EXIT");
-        Command exitGameCommand = new NoOperationCommand();
+        Command exitGameCommand = new ExitGameCommand(gameController);
 
         buttons.add(new ButtonController(exitGameButton, exitGameCommand));
 

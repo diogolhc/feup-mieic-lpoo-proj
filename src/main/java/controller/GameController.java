@@ -1,6 +1,9 @@
 package controller;
 
+import controller.command.OpenPopupMenuCommand;
 import controller.farm.FarmWithFarmerController;
+import controller.menu.builder.PauseMenuControllerBuilder;
+import controller.menu.builder.PopupMenuControllerBuilder;
 import gui.GUI;
 import gui.MouseListener;
 import model.Position;
@@ -40,6 +43,12 @@ public class GameController implements MouseListener {
 
     public void endGame() {
         this.running = false;
+    }
+
+    public void pauseGame() {
+        PopupMenuControllerBuilder menuControllerBuilder;
+        menuControllerBuilder = new PauseMenuControllerBuilder(this);
+        new OpenPopupMenuCommand(this, menuControllerBuilder).execute();
     }
 
     public void run() throws IOException {

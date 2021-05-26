@@ -22,8 +22,10 @@ public class Game {
         Farm farm = new NewGameFarmBuilder().buildFarm();
 
         this.controller = new GameController(gui);
+
         this.controller.setGameControllerState(
-                new MainMenuControllerBuilder(controller, farm, width, height).buildMenu());
+                new MainMenuControllerBuilder(controller, farm, width, height)
+                        .buildMenu(new Position(0,0)));
     }
 
     public GameController getController() {

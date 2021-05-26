@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class MenuControllerBuilder {
-
     public MenuController buildMenu(Position position) {
         Menu menu = new Menu(this.getTitle(), position, this.getWidth(), this.getHeight());
         for (Label label: this.getLabels()) {
