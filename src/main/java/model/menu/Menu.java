@@ -1,5 +1,6 @@
 package model.menu;
 
+import gui.Color;
 import model.Position;
 import model.menu.label.Label;
 
@@ -10,15 +11,12 @@ public class Menu {
     private final Set<Button> buttons;
     private final Set<Label> labels;
     private String title;
+    private Color color;
     private Position position;
     private int width;
     private int height;
 
-    public Menu(String title, Position position, int width, int height) {
-        this.title = title;
-        this.position = position;
-        this.width = width;
-        this.height = height;
+    public Menu() {
         this.buttons = new HashSet<>();
         this.labels = new HashSet<>();
     }
@@ -53,5 +51,26 @@ public class Menu {
 
     public int getHeight() {
         return this.height;
+    }
+
+    public Color getColor() {
+        return this.color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
+    }
+
+    public void setSize(int width, int height) {
+        this.width = width;
+        this.height = height;
     }
 }

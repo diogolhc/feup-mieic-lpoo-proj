@@ -34,6 +34,9 @@ public class GameController implements MouseListener {
     }
 
     public void setGameControllerState(GameControllerState state) {
+        if (this.gameControllerState != null) {
+            this.gameControllerState.reactChangeState();
+        }
         this.gameControllerState = state;
     }
 

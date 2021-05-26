@@ -10,8 +10,6 @@ import model.menu.label.Label;
 import viewer.GameViewer;
 
 public abstract class MenuViewer extends GameViewer {
-    public static final Color MENU_BACKGROUND_COLOR = new Color("#222222");
-
     protected Menu menu;
 
     public MenuViewer(Menu menu) {
@@ -44,7 +42,7 @@ public abstract class MenuViewer extends GameViewer {
 
     private void drawBackground(GUI gui) {
         FilledRectangleDrawer backgroundDrawer = new FilledRectangleDrawer(
-                gui, MENU_BACKGROUND_COLOR, MENU_BACKGROUND_COLOR, ' ');
+                gui, this.menu.getColor(), this.menu.getColor(), ' ');
         backgroundDrawer.draw(this.menu.getTopLeftPosition(), this.menu.getWidth(), this.menu.getHeight());
     }
 }

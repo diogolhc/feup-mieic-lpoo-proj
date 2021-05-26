@@ -11,4 +11,5 @@ public interface GameControllerState {
     void reactMouseClick(Position position);
     void reactTimePassed(long elapsedTimeSinceLastFrame);
     GameViewer getViewer();
+    void reactChangeState();
 }

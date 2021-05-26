@@ -8,6 +8,7 @@ import controller.menu.ButtonController;
 import controller.menu.MenuController;
 import controller.menu.PopupMenuControllerWithClosingCondition;
 import controller.menu.builder.crop_field.HarvestMenuControllerBuilder;
+import gui.Color;
 import model.Position;
 import model.farm.Farm;
 import model.farm.building.CropField;
@@ -76,5 +77,10 @@ public class AlertMenuControllerBuilder extends PopupMenuControllerBuilder {
     @Override
     protected String getTitle() {
         return "ALERT";
+    }
+
+    @Override
+    protected Color getColor() {
+        return new Color("#292929");
     }
 }

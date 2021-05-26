@@ -52,4 +52,7 @@ public abstract class FarmController implements GameControllerState {
 
         this.weatherController.reactTimePassed(elapsedTime);
     }
+
+    @Override
+    public void reactChangeState() {}
 }

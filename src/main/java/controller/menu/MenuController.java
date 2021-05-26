@@ -2,6 +2,7 @@ package controller.menu;
 
 import controller.GameControllerState;
 import controller.command.Command;
+import gui.Color;
 import gui.GUI;
 import model.Position;
 import model.menu.Button;
@@ -49,4 +50,11 @@ public abstract class MenuController implements GameControllerState {
 
     @Override
     public void reactTimePassed(long elapsedTimeSinceLastFrame) {}
+
+    @Override
+    public void reactChangeState() {
+        for (Button button: this.getMenu().getButtons()) {
+            button.unselect();
+        }
+    }
 }
