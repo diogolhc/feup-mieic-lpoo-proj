@@ -9,7 +9,7 @@ public class AnimalController {
     private static int lastMovement = 0;
 
     public void reset() {
-        lastMovement = lastMovement > 5 ? 0 : lastMovement;
+        lastMovement = lastMovement > 100 ? 0 : lastMovement;
     }
 
     public void reactTimePassed(Stockyard stockyard, InGameTime elapsedTime) {
@@ -19,7 +19,7 @@ public class AnimalController {
         System.out.println("Moving: " + stockyard.getLivestockType().getAnimalName());
         System.out.printf("Time: " + lastMovement);
         */
-        if (lastMovement >= 5) {
+        if (lastMovement >= 100) {
             for (Animal animal : stockyard.getAnimals()) {
                 Position newPosition = animal.getPosition().getRandomNeighbour();
                 if (stockyard.getAnimalsRegion().contains(newPosition) && stockyard.emptyPosition(newPosition)) {
@@ -27,6 +27,6 @@ public class AnimalController {
                 }
             }
         }
-        lastMovement += elapsedTime.getMinute();
+        lastMovement++;
     }
 }

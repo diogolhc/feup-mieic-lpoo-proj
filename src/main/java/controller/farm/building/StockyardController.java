@@ -41,7 +41,7 @@ public class StockyardController extends BuildingController<Stockyard> {
         PopupMenuControllerBuilder menuControllerBuilder;
 
         if (stockyard.getState() instanceof NotProducing) {
-            menuControllerBuilder = new FeedAnimalsMenuControllerBuilder(this.controller, stockyard, stockyard.getLivestockType().getFoodCrop());
+            menuControllerBuilder = new FeedAnimalsMenuControllerBuilder(this.controller, this.farm.getInventory(), stockyard, stockyard.getLivestockType().getFoodCrop());
         } else if ( stockyard.getState() instanceof Producing) {
             menuControllerBuilder = new ProducingMenuControllerBuilder(this.controller, farm, stockyard);
         } else if (stockyard.getState() instanceof ReadyToCollect) {
@@ -52,8 +52,6 @@ public class StockyardController extends BuildingController<Stockyard> {
                     "LOGIC ERROR: Unhandled CropFieldState: " + stockyard.getState().getClass().toString());
         }
 
-        // TODO
-        System.out.println(stockyard.getState());
         return new OpenPopupMenuCommand(this.controller, menuControllerBuilder);
     }
 
@@ -71,6 +69,6 @@ public class StockyardController extends BuildingController<Stockyard> {
 
     public void reactTimePassed(Stockyard stockyard, InGameTime elapsedTime) {
         animalController.reactTimePassed(stockyard, elapsedTime);
-
+        stockyard.getState().setRemainingTime(stockyard.getState().getRemainingTime().subtract(elapsedTime));
     }
 }
