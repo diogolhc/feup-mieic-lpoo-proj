@@ -24,17 +24,6 @@ public class MainMenuControllerBuilder extends MenuControllerBuilder {
         this.height = height;
     }
 
-    public MainMenuController buildMenu() {
-        Menu menu = new Menu(this.getTitle(), new Position(0,0), this.getWidth(), this.getHeight());
-
-        MainMenuController mainMenuController = this.getMenuController(menu);
-        for (ButtonController buttonController: this.getButtons()) {
-            mainMenuController.addButton(buttonController);
-        }
-
-        return mainMenuController;
-    }
-
     @Override
     protected List<ButtonController> getButtons() {
         List<ButtonController> buttons = super.getButtons();
