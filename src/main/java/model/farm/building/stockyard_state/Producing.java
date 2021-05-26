@@ -1,9 +1,7 @@
 package model.farm.building.stockyard_state;
 
-import gui.Color;
 import model.InGameTime;
 import model.farm.building.Stockyard;
-import model.farm.building.crop_field_state.ReadyToHarvest;
 import model.farm.item.AnimalProduct;
 
 public class Producing implements StockyardState {
@@ -51,7 +49,9 @@ public class Producing implements StockyardState {
     @Override
     public void changeProductAmount(double productAmount) {
         this.productAmount += productAmount;
-        this.productAmount = this.productAmount < 0 ? 0 : this.productAmount;
+        if (this.productAmount <= 0) {
+            this.stockyard.setState(new NotProducing());
+        }
     }
 
 }

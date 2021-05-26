@@ -9,7 +9,7 @@ import java.io.*;
 public class SaveGameCommand implements Command {
     private final GameController gameController;
     private final Farm farm;
-    private String saveFileName;
+    private final String saveFileName;
 
     public SaveGameCommand(GameController gameController, Farm farm, String saveFileName) {
         this.gameController = gameController;

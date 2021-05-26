@@ -24,10 +24,7 @@ public class ReadyToCollect implements StockyardState{
     }
 
     @Override
-    public void changeProductAmount(double productAmount) {
-        this.productAmount += productAmount;
-        this.productAmount = this.productAmount < 0 ? 0 : this.productAmount;
-    }
+    public void changeProductAmount(double productAmount) {}
 
     @Override
     public int getProductAmount() {

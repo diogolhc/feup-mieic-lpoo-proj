@@ -119,4 +119,8 @@ public class Stockyard extends Buildable {
     public Currency getBuildPrice() {
         return this.livestockType.getBuildPrice();
     }
+
+    public void changeProductAmount(double quantity) {
+        this.state.changeProductAmount(quantity);
+    }
 }
