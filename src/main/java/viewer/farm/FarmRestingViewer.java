@@ -3,24 +3,23 @@ package viewer.farm;
 import gui.Color;
 import gui.GUI;
 import model.Position;
-import model.farm.DemolishMarker;
 import model.farm.Farm;
 
-public class FarmSleepingViewer extends FarmViewer {
-    private final static char SLEEPING_MARKER = 'Z';
-    private final static Color SLEEPING_MARKER_COLOR = new Color("#00008b");
+public class FarmRestingViewer extends FarmViewer {
+    private final static char RESTING_MARKER = 'Z';
+    private final static Color RESTING_MARKER_COLOR = new Color("#00008b");
 
-    public FarmSleepingViewer(Farm farm) {
+    public FarmRestingViewer(Farm farm) {
         super(farm);
     }
 
     @Override
     public void draw(GUI gui) {
         super.draw(gui);
-        this.drawSleepingMarker(gui);
+        this.drawRestingMarker(gui);
     }
 
-    private void drawSleepingMarker(GUI gui) {
+    private void drawRestingMarker(GUI gui) {
         Position position = this.farm
                 .getBuildings()
                 .getHouse()
@@ -29,11 +28,11 @@ public class FarmSleepingViewer extends FarmViewer {
 
         Color backgroundColor = gui.getBackgroundColor(position.getX(), position.getY());
         gui.setBackgroundColor(backgroundColor);
-        gui.setForegroundColor(SLEEPING_MARKER_COLOR);
-        gui.drawChar(position.getX(), position.getY(), SLEEPING_MARKER);
+        gui.setForegroundColor(RESTING_MARKER_COLOR);
+        gui.drawChar(position.getX(), position.getY(), RESTING_MARKER);
 
         position = position.getTranslated(new Position(1, 1));
 
-        gui.drawChar(position.getX(), position.getY(), SLEEPING_MARKER);
+        gui.drawChar(position.getX(), position.getY(), RESTING_MARKER);
     }
 }

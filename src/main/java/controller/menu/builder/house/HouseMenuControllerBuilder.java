@@ -1,12 +1,10 @@
 package controller.menu.builder.house;
 
 import controller.GameController;
-import controller.GameControllerState;
 import controller.RealTimeToInGameTimeConverter;
 import controller.command.*;
 import controller.farm.FarmController;
-import controller.farm.FarmSleepingController;
-import controller.farm.FarmWithFarmerController;
+import controller.farm.FarmRestingController;
 import controller.menu.ButtonController;
 import controller.menu.builder.PopupMenuControllerBuilder;
 import model.Position;
@@ -41,8 +39,8 @@ public class HouseMenuControllerBuilder extends PopupMenuControllerBuilder {
 
         Button restButton = new Button(new Position(1, 9), "REST");
         Command restCommand = new CompoundCommand()
-                .addCommand(new SetTimeRateCommand(this.timeConverter, this.house.getSleepRate()))
-                .addCommand(new SetControllerStateCommand(this.controller, new FarmSleepingController(this.farmController)));
+                .addCommand(new SetTimeRateCommand(this.timeConverter, this.house.getRestRate()))
+                .addCommand(new SetControllerStateCommand(this.controller, new FarmRestingController(this.farmController)));
 
         buttons.add(new ButtonController(restButton, restCommand));
         return buttons;
