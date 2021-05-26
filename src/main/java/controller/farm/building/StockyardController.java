@@ -8,6 +8,7 @@ import controller.farm.FarmWithFarmerController;
 import controller.command.Command;
 import controller.command.NoOperationCommand;
 import controller.farm.AnimalController;
+import controller.menu.builder.PopupMenuControllerBuilder;
 import model.InGameTime;
 import model.farm.Farm;
 import model.farm.Animal;
@@ -29,6 +30,8 @@ public class StockyardController extends BuildingController<Stockyard> {
 
     @Override
     public Command getInteractionCommand(Stockyard stockyard) {
+        PopupMenuControllerBuilder menuControllerBuilder;
+
         // TODO
         System.out.println("Stockyard interaction not implemented yet");
         return new NoOperationCommand();
@@ -48,5 +51,6 @@ public class StockyardController extends BuildingController<Stockyard> {
 
     public void reactTimePassed(Stockyard stockyard, InGameTime elapsedTime) {
         animalController.reactTimePassed(stockyard, elapsedTime);
+
     }
 }
