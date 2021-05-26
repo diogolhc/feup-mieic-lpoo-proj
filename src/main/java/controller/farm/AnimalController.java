@@ -15,10 +15,6 @@ public class AnimalController {
     public void reactTimePassed(Stockyard stockyard, InGameTime elapsedTime) {
         // TODO use elapsed time for more intelligent movement
         // TODO stockyard MUST NOT be passed to this function, send me a message if you need help
-        /*
-        System.out.println("Moving: " + stockyard.getLivestockType().getAnimalName());
-        System.out.printf("Time: " + lastMovement);
-        */
         if (lastMovement >= 100) {
             for (Animal animal : stockyard.getAnimals()) {
                 Position newPosition = animal.getPosition().getRandomNeighbour();
