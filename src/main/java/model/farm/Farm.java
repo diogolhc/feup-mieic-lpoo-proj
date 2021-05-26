@@ -36,6 +36,7 @@ public class Farm {
         this.buildings = buildings;
         this.crops = new ArrayList<>();
         this.livestockTypes = new ArrayList<>();
+        this.inventory = new Inventory();
     }
 
     public Farmer getFarmer() {
