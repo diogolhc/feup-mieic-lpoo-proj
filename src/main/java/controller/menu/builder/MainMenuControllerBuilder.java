@@ -4,6 +4,7 @@ import controller.GameController;
 import controller.command.*;
 import controller.menu.ButtonController;
 import controller.menu.MainMenuController;
+import controller.menu.MenuController;
 import model.Position;
 import model.farm.Farm;
 import model.menu.Button;
@@ -24,15 +25,8 @@ public class MainMenuControllerBuilder extends MenuControllerBuilder {
         this.height = height;
     }
 
-    public MainMenuController buildMenu() {
-        Menu menu = new Menu(this.getTitle(), new Position(0,0), this.getWidth(), this.getHeight());
-
-        MainMenuController mainMenuController = this.getMenuController(menu);
-        for (ButtonController buttonController: this.getButtons()) {
-            mainMenuController.addButton(buttonController);
-        }
-
-        return mainMenuController;
+    public MenuController buildMenu() {
+        return super.buildMenu(new Position(0, 0));
     }
 
     @Override

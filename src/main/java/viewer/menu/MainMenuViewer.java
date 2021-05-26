@@ -12,7 +12,7 @@ public class MainMenuViewer extends MenuViewer {
 
     @Override
     protected void drawTitle(GUI gui) {
-        MainMenuTitleViewer mainMenuTitleViewer = new MainMenuTitleViewer();
-        mainMenuTitleViewer.draw(this.menu, gui);
+        MenuTitleViewer mainMenuTitleViewer = new MenuTitleViewer();
+        mainMenuTitleViewer.draw(this.menu, new Position(15, 2), gui);
     }
 }

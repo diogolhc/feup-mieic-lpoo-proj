@@ -23,9 +23,7 @@ public abstract class MenuControllerBuilder {
         return menuController;
     }
 
-    protected MenuController getMenuController(Menu menu) {
-        return new MenuController(menu);
-    }
+    protected abstract MenuController getMenuController(Menu menu);
 
     protected List<ButtonController> getButtons() {
         return new ArrayList<>();

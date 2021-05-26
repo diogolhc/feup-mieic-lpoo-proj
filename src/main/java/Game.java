@@ -1,4 +1,5 @@
 import controller.GameController;
+import controller.menu.MenuController;
 import controller.menu.builder.MainMenuControllerBuilder;
 import gui.GUI;
 import gui.LanternaGUI;
@@ -21,7 +22,8 @@ public class Game {
         Farm farm = new NewGameFarmBuilder().buildFarm();
 
         this.controller = new GameController(gui);
-        this.controller.setGameControllerState(new MainMenuControllerBuilder(controller, farm, width, height).buildMenu());
+        this.controller.setGameControllerState(
+                new MainMenuControllerBuilder(controller, farm, width, height).buildMenu());
     }
 
     public GameController getController() {

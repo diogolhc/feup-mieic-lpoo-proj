@@ -55,7 +55,7 @@ public class HarvestMenuControllerBuilder extends PopupMenuControllerBuilder {
 
     @Override
     protected int getHeight() {
-        return 12;
+        return 11;
     }
 
     @Override

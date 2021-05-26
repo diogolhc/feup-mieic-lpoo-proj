@@ -12,12 +12,11 @@ import model.menu.label.Label;
 public class MenuTitleViewer {
     private static final Color TITLE_COLOR = new Color("#aaaaaa");
     private static final char UNDERLINE_CHARACTER = '-';
-    private static final Position TITLE_POSITION = new Position(1, 1);
 
-    public void draw(Menu menu, GUI gui) {
+    public void draw(Menu menu, Position position, GUI gui) {
         UnderlinedStringDrawer drawer = new UnderlinedStringDrawer(
                 gui, MenuViewer.MENU_BACKGROUND_COLOR, this.TITLE_COLOR, this.UNDERLINE_CHARACTER);
 
-        drawer.draw(this.TITLE_POSITION.getTranslated(menu.getTopLeftPosition()), menu.getTitle());
+        drawer.draw(position.getTranslated(menu.getTopLeftPosition()), menu.getTitle());
     }
 }

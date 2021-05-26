@@ -12,7 +12,7 @@ import viewer.menu.MenuViewer;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MenuController implements GameControllerState {
+public abstract class MenuController implements GameControllerState {
     protected Menu menu;
     private List<ButtonController> buttonControllers;
 
@@ -49,9 +49,4 @@ public class MenuController implements GameControllerState {
 
     @Override
     public void reactTimePassed(long elapsedTimeSinceLastFrame) {}
-
-    @Override
-    public GameViewer getViewer() {
-        return new MenuViewer(this.menu);
-    }
 }

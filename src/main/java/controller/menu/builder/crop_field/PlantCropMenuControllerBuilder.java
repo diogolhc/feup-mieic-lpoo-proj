@@ -85,7 +85,7 @@ public class PlantCropMenuControllerBuilder extends PopupMenuControllerBuilder {
 
     @Override
     protected int getHeight() {
-        return 14;
+        return 13;
     }
 
     @Override
