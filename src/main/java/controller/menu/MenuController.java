@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MenuController implements GameControllerState {
-    private Menu menu;
+    protected Menu menu;
     private List<ButtonController> buttonControllers;
 
     public MenuController(Menu menu) {
