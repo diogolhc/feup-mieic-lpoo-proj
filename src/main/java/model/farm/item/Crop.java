@@ -8,20 +8,28 @@ import java.util.Collections;
 import java.util.List;
 
 public class Crop extends Item {
-    public static final Crop NO_CROP = new Crop("", new InGameTime(0),
-            Arrays.asList(new CropGrowthStage()), 0, new Currency());
+    public static final Crop NO_CROP = new Crop("");
 
     private final String name;
     private final InGameTime growTime;
     private final List<CropGrowthStage> growthStages;
     private final int baseHarvestAmount;
+
+    private final Currency plantPrice;
     private final Currency sellPrice;
 
-    public Crop(String name, InGameTime growTime, List<CropGrowthStage> growthStages, int baseHarvestAmount, Currency sellPrice) {
+    public Crop(String name) {
+        this(name, new InGameTime(0), Arrays.asList(new CropGrowthStage()),
+                0, new Currency(), new Currency());
+    }
+
+    public Crop(String name, InGameTime growTime, List<CropGrowthStage> growthStages, int baseHarvestAmount,
+                Currency plantPrice, Currency sellPrice) {
         this.name = name;
         this.growTime = growTime;
         this.growthStages = growthStages;
         this.baseHarvestAmount = baseHarvestAmount;
+        this.plantPrice = plantPrice;
         this.sellPrice = sellPrice;
         Collections.sort(this.growthStages);
     }
@@ -36,10 +44,6 @@ public class Crop extends Item {
         return this.growthStages.get(this.growthStages.size() - 1);
     }
 
-    public InGameTime getGrowTime() {
-        return growTime;
-    }
-
     @Override
     public String getName() {
         return this.name;
@@ -48,6 +52,14 @@ public class Crop extends Item {
     @Override
     public Currency getSellPrice() {
         return sellPrice;
+    }
+
+    public InGameTime getGrowTime() {
+        return growTime;
+    }
+
+    public Currency getPlantPrice() {
+        return plantPrice;
     }
 
     public int getBaseHarvestAmount() {

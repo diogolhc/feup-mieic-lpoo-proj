@@ -3,6 +3,7 @@ package model.farm.building;
 import model.Position;
 import model.farm.Animal;
 import model.farm.Livestock;
+import model.farm.building.stockyard_state.StockyardState;
 import model.farm.item.Crop;
 import model.farm.item.Item;
 import model.region.PositionRegion;
@@ -15,6 +16,7 @@ import java.util.List;
 public class Stockyard extends Building {
     private final Livestock livestockType;
     private final List<Animal> animals;
+    private StockyardState state;
 
     public Stockyard(Position topLeft, Livestock livestockType) {
         super(topLeft);
@@ -75,5 +77,13 @@ public class Stockyard extends Building {
 
     public Livestock getLivestockType() {
         return this.livestockType;
+    }
+
+    public void setState(StockyardState state) {
+        this.state = state;
+    }
+
+    public StockyardState getState() {
+        return state;
     }
 }

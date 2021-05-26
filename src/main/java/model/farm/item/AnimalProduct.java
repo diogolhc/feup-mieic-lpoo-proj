@@ -3,11 +3,17 @@ package model.farm.item;
 import model.InGameTime;
 import model.farm.Currency;
 
+import java.util.Arrays;
+
 public class AnimalProduct extends Item {
     private final String name;
     private final InGameTime productionTime;
     private final int baseProducedAmount;
     private final Currency sellPrice;
+
+    public AnimalProduct(String name) {
+        this(name, new InGameTime(0), 0, new Currency());
+    }
 
     public AnimalProduct(String name, InGameTime productionTime, int baseProducedAmount, Currency sellPrice) {
         this.name = name;
