@@ -22,8 +22,13 @@ public class FeedAnimalsCommand implements Command {
     @Override
     public void execute() {
         if (this.stockyard.getState() instanceof NotProducing &&
-                inventory.getAmount(stockyard.getLivestockType().getFoodCrop()) >= stockyard.getLivestockType().getRequiredFood() ) {
+                inventory.getAmount(stockyard.getLivestockType().getFoodCrop()) >=
+                        stockyard.getLivestockType().getRequiredFood()*stockyard.getAnimals().size() ) {
+
             this.stockyard.setState(new Producing(this.stockyard, this.stockyard.getLivestockType().getProducedItem()));
+
+            inventory.removeItem(stockyard.getLivestockType().getFoodCrop(),
+                    stockyard.getLivestockType().getRequiredFood() * stockyard.getAnimals().size());
         }
     }
 }

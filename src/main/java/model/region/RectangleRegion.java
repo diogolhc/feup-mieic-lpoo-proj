@@ -13,6 +13,14 @@ public class RectangleRegion implements Region {
         this.height = height;
     }
 
+    public int getHeight() {
+        return height;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
     public boolean intersects(RectangleRegion region) {
         int left1 = this.topLeft.getX();
         int right1 = left1 + this.width - 1;

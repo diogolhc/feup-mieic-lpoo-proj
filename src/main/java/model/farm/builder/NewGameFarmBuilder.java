@@ -151,6 +151,8 @@ public class NewGameFarmBuilder extends FarmBuilder {
         for (Livestock livestock : getLivestockTypes()) {
             Stockyard stockyard = new Stockyard(new Position(30, y), livestock);
             stockyard.addAnimal();
+            stockyard.addAnimal();
+            stockyard.addAnimal();
             stockyards.add(stockyard);
             y += 7;
         }

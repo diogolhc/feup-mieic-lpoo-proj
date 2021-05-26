@@ -30,8 +30,26 @@ public class Stockyard extends Buildable {
     public void addAnimal() {
         // TODO make sure position is different from all other animals
         // TODO THis is just here to debug
-        Position position = new Position(getTopLeftPosition().getX() + 2, getTopLeftPosition().getY() + 1);
-        this.animals.add(new Animal(position));
+        Position animalPosition = new Position(getTopLeftPosition().getX() + 2, getTopLeftPosition().getY() + 1);
+        RectangleRegion animalRegion = (RectangleRegion) this.getAnimalsRegion();
+
+        for (int i = 0; i < animalRegion.getWidth() - 1; i++) {
+            for (int j = 0; j < animalRegion.getHeight(); j++) {
+                animalPosition = new Position(getTopLeftPosition().getX() + 2 + i,
+                        getTopLeftPosition().getY() + 2 + j);
+
+                boolean emptyPosition = true;
+                for (Animal animal : animals) {
+                    if (animalPosition.equals(animal.getPosition())) {
+                        emptyPosition = false;
+                        break;
+                    }
+                }
+                if (emptyPosition) break;
+
+            }
+        }
+        this.animals.add(new Animal(animalPosition));
     }
 
     public void removeAnimal() {
