@@ -81,6 +81,6 @@ public class AlertMenuControllerBuilder extends PopupMenuControllerBuilder {
 
     @Override
     protected Color getColor() {
-        return new Color("#292929");
+        return new Color("#2C2C2C");
     }
 }

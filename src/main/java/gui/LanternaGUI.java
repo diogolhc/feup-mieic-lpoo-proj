@@ -146,7 +146,6 @@ public class LanternaGUI implements GUI {
         if (keyStroke == null) return ACTION.NONE;
 
         if (this.isKeyStrokeType(keyStroke, KeyType.EOF)) return ACTION.QUIT;
-        if (this.isKeyStrokeCharacter(keyStroke, 'q')) return ACTION.QUIT;
         if (this.isKeyStrokeType(keyStroke, KeyType.Escape)) return ACTION.BACK;
 
         if (this.isKeyStrokeCharacter(keyStroke, 'w')) return ACTION.MOVE_UP;
