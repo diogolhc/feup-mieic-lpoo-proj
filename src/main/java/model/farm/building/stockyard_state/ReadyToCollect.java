@@ -1,5 +1,6 @@
 package model.farm.building.stockyard_state;
 
+import gui.Color;
 import model.InGameTime;
 import model.farm.item.AnimalProduct;
 
@@ -15,6 +16,11 @@ public class ReadyToCollect implements StockyardState{
     @Override
     public AnimalProduct getProduct() {
         return this.animalProduct;
+    }
+
+    @Override
+    public char getChar() {
+        return this.animalProduct.getName().charAt(0) ;
     }
 
     @Override
@@ -35,5 +41,6 @@ public class ReadyToCollect implements StockyardState{
 
     @Override
     public void setRemainingTime(InGameTime time) {}
+
 }
 
