@@ -37,7 +37,7 @@ public class House extends Building {
         return "HOUSE";
     }
 
-    public long getSleepRate() {
+    public long getRestRate() {
         // TODO in the future, this could depend on the House level
         //      if the upgrades feature were to be implemented
         return 15;
