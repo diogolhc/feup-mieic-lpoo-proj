@@ -1,13 +1,18 @@
 package controller.command;
 
+import controller.GameController;
+import controller.menu.builder.PopupMenuControllerBuilder;
+import controller.menu.builder.info.AlertMenuControllerBuilder;
 import model.farm.Farm;
 import java.io.*;
 
 
 public class SaveGameCommand implements Command {
+    private final GameController gameController;
     private final Farm farm;
 
-    public SaveGameCommand(Farm farm) {
+    public SaveGameCommand(GameController gameController, Farm farm) {
+        this.gameController = gameController;
         this.farm = farm;
     }
 
@@ -18,11 +23,10 @@ public class SaveGameCommand implements Command {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(out);
             objectOutputStream.writeObject(this.farm);
 
-            // TODO should some message be printed without terminating the game since the user can continue to play?
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
-            e.printStackTrace();
+            PopupMenuControllerBuilder alert = new AlertMenuControllerBuilder(this.gameController,
+                    "FAILED TO SAVE GAME\nSAVE FILE MIGHT BE CORRUPTED");
+            new OpenPopupMenuCommand(this.gameController, alert).execute();
         }
     }
 }

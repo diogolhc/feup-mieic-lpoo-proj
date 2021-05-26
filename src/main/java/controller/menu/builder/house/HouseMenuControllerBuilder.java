@@ -32,7 +32,7 @@ public class HouseMenuControllerBuilder extends PopupMenuControllerBuilder {
 
         Button saveGame = new Button(new Position(1,5), "SAVE GAME");
         Command saveCommand = new CompoundCommand()
-                .addCommand(new SaveGameCommand(this.farmController.getFarm()))
+                .addCommand(new SaveGameCommand(this.controller, this.farmController.getFarm()))
                 .addCommand(new SetControllerStateCommand(this.controller, farmController));
 
         buttons.add(new ButtonController(saveGame, saveCommand));

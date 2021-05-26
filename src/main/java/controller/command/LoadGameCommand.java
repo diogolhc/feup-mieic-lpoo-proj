@@ -2,6 +2,8 @@ package controller.command;
 
 import controller.GameController;
 import controller.farm.FarmWithFarmerController;
+import controller.menu.builder.PopupMenuControllerBuilder;
+import controller.menu.builder.info.AlertMenuControllerBuilder;
 import model.farm.Farm;
 
 import java.io.*;
@@ -16,15 +18,17 @@ public class LoadGameCommand implements Command {
     @Override
     public void execute() {
         try {
-            FileInputStream in = new FileInputStream("save"); // TODO this is used both in load as in save...
+            FileInputStream in = new FileInputStream("save");
             ObjectInputStream objectInputStream = new ObjectInputStream(in);
             Farm farm = (Farm) objectInputStream.readObject();
 
             this.gameController.setGameControllerState(new FarmWithFarmerController(farm, this.gameController, 1));
-        } catch (Exception e) {
-            // TODO should some message be printed without terminating the game since the user can use new game option?
-        }
 
+        } catch (IOException | ClassNotFoundException e) {
+            PopupMenuControllerBuilder alert = new AlertMenuControllerBuilder(this.gameController,
+                    "FAILED TO LOAD GAME\nSAVE FILE MIGHT BE MISSING");
+            new OpenPopupMenuCommand(this.gameController, alert).execute();
+        }
     }
 
 }
