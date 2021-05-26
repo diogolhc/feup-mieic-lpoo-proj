@@ -124,7 +124,7 @@ public class NewGameFarmBuilder extends FarmBuilder {
 
             currentLine++;
             tokens = this.livestockLines.get(currentLine).split(" ");
-            livestock.setFoodCrop(new Crop(tokens[0], new InGameTime(), new ArrayList<>(), 0, new Currency())); // TODO
+            livestock.setFoodCrop(new Crop(tokens[0]));
             livestock.setRequiredFood(Integer.parseInt(tokens[1]));
 
             currentLine++;
@@ -199,8 +199,9 @@ public class NewGameFarmBuilder extends FarmBuilder {
             String cropName = tokens[0];
             InGameTime cropGrowthTime = parseTimeString(tokens[1]);
             int numberOfStages = Integer.parseInt(tokens[2]);
-            int baseHarvestAmount = Integer.parseInt(tokens[3]);
-            Currency sellPrice = new Currency(Integer.parseInt(tokens[4]));
+            Currency plantPrice = new Currency(Integer.parseInt(tokens[3]));
+            int baseHarvestAmount = Integer.parseInt(tokens[4]);
+            Currency sellPrice = new Currency(Integer.parseInt(tokens[5]));
 
             List<CropGrowthStage> growthStages = new ArrayList<>();
             currentLine++;
@@ -208,7 +209,7 @@ public class NewGameFarmBuilder extends FarmBuilder {
                 growthStages.add(parseGrowthStage(this.cropsLines.get(currentLine)));
                 currentLine++;
             }
-            crops.add(new Crop(cropName, cropGrowthTime, growthStages, baseHarvestAmount, sellPrice));
+            crops.add(new Crop(cropName, cropGrowthTime, growthStages, baseHarvestAmount, plantPrice, sellPrice));
         }
 
         return crops;
