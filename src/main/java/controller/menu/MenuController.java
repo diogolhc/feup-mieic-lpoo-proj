@@ -1,24 +1,23 @@
 package controller.menu;
 
+import controller.GameController;
 import controller.GameControllerState;
-import controller.command.Command;
-import gui.Color;
 import gui.GUI;
 import model.Position;
 import model.menu.Button;
 import model.menu.Menu;
-import viewer.GameViewer;
-import viewer.menu.MenuViewer;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class MenuController implements GameControllerState {
+    protected GameController gameController;
     protected Menu menu;
     private List<ButtonController> buttonControllers;
 
-    public MenuController(Menu menu) {
+    public MenuController(Menu menu, GameController gameController) {
         this.menu = menu;
+        this.gameController = gameController;
         this.buttonControllers = new ArrayList<>();
     }
 

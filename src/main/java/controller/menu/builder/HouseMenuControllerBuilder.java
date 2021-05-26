@@ -38,10 +38,8 @@ public class HouseMenuControllerBuilder extends PopupMenuControllerBuilder {
         buttons.add(new ButtonController(restButton, restCommand));
 
         Button saveGame = new Button(new Position(1,8), "SAVE GAME");
-        Command saveCommand = new CompoundCommand()
-                .addCommand(new SaveGameCommand(this.farmController.getFarm(), "save.data")) // TODO where is the best place to put a SAVE_FILE_NAME?
-                .addCommand(new SetControllerStateCommand(this.controller, farmController));
-
+        // TODO where is the best place to put a SAVE_FILE_NAME constant?
+        Command saveCommand = new SaveGameCommand(this.controller, this.farmController.getFarm(), "save.data");
         buttons.add(new ButtonController(saveGame, saveCommand));
 
         return buttons;

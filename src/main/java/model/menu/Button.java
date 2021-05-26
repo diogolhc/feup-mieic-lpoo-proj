@@ -12,9 +12,13 @@ public class Button {
     private final int height;
 
     public Button(Position position, String title) {
+        this(position, title, title.length() + 2);
+    }
+
+    public Button(Position position, String title, int width) {
         this.topLeft = position;
         this.title = title;
-        this.width = title.length() + 2;
+        this.width = width;
         this.height = 3;
         this.selected = false;
     }

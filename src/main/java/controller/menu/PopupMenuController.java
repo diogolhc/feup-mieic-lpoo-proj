@@ -9,16 +9,14 @@ import viewer.menu.PopupMenuViewer;
 
 public class PopupMenuController extends MenuController {
     private GameControllerState backState;
-    private GameController controller;
 
-    public PopupMenuController(Menu menu, GameController controller, GameControllerState backState) {
-        super(menu);
-        this.controller = controller;
+    public PopupMenuController(Menu menu, GameController gameController, GameControllerState backState) {
+        super(menu, gameController);
         this.backState = backState;
     }
 
     public void closePopup() {
-        this.controller.setGameControllerState(backState);
+        this.gameController.setGameControllerState(backState);
     }
 
     @Override

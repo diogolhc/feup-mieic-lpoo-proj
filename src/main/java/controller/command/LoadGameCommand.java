@@ -2,6 +2,7 @@ package controller.command;
 
 import controller.GameController;
 import controller.farm.FarmWithFarmerController;
+import controller.menu.builder.info.AlertMenuControllerBuilder;
 import model.farm.Farm;
 
 import java.io.*;
@@ -23,10 +24,14 @@ public class LoadGameCommand implements Command {
             Farm farm = (Farm) objectInputStream.readObject();
 
             this.gameController.setGameControllerState(new FarmWithFarmerController(farm, this.gameController, 1));
-        } catch (Exception e) {
-            // TODO should some message be printed without terminating the game since the user can use new game option?
+        } catch (FileNotFoundException e) {
+            new OpenPopupMenuCommand(this.gameController, new AlertMenuControllerBuilder(
+                    this.gameController, "NO SAVE FILE FOUND")).execute();
+        } catch (IOException | ClassNotFoundException e) {
+            new OpenPopupMenuCommand(this.gameController, new AlertMenuControllerBuilder(
+                    this.gameController, "FAILED TO LOAD SAVE FILE")).execute();
+            e.printStackTrace();
         }
-
     }
 
 }

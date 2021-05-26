@@ -48,7 +48,7 @@ public class MainMenuControllerBuilder extends MenuControllerBuilder {
 
     @Override
     protected MainMenuController getMenuController(Menu menu) {
-        return new MainMenuController(menu);
+        return new MainMenuController(menu, gameController);
     }
 
     @Override

@@ -3,6 +3,8 @@ package viewer.menu;
 import gui.Color;
 import gui.GUI;
 import gui.drawer.shape.BoxDrawer;
+import gui.drawer.shape.FilledRectangleDrawer;
+import gui.drawer.shape.RectangleDrawer;
 import gui.drawer.string.StringDrawer;
 import model.Position;
 import model.menu.Button;
@@ -26,11 +28,14 @@ public class ButtonViewer {
             foregroundColor = UNSELECTED_BUTTON_FOREGROUND;
         }
 
-        // TODO handle when title doesn't fit? (go to next line) (maybe this is overkill and won't be needed)
+        FilledRectangleDrawer rectangleDrawer = new FilledRectangleDrawer(gui, backgroundColor, foregroundColor, ' ');
+        rectangleDrawer.draw(position, button.getWidth(), button.getHeight());
+
         BoxDrawer boxDrawer = new BoxDrawer(gui, backgroundColor, foregroundColor);
         boxDrawer.draw(position, button.getWidth(), button.getHeight());
 
-        Position titlePosition = position.getRight().getDown();
+        Position centerOffset = new Position((button.getWidth() - button.getTitle().length())/2, 1);
+        Position titlePosition = position.getTranslated(centerOffset);
         StringDrawer stringDrawer = new StringDrawer(gui, backgroundColor, foregroundColor);
         stringDrawer.draw(titlePosition, button.getTitle());
     }

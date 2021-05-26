@@ -33,9 +33,9 @@ public class PlantCropMenuControllerBuilder extends PopupMenuControllerBuilder {
         List<ButtonController> buttons = super.getButtons();
 
         int x = 1;
-        int y = 5;
+        int y = 4;
         for (Crop crop: this.farm.getCrops()) {
-            Button plantCropButton = new Button(new Position(x, y), crop.getName());
+            Button plantCropButton = new Button(new Position(x, y), crop.getName(), 9);
             Command plantCropButtonCommand;
             if (this.farm.getCurrency().canBuy(crop.getPlantPrice())) {
                 plantCropButtonCommand = new CompoundCommand()
@@ -46,14 +46,13 @@ public class PlantCropMenuControllerBuilder extends PopupMenuControllerBuilder {
                         new AlertMenuControllerBuilder(this.controller, "NOT ENOUGH MONEY"));
             }
 
-
             buttons.add(new ButtonController(plantCropButton, plantCropButtonCommand));
 
-            if (y == 5) {
-                y += 4;
+            if (y == 4) {
+                y += 6;
             } else {
-                y = 5;
-                x += COLUMN_WIDTH + 2;
+                y = 4;
+                x += COLUMN_WIDTH + 3;
             }
         }
 
@@ -64,19 +63,27 @@ public class PlantCropMenuControllerBuilder extends PopupMenuControllerBuilder {
     protected List<Label> getLabels() {
         List<Label> labels = super.getLabels();
 
-        int x = 11;
-        int y = 6;
+        int x = 1;
+        int y = 4;
         for (Crop crop: this.farm.getCrops()) {
+            labels.add(new Label(new Position(x + 10, y), "SEED"));
+            labels.add(new Label(new Position(x + 10, y+1), "COST"));
             labels.add(new Label(
-                    new Position(x, y),
-                    () -> String.format("%1$3s", crop.getPlantPrice().toString())
+                    new Position(x + 10, y+2),
+                    () -> String.format("%1$4s", crop.getPlantPrice().toString())
+            ));
+            labels.add(new Label(
+                    new Position(x, y+3),
+                    () -> String.format("%1$s %2$3s",
+                            crop.getGrowTime().toCountdownString(),
+                            "x" + crop.getBaseHarvestAmount())
             ));
 
-            if (y == 6) {
-                y += 4;
+            if (y == 4) {
+                y += 6;
             } else {
-                y = 6;
-                x += COLUMN_WIDTH + 2;
+                y = 4;
+                x += COLUMN_WIDTH + 3;
             }
         }
 
@@ -85,12 +92,12 @@ public class PlantCropMenuControllerBuilder extends PopupMenuControllerBuilder {
 
     @Override
     protected int getHeight() {
-        return 13;
+        return 15;
     }
 
     @Override
     protected int getWidth() {
-        return this.farm.getCrops().size()/2 * COLUMN_WIDTH + 4;
+        return this.farm.getCrops().size()/2 * COLUMN_WIDTH + 5;
     }
 
     @Override
