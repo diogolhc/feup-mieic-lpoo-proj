@@ -30,4 +30,9 @@ public class Warehouse extends Building {
     public Region getInteractiveRegion() {
         return new PositionRegion(this.getTopLeftPosition().getTranslated(new Position(4, 6)));
     }
+
+    @Override
+    public String getName() {
+        return "WAREHOUSE";
+    }
 }

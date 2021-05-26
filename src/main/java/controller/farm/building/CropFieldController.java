@@ -32,7 +32,7 @@ public class CropFieldController extends BuildingController<CropField> {
         PopupMenuControllerBuilder menuControllerBuilder;
 
         if (cropField.getState() instanceof NotPlanted) {
-            menuControllerBuilder = new PlantCropMenuControllerBuilder(this.controller, this.farm.getCrops(), cropField);
+            menuControllerBuilder = new PlantCropMenuControllerBuilder(this.controller, this.farm, cropField);
         } else if (cropField.getState() instanceof Planted) {
             menuControllerBuilder = new CropFieldGrowingMenuControllerBuilder(this.controller, this.farm, cropField);
         } else if (cropField.getState() instanceof ReadyToHarvest) {

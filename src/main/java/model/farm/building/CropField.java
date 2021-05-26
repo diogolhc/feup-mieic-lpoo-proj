@@ -12,12 +12,17 @@ import model.region.Region;
 import java.util.Objects;
 
 
-public class CropField extends Building {
+public class CropField extends Buildable {
     private CropFieldState state;
 
     public CropField(Position topLeft) {
         super(topLeft);
         this.state = new NotPlanted();
+    }
+
+    @Override
+    public Currency getBuildPrice() {
+        return new Currency(3500);
     }
 
     @Override
@@ -54,6 +59,11 @@ public class CropField extends Building {
     @Override
     public Region getInteractiveRegion() {
         return new RectangleRegion(this.getTopLeftPosition(), this.getWidth(), this.getHeight());
+    }
+
+    @Override
+    public String getName() {
+        return "CROPFIELD";
     }
 
     public InGameTime getRemainingTime() {

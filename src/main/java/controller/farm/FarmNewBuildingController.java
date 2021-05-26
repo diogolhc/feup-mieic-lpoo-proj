@@ -4,19 +4,19 @@ import controller.menu.builder.AlertMenuControllerBuilder;
 import gui.GUI;
 import model.Position;
 import model.farm.Currency;
+import model.farm.building.Buildable;
 import model.farm.building.Building;
 import model.farm.building.CropField;
+import model.farm.building.Stockyard;
 import viewer.GameViewer;
 import viewer.farm.FarmNewBuildingViewer;
 
 public class FarmNewBuildingController extends FarmController {
-    private Building newBuilding;
-    private Currency price;
+    private Buildable newBuilding;
 
-    public FarmNewBuildingController(FarmController farmController, Building newBuilding, Currency price) {
+    public FarmNewBuildingController(FarmController farmController, Buildable newBuilding) {
         super(farmController);
         this.newBuilding = newBuilding;
-        this.price = price;
     }
 
     @Override
@@ -44,13 +44,15 @@ public class FarmNewBuildingController extends FarmController {
         } else {
             if (this.newBuilding instanceof CropField) {
                 this.farm.getBuildings().addCropField((CropField) this.newBuilding);
+            } else if (this.newBuilding instanceof Stockyard) {
+                this.farm.getBuildings().addStockyard((Stockyard) this.newBuilding);
             } else {
                 // This should never happen
                 throw new RuntimeException(
                         "LOGIC ERROR: Unhandled new building type: " + this.newBuilding.getClass().toString());
             }
 
-            this.farm.setCurrency(this.farm.getCurrency().subtract(this.price));
+            this.farm.setCurrency(this.farm.getCurrency().subtract(this.newBuilding.getBuildPrice()));
 
             returnToFarmerController();
         }
