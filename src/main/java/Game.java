@@ -1,10 +1,8 @@
 import controller.GameController;
+import controller.menu.MenuController;
 import controller.menu.builder.MainMenuControllerBuilder;
 import gui.GUI;
 import gui.LanternaGUI;
-import model.Position;
-import model.farm.Farm;
-import model.farm.builder.NewGameFarmBuilder;
 
 import java.awt.*;
 import java.io.IOException;
@@ -18,10 +16,10 @@ public class Game {
         int height = 21;
 
         GUI gui = new LanternaGUI(width, height);
-        Farm farm = new NewGameFarmBuilder().buildFarm();
 
         this.controller = new GameController(gui);
-        this.controller.setGameControllerState(new MainMenuControllerBuilder(controller, farm, width, height).buildMenu(new Position(0,0)));
+        MenuController mainMenu = new MainMenuControllerBuilder(this.controller).buildMenu();
+        this.controller.setGameControllerState(mainMenu);
     }
 
     public GameController getController() {

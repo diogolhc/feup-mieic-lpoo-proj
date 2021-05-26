@@ -5,11 +5,10 @@ import controller.GameControllerState;
 import controller.command.*;
 import controller.farm.FarmDemolishController;
 import controller.farm.FarmWithFarmerController;
-import controller.menu.builder.AlertMenuControllerBuilder;
+import controller.menu.builder.info.AlertMenuControllerBuilder;
 import controller.menu.builder.PopupMenuControllerBuilder;
 import model.InGameTime;
 import model.farm.Farm;
-import model.farm.Weather;
 import model.farm.building.CropField;
 import model.farm.building.crop_field_state.NotPlanted;
 import model.farm.building.crop_field_state.Planted;
@@ -32,7 +31,7 @@ public class CropFieldController extends BuildingController<CropField> {
         PopupMenuControllerBuilder menuControllerBuilder;
 
         if (cropField.getState() instanceof NotPlanted) {
-            menuControllerBuilder = new PlantCropMenuControllerBuilder(this.controller, this.farm.getCrops(), cropField);
+            menuControllerBuilder = new PlantCropMenuControllerBuilder(this.controller, this.farm, cropField);
         } else if (cropField.getState() instanceof Planted) {
             menuControllerBuilder = new CropFieldGrowingMenuControllerBuilder(this.controller, this.farm, cropField);
         } else if (cropField.getState() instanceof ReadyToHarvest) {
@@ -65,21 +64,6 @@ public class CropFieldController extends BuildingController<CropField> {
 
     public void reactTimePassed(CropField cropField, InGameTime elapsedTime) {
         cropField.setRemainingTime(cropField.getRemainingTime().subtract(elapsedTime));
-        cropField.changeHarvestAmount(calculateWeatherEffect(cropField, elapsedTime, this.farm.getWeather()));
+        cropField.changeHarvestAmount(this.farm.getWeather().getEffect(elapsedTime));
     }
-
-    private double calculateWeatherEffect(CropField cropField, InGameTime elapsedTime, Weather weather) {
-        double weatherEffect = elapsedTime.getMinute() * weather.getWeatherEffect();
-
-        // when readyToHarvest only bad effects take place
-        // what would be good effect while crop was in growth stage
-        // when ready to harvest it will rot it
-        if (cropField.getState() instanceof ReadyToHarvest) {
-            if (weatherEffect > 0)
-                weatherEffect *= -1;
-        }
-
-        return weatherEffect;
-    }
-
 }

@@ -8,7 +8,7 @@ public class Planted implements CropFieldState {
     private final CropField cropField;
     private final Crop crop;
     private InGameTime timeRemaining;
-    private double harvestAmount; // double so that small but in great quantity changes can have an effect
+    private double harvestAmount; // double so that fractional changes may add up and have an effect
 
     public Planted(CropField cropField, Crop crop) {
         this.cropField = cropField;
@@ -26,7 +26,7 @@ public class Planted implements CropFieldState {
     public void setRemainingTime(InGameTime time) {
         this.timeRemaining = time;
         if (this.timeRemaining.getMinute() <= 0) {
-            this.cropField.setState(new ReadyToHarvest(this.crop, this.harvestAmount));
+            this.cropField.setState(new ReadyToHarvest(this.cropField, this.crop, this.harvestAmount));
         }
     }
 
@@ -43,6 +43,8 @@ public class Planted implements CropFieldState {
     @Override
     public void changeHarvestAmount(double harvestAmount) {
         this.harvestAmount += harvestAmount;
-        this.harvestAmount = this.harvestAmount < 0 ? 0 : this.harvestAmount;
+        if (this.harvestAmount <= 0) {
+            this.cropField.setState(new NotPlanted());
+        }
     }
 }

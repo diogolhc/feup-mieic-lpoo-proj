@@ -32,6 +32,11 @@ public class House extends Building {
         return new PositionRegion(this.getTopLeftPosition().getTranslated(new Position(4, 6)));
     }
 
+    @Override
+    public String getName() {
+        return "HOUSE";
+    }
+
     public long getSleepRate() {
         // TODO in the future, this could depend on the House level
         //      if the upgrades feature were to be implemented

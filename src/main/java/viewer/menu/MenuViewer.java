@@ -9,9 +9,7 @@ import model.menu.Menu;
 import model.menu.label.Label;
 import viewer.GameViewer;
 
-public class MenuViewer extends GameViewer {
-    public static final Color MENU_BACKGROUND_COLOR = new Color("#222222");
-
+public abstract class MenuViewer extends GameViewer {
     protected Menu menu;
 
     public MenuViewer(Menu menu) {
@@ -40,14 +38,11 @@ public class MenuViewer extends GameViewer {
         }
     }
 
-    protected void drawTitle(GUI gui) {
-        MenuTitleViewer menuTitleViewer = new MenuTitleViewer();
-        menuTitleViewer.draw(this.menu, gui);
-    }
+    protected abstract void drawTitle(GUI gui);
 
     private void drawBackground(GUI gui) {
         FilledRectangleDrawer backgroundDrawer = new FilledRectangleDrawer(
-                gui, MENU_BACKGROUND_COLOR, MENU_BACKGROUND_COLOR, ' ');
+                gui, this.menu.getColor(), this.menu.getColor(), ' ');
         backgroundDrawer.draw(this.menu.getTopLeftPosition(), this.menu.getWidth(), this.menu.getHeight());
     }
 }

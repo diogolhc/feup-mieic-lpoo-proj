@@ -2,6 +2,7 @@ package controller.menu;
 
 import controller.GameControllerState;
 import controller.command.Command;
+import gui.Color;
 import gui.GUI;
 import model.Position;
 import model.menu.Button;
@@ -12,7 +13,7 @@ import viewer.menu.MenuViewer;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MenuController implements GameControllerState {
+public abstract class MenuController implements GameControllerState {
     protected Menu menu;
     private List<ButtonController> buttonControllers;
 
@@ -51,7 +52,9 @@ public class MenuController implements GameControllerState {
     public void reactTimePassed(long elapsedTimeSinceLastFrame) {}
 
     @Override
-    public GameViewer getViewer() {
-        return new MenuViewer(this.menu);
+    public void reactChangeState() {
+        for (Button button: this.getMenu().getButtons()) {
+            button.unselect();
+        }
     }
 }

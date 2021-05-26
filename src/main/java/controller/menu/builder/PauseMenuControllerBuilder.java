@@ -1,14 +1,9 @@
 package controller.menu.builder;
 
 import controller.GameController;
-import controller.command.Command;
-import controller.command.ExitGameCommand;
-import controller.command.NewGameCommand;
-import controller.command.NoOperationCommand;
-import controller.menu.ButtonController;
-import controller.menu.MainMenuController;
-import controller.menu.MenuController;
-import controller.menu.PauseMenuController;
+import controller.command.*;
+import controller.menu.*;
+import controller.menu.builder.info.ConfirmationMenuControllerBuilder;
 import model.Position;
 import model.menu.Button;
 import model.menu.Menu;
@@ -25,8 +20,16 @@ public class PauseMenuControllerBuilder extends PopupMenuControllerBuilder {
     protected List<ButtonController> getButtons() {
         List<ButtonController> buttons = super.getButtons();
 
-        Button returnToMainMenuButton = new Button(new Position(1, 6), "RETURN TO MAIN MENU");
-        Command returnToMainMenuCommand = new NoOperationCommand();
+        Button returnToMainMenuButton = new Button(new Position(1, 4), "RETURN TO MAIN MENU");
+        PopupMenuControllerBuilder confirmationPopup = new ConfirmationMenuControllerBuilder(
+                this.controller,
+                "EXIT TO MAIN MENU",
+                "ARE YOU SURE YOU WANT TO EXIT?\nYOUR PROGRESS WILL NOT BE SAVED\nUNLESS YOU SAVE AT THE HOUSE FIRST")
+                .setYesCommand(new SetControllerStateCommand(
+                        this.controller,
+                        new MainMenuControllerBuilder(this.controller).buildMenu()
+                ));
+        Command returnToMainMenuCommand = new OpenPopupMenuCommand(this.controller, confirmationPopup);
 
         buttons.add(new ButtonController(returnToMainMenuButton, returnToMainMenuCommand));
 
@@ -40,7 +43,7 @@ public class PauseMenuControllerBuilder extends PopupMenuControllerBuilder {
 
     @Override
     protected int getHeight() {
-        return 10;
+        return 8;
     }
 
     @Override

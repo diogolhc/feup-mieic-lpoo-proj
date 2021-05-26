@@ -30,4 +30,6 @@ public abstract class Building implements Serializable {
     public RectangleRegion getOccupiedRegion() {
         return new RectangleRegion(this.topLeft, this.getWidth(), this.getHeight());
     }
+
+    public abstract String getName();
 }

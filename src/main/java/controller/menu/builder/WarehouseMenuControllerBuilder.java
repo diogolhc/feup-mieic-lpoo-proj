@@ -40,7 +40,10 @@ public class WarehouseMenuControllerBuilder extends PopupMenuControllerBuilder {
         for (Item item: items) {
             labels.add(new Label(
                     new Position(1, y),
-                    () -> item.getName() + " x" + this.inventory.getAmount(item)
+                    () -> String.format("%1$-7s %2$4s",
+                            item.getName(),
+                            "x" + this.inventory.getAmount(item)
+                    )
             ));
             y += 1;
         }
@@ -55,7 +58,7 @@ public class WarehouseMenuControllerBuilder extends PopupMenuControllerBuilder {
 
     @Override
     protected int getWidth() {
-        return 21;
+        return 19;
     }
 
     @Override

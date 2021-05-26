@@ -34,6 +34,9 @@ public class GameController implements MouseListener {
     }
 
     public void setGameControllerState(GameControllerState state) {
+        if (this.gameControllerState != null) {
+            this.gameControllerState.reactChangeState();
+        }
         this.gameControllerState = state;
     }
 
@@ -43,12 +46,6 @@ public class GameController implements MouseListener {
 
     public void endGame() {
         this.running = false;
-    }
-
-    public void pauseGame() {
-        PopupMenuControllerBuilder menuControllerBuilder;
-        menuControllerBuilder = new PauseMenuControllerBuilder(this);
-        new OpenPopupMenuCommand(this, menuControllerBuilder).execute();
     }
 
     public void run() throws IOException {
@@ -96,5 +93,13 @@ public class GameController implements MouseListener {
     @Override
     public void onMouseClick(int x, int y) {
         this.gameControllerState.reactMouseClick(new Position(x, y));
+    }
+
+    public int getWindowWidth() {
+        return this.gui.getWindowWidth();
+    }
+
+    public int getWindowHeight() {
+        return this.gui.getWindowHeight();
     }
 }

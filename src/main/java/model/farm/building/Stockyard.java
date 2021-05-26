@@ -2,6 +2,7 @@ package model.farm.building;
 
 import model.Position;
 import model.farm.Animal;
+import model.farm.Currency;
 import model.farm.Livestock;
 import model.farm.building.stockyard_state.NotProducing;
 import model.farm.building.stockyard_state.StockyardState;
@@ -14,7 +15,7 @@ import model.region.Region;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Stockyard extends Building {
+public class Stockyard extends Buildable {
     private final Livestock livestockType;
     private final List<Animal> animals;
     private StockyardState state;
@@ -70,6 +71,11 @@ public class Stockyard extends Building {
         return new PositionRegion(this.getTopLeftPosition().getTranslated(new Position(-1, 3)));
     }
 
+    @Override
+    public String getName() {
+        return livestockType.getAnimalName() + " SY";
+    }
+
     public Region getAnimalsRegion() {
         return new RectangleRegion(
                 this.getTopLeftPosition().getTranslated(new Position(1, 1)),
@@ -87,5 +93,10 @@ public class Stockyard extends Building {
 
     public StockyardState getState() {
         return state;
+    }
+
+    @Override
+    public Currency getBuildPrice() {
+        return this.livestockType.getBuildPrice();
     }
 }

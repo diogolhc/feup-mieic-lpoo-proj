@@ -4,8 +4,10 @@ import controller.GameController;
 import controller.command.*;
 import controller.menu.ButtonController;
 import controller.menu.MainMenuController;
+import controller.menu.MenuController;
 import model.Position;
 import model.farm.Farm;
+import model.farm.builder.NewGameFarmBuilder;
 import model.menu.Button;
 import model.menu.Menu;
 
@@ -13,15 +15,13 @@ import java.util.List;
 
 public class MainMenuControllerBuilder extends MenuControllerBuilder {
     private final GameController gameController;
-    private final Farm farm;
     private final int width;
     private final int height;
 
-    public MainMenuControllerBuilder(GameController gameController, Farm farm, int width, int height) {
+    public MainMenuControllerBuilder(GameController gameController) {
         this.gameController = gameController;
-        this.farm = farm;
-        this.width = width;
-        this.height = height;
+        this.width = this.gameController.getWindowWidth();
+        this.height = this.gameController.getWindowHeight();
     }
 
     @Override
@@ -29,7 +29,7 @@ public class MainMenuControllerBuilder extends MenuControllerBuilder {
         List<ButtonController> buttons = super.getButtons();
 
         Button newGameButton = new Button(new Position(10, 6), "NEW GAME");
-        Command newGameCommand = new NewGameCommand(gameController, farm);
+        Command newGameCommand = new NewGameCommand(gameController);
 
         buttons.add(new ButtonController(newGameButton, newGameCommand));
 

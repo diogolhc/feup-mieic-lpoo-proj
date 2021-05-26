@@ -105,7 +105,7 @@ public class NewGameFarmBuilder extends FarmBuilder {
 
     @Override
     protected Inventory getInventory() {
-        return new Inventory(350);
+        return new Inventory(650);
     }
 
     @Override
@@ -121,6 +121,7 @@ public class NewGameFarmBuilder extends FarmBuilder {
             livestock.setAnimalChar(tokens[1].charAt(0));
             livestock.setStockyardWidth(Integer.parseInt(tokens[2]));
             livestock.setStockyardHeight(Integer.parseInt(tokens[3]));
+            livestock.setBuildPrice(new Currency(Integer.parseInt(tokens[4])));
 
             currentLine++;
             tokens = this.livestockLines.get(currentLine).split(" ");
@@ -146,19 +147,19 @@ public class NewGameFarmBuilder extends FarmBuilder {
     @Override
     protected List<Stockyard> getStockyards() {
         List<Stockyard> stockyards = new ArrayList<>();
-        int x = 30, y = 3;
+        int x = 30, y = 1;
         for (Livestock livestock : getLivestockTypes()) {
             Stockyard stockyard = new Stockyard(new Position(30, y), livestock);
             stockyard.addAnimal();
             stockyards.add(stockyard);
-            y += 8;
+            y += 7;
         }
         return stockyards;
     }
 
     @Override
     protected Currency getCurrency() {
-        return new Currency(999999);
+        return new Currency(0);
     }
 
     @Override

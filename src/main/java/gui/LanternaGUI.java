@@ -23,6 +23,8 @@ public class LanternaGUI implements GUI {
     private final Terminal terminal;
     private final TerminalScreen screen;
     private final TextGraphics graphics;
+    private int width;
+    private int height;
 
     public LanternaGUI(Terminal terminal, TerminalScreen screen) {
         this.terminal = terminal;
@@ -32,6 +34,8 @@ public class LanternaGUI implements GUI {
 
     public LanternaGUI(int width, int height) throws IOException, FontFormatException, URISyntaxException {
         AWTTerminalFontConfiguration fontConfig = this.loadSquareFont();
+        this.width = width;
+        this.height = height;
         this.terminal = this.createTerminal(width, height, fontConfig);
         this.screen = this.createScreen(terminal);
         this.graphics = this.screen.newTextGraphics();
@@ -94,6 +98,16 @@ public class LanternaGUI implements GUI {
     }
 
     @Override
+    public int getWindowWidth() {
+        return this.width;
+    }
+
+    @Override
+    public int getWindowHeight() {
+        return this.height;
+    }
+
+    @Override
     public void setBackgroundColor(Color color) {
         this.graphics.setBackgroundColor(TextColor.Factory.fromString(color.toString()));
 
@@ -146,7 +160,6 @@ public class LanternaGUI implements GUI {
         if (keyStroke == null) return ACTION.NONE;
 
         if (this.isKeyStrokeType(keyStroke, KeyType.EOF)) return ACTION.QUIT;
-        if (this.isKeyStrokeCharacter(keyStroke, 'q')) return ACTION.QUIT;
         if (this.isKeyStrokeType(keyStroke, KeyType.Escape)) return ACTION.BACK;
 
         if (this.isKeyStrokeCharacter(keyStroke, 'w')) return ACTION.MOVE_UP;

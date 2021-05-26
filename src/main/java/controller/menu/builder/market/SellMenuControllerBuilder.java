@@ -32,25 +32,29 @@ public class SellMenuControllerBuilder extends PopupMenuControllerBuilder {
     protected List<ButtonController> getButtons() {
         List<ButtonController> buttons = super.getButtons();
 
-
-        int y = 6;
+        int x = 1;
+        int y = 5;
         for (Item item: items) {
-            int x = 1;
+            int currentX = x;
 
-            Button sell1Button = new Button(new Position(x, y), "x1");
+            Button sell1Button = new Button(new Position(currentX, y), "x1");
             Command sell1Command = new SellItemCommand(this.farm, item, 1);
             buttons.add(new ButtonController(sell1Button, sell1Command));
 
-            x += sell1Button.getWidth() + 1;
-            Button sell10Button = new Button(new Position(x, y), "x10");
+            currentX += sell1Button.getWidth() + 1;
+            Button sell10Button = new Button(new Position(currentX, y), "x10");
             Command sell10Command = new SellItemCommand(this.farm, item, 10);
             buttons.add(new ButtonController(sell10Button, sell10Command));
 
-            x += sell10Button.getWidth() + 1;
-            Button sell100Button = new Button(new Position(x, y), "x100");
+            currentX += sell10Button.getWidth() + 1;
+            Button sell100Button = new Button(new Position(currentX, y), "x100");
             Command sell100Command = new SellItemCommand(this.farm, item, 100);
             buttons.add(new ButtonController(sell100Button, sell100Command));
-            y+=5;
+            y += 5;
+            if (y >= 20) {
+                x += 19;
+                y = 5;
+            }
         }
 
         return buttons;
@@ -60,17 +64,22 @@ public class SellMenuControllerBuilder extends PopupMenuControllerBuilder {
     protected List<Label> getLabels() {
         List<Label> labels = super.getLabels();
 
+        int x = 1;
         int y = 4;
         for (Item item: items) {
             labels.add(new Label(
-                    new Position(1, y),
-                    () -> String.format("%1$-6s %2$4s %3$5s",
+                    new Position(x, y),
+                    () -> String.format("%1$-7s %2$4s %3$4s",
                             item.getName(),
                             "x" + this.farm.getInventory().getAmount(item),
                             item.getSellPrice().toString()
                     )
             ));
             y += 5;
+            if (y >= 19) {
+                x += 19;
+                y = 4;
+            }
         }
 
         return labels;
@@ -78,12 +87,12 @@ public class SellMenuControllerBuilder extends PopupMenuControllerBuilder {
 
     @Override
     protected int getHeight() {
-        return 5 + items.size() * 6;
+        return 19;
     }
 
     @Override
     protected int getWidth() {
-        return 21;
+        return 38;
     }
 
     @Override

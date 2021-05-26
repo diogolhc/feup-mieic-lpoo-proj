@@ -13,6 +13,7 @@ public class Livestock implements Serializable {
     private Crop foodCrop;
     private int requiredFood;
     private AnimalProduct producedItem;
+    private Currency buildPrice;
     private int stockyardWidth;
     private int stockyardHeight;
 
@@ -70,5 +71,13 @@ public class Livestock implements Serializable {
 
     public void setRequiredFood(int requiredFood) {
         this.requiredFood = requiredFood;
+    }
+
+    public Currency getBuildPrice() {
+        return this.buildPrice;
+    }
+
+    public void setBuildPrice(Currency buildPrice) {
+        this.buildPrice = buildPrice;
     }
 }

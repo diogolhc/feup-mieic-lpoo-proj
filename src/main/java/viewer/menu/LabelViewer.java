@@ -10,7 +10,7 @@ public class LabelViewer {
     private static final Color LABEL_TEXT_COLOR = new Color("#aaaaaa");
 
     public void draw(Menu menu, Label label, GUI gui) {
-        StringDrawer drawer = new StringDrawer(gui, MenuViewer.MENU_BACKGROUND_COLOR, LABEL_TEXT_COLOR);
+        StringDrawer drawer = new StringDrawer(gui, menu.getColor(), LABEL_TEXT_COLOR);
         drawer.draw(label.getTopLeft().getTranslated(menu.getTopLeftPosition()), label.getString());
     }
 }

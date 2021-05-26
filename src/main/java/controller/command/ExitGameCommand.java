@@ -13,5 +13,4 @@ public class ExitGameCommand implements Command {
     public void execute() {
         gameController.endGame();
     }
-
 }
