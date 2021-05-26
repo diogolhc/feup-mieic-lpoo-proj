@@ -1,5 +1,6 @@
 package model.farm.building.stockyard_state;
 
+import gui.Color;
 import model.InGameTime;
 import model.farm.Currency;
 import model.farm.item.AnimalProduct;
@@ -17,7 +18,12 @@ public class NotProducing implements StockyardState {
 
     @Override
     public AnimalProduct getProduct() {
-        return new AnimalProduct("No Product");
+        return new AnimalProduct(" ");
+    }
+
+    @Override
+    public char getChar() {
+        return ' ';
     }
 
     @Override
