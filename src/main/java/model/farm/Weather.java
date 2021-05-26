@@ -1,5 +1,7 @@
 package model.farm;
 
+import model.InGameTime;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,8 +24,8 @@ public class Weather {
         return name;
     }
 
-    public double getWeatherEffect() {
-        return weatherEffect;
+    public double getEffect(InGameTime elapsedTime) {
+        return weatherEffect * elapsedTime.getMinute();
     }
 
     public Map<Weather, Double> getWeatherChangeProbabilities() {

@@ -65,21 +65,6 @@ public class CropFieldController extends BuildingController<CropField> {
 
     public void reactTimePassed(CropField cropField, InGameTime elapsedTime) {
         cropField.setRemainingTime(cropField.getRemainingTime().subtract(elapsedTime));
-        cropField.changeHarvestAmount(calculateWeatherEffect(cropField, elapsedTime, this.farm.getWeather()));
+        cropField.changeHarvestAmount(this.farm.getWeather().getEffect(elapsedTime));
     }
-
-    private double calculateWeatherEffect(CropField cropField, InGameTime elapsedTime, Weather weather) {
-        double weatherEffect = elapsedTime.getMinute() * weather.getWeatherEffect();
-
-        // when readyToHarvest only bad effects take place
-        // what would be good effect while crop was in growth stage
-        // when ready to harvest it will rot it
-        if (cropField.getState() instanceof ReadyToHarvest) {
-            if (weatherEffect > 0)
-                weatherEffect *= -1;
-        }
-
-        return weatherEffect;
-    }
-
 }

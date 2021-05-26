@@ -1,13 +1,16 @@
 package model.farm.building.crop_field_state;
 
 import model.InGameTime;
+import model.farm.building.CropField;
 import model.farm.item.Crop;
 
 public class ReadyToHarvest implements CropFieldState {
+    private CropField cropField;
     private Crop crop;
     private double harvestAmount; // double so that small but in great quantity changes can have an effect
 
-    public ReadyToHarvest(Crop crop, double harvestAmount) {
+    public ReadyToHarvest(CropField cropField, Crop crop, double harvestAmount) {
+        this.cropField = cropField;
         this.crop = crop;
         this.harvestAmount = harvestAmount;
     }
@@ -32,8 +35,15 @@ public class ReadyToHarvest implements CropFieldState {
 
     @Override
     public void changeHarvestAmount(double harvestAmount) {
-        if (harvestAmount > 0) return;
+        // when readyToHarvest only bad effects take place
+        // what would be a good effect while crop was in growth stage
+        // will rot it when ready to harvest
+        if (harvestAmount > 0) {
+            harvestAmount *= -1;
+        }
         this.harvestAmount += harvestAmount;
-        this.harvestAmount = this.harvestAmount < 0 ? 0 : this.harvestAmount;
+        if (this.harvestAmount <= 0) {
+            this.cropField.setState(new NotPlanted());
+        }
     }
 }
