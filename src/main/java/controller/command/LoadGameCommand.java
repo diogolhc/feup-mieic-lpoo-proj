@@ -33,5 +33,4 @@ public class LoadGameCommand implements Command {
             e.printStackTrace();
         }
     }
-
 }

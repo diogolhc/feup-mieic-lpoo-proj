@@ -30,6 +30,7 @@ public class HouseMenuControllerBuilder extends PopupMenuControllerBuilder {
     protected List<ButtonController> getButtons() {
         List<ButtonController> buttons = super.getButtons();
 
+
         Button restButton = new Button(new Position(1, 4), "REST");
         Command restCommand = new CompoundCommand()
                 .addCommand(new SetTimeRateCommand(this.timeConverter, this.house.getRestRate()))

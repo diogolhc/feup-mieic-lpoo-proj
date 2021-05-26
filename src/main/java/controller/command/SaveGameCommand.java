@@ -7,7 +7,7 @@ import java.io.*;
 
 
 public class SaveGameCommand implements Command {
-    private GameController gameController;
+    private final GameController gameController;
     private final Farm farm;
     private String saveFileName;
 

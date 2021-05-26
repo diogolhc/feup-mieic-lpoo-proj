@@ -2,7 +2,6 @@ package controller.command;
 
 import controller.GameController;
 import controller.farm.FarmWithFarmerController;
-import controller.menu.PopupMenuController;
 import controller.menu.builder.PopupMenuControllerBuilder;
 import controller.menu.builder.info.AlertMenuControllerBuilder;
 import model.farm.Farm;
@@ -27,7 +26,6 @@ public class NewGameCommand implements Command {
             PopupMenuControllerBuilder alert = new AlertMenuControllerBuilder(this.gameController,
                     "FAILED TO START NEW GAME\nDATA FILES MIGHT BE CORRUPTED");
             new OpenPopupMenuCommand(this.gameController, alert).execute();
-            e.printStackTrace();
         }
     }
 

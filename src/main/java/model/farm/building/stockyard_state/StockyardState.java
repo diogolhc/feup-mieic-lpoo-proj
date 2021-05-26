@@ -1,5 +1,6 @@
 package model.farm.building.stockyard_state;
 
+import gui.Color;
 import model.InGameTime;
 import model.farm.item.AnimalProduct;
 
@@ -11,4 +12,5 @@ public interface StockyardState extends Serializable {
     AnimalProduct getProduct();
     int getProductAmount();
     void changeProductAmount(double productAmount);
+    char getChar();
 }

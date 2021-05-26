@@ -1,5 +1,6 @@
 package model.farm.building.stockyard_state;
 
+import gui.Color;
 import model.InGameTime;
 import model.farm.building.Stockyard;
 import model.farm.building.crop_field_state.ReadyToHarvest;
@@ -32,6 +33,12 @@ public class Producing implements StockyardState {
     }
 
     @Override
+    public char getChar() {
+        return (char) (this.animalProduct.getName().charAt(0) + 32);
+        //ascii conversion
+    }
+
+    @Override
     public AnimalProduct getProduct() {
         return this.animalProduct;
     }
@@ -46,4 +53,5 @@ public class Producing implements StockyardState {
         this.productAmount += productAmount;
         this.productAmount = this.productAmount < 0 ? 0 : this.productAmount;
     }
+
 }
