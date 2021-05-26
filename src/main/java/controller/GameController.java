@@ -14,7 +14,7 @@ public class GameController implements MouseListener {
     private GUI gui;
     private boolean running;
 
-    private GameController(GUI gui) {
+    public GameController(GUI gui) {
         this.gui = gui;
         this.gui.setMouseListener(this);
         this.running = true;

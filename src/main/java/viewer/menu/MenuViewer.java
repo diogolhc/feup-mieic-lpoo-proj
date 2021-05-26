@@ -12,7 +12,7 @@ import viewer.GameViewer;
 public class MenuViewer extends GameViewer {
     public static final Color MENU_BACKGROUND_COLOR = new Color("#222222");
 
-    private Menu menu;
+    protected Menu menu;
 
     public MenuViewer(Menu menu) {
         this.menu = menu;
@@ -40,7 +40,7 @@ public class MenuViewer extends GameViewer {
         }
     }
 
-    private void drawTitle(GUI gui) {
+    protected void drawTitle(GUI gui) {
         MenuTitleViewer menuTitleViewer = new MenuTitleViewer();
         menuTitleViewer.draw(this.menu, gui);
     }

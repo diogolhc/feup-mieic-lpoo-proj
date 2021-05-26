@@ -1,6 +1,8 @@
 import controller.GameController;
+import controller.menu.builder.MainMenuControllerBuilder;
 import gui.GUI;
 import gui.LanternaGUI;
+import model.Position;
 import model.farm.Farm;
 import model.farm.builder.NewGameFarmBuilder;
 
@@ -12,11 +14,14 @@ public class Game {
     private final GameController controller;
 
     public Game() throws IOException, FontFormatException, URISyntaxException {
-        GUI gui = new LanternaGUI(40, 21);
+        int width = 40;
+        int height = 21;
 
+        GUI gui = new LanternaGUI(width, height);
         Farm farm = new NewGameFarmBuilder().buildFarm();
 
-        this.controller = new GameController(gui, farm);
+        this.controller = new GameController(gui);
+        this.controller.setGameControllerState(new MainMenuControllerBuilder(controller, farm, width, height).buildMenu());
     }
 
     public GameController getController() {
