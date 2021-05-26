@@ -35,7 +35,7 @@ public class FeedAnimalsMenuControllerBuilder extends PopupMenuControllerBuilder
         int x = 1;
         int y = 5;
 
-        String title = stockyard.getLivestockType().getFoodCrop().getName() + " x" +
+        String title = "FEED " + stockyard.getLivestockType().getFoodCrop().getName() + " x" +
                 stockyard.getLivestockType().getRequiredFood();
 
         Button feedAnimalsButton = new Button(new Position(x, y), title);
