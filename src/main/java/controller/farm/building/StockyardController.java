@@ -70,5 +70,6 @@ public class StockyardController extends BuildingController<Stockyard> {
     public void reactTimePassed(Stockyard stockyard, InGameTime elapsedTime) {
         animalController.reactTimePassed(stockyard, elapsedTime);
         stockyard.getState().setRemainingTime(stockyard.getState().getRemainingTime().subtract(elapsedTime));
+        stockyard.changeProductAmount(this.farm.getWeather().getEffect(elapsedTime));
     }
 }

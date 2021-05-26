@@ -9,7 +9,7 @@ import java.io.*;
 
 public class LoadGameCommand implements Command {
     private final GameController gameController;
-    private String saveFileName;
+    private final String saveFileName;
 
     public LoadGameCommand(GameController gameController, String saveFileName) {
         this.gameController = gameController;

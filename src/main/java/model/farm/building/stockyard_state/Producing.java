@@ -49,7 +49,9 @@ public class Producing implements StockyardState {
     @Override
     public void changeProductAmount(double productAmount) {
         this.productAmount += productAmount;
-        this.productAmount = this.productAmount < 0 ? 0 : this.productAmount;
+        if (this.productAmount <= 0) {
+            this.stockyard.setState(new NotProducing());
+        }
     }
 
 }
