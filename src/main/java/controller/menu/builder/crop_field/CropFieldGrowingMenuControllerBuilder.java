@@ -85,7 +85,7 @@ public class CropFieldGrowingMenuControllerBuilder extends PopupMenuControllerBu
 
     @Override
     protected int getWidth() {
-        return 30;
+        return 23;
     }
 
     @Override

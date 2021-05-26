@@ -75,7 +75,7 @@ public class Stockyard extends Buildable {
 
     @Override
     public String getName() {
-        return livestockType.getAnimalName() + " SY";
+        return livestockType.getAnimalName() + " S.Y.";
     }
 
     public Region getAnimalsRegion() {

@@ -1,4 +1,4 @@
-package controller.menu.builder.house;
+package controller.menu.builder;
 
 import controller.GameController;
 import controller.RealTimeToInGameTimeConverter;
@@ -30,30 +30,31 @@ public class HouseMenuControllerBuilder extends PopupMenuControllerBuilder {
     protected List<ButtonController> getButtons() {
         List<ButtonController> buttons = super.getButtons();
 
-        Button saveGame = new Button(new Position(1,5), "SAVE GAME");
-        Command saveCommand = new CompoundCommand()
-                .addCommand(new SaveGameCommand(this.farmController.getFarm()))
-                .addCommand(new SetControllerStateCommand(this.controller, farmController));
-
-        buttons.add(new ButtonController(saveGame, saveCommand));
-
-        Button restButton = new Button(new Position(1, 9), "REST");
+        Button restButton = new Button(new Position(1, 4), "REST");
         Command restCommand = new CompoundCommand()
                 .addCommand(new SetTimeRateCommand(this.timeConverter, this.house.getRestRate()))
                 .addCommand(new SetControllerStateCommand(this.controller, new FarmRestingController(this.farmController)));
 
         buttons.add(new ButtonController(restButton, restCommand));
+
+        Button saveGame = new Button(new Position(1,8), "SAVE GAME");
+        Command saveCommand = new CompoundCommand()
+                .addCommand(new SaveGameCommand(this.farmController.getFarm(), "save.data")) // TODO where is the best place to put a SAVE_FILE_NAME?
+                .addCommand(new SetControllerStateCommand(this.controller, farmController));
+
+        buttons.add(new ButtonController(saveGame, saveCommand));
+
         return buttons;
     }
 
     @Override
     protected int getHeight() {
-        return 13;
+        return 12;
     }
 
     @Override
     protected int getWidth() {
-        return 20;
+        return 13;
     }
 
     @Override

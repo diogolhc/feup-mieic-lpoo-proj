@@ -58,7 +58,7 @@ public class WarehouseMenuControllerBuilder extends PopupMenuControllerBuilder {
 
     @Override
     protected int getWidth() {
-        return 19;
+        return 21;
     }
 
     @Override

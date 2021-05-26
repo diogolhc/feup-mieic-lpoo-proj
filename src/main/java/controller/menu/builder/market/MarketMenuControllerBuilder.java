@@ -54,7 +54,7 @@ public class MarketMenuControllerBuilder extends PopupMenuControllerBuilder {
 
     @Override
     protected int getWidth() {
-        return 18;
+        return 12;
     }
 
     @Override

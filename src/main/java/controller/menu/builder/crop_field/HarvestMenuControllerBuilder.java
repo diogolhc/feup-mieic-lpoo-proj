@@ -60,7 +60,7 @@ public class HarvestMenuControllerBuilder extends PopupMenuControllerBuilder {
 
     @Override
     protected int getWidth() {
-        return 30;
+        return 22;
     }
 
     @Override

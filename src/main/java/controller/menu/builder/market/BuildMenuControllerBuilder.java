@@ -44,17 +44,8 @@ public class BuildMenuControllerBuilder extends PopupMenuControllerBuilder {
         List<ButtonController> buttons = super.getButtons();
 
         int y = 4;
-        int x = 1;
-
-        Button demolishButton = new Button(new Position(x, y), "DEMOLISH");
-        Command demolishCommand;
-        demolishCommand = new SetControllerStateCommand(this.controller, new FarmDemolishController(this.farmController));
-        buttons.add(new ButtonController(demolishButton, demolishCommand));
-
-        y += 4;
-
         for (Buildable building: this.buildingCatalog) {
-            Button buildButton = new Button(new Position(x, y), building.getName());
+            Button buildButton = new Button(new Position(1, y), building.getName());
             Command buildCommand;
             if (this.farm.getCurrency().canBuy(building.getBuildPrice())) {
                 buildCommand = new SetControllerStateCommand(this.controller, new FarmNewBuildingController(
@@ -66,11 +57,14 @@ public class BuildMenuControllerBuilder extends PopupMenuControllerBuilder {
             buttons.add(new ButtonController(buildButton, buildCommand));
 
             y += 4;
-            if (y >= 16) {
-                y = 8;
-                x += 20;
-            }
         }
+
+        Button demolishButton = new Button(new Position(24, 4), "DEMOLISH");
+        Command demolishCommand;
+        demolishCommand = new SetControllerStateCommand(this.controller, new FarmDemolishController(this.farmController));
+        buttons.add(new ButtonController(demolishButton, demolishCommand));
+
+        y += 4;
 
         return buttons;
     }
@@ -79,19 +73,14 @@ public class BuildMenuControllerBuilder extends PopupMenuControllerBuilder {
     protected List<Label> getLabels() {
         List<Label> labels = super.getLabels();
 
-        int x = 14;
-        int y = 9;
+        int y = 5;
         for (Buildable building: this.buildingCatalog) {
             labels.add(new Label(
-                    new Position(x, y),
+                    new Position(16, y),
                     () -> building.getBuildPrice().toString()
             ));
 
             y += 4;
-            if (y >= 17) {
-                y = 9;
-                x += 17;
-            }
         }
 
         return labels;
@@ -104,7 +93,7 @@ public class BuildMenuControllerBuilder extends PopupMenuControllerBuilder {
 
     @Override
     protected int getWidth() {
-        return 37;
+        return 35;
     }
 
     @Override
