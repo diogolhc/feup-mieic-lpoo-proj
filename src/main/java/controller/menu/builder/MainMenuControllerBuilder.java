@@ -50,7 +50,7 @@ public class MainMenuControllerBuilder extends MenuControllerBuilder {
         buttons.add(new ButtonController(loadGameButton, loadGameCommand));
 
         Button exitGameButton = new Button(new Position(10, 16), "EXIT");
-        Command exitGameCommand = new NoOperationCommand();
+        Command exitGameCommand = new ExitGameCommand(gameController);
 
         buttons.add(new ButtonController(exitGameButton, exitGameCommand));
 
