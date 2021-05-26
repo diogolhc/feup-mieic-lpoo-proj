@@ -19,7 +19,7 @@ public class FeedAnimalsCommand implements Command {
     @Override
     public void execute() {
         if (this.stockyard.getState() instanceof NotProducing) {
-            this.stockyard.setState(new Producing(this.stockyard, this.stockyard.getState().getProduct()));
+            this.stockyard.setState(new Producing(this.stockyard, this.stockyard.getLivestockType().getProducedItem()));
         }
     }
 }
