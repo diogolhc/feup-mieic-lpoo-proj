@@ -9,9 +9,6 @@ import model.farm.building.crop_field_state.NotPlanted;
 import model.region.RectangleRegion;
 import model.region.Region;
 
-import java.util.Objects;
-
-
 public class CropField extends Buildable {
     private CropFieldState state;
 

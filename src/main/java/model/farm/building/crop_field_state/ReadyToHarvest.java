@@ -32,6 +32,7 @@ public class ReadyToHarvest implements CropFieldState {
 
     @Override
     public void changeHarvestAmount(double harvestAmount) {
+        if (harvestAmount > 0) return;
         this.harvestAmount += harvestAmount;
         this.harvestAmount = this.harvestAmount < 0 ? 0 : this.harvestAmount;
     }
