@@ -2,6 +2,7 @@ package model.farm.crop;
 
 import gui.Color;
 import model.InGameTime;
+import model.farm.Currency;
 import model.farm.data.item.Crop;
 import model.farm.data.item.CropGrowthStage;
 import org.junit.jupiter.api.Assertions;
@@ -18,16 +19,17 @@ public class CropTest {
 
     @BeforeEach
     void setUp() {
-        growthStages = new ArrayList<>();
-        crop = Mockito.mock(Crop.class);
-        Mockito.when(crop.getCurrentGrowthStage(Mockito.any())).thenCallRealMethod();
-        Mockito.when(crop.getGrowthStages()).thenReturn(growthStages);
+        crop = new Crop("CROP");
 
+        growthStages = new ArrayList<>();
         growthStages.add(new CropGrowthStage(new InGameTime(0), 'a', new Color("#000001")));
         growthStages.add(new CropGrowthStage(new InGameTime(5), 'b', new Color("#000002")));
         growthStages.add(new CropGrowthStage(new InGameTime(6), 'c', new Color("#000003")));
         growthStages.add(new CropGrowthStage(new InGameTime(8), 'd', new Color("#000004")));
         growthStages.add(new CropGrowthStage(new InGameTime(20), 'e', new Color("#000005")));
+        for (CropGrowthStage growthStage: growthStages) {
+            crop.addGrowthStage(growthStage);
+        }
     }
 
     @Test

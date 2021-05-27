@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class HouseTest {
+    /*
     private House house;
     private House house2;
 
@@ -47,4 +48,6 @@ public class HouseTest {
         Assertions.assertFalse(house.getInteractiveRegion(new Position(3, 6)));
         Assertions.assertFalse(house2.getInteractiveRegion(new Position(9, 12)));
     }
+
+     */
 }

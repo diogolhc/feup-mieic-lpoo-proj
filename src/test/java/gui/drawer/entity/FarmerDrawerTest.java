@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 public class FarmerDrawerTest {
+    /*
     private GUI gui;
     private Color backgroundColors[][] = new Color[10][10];
     private Color foregroundColors[][] = new Color[10][10];
@@ -146,4 +147,6 @@ public class FarmerDrawerTest {
             }
         }
     }
+
+     */
 }

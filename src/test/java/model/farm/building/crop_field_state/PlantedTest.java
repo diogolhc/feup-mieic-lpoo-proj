@@ -11,7 +11,6 @@ import org.mockito.Mockito;
 public class PlantedTest {
     private CropField field;
     private Planted state;
-    private InGameTime zero = new InGameTime(0);
 
     @BeforeEach
     void setUp() {

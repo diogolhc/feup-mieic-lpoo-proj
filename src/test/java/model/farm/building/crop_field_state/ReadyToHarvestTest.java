@@ -2,6 +2,7 @@ package model.farm.building.crop_field_state;
 
 import model.InGameTime;
 import model.farm.data.item.Crop;
+import model.farm.building.CropField;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,7 +14,7 @@ public class ReadyToHarvestTest {
 
     @BeforeEach
     void setUp() {
-        state = new ReadyToHarvest(Mockito.mock(Crop.class));
+        state = new ReadyToHarvest(Mockito.mock(CropField.class), Mockito.mock(Crop.class), 1);
     }
 
     @Test
