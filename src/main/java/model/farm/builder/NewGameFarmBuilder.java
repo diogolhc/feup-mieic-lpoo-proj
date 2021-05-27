@@ -23,6 +23,7 @@ public class NewGameFarmBuilder extends FarmBuilder {
     private final List<String> cropsLines;
     private final List<String> livestockLines;
     private final List<String> weatherLines;
+    private final List<String> stockyardLines;
 
     // TODO check invalid formats?
     public NewGameFarmBuilder() throws IOException, URISyntaxException {
@@ -37,6 +38,10 @@ public class NewGameFarmBuilder extends FarmBuilder {
         resource = NewGameFarmBuilder.class.getResource("/game/livestock.data");
         br = new BufferedReader(new FileReader(resource.toURI().getPath()));
         this.livestockLines = this.readLines(br);
+
+        resource = NewGameFarmBuilder.class.getResource("/game/stockyard.data");
+        br = new BufferedReader(new FileReader(resource.toURI().getPath()));
+        this.stockyardLines = this.readLines(br);
     }
 
     private static List<String> readLines(BufferedReader br) throws IOException {
@@ -147,14 +152,34 @@ public class NewGameFarmBuilder extends FarmBuilder {
     @Override
     protected List<Stockyard> getStockyards() {
         List<Stockyard> stockyards = new ArrayList<>();
-        int x = 30, y = 1;
-        for (Livestock livestock : getLivestockTypes()) {
-            Stockyard stockyard = new Stockyard(new Position(30, y), livestock);
-            stockyard.addAnimal();
-            stockyard.addAnimal();
-            stockyard.addAnimal();
+        if (this.stockyardLines.isEmpty()) return stockyards;
+
+        int currentLine = 0;
+        while (currentLine < this.stockyardLines.size()) {
+            String[] tokens = this.stockyardLines.get(currentLine).split(" ");
+            Position posTopLeft = new Position(Integer.parseInt(tokens[0]), Integer.parseInt(tokens[1]));
+            currentLine++;
+            tokens = this.stockyardLines.get(currentLine).split(" ");
+
+            String livestockName = tokens[0];
+            int maxNumAnimals = Integer.parseInt(tokens[1]);
+            Livestock livestock = new Livestock();
+            boolean found = false;
+            for (Livestock l : this.getLivestockTypes()) {
+                if (l.getAnimalName().equals(livestockName)) {
+                    livestock = l;
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {       // Invalid Stockyard
+                currentLine++;
+                continue;
+            }
+
+            Stockyard stockyard = new Stockyard(posTopLeft, livestock, maxNumAnimals);
             stockyards.add(stockyard);
-            y += 7;
+            currentLine++;
         }
         return stockyards;
     }

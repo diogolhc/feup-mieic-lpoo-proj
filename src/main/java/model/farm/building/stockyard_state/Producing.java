@@ -1,5 +1,6 @@
 package model.farm.building.stockyard_state;
 
+import gui.Color;
 import model.InGameTime;
 import model.farm.building.Stockyard;
 import model.farm.item.AnimalProduct;
@@ -30,11 +31,6 @@ public class Producing implements StockyardState {
         }
     }
 
-    @Override
-    public char getChar() {
-        return (char) (this.animalProduct.getName().charAt(0) + 32);
-        //ascii conversion
-    }
 
     @Override
     public AnimalProduct getProduct() {
@@ -54,4 +50,8 @@ public class Producing implements StockyardState {
         }
     }
 
+    @Override
+    public Color getColor() {
+        return new Color("#595959");
+    }
 }

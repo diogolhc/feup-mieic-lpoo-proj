@@ -12,5 +12,5 @@ public interface StockyardState extends Serializable {
     AnimalProduct getProduct();
     int getProductAmount();
     void changeProductAmount(double productAmount);
-    char getChar();
+    Color getColor();
 }

@@ -19,8 +19,8 @@ public class ReadyToCollect implements StockyardState{
     }
 
     @Override
-    public char getChar() {
-        return this.animalProduct.getName().charAt(0) ;
+    public Color getColor() {
+        return new Color("#b0b0b0");
     }
 
     @Override

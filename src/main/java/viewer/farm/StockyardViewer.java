@@ -18,9 +18,6 @@ public class StockyardViewer {
                     stockyard.getTopLeftPosition().getY());
         fencesViewer.draw(fencesPosition, stockyard.getWidth() - 1, stockyard.getHeight(), gui);
 
-        gui.drawChar(stockyard.getTopLeftPosition().getX(), stockyard.getTopLeftPosition().getY() + 2, stockyard.getState().getChar());
-        gui.drawChar(stockyard.getTopLeftPosition().getX(), stockyard.getTopLeftPosition().getY() + 4, stockyard.getState().getChar());
-
         gui.setForegroundColor(FENCE_DOOR_COLOR);
         gui.drawChar(stockyard.getTopLeftPosition().getX() + 1, stockyard.getTopLeftPosition().getY() + 3, '|');
 
@@ -29,7 +26,7 @@ public class StockyardViewer {
 
         for (Animal animal: stockyard.getAnimals()) {
             AnimalViewer animalViewer = new AnimalViewer();
-            animalViewer.draw(animal, stockyard.getLivestockType().getAnimalChar(), gui);
+            animalViewer.draw(animal, stockyard.getLivestockType().getAnimalChar(), gui, stockyard.getState().getColor());
         }
     }
 }

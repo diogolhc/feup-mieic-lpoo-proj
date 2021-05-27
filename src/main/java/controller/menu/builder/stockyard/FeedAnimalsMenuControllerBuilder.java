@@ -35,15 +35,12 @@ public class FeedAnimalsMenuControllerBuilder extends PopupMenuControllerBuilder
     protected List<ButtonController> getButtons() {
         List<ButtonController> buttons = super.getButtons();
         int x = 1;
-        int y = 5;
+        int y = 9;
 
-        String title = "FEED " + stockyard.getLivestockType().getFoodCrop().getName() + " x" +
-                stockyard.getLivestockType().getRequiredFood() * stockyard.getAnimals().size();
+        String title = "FEED";
 
         Button feedAnimalsButton = new Button(new Position(x, y), title);
-
         Command feedAnimalsCommand;
-
         if (this.inventory.getAmount(this.stockyard.getLivestockType().getFoodCrop()) >=
             this.stockyard.getLivestockType().getRequiredFood()) {
 
@@ -56,8 +53,14 @@ public class FeedAnimalsMenuControllerBuilder extends PopupMenuControllerBuilder
                     new AlertMenuControllerBuilder(this.controller, "NOT ENOUGHT " +
                             this.stockyard.getLivestockType().getFoodCrop().getName()));
         }
-
         buttons.add(new ButtonController(feedAnimalsButton, feedAnimalsCommand));
+
+        title = "BUY";
+        Button buyAnimalButton = new Button(new Position(x, y), title);
+        Command buyAnimalCommand;
+        if (this.stockyard.getAnimals().size() < this.stockyard.getMaxNumAnimals()) {
+
+        }
 
         return buttons;
     }
@@ -65,11 +68,46 @@ public class FeedAnimalsMenuControllerBuilder extends PopupMenuControllerBuilder
     @Override
     protected List<Label> getLabels() {
         List<Label> labels = super.getLabels();
+        int x = 1;
+        int y = 3;
 
         labels.add(new Label(
-                new Position(1, 3),
+                new Position(x, y),
+                () -> stockyard.getLivestockType().getAnimalName() + ": " + stockyard.getAnimals().size()
+        ));
+
+        y += 4;
+        labels.add(new Label(
+                new Position(x, y),
                 () -> stockyard.getLivestockType().getFoodCrop().getName() + ": " +
                         inventory.getAmount(stockyard.getLivestockType().getFoodCrop())
+        ));
+
+        x += 7;
+        y += 2;
+        labels.add(new Label(
+                new Position(x, y),
+                () ->  stockyard.getLivestockType().getFoodCrop().getName()
+        ));
+
+        y += 1;
+        labels.add(new Label(
+                new Position(x, y),
+                () -> "NEEDED"
+        ));
+
+        y += 1;
+        labels.add(new Label(
+                new Position(x, y),
+                () -> String.valueOf(stockyard.getLivestockType().getRequiredFood() * stockyard.getAnimals().size())
+        ));
+
+        x = 1;
+        y += 2;
+        labels.add(new Label(
+                new Position(x, y),
+                () -> "PRODUCES: " + stockyard.getLivestockType().getProducedItem().getName() + " x" +
+                        stockyard.getLivestockType().getProducedItem().getBaseProducedAmount() * stockyard.getAnimals().size()
         ));
 
         return labels;
@@ -77,12 +115,12 @@ public class FeedAnimalsMenuControllerBuilder extends PopupMenuControllerBuilder
 
     @Override
     protected int getHeight() {
-        return 10;
+        return 15;
     }
 
     @Override
     protected int getWidth() {
-        return 20;
+        return 25;
     }
 
     @Override

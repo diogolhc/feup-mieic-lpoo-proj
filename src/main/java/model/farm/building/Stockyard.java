@@ -16,46 +16,57 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Stockyard extends Buildable {
+    private final int maxNumAnimals;
+
     private final Livestock livestockType;
     private final List<Animal> animals;
     private StockyardState state;
 
-    public Stockyard(Position topLeft, Livestock livestockType) {
+    public Stockyard(Position topLeft, Livestock livestockType, int maxNumAnimals) {
         super(topLeft);
         this.livestockType = livestockType;
         this.animals = new ArrayList<>();
         this.state = new NotProducing();
+        this.maxNumAnimals = maxNumAnimals;
     }
 
     public void addAnimal() {
         // TODO make sure position is different from all other animals
         // TODO THis is just here to debug
-        Position animalPosition = new Position(getTopLeftPosition().getX() + 2, getTopLeftPosition().getY() + 1);
-        RectangleRegion animalRegion = (RectangleRegion) this.getAnimalsRegion();
+        if (animals.size() == maxNumAnimals) {
 
-        for (int i = 0; i < animalRegion.getWidth() - 1; i++) {
-            for (int j = 0; j < animalRegion.getHeight(); j++) {
-                animalPosition = new Position(getTopLeftPosition().getX() + 2 + i,
-                        getTopLeftPosition().getY() + 2 + j);
+        } else {
+            Position animalPosition = new Position(getTopLeftPosition().getX() + 2, getTopLeftPosition().getY() + 1);
+            RectangleRegion animalRegion = (RectangleRegion) this.getAnimalsRegion();
 
-                boolean emptyPosition = true;
-                for (Animal animal : animals) {
-                    if (animalPosition.equals(animal.getPosition())) {
-                        emptyPosition = false;
-                        break;
+            for (int i = 0; i < animalRegion.getWidth() - 1; i++) {
+                for (int j = 0; j < animalRegion.getHeight(); j++) {
+                    animalPosition = new Position(getTopLeftPosition().getX() + 2 + i,
+                            getTopLeftPosition().getY() + 2 + j);
+
+                    boolean emptyPosition = true;
+                    for (Animal animal : animals) {
+                        if (animalPosition.equals(animal.getPosition())) {
+                            emptyPosition = false;
+                            break;
+                        }
                     }
-                }
-                if (emptyPosition) break;
+                    if (emptyPosition) break;
 
+                }
             }
+            this.animals.add(new Animal(animalPosition));
         }
-        this.animals.add(new Animal(animalPosition));
     }
 
     public void removeAnimal() {
         if (this.animals.size() > 0) {
             this.animals.remove(0);
         }
+    }
+
+    public int getMaxNumAnimals() {
+        return maxNumAnimals;
     }
 
     public List<Animal> getAnimals() {

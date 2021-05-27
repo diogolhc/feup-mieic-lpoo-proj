@@ -22,8 +22,8 @@ public class NotProducing implements StockyardState {
     }
 
     @Override
-    public char getChar() {
-        return ' ';
+    public Color getColor() {
+        return new Color("#223366");
     }
 
     @Override
