@@ -27,7 +27,7 @@ public class GameControllerTest {
             this.mouseListener = invocation.getArgument(0);
             return null;
         }).when(gui).setMouseListener(Mockito.any());
-        Mockito.when(gui.getNextAction()).thenReturn(GUI.ACTION.NONE);
+        Mockito.when(gui.getNextKeyboardAction()).thenReturn(GUI.KEYBOARD_ACTION.NONE);
 
         Mockito.when(state.getViewer()).thenReturn(viewer);
 
@@ -39,28 +39,28 @@ public class GameControllerTest {
         controller.runFrame(50);
 
         Mockito.verify(viewer, Mockito.times(1)).drawScreen(gui);
-        Mockito.verify(state, Mockito.times(1)).reactKeyboard(GUI.ACTION.NONE);
+        Mockito.verify(state, Mockito.times(1)).reactKeyboard(GUI.KEYBOARD_ACTION.NONE);
         Mockito.verify(state, Mockito.times(1)).reactTimePassed(50);
 
-        Mockito.when(gui.getNextAction()).thenReturn(GUI.ACTION.INTERACT);
+        Mockito.when(gui.getNextKeyboardAction()).thenReturn(GUI.KEYBOARD_ACTION.INTERACT);
         controller.runFrame(250);
 
         Mockito.verify(viewer, Mockito.times(2)).drawScreen(gui);
-        Mockito.verify(state, Mockito.times(1)).reactKeyboard(GUI.ACTION.INTERACT);
+        Mockito.verify(state, Mockito.times(1)).reactKeyboard(GUI.KEYBOARD_ACTION.INTERACT);
         Mockito.verify(state, Mockito.times(1)).reactTimePassed(250);
     }
 
     @Test
     public void run() throws IOException {
-        Mockito.when(gui.getNextAction()).thenReturn(
-                GUI.ACTION.NONE, GUI.ACTION.NONE, GUI.ACTION.INTERACT, GUI.ACTION.MOVE_LEFT, GUI.ACTION.QUIT);
+        Mockito.when(gui.getNextKeyboardAction()).thenReturn(
+                GUI.KEYBOARD_ACTION.NONE, GUI.KEYBOARD_ACTION.NONE, GUI.KEYBOARD_ACTION.INTERACT, GUI.KEYBOARD_ACTION.MOVE_LEFT, GUI.KEYBOARD_ACTION.QUIT);
 
         controller.run();
 
         Mockito.verify(viewer, Mockito.times(5)).drawScreen(gui);
-        Mockito.verify(state, Mockito.times(2)).reactKeyboard(GUI.ACTION.NONE);
-        Mockito.verify(state, Mockito.times(1)).reactKeyboard(GUI.ACTION.MOVE_LEFT);
-        Mockito.verify(state, Mockito.never()).reactKeyboard(GUI.ACTION.QUIT);
+        Mockito.verify(state, Mockito.times(2)).reactKeyboard(GUI.KEYBOARD_ACTION.NONE);
+        Mockito.verify(state, Mockito.times(1)).reactKeyboard(GUI.KEYBOARD_ACTION.MOVE_LEFT);
+        Mockito.verify(state, Mockito.never()).reactKeyboard(GUI.KEYBOARD_ACTION.QUIT);
     }
 
     @Test

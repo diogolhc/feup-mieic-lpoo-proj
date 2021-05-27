@@ -19,10 +19,17 @@ public class UnderlinedStringDrawer {
     }
 
     public void draw(Position position, String title) {
+        drawTitle(position, title);
+        drawUnderline(position, title);
+    }
+
+    private void drawTitle(Position position, String title) {
         this.gui.setBackgroundColor(this.backgroundColor);
         this.gui.setForegroundColor(this.foregroundColor);
         this.gui.drawString(position.getX(), position.getY(), title);
+    }
 
+    private void drawUnderline(Position position, String title) {
         HorizontalLineDrawer hLineDrawer = new HorizontalLineDrawer(
                 this.gui, this.backgroundColor, this.foregroundColor, this.underlineCharacter);
         hLineDrawer.draw(position.getDown(), title.length());

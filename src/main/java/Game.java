@@ -12,10 +12,7 @@ public class Game {
     private final GameController controller;
 
     public Game() throws IOException, FontFormatException, URISyntaxException {
-        int width = 40;
-        int height = 21;
-
-        GUI gui = new LanternaGUI(width, height);
+        GUI gui = new LanternaGUI(40, 21);
 
         this.controller = new GameController(gui);
         MenuController mainMenu = new MainMenuControllerBuilder(this.controller).buildMenu();

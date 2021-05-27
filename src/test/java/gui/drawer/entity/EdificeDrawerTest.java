@@ -7,14 +7,15 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import viewer.farm.element.building.EdificeViewer;
 
-class BuildingDrawerTest {
+class EdificeDrawerTest {
     private GUI gui;
     private Color backgroundColors[][] = new Color[10][10];
     private Color foregroundColors[][] = new Color[10][10];
     private char characters[][] = new char[10][10];
-    private Color currentBackgroundColor = new Color("#000000");
-    private Color currentForegroundColor = new Color("#FFFFFF");
+    private Color currentBackgroundColor = Color.BLACK;
+    private Color currentForegroundColor = Color.WHITE;
 
     @BeforeEach
     void setUp() {
@@ -78,15 +79,15 @@ class BuildingDrawerTest {
 
     @Test
     void drawAtOrigin() {
-        BuildingDrawer drawer = new BuildingDrawer(gui);
-        drawer.draw(new Position(0, 0));
-
-        Color BLACK = new Color("#000000");
+        Color BLACK = Color.BLACK;
         Color PATH = new Color("#be9b7b");
         Color FLOOR = new Color("#777777");
         Color DOOR = new Color("#82490b");
         Color WALL = new Color("#eeeeef");
         Color ROOF = new Color("#c20000");
+
+        EdificeViewer drawer = new EdificeViewer(gui, WALL, ROOF);
+        drawer.draw(new Position(0, 0));
 
         Color expectedBg[][] = {
                 {BLACK, ROOF, ROOF, ROOF, ROOF, ROOF, BLACK, BLACK, BLACK, BLACK},
@@ -124,16 +125,15 @@ class BuildingDrawerTest {
 
     @Test
     void drawOtherPosition() {
-
-        BuildingDrawer drawer = new BuildingDrawer(gui);
-        drawer.draw(new Position(2, 2));
-
-        Color BLACK = new Color("#000000");
+        Color BLACK = Color.BLACK;
         Color PATH = new Color("#be9b7b");
         Color FLOOR = new Color("#777777");
         Color DOOR = new Color("#82490b");
         Color WALL = new Color("#eeeeef");
         Color ROOF = new Color("#c20000");
+
+        EdificeViewer drawer = new EdificeViewer(gui, WALL, ROOF);
+        drawer.draw(new Position(2, 2));
 
         Color expectedBg[][] = {
                 {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},

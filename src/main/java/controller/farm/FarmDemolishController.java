@@ -22,9 +22,9 @@ public class FarmDemolishController extends FarmController {
     }
 
     @Override
-    public void reactKeyboard(GUI.ACTION action) {
-        if (action == GUI.ACTION.BACK) returnToFarmerController();
-        if (action == GUI.ACTION.INTERACT) reactDemolish();
+    public void reactKeyboard(GUI.KEYBOARD_ACTION action) {
+        if (action == GUI.KEYBOARD_ACTION.BACK) returnToFarmerController();
+        if (action == GUI.KEYBOARD_ACTION.INTERACT) reactDemolish();
         DemolishMarkerController demolishMarkerController = new DemolishMarkerController(this.farm, this.demolishMarker);
         demolishMarkerController.doAction(action);
     }

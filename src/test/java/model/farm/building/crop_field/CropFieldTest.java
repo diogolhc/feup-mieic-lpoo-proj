@@ -64,7 +64,7 @@ public class CropFieldTest {
     void getGrowthStage() {
         CropFieldState state = Mockito.mock(CropFieldState.class);
         Crop crop = Mockito.mock(Crop.class);
-        CropGrowthStage growthStage = new CropGrowthStage(new InGameTime(7), 'c', new Color("#FFFFFF"));
+        CropGrowthStage growthStage = new CropGrowthStage(new InGameTime(7), 'c', Color.WHITE);
         InGameTime time = new InGameTime(5);
 
         field.setState(state);

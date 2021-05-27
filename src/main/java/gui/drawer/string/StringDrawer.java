@@ -2,7 +2,6 @@ package gui.drawer.string;
 
 import gui.Color;
 import gui.GUI;
-import gui.drawer.shape.HorizontalLineDrawer;
 import model.Position;
 
 public class StringDrawer {

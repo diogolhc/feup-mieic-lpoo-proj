@@ -10,9 +10,9 @@ public class BoxDrawer {
     private final GUI gui;
     private final Color backgroundColor;
     private final Color foregroundColor;
-    private static final char HORIZONTAL_LINE = '-';
-    private static final char VERTICAL_LINE = '|';
-    private static final char CORNER_LINE = '+';
+    public static final char HORIZONTAL_LINE = '-';
+    public static final char VERTICAL_LINE = '|';
+    public static final char CORNER_LINE = '+';
 
     public BoxDrawer(GUI gui, Color backgroundColor, Color foregroundColor) {
         this.gui = gui;
@@ -21,22 +21,34 @@ public class BoxDrawer {
     }
 
     public void draw(Position position, int width, int height) {
+        drawHorizontalEdges(position, width, height);
+        drawVerticalEdges(position, width, height);
+        drawCorner(position, width, height);
+    }
+
+    private void drawHorizontalEdges(Position position, int width, int height) {
         if (width > 2) {
             HorizontalLineDrawer hLineDrawer = new HorizontalLineDrawer(
                     this.gui, this.backgroundColor, this.foregroundColor, HORIZONTAL_LINE);
-            hLineDrawer.draw(position.getRight(), width - 2);
-            Position bottom = new Position(position.getX() + 1, position.getY() + height - 1);
+            Position top = position.getRight();
+            hLineDrawer.draw(top, width - 2);
+            Position bottom = position.getTranslated(new Position(1, height - 1));
             hLineDrawer.draw(bottom, width - 2);
         }
+    }
 
+    private void drawVerticalEdges(Position position, int width, int height) {
         if (height > 2) {
             VerticalLineDrawer vLineDrawer = new VerticalLineDrawer(
                     this.gui, this.backgroundColor, this.foregroundColor, VERTICAL_LINE);
-            vLineDrawer.draw(position.getDown(), height - 2);
-            Position right = new Position(position.getX() + width - 1, position.getY() + 1);
+            Position left = position.getDown();
+            vLineDrawer.draw(left, height - 2);
+            Position right = position.getTranslated(new Position(width - 1, 1));
             vLineDrawer.draw(right, height - 2);
         }
+    }
 
+    private void drawCorner(Position position, int width, int height) {
         int x = position.getX();
         int y = position.getY();
 

@@ -1,4 +1,4 @@
-package viewer.farm;
+package viewer.farm.element.entity;
 
 import gui.Color;
 import gui.GUI;
@@ -8,8 +8,8 @@ import model.farm.building.Building;
 import model.farm.building.BuildingSet;
 
 public class NewBuildingZoneViewer {
-    private static final Color AVAILABLE_ZONE_COLOR = new Color("#03ac13");
-    private static final Color UNAVAILABLE_ZONE_COLOR = new Color("#e3242b");
+    public static final Color AVAILABLE_ZONE_COLOR = new Color("#03ac13");
+    public static final Color UNAVAILABLE_ZONE_COLOR = new Color("#e3242b");
 
     public void draw(BuildingSet buildings, Building newBuilding, GUI gui) {
         Position position = newBuilding.getTopLeftPosition();
@@ -23,7 +23,7 @@ public class NewBuildingZoneViewer {
             zoneColor = AVAILABLE_ZONE_COLOR;
         }
 
-        FilledRectangleDrawer rectangleDrawer = new FilledRectangleDrawer(gui, zoneColor, zoneColor, ' ');
+        FilledRectangleDrawer rectangleDrawer = new FilledRectangleDrawer(gui, zoneColor);
         rectangleDrawer.draw(position, width, height);
     }
 }

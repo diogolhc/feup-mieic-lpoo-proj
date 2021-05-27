@@ -1,9 +1,6 @@
 package controller;
 
-import controller.command.OpenPopupMenuCommand;
 import controller.farm.FarmWithFarmerController;
-import controller.menu.builder.PauseMenuControllerBuilder;
-import controller.menu.builder.PopupMenuControllerBuilder;
 import gui.GUI;
 import gui.MouseListener;
 import model.Position;
@@ -71,8 +68,8 @@ public class GameController implements MouseListener {
     public void runFrame(long elapsedTimeSinceLastFrame) throws IOException {
         this.gameControllerState.getViewer().drawScreen(gui);
 
-        GUI.ACTION action = this.gui.getNextAction();
-        if (action == GUI.ACTION.QUIT) {
+        GUI.KEYBOARD_ACTION action = this.gui.getNextKeyboardAction();
+        if (action == GUI.KEYBOARD_ACTION.QUIT) {
             this.endGame();
             return;
         }

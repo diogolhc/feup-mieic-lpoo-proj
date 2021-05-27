@@ -17,8 +17,8 @@ public class FarmRestingController extends FarmController {
     }
 
     @Override
-    public void reactKeyboard(GUI.ACTION action) {
-        if (action != GUI.ACTION.NONE) returnToFarmerController();
+    public void reactKeyboard(GUI.KEYBOARD_ACTION action) {
+        if (action != GUI.KEYBOARD_ACTION.NONE) returnToFarmerController();
     }
 
     @Override

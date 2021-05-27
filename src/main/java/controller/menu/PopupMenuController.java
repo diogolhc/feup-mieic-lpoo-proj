@@ -20,8 +20,8 @@ public class PopupMenuController extends MenuController {
     }
 
     @Override
-    public void reactKeyboard(GUI.ACTION action) {
-        if (action == GUI.ACTION.BACK) {
+    public void reactKeyboard(GUI.KEYBOARD_ACTION action) {
+        if (action == GUI.KEYBOARD_ACTION.BACK) {
             this.closePopup();
         }
     }

@@ -13,8 +13,8 @@ public class FarmerDrawerTest {
     private Color backgroundColors[][] = new Color[10][10];
     private Color foregroundColors[][] = new Color[10][10];
     private char characters[][] = new char[10][10];
-    private Color currentBackgroundColor = new Color("#000000");
-    private Color currentForegroundColor = new Color("#FFFFFF");
+    private Color currentBackgroundColor = Color.BLACK;
+    private Color currentForegroundColor = Color.WHITE;
 
     private Color[][] cloneSquareBidimensionalArray(Color[][] array) {
         Color newArray[][] = new Color[array.length][array.length];
@@ -87,7 +87,7 @@ public class FarmerDrawerTest {
 
     @Test
     void draw() {
-        Color WHITE = new Color("#FFFFFF");
+        Color WHITE = Color.WHITE;
         Color FARMER_COLOR = new Color("#223366");
 
         Color expectedBg[][] = cloneSquareBidimensionalArray(this.backgroundColors);
@@ -112,7 +112,7 @@ public class FarmerDrawerTest {
 
     @Test
     void drawOnBackground() {
-        Color WHITE = new Color("#FFFFFF");
+        Color WHITE = Color.WHITE;
         Color RED = new Color("#FF0000");
         Color BLUE = new Color("#0000FF");
         Color FARMER_COLOR = new Color("#223366");

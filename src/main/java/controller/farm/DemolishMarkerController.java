@@ -15,11 +15,11 @@ public class DemolishMarkerController {
         this.marker = marker;
     }
 
-    public void doAction(GUI.ACTION action) {
-        if (action == GUI.ACTION.MOVE_UP) moveUp();
-        if (action == GUI.ACTION.MOVE_RIGHT) moveRight();
-        if (action == GUI.ACTION.MOVE_DOWN) moveDown();
-        if (action == GUI.ACTION.MOVE_LEFT) moveLeft();
+    public void doAction(GUI.KEYBOARD_ACTION action) {
+        if (action == GUI.KEYBOARD_ACTION.MOVE_UP) moveUp();
+        if (action == GUI.KEYBOARD_ACTION.MOVE_RIGHT) moveRight();
+        if (action == GUI.KEYBOARD_ACTION.MOVE_DOWN) moveDown();
+        if (action == GUI.KEYBOARD_ACTION.MOVE_LEFT) moveLeft();
     }
 
     private void moveLeft() {

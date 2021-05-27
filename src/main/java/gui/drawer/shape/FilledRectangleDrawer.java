@@ -17,6 +17,10 @@ public class FilledRectangleDrawer {
         this.character = character;
     }
 
+    public FilledRectangleDrawer(GUI gui, Color backgroundColor) {
+        this(gui, backgroundColor, backgroundColor, ' ');
+    }
+
     public void draw(Position position, int width, int height) {
         HorizontalLineDrawer hLineDrawer = new HorizontalLineDrawer(
                 this.gui, this.backgroundColor, this.foregroundColor, this.character);

@@ -19,25 +19,28 @@ import java.net.URISyntaxException;
 import java.net.URL;
 
 public class LanternaGUI implements GUI {
-    private static final int CHAR_SIZE = 25;
+    public static final int CHAR_SIZE = 25;
+
     private final Terminal terminal;
     private final TerminalScreen screen;
     private final TextGraphics graphics;
     private int mouseX = 0;
     private int mouseY = 0;
-    private int width;
-    private int height;
+    private final int windowWidth;
+    private final int windowHeight;
 
-    public LanternaGUI(Terminal terminal, TerminalScreen screen) {
+    public LanternaGUI(Terminal terminal, TerminalScreen screen) throws IOException {
         this.terminal = terminal;
+        this.windowWidth = terminal.getTerminalSize().getColumns();
+        this.windowHeight = terminal.getTerminalSize().getRows();
         this.screen = screen;
         this.graphics = this.screen.newTextGraphics();
     }
 
     public LanternaGUI(int width, int height) throws IOException, FontFormatException, URISyntaxException {
         AWTTerminalFontConfiguration fontConfig = this.loadSquareFont();
-        this.width = width;
-        this.height = height;
+        this.windowWidth = width;
+        this.windowHeight = height;
         this.terminal = this.createTerminal(width, height, fontConfig);
         this.screen = this.createScreen(terminal);
         this.graphics = this.screen.newTextGraphics();
@@ -101,12 +104,12 @@ public class LanternaGUI implements GUI {
 
     @Override
     public int getWindowWidth() {
-        return this.width;
+        return this.windowWidth;
     }
 
     @Override
     public int getWindowHeight() {
-        return this.height;
+        return this.windowHeight;
     }
 
     @Override
@@ -120,21 +123,18 @@ public class LanternaGUI implements GUI {
         this.graphics.setForegroundColor(TextColor.Factory.fromString(color.toString()));
     }
 
-    private static String getColorString(TextColor color) {
-        return "#"
-                + String.format("%02x", color.getRed())
-                + String.format("%02x", color.getGreen())
-                + String.format("%02x", color.getBlue());
+    private static String getTextColorString(TextColor color) {
+        return String.format("#%02x%02x%02x", color.getRed(), color.getGreen(), color.getBlue());
     }
 
     @Override
     public Color getBackgroundColor(int x, int y) {
-        return new Color(this.getColorString(this.graphics.getCharacter(x, y).getBackgroundColor()));
+        return new Color(this.getTextColorString(this.graphics.getCharacter(x, y).getBackgroundColor()));
     }
 
     @Override
     public Color getForegroundColor(int x, int y) {
-        return new Color(this.getColorString(this.graphics.getCharacter(x, y).getBackgroundColor()));
+        return new Color(this.getTextColorString(this.graphics.getCharacter(x, y).getBackgroundColor()));
     }
 
     @Override
@@ -156,26 +156,25 @@ public class LanternaGUI implements GUI {
     }
 
     @Override
-    public ACTION getNextAction() throws IOException {
+    public KEYBOARD_ACTION getNextKeyboardAction() throws IOException {
         KeyStroke keyStroke = this.screen.pollInput();
 
-        if (keyStroke == null) return ACTION.NONE;
+        if (keyStroke == null) return KEYBOARD_ACTION.NONE;
 
-        if (this.isKeyStrokeType(keyStroke, KeyType.EOF)) return ACTION.QUIT;
-        if (this.isKeyStrokeType(keyStroke, KeyType.Escape)) return ACTION.BACK;
+        if (this.isKeyStrokeType(keyStroke, KeyType.EOF)) return KEYBOARD_ACTION.QUIT;
+        if (this.isKeyStrokeType(keyStroke, KeyType.Escape)) return KEYBOARD_ACTION.BACK;
 
-        if (this.isKeyStrokeCharacter(keyStroke, 'w')) return ACTION.MOVE_UP;
-        if (this.isKeyStrokeCharacter(keyStroke, 'd')) return ACTION.MOVE_RIGHT;
-        if (this.isKeyStrokeCharacter(keyStroke, 's')) return ACTION.MOVE_DOWN;
-        if (this.isKeyStrokeCharacter(keyStroke, 'a')) return ACTION.MOVE_LEFT;
-        if (this.isKeyStrokeCharacter(keyStroke, ' ')) return ACTION.INTERACT;
+        if (this.isKeyStrokeCharacter(keyStroke, 'w')) return KEYBOARD_ACTION.MOVE_UP;
+        if (this.isKeyStrokeCharacter(keyStroke, 'd')) return KEYBOARD_ACTION.MOVE_RIGHT;
+        if (this.isKeyStrokeCharacter(keyStroke, 's')) return KEYBOARD_ACTION.MOVE_DOWN;
+        if (this.isKeyStrokeCharacter(keyStroke, 'a')) return KEYBOARD_ACTION.MOVE_LEFT;
+        if (this.isKeyStrokeCharacter(keyStroke, ' ')) return KEYBOARD_ACTION.INTERACT;
 
-        return ACTION.NONE;
+        return KEYBOARD_ACTION.NONE;
     }
 
-    @Override
-    public void setMouseListener(MouseListener mouseListener) {
-        MouseAdapter mouseAdapter = new MouseAdapter() {
+    public MouseAdapter getMouseAdapter(MouseListener mouseListener) {
+        return new MouseAdapter() {
             private void updateMousePosition(MouseEvent e) {
                 mouseX = e.getX()/LanternaGUI.CHAR_SIZE;
                 mouseY = e.getY()/LanternaGUI.CHAR_SIZE;
@@ -203,6 +202,11 @@ public class LanternaGUI implements GUI {
                 mouseListener.onMouseMovement(mouseX, mouseY);
             }
         };
+    }
+
+    @Override
+    public void setMouseListener(MouseListener mouseListener) {
+        MouseAdapter mouseAdapter = getMouseAdapter(mouseListener);
 
         ((AWTTerminalFrame) this.terminal).getComponent(0).addMouseListener(mouseAdapter);
         ((AWTTerminalFrame) this.terminal).getComponent(0).addMouseMotionListener(mouseAdapter);

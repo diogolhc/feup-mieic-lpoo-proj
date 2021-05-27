@@ -31,7 +31,7 @@ public abstract class MenuController implements GameControllerState {
     }
 
     @Override
-    public void reactKeyboard(GUI.ACTION action) {}
+    public void reactKeyboard(GUI.KEYBOARD_ACTION action) {}
 
     @Override
     public void reactMouseMovement(Position position) {

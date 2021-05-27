@@ -17,6 +17,10 @@ public class HorizontalLineDrawer {
         this.character = character;
     }
 
+    public HorizontalLineDrawer(GUI gui, Color backgroundColor) {
+        this(gui, backgroundColor, backgroundColor, ' ');
+    }
+
     public void draw(Position position, int length) {
         this.gui.setForegroundColor(foregroundColor);
         this.gui.setBackgroundColor(backgroundColor);

@@ -1,16 +1,16 @@
 package viewer.menu;
 
-import gui.Color;
 import gui.GUI;
 import gui.drawer.shape.FilledRectangleDrawer;
-import model.Position;
 import model.menu.Button;
 import model.menu.Menu;
 import model.menu.label.Label;
 import viewer.GameViewer;
+import viewer.menu.element.ButtonViewer;
+import viewer.menu.element.LabelViewer;
 
 public abstract class MenuViewer extends GameViewer {
-    protected Menu menu;
+    protected final Menu menu;
 
     public MenuViewer(Menu menu) {
         this.menu = menu;
@@ -24,12 +24,13 @@ public abstract class MenuViewer extends GameViewer {
         drawLabels(gui);
     }
 
-    private void drawLabels(GUI gui) {
-        LabelViewer labelViewer = new LabelViewer();
-        for (Label label: this.menu.getLabels()) {
-            labelViewer.draw(this.menu, label, gui);
-        }
+    private void drawBackground(GUI gui) {
+        FilledRectangleDrawer backgroundDrawer = new FilledRectangleDrawer(
+                gui, this.menu.getColor(), this.menu.getColor(), ' ');
+        backgroundDrawer.draw(this.menu.getTopLeftPosition(), this.menu.getWidth(), this.menu.getHeight());
     }
+
+    protected abstract void drawTitle(GUI gui);
 
     private void drawButtons(GUI gui) {
         ButtonViewer buttonViewer = new ButtonViewer();
@@ -38,11 +39,10 @@ public abstract class MenuViewer extends GameViewer {
         }
     }
 
-    protected abstract void drawTitle(GUI gui);
-
-    private void drawBackground(GUI gui) {
-        FilledRectangleDrawer backgroundDrawer = new FilledRectangleDrawer(
-                gui, this.menu.getColor(), this.menu.getColor(), ' ');
-        backgroundDrawer.draw(this.menu.getTopLeftPosition(), this.menu.getWidth(), this.menu.getHeight());
+    private void drawLabels(GUI gui) {
+        LabelViewer labelViewer = new LabelViewer();
+        for (Label label: this.menu.getLabels()) {
+            labelViewer.draw(this.menu, label, gui);
+        }
     }
 }

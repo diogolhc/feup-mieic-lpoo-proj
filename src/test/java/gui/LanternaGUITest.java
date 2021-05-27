@@ -25,7 +25,7 @@ class LanternaGUITest {
     private TextColor currentForegroundColor = TextColor.Factory.fromString("#FFFFFF");
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws IOException {
         this.terminal = Mockito.mock(Terminal.class);
         this.screen = Mockito.mock(TerminalScreen.class);
         this.tg = Mockito.mock(TextGraphics.class);
@@ -104,18 +104,18 @@ class LanternaGUITest {
     @Test
     void getNextAction() throws IOException {
         Mockito.when(screen.pollInput()).thenReturn(KeyStroke.fromString("w"));
-        Assertions.assertEquals(GUI.ACTION.MOVE_UP, gui.getNextAction());
+        Assertions.assertEquals(GUI.KEYBOARD_ACTION.MOVE_UP, gui.getNextKeyboardAction());
         Mockito.when(screen.pollInput()).thenReturn(KeyStroke.fromString("s"));
-        Assertions.assertEquals(GUI.ACTION.MOVE_DOWN, gui.getNextAction());
+        Assertions.assertEquals(GUI.KEYBOARD_ACTION.MOVE_DOWN, gui.getNextKeyboardAction());
         Mockito.when(screen.pollInput()).thenReturn(KeyStroke.fromString("a"));
-        Assertions.assertEquals(GUI.ACTION.MOVE_LEFT, gui.getNextAction());
+        Assertions.assertEquals(GUI.KEYBOARD_ACTION.MOVE_LEFT, gui.getNextKeyboardAction());
         Mockito.when(screen.pollInput()).thenReturn(KeyStroke.fromString("d"));
-        Assertions.assertEquals(GUI.ACTION.MOVE_RIGHT, gui.getNextAction());
+        Assertions.assertEquals(GUI.KEYBOARD_ACTION.MOVE_RIGHT, gui.getNextKeyboardAction());
         Mockito.when(screen.pollInput()).thenReturn(KeyStroke.fromString("<Space>"));
-        Assertions.assertEquals(GUI.ACTION.INTERACT, gui.getNextAction());
+        Assertions.assertEquals(GUI.KEYBOARD_ACTION.INTERACT, gui.getNextKeyboardAction());
         Mockito.when(screen.pollInput()).thenReturn(null);
-        Assertions.assertEquals(GUI.ACTION.NONE, gui.getNextAction());
+        Assertions.assertEquals(GUI.KEYBOARD_ACTION.NONE, gui.getNextKeyboardAction());
         Mockito.when(screen.pollInput()).thenReturn(KeyStroke.fromString("."));
-        Assertions.assertEquals(GUI.ACTION.NONE, gui.getNextAction());
+        Assertions.assertEquals(GUI.KEYBOARD_ACTION.NONE, gui.getNextKeyboardAction());
     }
 }

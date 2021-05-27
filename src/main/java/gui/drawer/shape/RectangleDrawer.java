@@ -17,6 +17,10 @@ public class RectangleDrawer {
         this.character = character;
     }
 
+    public RectangleDrawer(GUI gui, Color backgroundColor) {
+        this(gui, backgroundColor, backgroundColor, ' ');
+    }
+
     public void draw(Position position, int width, int height) {
         HorizontalLineDrawer hLineDrawer = new HorizontalLineDrawer(
                 this.gui, this.backgroundColor, this.foregroundColor, this.character);
@@ -26,8 +30,8 @@ public class RectangleDrawer {
         hLineDrawer.draw(position, width);
         vLineDrawer.draw(position, height);
 
-        Position topRight = new Position(position.getX() + width - 1, position.getY());
-        Position bottomLeft = new Position(position.getX(), position.getY() + height - 1);
+        Position topRight = position.getTranslated(new Position(width - 1, 0));
+        Position bottomLeft = position.getTranslated(new Position(0, height - 1));
 
         hLineDrawer.draw(bottomLeft, width);
         vLineDrawer.draw(topRight, height);

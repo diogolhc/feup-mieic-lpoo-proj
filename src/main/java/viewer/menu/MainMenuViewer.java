@@ -3,7 +3,7 @@ package viewer.menu;
 import gui.GUI;
 import model.Position;
 import model.menu.Menu;
-import viewer.menu.MenuViewer;
+import viewer.menu.element.MenuTitleViewer;
 
 public class MainMenuViewer extends MenuViewer {
     public MainMenuViewer(Menu menu) {

@@ -1,17 +1,14 @@
-package viewer.menu;
+package viewer.menu.element;
 
 import gui.Color;
 import gui.GUI;
-import gui.drawer.shape.HorizontalLineDrawer;
-import gui.drawer.string.StringDrawer;
 import gui.drawer.string.UnderlinedStringDrawer;
 import model.Position;
 import model.menu.Menu;
-import model.menu.label.Label;
 
 public class MenuTitleViewer {
-    private static final Color TITLE_COLOR = new Color("#aaaaaa");
-    private static final char UNDERLINE_CHARACTER = '-';
+    public static final Color TITLE_COLOR = new Color("#aaaaaa");
+    public static final char UNDERLINE_CHARACTER = '-';
 
     public void draw(Menu menu, Position position, GUI gui) {
         UnderlinedStringDrawer drawer = new UnderlinedStringDrawer(

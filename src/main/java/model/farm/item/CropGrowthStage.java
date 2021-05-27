@@ -17,7 +17,7 @@ public class CropGrowthStage implements Comparable<CropGrowthStage>, Serializabl
     }
 
     public CropGrowthStage() {
-        this(new InGameTime(0), ' ', new Color("#000000"));
+        this(new InGameTime(0), ' ', Color.BLACK);
     }
 
     public CropGrowthStage(CropGrowthStage stage) {

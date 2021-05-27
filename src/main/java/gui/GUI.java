@@ -1,7 +1,5 @@
 package gui;
 
-import model.Position;
-
 import java.io.IOException;
 
 public interface GUI {
@@ -27,16 +25,15 @@ public interface GUI {
 
     void drawString(int x, int y, String string);
 
-    GUI.ACTION getNextAction() throws IOException;
-
     void setMouseListener(MouseListener mouseListener);
 
     int getMouseX();
 
     int getMouseY();
 
-    enum ACTION {
+    KEYBOARD_ACTION getNextKeyboardAction() throws IOException;
+
+    enum KEYBOARD_ACTION {
         NONE, QUIT, MOVE_UP, MOVE_RIGHT, MOVE_DOWN, MOVE_LEFT, BACK, INTERACT
     }
-
 }

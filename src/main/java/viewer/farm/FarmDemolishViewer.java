@@ -3,7 +3,7 @@ package viewer.farm;
 import gui.GUI;
 import model.farm.DemolishMarker;
 import model.farm.Farm;
-import model.farm.building.Building;
+import viewer.farm.element.entity.DemolishMarkerViewer;
 
 public class FarmDemolishViewer extends FarmViewer {
     private final DemolishMarker marker;

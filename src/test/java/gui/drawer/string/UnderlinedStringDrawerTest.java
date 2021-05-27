@@ -14,8 +14,8 @@ public class UnderlinedStringDrawerTest {
     private Color backgroundColors[][] = new Color[10][10];
     private Color foregroundColors[][] = new Color[10][10];
     private char characters[][] = new char[10][10];
-    private Color currentBackgroundColor = new Color("#000000");
-    private Color currentForegroundColor = new Color("#FFFFFF");
+    private Color currentBackgroundColor = Color.BLACK;
+    private Color currentForegroundColor = Color.WHITE;
 
     @BeforeEach
     void setUp() {
@@ -74,9 +74,9 @@ public class UnderlinedStringDrawerTest {
     @Test
     void draw() {
         Color BACK = new Color("#123456");
-        Color BLACK = new Color("#000000");
+        Color BLACK = Color.BLACK;
         Color FRONT = new Color("#FEDCBA");
-        Color WHITE = new Color("#FFFFFF");
+        Color WHITE = Color.WHITE;
 
         UnderlinedStringDrawer drawer = new UnderlinedStringDrawer(gui, BACK, FRONT, '_');
         drawer.draw(new Position(5, 7), "HELLO");
@@ -129,8 +129,8 @@ public class UnderlinedStringDrawerTest {
 
     @Test
     void drawMultiple() {
-        Color BLACK = new Color("#000000");
-        Color WHITE = new Color("#FFFFFF");
+        Color BLACK = Color.BLACK;
+        Color WHITE = Color.WHITE;
         Color BACK1 = new Color("#123456");
         Color BACK2 = new Color("#144436");
         Color BACK3 = new Color("#123999");

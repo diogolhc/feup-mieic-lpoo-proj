@@ -1,5 +1,6 @@
 package model.farm.building;
 
+import gui.Color;
 import model.Position;
 import model.farm.Animal;
 import model.farm.Currency;
@@ -126,5 +127,13 @@ public class Stockyard extends Buildable {
 
     public void changeProductAmount(double quantity) {
         this.state.changeCollectAmount(quantity);
+    }
+
+    public char getAnimalChar() {
+        return this.getLivestockType().getAnimalChar();
+    }
+
+    public Color getAnimalColor() {
+        return this.state.getAnimalColor();
     }
 }

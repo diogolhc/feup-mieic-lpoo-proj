@@ -20,9 +20,9 @@ public class FarmNewBuildingController extends FarmController {
     }
 
     @Override
-    public void reactKeyboard(GUI.ACTION action) {
-        if (action == GUI.ACTION.BACK) returnToFarmerController();
-        if (action == GUI.ACTION.INTERACT) reactInteraction();
+    public void reactKeyboard(GUI.KEYBOARD_ACTION action) {
+        if (action == GUI.KEYBOARD_ACTION.BACK) returnToFarmerController();
+        if (action == GUI.KEYBOARD_ACTION.INTERACT) reactInteraction();
         NewBuildingController newBuildingController = new NewBuildingController(this.farm, this.newBuilding);
         newBuildingController.doAction(action);
     }

@@ -20,8 +20,8 @@ public class MainMenuController extends MenuController {
     }
 
     @Override
-    public void reactKeyboard(GUI.ACTION action) {
-        if (action == GUI.ACTION.BACK) {
+    public void reactKeyboard(GUI.KEYBOARD_ACTION action) {
+        if (action == GUI.KEYBOARD_ACTION.BACK) {
             new OpenPopupMenuCommand(this.gameController, new ConfirmationMenuControllerBuilder(this.gameController,
                     "EXIT GAME", "DO YOU WANT TO EXIT?")
                     .setYesCommand(new ExitGameCommand(this.gameController))

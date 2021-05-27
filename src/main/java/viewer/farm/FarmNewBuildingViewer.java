@@ -2,8 +2,8 @@ package viewer.farm;
 
 import gui.GUI;
 import model.farm.Farm;
-import model.farm.Farmer;
 import model.farm.building.Building;
+import viewer.farm.element.entity.NewBuildingZoneViewer;
 
 public class FarmNewBuildingViewer extends FarmViewer {
     private final Building newBuilding;

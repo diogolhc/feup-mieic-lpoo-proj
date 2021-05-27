@@ -375,7 +375,7 @@ be inserted without breaking existing code.
 
 ### Middle man
 
-Many of the viewer classes (for example, [FarmerViewer](../src/main/java/viewer/farm/FarmerViewer.java))
+Many of the viewer classes (for example, [FarmerViewer](../src/main/java/viewer/farm/element/entity/FarmerViewer.java))
 are **Middle Men** as their sole purpose is to delegate the drawing work
 to the respective drawer (gui) class. This adds needless complexity to the program
 and also makes testing the viewers harder (if the viewer is just delegating
@@ -385,7 +385,7 @@ drawer and it can't be tested isolated from the drawer).
 To improve the code, for each viewer we can use **Inline Class**,
 inlining the respective drawer class into the viewer class. In the concrete
 example given, the draw method of [FarmerDrawer](../src/main/java/gui/drawer/entity/FarmerDrawer.java)
-would be moved to [FarmerViewer](../src/main/java/viewer/farm/FarmerViewer.java),
+would be moved to [FarmerViewer](../src/main/java/viewer/farm/element/entity/FarmerViewer.java),
 replacing the viewer's *draw()* method that only delegates work.
 After that, [FarmerDrawer](../src/main/java/gui/drawer/entity/FarmerDrawer.java)
 should be removed.

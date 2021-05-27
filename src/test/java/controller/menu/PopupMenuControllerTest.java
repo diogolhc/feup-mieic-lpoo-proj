@@ -31,9 +31,9 @@ public class PopupMenuControllerTest {
 
     @Test
     public void reactKeyboard() {
-        popupMenuController.reactKeyboard(GUI.ACTION.INTERACT);
+        popupMenuController.reactKeyboard(GUI.KEYBOARD_ACTION.INTERACT);
         Mockito.verify(gameController, Mockito.never()).setGameControllerState(Mockito.any());
-        popupMenuController.reactKeyboard(GUI.ACTION.BACK);
+        popupMenuController.reactKeyboard(GUI.KEYBOARD_ACTION.BACK);
         Mockito.verify(gameController, Mockito.times(1)).setGameControllerState(backState);
 
         // Popup should disable keyboard reactions of backState

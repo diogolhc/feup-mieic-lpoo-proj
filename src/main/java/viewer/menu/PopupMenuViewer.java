@@ -4,9 +4,10 @@ import gui.GUI;
 import model.Position;
 import model.menu.Menu;
 import viewer.GameViewer;
+import viewer.menu.element.MenuTitleViewer;
 
 public class PopupMenuViewer extends MenuViewer {
-    private GameViewer backViewer;
+    private final GameViewer backViewer;
 
     public PopupMenuViewer(Menu menu, GameViewer backViewer) {
         super(menu);

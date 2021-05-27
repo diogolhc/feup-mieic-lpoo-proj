@@ -14,8 +14,8 @@ public class UnselectedButtonDrawerTest {
     private Color backgroundColors[][] = new Color[10][10];
     private Color foregroundColors[][] = new Color[10][10];
     private char characters[][] = new char[10][10];
-    private Color currentBackgroundColor = new Color("#000000");
-    private Color currentForegroundColor = new Color("#FFFFFF");
+    private Color currentBackgroundColor = Color.BLACK;
+    private Color currentForegroundColor = Color.WHITE;
 
     @BeforeEach
     void setUp() {
@@ -74,8 +74,8 @@ public class UnselectedButtonDrawerTest {
 
     @Test
     void drawUnselectedButtonAtPosition() {
-        Color BLACK = new Color("#000000");
-        Color WHITE = new Color("#FFFFFF");
+        Color BLACK = Color.BLACK;
+        Color WHITE = Color.WHITE;
         Color BACK = new Color("#90a4ae");
         Color FRONT = new Color("#263238");
 
