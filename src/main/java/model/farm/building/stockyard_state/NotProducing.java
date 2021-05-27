@@ -7,7 +7,6 @@ import model.farm.item.AnimalProduct;
 import model.farm.item.Crop;
 
 public class NotProducing implements StockyardState {
-
     @Override
     public InGameTime getRemainingTime() {
         return new InGameTime(0);
@@ -17,20 +16,15 @@ public class NotProducing implements StockyardState {
     public void setRemainingTime(InGameTime time) {}
 
     @Override
-    public AnimalProduct getProduct() {
-        return new AnimalProduct(" ");
-    }
-
-    @Override
-    public Color getColor() {
+    public Color getAnimalColor() {
         return new Color("#223366");
     }
 
     @Override
-    public int getProductAmount() {
+    public int getCollectAmount() {
         return 0;
     }
 
     @Override
-    public void changeProductAmount(double productAmount) {}
+    public void changeCollectAmount(double collectAmount) {}
 }

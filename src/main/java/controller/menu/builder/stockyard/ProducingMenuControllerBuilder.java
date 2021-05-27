@@ -68,7 +68,7 @@ public class ProducingMenuControllerBuilder extends PopupMenuControllerBuilder {
 
         labels.add(new Label(
                 new Position(1, 4),
-                () -> "PRODUCT: " + stockyard.getState().getProduct().getName()
+                () -> "PRODUCT: " + this.stockyard.getLivestockType().getProducedItem().getName()
         ));
 
         labels.add(new Label(
@@ -78,7 +78,7 @@ public class ProducingMenuControllerBuilder extends PopupMenuControllerBuilder {
 
         labels.add( new Label(
                 new Position(1, 6),
-                () -> "QUANTITY: " + stockyard.getState().getProductAmount()
+                () -> "QUANTITY: " + stockyard.getState().getCollectAmount()
         ));
 
 
@@ -92,7 +92,7 @@ public class ProducingMenuControllerBuilder extends PopupMenuControllerBuilder {
 
     @Override
     protected int getWidth() {
-        return 30;
+        return 23;
     }
 
     @Override

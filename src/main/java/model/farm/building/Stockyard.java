@@ -53,11 +53,11 @@ public class Stockyard extends Buildable {
         }
     }
 
-    public boolean canAddAnimal() {
-        return this.animals.size() < livestockType.getMaxNumAnimals();
+    public boolean isFull() {
+        return this.animals.size() >= livestockType.getMaxNumAnimals();
     }
 
-    public boolean canRemoveAnimal() { return this.animals.size() > 0; }
+    public boolean isEmpty() { return this.animals.size() <= 0; }
 
     public void removeAnimal() {
         if (this.animals.size() > 0) {
@@ -140,6 +140,6 @@ public class Stockyard extends Buildable {
     }
 
     public void changeProductAmount(double quantity) {
-        this.state.changeProductAmount(quantity);
+        this.state.changeCollectAmount(quantity);
     }
 }

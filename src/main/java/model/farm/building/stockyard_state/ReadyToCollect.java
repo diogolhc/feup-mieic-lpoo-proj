@@ -2,33 +2,35 @@ package model.farm.building.stockyard_state;
 
 import gui.Color;
 import model.InGameTime;
+import model.farm.building.Stockyard;
 import model.farm.item.AnimalProduct;
 
 public class ReadyToCollect implements StockyardState{
-    private final AnimalProduct animalProduct;
-    private double productAmount;
+    private Stockyard stockyard;
+    private double collectAmount; // double so that small but in great quantity changes can have an effect
 
-    public ReadyToCollect(AnimalProduct crop, double productAmount) {
-        this.animalProduct = crop;
-        this.productAmount = productAmount;
+    public ReadyToCollect(Stockyard stockyard, double collectAmount) {
+        this.stockyard = stockyard;
+        this.collectAmount = collectAmount;
     }
 
     @Override
-    public AnimalProduct getProduct() {
-        return this.animalProduct;
+    public void changeCollectAmount(double collectAmount) {
+        // when readyToCollect only bad effects take place
+        // what would be a good effect while producing
+        // will spoil the product over time
+        if (collectAmount > 0) {
+            collectAmount *= -1;
+        }
+        this.collectAmount += collectAmount;
+        if (this.collectAmount <= 0) {
+            this.stockyard.setState(new NotProducing());
+        }
     }
 
     @Override
-    public Color getColor() {
-        return new Color("#b0b0b0");
-    }
-
-    @Override
-    public void changeProductAmount(double productAmount) {}
-
-    @Override
-    public int getProductAmount() {
-        return (int) this.productAmount;
+    public int getCollectAmount() {
+        return (int) this.collectAmount;
     }
 
     @Override
@@ -39,5 +41,9 @@ public class ReadyToCollect implements StockyardState{
     @Override
     public void setRemainingTime(InGameTime time) {}
 
+    @Override
+    public Color getAnimalColor() {
+        return new Color("#298a36");
+    }
 }
 

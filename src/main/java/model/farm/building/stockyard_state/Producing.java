@@ -7,51 +7,44 @@ import model.farm.item.AnimalProduct;
 
 public class Producing implements StockyardState {
     private final Stockyard stockyard;
-    private final AnimalProduct animalProduct;
     private InGameTime timeRemaining;
-    private double productAmount; // double so that small but in great quantity changes can have an effect
+    private double collectAmount; // double so that small but in great quantity changes can have an effect
 
-    public Producing(Stockyard stockyard, AnimalProduct animalProduct) {
+    public Producing(Stockyard stockyard) {
         this.stockyard = stockyard;
-        this.animalProduct = animalProduct;
-        this.productAmount = this.animalProduct.getBaseProducedAmount();
-        timeRemaining = this.animalProduct.getProductionTime();
+        AnimalProduct product = stockyard.getLivestockType().getProducedItem();
+        this.collectAmount = product.getBaseProducedAmount() * this.stockyard.getAnimals().size();
+        this.timeRemaining = product.getProductionTime();
     }
 
     @Override
     public InGameTime getRemainingTime() {
-        return timeRemaining;
+        return this.timeRemaining;
     }
 
     @Override
     public void setRemainingTime(InGameTime time) {
         this.timeRemaining = time;
         if (this.timeRemaining.getMinute() <= 0) {
-            this.stockyard.setState(new ReadyToCollect(this.animalProduct, this.productAmount));
+            this.stockyard.setState(new ReadyToCollect(stockyard, this.collectAmount));
         }
     }
 
-
     @Override
-    public AnimalProduct getProduct() {
-        return this.animalProduct;
+    public int getCollectAmount() {
+        return (int) this.collectAmount;
     }
 
     @Override
-    public int getProductAmount() {
-        return (int)this.productAmount;
-    }
-
-    @Override
-    public void changeProductAmount(double productAmount) {
-        this.productAmount += productAmount;
-        if (this.productAmount <= 0) {
+    public void changeCollectAmount(double collectAmount) {
+        this.collectAmount += collectAmount;
+        if (this.collectAmount <= 0) {
             this.stockyard.setState(new NotProducing());
         }
     }
 
     @Override
-    public Color getColor() {
-        return new Color("#595959");
+    public Color getAnimalColor() {
+        return new Color("#c96d82");
     }
 }

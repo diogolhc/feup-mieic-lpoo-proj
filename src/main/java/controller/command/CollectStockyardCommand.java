@@ -4,6 +4,7 @@ import model.farm.Inventory;
 import model.farm.building.Stockyard;
 import model.farm.building.stockyard_state.NotProducing;
 import model.farm.building.stockyard_state.ReadyToCollect;
+import model.farm.item.AnimalProduct;
 
 public class CollectStockyardCommand implements Command {
     private Inventory inventory;
@@ -18,7 +19,9 @@ public class CollectStockyardCommand implements Command {
     public void execute() {
         if (this.stockyard.getState() instanceof ReadyToCollect) {
             ReadyToCollect stockyardState = (ReadyToCollect) this.stockyard.getState();
-            this.inventory.storeItem(stockyardState.getProduct(), stockyardState.getProductAmount());
+            AnimalProduct producedItem = this.stockyard.getLivestockType().getProducedItem();
+
+            this.inventory.storeItem(producedItem, stockyardState.getCollectAmount());
             this.stockyard.setState(new NotProducing());
         }
     }

@@ -40,7 +40,7 @@ public class WarehouseMenuControllerBuilder extends PopupMenuControllerBuilder {
         for (Item item: items) {
             labels.add(new Label(
                     new Position(1, y),
-                    () -> String.format("%1$-7s %2$4s",
+                    () -> String.format("%1$-7s %2$6s",
                             item.getName(),
                             "x" + this.inventory.getAmount(item)
                     )

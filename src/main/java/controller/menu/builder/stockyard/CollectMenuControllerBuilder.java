@@ -35,7 +35,7 @@ public class CollectMenuControllerBuilder extends PopupMenuControllerBuilder {
 
         labels.add( new Label(
                 new Position(1, 5),
-                () -> "QUANTITY: " + stockyard.getState().getProductAmount()
+                () -> "QUANTITY: " + stockyard.getState().getCollectAmount()
         ));
 
         return labels;
@@ -58,12 +58,12 @@ public class CollectMenuControllerBuilder extends PopupMenuControllerBuilder {
 
     @Override
     protected int getHeight() {
-        return 12;
+        return 11;
     }
 
     @Override
     protected int getWidth() {
-        return 30;
+        return 22;
     }
 
     @Override

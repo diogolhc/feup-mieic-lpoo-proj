@@ -26,7 +26,7 @@ public class StockyardViewer {
 
         for (Animal animal: stockyard.getAnimals()) {
             AnimalViewer animalViewer = new AnimalViewer();
-            animalViewer.draw(animal, stockyard.getLivestockType().getAnimalChar(), gui, stockyard.getState().getColor());
+            animalViewer.draw(animal, stockyard.getLivestockType().getAnimalChar(), gui, stockyard.getState().getAnimalColor());
         }
     }
 }

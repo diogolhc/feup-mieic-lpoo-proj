@@ -9,8 +9,7 @@ import java.io.Serializable;
 public interface StockyardState extends Serializable {
     InGameTime getRemainingTime();
     void setRemainingTime(InGameTime time);
-    AnimalProduct getProduct();
-    int getProductAmount();
-    void changeProductAmount(double productAmount);
-    Color getColor();
+    int getCollectAmount();
+    void changeCollectAmount(double collectAmount);
+    Color getAnimalColor();
 }

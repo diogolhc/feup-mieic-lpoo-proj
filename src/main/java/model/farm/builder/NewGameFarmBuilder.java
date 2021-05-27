@@ -105,7 +105,7 @@ public class NewGameFarmBuilder extends FarmBuilder {
 
     @Override
     protected Inventory getInventory() {
-        return new Inventory(650);
+        return new Inventory(850);
     }
 
     @Override

@@ -20,7 +20,7 @@ public class GameController implements MouseListener {
     public GameController(GUI gui) {
         this.gui = gui;
         this.gui.setMouseListener(this);
-        this.running = true;
+        this.running = false;
     }
 
     public GameController(GUI gui, GameControllerState initialState) {
@@ -34,12 +34,12 @@ public class GameController implements MouseListener {
     }
 
     public void setGameControllerState(GameControllerState state) {
-        boolean has_previous_controller = this.gameControllerState != null;
-        if (has_previous_controller) {
+        if (this.running) {
             this.gameControllerState.reactChangeState();
         }
         this.gameControllerState = state;
-        if (has_previous_controller) {
+        if (this.running) {
+            // Update mouse position in new state
             this.gameControllerState.reactMouseMovement(new Position(this.gui.getMouseX(), this.gui.getMouseY()));
         }
     }
@@ -53,6 +53,8 @@ public class GameController implements MouseListener {
     }
 
     public void run() throws IOException {
+        this.running = true;
+
         int frameTime = 1000/FPS;
         long lastFrameStartTime = System.currentTimeMillis();
 
@@ -91,11 +93,13 @@ public class GameController implements MouseListener {
 
     @Override
     public void onMouseMovement(int x, int y) {
+        if (!this.running) return;
         this.gameControllerState.reactMouseMovement(new Position(x, y));
     }
 
     @Override
     public void onMouseClick(int x, int y) {
+        if (!this.running) return;
         this.gameControllerState.reactMouseClick(new Position(x, y));
     }
 
