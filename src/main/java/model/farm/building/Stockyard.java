@@ -15,7 +15,6 @@ import java.util.List;
 
 public class Stockyard extends Buildable {
     private final int maxNumAnimals;
-
     private final Livestock livestockType;
     private final List<Animal> animals;
     private StockyardState state;
@@ -55,6 +54,10 @@ public class Stockyard extends Buildable {
             }
             this.animals.add(new Animal(animalPosition));
         }
+    }
+
+    public boolean canAddAnimal() {
+        return this.animals.size() < maxNumAnimals;
     }
 
     public void removeAnimal() {

@@ -41,7 +41,7 @@ public class StockyardController extends BuildingController<Stockyard> {
         PopupMenuControllerBuilder menuControllerBuilder;
 
         if (stockyard.getState() instanceof NotProducing) {
-            menuControllerBuilder = new FeedAnimalsMenuControllerBuilder(this.controller, this.farm.getInventory(), stockyard, stockyard.getLivestockType().getFoodCrop());
+            menuControllerBuilder = new FeedAnimalsMenuControllerBuilder(this.controller, this.farm, stockyard, stockyard.getLivestockType().getFoodCrop());
         } else if ( stockyard.getState() instanceof Producing) {
             menuControllerBuilder = new ProducingMenuControllerBuilder(this.controller, farm, stockyard);
         } else if (stockyard.getState() instanceof ReadyToCollect) {

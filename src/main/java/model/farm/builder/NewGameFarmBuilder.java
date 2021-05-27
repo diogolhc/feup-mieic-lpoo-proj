@@ -127,6 +127,8 @@ public class NewGameFarmBuilder extends FarmBuilder {
             livestock.setStockyardWidth(Integer.parseInt(tokens[2]));
             livestock.setStockyardHeight(Integer.parseInt(tokens[3]));
             livestock.setBuildPrice(new Currency(Integer.parseInt(tokens[4])));
+            livestock.setAnimalBuyPrice(new Currency(Integer.parseInt(tokens[5])));
+            livestock.setAnimalSellPrice(new Currency(Integer.parseInt(tokens[6])));
 
             currentLine++;
             tokens = this.livestockLines.get(currentLine).split(" ");
