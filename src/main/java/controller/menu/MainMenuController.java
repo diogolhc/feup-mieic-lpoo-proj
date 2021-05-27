@@ -28,4 +28,7 @@ public class MainMenuController extends MenuController {
             ).execute();
         }
     }
+
+    @Override
+    public void reactTimePassed(long elapsedTimeSinceLastFrame) {}
 }

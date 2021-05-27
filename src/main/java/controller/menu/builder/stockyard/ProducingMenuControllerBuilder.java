@@ -7,6 +7,7 @@ import controller.command.StopProducingStockyardCommand;
 import controller.menu.ButtonController;
 import controller.menu.MenuController;
 import controller.menu.PopupMenuControllerWithClosingCondition;
+import controller.menu.builder.MenuControllerBuilder;
 import controller.menu.builder.PopupMenuControllerBuilder;
 import model.Position;
 import model.farm.Farm;
@@ -30,8 +31,11 @@ public class ProducingMenuControllerBuilder extends PopupMenuControllerBuilder {
 
     @Override
     protected MenuController getMenuController(Menu menu) {
-        MenuController collectMenuController = new CollectMenuControllerBuilder(
-                this.controller, this.farm.getInventory(), this.stockyard).buildMenu(new Position(1, 1));
+        MenuControllerBuilder collectMenuControllerBuilder = new CollectMenuControllerBuilder(
+                this.controller, this.farm.getInventory(), this.stockyard);
+
+        MenuController collectMenuController = collectMenuControllerBuilder.buildMenuCentered(
+                controller.getWindowWidth(), controller.getWindowHeight());
 
         Command closingCondition = () -> {
             if (stockyard.getState() instanceof ReadyToCollect) {

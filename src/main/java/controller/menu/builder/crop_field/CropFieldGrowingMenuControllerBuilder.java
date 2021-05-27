@@ -7,6 +7,7 @@ import controller.command.RemoveCropCommand;
 import controller.menu.ButtonController;
 import controller.menu.MenuController;
 import controller.menu.PopupMenuControllerWithClosingCondition;
+import controller.menu.builder.MenuControllerBuilder;
 import controller.menu.builder.PopupMenuControllerBuilder;
 import model.Position;
 import model.farm.Farm;
@@ -30,8 +31,11 @@ public class CropFieldGrowingMenuControllerBuilder extends PopupMenuControllerBu
 
     @Override
     protected MenuController getMenuController(Menu menu) {
-        MenuController harvestMenuController = new HarvestMenuControllerBuilder(
-                this.controller, this.farm.getInventory(), this.cropField).buildMenu(new Position(1, 1));
+        MenuControllerBuilder harvestMenuControllerBuilder = new HarvestMenuControllerBuilder(
+                this.controller, this.farm.getInventory(), this.cropField);
+
+        MenuController harvestMenuController = harvestMenuControllerBuilder.buildMenuCentered(
+                controller.getWindowWidth(), controller.getWindowHeight());
 
         Command closingCondition = () -> {
             if (cropField.getState() instanceof ReadyToHarvest) {

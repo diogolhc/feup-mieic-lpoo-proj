@@ -23,6 +23,8 @@ public class LanternaGUI implements GUI {
     private final Terminal terminal;
     private final TerminalScreen screen;
     private final TextGraphics graphics;
+    private int mouseX = 0;
+    private int mouseY = 0;
     private int width;
     private int height;
 
@@ -173,18 +175,45 @@ public class LanternaGUI implements GUI {
 
     @Override
     public void setMouseListener(MouseListener mouseListener) {
-        ((AWTTerminalFrame) this.terminal).getComponent(0).addMouseListener(new MouseAdapter() {
+        MouseAdapter mouseAdapter = new MouseAdapter() {
+            private void updateMousePosition(MouseEvent e) {
+                mouseX = e.getX()/LanternaGUI.CHAR_SIZE;
+                mouseY = e.getY()/LanternaGUI.CHAR_SIZE;
+            }
+
             @Override
             public void mouseClicked(MouseEvent e) {
-                mouseListener.onMouseClick(e.getX()/LanternaGUI.CHAR_SIZE, e.getY()/LanternaGUI.CHAR_SIZE);
-            }
-        });
+                updateMousePosition(e);
+                mouseListener.onMouseClick(mouseX, mouseY);
 
-        ((AWTTerminalFrame) this.terminal).getComponent(0).addMouseMotionListener(new MouseMotionAdapter() {
+            }
+
             @Override
             public void mouseMoved(MouseEvent e) {
-                mouseListener.onMouseMovement(e.getX()/LanternaGUI.CHAR_SIZE, e.getY()/LanternaGUI.CHAR_SIZE);
+                updateMousePosition(e);
+                mouseListener.onMouseMovement(mouseX, mouseY);
             }
-        });
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                // When mouse is released after being pressed, it should
+                // update position so that buttons are selected/unselected
+                // correctly.
+                updateMousePosition(e);
+                mouseListener.onMouseMovement(mouseX, mouseY);
+            }
+        };
+
+        ((AWTTerminalFrame) this.terminal).getComponent(0).addMouseListener(mouseAdapter);
+        ((AWTTerminalFrame) this.terminal).getComponent(0).addMouseMotionListener(mouseAdapter);
+    }
+
+    @Override
+    public int getMouseX() {
+        return mouseX;
+    }
+
+    public int getMouseY() {
+        return mouseY;
     }
 }
