@@ -26,31 +26,20 @@ public class Stockyard extends Buildable {
     }
 
     public void addAnimal() {
-        // TODO THIS IS JUST HERE TO DEBUG
-        if (animals.size() == livestockType.getMaxNumAnimals()) {
+        Position animalPosition;
 
-        } else {
-            Position animalPosition = new Position(getTopLeftPosition().getX() + 2, getTopLeftPosition().getY() + 1);
-            RectangleRegion animalRegion = (RectangleRegion) this.getAnimalsRegion();
+        do {
+            int x = (int) (Math.random() * this.getAnimalsRegion().getWidth());
+            int y = (int) (Math.random() * this.getAnimalsRegion().getHeight());
 
-            for (int i = 0; i < animalRegion.getWidth() - 1; i++) {
-                for (int j = 0; j < animalRegion.getHeight(); j++) {
-                    animalPosition = new Position(getTopLeftPosition().getX() + 2 + i,
-                            getTopLeftPosition().getY() + 2 + j);
+            animalPosition = this.getAnimalsRegion().getTopLeftPosition().getTranslated(new Position(x, y));
+        } while (isAnimalAt(animalPosition));
 
-                    boolean emptyPosition = true;
-                    for (Animal animal : animals) {
-                        if (animalPosition.equals(animal.getPosition())) {
-                            emptyPosition = false;
-                            break;
-                        }
-                    }
-                    if (emptyPosition) break;
+        addAnimal(animalPosition);
+    }
 
-                }
-            }
-            this.animals.add(new Animal(animalPosition));
-        }
+    public void addAnimal(Position animalPosition) {
+        this.animals.add(new Animal(animalPosition));
     }
 
     public boolean isFull() {
@@ -65,21 +54,21 @@ public class Stockyard extends Buildable {
         }
     }
 
-    public int getMaxNumAnimals() {
-        return livestockType.getMaxNumAnimals();
-    }
-
     public List<Animal> getAnimals() {
         return this.animals;
     }
 
-    public boolean emptyPosition(Position position) {
-        for (Animal animal: animals) {
-            if (animal.getPosition().equals(position)) return false;
-        }
-        return true;
+    public boolean isTraversableForAnimals(Position position) {
+        return this.getAnimalsRegion().contains(position)
+                && !this.isAnimalAt(position);
     }
 
+    public boolean isAnimalAt(Position position) {
+        for (Animal animal: animals) {
+            if (animal.getPosition().equals(position)) return true;
+        }
+        return false;
+    }
 
     @Override
     public int getWidth() {
@@ -107,7 +96,7 @@ public class Stockyard extends Buildable {
         return livestockType.getAnimalName() + " S.Y.";
     }
 
-    public Region getAnimalsRegion() {
+    private RectangleRegion getAnimalsRegion() {
         return new RectangleRegion(
                 this.getTopLeftPosition().getTranslated(new Position(2, 1)),
                 this.getWidth() - 3,
@@ -120,10 +109,6 @@ public class Stockyard extends Buildable {
 
     public int getFeedQuantity() {
         return this.animals.size() * this.livestockType.getRequiredFood();
-    }
-
-    public int getProduceQuantity() {
-        return this.animals.size() * this.livestockType.getProducedItem().getBaseProducedAmount();
     }
 
     public void setState(StockyardState state) {

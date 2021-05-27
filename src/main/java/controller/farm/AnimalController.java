@@ -3,11 +3,7 @@ package controller.farm;
 import model.InGameTime;
 import model.Position;
 import model.farm.Animal;
-import model.farm.Farm;
-import model.farm.Weather;
 import model.farm.building.Stockyard;
-
-import java.util.Map;
 
 public class AnimalController {
     private static final InGameTime MIN_NEXT_MOVEMENT = new InGameTime(1);
@@ -30,7 +26,7 @@ public class AnimalController {
     }
 
     private void move(Animal animal, Position position) {
-        if (stockyard.getAnimalsRegion().contains(position) && stockyard.emptyPosition(position)) {
+        if (stockyard.isTraversableForAnimals(position)) {
             animal.setPosition(position);
         }
     }

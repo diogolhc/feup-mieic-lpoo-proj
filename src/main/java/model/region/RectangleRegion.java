@@ -60,4 +60,8 @@ public class RectangleRegion implements Region {
         if (y < 0 || y >= this.height) return false;
         return true;
     }
+
+    public Position getTopLeftPosition() {
+        return this.topLeft;
+    }
 }
