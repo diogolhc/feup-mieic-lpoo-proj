@@ -12,7 +12,7 @@ import controller.menu.builder.info.AlertMenuControllerBuilder;
 import controller.menu.builder.PopupMenuControllerBuilder;
 import model.Position;
 import model.farm.Farm;
-import model.farm.Livestock;
+import model.farm.data.Livestock;
 import model.farm.building.Buildable;
 import model.farm.building.CropField;
 import model.farm.building.Stockyard;

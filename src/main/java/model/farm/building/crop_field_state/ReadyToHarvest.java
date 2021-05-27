@@ -2,7 +2,7 @@ package model.farm.building.crop_field_state;
 
 import model.InGameTime;
 import model.farm.building.CropField;
-import model.farm.item.Crop;
+import model.farm.data.item.Crop;
 
 public class ReadyToHarvest implements CropFieldState {
     private CropField cropField;
@@ -30,7 +30,7 @@ public class ReadyToHarvest implements CropFieldState {
 
     @Override
     public int getHarvestAmount() {
-        return (int)this.harvestAmount;
+        return (int) this.harvestAmount;
     }
 
     @Override
@@ -41,6 +41,7 @@ public class ReadyToHarvest implements CropFieldState {
         if (harvestAmount > 0) {
             harvestAmount *= -1;
         }
+
         this.harvestAmount += harvestAmount;
         if (this.harvestAmount <= 0) {
             this.cropField.setState(new NotPlanted());

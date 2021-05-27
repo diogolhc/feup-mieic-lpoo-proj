@@ -2,8 +2,8 @@ package model.farm.crop;
 
 import gui.Color;
 import model.InGameTime;
-import model.farm.item.Crop;
-import model.farm.item.CropGrowthStage;
+import model.farm.data.item.Crop;
+import model.farm.data.item.CropGrowthStage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -2,13 +2,12 @@ package viewer.farm.element;
 
 import gui.Color;
 import gui.GUI;
-import gui.drawer.shape.FilledRectangleDrawer;
 import gui.drawer.shape.HorizontalLineDrawer;
 import gui.drawer.string.StringDrawer;
 import model.Position;
 import model.InGameTime;
 import model.farm.Currency;
-import model.farm.Weather;
+import model.farm.data.Weather;
 
 
 public class HUDViewer {
@@ -34,7 +33,7 @@ public class HUDViewer {
 
     private void drawText(InGameTime time, Weather weather, Currency currency, GUI gui) {
         StringDrawer infoDrawer = new StringDrawer(gui, HUD_BACKGROUND_COLOR, Color.WHITE);
-        infoDrawer.draw(new Position(0, this.y), time.toString());
+        infoDrawer.draw(new Position(0, this.y), time.getDayTimeString());
         infoDrawer.draw(new Position(18, this.y), weather.getName());
 
         StringDrawer currencyDrawer = new StringDrawer(gui, HUD_BACKGROUND_COLOR, CURRENCY_COLOR);

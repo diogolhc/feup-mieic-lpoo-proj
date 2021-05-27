@@ -1,10 +1,8 @@
 package viewer.farm;
 
-import gui.Color;
 import gui.GUI;
-import model.Position;
 import model.farm.Farm;
-import model.farm.building.House;
+import model.farm.building.edifice.House;
 import viewer.farm.element.RestingMarkerViewer;
 
 public class FarmRestingViewer extends FarmViewer {

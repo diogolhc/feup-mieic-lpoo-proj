@@ -27,6 +27,17 @@ public class InGameTime implements Comparable<InGameTime>, Serializable {
         return new InGameTime(min.minutes + (int) (Math.random() * delta));
     }
 
+    public static InGameTime parseTimerString(String s) {
+        String[] tokens = s.split(":");
+        if (tokens.length == 2) {
+            return new InGameTime(0, Integer.parseInt(tokens[0]), Integer.parseInt(tokens[1]));
+        } else if (tokens.length == 3) {
+            return new InGameTime(Integer.parseInt(tokens[0]), Integer.parseInt(tokens[1]), Integer.parseInt(tokens[2]));
+        } else {
+            throw new IllegalArgumentException("Can't parse string " + s + " as IngamTime.");
+        }
+    }
+
     public int getMinute() {
         return minutes;
     }
@@ -53,17 +64,21 @@ public class InGameTime implements Comparable<InGameTime>, Serializable {
         return new InGameTime(minutes);
     }
 
-    @Override
-    public String toString() {
+    public String getDayTimeString() {
         return String.format("DAY %03d  %02d:%02d", this.getDay(), this.getHourOfDay(), this.getMinuteOfHour());
     }
 
-    public String toCountdownString() {
+    public String getTimerString() {
         if (this.getDay() == 0) {
             return String.format("%02d:%02d", this.getHourOfDay(), this.getMinuteOfHour());
         } else {
             return String.format("%d:%02d:%02d", this.getDay(), this.getHourOfDay(), this.getMinuteOfHour());
         }
+    }
+
+    @Override
+    public String toString() {
+        return this.getTimerString();
     }
 
     @Override

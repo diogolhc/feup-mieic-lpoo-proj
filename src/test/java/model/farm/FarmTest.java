@@ -1,8 +1,7 @@
 package model.farm;
 
 import model.Position;
-import model.farm.building.BuildingSet;
-import model.farm.building.House;
+import model.farm.building.edifice.House;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

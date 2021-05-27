@@ -4,7 +4,7 @@ import model.farm.Inventory;
 import model.farm.building.Stockyard;
 import model.farm.building.stockyard_state.NotProducing;
 import model.farm.building.stockyard_state.ReadyToCollect;
-import model.farm.item.AnimalProduct;
+import model.farm.data.item.AnimalProduct;
 
 public class CollectStockyardCommand implements Command {
     private Inventory inventory;

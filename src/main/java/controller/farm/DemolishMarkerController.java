@@ -2,15 +2,15 @@ package controller.farm;
 
 import gui.GUI;
 import model.Position;
-import model.farm.DemolishMarker;
+import model.farm.entity.Entity;
 import model.farm.Farm;
 
 // TODO very similar to FarmerController
 public class DemolishMarkerController {
     private final Farm farm;
-    private DemolishMarker marker;
+    private Entity marker;
 
-    public DemolishMarkerController(Farm farm, DemolishMarker marker) {
+    public DemolishMarkerController(Farm farm, Entity marker) {
         this.farm = farm;
         this.marker = marker;
     }

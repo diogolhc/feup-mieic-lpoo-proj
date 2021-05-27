@@ -1,4 +1,4 @@
-package model.farm.item;
+package model.farm.data.item;
 
 import model.farm.Currency;
 

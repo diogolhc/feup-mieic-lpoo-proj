@@ -2,7 +2,7 @@ package controller.farm;
 
 import model.InGameTime;
 import model.Position;
-import model.farm.Animal;
+import model.farm.entity.Animal;
 import model.farm.building.Stockyard;
 
 public class AnimalController {

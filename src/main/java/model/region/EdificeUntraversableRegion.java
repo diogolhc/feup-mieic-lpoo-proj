@@ -3,7 +3,7 @@ package model.region;
 import model.Position;
 
 public class EdificeUntraversableRegion implements Region {
-    private Position topLeft;
+    private final Position topLeft;
 
     public EdificeUntraversableRegion(Position topLeft) {
         this.topLeft = topLeft;

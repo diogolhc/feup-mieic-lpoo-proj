@@ -1,26 +1,16 @@
-package model.farm;
+package model.farm.entity;
 
 import model.InGameTime;
 import model.Position;
 
 import java.io.Serializable;
 
-// TODO maybe this could be unified with Farmer?
-public class Animal implements Serializable {
-    private Position position;
+public class Animal extends Entity {
     private InGameTime idleTime;
 
     public Animal(Position position) {
-        this.position = position;
+        super(position);
         this.idleTime = new InGameTime();
-    }
-
-    public Position getPosition() {
-        return this.position;
-    }
-
-    public void setPosition(Position position) {
-        this.position = position;
     }
 
     public InGameTime getIdleTime() {

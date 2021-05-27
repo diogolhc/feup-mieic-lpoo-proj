@@ -35,8 +35,8 @@ public class InGameTimeTest {
 
     @Test
     public void testCountDownFormat() {
-        Assertions.assertEquals(time.toCountdownString(), "3:02:01");
+        Assertions.assertEquals(time.getTimerString(), "3:02:01");
         InGameTime time2 = new InGameTime(0, 5, 40);
-        Assertions.assertEquals(time2.toCountdownString(), "05:40");
+        Assertions.assertEquals(time2.getTimerString(), "05:40");
     }
 }

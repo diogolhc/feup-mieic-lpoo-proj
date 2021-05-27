@@ -14,7 +14,7 @@ public abstract class MenuControllerBuilder {
     public MenuController buildMenu(Position position) {
         Menu menu = new Menu();
         menu.setTitle(this.getTitle());
-        menu.setPosition(position);
+        menu.setTopLeftPosition(position);
         menu.setSize(this.getWidth(), this.getHeight());
         menu.setColor(this.getColor());
 
@@ -27,7 +27,7 @@ public abstract class MenuControllerBuilder {
             menuController.addButton(buttonController);
         }
 
-        menu.setPosition(new Position(
+        menu.setTopLeftPosition(new Position(
                 (40 - menu.getWidth())/2,
                 (21 - menu.getHeight())/2
         ));

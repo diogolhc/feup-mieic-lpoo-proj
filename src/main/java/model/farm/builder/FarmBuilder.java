@@ -3,16 +3,16 @@ package model.farm.builder;
 import model.InGameTime;
 import model.farm.*;
 import model.farm.Farm;
-import model.farm.Farmer;
+import model.farm.data.Livestock;
+import model.farm.entity.Entity;
 import model.farm.Inventory;
 import model.farm.building.BuildingSet;
-import model.farm.building.House;
-import model.farm.building.Market;
-import model.farm.building.Warehouse;
+import model.farm.building.edifice.House;
+import model.farm.building.edifice.Market;
+import model.farm.building.edifice.Warehouse;
 import model.farm.building.CropField;
-import model.farm.item.Crop;
-import model.farm.building.*;
-import model.farm.Weather;
+import model.farm.data.item.Crop;
+import model.farm.data.Weather;
 
 import java.util.List;
 import java.util.Set;
@@ -32,12 +32,12 @@ public abstract class FarmBuilder {
         Farm farm = new Farm(this.getWidth(), this.getHeight(), buildingSet);
         farm.setFarmer(this.getFarmer());
         farm.setTime(this.getTime());
-        farm.setWeatherStates(this.getWeatherStates());
-        farm.setCurrentWeather(farm.getWeatherStates().get(0)); // TODO this will not be like this
-        farm.setCropTypes(this.getCrops());
+        farm.addWeatherTypes(this.getWeatherStates());
+        farm.setCurrentWeather(farm.getWeatherTypes().get(0)); // TODO this will not be like this
+        farm.addCropTypes(this.getCrops());
         farm.setInventory(this.getInventory());
         farm.setCurrency(this.getCurrency());
-        farm.setLivestockTypes(this.getLivestockTypes());
+        farm.addLivestockTypes(this.getLivestockTypes());
 
         for (Livestock livestock: farm.getLivestockTypes()) {
             livestock.setFoodCrop(farm.getCropTypes().get(farm.getCropTypes().indexOf(livestock.getFoodCrop())));
@@ -60,7 +60,7 @@ public abstract class FarmBuilder {
 
     protected abstract List<Weather> getWeatherStates();
 
-    protected abstract Farmer getFarmer();
+    protected abstract Entity getFarmer();
 
     protected abstract House getHouse();
 

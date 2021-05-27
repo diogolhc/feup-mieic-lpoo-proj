@@ -3,7 +3,7 @@ package viewer.farm.element;
 import gui.Color;
 import gui.GUI;
 import model.Position;
-import model.farm.building.House;
+import model.farm.building.edifice.House;
 
 public class RestingMarkerViewer {
     public static final char RESTING_MARKER = 'Z';

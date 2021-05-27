@@ -1,4 +1,4 @@
-package model.farm.item;
+package model.farm.data.item;
 
 import gui.Color;
 import model.InGameTime;
@@ -18,12 +18,6 @@ public class CropGrowthStage implements Comparable<CropGrowthStage>, Serializabl
 
     public CropGrowthStage() {
         this(new InGameTime(0), ' ', Color.BLACK);
-    }
-
-    public CropGrowthStage(CropGrowthStage stage) {
-        this.stageStartTime = stage.stageStartTime;
-        this.stageChar = stage.stageChar;
-        this.stageColor = stage.stageColor;
     }
 
     public InGameTime getStageStartTime() {

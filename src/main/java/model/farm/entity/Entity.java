@@ -1,13 +1,13 @@
-package model.farm;
+package model.farm.entity;
 
 import model.Position;
 
 import java.io.Serializable;
 
-public class Farmer implements Serializable {
+public class Entity implements Serializable {
     private Position position;
 
-    public Farmer(Position position) {
+    public Entity(Position position) {
         this.position = position;
     }
 
@@ -18,4 +18,5 @@ public class Farmer implements Serializable {
     public void setPosition(Position position) {
         this.position = position;
     }
+
 }

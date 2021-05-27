@@ -13,7 +13,7 @@ import controller.menu.builder.stockyard.FeedAnimalsMenuControllerBuilder;
 //import controller.menu.builder.stockyard.ProducingMenuControllerBuilder;
 import controller.menu.builder.stockyard.ProducingMenuControllerBuilder;
 import model.InGameTime;
-import model.farm.Animal;
+import model.farm.entity.Animal;
 import model.farm.Farm;
 import model.farm.building.Stockyard;
 import model.farm.building.stockyard_state.NotProducing;
@@ -42,7 +42,7 @@ public class StockyardController extends BuildingController<Stockyard> {
         } else {
             // This should never happen
             throw new RuntimeException(
-                    "LOGIC ERROR: Unhandled CropFieldState: " + stockyard.getState().getClass().toString());
+                    "LOGIC ERROR: Unhandled StockyardState: " + stockyard.getState().getClass().toString());
         }
 
         return new OpenPopupMenuCommand(this.controller, menuControllerBuilder);
@@ -67,6 +67,6 @@ public class StockyardController extends BuildingController<Stockyard> {
         }
 
         stockyard.getState().setRemainingTime(stockyard.getState().getRemainingTime().subtract(elapsedTime));
-        stockyard.changeProductAmount(this.farm.getCurrentWeather().getEffect(elapsedTime));
+        stockyard.changeCollectAmount(this.farm.getCurrentWeather().getEffect(elapsedTime));
     }
 }

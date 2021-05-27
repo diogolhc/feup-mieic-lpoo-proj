@@ -3,7 +3,7 @@ package model.farm.building.crop_field;
 import model.Position;
 import model.farm.building.BuildingSet;
 import model.farm.building.CropField;
-import model.farm.building.House;
+import model.farm.building.edifice.House;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,8 +15,8 @@ public class BuildingSetTest {
     public void setUp() {
         buildingSet = new BuildingSet();
         buildingSet.setHouse(new House(new Position(5, 5)));
-        buildingSet.addCropField(new CropField(new Position(0, 0)))
-                .addCropField(new CropField(new Position(1 ,4)));
+        buildingSet.addCropField(new CropField(new Position(0, 0)));
+        buildingSet.addCropField(new CropField(new Position(1 ,4)));
     }
 
     @Test

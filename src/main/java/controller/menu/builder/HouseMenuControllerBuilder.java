@@ -6,9 +6,8 @@ import controller.command.*;
 import controller.farm.FarmController;
 import controller.farm.FarmRestingController;
 import controller.menu.ButtonController;
-import controller.menu.builder.PopupMenuControllerBuilder;
 import model.Position;
-import model.farm.building.House;
+import model.farm.building.edifice.House;
 import model.menu.Button;
 
 import java.util.List;
@@ -60,5 +59,4 @@ public class HouseMenuControllerBuilder extends PopupMenuControllerBuilder {
     protected String getTitle() {
         return "HOUSE";
     }
-
 }

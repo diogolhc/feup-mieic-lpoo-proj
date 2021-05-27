@@ -3,7 +3,6 @@ package model.farm.building.stockyard_state;
 import gui.Color;
 import model.InGameTime;
 import model.farm.building.Stockyard;
-import model.farm.item.AnimalProduct;
 
 public class ReadyToCollect implements StockyardState{
     private Stockyard stockyard;
@@ -46,4 +45,3 @@ public class ReadyToCollect implements StockyardState{
         return new Color("#298a36");
     }
 }
-

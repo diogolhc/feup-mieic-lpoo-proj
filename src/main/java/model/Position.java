@@ -36,6 +36,28 @@ public class Position implements Serializable {
         return y;
     }
 
+    public Position getTranslated(Position position) {
+        return new Position(this.getX() + position.getX(), this.getY() + position.getY());
+    }
+
+    public Position getRelativeTo(Position position) {
+        return this.getTranslated(new Position(-position.getX(), -position.getY()));
+    }
+
+    public Position getRandomNeighbour() {
+        int n = (int) (Math.random() * 4);
+        switch (n) {
+            case 0:
+                return this.getDown();
+            case 1:
+                return this.getRight();
+            case 2:
+                return this.getUp();
+            default:
+                return this.getLeft();
+        }
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -52,29 +74,5 @@ public class Position implements Serializable {
     @Override
     public String toString() {
         return "Position(" + this.x + ", " + this.y + ")";
-    }
-
-    public Position getTranslated(Position position) {
-        return new Position(this.getX() + position.getX(), this.getY() + position.getY());
-    }
-
-    public Position getRelativeTo(Position position) {
-        return this.getTranslated(new Position(-position.getX(), -position.getY()));
-    }
-
-    public Position getRandomNeighbour() {
-        int n = (int) (Math.random() * 4);
-        switch (n) {
-            case 0:
-                return new Position(x, y - 1);
-            case 1:
-                return new Position(x + 1, y);
-            case 2:
-                return new Position(x, y + 1);
-            case 3:
-                return new Position(x - 1, y);
-            default:
-                return new Position(x, y);
-        }
     }
 }

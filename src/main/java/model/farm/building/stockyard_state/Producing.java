@@ -3,7 +3,7 @@ package model.farm.building.stockyard_state;
 import gui.Color;
 import model.InGameTime;
 import model.farm.building.Stockyard;
-import model.farm.item.AnimalProduct;
+import model.farm.data.item.AnimalProduct;
 
 public class Producing implements StockyardState {
     private final Stockyard stockyard;

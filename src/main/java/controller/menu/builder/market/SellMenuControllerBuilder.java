@@ -2,20 +2,15 @@ package controller.menu.builder.market;
 
 import controller.GameController;
 import controller.command.Command;
-import controller.command.CompoundCommand;
-import controller.command.PlantCropCommand;
 import controller.command.SellItemCommand;
 import controller.menu.ButtonController;
 import controller.menu.builder.PopupMenuControllerBuilder;
 import model.Position;
 import model.farm.Farm;
-import model.farm.Inventory;
-import model.farm.item.Crop;
-import model.farm.item.Item;
+import model.farm.data.item.Item;
 import model.menu.Button;
 import model.menu.label.Label;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SellMenuControllerBuilder extends PopupMenuControllerBuilder {
@@ -24,7 +19,7 @@ public class SellMenuControllerBuilder extends PopupMenuControllerBuilder {
 
     public SellMenuControllerBuilder(GameController controller, Farm farm) {
         super(controller);
-        this.items = farm.getItems();
+        this.items = farm.getAllItems();
         this.farm = farm;
     }
 

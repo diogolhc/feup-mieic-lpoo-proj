@@ -2,7 +2,7 @@ package viewer.farm;
 
 import gui.GUI;
 import model.farm.Farm;
-import model.farm.Farmer;
+import model.farm.entity.Entity;
 import viewer.farm.element.entity.FarmerViewer;
 
 public class FarmWithFarmerViewer extends FarmViewer {
@@ -16,7 +16,7 @@ public class FarmWithFarmerViewer extends FarmViewer {
         this.drawFarmer(this.farm.getFarmer(), new FarmerViewer(), gui);
     }
 
-    private void drawFarmer(Farmer farmer, FarmerViewer farmerViewer, GUI gui) {
+    private void drawFarmer(Entity farmer, FarmerViewer farmerViewer, GUI gui) {
         farmerViewer.draw(farmer, gui);
     }
 }

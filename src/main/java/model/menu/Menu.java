@@ -12,7 +12,7 @@ public class Menu {
     private final Set<Label> labels;
     private String title;
     private Color color;
-    private Position position;
+    private Position topLeft;
     private int width;
     private int height;
 
@@ -23,6 +23,10 @@ public class Menu {
 
     public String getTitle() {
         return this.title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public Set<Button> getButtons() {
@@ -42,7 +46,11 @@ public class Menu {
     }
 
     public Position getTopLeftPosition() {
-        return this.position;
+        return this.topLeft;
+    }
+
+    public void setTopLeftPosition(Position position) {
+        this.topLeft = position;
     }
 
     public int getWidth() {
@@ -53,24 +61,16 @@ public class Menu {
         return this.height;
     }
 
+    public void setSize(int width, int height) {
+        this.width = width;
+        this.height = height;
+    }
+
     public Color getColor() {
         return this.color;
     }
 
     public void setColor(Color color) {
         this.color = color;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setPosition(Position position) {
-        this.position = position;
-    }
-
-    public void setSize(int width, int height) {
-        this.width = width;
-        this.height = height;
     }
 }

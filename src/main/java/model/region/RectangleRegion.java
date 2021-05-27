@@ -13,6 +13,14 @@ public class RectangleRegion implements Region {
         this.height = height;
     }
 
+    public Position getTopLeftPosition() {
+        return this.topLeft;
+    }
+
+    public RectangleRegion getTranslated(Position position) {
+        return new RectangleRegion(this.topLeft.getTranslated(position), this.width, this.height);
+    }
+
     public int getHeight() {
         return height;
     }
@@ -32,9 +40,7 @@ public class RectangleRegion implements Region {
         int top2 = region.topLeft.getY();
         int bottom2 = top2 + region.height - 1;
 
-        if (left1 > right2 || left2 > right1) return false;
-        if (top1 > bottom2 || top2 > bottom1) return false;
-        return true;
+        return left1 <= right2 && left2 <= right1 && top1 <= bottom2 && top2 <= bottom1;
     }
 
     public boolean contains(RectangleRegion region) {
@@ -59,9 +65,5 @@ public class RectangleRegion implements Region {
         if (x < 0 || x >= this.width) return false;
         if (y < 0 || y >= this.height) return false;
         return true;
-    }
-
-    public Position getTopLeftPosition() {
-        return this.topLeft;
     }
 }

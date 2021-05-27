@@ -2,7 +2,7 @@ package controller.command;
 
 import model.farm.Farm;
 import model.farm.building.CropField;
-import model.farm.item.Crop;
+import model.farm.data.item.Crop;
 import model.farm.building.crop_field_state.NotPlanted;
 import model.farm.building.crop_field_state.Planted;
 

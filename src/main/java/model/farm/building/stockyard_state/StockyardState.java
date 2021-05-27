@@ -2,7 +2,6 @@ package model.farm.building.stockyard_state;
 
 import gui.Color;
 import model.InGameTime;
-import model.farm.item.AnimalProduct;
 
 import java.io.Serializable;
 

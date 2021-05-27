@@ -3,8 +3,7 @@ package viewer.farm.element.entity;
 import gui.Color;
 import gui.GUI;
 import model.Position;
-import model.farm.Animal;
-import model.farm.Livestock;
+import model.farm.entity.Animal;
 
 public class AnimalViewer {
     public void draw(Animal animal, char animalChar, Color animalColor, GUI gui) {

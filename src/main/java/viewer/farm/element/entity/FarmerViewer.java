@@ -3,13 +3,13 @@ package viewer.farm.element.entity;
 import gui.Color;
 import gui.GUI;
 import model.Position;
-import model.farm.Farmer;
+import model.farm.entity.Entity;
 
 public class FarmerViewer {
     public static final Color FARMER_COLOR = new Color("#223366");
     public static final char FARMER_CHAR = '@';
 
-    public void draw(Farmer farmer, GUI gui) {
+    public void draw(Entity farmer, GUI gui) {
         Position position = farmer.getPosition();
 
         Color backgroundColor = gui.getBackgroundColor(position.getX(), position.getY());

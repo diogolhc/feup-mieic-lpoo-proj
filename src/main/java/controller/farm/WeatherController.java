@@ -2,7 +2,7 @@ package controller.farm;
 
 import model.InGameTime;
 import model.farm.Farm;
-import model.farm.Weather;
+import model.farm.data.Weather;
 
 import java.util.Map;
 

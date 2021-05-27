@@ -6,7 +6,7 @@ import gui.drawer.shape.FilledRectangleDrawer;
 import gui.drawer.shape.RectangleDrawer;
 import model.Position;
 import model.farm.building.CropField;
-import model.farm.item.CropGrowthStage;
+import model.farm.data.item.CropGrowthStage;
 
 public class CropFieldViewer {
     public static final Color SOIL_COLOR = new Color("#372201");

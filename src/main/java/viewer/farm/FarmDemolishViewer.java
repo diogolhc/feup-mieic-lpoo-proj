@@ -1,14 +1,14 @@
 package viewer.farm;
 
 import gui.GUI;
-import model.farm.DemolishMarker;
+import model.farm.entity.Entity;
 import model.farm.Farm;
 import viewer.farm.element.entity.DemolishMarkerViewer;
 
 public class FarmDemolishViewer extends FarmViewer {
-    private final DemolishMarker marker;
+    private final Entity marker;
 
-    public FarmDemolishViewer(Farm farm, DemolishMarker marker) {
+    public FarmDemolishViewer(Farm farm, Entity marker) {
         super(farm);
         this.marker = marker;
     }
@@ -19,7 +19,7 @@ public class FarmDemolishViewer extends FarmViewer {
         this.drawDemolishMarker(this.marker, new DemolishMarkerViewer(), gui);
     }
 
-    private void drawDemolishMarker(DemolishMarker marker, DemolishMarkerViewer markerViewer, GUI gui) {
+    private void drawDemolishMarker(Entity marker, DemolishMarkerViewer markerViewer, GUI gui) {
         markerViewer.draw(this.farm.getBuildings(), marker, gui);
     }
 }

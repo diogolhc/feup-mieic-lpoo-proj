@@ -4,7 +4,7 @@ import gui.Color;
 import gui.GUI;
 import gui.drawer.shape.BoxDrawer;
 import model.Position;
-import model.farm.Animal;
+import model.farm.entity.Animal;
 import model.farm.building.Stockyard;
 import viewer.farm.element.entity.AnimalViewer;
 

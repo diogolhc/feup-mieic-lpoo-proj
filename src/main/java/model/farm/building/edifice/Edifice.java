@@ -1,14 +1,13 @@
-package model.farm.building;
+package model.farm.building.edifice;
 
 import model.Position;
+import model.farm.building.Building;
 import model.region.EdificeUntraversableRegion;
 import model.region.PositionRegion;
 import model.region.Region;
 
-import java.io.Serializable;
-
-public class House extends Building {
-    public House(Position topLeft) {
+public abstract class Edifice extends Building {
+    public Edifice(Position topLeft) {
         super(topLeft);
     }
 
@@ -30,16 +29,5 @@ public class House extends Building {
     @Override
     public Region getInteractiveRegion() {
         return new PositionRegion(this.getTopLeftPosition().getTranslated(new Position(4, 6)));
-    }
-
-    @Override
-    public String getName() {
-        return "HOUSE";
-    }
-
-    public long getRestRate() {
-        // TODO in the future, this could depend on the House level
-        //      if the upgrades feature were to be implemented
-        return 15;
     }
 }

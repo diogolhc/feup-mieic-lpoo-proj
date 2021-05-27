@@ -3,7 +3,7 @@ package controller.farm;
 import controller.GameController;
 import model.InGameTime;
 import model.farm.Farm;
-import model.farm.Weather;
+import model.farm.data.Weather;
 import model.farm.building.CropField;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

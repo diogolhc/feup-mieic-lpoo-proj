@@ -1,13 +1,13 @@
 package model.farm;
 
-import model.farm.item.Item;
+import model.farm.data.item.Item;
 
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Inventory implements Serializable {
-    private Map<Item, Integer> items;
+    private final Map<Item, Integer> items;
     private int capacity;
     private int occupied;
 
@@ -43,8 +43,10 @@ public class Inventory implements Serializable {
     }
 
     public void storeItem(Item item, int amount) {
-        // Discard items that can't be stored
-        if (occupied + amount > capacity) amount = capacity - occupied;
+        // Discards items that can't be stored
+        if (occupied + amount > capacity) {
+            amount = capacity - occupied;
+        }
 
         occupied += amount;
         items.put(item, getAmount(item) + amount);

@@ -8,7 +8,7 @@ import controller.menu.builder.info.AlertMenuControllerBuilder;
 import model.Position;
 import model.farm.Farm;
 import model.farm.building.Stockyard;
-import model.farm.item.Crop;
+import model.farm.data.item.Crop;
 import model.menu.Button;
 import model.menu.label.Label;
 
@@ -135,7 +135,7 @@ public class FeedAnimalsMenuControllerBuilder extends PopupMenuControllerBuilder
                         return String.format("PRODUCES: %1$s %2$s IN %3$s",
                                 this.stockyard.getLivestockType().getProducedItem().getName(),
                                 "x" + this.stockyard.getLivestockType().getProducedItem().getBaseProducedAmount() * this.stockyard.getAnimals().size(),
-                                this.stockyard.getLivestockType().getProducedItem().getProductionTime().toCountdownString());
+                                this.stockyard.getLivestockType().getProducedItem().getProductionTime().getTimerString());
                     }
                 }
         ));

@@ -8,7 +8,7 @@ import controller.farm.FarmController;
 import controller.menu.builder.info.AlertMenuControllerBuilder;
 import controller.menu.builder.PopupMenuControllerBuilder;
 import controller.menu.builder.HouseMenuControllerBuilder;
-import model.farm.building.House;
+import model.farm.building.edifice.House;
 
 public class HouseController extends BuildingController<House> {
     private final GameController controller;

@@ -2,7 +2,7 @@ package controller.command;
 
 import model.farm.Currency;
 import model.farm.Farm;
-import model.farm.item.Item;
+import model.farm.data.item.Item;
 
 public class SellItemCommand implements Command {
     private final Farm farm;

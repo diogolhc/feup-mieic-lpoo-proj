@@ -2,10 +2,12 @@ package model.farm;
 
 import model.Position;
 import model.InGameTime;
-import model.farm.building.Stockyard;
-import model.farm.item.Crop;
+import model.farm.data.Livestock;
+import model.farm.data.Weather;
+import model.farm.entity.Entity;
+import model.farm.data.item.Crop;
 import model.farm.building.BuildingSet;
-import model.farm.item.Item;
+import model.farm.data.item.Item;
 import model.region.RectangleRegion;
 
 import java.io.Serializable;
@@ -13,19 +15,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Farm implements Serializable {
-    private Farmer farmer;
+    private Entity farmer;
     private final BuildingSet buildings;
     private InGameTime time;
     private Inventory inventory;
     private Currency currency;
     private Weather currentWeather;
 
-    private List<Weather> weatherTypes;
-    private List<Crop> cropTypes;
-    private List<Livestock> livestockTypes;
+    private final List<Weather> weatherTypes;
+    private final List<Crop> cropTypes;
+    private final List<Livestock> livestockTypes;
 
-    private int width;
-    private int height;
+    private final int width;
+    private final int height;
 
     public Farm(int width, int height) {
         this(width, height, new BuildingSet());
@@ -37,11 +39,8 @@ public class Farm implements Serializable {
         this.buildings = buildings;
         this.cropTypes = new ArrayList<>();
         this.livestockTypes = new ArrayList<>();
+        this.weatherTypes = new ArrayList<>();
         this.inventory = new Inventory();
-    }
-
-    public Farmer getFarmer() {
-        return this.farmer;
     }
 
     public RectangleRegion getInsideRegion() {
@@ -49,18 +48,7 @@ public class Farm implements Serializable {
     }
 
     public boolean isTraversable(Position position) {
-        if (!this.getInsideRegion().contains(position)) return false;
-        if (!this.buildings.isTraversable(position)) return false;
-        return true;
-    }
-
-    public List<Item> getItems() {
-        List<Item> items = new ArrayList<>();
-        items.addAll(this.cropTypes);
-        for (Livestock livestock: livestockTypes) {
-            items.add(livestock.getProducedItem());
-        }
-        return items;
+        return getInsideRegion().contains(position) && this.buildings.isTraversable(position);
     }
 
     public int getWidth() {
@@ -75,48 +63,20 @@ public class Farm implements Serializable {
         return this.buildings;
     }
 
-    public InGameTime getTime() {
-        return time;
+    public void setCurrentWeather(Weather weather) {
+        this.currentWeather = weather;
     }
 
     public Weather getCurrentWeather() {
         return currentWeather;
     }
 
-    public void setCurrentWeather(Weather weather) {
-        this.currentWeather = weather;
-    }
-
-    public void setFarmer(Farmer farmer) {
+    public void setFarmer(Entity farmer) {
         this.farmer = farmer;
     }
 
-    public void setTime(InGameTime time) {
-        this.time = time;
-    }
-
-    public void setCropTypes(List<Crop> crops) {
-        this.cropTypes = crops;
-    }
-
-    public List<Crop> getCropTypes() {
-        return this.cropTypes;
-    }
-
-    public List<Livestock> getLivestockTypes() {
-        return livestockTypes;
-    }
-
-    public void setLivestockTypes(List<Livestock> livestockTypes) {
-        this.livestockTypes = livestockTypes;
-    }
-
-    public void setWeatherStates(List<Weather> weathers) {
-        this.weatherTypes = weathers;
-    }
-
-    public List<Weather> getWeatherStates() {
-        return this.weatherTypes;
+    public Entity getFarmer() {
+        return this.farmer;
     }
 
     public void setInventory(Inventory inventory) {
@@ -127,17 +87,52 @@ public class Farm implements Serializable {
         return this.inventory;
     }
 
-    public Currency getCurrency() {
-        return this.currency;
+    public void setTime(InGameTime time) {
+        this.time = time;
+    }
+
+    public InGameTime getTime() {
+        return time;
     }
 
     public void setCurrency(Currency currency) {
         this.currency = currency;
     }
 
-    public void setStockyards(List<Stockyard> stockyards){
-        for (Stockyard stockyard : stockyards) {
-            this.buildings.addStockyard(stockyard);
+    public Currency getCurrency() {
+        return this.currency;
+    }
+
+    public void addCropTypes(List<Crop> crops) {
+        this.cropTypes.addAll(crops);
+    }
+
+    public List<Crop> getCropTypes() {
+        return this.cropTypes;
+    }
+
+    public void addLivestockTypes(List<Livestock> livestockTypes) {
+        this.livestockTypes.addAll(livestockTypes);
+    }
+
+    public List<Livestock> getLivestockTypes() {
+        return livestockTypes;
+    }
+
+    public List<Item> getAllItems() {
+        List<Item> items = new ArrayList<>();
+        items.addAll(this.cropTypes);
+        for (Livestock livestock: livestockTypes) {
+            items.add(livestock.getProducedItem());
         }
+        return items;
+    }
+
+    public void addWeatherTypes(List<Weather> weathers) {
+        this.weatherTypes.addAll(weathers);
+    }
+
+    public List<Weather> getWeatherTypes() {
+        return this.weatherTypes;
     }
 }

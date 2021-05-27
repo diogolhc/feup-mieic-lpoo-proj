@@ -3,7 +3,7 @@ package controller.farm;
 import controller.farm.building.*;
 import gui.GUI;
 import model.Position;
-import model.farm.DemolishMarker;
+import model.farm.entity.Entity;
 import model.farm.building.BuildingSet;
 import model.farm.building.CropField;
 import model.farm.building.Stockyard;
@@ -14,11 +14,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FarmDemolishController extends FarmController {
-    private DemolishMarker demolishMarker;
+    private Entity demolishMarker;
 
     public FarmDemolishController(FarmController farmController) {
         super(farmController);
-        this.demolishMarker = new DemolishMarker(new Position(1, 1));
+        this.demolishMarker = new Entity(new Position(1, 1));
     }
 
     @Override

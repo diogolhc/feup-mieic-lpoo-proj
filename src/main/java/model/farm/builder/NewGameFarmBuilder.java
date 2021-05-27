@@ -6,9 +6,15 @@ import model.Position;
 import model.farm.*;
 import model.farm.Currency;
 import model.farm.building.*;
-import model.farm.item.AnimalProduct;
-import model.farm.item.Crop;
-import model.farm.item.CropGrowthStage;
+import model.farm.building.edifice.House;
+import model.farm.building.edifice.Market;
+import model.farm.building.edifice.Warehouse;
+import model.farm.data.Livestock;
+import model.farm.data.Weather;
+import model.farm.entity.Entity;
+import model.farm.data.item.AnimalProduct;
+import model.farm.data.item.Crop;
+import model.farm.data.item.CropGrowthStage;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -71,11 +77,10 @@ public class NewGameFarmBuilder extends FarmBuilder {
 
             int index;
             if ((index = weathers.indexOf(weather)) != -1) {
-                weather = weathers.get(index);
-                weather.setWeatherEffect(weatherEffect);
-            } else {
-                weathers.add(weather);
+                weathers.remove(index);
             }
+
+            weathers.add(weather);
 
             int numChanges = Integer.parseInt(this.weatherLines.get(line++));
             for (int j = 0; j < numChanges; j++) {
@@ -90,7 +95,7 @@ public class NewGameFarmBuilder extends FarmBuilder {
                     weathers.add(weather2);
                 }
 
-                weather.addWeatherChangePossibility(weather2, probability);
+                weather.addWeatherChangeProbability(weather2, probability);
             }
 
         }
@@ -99,8 +104,8 @@ public class NewGameFarmBuilder extends FarmBuilder {
     }
 
     @Override
-    protected Farmer getFarmer() {
-        return new Farmer(new Position(3, 7));
+    protected Entity getFarmer() {
+        return new Entity(new Position(3, 7));
     }
 
     @Override

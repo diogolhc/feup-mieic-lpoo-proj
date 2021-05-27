@@ -71,7 +71,7 @@ public class CropFieldGrowingMenuControllerBuilder extends PopupMenuControllerBu
 
         labels.add(new Label(
                 new Position(1, 5),
-                () -> "REMAINING TIME: " + cropField.getRemainingTime().toCountdownString()
+                () -> "REMAINING TIME: " + cropField.getRemainingTime().getTimerString()
         ));
 
         labels.add( new Label(

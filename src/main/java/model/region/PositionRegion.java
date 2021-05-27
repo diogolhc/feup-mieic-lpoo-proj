@@ -3,7 +3,7 @@ package model.region;
 import model.Position;
 
 public class PositionRegion implements Region {
-    private Position position;
+    private final Position position;
 
     public PositionRegion(Position position) {
         this.position = position;

@@ -4,7 +4,7 @@ import model.Position;
 
 public class Label {
     private final Position topLeft;
-    private LabelText labelText;
+    private final LabelText labelText;
 
     public Label(Position position, LabelText labelText) {
         this.topLeft = position;

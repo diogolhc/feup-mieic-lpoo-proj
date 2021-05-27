@@ -3,8 +3,8 @@ package controller.farm;
 import gui.GUI;
 import model.Position;
 import model.farm.Farm;
-import model.farm.Farmer;
-import model.farm.building.House;
+import model.farm.entity.Entity;
+import model.farm.building.edifice.House;
 import model.farm.building.CropField;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,7 +18,7 @@ public class FarmerControllerTest {
     public void setUp() {
         farm = new Farm(20, 20);
         farm.getBuildings().setHouse(new House(new Position(1, 1)));
-        farm.setFarmer(new Farmer(new Position(10, 10)));
+        farm.setFarmer(new Entity(new Position(10, 10)));
         controller = new FarmerController(farm);
     }
 

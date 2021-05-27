@@ -17,19 +17,19 @@ public abstract class Building implements Serializable {
         return this.topLeft;
     }
 
-    public abstract int getWidth();
-    public abstract int getHeight();
-
     public void setTopLeftPosition(Position topLeft) {
         this.topLeft = topLeft;
     }
-    
-    public abstract Region getUntraversableRegion();
-    public abstract Region getInteractiveRegion();
 
     public RectangleRegion getOccupiedRegion() {
         return new RectangleRegion(this.topLeft, this.getWidth(), this.getHeight());
     }
+
+    public abstract int getWidth();
+    public abstract int getHeight();
+    
+    public abstract Region getUntraversableRegion();
+    public abstract Region getInteractiveRegion();
 
     public abstract String getName();
 }

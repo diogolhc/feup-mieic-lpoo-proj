@@ -12,11 +12,7 @@ public class Currency implements Serializable {
     }
 
     public Currency(int coins) {
-        if (coins > MAX_CURRENCY) {
-            this.coins = MAX_CURRENCY;
-        } else {
-            this.coins = coins;
-        }
+        this.coins = Math.min(coins, MAX_CURRENCY);
     }
 
     public int getCoins() {

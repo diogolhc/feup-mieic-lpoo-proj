@@ -6,7 +6,7 @@ import controller.command.OpenPopupMenuCommand;
 import controller.menu.builder.*;
 import controller.menu.builder.info.AlertMenuControllerBuilder;
 import model.farm.Farm;
-import model.farm.building.Warehouse;
+import model.farm.building.edifice.Warehouse;
 
 public class WarehouseController extends BuildingController<Warehouse> {
     private final GameController controller;

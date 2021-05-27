@@ -11,7 +11,7 @@ import controller.menu.builder.PopupMenuControllerBuilder;
 import model.Position;
 import model.farm.Farm;
 import model.farm.building.CropField;
-import model.farm.item.Crop;
+import model.farm.data.item.Crop;
 import model.menu.Button;
 import model.menu.label.Label;
 
@@ -75,7 +75,7 @@ public class PlantCropMenuControllerBuilder extends PopupMenuControllerBuilder {
             labels.add(new Label(
                     new Position(x, y+4),
                     () -> String.format("%1$s %2$3s",
-                            crop.getGrowTime().toCountdownString(),
+                            crop.getGrowTime().getTimerString(),
                             "x" + crop.getBaseHarvestAmount())
             ));
 

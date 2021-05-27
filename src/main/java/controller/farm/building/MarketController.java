@@ -8,7 +8,7 @@ import controller.menu.builder.info.AlertMenuControllerBuilder;
 import controller.menu.builder.PopupMenuControllerBuilder;
 import controller.menu.builder.market.MarketMenuControllerBuilder;
 import model.farm.Farm;
-import model.farm.building.Market;
+import model.farm.building.edifice.Market;
 
 public class MarketController extends BuildingController<Market> {
     private final GameController controller;
