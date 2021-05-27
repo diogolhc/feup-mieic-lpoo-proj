@@ -109,10 +109,23 @@ public class FeedAnimalsMenuControllerBuilder extends PopupMenuControllerBuilder
                 new Position(x, y),
                 () -> "COSTS"
         ));
+
+        x = 21;
+        labels.add(new Label(
+                new Position(x, y),
+                () -> "RETURN"
+        ));
+
+        x = 6;
         y += 1;
         labels.add(new Label(
                 new Position(x, y),
                 () -> String.valueOf(this.stockyard.getLivestockType().getAnimalBuyPrice())
+        ));
+        x = 21;
+        labels.add(new Label(
+                new Position(x, y),
+                () -> String.valueOf(this.stockyard.getLivestockType().getAnimalSellPrice())
         ));
 
         x = 1;
