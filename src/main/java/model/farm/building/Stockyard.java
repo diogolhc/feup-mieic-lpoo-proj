@@ -6,8 +6,6 @@ import model.farm.Currency;
 import model.farm.Livestock;
 import model.farm.building.stockyard_state.NotProducing;
 import model.farm.building.stockyard_state.StockyardState;
-import model.farm.item.Crop;
-import model.farm.item.Item;
 import model.region.PositionRegion;
 import model.region.RectangleRegion;
 import model.region.Region;
@@ -28,34 +26,47 @@ public class Stockyard extends Buildable {
     }
 
     public void addAnimal() {
-        // TODO make sure position is different from all other animals
-        // TODO THis is just here to debug
-        Position animalPosition = new Position(getTopLeftPosition().getX() + 2, getTopLeftPosition().getY() + 1);
-        RectangleRegion animalRegion = (RectangleRegion) this.getAnimalsRegion();
+        // TODO THIS IS JUST HERE TO DEBUG
+        if (animals.size() == livestockType.getMaxNumAnimals()) {
 
-        for (int i = 0; i < animalRegion.getWidth() - 1; i++) {
-            for (int j = 0; j < animalRegion.getHeight(); j++) {
-                animalPosition = new Position(getTopLeftPosition().getX() + 2 + i,
-                        getTopLeftPosition().getY() + 2 + j);
+        } else {
+            Position animalPosition = new Position(getTopLeftPosition().getX() + 2, getTopLeftPosition().getY() + 1);
+            RectangleRegion animalRegion = (RectangleRegion) this.getAnimalsRegion();
 
-                boolean emptyPosition = true;
-                for (Animal animal : animals) {
-                    if (animalPosition.equals(animal.getPosition())) {
-                        emptyPosition = false;
-                        break;
+            for (int i = 0; i < animalRegion.getWidth() - 1; i++) {
+                for (int j = 0; j < animalRegion.getHeight(); j++) {
+                    animalPosition = new Position(getTopLeftPosition().getX() + 2 + i,
+                            getTopLeftPosition().getY() + 2 + j);
+
+                    boolean emptyPosition = true;
+                    for (Animal animal : animals) {
+                        if (animalPosition.equals(animal.getPosition())) {
+                            emptyPosition = false;
+                            break;
+                        }
                     }
-                }
-                if (emptyPosition) break;
+                    if (emptyPosition) break;
 
+                }
             }
+            this.animals.add(new Animal(animalPosition));
         }
-        this.animals.add(new Animal(animalPosition));
     }
+
+    public boolean canAddAnimal() {
+        return this.animals.size() < livestockType.getMaxNumAnimals();
+    }
+
+    public boolean canRemoveAnimal() { return this.animals.size() > 0; }
 
     public void removeAnimal() {
         if (this.animals.size() > 0) {
             this.animals.remove(0);
         }
+    }
+
+    public int getMaxNumAnimals() {
+        return livestockType.getMaxNumAnimals();
     }
 
     public List<Animal> getAnimals() {
@@ -105,6 +116,14 @@ public class Stockyard extends Buildable {
 
     public Livestock getLivestockType() {
         return this.livestockType;
+    }
+
+    public int getFeedQuantity() {
+        return this.animals.size() * this.livestockType.getRequiredFood();
+    }
+
+    public int getProduceQuantity() {
+        return this.animals.size() * this.livestockType.getProducedItem().getBaseProducedAmount();
     }
 
     public void setState(StockyardState state) {
