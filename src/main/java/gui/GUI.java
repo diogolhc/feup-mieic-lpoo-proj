@@ -1,5 +1,7 @@
 package gui;
 
+import model.Position;
+
 import java.io.IOException;
 
 public interface GUI {
@@ -28,6 +30,10 @@ public interface GUI {
     GUI.ACTION getNextAction() throws IOException;
 
     void setMouseListener(MouseListener mouseListener);
+
+    int getMouseX();
+
+    int getMouseY();
 
     enum ACTION {
         NONE, QUIT, MOVE_UP, MOVE_RIGHT, MOVE_DOWN, MOVE_LEFT, BACK, INTERACT

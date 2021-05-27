@@ -34,10 +34,14 @@ public class GameController implements MouseListener {
     }
 
     public void setGameControllerState(GameControllerState state) {
-        if (this.gameControllerState != null) {
+        boolean has_previous_controller = this.gameControllerState != null;
+        if (has_previous_controller) {
             this.gameControllerState.reactChangeState();
         }
         this.gameControllerState = state;
+        if (has_previous_controller) {
+            this.gameControllerState.reactMouseMovement(new Position(this.gui.getMouseX(), this.gui.getMouseY()));
+        }
     }
 
     public GameControllerState getGameControllerState() {
