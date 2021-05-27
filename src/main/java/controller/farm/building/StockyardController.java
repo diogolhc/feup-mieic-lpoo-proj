@@ -6,7 +6,6 @@ import controller.command.*;
 import controller.farm.FarmDemolishController;
 import controller.farm.FarmWithFarmerController;
 import controller.command.Command;
-import controller.command.NoOperationCommand;
 import controller.farm.AnimalController;
 import controller.menu.builder.PopupMenuControllerBuilder;
 import controller.menu.builder.stockyard.CollectMenuControllerBuilder;
@@ -14,8 +13,8 @@ import controller.menu.builder.stockyard.FeedAnimalsMenuControllerBuilder;
 //import controller.menu.builder.stockyard.ProducingMenuControllerBuilder;
 import controller.menu.builder.stockyard.ProducingMenuControllerBuilder;
 import model.InGameTime;
-import model.farm.Farm;
 import model.farm.Animal;
+import model.farm.Farm;
 import model.farm.building.Stockyard;
 import model.farm.building.stockyard_state.NotProducing;
 import model.farm.building.stockyard_state.Producing;
@@ -23,17 +22,11 @@ import model.farm.building.stockyard_state.ReadyToCollect;
 
 public class StockyardController extends BuildingController<Stockyard> {
     private final GameController controller;
-    private final AnimalController animalController;
     private Farm farm;
 
     public StockyardController(GameController controller, Farm farm) {
         this.controller = controller;
-        this.animalController = new AnimalController();
         this.farm = farm;
-    }
-
-    public void resetLastMovement() {
-        animalController.reset();
     }
 
     @Override
@@ -68,8 +61,12 @@ public class StockyardController extends BuildingController<Stockyard> {
     }
 
     public void reactTimePassed(Stockyard stockyard, InGameTime elapsedTime) {
-        animalController.reactTimePassed(stockyard, elapsedTime);
+        AnimalController animalController = new AnimalController(stockyard);
+        for (Animal animal: stockyard.getAnimals()) {
+            animalController.reactTimePassed(animal, elapsedTime);
+        }
+
         stockyard.getState().setRemainingTime(stockyard.getState().getRemainingTime().subtract(elapsedTime));
-        stockyard.changeProductAmount(this.farm.getWeather().getEffect(elapsedTime));
+        stockyard.changeProductAmount(this.farm.getCurrentWeather().getEffect(elapsedTime));
     }
 }

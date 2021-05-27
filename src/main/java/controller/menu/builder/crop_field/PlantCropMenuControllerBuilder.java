@@ -34,7 +34,7 @@ public class PlantCropMenuControllerBuilder extends PopupMenuControllerBuilder {
 
         int x = 1;
         int y = 4;
-        for (Crop crop: this.farm.getCrops()) {
+        for (Crop crop: this.farm.getCropTypes()) {
             Button plantCropButton = new Button(new Position(x, y), crop.getName(), 9);
             Command plantCropButtonCommand;
             if (this.farm.getCurrency().canBuy(crop.getPlantPrice())) {
@@ -65,7 +65,7 @@ public class PlantCropMenuControllerBuilder extends PopupMenuControllerBuilder {
 
         int x = 1;
         int y = 4;
-        for (Crop crop: this.farm.getCrops()) {
+        for (Crop crop: this.farm.getCropTypes()) {
             labels.add(new Label(new Position(x + 10, y), "SEED"));
             labels.add(new Label(new Position(x + 10, y+1), "COST"));
             labels.add(new Label(
@@ -97,7 +97,7 @@ public class PlantCropMenuControllerBuilder extends PopupMenuControllerBuilder {
 
     @Override
     protected int getWidth() {
-        return this.farm.getCrops().size()/2 * COLUMN_WIDTH + 5;
+        return this.farm.getCropTypes().size()/2 * COLUMN_WIDTH + 5;
     }
 
     @Override

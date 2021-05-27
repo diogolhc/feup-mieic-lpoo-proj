@@ -24,7 +24,7 @@ public class FarmViewer extends GameViewer {
         this.drawBackground(this.farm, gui);
         this.drawBuildings(this.farm.getBuildings(), gui);
         this.drawFences(this.farm, gui);
-        this.drawHUD(this.farm.getTime(), this.farm.getWeather(), this.farm.getCurrency(), new HUDViewer(), gui);
+        this.drawHUD(this.farm.getTime(), this.farm.getCurrentWeather(), this.farm.getCurrency(), new HUDViewer(), gui);
     }
 
     private void drawBackground(Farm farm, GUI gui) {

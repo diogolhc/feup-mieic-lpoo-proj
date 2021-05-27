@@ -12,17 +12,18 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Farm implements Serializable {
     private Farmer farmer;
     private final BuildingSet buildings;
     private InGameTime time;
-    private List<Weather> weathers;
-    private Weather weather;
     private Inventory inventory;
     private Currency currency;
-    private List<Crop> crops;
+    private Weather currentWeather;
+
+    private List<Weather> weatherTypes;
+    private List<Crop> cropTypes;
     private List<Livestock> livestockTypes;
+
     private int width;
     private int height;
 
@@ -34,7 +35,7 @@ public class Farm implements Serializable {
         this.width = width;
         this.height = height;
         this.buildings = buildings;
-        this.crops = new ArrayList<>();
+        this.cropTypes = new ArrayList<>();
         this.livestockTypes = new ArrayList<>();
         this.inventory = new Inventory();
     }
@@ -55,7 +56,7 @@ public class Farm implements Serializable {
 
     public List<Item> getItems() {
         List<Item> items = new ArrayList<>();
-        items.addAll(this.crops);
+        items.addAll(this.cropTypes);
         for (Livestock livestock: livestockTypes) {
             items.add(livestock.getProducedItem());
         }
@@ -78,12 +79,12 @@ public class Farm implements Serializable {
         return time;
     }
 
-    public Weather getWeather() {
-        return weather;
+    public Weather getCurrentWeather() {
+        return currentWeather;
     }
 
-    public void setWeather(Weather weather) {
-        this.weather = weather;
+    public void setCurrentWeather(Weather weather) {
+        this.currentWeather = weather;
     }
 
     public void setFarmer(Farmer farmer) {
@@ -94,12 +95,12 @@ public class Farm implements Serializable {
         this.time = time;
     }
 
-    public void setCrops(List<Crop> crops) {
-        this.crops = crops;
+    public void setCropTypes(List<Crop> crops) {
+        this.cropTypes = crops;
     }
 
-    public List<Crop> getCrops() {
-        return this.crops;
+    public List<Crop> getCropTypes() {
+        return this.cropTypes;
     }
 
     public List<Livestock> getLivestockTypes() {
@@ -111,11 +112,11 @@ public class Farm implements Serializable {
     }
 
     public void setWeatherStates(List<Weather> weathers) {
-        this.weathers = weathers;
+        this.weatherTypes = weathers;
     }
 
     public List<Weather> getWeatherStates() {
-        return this.weathers;
+        return this.weatherTypes;
     }
 
     public void setInventory(Inventory inventory) {

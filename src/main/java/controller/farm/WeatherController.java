@@ -7,33 +7,33 @@ import model.farm.Weather;
 import java.util.Map;
 
 public class WeatherController {
-    private static final int MIN_NEXT_MINUTE = 15; // TODO adjust these values (?)
-    private static final int MAX_NEXT_MINUTE = 120;
-    private int nextMinute;
+    private static final InGameTime MIN_NEXT_MINUTE = new InGameTime(15);
+    private static final InGameTime MAX_NEXT_MINUTE = new InGameTime(120);
+    private InGameTime nextMinute;
     Farm farm;
 
     public WeatherController(Farm farm) {
-        this.nextMinute = 0;
+        this.nextMinute = new InGameTime();
         this.farm = farm;
     }
 
     public void reactTimePassed(InGameTime time) {
-        this.nextMinute -= time.getMinute();
-        if (this.nextMinute <= 0) {
+        this.nextMinute = this.nextMinute.subtract(time);
+        if (this.nextMinute.getMinute() <= 0) {
             this.updateWeatherState(Math.random());
-            this.nextMinute = MIN_NEXT_MINUTE + (int)(Math.random() * (MAX_NEXT_MINUTE - MIN_NEXT_MINUTE));
+            this.nextMinute = InGameTime.getRandom(MIN_NEXT_MINUTE, MAX_NEXT_MINUTE);
         }
     }
 
     private void updateWeatherState(double chance) {
-        Map<Weather, Double> probabilities = farm.getWeather().getWeatherChangeProbabilities();
+        Map<Weather, Double> probabilities = farm.getCurrentWeather().getWeatherChangeProbabilities();
 
         double acum = 0;
         for (Map.Entry<Weather, Double> entry : probabilities.entrySet()) {
             acum += entry.getValue();
 
             if (chance < acum) {
-                this.farm.setWeather(entry.getKey());
+                this.farm.setCurrentWeather(entry.getKey());
                 break;
             }
         }

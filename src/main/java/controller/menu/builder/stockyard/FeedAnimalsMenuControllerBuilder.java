@@ -33,9 +33,7 @@ public class FeedAnimalsMenuControllerBuilder extends PopupMenuControllerBuilder
         int x = 1;
         int y = 10;
 
-        String title = "FEED";
-
-        Button feedAnimalsButton = new Button(new Position(x, y), title);
+        Button feedAnimalsButton = new Button(new Position(x, y), "FEED");
         Command feedAnimalsCommand;
         if (this.farm.getInventory().getAmount(this.stockyard.getLivestockType().getFoodCrop()) >=
             this.stockyard.getFeedQuantity() && this.stockyard.getAnimals().size() > 0) {
@@ -56,15 +54,12 @@ public class FeedAnimalsMenuControllerBuilder extends PopupMenuControllerBuilder
         buttons.add(new ButtonController(feedAnimalsButton, feedAnimalsCommand));
 
         y = 5;
-        title = "BUY";
-        Button buyAnimalButton = new Button(new Position(x, y), title);
+        Button buyAnimalButton = new Button(new Position(x, y), "BUY");
         Command buyAnimalCommand;
         if (this.stockyard.canAddAnimal() &&
                 this.farm.getCurrency().canBuy(this.stockyard.getLivestockType().getAnimalBuyPrice())) {
 
-            buyAnimalCommand = new CompoundCommand()
-                    .addCommand(new BuyAnimalCommand(this.farm, this.stockyard))
-                    .addCommand(super.getClosePopupMenuCommand());
+            buyAnimalCommand = new BuyAnimalCommand(this.farm, this.stockyard);
 
         } else if (this.stockyard.canAddAnimal())  {
             buyAnimalCommand = new OpenPopupMenuCommand(this.controller,
@@ -76,13 +71,10 @@ public class FeedAnimalsMenuControllerBuilder extends PopupMenuControllerBuilder
         buttons.add(new ButtonController(buyAnimalButton, buyAnimalCommand));
 
         x = 15;
-        title = "SELL";
-        Button sellAnimalButton = new Button(new Position(x, y), title);
+        Button sellAnimalButton = new Button(new Position(x, y), "SELL");
         Command sellAnimalCommand;
         if (this.stockyard.canRemoveAnimal()) {
-            sellAnimalCommand = new CompoundCommand()
-                    .addCommand(new SellAnimalCommand(this.farm, this.stockyard))
-                    .addCommand(super.getClosePopupMenuCommand());
+            sellAnimalCommand = new SellAnimalCommand(this.farm, this.stockyard);
         } else {
             sellAnimalCommand = new OpenPopupMenuCommand(this.controller,
                     new AlertMenuControllerBuilder(this.controller, "THERE ARE NO " +
