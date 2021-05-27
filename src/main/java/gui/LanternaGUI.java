@@ -193,6 +193,15 @@ public class LanternaGUI implements GUI {
                 updateMousePosition(e);
                 mouseListener.onMouseMovement(mouseX, mouseY);
             }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                // When mouse is released after being pressed, it should
+                // update position so that buttons are selected/unselected
+                // correctly.
+                updateMousePosition(e);
+                mouseListener.onMouseMovement(mouseX, mouseY);
+            }
         };
 
         ((AWTTerminalFrame) this.terminal).getComponent(0).addMouseListener(mouseAdapter);
