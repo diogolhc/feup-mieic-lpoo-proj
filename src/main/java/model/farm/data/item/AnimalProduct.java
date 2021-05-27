@@ -16,16 +16,13 @@ public class AnimalProduct extends Item {
         this.sellPrice = new Currency();
     }
 
-    public void setProductionTime(InGameTime productionTime) {
-        this.productionTime = productionTime;
-    }
-
-    public void setBaseProducedAmount(int baseProducedAmount) {
-        this.baseProducedAmount = baseProducedAmount;
-    }
-
-    public void setSellPrice(Currency sellPrice) {
-        this.sellPrice = sellPrice;
+    public static AnimalProduct parseAnimalProduct(String s) {
+        String[] tokens = s.split(" ");
+        AnimalProduct product = new AnimalProduct(tokens[0]);
+        product.productionTime = InGameTime.parseTimerString(tokens[1]);
+        product.baseProducedAmount = Integer.parseInt(tokens[2]);
+        product.sellPrice = new Currency(Integer.parseInt(tokens[3]));
+        return product;
     }
 
     @Override

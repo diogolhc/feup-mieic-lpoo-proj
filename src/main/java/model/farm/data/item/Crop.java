@@ -37,8 +37,8 @@ public class Crop extends Item {
         return this.growthStages.last();
     }
 
-    public void addGrowthStages(Collection<CropGrowthStage> growthStages) {
-        this.growthStages.addAll(growthStages);
+    public void addGrowthStage(CropGrowthStage growthStage) {
+        this.growthStages.add(growthStage);
     }
 
     public void setPlantPrice(Currency plantPrice) {

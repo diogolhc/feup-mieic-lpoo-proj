@@ -20,6 +20,14 @@ public class CropGrowthStage implements Comparable<CropGrowthStage>, Serializabl
         this(new InGameTime(0), ' ', Color.BLACK);
     }
 
+    public static CropGrowthStage parseGrowthStage(String s) {
+        String tokens[] = s.split(" ");
+        InGameTime stageTime = InGameTime.parseTimerString(tokens[0]);
+        char stageChar = tokens[1].charAt(0);
+        Color stageColor = new Color(tokens[2]);
+        return new CropGrowthStage(stageTime, stageChar, stageColor);
+    }
+
     public InGameTime getStageStartTime() {
         return this.stageStartTime;
     }

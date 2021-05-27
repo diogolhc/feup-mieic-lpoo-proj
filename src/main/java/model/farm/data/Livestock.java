@@ -23,7 +23,7 @@ public class Livestock implements Serializable {
 
     private Livestock() {}
 
-    public static Livestock parseLivestockType(List<String> lines) {
+    public static Livestock parseLivestockType(List<Crop> cropTypes, List<String> lines) {
         Livestock livestock = new Livestock();
 
         String[] tokens = lines.get(0).split(" ");
@@ -31,22 +31,20 @@ public class Livestock implements Serializable {
         livestock.animalChar = tokens[1].charAt(0);
         livestock.stockyardWidth = Integer.parseInt(tokens[2]);
         livestock.stockyardHeight = Integer.parseInt(tokens[3]);
+        if (livestock.stockyardWidth < 4 || livestock.stockyardHeight < 5) {
+            throw new RuntimeException("Stockyard size must be at least 4x5");
+        }
+
         livestock.maxNumAnimals = Integer.parseInt(tokens[4]);
         livestock.buildPrice = new Currency(Integer.parseInt(tokens[5]));
         livestock.animalBuyPrice = new Currency(Integer.parseInt(tokens[6]));
         livestock.animalSellPrice = new Currency(Integer.parseInt(tokens[7]));
 
         tokens = lines.get(1).split(" ");
-        livestock.foodCrop = new Crop(tokens[0]); // TODO
+        livestock.foodCrop = cropTypes.get(cropTypes.indexOf(new Crop(tokens[0])));
         livestock.requiredFood = Integer.parseInt(tokens[1]);
 
-        tokens = lines.get(2).split(" ");
-        AnimalProduct product = new AnimalProduct(tokens[0]);
-        product.setProductionTime(InGameTime.parseTimerString(tokens[1]));
-        product.setBaseProducedAmount(Integer.parseInt(tokens[2]));
-        product.setSellPrice(new Currency(Integer.parseInt(tokens[3])));
-
-        livestock.producedItem = product;
+        livestock.producedItem = AnimalProduct.parseAnimalProduct(lines.get(2));
         return livestock;
     }
 

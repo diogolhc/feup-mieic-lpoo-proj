@@ -27,7 +27,7 @@ public class StockyardViewer {
         BoxDrawer fencesDrawer = new BoxDrawer(gui, Color.GRASS, Color.WOOD);
         fencesDrawer.draw(position, width, height);
 
-        drawFencesDoor(position.getTranslated(new Position(1, 3)), gui);
+        drawFencesDoor(position.getTranslated(new Position(0, 3)), gui);
     }
 
     private void drawFencesDoor(Position position, GUI gui) {

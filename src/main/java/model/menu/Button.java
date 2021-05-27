@@ -17,7 +17,7 @@ public class Button {
     public Button(Position position, String title, int width) {
         this.topLeft = position;
         this.title = title;
-        this.width = width;
+        this.width = Math.max(width, title.length() + 2);
         this.selected = false;
     }
 
