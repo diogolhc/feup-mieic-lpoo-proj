@@ -2,6 +2,7 @@ package controller.command;
 
 import controller.GameController;
 import controller.GameControllerState;
+import controller.menu.MenuController;
 import controller.menu.builder.PopupMenuControllerBuilder;
 import model.Position;
 
@@ -18,6 +19,9 @@ public class OpenPopupMenuCommand implements Command {
 
     @Override
     public void execute() {
-        this.controller.setGameControllerState(menuBuilder.buildMenu(new Position(1, 1)));
+        MenuController popupController = menuBuilder.buildMenuCentered(
+                controller.getWindowWidth(), controller.getWindowHeight());
+
+        this.controller.setGameControllerState(popupController);
     }
 }

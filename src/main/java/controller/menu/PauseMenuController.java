@@ -11,5 +11,4 @@ public class PauseMenuController extends PopupMenuController {
 
     @Override
     public void reactTimePassed(long elapsedTimeSinceLastFrame) {}
-
 }

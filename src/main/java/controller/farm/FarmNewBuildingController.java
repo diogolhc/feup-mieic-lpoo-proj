@@ -1,5 +1,7 @@
 package controller.farm;
 
+import controller.menu.MenuController;
+import controller.menu.builder.MenuControllerBuilder;
 import controller.menu.builder.info.AlertMenuControllerBuilder;
 import gui.GUI;
 import model.Position;
@@ -37,8 +39,13 @@ public class FarmNewBuildingController extends FarmController {
 
     private void reactInteraction() {
         if (farm.getBuildings().isOccupied(this.newBuilding.getOccupiedRegion())) {
-            this.controller.setGameControllerState(new AlertMenuControllerBuilder(this.controller,
-                    "CHOSEN PLACE IS ALREADY OCCUPIED").buildMenu(new Position(1, 1)));
+            MenuControllerBuilder popupControllerBuilder = new AlertMenuControllerBuilder(this.controller,
+                    "CHOSEN PLACE IS ALREADY OCCUPIED");
+
+            MenuController popupController = popupControllerBuilder.buildMenuCentered(
+                    controller.getWindowWidth(), controller.getWindowHeight());
+
+            this.controller.setGameControllerState(popupController);
         } else {
             if (this.newBuilding instanceof CropField) {
                 this.farm.getBuildings().addCropField((CropField) this.newBuilding);

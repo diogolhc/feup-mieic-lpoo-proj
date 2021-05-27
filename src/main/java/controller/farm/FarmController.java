@@ -42,7 +42,6 @@ public abstract class FarmController implements GameControllerState {
         }
 
         StockyardController stockyardController = new StockyardController(this.controller, this.farm);
-
         for (Stockyard stockyard : this.farm.getBuildings().getStockyards()) {
             stockyardController.reactTimePassed(stockyard, elapsedTime);
         }
