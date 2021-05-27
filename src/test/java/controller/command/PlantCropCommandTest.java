@@ -1,6 +1,8 @@
 package controller.command;
 
 import model.Position;
+import model.farm.Currency;
+import model.farm.Farm;
 import model.farm.building.CropField;
 import model.farm.item.Crop;
 import model.farm.building.crop_field_state.CropFieldState;
@@ -13,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 public class PlantCropCommandTest {
+    private Farm farm;
     private CropField cropField;
     private ReadyToHarvest stateReady;
     private Planted statePlanted;
@@ -25,9 +28,12 @@ public class PlantCropCommandTest {
         stateReady = Mockito.mock(ReadyToHarvest.class);
         statePlanted = Mockito.mock(Planted.class);
         stateNotPlanted = Mockito.mock(NotPlanted.class);
+        farm = new Farm(10,10);
+        farm.setCurrency(new Currency(100));
         cropField = new CropField(new Position(0, 0));
         crop = Mockito.mock(Crop.class);
-        command = new PlantCropCommand(cropField, crop);
+        Mockito.when(crop.getPlantPrice()).thenReturn(new Currency(10));
+        command = new PlantCropCommand(farm, cropField, crop);
     }
 
     @Test
@@ -35,6 +41,7 @@ public class PlantCropCommandTest {
         cropField.setState(stateReady);
         command.execute();
         Assertions.assertSame(stateReady, cropField.getState());
+        Assertions.assertEquals(100, farm.getCurrency().getCoins());
     }
 
     @Test
@@ -44,6 +51,7 @@ public class PlantCropCommandTest {
         CropFieldState newState = cropField.getState();
         Assertions.assertTrue(newState instanceof Planted);
         Assertions.assertSame(crop, newState.getCrop());
+        Assertions.assertEquals(90, farm.getCurrency().getCoins());
     }
 
     @Test
@@ -51,5 +59,6 @@ public class PlantCropCommandTest {
         cropField.setState(statePlanted);
         command.execute();
         Assertions.assertSame(statePlanted, cropField.getState());
+        Assertions.assertEquals(100, farm.getCurrency().getCoins());
     }
 }

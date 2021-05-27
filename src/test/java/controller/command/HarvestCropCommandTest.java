@@ -55,7 +55,6 @@ public class HarvestCropCommandTest {
         cropField.setState(stateReady);
         int harvestAmount = cropField.getHarvestAmount();
         command.execute();
-        Assertions.assertEquals(harvestAmount, inventory.getCapacity());
         Assertions.assertEquals(harvestAmount, inventory.getAmount(cropField.getState().getCrop()));
     }
 }
