@@ -6,12 +6,12 @@ public class RealTimeToInGameTimeConverter {
     private static final long SECS_TO_MILLI = 1000;
     private long baseRate;
     private long rateMultiplier;
-    private long leftOverTimeMs;
+    private long leftOverTime;
 
     public RealTimeToInGameTimeConverter(long realSecToGameMinutesRate) {
         this.baseRate = realSecToGameMinutesRate;
         this.rateMultiplier = 1;
-        this.leftOverTimeMs = 0;
+        this.leftOverTime = 0;
     }
 
     public long getRate() {
@@ -23,8 +23,8 @@ public class RealTimeToInGameTimeConverter {
     }
 
     public InGameTime convert(long elapsedTimeSinceLastFrameMilliSeconds) {
-        long convertedTime = elapsedTimeSinceLastFrameMilliSeconds * this.getRate() + this.leftOverTimeMs;
-        this.leftOverTimeMs = convertedTime % SECS_TO_MILLI;
+        long convertedTime = elapsedTimeSinceLastFrameMilliSeconds * this.getRate() + this.leftOverTime;
+        this.leftOverTime = convertedTime % SECS_TO_MILLI;
 
         return new InGameTime((int)(convertedTime / SECS_TO_MILLI));
     }

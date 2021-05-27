@@ -15,7 +15,7 @@ class RealTimeToInGameTimeConverterTest {
 
     @Test
     void accelerateTime() {
-        this.realTimeToInGameTimeConverter.setMultiplier(3);
+        this.realTimeToInGameTimeConverter.setRateMultiplier(3);
 
         Assertions.assertEquals(6, this.realTimeToInGameTimeConverter.getRate());
     }
@@ -27,7 +27,7 @@ class RealTimeToInGameTimeConverterTest {
 
     @Test
     void accelerateAndConvert() {
-        this.realTimeToInGameTimeConverter.setMultiplier(10);
+        this.realTimeToInGameTimeConverter.setRateMultiplier(10);
 
         Assertions.assertEquals(new InGameTime(40), this.realTimeToInGameTimeConverter.convert(2000));
     }
@@ -35,21 +35,22 @@ class RealTimeToInGameTimeConverterTest {
     @Test
     void convertSeveralTimes() {
         this.realTimeToInGameTimeConverter.convert(100);
-        this.realTimeToInGameTimeConverter.convert(200);
-        this.realTimeToInGameTimeConverter.convert(300);
+        this.realTimeToInGameTimeConverter.convert(100);
+        this.realTimeToInGameTimeConverter.convert(100);
+        this.realTimeToInGameTimeConverter.convert(100);
 
-        Assertions.assertEquals(new InGameTime(2), this.realTimeToInGameTimeConverter.convert(400));
+        Assertions.assertEquals(new InGameTime(1), this.realTimeToInGameTimeConverter.convert(300));
     }
 
     @Test
     void convertSeveralTimesWithAccelerate() {
-        this.realTimeToInGameTimeConverter.setMultiplier(10);
+        this.realTimeToInGameTimeConverter.setRateMultiplier(3);
 
         this.realTimeToInGameTimeConverter.convert(100);
-        this.realTimeToInGameTimeConverter.convert(200);
-        this.realTimeToInGameTimeConverter.convert(300);
+        this.realTimeToInGameTimeConverter.convert(100);
+        this.realTimeToInGameTimeConverter.convert(100);
 
-        Assertions.assertEquals(new InGameTime(20), this.realTimeToInGameTimeConverter.convert(400));
+        Assertions.assertEquals(new InGameTime(3), this.realTimeToInGameTimeConverter.convert(400));
     }
 
 }
