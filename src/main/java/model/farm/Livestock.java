@@ -18,6 +18,7 @@ public class Livestock implements Serializable {
     private Currency animalSellPrice;
     private int stockyardWidth;
     private int stockyardHeight;
+    private int maxNumAnimals;
 
     public String getAnimalName() {
         return animalName;
@@ -97,5 +98,13 @@ public class Livestock implements Serializable {
 
     public void setAnimalSellPrice(Currency animalSellPrice) {
         this.animalSellPrice = animalSellPrice;
+    }
+
+    public void setMaxNumAnimals(int maxNumAnimals) {
+        this.maxNumAnimals = maxNumAnimals;
+    }
+
+    public int getMaxNumAnimals() {
+        return maxNumAnimals;
     }
 }

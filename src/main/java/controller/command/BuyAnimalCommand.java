@@ -15,10 +15,7 @@ public class BuyAnimalCommand implements Command {
 
     @Override
     public void execute() {
-        if (this.farm.getCurrency().canBuy(this.stockyard.getLivestockType().getAnimalBuyPrice()) &&
-                this.stockyard.canAddAnimal() ) {
-            this.farm.setCurrency(this.farm.getCurrency().subtract(this.stockyard.getLivestockType().getAnimalBuyPrice()));
-            this.stockyard.addAnimal();
-        }
+        this.farm.setCurrency(this.farm.getCurrency().subtract(this.stockyard.getLivestockType().getAnimalBuyPrice()));
+        this.stockyard.addAnimal();
     }
 }

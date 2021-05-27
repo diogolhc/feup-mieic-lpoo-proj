@@ -129,6 +129,7 @@ public class NewGameFarmBuilder extends FarmBuilder {
             livestock.setBuildPrice(new Currency(Integer.parseInt(tokens[4])));
             livestock.setAnimalBuyPrice(new Currency(Integer.parseInt(tokens[5])));
             livestock.setAnimalSellPrice(new Currency(Integer.parseInt(tokens[6])));
+            livestock.setMaxNumAnimals(Integer.parseInt(tokens[7]));
 
             currentLine++;
             tokens = this.livestockLines.get(currentLine).split(" ");
@@ -164,7 +165,6 @@ public class NewGameFarmBuilder extends FarmBuilder {
             tokens = this.stockyardLines.get(currentLine).split(" ");
 
             String livestockName = tokens[0];
-            int maxNumAnimals = Integer.parseInt(tokens[1]);
             Livestock livestock = new Livestock();
             boolean found = false;
             for (Livestock l : this.getLivestockTypes()) {
@@ -179,7 +179,7 @@ public class NewGameFarmBuilder extends FarmBuilder {
                 continue;
             }
 
-            Stockyard stockyard = new Stockyard(posTopLeft, livestock, maxNumAnimals);
+            Stockyard stockyard = new Stockyard(posTopLeft, livestock);
             stockyards.add(stockyard);
             currentLine++;
         }
@@ -188,7 +188,7 @@ public class NewGameFarmBuilder extends FarmBuilder {
 
     @Override
     protected Currency getCurrency() {
-        return new Currency(99999);
+        return new Currency(999999);
     }
 
     @Override

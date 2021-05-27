@@ -35,7 +35,7 @@ public class BuildMenuControllerBuilder extends PopupMenuControllerBuilder {
         this.buildingCatalog = new ArrayList<>();
         this.buildingCatalog.add(new CropField(NEW_BUILDING_STARTING_POSITION));
         for (Livestock livestockType: this.farm.getLivestockTypes()) {
-            this.buildingCatalog.add(new Stockyard(NEW_BUILDING_STARTING_POSITION, livestockType, 5));
+            this.buildingCatalog.add(new Stockyard(NEW_BUILDING_STARTING_POSITION, livestockType));
         }
     }
 

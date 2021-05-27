@@ -59,16 +59,36 @@ public class FeedAnimalsMenuControllerBuilder extends PopupMenuControllerBuilder
         title = "BUY";
         Button buyAnimalButton = new Button(new Position(x, y), title);
         Command buyAnimalCommand;
-        if (this.stockyard.getAnimals().size() < this.stockyard.getMaxNumAnimals()) {
+        if (this.stockyard.canAddAnimal() &&
+                this.farm.getCurrency().canBuy(this.stockyard.getLivestockType().getAnimalBuyPrice())) {
+
             buyAnimalCommand = new CompoundCommand()
                     .addCommand(new BuyAnimalCommand(this.farm, this.stockyard))
                     .addCommand(super.getClosePopupMenuCommand());
-        } else {
+
+        } else if (this.stockyard.canAddAnimal())  {
             buyAnimalCommand = new OpenPopupMenuCommand(this.controller,
                     new AlertMenuControllerBuilder(this.controller, "NOT ENOUGH MONEY"));
+        } else {
+            buyAnimalCommand = new OpenPopupMenuCommand(this.controller,
+                    new AlertMenuControllerBuilder(this.controller, "STOCKYARD IS FULL"));
         }
         buttons.add(new ButtonController(buyAnimalButton, buyAnimalCommand));
 
+        x = 15;
+        title = "SELL";
+        Button sellAnimalButton = new Button(new Position(x, y), title);
+        Command sellAnimalCommand;
+        if (this.stockyard.canRemoveAnimal()) {
+            sellAnimalCommand = new CompoundCommand()
+                    .addCommand(new SellAnimalCommand(this.farm, this.stockyard))
+                    .addCommand(super.getClosePopupMenuCommand());
+        } else {
+            sellAnimalCommand = new OpenPopupMenuCommand(this.controller,
+                    new AlertMenuControllerBuilder(this.controller, "THERE ARE NO " +
+                    this.stockyard.getLivestockType().getAnimalName() + " TO SELL"));
+        }
+        buttons.add(new ButtonController(sellAnimalButton, sellAnimalCommand));
         return buttons;
     }
 

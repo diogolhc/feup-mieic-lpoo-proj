@@ -14,23 +14,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Stockyard extends Buildable {
-    private final int maxNumAnimals;
     private final Livestock livestockType;
     private final List<Animal> animals;
     private StockyardState state;
 
-    public Stockyard(Position topLeft, Livestock livestockType, int maxNumAnimals) {
+    public Stockyard(Position topLeft, Livestock livestockType) {
         super(topLeft);
         this.livestockType = livestockType;
         this.animals = new ArrayList<>();
         this.state = new NotProducing();
-        this.maxNumAnimals = maxNumAnimals;
     }
 
     public void addAnimal() {
-        // TODO make sure position is different from all other animals
-        // TODO THis is just here to debug
-        if (animals.size() == maxNumAnimals) {
+        // TODO THIS IS JUST HERE TO DEBUG
+        if (animals.size() == livestockType.getMaxNumAnimals()) {
 
         } else {
             Position animalPosition = new Position(getTopLeftPosition().getX() + 2, getTopLeftPosition().getY() + 1);
@@ -57,8 +54,10 @@ public class Stockyard extends Buildable {
     }
 
     public boolean canAddAnimal() {
-        return this.animals.size() < maxNumAnimals;
+        return this.animals.size() < livestockType.getMaxNumAnimals();
     }
+
+    public boolean canRemoveAnimal() { return this.animals.size() > 0; }
 
     public void removeAnimal() {
         if (this.animals.size() > 0) {
@@ -67,7 +66,7 @@ public class Stockyard extends Buildable {
     }
 
     public int getMaxNumAnimals() {
-        return maxNumAnimals;
+        return livestockType.getMaxNumAnimals();
     }
 
     public List<Animal> getAnimals() {
