@@ -24,34 +24,34 @@ public class FarmerControllerTest {
 
     @Test
     public void moveUp() {
-        controller.doAction(GUI.ACTION.MOVE_UP);
+        controller.reactKeyboard(GUI.ACTION.MOVE_UP);
         Assertions.assertEquals(new Position(10, 9), farm.getFarmer().getPosition());
     }
 
     @Test
     public void moveDown() {
-        controller.doAction(GUI.ACTION.MOVE_DOWN);
+        controller.reactKeyboard(GUI.ACTION.MOVE_DOWN);
         Assertions.assertEquals(new Position(10, 11), farm.getFarmer().getPosition());
     }
 
     @Test
     public void moveLeft() {
-        controller.doAction(GUI.ACTION.MOVE_LEFT);
+        controller.reactKeyboard(GUI.ACTION.MOVE_LEFT);
         Assertions.assertEquals(new Position(9, 10), farm.getFarmer().getPosition());
     }
 
     @Test
     public void moveRight() {
-        controller.doAction(GUI.ACTION.MOVE_RIGHT);
+        controller.reactKeyboard(GUI.ACTION.MOVE_RIGHT);
         Assertions.assertEquals(new Position(11, 10), farm.getFarmer().getPosition());
     }
 
     @Test
     public void cantMove() {
         farm.getBuildings().setHouse(new House(new Position(10, 10)));
-        controller.doAction(GUI.ACTION.MOVE_DOWN);
+        controller.reactKeyboard(GUI.ACTION.MOVE_DOWN);
         Assertions.assertEquals(new Position(10, 10), farm.getFarmer().getPosition());
-        controller.doAction(GUI.ACTION.MOVE_RIGHT);
+        controller.reactKeyboard(GUI.ACTION.MOVE_RIGHT);
         Assertions.assertEquals(new Position(10, 10), farm.getFarmer().getPosition());
     }
 
@@ -62,7 +62,7 @@ public class FarmerControllerTest {
         Position lastPosition;
         do {
             lastPosition = farm.getFarmer().getPosition();
-            controller.doAction(GUI.ACTION.MOVE_RIGHT);
+            controller.reactKeyboard(GUI.ACTION.MOVE_RIGHT);
         } while (farm.getFarmer().getPosition() != lastPosition);
 
         Assertions.assertEquals(new Position(15, 10), farm.getFarmer().getPosition());

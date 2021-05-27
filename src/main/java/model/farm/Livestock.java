@@ -14,8 +14,11 @@ public class Livestock implements Serializable {
     private int requiredFood;
     private AnimalProduct producedItem;
     private Currency buildPrice;
+    private Currency animalBuyPrice;
+    private Currency animalSellPrice;
     private int stockyardWidth;
     private int stockyardHeight;
+    private int maxNumAnimals;
 
     public String getAnimalName() {
         return animalName;
@@ -79,5 +82,29 @@ public class Livestock implements Serializable {
 
     public void setBuildPrice(Currency buildPrice) {
         this.buildPrice = buildPrice;
+    }
+
+    public Currency getAnimalBuyPrice() {
+        return animalBuyPrice;
+    }
+
+    public void setAnimalBuyPrice(Currency animalBuyPrice) {
+        this.animalBuyPrice = animalBuyPrice;
+    }
+
+    public Currency getAnimalSellPrice() {
+        return animalSellPrice;
+    }
+
+    public void setAnimalSellPrice(Currency animalSellPrice) {
+        this.animalSellPrice = animalSellPrice;
+    }
+
+    public void setMaxNumAnimals(int maxNumAnimals) {
+        this.maxNumAnimals = maxNumAnimals;
+    }
+
+    public int getMaxNumAnimals() {
+        return maxNumAnimals;
     }
 }

@@ -42,13 +42,9 @@ public abstract class FarmController implements GameControllerState {
         }
 
         StockyardController stockyardController = new StockyardController(this.controller, this.farm);
-
         for (Stockyard stockyard : this.farm.getBuildings().getStockyards()) {
             stockyardController.reactTimePassed(stockyard, elapsedTime);
         }
-
-        stockyardController.resetLastMovement();
-
 
         this.weatherController.reactTimePassed(elapsedTime);
     }
@@ -59,5 +55,4 @@ public abstract class FarmController implements GameControllerState {
 
     @Override
     public void reactChangeState() {}
-
 }

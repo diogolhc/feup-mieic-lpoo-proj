@@ -11,7 +11,7 @@ public class FarmerController {
         this.farm = farm;
     }
 
-    public void doAction(GUI.ACTION action) {
+    public void reactKeyboard(GUI.ACTION action) {
         if (action == GUI.ACTION.MOVE_UP) moveUp();
         if (action == GUI.ACTION.MOVE_RIGHT) moveRight();
         if (action == GUI.ACTION.MOVE_DOWN) moveDown();

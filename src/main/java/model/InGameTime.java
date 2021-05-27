@@ -22,6 +22,11 @@ public class InGameTime implements Comparable<InGameTime>, Serializable {
         this.minutes = growTime.minutes;
     }
 
+    public static InGameTime getRandom(InGameTime min, InGameTime max) {
+        int delta = max.minutes - min.minutes;
+        return new InGameTime(min.minutes + (int) (Math.random() * delta));
+    }
+
     public int getMinute() {
         return minutes;
     }

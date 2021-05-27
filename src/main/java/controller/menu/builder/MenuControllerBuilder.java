@@ -27,11 +27,24 @@ public abstract class MenuControllerBuilder {
             menuController.addButton(buttonController);
         }
 
+        menu.setPosition(new Position(
+                (40 - menu.getWidth())/2,
+                (21 - menu.getHeight())/2
+        ));
+
         return menuController;
     }
 
     public MenuController buildMenu() {
         return this.buildMenu(new Position(0, 0));
+    }
+
+    public MenuController buildMenuCentered(int windowWidth, int windowHeight) {
+        Position position = new Position(
+                (windowWidth - this.getWidth())/2,
+                (windowHeight - this.getHeight())/2
+        );
+        return this.buildMenu(position);
     }
 
     protected abstract MenuController getMenuController(Menu menu);

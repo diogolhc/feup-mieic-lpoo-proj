@@ -20,7 +20,7 @@ public class FarmWithFarmerControllerTest {
     public void setUp() {
         farm = new Farm(6, 8);
         farm.setTime(new InGameTime(0, 0, 0));
-        farm.setWeather(new Weather("SUNNY"));
+        farm.setCurrentWeather(new Weather("SUNNY"));
         cropField = Mockito.mock(CropField.class);
         Mockito.when(cropField.getRemainingTime()).thenReturn(new InGameTime(0));
         farm.getBuildings().addCropField(cropField);

@@ -21,7 +21,7 @@ public class FeedAnimalsCommand implements Command {
     public void execute() {
         if (this.stockyard.getState() instanceof NotProducing) {
             this.stockyard.setState(new Producing(this.stockyard, this.stockyard.getLivestockType().getProducedItem()));
-            inventory.removeItem(stockyard.getLivestockType().getFoodCrop(), stockyard.getFeedQuantity());
+            this.inventory.removeItem(this.stockyard.getLivestockType().getFoodCrop(), this.stockyard.getFeedQuantity());
         }
     }
 }

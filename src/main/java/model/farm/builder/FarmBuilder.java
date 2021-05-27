@@ -2,7 +2,6 @@ package model.farm.builder;
 
 import model.InGameTime;
 import model.farm.*;
-import model.farm.Animal;
 import model.farm.Farm;
 import model.farm.Farmer;
 import model.farm.Inventory;
@@ -34,20 +33,18 @@ public abstract class FarmBuilder {
         farm.setFarmer(this.getFarmer());
         farm.setTime(this.getTime());
         farm.setWeatherStates(this.getWeatherStates());
-        farm.setWeather(farm.getWeatherStates().get(0)); // TODO this will not be like this
-        farm.setCrops(this.getCrops());
+        farm.setCurrentWeather(farm.getWeatherStates().get(0)); // TODO this will not be like this
+        farm.setCropTypes(this.getCrops());
         farm.setInventory(this.getInventory());
         farm.setCurrency(this.getCurrency());
         farm.setLivestockTypes(this.getLivestockTypes());
-        farm.setStockyards(this.getStockyards());
+
         for (Livestock livestock: farm.getLivestockTypes()) {
-            livestock.setFoodCrop(farm.getCrops().get(farm.getCrops().indexOf(livestock.getFoodCrop())));
+            livestock.setFoodCrop(farm.getCropTypes().get(farm.getCropTypes().indexOf(livestock.getFoodCrop())));
         }
 
         return farm;
     }
-
-    protected abstract List<Stockyard> getStockyards();
 
     protected abstract List<Livestock> getLivestockTypes();
 

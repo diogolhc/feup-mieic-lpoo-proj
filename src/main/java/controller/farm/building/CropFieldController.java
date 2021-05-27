@@ -64,6 +64,6 @@ public class CropFieldController extends BuildingController<CropField> {
 
     public void reactTimePassed(CropField cropField, InGameTime elapsedTime) {
         cropField.setRemainingTime(cropField.getRemainingTime().subtract(elapsedTime));
-        cropField.changeHarvestAmount(this.farm.getWeather().getEffect(elapsedTime));
+        cropField.changeHarvestAmount(this.farm.getCurrentWeather().getEffect(elapsedTime));
     }
 }

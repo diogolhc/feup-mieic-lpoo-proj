@@ -6,7 +6,6 @@ import controller.farm.building.*;
 import controller.menu.builder.PauseMenuControllerBuilder;
 import controller.menu.builder.PopupMenuControllerBuilder;
 import gui.GUI;
-import model.InGameTime;
 import model.Position;
 import model.farm.Farm;
 import model.farm.building.BuildingSet;
@@ -29,7 +28,7 @@ public class FarmWithFarmerController extends FarmController {
         if (action == GUI.ACTION.BACK) pauseGame();
         if (action == GUI.ACTION.INTERACT) reactInteraction();
         FarmerController farmerController = new FarmerController(this.farm);
-        farmerController.doAction(action);
+        farmerController.reactKeyboard(action);
     }
 
     @Override

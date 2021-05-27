@@ -48,9 +48,6 @@ public abstract class MenuController implements GameControllerState {
     }
 
     @Override
-    public void reactTimePassed(long elapsedTimeSinceLastFrame) {}
-
-    @Override
     public void reactChangeState() {
         for (Button button: this.getMenu().getButtons()) {
             button.unselect();
