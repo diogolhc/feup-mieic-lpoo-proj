@@ -9,10 +9,8 @@ import controller.menu.ButtonController;
 import controller.menu.builder.PopupMenuControllerBuilder;
 import controller.menu.builder.info.AlertMenuControllerBuilder;
 import model.Position;
-import model.farm.Farm;
 import model.farm.Inventory;
 import model.farm.building.Stockyard;
-import model.farm.item.AnimalProduct;
 import model.farm.item.Crop;
 import model.menu.Button;
 import model.menu.label.Label;
@@ -38,14 +36,14 @@ public class FeedAnimalsMenuControllerBuilder extends PopupMenuControllerBuilder
         int y = 5;
 
         String title = "FEED " + stockyard.getLivestockType().getFoodCrop().getName() + " x" +
-                stockyard.getLivestockType().getRequiredFood() * stockyard.getAnimals().size();
+                stockyard.getFeedQuantity();
 
         Button feedAnimalsButton = new Button(new Position(x, y), title);
 
         Command feedAnimalsCommand;
 
         if (this.inventory.getAmount(this.stockyard.getLivestockType().getFoodCrop()) >=
-            this.stockyard.getLivestockType().getRequiredFood()) {
+            this.stockyard.getFeedQuantity()) {
 
             feedAnimalsCommand = new CompoundCommand()
                     .addCommand(new FeedAnimalsCommand(this.stockyard, inventory, crop))
@@ -53,7 +51,7 @@ public class FeedAnimalsMenuControllerBuilder extends PopupMenuControllerBuilder
 
         } else {
             feedAnimalsCommand = new OpenPopupMenuCommand(this.controller,
-                    new AlertMenuControllerBuilder(this.controller, "NOT ENOUGHT " +
+                    new AlertMenuControllerBuilder(this.controller, "NOT ENOUGH " +
                             this.stockyard.getLivestockType().getFoodCrop().getName()));
         }
 
