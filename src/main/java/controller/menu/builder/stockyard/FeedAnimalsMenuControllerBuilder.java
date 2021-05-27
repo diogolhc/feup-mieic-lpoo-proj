@@ -9,10 +9,8 @@ import controller.menu.ButtonController;
 import controller.menu.builder.PopupMenuControllerBuilder;
 import controller.menu.builder.info.AlertMenuControllerBuilder;
 import model.Position;
-import model.farm.Farm;
 import model.farm.Inventory;
 import model.farm.building.Stockyard;
-import model.farm.item.AnimalProduct;
 import model.farm.item.Crop;
 import model.menu.Button;
 import model.menu.label.Label;
@@ -42,7 +40,7 @@ public class FeedAnimalsMenuControllerBuilder extends PopupMenuControllerBuilder
         Button feedAnimalsButton = new Button(new Position(x, y), title);
         Command feedAnimalsCommand;
         if (this.inventory.getAmount(this.stockyard.getLivestockType().getFoodCrop()) >=
-            this.stockyard.getLivestockType().getRequiredFood()) {
+            this.stockyard.getFeedQuantity()) {
 
             feedAnimalsCommand = new CompoundCommand()
                     .addCommand(new FeedAnimalsCommand(this.stockyard, inventory, crop))
@@ -50,7 +48,7 @@ public class FeedAnimalsMenuControllerBuilder extends PopupMenuControllerBuilder
 
         } else {
             feedAnimalsCommand = new OpenPopupMenuCommand(this.controller,
-                    new AlertMenuControllerBuilder(this.controller, "NOT ENOUGHT " +
+                    new AlertMenuControllerBuilder(this.controller, "NOT ENOUGH " +
                             this.stockyard.getLivestockType().getFoodCrop().getName()));
         }
         buttons.add(new ButtonController(feedAnimalsButton, feedAnimalsCommand));
@@ -106,8 +104,7 @@ public class FeedAnimalsMenuControllerBuilder extends PopupMenuControllerBuilder
         y += 2;
         labels.add(new Label(
                 new Position(x, y),
-                () -> "PRODUCES: " + stockyard.getLivestockType().getProducedItem().getName() + " x" +
-                        stockyard.getLivestockType().getProducedItem().getBaseProducedAmount() * stockyard.getAnimals().size()
+                () -> "PRODUCES: " + stockyard.getLivestockType().getProducedItem().getName() + " x" + stockyard.getProduceQuantity()
         ));
 
         return labels;

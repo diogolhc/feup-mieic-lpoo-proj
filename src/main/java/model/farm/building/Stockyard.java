@@ -6,8 +6,6 @@ import model.farm.Currency;
 import model.farm.Livestock;
 import model.farm.building.stockyard_state.NotProducing;
 import model.farm.building.stockyard_state.StockyardState;
-import model.farm.item.Crop;
-import model.farm.item.Item;
 import model.region.PositionRegion;
 import model.region.RectangleRegion;
 import model.region.Region;
@@ -116,6 +114,14 @@ public class Stockyard extends Buildable {
 
     public Livestock getLivestockType() {
         return this.livestockType;
+    }
+
+    public int getFeedQuantity() {
+        return this.animals.size() * this.livestockType.getRequiredFood();
+    }
+
+    public int getProduceQuantity() {
+        return this.animals.size() * this.livestockType.getProducedItem().getBaseProducedAmount();
     }
 
     public void setState(StockyardState state) {
