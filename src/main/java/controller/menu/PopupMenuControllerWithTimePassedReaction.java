@@ -6,10 +6,10 @@ import controller.command.Command;
 import model.menu.Menu;
 
 public class PopupMenuControllerWithTimePassedReaction extends PopupMenuController {
-    private Command timePassedReaction;
+    private final Command timePassedReaction;
 
-    public PopupMenuControllerWithTimePassedReaction(Menu menu, GameController controller, GameControllerState backState,
-                                                     Command timePassedReaction) {
+    public PopupMenuControllerWithTimePassedReaction(Menu menu, GameController controller,
+                                                     GameControllerState backState, Command timePassedReaction) {
         super(menu, controller, backState);
         this.timePassedReaction = timePassedReaction;
     }
