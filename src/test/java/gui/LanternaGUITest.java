@@ -1,5 +1,6 @@
 package gui;
 
+import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
@@ -69,6 +70,7 @@ class LanternaGUITest {
             return TextCharacter.fromCharacter(c, fg, bg)[0];
         });
 
+        Mockito.when(this.terminal.getTerminalSize()).thenReturn(new TerminalSize(50, 50));
         gui = new LanternaGUI(terminal, screen);
     }
 
