@@ -2,6 +2,7 @@ package gui.drawer.entity;
 
 import gui.Color;
 import gui.GUI;
+import gui.drawer.shape.BoxDrawer;
 import model.Position;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 public class FencesViewerTest {
-/*
+
     private GUI gui;
     private Color backgroundColors[][] = new Color[10][10];
     private Color foregroundColors[][] = new Color[10][10];
@@ -78,12 +79,13 @@ public class FencesViewerTest {
 
     @Test
     void draw() {
-        FencesViewer drawer = new FencesViewer(gui);
-        drawer.draw(new Position(2, 2), 5, 5);
+        Position position = new Position(2, 2);
+        BoxDrawer drawer = new BoxDrawer(gui, Color.GRASS, Color.WOOD);
+        drawer.draw(position, 5, 5);
 
         Color BLACK = Color.BLACK;
         Color WHITE = Color.WHITE;
-        Color FENCES_BACKGROUND = new Color("#7EC850");
+        Color FENCES_BACKGROUND = new Color("#7ec850");
         Color FENCES_COLOR = new Color("#846f46");
         char HORIZONTAL_LINE = '-';
         char VERTICAL_LINE = '|';
@@ -135,5 +137,4 @@ public class FencesViewerTest {
         }
     }
 
- */
 }
