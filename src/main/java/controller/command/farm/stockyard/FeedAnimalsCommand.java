@@ -2,10 +2,9 @@ package controller.command.farm.stockyard;
 
 import controller.command.Command;
 import model.farm.Inventory;
-import model.farm.building.Stockyard;
-import model.farm.building.stockyard_state.NotProducing;
-import model.farm.building.stockyard_state.Producing;
-import model.farm.data.item.Crop;
+import model.farm.building.stockyard.Stockyard;
+import model.farm.building.stockyard.state.NotProducing;
+import model.farm.building.stockyard.state.Producing;
 
 public class FeedAnimalsCommand implements Command {
     private final Inventory inventory;
@@ -20,7 +19,7 @@ public class FeedAnimalsCommand implements Command {
     public void execute() {
         if (this.stockyard.getState() instanceof NotProducing) {
             this.stockyard.setState(new Producing(this.stockyard));
-            this.inventory.removeItem(this.stockyard.getLivestockType().getFoodCrop(), this.stockyard.getFeedQuantity());
+            this.inventory.removeItem(this.stockyard.getLivestockType().getFoodCrop(), this.stockyard.getRequiredFood());
         }
     }
 }

@@ -5,7 +5,7 @@ import gui.GUI;
 import gui.drawer.shape.BoxDrawer;
 import model.Position;
 import model.farm.entity.Animal;
-import model.farm.building.Stockyard;
+import model.farm.building.stockyard.Stockyard;
 import viewer.farm.element.entity.AnimalViewer;
 
 public class StockyardViewer {
@@ -40,7 +40,7 @@ public class StockyardViewer {
         char animalChar = stockyard.getAnimalChar();
         Color animalColor = stockyard.getAnimalColor();
 
-        for (Animal animal: stockyard.getAnimals()) {
+        for (Animal animal: stockyard.getAnimals().getList()) {
             animalViewer.draw(animal, animalChar, animalColor, gui);
         }
     }

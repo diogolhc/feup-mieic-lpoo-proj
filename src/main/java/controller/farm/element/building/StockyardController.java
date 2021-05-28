@@ -15,12 +15,13 @@ import controller.menu.builder.stockyard.FeedAnimalsMenuControllerBuilder;
 //import controller.menu.builder.stockyard.ProducingMenuControllerBuilder;
 import controller.menu.builder.stockyard.ProducingMenuControllerBuilder;
 import model.InGameTime;
+import model.farm.building.stockyard.StockyardAnimals;
 import model.farm.entity.Animal;
 import model.farm.Farm;
-import model.farm.building.Stockyard;
-import model.farm.building.stockyard_state.NotProducing;
-import model.farm.building.stockyard_state.Producing;
-import model.farm.building.stockyard_state.ReadyToCollect;
+import model.farm.building.stockyard.Stockyard;
+import model.farm.building.stockyard.state.NotProducing;
+import model.farm.building.stockyard.state.Producing;
+import model.farm.building.stockyard.state.ReadyToCollect;
 
 public class StockyardController extends BuildingController<Stockyard> {
     private final GameController controller;
@@ -63,8 +64,9 @@ public class StockyardController extends BuildingController<Stockyard> {
     }
 
     public void reactTimePassed(Stockyard stockyard, InGameTime elapsedTime) {
-        AnimalController animalController = new AnimalController(stockyard);
-        for (Animal animal: stockyard.getAnimals()) {
+        StockyardAnimals animals = stockyard.getAnimals();
+        AnimalController animalController = new AnimalController(animals);
+        for (Animal animal: animals.getList()) {
             animalController.reactTimePassed(animal, elapsedTime);
         }
 

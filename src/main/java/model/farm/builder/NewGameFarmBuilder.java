@@ -5,6 +5,7 @@ import model.Position;
 import model.farm.*;
 import model.farm.Currency;
 import model.farm.building.*;
+import model.farm.building.crop_field.CropField;
 import model.farm.data.Livestock;
 import model.farm.data.Weather;
 import model.farm.entity.Entity;

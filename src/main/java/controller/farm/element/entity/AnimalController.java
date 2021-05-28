@@ -2,16 +2,16 @@ package controller.farm.element.entity;
 
 import model.InGameTime;
 import model.Position;
+import model.farm.building.stockyard.StockyardAnimals;
 import model.farm.entity.Animal;
-import model.farm.building.Stockyard;
 
 public class AnimalController {
     private static final InGameTime MIN_NEXT_MOVEMENT = new InGameTime(1);
     private static final InGameTime MAX_NEXT_MOVEMENT = new InGameTime(7);
-    private Stockyard stockyard;
+    private final StockyardAnimals stockyardAnimals;
 
-    public AnimalController(Stockyard stockyard) {
-        this.stockyard = stockyard;
+    public AnimalController(StockyardAnimals stockyardAnimals) {
+        this.stockyardAnimals = stockyardAnimals;
     }
 
     public void reactTimePassed(Animal animal, InGameTime elapsedTime) {
@@ -21,12 +21,12 @@ public class AnimalController {
             InGameTime randomTime = InGameTime.getRandom(MIN_NEXT_MOVEMENT, MAX_NEXT_MOVEMENT);
             animal.setIdleTime(animal.getIdleTime().add(randomTime));
 
-            move(animal, animal.getPosition().getRandomNeighbour());
+            this.move(animal, animal.getPosition().getRandomNeighbour());
         }
     }
 
     private void move(Animal animal, Position position) {
-        if (stockyard.isTraversableForAnimals(position)) {
+        if (this.stockyardAnimals.canAnimalMoveTo(position)) {
             animal.setPosition(position);
         }
     }

@@ -8,7 +8,7 @@ import model.farm.building.Edifice;
 import model.farm.building.Edifice;
 import model.farm.entity.Entity;
 import model.farm.building.Edifice;
-import model.farm.building.CropField;
+import model.farm.building.crop_field.CropField;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

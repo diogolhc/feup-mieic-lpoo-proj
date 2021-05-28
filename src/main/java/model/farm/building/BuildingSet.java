@@ -1,6 +1,8 @@
 package model.farm.building;
 
 import model.Position;
+import model.farm.building.crop_field.CropField;
+import model.farm.building.stockyard.Stockyard;
 import model.region.RectangleRegion;
 
 import java.io.Serializable;

@@ -1,30 +1,29 @@
-package model.farm.building;
+package model.farm.building.stockyard;
 
 import gui.Color;
 import model.InGameTime;
 import model.Position;
-import model.farm.entity.Animal;
 import model.farm.Currency;
+import model.farm.building.Buildable;
 import model.farm.data.Livestock;
-import model.farm.building.stockyard_state.NotProducing;
-import model.farm.building.stockyard_state.StockyardState;
+import model.farm.building.stockyard.state.NotProducing;
+import model.farm.building.stockyard.state.StockyardState;
 import model.region.PositionRegion;
 import model.region.RectangleRegion;
 import model.region.Region;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class Stockyard extends Buildable {
     private final Livestock livestockType;
-    private final List<Animal> animals;
+    private final StockyardAnimals animals;
     private StockyardState state;
 
     public Stockyard(Position topLeft, Livestock livestockType) {
         super(topLeft);
         this.livestockType = livestockType;
-        this.animals = new ArrayList<>();
+        RectangleRegion animalRegion = new RectangleRegion(topLeft, this.getWidth(), this.getHeight());
+        this.animals = new StockyardAnimals(animalRegion, this.livestockType.getMaxNumAnimals());
         this.state = new NotProducing();
     }
 
@@ -61,64 +60,26 @@ public class Stockyard extends Buildable {
         return livestockType.getAnimalName() + " S.Y.";
     }
 
-    public void addAnimal() {
-        Position animalPosition;
-
-        do {
-            int x = (int) (Math.random() * this.getAnimalsRegion().getWidth());
-            int y = (int) (Math.random() * this.getAnimalsRegion().getHeight());
-
-            animalPosition = this.getAnimalsRegion().getTopLeftPosition().getTranslated(new Position(x, y));
-        } while (isAnimalAt(animalPosition));
-
-        addAnimal(animalPosition);
+    @Override
+    public void setTopLeftPosition(Position topLeft) {
+        super.setTopLeftPosition(topLeft);
+        this.animals.setTopLeftPosition(topLeft);
     }
 
-    public void addAnimal(Position animalPosition) {
-        this.animals.add(new Animal(animalPosition));
-    }
-
-    public void removeAnimal() {
-        if (this.animals.size() > 0) {
-            this.animals.remove(0);
-        }
-    }
-
-    public boolean isFull() {
-        return this.animals.size() >= livestockType.getMaxNumAnimals();
-    }
-
-    public boolean isEmpty() { return this.animals.size() <= 0; }
-
-    public List<Animal> getAnimals() {
+    public StockyardAnimals getAnimals() {
         return this.animals;
-    }
-
-    public boolean isAnimalAt(Position position) {
-        for (Animal animal: animals) {
-            if (animal.getPosition().equals(position)) return true;
-        }
-        return false;
-    }
-
-    private RectangleRegion getAnimalsRegion() {
-        return new RectangleRegion(
-                this.getTopLeftPosition().getTranslated(new Position(2, 1)),
-                this.getWidth() - 3,
-                this.getHeight() - 2);
-    }
-
-    public boolean isTraversableForAnimals(Position position) {
-        return this.getAnimalsRegion().contains(position)
-                && !this.isAnimalAt(position);
     }
 
     public Livestock getLivestockType() {
         return this.livestockType;
     }
 
-    public int getFeedQuantity() {
-        return this.animals.size() * this.livestockType.getRequiredFood();
+    public int getRequiredFood() {
+        return this.livestockType.getRequiredFood() * this.animals.getSize();
+    }
+
+    public double getBaseProducedAmount() {
+        return this.livestockType.getProducedItem().getBaseProducedAmount() * this.animals.getSize();
     }
 
     public void setState(StockyardState state) {

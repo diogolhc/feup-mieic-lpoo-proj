@@ -8,8 +8,8 @@ import controller.farm.element.building.CropFieldController;
 import controller.farm.element.building.*;
 import model.InGameTime;
 import model.farm.Farm;
-import model.farm.building.CropField;
-import model.farm.building.Stockyard;
+import model.farm.building.crop_field.CropField;
+import model.farm.building.stockyard.Stockyard;
 
 public abstract class FarmController implements GameControllerState {
     protected Farm farm;

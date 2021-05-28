@@ -1,21 +1,25 @@
 package controller.command.farm.stockyard;
 
 import controller.command.Command;
+import model.farm.Currency;
 import model.farm.Farm;
-import model.farm.building.Stockyard;
+import model.farm.building.stockyard.Stockyard;
+import model.farm.building.stockyard.StockyardAnimals;
 
 public class SellAnimalCommand implements Command {
     private final Farm farm;
-    private final Stockyard stockyard;
+    private final StockyardAnimals stockyardAnimals;
+    private Currency sellPrice;
 
-    public SellAnimalCommand(Farm farm, Stockyard stockyard) {
+    public SellAnimalCommand(Farm farm, StockyardAnimals stockyardAnimals, Currency sellPrice) {
         this.farm = farm;
-        this.stockyard = stockyard;
+        this.stockyardAnimals = stockyardAnimals;
+        this.sellPrice = sellPrice;
     }
 
     @Override
     public void execute() {
-        this.stockyard.removeAnimal();
-        this.farm.setCurrency(this.farm.getCurrency().add(this.stockyard.getLivestockType().getAnimalSellPrice()));
+        this.stockyardAnimals.removeAnimal();
+        this.farm.setCurrency(this.farm.getCurrency().add(this.sellPrice));
     }
 }

@@ -1,7 +1,7 @@
-package model.farm.building.crop_field_state;
+package model.farm.building.crop_field.state;
 
 import model.InGameTime;
-import model.farm.building.CropField;
+import model.farm.building.crop_field.CropField;
 import model.farm.data.item.Crop;
 
 public class Planted implements CropFieldState {

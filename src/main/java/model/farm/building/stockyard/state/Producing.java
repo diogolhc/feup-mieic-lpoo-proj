@@ -1,9 +1,8 @@
-package model.farm.building.stockyard_state;
+package model.farm.building.stockyard.state;
 
 import gui.Color;
 import model.InGameTime;
-import model.farm.building.Stockyard;
-import model.farm.data.item.AnimalProduct;
+import model.farm.building.stockyard.Stockyard;
 
 public class Producing implements StockyardState {
     private final Stockyard stockyard;
@@ -12,9 +11,8 @@ public class Producing implements StockyardState {
 
     public Producing(Stockyard stockyard) {
         this.stockyard = stockyard;
-        AnimalProduct product = stockyard.getLivestockType().getProducedItem();
-        this.collectAmount = product.getBaseProducedAmount() * this.stockyard.getAnimals().size();
-        this.timeRemaining = product.getProductionTime();
+        this.collectAmount = this.stockyard.getBaseProducedAmount();
+        this.timeRemaining = stockyard.getLivestockType().getProducedItem().getProductionTime();
     }
 
     @Override

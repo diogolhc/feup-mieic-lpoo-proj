@@ -1,9 +1,9 @@
 package controller.command.farm.stockyard;
 
 import controller.command.Command;
-import model.farm.building.Stockyard;
-import model.farm.building.stockyard_state.NotProducing;
-import model.farm.building.stockyard_state.Producing;
+import model.farm.building.stockyard.Stockyard;
+import model.farm.building.stockyard.state.NotProducing;
+import model.farm.building.stockyard.state.Producing;
 
 public class StopProducingStockyardCommand implements Command {
     private final Stockyard stockyard;

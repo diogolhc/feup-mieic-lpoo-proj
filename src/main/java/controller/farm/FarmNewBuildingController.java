@@ -7,8 +7,8 @@ import controller.menu.builder.info.AlertMenuControllerBuilder;
 import gui.GUI;
 import model.Position;
 import model.farm.building.Buildable;
-import model.farm.building.CropField;
-import model.farm.building.Stockyard;
+import model.farm.building.crop_field.CropField;
+import model.farm.building.stockyard.Stockyard;
 import viewer.GameViewer;
 import viewer.farm.FarmNewBuildingViewer;
 

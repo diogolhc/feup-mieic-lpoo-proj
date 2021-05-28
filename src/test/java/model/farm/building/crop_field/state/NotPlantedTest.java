@@ -1,20 +1,17 @@
-package model.farm.building.crop_field_state;
+package model.farm.building.crop_field.state;
 
 import model.InGameTime;
-import model.farm.data.item.Crop;
-import model.farm.building.CropField;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
-public class ReadyToHarvestTest {
-    private ReadyToHarvest state;
+public class NotPlantedTest {
+    private NotPlanted state;
     private InGameTime zero = new InGameTime(0);
 
     @BeforeEach
     void setUp() {
-        state = new ReadyToHarvest(Mockito.mock(CropField.class), Mockito.mock(Crop.class), 1);
+        state = new NotPlanted();
     }
 
     @Test

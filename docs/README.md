@@ -262,7 +262,7 @@ These classes can be found in the following files:
 - [PlantCropCommand](../src/main/java/controller/command/PlantCropCommand.java)
 - [OpenPopupMenuCommand](../src/main/java/controller/command/OpenPopupMenuCommand.java)
 - [SetControllerStateCommand](../src/main/java/controller/command/SetControllerStateCommand.java)
-- [CropField](../src/main/java/model/farm/building/CropField.java)
+- [CropField](../src/main/java/model/farm/building/crop_field/CropField.java)
 - [GameController](../src/main/java/controller/GameController.java)
 
 #### Consequences

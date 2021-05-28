@@ -10,7 +10,7 @@ import controller.menu.builder.info.AlertMenuControllerBuilder;
 import controller.menu.builder.PopupMenuControllerBuilder;
 import model.Position;
 import model.farm.Farm;
-import model.farm.building.CropField;
+import model.farm.building.crop_field.CropField;
 import model.farm.data.item.Crop;
 import model.menu.Button;
 import model.menu.label.Label;

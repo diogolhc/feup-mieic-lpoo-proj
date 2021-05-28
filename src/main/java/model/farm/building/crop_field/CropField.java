@@ -1,12 +1,13 @@
-package model.farm.building;
+package model.farm.building.crop_field;
 
 import model.InGameTime;
 import model.Position;
 import model.farm.Currency;
+import model.farm.building.Buildable;
 import model.farm.data.item.Crop;
 import model.farm.data.item.CropGrowthStage;
-import model.farm.building.crop_field_state.CropFieldState;
-import model.farm.building.crop_field_state.NotPlanted;
+import model.farm.building.crop_field.state.CropFieldState;
+import model.farm.building.crop_field.state.NotPlanted;
 import model.region.RectangleRegion;
 import model.region.Region;
 
