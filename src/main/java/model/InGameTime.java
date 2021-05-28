@@ -35,7 +35,7 @@ public class InGameTime implements Comparable<InGameTime>, Serializable {
         } else if (tokens.length == 3) {
             return new InGameTime(Integer.parseInt(tokens[0]), Integer.parseInt(tokens[1]), Integer.parseInt(tokens[2]));
         } else {
-            throw new IllegalArgumentException("Can't parse string " + s + " as IngamTime.");
+            throw new IllegalArgumentException("Can't parse string " + s + " as InGamTime.");
         }
     }
 
