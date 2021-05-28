@@ -19,6 +19,7 @@ public class SellAnimalCommandTest {
     private Command command;
     private Livestock livestock;
 
+
     @BeforeEach
     public void setUp() {
         stateNotProducing = Mockito.mock(NotProducing.class);
@@ -36,6 +37,7 @@ public class SellAnimalCommandTest {
         stockyard.getAnimals().addAnimal();
 
         Mockito.when(stockyard.getLivestockType().getAnimalSellPrice()).thenReturn(new Currency(10));
+
         command = new SellAnimalCommand(wallet, stockyard.getAnimals(), new Currency(10));
     }
 
