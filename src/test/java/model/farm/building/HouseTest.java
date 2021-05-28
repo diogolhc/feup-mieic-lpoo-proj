@@ -1,11 +1,5 @@
 package model.farm.building;
 
-import model.Position;
-import model.farm.building.edifice.House;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 public class HouseTest {
 
     private House house;

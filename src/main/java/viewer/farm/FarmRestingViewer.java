@@ -2,7 +2,7 @@ package viewer.farm;
 
 import gui.GUI;
 import model.farm.Farm;
-import model.farm.building.edifice.House;
+import model.farm.building.Edifice;
 import viewer.farm.element.RestingMarkerViewer;
 
 public class FarmRestingViewer extends FarmViewer {
@@ -16,7 +16,7 @@ public class FarmRestingViewer extends FarmViewer {
         this.drawRestingMarker(this.farm.getBuildings().getHouse(), new RestingMarkerViewer(), gui);
     }
 
-    private void drawRestingMarker(House house, RestingMarkerViewer markerViewer, GUI gui) {
+    private void drawRestingMarker(Edifice house, RestingMarkerViewer markerViewer, GUI gui) {
         markerViewer.draw(house, gui);
     }
 }

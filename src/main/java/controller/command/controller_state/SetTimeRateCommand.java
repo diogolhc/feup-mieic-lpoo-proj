@@ -1,13 +1,13 @@
 package controller.command.controller_state;
 
-import controller.RealTimeToInGameTimeConverter;
+import controller.TimeConverter;
 import controller.command.Command;
 
 public class SetTimeRateCommand implements Command {
-    private final RealTimeToInGameTimeConverter timeConverter;
+    private final TimeConverter timeConverter;
     private final long rate;
 
-    public SetTimeRateCommand(RealTimeToInGameTimeConverter timeConverter, long rate) {
+    public SetTimeRateCommand(TimeConverter timeConverter, long rate) {
         this.timeConverter = timeConverter;
         this.rate = rate;
     }

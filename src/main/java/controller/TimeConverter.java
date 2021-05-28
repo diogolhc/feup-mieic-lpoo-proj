@@ -2,13 +2,13 @@ package controller;
 
 import model.InGameTime;
 
-public class RealTimeToInGameTimeConverter {
+public class TimeConverter {
     private static final long SECS_TO_MILLI = 1000;
     private final long baseRate;
     private long rateMultiplier;
     private long leftoverTime;
 
-    public RealTimeToInGameTimeConverter(long realSecToGameMinutesRate) {
+    public TimeConverter(long realSecToGameMinutesRate) {
         this.baseRate = realSecToGameMinutesRate;
         this.rateMultiplier = 1;
         this.leftoverTime = 0;

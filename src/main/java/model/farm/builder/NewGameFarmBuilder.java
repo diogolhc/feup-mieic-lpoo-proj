@@ -5,9 +5,6 @@ import model.Position;
 import model.farm.*;
 import model.farm.Currency;
 import model.farm.building.*;
-import model.farm.building.edifice.House;
-import model.farm.building.edifice.Market;
-import model.farm.building.edifice.Warehouse;
 import model.farm.data.Livestock;
 import model.farm.data.Weather;
 import model.farm.entity.Entity;
@@ -60,9 +57,10 @@ public class NewGameFarmBuilder extends FarmBuilder {
     @Override
     protected BuildingSet getBuildings() {
         BuildingSet buildingSet = new BuildingSet();
-        buildingSet.setHouse(new House(new Position(2, 1)));
-        buildingSet.setMarket(new Market(new Position(10, 1)));
-        buildingSet.setWarehouse(new Warehouse(new Position(18, 1)));
+
+        buildingSet.setHousePosition(new Position(2, 1));
+        buildingSet.setMarketPosition(new Position(10, 1));
+        buildingSet.setWarehousePosition(new Position(18, 1));
 
         buildingSet.addCropField(new CropField(new Position(2, 10)));
 

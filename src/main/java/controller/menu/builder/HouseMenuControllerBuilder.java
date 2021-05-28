@@ -1,7 +1,6 @@
 package controller.menu.builder;
 
 import controller.GameController;
-import controller.RealTimeToInGameTimeConverter;
 import controller.command.*;
 import controller.command.controller_state.SetControllerStateCommand;
 import controller.command.controller_state.SetTimeRateCommand;
@@ -10,32 +9,31 @@ import controller.farm.FarmController;
 import controller.farm.FarmRestingController;
 import controller.menu.element.ButtonController;
 import model.Position;
-import model.farm.building.edifice.House;
+import model.farm.building.Edifice;
 import model.menu.Button;
 
 import java.util.List;
 
 public class HouseMenuControllerBuilder extends PopupMenuControllerBuilder {
-    private House house;
-    private RealTimeToInGameTimeConverter timeConverter;
+    private Edifice house;
+    private int sleepRateMultiplier;
     private FarmController farmController;
 
-    public HouseMenuControllerBuilder(GameController controller, FarmController farmController,
-                                      RealTimeToInGameTimeConverter timeConverter, House house) {
+    public HouseMenuControllerBuilder(GameController controller, FarmController farmController, Edifice house,
+                                      int sleepRateMultiplier) {
         super(controller);
         this.farmController = farmController;
-        this.timeConverter = timeConverter;
         this.house = house;
+        this.sleepRateMultiplier = sleepRateMultiplier;
     }
 
     @Override
     protected List<ButtonController> getButtons() {
         List<ButtonController> buttons = super.getButtons();
 
-
         Button restButton = new Button(new Position(1, 4), "REST");
         Command restCommand = new CompoundCommand()
-                .addCommand(new SetTimeRateCommand(this.timeConverter, this.house.getRestRate()))
+                .addCommand(new SetTimeRateCommand(this.farmController.getTimeConverter(), this.sleepRateMultiplier))
                 .addCommand(new SetControllerStateCommand(this.controller, new FarmRestingController(this.farmController)));
 
         buttons.add(new ButtonController(restButton, restCommand));
@@ -60,6 +58,6 @@ public class HouseMenuControllerBuilder extends PopupMenuControllerBuilder {
 
     @Override
     protected String getTitle() {
-        return "HOUSE";
+        return house.getName();
     }
 }

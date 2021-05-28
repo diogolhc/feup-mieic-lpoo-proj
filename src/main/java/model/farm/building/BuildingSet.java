@@ -1,9 +1,6 @@
 package model.farm.building;
 
 import model.Position;
-import model.farm.building.edifice.House;
-import model.farm.building.edifice.Market;
-import model.farm.building.edifice.Warehouse;
 import model.region.RectangleRegion;
 
 import java.io.Serializable;
@@ -15,11 +12,14 @@ import java.util.Set;
 public class BuildingSet implements Serializable {
     private final Set<CropField> cropFields;
     private final Set<Stockyard> stockyards;
-    private House house;
-    private Market market;
-    private Warehouse warehouse;
+    private final Edifice house;
+    private final Edifice market;
+    private final Edifice warehouse;
 
     public BuildingSet() {
+        this.house = new Edifice("HOUSE");
+        this.market = new Edifice("MARKET");
+        this.warehouse = new Edifice("WAREHOUSE");
         this.cropFields = new HashSet<>();
         this.stockyards = new HashSet<>();
     }
@@ -80,27 +80,27 @@ public class BuildingSet implements Serializable {
 
     public Set<Stockyard> getStockyards() { return this.stockyards; }
 
-    public House getHouse() {
+    public Edifice getHouse() {
         return this.house;
     }
 
-    public void setHouse(House house) {
-        this.house = house;
+    public void setHousePosition(Position position) {
+        this.house.setTopLeftPosition(position);
     }
 
-    public Market getMarket() {
+    public Edifice getMarket() {
         return this.market;
     }
 
-    public void setMarket(Market market) {
-        this.market = market;
+    public void setMarketPosition(Position position) {
+        this.market.setTopLeftPosition(position);
     }
 
-    public Warehouse getWarehouse() {
+    public Edifice getWarehouse() {
         return this.warehouse;
     }
 
-    public void setWarehouse(Warehouse warehouse) {
-        this.warehouse = warehouse;
+    public void setWarehousePosition(Position position) {
+        this.warehouse.setTopLeftPosition(position);
     }
 }

@@ -7,7 +7,7 @@ import model.farm.Farm;
 import model.farm.building.edifice.Market;
 import model.farm.building.edifice.Warehouse;
 import model.farm.entity.Entity;
-import model.farm.building.edifice.House;
+import model.farm.building.Edifice;
 import model.farm.building.CropField;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,9 +20,11 @@ public class FarmerControllerTest {
     @BeforeEach
     public void setUp() {
         farm = new Farm(20, 20);
-        farm.getBuildings().setHouse(new House(new Position(1, 1)));
-        farm.getBuildings().setMarket(new Market(new Position(9, 1)));
-        farm.getBuildings().setWarehouse(new Warehouse(new Position(17, 1)));
+
+        farm.getBuildings().setHousePosition(new Position(1, 1));
+        farm.getBuildings().setMarketPosition(new Position(9, 1));
+        farm.getBuildings().setWarehousePosition(new Position(17, 1));
+
         farm.setFarmer(new Entity(new Position(10, 10)));
         controller = new FarmerController(farm);
     }
@@ -53,7 +55,7 @@ public class FarmerControllerTest {
 
     @Test
     public void cantMove() {
-        farm.getBuildings().setHouse(new House(new Position(10, 10)));
+        farm.getBuildings().setHouse(new Edifice(new Position(10, 10)));
         controller.reactKeyboard(GUI.KEYBOARD_ACTION.MOVE_DOWN);
         Assertions.assertEquals(new Position(10, 10), farm.getFarmer().getPosition());
         controller.reactKeyboard(GUI.KEYBOARD_ACTION.MOVE_RIGHT);

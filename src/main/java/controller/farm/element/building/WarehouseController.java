@@ -4,28 +4,20 @@ import controller.GameController;
 import controller.command.Command;
 import controller.command.controller_state.OpenPopupMenuCommand;
 import controller.menu.builder.*;
-import controller.menu.builder.info.AlertMenuControllerBuilder;
 import model.farm.Farm;
-import model.farm.building.edifice.Warehouse;
+import model.farm.building.Edifice;
 
-public class WarehouseController extends BuildingController<Warehouse> {
-    private final GameController controller;
+public class WarehouseController extends EdificeController {
     private Farm farm;
 
     public WarehouseController(GameController controller, Farm farm) {
-        this.controller = controller;
+        super(controller);
         this.farm = farm;
     }
 
     @Override
-    public Command getInteractionCommand(Warehouse warehouse) {
+    public Command getInteractionCommand(Edifice warehouse) {
         PopupMenuControllerBuilder menuControllerBuilder = new WarehouseMenuControllerBuilder(this.controller, farm);
         return new OpenPopupMenuCommand(this.controller, menuControllerBuilder);
-    }
-
-    @Override
-    public Command getDemolishCommand(Warehouse warehouse) {
-        return new OpenPopupMenuCommand(this.controller, new AlertMenuControllerBuilder(this.controller,
-                "WAREHOUSE CANNOT BE DEMOLISHED"));
     }
 }

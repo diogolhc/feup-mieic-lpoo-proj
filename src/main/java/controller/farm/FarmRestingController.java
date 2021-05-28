@@ -28,7 +28,7 @@ public class FarmRestingController extends FarmController {
     public void reactMouseClick(Position position) {}
 
     private void returnToFarmerController() {
-        this.realTimeToInGameTimeConverter.setRateMultiplier(1);
+        this.timeConverter.setRateMultiplier(1);
         this.controller.setGameControllerState(new FarmWithFarmerController(this));
     }
 

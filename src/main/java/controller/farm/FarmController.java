@@ -2,7 +2,7 @@ package controller.farm;
 
 import controller.GameController;
 import controller.GameControllerState;
-import controller.RealTimeToInGameTimeConverter;
+import controller.TimeConverter;
 import controller.farm.element.WeatherController;
 import controller.farm.element.building.CropFieldController;
 import controller.farm.element.building.*;
@@ -14,26 +14,30 @@ import model.farm.building.Stockyard;
 public abstract class FarmController implements GameControllerState {
     protected Farm farm;
     protected GameController controller;
-    protected RealTimeToInGameTimeConverter realTimeToInGameTimeConverter;
+    protected TimeConverter timeConverter;
     protected WeatherController weatherController;
 
     public FarmController(FarmController farmController) {
         this.farm = farmController.farm;
         this.controller = farmController.controller;
-        this.realTimeToInGameTimeConverter = farmController.realTimeToInGameTimeConverter;
+        this.timeConverter = farmController.timeConverter;
         this.weatherController = farmController.weatherController;
     }
 
     public FarmController(Farm farm, GameController controller, long realSecToGameMinutesRate) {
         this.farm = farm;
         this.controller = controller;
-        this.realTimeToInGameTimeConverter = new RealTimeToInGameTimeConverter(realSecToGameMinutesRate);
+        this.timeConverter = new TimeConverter(realSecToGameMinutesRate);
         this.weatherController = new WeatherController(this.farm);
+    }
+
+    public TimeConverter getTimeConverter() {
+        return this.timeConverter;
     }
 
     @Override
     public void reactTimePassed(long elapsedTimeSinceLastFrame) {
-        InGameTime elapsedTime = this.realTimeToInGameTimeConverter.convert(elapsedTimeSinceLastFrame);
+        InGameTime elapsedTime = this.timeConverter.convert(elapsedTimeSinceLastFrame);
 
         this.farm.setTime(this.farm.getTime().add(elapsedTime));
 

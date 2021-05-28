@@ -7,15 +7,10 @@ import model.farm.building.BuildingSet;
 import model.farm.data.Livestock;
 import model.farm.entity.Entity;
 import model.farm.Inventory;
-import model.farm.building.edifice.House;
-import model.farm.building.edifice.Market;
-import model.farm.building.edifice.Warehouse;
-import model.farm.building.CropField;
 import model.farm.data.item.Crop;
 import model.farm.data.Weather;
 
 import java.util.List;
-import java.util.Set;
 
 public abstract class FarmBuilder {
     public Farm buildFarm() {

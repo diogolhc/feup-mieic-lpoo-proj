@@ -1,30 +1,26 @@
 package controller.farm.element.building;
 
 import controller.GameController;
-import controller.RealTimeToInGameTimeConverter;
 import controller.command.Command;
 import controller.command.controller_state.OpenPopupMenuCommand;
 import controller.farm.FarmController;
-import controller.menu.builder.info.AlertMenuControllerBuilder;
 import controller.menu.builder.PopupMenuControllerBuilder;
 import controller.menu.builder.HouseMenuControllerBuilder;
-import model.farm.building.edifice.House;
+import model.farm.building.Edifice;
 
-public class HouseController extends BuildingController<House> {
-    private final GameController controller;
-    private RealTimeToInGameTimeConverter timeConverter;
+public class HouseController extends EdificeController {
+    public static final int SLEEP_RATE_MULTIPLIER = 15;
 
-    public HouseController(GameController controller, RealTimeToInGameTimeConverter timeConverter) {
-        this.controller = controller;
-        this.timeConverter = timeConverter;
+    public HouseController(GameController controller) {
+        super(controller);
     }
 
     @Override
-    public Command getInteractionCommand(House house) {
+    public Command getInteractionCommand(Edifice house) {
         if (this.controller.getGameControllerState() instanceof FarmController) {
             FarmController farmController = (FarmController) this.controller.getGameControllerState();
             PopupMenuControllerBuilder menuControllerBuilder = new HouseMenuControllerBuilder(
-                    this.controller, farmController, timeConverter, house);
+                    this.controller, farmController, house, SLEEP_RATE_MULTIPLIER);
             return new OpenPopupMenuCommand(this.controller, menuControllerBuilder);
         } else {
             // This never happens because the interaction command is retrieved after
@@ -32,11 +28,5 @@ public class HouseController extends BuildingController<House> {
             throw new RuntimeException(
                     "LOGIC ERROR: Open market in invalid state: " + this.controller.getGameControllerState().getClass().toString());
         }
-    }
-
-    @Override
-    public Command getDemolishCommand(House house) {
-        return new OpenPopupMenuCommand(this.controller, new AlertMenuControllerBuilder(this.controller,
-                "HOUSE CANNOT BE DEMOLISHED"));
     }
 }

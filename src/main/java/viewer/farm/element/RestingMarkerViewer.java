@@ -3,13 +3,13 @@ package viewer.farm.element;
 import gui.Color;
 import gui.GUI;
 import model.Position;
-import model.farm.building.edifice.House;
+import model.farm.building.Edifice;
 
 public class RestingMarkerViewer {
     public static final char RESTING_MARKER = 'Z';
     public static final Color RESTING_MARKER_COLOR = new Color("#00008b");
 
-    public void draw(House house, GUI gui) {
+    public void draw(Edifice house, GUI gui) {
         Position position = house
                 .getTopLeftPosition()
                 .getTranslated(new Position(2, 2));

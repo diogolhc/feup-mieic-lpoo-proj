@@ -9,9 +9,7 @@ import model.Position;
 import model.farm.Currency;
 import model.farm.building.*;
 import model.farm.Farm;
-import model.farm.building.edifice.House;
-import model.farm.building.edifice.Market;
-import model.farm.building.edifice.Warehouse;
+import model.farm.building.Edifice;
 import model.farm.data.Weather;
 import viewer.GameViewer;
 import viewer.farm.element.*;
@@ -64,17 +62,17 @@ public abstract class FarmViewer extends GameViewer {
         }
     }
 
-    private void drawHouse(House house, GUI gui) {
+    private void drawHouse(Edifice house, GUI gui) {
         EdificeViewer houseViewer = new EdificeViewer(new Color("#c20000"));
         houseViewer.draw(house.getTopLeftPosition(), gui);
     }
 
-    private void drawMarket(Market market, GUI gui) {
+    private void drawMarket(Edifice market, GUI gui) {
         EdificeViewer marketViewer = new EdificeViewer(new Color("#00c200"));
         marketViewer.draw(market.getTopLeftPosition(), gui);
     }
 
-    private void drawWarehouse(Warehouse warehouse, GUI gui) {
+    private void drawWarehouse(Edifice warehouse, GUI gui) {
         EdificeViewer warehouseViewer = new EdificeViewer(new Color("#0099c2"));
         warehouseViewer.draw(warehouse.getTopLeftPosition(), gui);
     }

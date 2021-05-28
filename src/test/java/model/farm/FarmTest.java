@@ -1,7 +1,7 @@
 package model.farm;
 
 import model.Position;
-import model.farm.building.edifice.House;
+import model.farm.building.Edifice;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,7 +12,7 @@ public class FarmTest {
     @BeforeEach
     void setUp() {
         farm = new Farm(40, 20);
-        farm.getBuildings().setHouse(new House(new Position(1, 1)));
+        farm.getBuildings().setHouse(new Edifice(new Position(1, 1)));
     }
 
     @Test

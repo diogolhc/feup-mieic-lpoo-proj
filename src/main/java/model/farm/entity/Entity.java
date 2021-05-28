@@ -18,5 +18,4 @@ public class Entity implements Serializable {
     public void setPosition(Position position) {
         this.position = position;
     }
-
 }
