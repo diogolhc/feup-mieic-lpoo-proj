@@ -28,6 +28,7 @@ class LanternaGUITest {
     @BeforeEach
     void setUp() throws IOException {
         this.terminal = Mockito.mock(Terminal.class);
+        Mockito.when(this.terminal.getTerminalSize()).thenReturn(new TerminalSize(10, 10));
         this.screen = Mockito.mock(TerminalScreen.class);
         this.tg = Mockito.mock(TextGraphics.class);
 
