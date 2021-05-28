@@ -1,14 +1,19 @@
 package model.farm.building;
 
+import model.Position;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 public class HouseTest {
 
-    private House house;
-    private House house2;
+    private Edifice house;
+    private Edifice house2;
 
     @BeforeEach
     void setUp() {
-        house = new House(new Position(0, 0));
-        house2 = new House(new Position(5, 7));
+        house = new Edifice(new Position(0, 0), "HOUSE");
+        house2 = new Edifice(new Position(5, 7), "HOUSE");
     }
 
     @Test
