@@ -1,15 +1,12 @@
-package controller.command.stockyard;
+package controller.command.farm.stockyard;
 
 import controller.command.Command;
-import controller.command.farm.stockyard.BuyAnimalCommand;
-import controller.command.farm.stockyard.SellAnimalCommand;
 import model.Position;
 import model.farm.Currency;
 import model.farm.Wallet;
 import model.farm.building.stockyard.Stockyard;
 import model.farm.building.stockyard.state.NotProducing;
 import model.farm.data.Livestock;
-import model.farm.data.item.AnimalProduct;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

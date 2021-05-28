@@ -1,5 +1,6 @@
-package controller.command;
+package controller.command.farm;
 
+import controller.command.Command;
 import controller.command.farm.SellItemCommand;
 import model.farm.Currency;
 import model.farm.Inventory;

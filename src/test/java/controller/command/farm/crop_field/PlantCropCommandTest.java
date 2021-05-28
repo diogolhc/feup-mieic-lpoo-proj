@@ -1,9 +1,12 @@
-package controller.command.crop_field;
+package controller.command.farm.crop_field;
 
 import controller.command.Command;
-import controller.command.farm.crop_field.RemoveCropCommand;
 import model.Position;
+import model.farm.Currency;
+import model.farm.Wallet;
 import model.farm.building.crop_field.CropField;
+import model.farm.data.item.Crop;
+import model.farm.building.crop_field.state.CropFieldState;
 import model.farm.building.crop_field.state.NotPlanted;
 import model.farm.building.crop_field.state.Planted;
 import model.farm.building.crop_field.state.ReadyToHarvest;
@@ -12,40 +15,50 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-public class RemoveCropCommandTest {
+public class PlantCropCommandTest {
+    private Wallet wallet;
     private CropField cropField;
     private ReadyToHarvest stateReady;
     private Planted statePlanted;
     private NotPlanted stateNotPlanted;
     private Command command;
+    private Crop crop;
 
     @BeforeEach
     public void setUp() {
         stateReady = Mockito.mock(ReadyToHarvest.class);
         statePlanted = Mockito.mock(Planted.class);
         stateNotPlanted = Mockito.mock(NotPlanted.class);
+        wallet = new Wallet(new Currency(100));
         cropField = new CropField(new Position(0, 0));
-        command = new RemoveCropCommand(cropField);
+        crop = Mockito.mock(Crop.class);
+        Mockito.when(crop.getPlantPrice()).thenReturn(new Currency(10));
+        command = new PlantCropCommand(wallet, cropField, crop);
     }
 
     @Test
     public void executeReady() {
         cropField.setState(stateReady);
         command.execute();
-        Assertions.assertTrue(cropField.getState() instanceof NotPlanted);
+        Assertions.assertSame(stateReady, cropField.getState());
+        Assertions.assertEquals(100, wallet.getCurrency().getCoins());
     }
 
     @Test
     public void executeNotPlanted() {
         cropField.setState(stateNotPlanted);
         command.execute();
-        Assertions.assertTrue(cropField.getState() instanceof NotPlanted);
+        CropFieldState newState = cropField.getState();
+        Assertions.assertTrue(newState instanceof Planted);
+        Assertions.assertSame(crop, newState.getCrop());
+        Assertions.assertEquals(90, wallet.getCurrency().getCoins());
     }
 
     @Test
     public void executePlanted() {
         cropField.setState(statePlanted);
         command.execute();
-        Assertions.assertTrue(cropField.getState() instanceof NotPlanted);
+        Assertions.assertSame(statePlanted, cropField.getState());
+        Assertions.assertEquals(100, wallet.getCurrency().getCoins());
     }
 }

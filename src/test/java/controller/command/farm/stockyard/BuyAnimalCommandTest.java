@@ -1,10 +1,8 @@
-package controller.command.stockyard;
+package controller.command.farm.stockyard;
 
 import controller.command.Command;
-import controller.command.farm.stockyard.BuyAnimalCommand;
 import model.Position;
 import model.farm.Currency;
-import model.farm.Farm;
 
 import model.farm.Wallet;
 import model.farm.building.stockyard.Stockyard;
