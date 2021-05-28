@@ -80,7 +80,7 @@ public class NewGameFarmBuilder extends FarmBuilder {
 
     @Override
     protected Currency getCurrency() {
-        return new Currency(0);
+        return new Currency(99999);
     }
 
     @Override

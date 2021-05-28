@@ -22,7 +22,7 @@ public class Stockyard extends Buildable {
     public Stockyard(Position topLeft, Livestock livestockType) {
         super(topLeft);
         this.livestockType = livestockType;
-        RectangleRegion animalRegion = new RectangleRegion(topLeft, this.getWidth(), this.getHeight());
+        RectangleRegion animalRegion = new RectangleRegion(topLeft, this.getWidth() - 3, this.getHeight() - 2);
         this.animals = new StockyardAnimals(animalRegion, this.livestockType.getMaxNumAnimals());
         this.state = new NotProducing();
     }

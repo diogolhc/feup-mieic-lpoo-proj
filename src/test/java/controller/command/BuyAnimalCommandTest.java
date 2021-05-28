@@ -4,10 +4,9 @@ import controller.command.farm.stockyard.BuyAnimalCommand;
 import model.Position;
 import model.farm.Currency;
 import model.farm.Farm;
-import model.farm.building.Stockyard;
-import model.farm.building.stockyard_state.NotProducing;
-import model.farm.building.stockyard_state.Producing;
-import model.farm.building.stockyard_state.ReadyToCollect;
+
+import model.farm.building.stockyard.Stockyard;
+import model.farm.building.stockyard.state.NotProducing;
 import model.farm.data.Livestock;
 import model.farm.data.item.AnimalProduct;
 import org.junit.jupiter.api.Assertions;
@@ -33,16 +32,19 @@ public class BuyAnimalCommandTest {
         Mockito.when(stockyard.getLivestockType().getAnimalBuyPrice()).thenReturn(new Currency(10));
         Mockito.when(stockyard.getLivestockType().getProducedItem()).thenReturn(new AnimalProduct("MILK"));
 
-        command = new BuyAnimalCommand(farm, stockyard);
+        command = new BuyAnimalCommand(farm, stockyard.getAnimals(), new Currency(10));
     }
 
 
     @Test
     public void execute() {
         stockyard.setState(stateNotProducing);
+        Assertions.assertEquals(0, stockyard.getAnimals().getSize());
         command.execute();
+
         Assertions.assertSame(stateNotProducing, stockyard.getState());
         Assertions.assertEquals(90, farm.getCurrency().getCoins());
+        Assertions.assertEquals(1, stockyard.getAnimals().getSize());
     }
 
 }
