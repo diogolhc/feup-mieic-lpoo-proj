@@ -1,6 +1,6 @@
-package controller.command;
+package controller.command.farm.crop_field;
 
-import controller.command.farm.crop_field.RemoveCropCommand;
+import controller.command.Command;
 import model.Position;
 import model.farm.building.crop_field.CropField;
 import model.farm.building.crop_field.state.NotPlanted;
