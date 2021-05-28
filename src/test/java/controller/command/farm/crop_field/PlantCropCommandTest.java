@@ -1,9 +1,8 @@
-package controller.command;
+package controller.command.farm.crop_field;
 
-import controller.command.farm.crop_field.PlantCropCommand;
+import controller.command.Command;
 import model.Position;
 import model.farm.Currency;
-import model.farm.Farm;
 import model.farm.Wallet;
 import model.farm.building.crop_field.CropField;
 import model.farm.data.item.Crop;
