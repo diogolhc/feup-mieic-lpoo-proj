@@ -4,6 +4,8 @@ import controller.farm.element.entity.FarmerController;
 import gui.GUI;
 import model.Position;
 import model.farm.Farm;
+import model.farm.building.edifice.Market;
+import model.farm.building.edifice.Warehouse;
 import model.farm.entity.Entity;
 import model.farm.building.edifice.House;
 import model.farm.building.CropField;
@@ -19,6 +21,8 @@ public class FarmerControllerTest {
     public void setUp() {
         farm = new Farm(20, 20);
         farm.getBuildings().setHouse(new House(new Position(1, 1)));
+        farm.getBuildings().setMarket(new Market(new Position(9, 1)));
+        farm.getBuildings().setWarehouse(new Warehouse(new Position(17, 1)));
         farm.setFarmer(new Entity(new Position(10, 10)));
         controller = new FarmerController(farm);
     }

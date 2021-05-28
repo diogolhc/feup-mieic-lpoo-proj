@@ -10,7 +10,7 @@ import org.mockito.Mockito;
 import viewer.farm.element.building.EdificeViewer;
 
 class EdificeDrawerTest {
-    /*
+
     private GUI gui;
     private Color backgroundColors[][] = new Color[10][10];
     private Color foregroundColors[][] = new Color[10][10];
@@ -87,8 +87,8 @@ class EdificeDrawerTest {
         Color WALL = new Color("#eeeeef");
         Color ROOF = new Color("#c20000");
 
-        EdificeViewer drawer = new EdificeViewer(gui, WALL, ROOF);
-        drawer.draw(new Position(0, 0));
+        EdificeViewer drawer = new EdificeViewer(ROOF);
+        drawer.draw(new Position(0, 0), gui);
 
         Color expectedBg[][] = {
                 {BLACK, ROOF, ROOF, ROOF, ROOF, ROOF, BLACK, BLACK, BLACK, BLACK},
@@ -133,8 +133,8 @@ class EdificeDrawerTest {
         Color WALL = new Color("#eeeeef");
         Color ROOF = new Color("#c20000");
 
-        EdificeViewer drawer = new EdificeViewer(gui, WALL, ROOF);
-        drawer.draw(new Position(2, 2));
+        EdificeViewer drawer = new EdificeViewer( ROOF);
+        drawer.draw(new Position(2, 2), gui);
 
         Color expectedBg[][] = {
                 {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
@@ -170,5 +170,4 @@ class EdificeDrawerTest {
         Assertions.assertEquals(BLACK, this.foregroundColors[7][6]);
     }
 
-     */
 }
