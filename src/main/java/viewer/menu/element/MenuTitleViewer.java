@@ -12,7 +12,7 @@ public class MenuTitleViewer {
 
     public void draw(Menu menu, Position position, GUI gui) {
         UnderlinedStringDrawer drawer = new UnderlinedStringDrawer(
-                gui, menu.getColor(), this.TITLE_COLOR, this.UNDERLINE_CHARACTER);
+                gui, menu.getColor(), TITLE_COLOR, UNDERLINE_CHARACTER);
 
         drawer.draw(position.getTranslated(menu.getTopLeftPosition()), menu.getTitle());
     }
