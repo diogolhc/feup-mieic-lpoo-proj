@@ -65,13 +65,15 @@ public class GameControllerTest {
 
     @Test
     public void onMouseMovement() {
-        mouseListener.onMouseMovement(4, 9);
+        this.controller.setRunning(true);
+        this.mouseListener.onMouseMovement(4, 9);
         Mockito.verify(state, Mockito.times(1)).reactMouseMovement(new Position(4, 9));
     }
 
     @Test
     public void onMouseClick() {
-        mouseListener.onMouseClick(5, 7);
+        this.controller.setRunning(true);
+        this.mouseListener.onMouseClick(5, 7);
         Mockito.verify(state, Mockito.times(1)).reactMouseClick(new Position(5, 7));
     }
 }
