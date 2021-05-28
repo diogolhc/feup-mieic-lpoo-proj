@@ -4,10 +4,11 @@ import model.Position;
 import model.farm.entity.Animal;
 import model.region.RectangleRegion;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StockyardAnimals {
+public class StockyardAnimals implements Serializable {
     private final List<Animal> animals;
     private final int maxNumAnimals;
     private RectangleRegion animalsRegion;

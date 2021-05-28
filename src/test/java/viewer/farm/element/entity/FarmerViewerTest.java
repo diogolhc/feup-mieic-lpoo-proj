@@ -90,7 +90,7 @@ public class FarmerViewerTest {
     @Test
     void draw() {
         Color WHITE = Color.WHITE;
-        Color FARMER_COLOR = new Color("#223366");
+        Color FARMER_COLOR = FarmerViewer.FARMER_COLOR;
 
         Color expectedBg[][] = cloneSquareBidimensionalArray(this.backgroundColors);
         Entity farmer = new Entity(new Position(2, 3));
@@ -100,7 +100,7 @@ public class FarmerViewerTest {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
                 if (i == 2 && j == 3) {
-                    Assertions.assertEquals('@', this.characters[j][i]);
+                    Assertions.assertEquals(FarmerViewer.FARMER_CHAR, this.characters[j][i]);
                     Assertions.assertEquals(FARMER_COLOR, this.foregroundColors[j][i]);
                 } else {
                     Assertions.assertEquals(' ', this.characters[j][i]);
@@ -117,7 +117,7 @@ public class FarmerViewerTest {
         Color WHITE = Color.WHITE;
         Color RED = new Color("#FF0000");
         Color BLUE = new Color("#0000FF");
-        Color FARMER_COLOR = new Color("#223366");
+        Color FARMER_COLOR = FarmerViewer.FARMER_COLOR;
 
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
@@ -138,7 +138,7 @@ public class FarmerViewerTest {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
                 if (i == 4 && j == 6) {
-                    Assertions.assertEquals('@', this.characters[j][i]);
+                    Assertions.assertEquals(FarmerViewer.FARMER_CHAR, this.characters[j][i]);
                     Assertions.assertEquals(FARMER_COLOR, this.foregroundColors[j][i]);
                 } else {
                     Assertions.assertEquals(' ', this.characters[j][i]);

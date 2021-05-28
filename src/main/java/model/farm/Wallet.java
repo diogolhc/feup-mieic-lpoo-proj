@@ -1,6 +1,8 @@
 package model.farm;
 
-public class Wallet {
+import java.io.Serializable;
+
+public class Wallet implements Serializable {
     Currency currency;
 
     public Wallet(Currency currency) {

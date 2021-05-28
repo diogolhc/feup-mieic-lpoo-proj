@@ -1,28 +1,25 @@
-package viewer.farm.element.building;
+package viewer.menu.element;
 
 import gui.Color;
 import gui.GUI;
-import model.InGameTime;
 import model.Position;
-import model.farm.building.crop_field.CropField;
-import model.farm.building.crop_field.state.CropFieldState;
-import model.farm.building.crop_field.state.ReadyToHarvest;
-import model.farm.data.item.Crop;
-import model.farm.data.item.CropGrowthStage;
+import model.menu.Menu;
+import model.menu.label.Label;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-
-class CropFieldViewerTest {
+class LabelViewerTest {
     private GUI gui;
     private Color backgroundColors[][] = new Color[10][10];
     private Color foregroundColors[][] = new Color[10][10];
     private char characters[][] = new char[10][10];
     private Color currentBackgroundColor = Color.BLACK;
     private Color currentForegroundColor = Color.WHITE;
-    private CropField cropField;
+    private Menu menu;
+    private Label label;
+    private Color menuColor;
 
     @BeforeEach
     void setUp() {
@@ -81,24 +78,34 @@ class CropFieldViewerTest {
             int y = invocation.getArgument(1);
             return this.foregroundColors[y][x];
         }).when(gui).getForegroundColor(Mockito.anyInt(), Mockito.anyInt());
+
+        this.label = Mockito.mock(Label.class);
+        Mockito.when(this.label.getString()).thenReturn("LABEL");
+        Mockito.when(this.label.getTopLeft()).thenReturn(new Position(1,0));
+
+        this.menuColor = new Color("#012345");
+
+        this.menu = Mockito.mock(Menu.class);
+        Mockito.when(this.menu.getTopLeftPosition()).thenReturn(new Position(1,1));
+        Mockito.when(this.menu.getColor()).thenReturn(menuColor);
     }
 
 
     @Test
-    void drawNoCropAtOrigin() {
-        this.cropField = new CropField(new Position(0, 0));
+    void draw() {
         Color BLACK = Color.BLACK;
-        Color PATH = Color.HIGHLIGHTED_FLOOR;
-        Color SOIL_COLOR = CropFieldViewer.SOIL_COLOR;
+        Color WHITE = Color.WHITE;
+        Color LABEL = LabelViewer.LABEL_TEXT_COLOR;
 
-        CropFieldViewer viewer = new CropFieldViewer();
-        viewer.draw(cropField, gui);
+        LabelViewer viewer = new LabelViewer();
+        viewer.draw(this.menu, this.label, this.gui);
+
 
         Color expectedBg[][] = {
-                {PATH, PATH, PATH, PATH, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
-                {PATH, SOIL_COLOR, SOIL_COLOR, PATH, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
-                {PATH, SOIL_COLOR, SOIL_COLOR, PATH, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
-                {PATH, PATH, PATH, PATH, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, menuColor, menuColor, menuColor, menuColor, menuColor, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
                 {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
                 {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
                 {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
@@ -107,81 +114,25 @@ class CropFieldViewerTest {
                 {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
         };
 
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
-                Assertions.assertEquals(' ', this.characters[j][i]);
-                Assertions.assertEquals(expectedBg[j][i], this.backgroundColors[j][i]);
-            }
-        }
-    }
-
-    @Test
-    void drawNoCropAtPosition() {
-        this.cropField = new CropField(new Position(2, 2));
-        Color BLACK = Color.BLACK;
-        Color PATH = Color.HIGHLIGHTED_FLOOR;
-        Color SOIL_COLOR = CropFieldViewer.SOIL_COLOR;
-
-        CropFieldViewer viewer = new CropFieldViewer();
-        viewer.draw(cropField, gui);
-
-        Color expectedBg[][] = {
-                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
-                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
-                {BLACK, BLACK, PATH, PATH, PATH, PATH, BLACK, BLACK, BLACK, BLACK},
-                {BLACK, BLACK, PATH, SOIL_COLOR, SOIL_COLOR, PATH, BLACK, BLACK, BLACK, BLACK},
-                {BLACK, BLACK, PATH, SOIL_COLOR, SOIL_COLOR, PATH, BLACK, BLACK, BLACK, BLACK},
-                {BLACK, BLACK, PATH, PATH, PATH, PATH, BLACK, BLACK, BLACK, BLACK},
-                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
-                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
-                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
-                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
-        };
-
-
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
-                Assertions.assertEquals(' ', this.characters[j][i]);
-                Assertions.assertEquals(expectedBg[j][i], this.backgroundColors[j][i]);
-            }
-        }
-    }
-
-    @Test
-    void drawWithCrop() {
-        Color BLACK = Color.BLACK;
-        Color PATH = Color.HIGHLIGHTED_FLOOR;
-        Color SOIL_COLOR = CropFieldViewer.SOIL_COLOR;
-        Color STAGE_COLOR = new Color("#696606");
-
-        Crop crop = new Crop("WHEAT");
-        crop.addGrowthStage(new CropGrowthStage(new InGameTime(0), '#', STAGE_COLOR));
-        CropFieldState state = new ReadyToHarvest(cropField, crop, 5);
-        this.cropField = new CropField(new Position(2, 2));
-        this.cropField.setState(state);
-
-        CropFieldViewer viewer = new CropFieldViewer();
-        viewer.draw(cropField, gui);
-
-        Color expectedBg[][] = {
-                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
-                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
-                {BLACK, BLACK, PATH, PATH, PATH, PATH, BLACK, BLACK, BLACK, BLACK},
-                {BLACK, BLACK, PATH, SOIL_COLOR, SOIL_COLOR, PATH, BLACK, BLACK, BLACK, BLACK},
-                {BLACK, BLACK, PATH, SOIL_COLOR, SOIL_COLOR, PATH, BLACK, BLACK, BLACK, BLACK},
-                {BLACK, BLACK, PATH, PATH, PATH, PATH, BLACK, BLACK, BLACK, BLACK},
-                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
-                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
-                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
-                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
+        Color expectedFg[][] = {
+                {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
+                {WHITE, WHITE, LABEL, LABEL, LABEL, LABEL, LABEL, WHITE, WHITE, WHITE},
+                {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
+                {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
+                {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
+                {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
+                {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
+                {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
+                {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
+                {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
         };
 
         char expectedChars[][] = {
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                {' ', ' ', 'L', 'A', 'B', 'E', 'L', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', '#', '#', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', '#', '#', ' ', ' ', ' ', ' ', ' '},
+                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
@@ -191,13 +142,10 @@ class CropFieldViewerTest {
 
         for (int i = 0; i < 10; i++) {
             Assertions.assertArrayEquals(expectedBg[i], this.backgroundColors[i]);
+            Assertions.assertArrayEquals(expectedFg[i], this.foregroundColors[i]);
             Assertions.assertArrayEquals(expectedChars[i], this.characters[i]);
         }
 
-        Assertions.assertEquals(STAGE_COLOR, this.foregroundColors[3][3]);
-        Assertions.assertEquals(STAGE_COLOR, this.foregroundColors[3][4]);
-        Assertions.assertEquals(STAGE_COLOR, this.foregroundColors[4][3]);
-        Assertions.assertEquals(STAGE_COLOR, this.foregroundColors[4][4]);
     }
 
 }

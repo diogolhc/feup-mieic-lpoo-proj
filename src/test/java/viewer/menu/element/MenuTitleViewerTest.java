@@ -1,21 +1,23 @@
-package viewer.farm.element.building;
+package viewer.menu.element;
 
 import gui.Color;
 import gui.GUI;
 import model.Position;
+import model.menu.Menu;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-
-class EdificeViewerTest {
+class MenuTitleViewerTest {
     private GUI gui;
     private Color backgroundColors[][] = new Color[10][10];
     private Color foregroundColors[][] = new Color[10][10];
     private char characters[][] = new char[10][10];
     private Color currentBackgroundColor = Color.BLACK;
     private Color currentForegroundColor = Color.WHITE;
+    private Menu menu;
+    private Color menuColor;
 
     @BeforeEach
     void setUp() {
@@ -74,42 +76,57 @@ class EdificeViewerTest {
             int y = invocation.getArgument(1);
             return this.foregroundColors[y][x];
         }).when(gui).getForegroundColor(Mockito.anyInt(), Mockito.anyInt());
+
+
+        menuColor = new Color("#012345");
+        menu = Mockito.mock(Menu.class);
+        Mockito.when(menu.getColor()).thenReturn(menuColor);
+        Mockito.when(menu.getTitle()).thenReturn("TITLE");
+        Mockito.when(menu.getTopLeftPosition()).thenReturn(new Position(2,0));
     }
 
-
     @Test
-    void drawAtOrigin() {
+    void draw() {
         Color BLACK = Color.BLACK;
-        Color PATH = Color.HIGHLIGHTED_FLOOR;
-        Color FLOOR = EdificeViewer.FLOOR_COLOR;
-        Color DOOR = EdificeViewer.DOOR_COLOR;
-        Color WALL = EdificeViewer.WALL_COLOR;
-        Color ROOF = new Color("#c20000");
+        Color WHITE = Color.WHITE;
+        Color TITLE = MenuTitleViewer.TITLE_COLOR;
 
-
-        EdificeViewer viewer = new EdificeViewer(ROOF);
-        viewer.draw(new Position(0, 0), gui);
+        MenuTitleViewer viewer = new MenuTitleViewer();
+        viewer.draw(this.menu, new Position(0,0), this.gui);
 
         Color expectedBg[][] = {
-                {BLACK, ROOF, ROOF, ROOF, ROOF, ROOF, BLACK, BLACK, BLACK, BLACK},
-                {ROOF, ROOF, ROOF, ROOF, ROOF, ROOF, ROOF, BLACK, BLACK, BLACK},
-                {WALL, WALL, WALL, WALL, WALL, WALL, WALL, BLACK, BLACK, BLACK},
-                {WALL, WALL, WALL, WALL, WALL, WALL, WALL, BLACK, BLACK, BLACK},
-                {WALL, WALL, WALL, WALL, DOOR, WALL, WALL, BLACK, BLACK, BLACK},
-                {WALL, WALL, WALL, WALL, DOOR, WALL, WALL, BLACK, BLACK, BLACK},
-                {FLOOR, FLOOR, FLOOR, FLOOR, PATH, FLOOR, FLOOR, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, menuColor, menuColor, menuColor, menuColor, menuColor, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, menuColor, menuColor, menuColor, menuColor, menuColor, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
                 {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
                 {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
                 {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
         };
 
+        Color expectedFg[][] = {
+                {WHITE, WHITE, TITLE, TITLE, TITLE, TITLE, TITLE, WHITE, WHITE, WHITE},
+                {WHITE, WHITE, TITLE, TITLE, TITLE, TITLE, TITLE, WHITE, WHITE, WHITE},
+                {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
+                {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
+                {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
+                {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
+                {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
+                {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
+                {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
+                {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
+        };
+
         char expectedChars[][] = {
+                {' ', ' ', 'T', 'I', 'T', 'L', 'E', ' ', ' ', ' '},
+                {' ', ' ', '-', '-', '-', '-', '-', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', '\'', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
@@ -118,56 +135,10 @@ class EdificeViewerTest {
 
         for (int i = 0; i < 10; i++) {
             Assertions.assertArrayEquals(expectedBg[i], this.backgroundColors[i]);
+            Assertions.assertArrayEquals(expectedFg[i], this.foregroundColors[i]);
             Assertions.assertArrayEquals(expectedChars[i], this.characters[i]);
         }
 
-        Assertions.assertEquals(BLACK, this.foregroundColors[5][4]);
     }
 
-    @Test
-    void drawOtherPosition() {
-        Color BLACK = Color.BLACK;
-        Color PATH = Color.HIGHLIGHTED_FLOOR;
-        Color FLOOR = EdificeViewer.FLOOR_COLOR;
-        Color DOOR = EdificeViewer.DOOR_COLOR;
-        Color WALL = EdificeViewer.WALL_COLOR;
-        Color ROOF = new Color("#c20000");
-
-
-        EdificeViewer viewer = new EdificeViewer( ROOF);
-        viewer.draw(new Position(2, 2), gui);
-
-        Color expectedBg[][] = {
-                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
-                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
-                {BLACK, BLACK, BLACK, ROOF, ROOF, ROOF, ROOF, ROOF, BLACK, BLACK},
-                {BLACK, BLACK, ROOF, ROOF, ROOF, ROOF, ROOF, ROOF, ROOF, BLACK},
-                {BLACK, BLACK, WALL, WALL, WALL, WALL, WALL, WALL, WALL, BLACK},
-                {BLACK, BLACK, WALL, WALL, WALL, WALL, WALL, WALL, WALL, BLACK},
-                {BLACK, BLACK, WALL, WALL, WALL, WALL, DOOR, WALL, WALL, BLACK},
-                {BLACK, BLACK, WALL, WALL, WALL, WALL, DOOR, WALL, WALL, BLACK},
-                {BLACK, BLACK, FLOOR, FLOOR, FLOOR, FLOOR, PATH, FLOOR, FLOOR, BLACK},
-                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
-        };
-
-        char expectedChars[][] = {
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', '\'', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-        };
-
-        for (int i = 0; i < 10; i++) {
-            Assertions.assertArrayEquals(expectedBg[i], this.backgroundColors[i]);
-            Assertions.assertArrayEquals(expectedChars[i], this.characters[i]);
-        }
-
-        Assertions.assertEquals(BLACK, this.foregroundColors[7][6]);
-    }
 }

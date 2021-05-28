@@ -7,9 +7,9 @@ import gui.drawer.shape.HorizontalLineDrawer;
 import model.Position;
 
 public class EdificeViewer {
-    private static final Color WALL_COLOR = new Color("#eeeeef");
-    private static final Color FLOOR_COLOR = new Color("#777777");
-    private static final Color DOOR_COLOR = new Color("#82490b");
+    public static final Color WALL_COLOR = new Color("#eeeeef");
+    public static final Color FLOOR_COLOR = new Color("#777777");
+    public static final Color DOOR_COLOR = new Color("#82490b");
     private final Color roofColor;
 
     public EdificeViewer(Color roofColor) {
