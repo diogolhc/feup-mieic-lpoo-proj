@@ -165,7 +165,6 @@ public class CropFieldDrawerTest {
 
         CropFieldViewer drawer = new CropFieldViewer();
         drawer.draw(cropField, gui);
-        // drawer.draw(new Position(2, 2), STAGE_COLOR, '#');
 
         Color expectedBg[][] = {
                 {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
