@@ -134,7 +134,7 @@ public class FeedAnimalsMenuControllerBuilder extends PopupMenuControllerBuilder
                 new Position(1, 16),
                 () -> {
                     if (this.stockyard.isEmpty()) {
-                        return "DOES NOT PRODUCE";
+                        return "STOCKYARD IS EMPTY";
                     } else {
                         return String.format("PRODUCES: %1$s %2$s IN %3$s",
                                 this.stockyard.getLivestockType().getProducedItem().getName(),

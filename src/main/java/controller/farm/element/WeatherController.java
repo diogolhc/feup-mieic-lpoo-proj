@@ -10,10 +10,10 @@ public class WeatherController {
     private static final InGameTime MIN_NEXT_MINUTE = new InGameTime(15);
     private static final InGameTime MAX_NEXT_MINUTE = new InGameTime(120);
     private InGameTime nextMinute;
-    Farm farm;
+    private Farm farm;
 
     public WeatherController(Farm farm) {
-        this.nextMinute = new InGameTime();
+        this.nextMinute = InGameTime.getRandom(MIN_NEXT_MINUTE, MAX_NEXT_MINUTE);
         this.farm = farm;
     }
 

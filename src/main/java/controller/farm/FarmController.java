@@ -28,7 +28,7 @@ public abstract class FarmController implements GameControllerState {
         this.farm = farm;
         this.controller = controller;
         this.realTimeToInGameTimeConverter = new RealTimeToInGameTimeConverter(realSecToGameMinutesRate);
-        this.weatherController = new WeatherController(this.farm); // TODO should this be done in a different way?
+        this.weatherController = new WeatherController(this.farm);
     }
 
     @Override
