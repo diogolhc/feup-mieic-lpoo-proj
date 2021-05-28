@@ -1,4 +1,4 @@
-package gui.drawer.entity;
+package viewer.farm.element.building;
 
 import gui.Color;
 import gui.GUI;
@@ -13,10 +13,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import viewer.farm.element.building.CropFieldViewer;
 
-public class CropFieldDrawerTest {
 
+class CropFieldViewerTest {
     private GUI gui;
     private Color backgroundColors[][] = new Color[10][10];
     private Color foregroundColors[][] = new Color[10][10];
@@ -93,8 +92,8 @@ public class CropFieldDrawerTest {
         Color PATH = new Color("#be9b7b");
         Color SOIL_COLOR = new Color("#372201");
 
-        CropFieldViewer drawer = new CropFieldViewer();
-        drawer.draw(cropField, gui);
+        CropFieldViewer viewer = new CropFieldViewer();
+        viewer.draw(cropField, gui);
 
         Color expectedBg[][] = {
                 {PATH, PATH, PATH, PATH, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
@@ -125,8 +124,8 @@ public class CropFieldDrawerTest {
         Color PATH = new Color("#be9b7b");
         Color SOIL_COLOR = new Color("#372201");
 
-        CropFieldViewer drawer = new CropFieldViewer();
-        drawer.draw(cropField, gui);
+        CropFieldViewer viewer = new CropFieldViewer();
+        viewer.draw(cropField, gui);
 
         Color expectedBg[][] = {
                 {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
@@ -163,8 +162,8 @@ public class CropFieldDrawerTest {
         this.cropField = new CropField(new Position(2, 2));
         this.cropField.setState(state);
 
-        CropFieldViewer drawer = new CropFieldViewer();
-        drawer.draw(cropField, gui);
+        CropFieldViewer viewer = new CropFieldViewer();
+        viewer.draw(cropField, gui);
 
         Color expectedBg[][] = {
                 {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
