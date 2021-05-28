@@ -8,7 +8,7 @@ import viewer.GameViewer;
 import viewer.menu.PopupMenuViewer;
 
 public class PopupMenuController extends MenuController {
-    private GameControllerState backState;
+    private final GameControllerState backState;
 
     public PopupMenuController(Menu menu, GameController gameController, GameControllerState backState) {
         super(menu, gameController);

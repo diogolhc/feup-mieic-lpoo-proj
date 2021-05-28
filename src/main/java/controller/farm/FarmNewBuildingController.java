@@ -1,8 +1,10 @@
 package controller.farm;
 
+import controller.command.controller_state.OpenPopupMenuCommand;
 import controller.farm.element.entity.NewBuildingController;
 import controller.menu.MenuController;
 import controller.menu.builder.MenuControllerBuilder;
+import controller.menu.builder.PopupMenuControllerBuilder;
 import controller.menu.builder.info.AlertMenuControllerBuilder;
 import gui.GUI;
 import model.Position;
@@ -13,7 +15,7 @@ import viewer.GameViewer;
 import viewer.farm.FarmNewBuildingViewer;
 
 public class FarmNewBuildingController extends FarmController {
-    private Buildable newBuilding;
+    private final Buildable newBuilding;
 
     public FarmNewBuildingController(FarmController farmController, Buildable newBuilding) {
         super(farmController);
@@ -22,31 +24,22 @@ public class FarmNewBuildingController extends FarmController {
 
     @Override
     public void reactKeyboard(GUI.KEYBOARD_ACTION action) {
-        if (action == GUI.KEYBOARD_ACTION.BACK) returnToFarmerController();
-        if (action == GUI.KEYBOARD_ACTION.INTERACT) reactInteraction();
+        if (action == GUI.KEYBOARD_ACTION.BACK) this.returnToFarmerController();
+        if (action == GUI.KEYBOARD_ACTION.INTERACT) this.reactInteraction();
         NewBuildingController newBuildingController = new NewBuildingController(this.farm, this.newBuilding);
         newBuildingController.doAction(action);
     }
-
-    @Override
-    public void reactMouseMovement(Position position) {}
-
-    @Override
-    public void reactMouseClick(Position position) {}
 
     private void returnToFarmerController() {
         this.controller.setGameControllerState(new FarmWithFarmerController(this));
     }
 
     private void reactInteraction() {
-        if (farm.getBuildings().isOccupied(this.newBuilding.getOccupiedRegion())) {
-            MenuControllerBuilder popupControllerBuilder = new AlertMenuControllerBuilder(this.controller,
+        if (this.farm.getBuildings().isOccupied(this.newBuilding.getOccupiedRegion())) {
+            PopupMenuControllerBuilder occupiedAlert = new AlertMenuControllerBuilder(this.controller,
                     "CHOSEN PLACE IS ALREADY OCCUPIED");
 
-            MenuController popupController = popupControllerBuilder.buildMenuCentered(
-                    controller.getWindowWidth(), controller.getWindowHeight());
-
-            this.controller.setGameControllerState(popupController);
+            new OpenPopupMenuCommand(this.controller, occupiedAlert).execute();
         } else {
             if (this.newBuilding instanceof CropField) {
                 this.farm.getBuildings().addCropField((CropField) this.newBuilding);
@@ -60,7 +53,7 @@ public class FarmNewBuildingController extends FarmController {
 
             this.farm.getWallet().spend(this.newBuilding.getBuildPrice());
 
-            returnToFarmerController();
+            this.returnToFarmerController();
         }
     }
 

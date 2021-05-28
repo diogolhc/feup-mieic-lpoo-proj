@@ -12,9 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class MenuController implements GameControllerState {
-    protected GameController gameController;
-    private Menu menu;
-    private List<ButtonController> buttonControllers;
+    protected final GameController gameController;
+    private final Menu menu;
+    private final List<ButtonController> buttonControllers;
 
     public MenuController(Menu menu, GameController gameController) {
         this.menu = menu;
