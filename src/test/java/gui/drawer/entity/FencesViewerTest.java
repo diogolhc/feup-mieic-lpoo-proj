@@ -1,4 +1,4 @@
-package viewer.farm.element.building;
+package gui.drawer.entity;
 
 import gui.Color;
 import gui.GUI;
@@ -8,8 +8,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-
-class EdificeViewerTest {
+public class FencesViewerTest {
+/*
     private GUI gui;
     private Color backgroundColors[][] = new Color[10][10];
     private Color foregroundColors[][] = new Color[10][10];
@@ -76,40 +76,53 @@ class EdificeViewerTest {
         }).when(gui).getForegroundColor(Mockito.anyInt(), Mockito.anyInt());
     }
 
-
     @Test
-    void drawAtOrigin() {
-        Color BLACK = Color.BLACK;
-        Color PATH = new Color("#be9b7b");
-        Color FLOOR = new Color("#777777");
-        Color DOOR = new Color("#82490b");
-        Color WALL = new Color("#eeeeef");
-        Color ROOF = new Color("#c20000");
+    void draw() {
+        FencesViewer drawer = new FencesViewer(gui);
+        drawer.draw(new Position(2, 2), 5, 5);
 
-        EdificeViewer viewer = new EdificeViewer(ROOF);
-        viewer.draw(new Position(0, 0), gui);
+        Color BLACK = Color.BLACK;
+        Color WHITE = Color.WHITE;
+        Color FENCES_BACKGROUND = new Color("#7EC850");
+        Color FENCES_COLOR = new Color("#846f46");
+        char HORIZONTAL_LINE = '-';
+        char VERTICAL_LINE = '|';
+        char CORNER_LINE = '+';
 
         Color expectedBg[][] = {
-                {BLACK, ROOF, ROOF, ROOF, ROOF, ROOF, BLACK, BLACK, BLACK, BLACK},
-                {ROOF, ROOF, ROOF, ROOF, ROOF, ROOF, ROOF, BLACK, BLACK, BLACK},
-                {WALL, WALL, WALL, WALL, WALL, WALL, WALL, BLACK, BLACK, BLACK},
-                {WALL, WALL, WALL, WALL, WALL, WALL, WALL, BLACK, BLACK, BLACK},
-                {WALL, WALL, WALL, WALL, DOOR, WALL, WALL, BLACK, BLACK, BLACK},
-                {WALL, WALL, WALL, WALL, DOOR, WALL, WALL, BLACK, BLACK, BLACK},
-                {FLOOR, FLOOR, FLOOR, FLOOR, PATH, FLOOR, FLOOR, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, FENCES_BACKGROUND, FENCES_BACKGROUND, FENCES_BACKGROUND, FENCES_BACKGROUND, FENCES_BACKGROUND, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, FENCES_BACKGROUND, BLACK, BLACK, BLACK, FENCES_BACKGROUND, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, FENCES_BACKGROUND, BLACK, BLACK, BLACK, FENCES_BACKGROUND, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, FENCES_BACKGROUND, BLACK, BLACK, BLACK, FENCES_BACKGROUND, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, FENCES_BACKGROUND, FENCES_BACKGROUND, FENCES_BACKGROUND, FENCES_BACKGROUND, FENCES_BACKGROUND, BLACK, BLACK, BLACK},
                 {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
                 {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
                 {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
         };
 
+        Color expectedFg[][] = {
+                {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
+                {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
+                {WHITE, WHITE, FENCES_COLOR, FENCES_COLOR, FENCES_COLOR, FENCES_COLOR, FENCES_COLOR, WHITE, WHITE, WHITE},
+                {WHITE, WHITE, FENCES_COLOR, WHITE, WHITE, WHITE, FENCES_COLOR, WHITE, WHITE, WHITE},
+                {WHITE, WHITE, FENCES_COLOR, WHITE, WHITE, WHITE, FENCES_COLOR, WHITE, WHITE, WHITE},
+                {WHITE, WHITE, FENCES_COLOR, WHITE, WHITE, WHITE, FENCES_COLOR, WHITE, WHITE, WHITE},
+                {WHITE, WHITE, FENCES_COLOR, FENCES_COLOR, FENCES_COLOR, FENCES_COLOR, FENCES_COLOR, WHITE, WHITE, WHITE},
+                {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
+                {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
+                {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
+        };
+
         char expectedChars[][] = {
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', '\'', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                {' ', ' ', CORNER_LINE, HORIZONTAL_LINE, HORIZONTAL_LINE, HORIZONTAL_LINE, CORNER_LINE, ' ', ' ', ' '},
+                {' ', ' ', VERTICAL_LINE, ' ', ' ', ' ', VERTICAL_LINE, ' ', ' ', ' '},
+                {' ', ' ', VERTICAL_LINE, ' ', ' ', ' ', VERTICAL_LINE, ' ', ' ', ' '},
+                {' ', ' ', VERTICAL_LINE, ' ', ' ', ' ', VERTICAL_LINE, ' ', ' ', ' '},
+                {' ', ' ', CORNER_LINE, HORIZONTAL_LINE, HORIZONTAL_LINE, HORIZONTAL_LINE, CORNER_LINE, ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
@@ -118,55 +131,9 @@ class EdificeViewerTest {
         for (int i = 0; i < 10; i++) {
             Assertions.assertArrayEquals(expectedBg[i], this.backgroundColors[i]);
             Assertions.assertArrayEquals(expectedChars[i], this.characters[i]);
+            Assertions.assertArrayEquals(expectedFg[i], this.foregroundColors[i]);
         }
-
-        Assertions.assertEquals(BLACK, this.foregroundColors[5][4]);
     }
 
-    @Test
-    void drawOtherPosition() {
-        Color BLACK = Color.BLACK;
-        Color PATH = new Color("#be9b7b");
-        Color FLOOR = new Color("#777777");
-        Color DOOR = new Color("#82490b");
-        Color WALL = new Color("#eeeeef");
-        Color ROOF = new Color("#c20000");
-
-
-        EdificeViewer viewer = new EdificeViewer( ROOF);
-        viewer.draw(new Position(2, 2), gui);
-
-        Color expectedBg[][] = {
-                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
-                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
-                {BLACK, BLACK, BLACK, ROOF, ROOF, ROOF, ROOF, ROOF, BLACK, BLACK},
-                {BLACK, BLACK, ROOF, ROOF, ROOF, ROOF, ROOF, ROOF, ROOF, BLACK},
-                {BLACK, BLACK, WALL, WALL, WALL, WALL, WALL, WALL, WALL, BLACK},
-                {BLACK, BLACK, WALL, WALL, WALL, WALL, WALL, WALL, WALL, BLACK},
-                {BLACK, BLACK, WALL, WALL, WALL, WALL, DOOR, WALL, WALL, BLACK},
-                {BLACK, BLACK, WALL, WALL, WALL, WALL, DOOR, WALL, WALL, BLACK},
-                {BLACK, BLACK, FLOOR, FLOOR, FLOOR, FLOOR, PATH, FLOOR, FLOOR, BLACK},
-                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
-        };
-
-        char expectedChars[][] = {
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', '\'', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-        };
-
-        for (int i = 0; i < 10; i++) {
-            Assertions.assertArrayEquals(expectedBg[i], this.backgroundColors[i]);
-            Assertions.assertArrayEquals(expectedChars[i], this.characters[i]);
-        }
-
-        Assertions.assertEquals(BLACK, this.foregroundColors[7][6]);
-    }
+ */
 }
