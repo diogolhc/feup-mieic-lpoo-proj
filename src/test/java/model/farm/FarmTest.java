@@ -12,7 +12,7 @@ public class FarmTest {
     @BeforeEach
     void setUp() {
         farm = new Farm(40, 20);
-        farm.getBuildings().setHouse(new Edifice(new Position(1, 1)));
+        farm.getBuildings().setHousePosition(new Position(1, 1));
     }
 
     @Test
