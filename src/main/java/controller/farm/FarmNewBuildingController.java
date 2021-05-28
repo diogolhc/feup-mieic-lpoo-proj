@@ -58,7 +58,7 @@ public class FarmNewBuildingController extends FarmController {
                         "LOGIC ERROR: Unhandled new building type: " + this.newBuilding.getClass().toString());
             }
 
-            this.farm.setCurrency(this.farm.getCurrency().subtract(this.newBuilding.getBuildPrice()));
+            this.farm.getWallet().spend(this.newBuilding.getBuildPrice());
 
             returnToFarmerController();
         }

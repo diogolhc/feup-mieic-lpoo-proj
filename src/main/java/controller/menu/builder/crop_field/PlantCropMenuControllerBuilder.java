@@ -37,9 +37,9 @@ public class PlantCropMenuControllerBuilder extends PopupMenuControllerBuilder {
         for (Crop crop: this.farm.getCropTypes()) {
             Button plantCropButton = new Button(new Position(x, y), crop.getName(), 9);
             Command plantCropButtonCommand;
-            if (this.farm.getCurrency().canBuy(crop.getPlantPrice())) {
+            if (this.farm.getWallet().canBuy(crop.getPlantPrice())) {
                 plantCropButtonCommand = new CompoundCommand()
-                        .addCommand(new PlantCropCommand(this.farm, this.cropField, crop))
+                        .addCommand(new PlantCropCommand(this.farm.getWallet(), this.cropField, crop))
                         .addCommand(super.getClosePopupMenuCommand());
             } else {
                 plantCropButtonCommand = new OpenPopupMenuCommand(this.controller,

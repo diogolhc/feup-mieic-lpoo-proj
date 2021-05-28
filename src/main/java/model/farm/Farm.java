@@ -19,7 +19,7 @@ public class Farm implements Serializable {
     private final BuildingSet buildings;
     private InGameTime time;
     private Inventory inventory;
-    private Currency currency;
+    private Wallet wallet;
     private Weather currentWeather;
 
     private final List<Weather> weatherTypes;
@@ -95,12 +95,12 @@ public class Farm implements Serializable {
         return time;
     }
 
-    public void setCurrency(Currency currency) {
-        this.currency = currency;
+    public void setWallet(Wallet wallet) {
+        this.wallet = wallet;
     }
 
-    public Currency getCurrency() {
-        return this.currency;
+    public Wallet getWallet() {
+        return this.wallet;
     }
 
     public void addCropTypes(List<Crop> crops) {

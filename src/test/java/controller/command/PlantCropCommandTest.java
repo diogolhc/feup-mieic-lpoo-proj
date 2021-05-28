@@ -42,7 +42,7 @@ public class PlantCropCommandTest {
         cropField.setState(stateReady);
         command.execute();
         Assertions.assertSame(stateReady, cropField.getState());
-        Assertions.assertEquals(100, farm.getCurrency().getCoins());
+        Assertions.assertEquals(100, farm.getWallet().getCurrency().getCoins());
     }
 
     @Test
@@ -52,7 +52,7 @@ public class PlantCropCommandTest {
         CropFieldState newState = cropField.getState();
         Assertions.assertTrue(newState instanceof Planted);
         Assertions.assertSame(crop, newState.getCrop());
-        Assertions.assertEquals(90, farm.getCurrency().getCoins());
+        Assertions.assertEquals(90, farm.getWallet().getCurrency().getCoins());
     }
 
     @Test
@@ -60,6 +60,6 @@ public class PlantCropCommandTest {
         cropField.setState(statePlanted);
         command.execute();
         Assertions.assertSame(statePlanted, cropField.getState());
-        Assertions.assertEquals(100, farm.getCurrency().getCoins());
+        Assertions.assertEquals(100, farm.getWallet().getCurrency().getCoins());
     }
 }

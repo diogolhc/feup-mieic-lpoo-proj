@@ -7,6 +7,7 @@ import gui.drawer.string.StringDrawer;
 import model.Position;
 import model.InGameTime;
 import model.farm.Currency;
+import model.farm.Wallet;
 import model.farm.data.Weather;
 
 
@@ -21,9 +22,9 @@ public class HUDViewer {
         this.y = y;
     }
 
-    public void draw(InGameTime time, Weather weather, Currency currency, GUI gui) {
+    public void draw(InGameTime time, Weather weather, Wallet wallet, GUI gui) {
         drawBackground(gui);
-        drawText(time, weather, currency, gui);
+        drawText(time, weather, wallet, gui);
     }
 
     private void drawBackground(GUI gui) {
@@ -31,13 +32,13 @@ public class HUDViewer {
         backgroundDrawer.draw(new Position(0, this.y), this.width);
     }
 
-    private void drawText(InGameTime time, Weather weather, Currency currency, GUI gui) {
+    private void drawText(InGameTime time, Weather weather, Wallet wallet, GUI gui) {
         StringDrawer infoDrawer = new StringDrawer(gui, HUD_BACKGROUND_COLOR, Color.WHITE);
         infoDrawer.draw(new Position(0, this.y), time.getDayTimeString());
         infoDrawer.draw(new Position(18, this.y), weather.getName());
 
         StringDrawer currencyDrawer = new StringDrawer(gui, HUD_BACKGROUND_COLOR, CURRENCY_COLOR);
         Position currencyPosition = new Position(this.width - Currency.MAX_STRING_LENGTH, this.y);
-        currencyDrawer.draw(currencyPosition, currency.toStringPadded());
+        currencyDrawer.draw(currencyPosition, wallet.getCurrency().toStringPadded());
     }
 }

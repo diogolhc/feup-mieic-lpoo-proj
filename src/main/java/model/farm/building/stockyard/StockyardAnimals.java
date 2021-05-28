@@ -3,7 +3,6 @@ package model.farm.building.stockyard;
 import model.Position;
 import model.farm.entity.Animal;
 import model.region.RectangleRegion;
-import model.region.Region;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,12 +66,8 @@ public class StockyardAnimals {
         return false;
     }
 
-    public void setTopLeftPosition(Position topLeft) {
-        this.animalsRegion = new RectangleRegion(
-                topLeft,
-                this.animalsRegion.getWidth(),
-                this.animalsRegion.getHeight()
-        );
+    public void setAnimalsRegion(RectangleRegion region) {
+        this.animalsRegion = region;
     }
 
     public boolean canAnimalMoveTo(Position position) {

@@ -3,23 +3,26 @@ package controller.command.farm.stockyard;
 import controller.command.Command;
 import model.farm.Currency;
 import model.farm.Farm;
+import model.farm.Wallet;
 import model.farm.building.stockyard.Stockyard;
 import model.farm.building.stockyard.StockyardAnimals;
 
 public class BuyAnimalCommand implements Command {
-    private final Farm farm;
+    private final Wallet wallet;
     private final StockyardAnimals stockyardAnimals;
-    private Currency price;
+    private final Currency price;
 
-    public BuyAnimalCommand(Farm farm, StockyardAnimals stockyardAnimals, Currency price) {
-        this.farm = farm;
+    public BuyAnimalCommand(Wallet wallet, StockyardAnimals stockyardAnimals, Currency price) {
+        this.wallet = wallet;
         this.stockyardAnimals = stockyardAnimals;
         this.price = price;
     }
 
     @Override
     public void execute() {
-        this.stockyardAnimals.addAnimal();
-        this.farm.setCurrency(this.farm.getCurrency().subtract(price));
+        if (!this.stockyardAnimals.isFull()) {
+            this.stockyardAnimals.addAnimal();
+            this.wallet.spend(price);
+        }
     }
 }

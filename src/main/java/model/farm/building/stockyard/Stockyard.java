@@ -22,12 +22,7 @@ public class Stockyard extends Buildable {
     public Stockyard(Position topLeft, Livestock livestockType) {
         super(topLeft);
         this.livestockType = livestockType;
-        RectangleRegion animalRegion = new RectangleRegion(
-                topLeft.getTranslated(new Position(2, 1)),
-                this.getWidth() - 3,
-                this.getHeight() - 2
-        );
-        this.animals = new StockyardAnimals(animalRegion, this.livestockType.getMaxNumAnimals());
+        this.animals = new StockyardAnimals(getAnimalsRegion(), this.livestockType.getMaxNumAnimals());
         this.state = new NotProducing();
     }
 
@@ -67,7 +62,15 @@ public class Stockyard extends Buildable {
     @Override
     public void setTopLeftPosition(Position topLeft) {
         super.setTopLeftPosition(topLeft);
-        this.animals.setTopLeftPosition(topLeft.getTranslated(new Position(2, 1)));
+        this.animals.setAnimalsRegion(getAnimalsRegion());
+    }
+
+    private RectangleRegion getAnimalsRegion() {
+        return new RectangleRegion(
+                this.getTopLeftPosition().getTranslated(new Position(2, 1)),
+                this.getWidth() - 3,
+                this.getHeight() - 2
+        );
     }
 
     public StockyardAnimals getAnimals() {
