@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 public class CropFieldTest {
-    /*
+
     private CropField field;
 
     @BeforeEach
@@ -23,42 +23,52 @@ public class CropFieldTest {
 
     @Test
     void isTraversable() {
-        Assertions.assertTrue(this.field.getTraversableRegion(new Position(3, 3)));
-        Assertions.assertTrue(this.field.getTraversableRegion(new Position(4, 5)));
-        Assertions.assertTrue(this.field.getTraversableRegion(new Position(5, 5)));
-        Assertions.assertTrue(this.field.getTraversableRegion(new Position(4, 6)));
-        Assertions.assertFalse(this.field.getTraversableRegion(new Position(5, 6)));
-        Assertions.assertFalse(this.field.getTraversableRegion(new Position(6, 6)));
-        Assertions.assertFalse(this.field.getTraversableRegion(new Position(5, 7)));
-        Assertions.assertFalse(this.field.getTraversableRegion(new Position(6, 7)));
+        Assertions.assertTrue(this.field.getUntraversableRegion().contains(new Position(5, 6)));
+        Assertions.assertTrue(this.field.getUntraversableRegion().contains(new Position(5, 7)));
+        Assertions.assertTrue(this.field.getUntraversableRegion().contains(new Position(6, 6)));
+        Assertions.assertTrue(this.field.getUntraversableRegion().contains(new Position(6, 7)));
+
+        Assertions.assertFalse(this.field.getUntraversableRegion().contains(new Position(4, 5)));
+        Assertions.assertFalse(this.field.getUntraversableRegion().contains(new Position(4, 6)));
+        Assertions.assertFalse(this.field.getUntraversableRegion().contains(new Position(4, 7)));
+        Assertions.assertFalse(this.field.getUntraversableRegion().contains(new Position(4, 8)));
+        Assertions.assertFalse(this.field.getUntraversableRegion().contains(new Position(5, 5)));
+        Assertions.assertFalse(this.field.getUntraversableRegion().contains(new Position(6, 5)));
+        Assertions.assertFalse(this.field.getUntraversableRegion().contains(new Position(7, 5)));
+        Assertions.assertFalse(this.field.getUntraversableRegion().contains(new Position(4, 8)));
+        Assertions.assertFalse(this.field.getUntraversableRegion().contains(new Position(5, 8)));
+        Assertions.assertFalse(this.field.getUntraversableRegion().contains(new Position(6, 8)));
+        Assertions.assertFalse(this.field.getUntraversableRegion().contains(new Position(7, 8)));
+        Assertions.assertFalse(this.field.getUntraversableRegion().contains(new Position(7, 5)));
+        Assertions.assertFalse(this.field.getUntraversableRegion().contains(new Position(7, 6)));
+        Assertions.assertFalse(this.field.getUntraversableRegion().contains(new Position(7, 7)));
 
     }
 
     @Test
     void isInInteractiveZone() {
-        Assertions.assertFalse(this.field.getInteractiveRegion(new Position(3, 3)));
-        Assertions.assertFalse(this.field.getInteractiveRegion(new Position(3, 5)));
-        Assertions.assertFalse(this.field.getInteractiveRegion(new Position(8, 8)));
-        Assertions.assertFalse(this.field.getInteractiveRegion(new Position(5, 9)));
+        Assertions.assertFalse(this.field.getInteractiveRegion().contains(new Position(3, 3)));
+        Assertions.assertFalse(this.field.getInteractiveRegion().contains(new Position(3, 5)));
+        Assertions.assertFalse(this.field.getInteractiveRegion().contains(new Position(8, 8)));
+        Assertions.assertFalse(this.field.getInteractiveRegion().contains(new Position(5, 9)));
 
-        Assertions.assertTrue(this.field.getInteractiveRegion(new Position(4, 5)));
-        Assertions.assertTrue(this.field.getInteractiveRegion(new Position(5, 5)));
-        Assertions.assertTrue(this.field.getInteractiveRegion(new Position(6, 5)));
-        Assertions.assertTrue(this.field.getInteractiveRegion(new Position(7, 5)));
+        Assertions.assertTrue(this.field.getInteractiveRegion().contains(new Position(4, 5)));
+        Assertions.assertTrue(this.field.getInteractiveRegion().contains(new Position(5, 5)));
+        Assertions.assertTrue(this.field.getInteractiveRegion().contains(new Position(6, 5)));
+        Assertions.assertTrue(this.field.getInteractiveRegion().contains(new Position(7, 5)));
 
-        Assertions.assertTrue(this.field.getInteractiveRegion(new Position(4, 6)));
-        Assertions.assertTrue(this.field.getInteractiveRegion(new Position(4, 7)));
-        Assertions.assertTrue(this.field.getInteractiveRegion(new Position(4, 8)));
+        Assertions.assertTrue(this.field.getInteractiveRegion().contains(new Position(4, 6)));
+        Assertions.assertTrue(this.field.getInteractiveRegion().contains(new Position(4, 7)));
+        Assertions.assertTrue(this.field.getInteractiveRegion().contains(new Position(4, 8)));
 
-        Assertions.assertTrue(this.field.getInteractiveRegion(new Position(5, 6)));
-        Assertions.assertTrue(this.field.getInteractiveRegion(new Position(7, 8)));
-
+        Assertions.assertTrue(this.field.getInteractiveRegion().contains(new Position(5, 6)));
+        Assertions.assertTrue(this.field.getInteractiveRegion().contains(new Position(7, 8)));
     }
 
     @Test
     void getGrowthStageDefault() {
         Crop crop = Crop.NO_CROP;
-        Assertions.assertSame(crop.getGrowthStages().get(0), field.getCropGrowthStage());
+        Assertions.assertSame(crop.getCurrentGrowthStage(new InGameTime(0)), field.getCropGrowthStage());
     }
 
     @Test
@@ -79,5 +89,4 @@ public class CropFieldTest {
         Assertions.assertSame(growthStage, field.getCropGrowthStage());
     }
 
-     */
 }
