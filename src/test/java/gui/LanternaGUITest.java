@@ -71,6 +71,7 @@ class LanternaGUITest {
             return TextCharacter.fromCharacter(c, fg, bg)[0];
         });
 
+        Mockito.when(this.terminal.getTerminalSize()).thenReturn(new TerminalSize(50, 50));
         gui = new LanternaGUI(terminal, screen);
     }
 

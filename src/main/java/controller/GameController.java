@@ -100,4 +100,8 @@ public class GameController implements MouseListener {
     public int getWindowHeight() {
         return this.gui.getWindowHeight();
     }
+
+    public void setRunning(boolean running) {
+        this.running = running;
+    }
 }
