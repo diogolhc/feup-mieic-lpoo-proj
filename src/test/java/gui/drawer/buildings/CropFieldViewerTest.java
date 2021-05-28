@@ -1,4 +1,4 @@
-package gui.drawer.entity;
+package gui.drawer.buildings;
 
 import gui.Color;
 import gui.GUI;
@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import viewer.farm.element.building.CropFieldViewer;
 
-public class CropFieldDrawerTest {
+public class CropFieldViewerTest {
 
     private GUI gui;
     private Color backgroundColors[][] = new Color[10][10];

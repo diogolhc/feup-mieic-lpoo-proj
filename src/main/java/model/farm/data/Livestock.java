@@ -21,7 +21,7 @@ public class Livestock implements Serializable {
     private int stockyardWidth;
     private int stockyardHeight;
 
-    private Livestock() {}
+    public Livestock() {}
 
     public static Livestock parseLivestockType(List<Crop> cropTypes, List<String> lines) {
         Livestock livestock = new Livestock();

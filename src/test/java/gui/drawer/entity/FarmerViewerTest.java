@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import viewer.farm.element.entity.FarmerViewer;
 
-public class FarmerDrawerTest {
+public class FarmerViewerTest {
 
     private GUI gui;
     private Color backgroundColors[][] = new Color[10][10];

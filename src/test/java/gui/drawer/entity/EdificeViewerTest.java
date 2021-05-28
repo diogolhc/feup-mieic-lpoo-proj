@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import viewer.farm.element.building.EdificeViewer;
 
-class EdificeDrawerTest {
+class EdificeViewerTest {
 
     private GUI gui;
     private Color backgroundColors[][] = new Color[10][10];
@@ -133,7 +133,7 @@ class EdificeDrawerTest {
         Color WALL = new Color("#eeeeef");
         Color ROOF = new Color("#c20000");
 
-        EdificeViewer drawer = new EdificeViewer( ROOF);
+        EdificeViewer drawer = new EdificeViewer(ROOF);
         drawer.draw(new Position(2, 2), gui);
 
         Color expectedBg[][] = {
