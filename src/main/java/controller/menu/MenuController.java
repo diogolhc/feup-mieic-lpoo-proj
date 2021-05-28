@@ -2,6 +2,7 @@ package controller.menu;
 
 import controller.GameController;
 import controller.GameControllerState;
+import controller.menu.element.ButtonController;
 import gui.GUI;
 import model.Position;
 import model.menu.Button;
@@ -12,7 +13,7 @@ import java.util.List;
 
 public abstract class MenuController implements GameControllerState {
     protected GameController gameController;
-    protected Menu menu;
+    private Menu menu;
     private List<ButtonController> buttonControllers;
 
     public MenuController(Menu menu, GameController gameController) {

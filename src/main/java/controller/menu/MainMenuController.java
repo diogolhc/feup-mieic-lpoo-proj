@@ -1,8 +1,8 @@
 package controller.menu;
 
 import controller.GameController;
-import controller.command.ExitGameCommand;
-import controller.command.OpenPopupMenuCommand;
+import controller.command.game.ExitGameCommand;
+import controller.command.controller_state.OpenPopupMenuCommand;
 import controller.menu.builder.info.ConfirmationMenuControllerBuilder;
 import gui.GUI;
 import model.menu.Menu;
@@ -12,11 +12,6 @@ import viewer.menu.MainMenuViewer;
 public class MainMenuController extends MenuController {
     public MainMenuController(Menu menu, GameController gameController) {
         super(menu, gameController);
-    }
-
-    @Override
-    public GameViewer getViewer() {
-        return new MainMenuViewer(this.menu);
     }
 
     @Override
@@ -31,4 +26,9 @@ public class MainMenuController extends MenuController {
 
     @Override
     public void reactTimePassed(long elapsedTimeSinceLastFrame) {}
+
+    @Override
+    public GameViewer getViewer() {
+        return new MainMenuViewer(this.getMenu());
+    }
 }

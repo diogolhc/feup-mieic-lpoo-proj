@@ -3,10 +3,10 @@ package controller.menu.builder.crop_field;
 import controller.GameController;
 import controller.command.Command;
 import controller.command.CompoundCommand;
-import controller.command.RemoveCropCommand;
-import controller.menu.ButtonController;
+import controller.command.farm.crop_field.RemoveCropCommand;
+import controller.menu.element.ButtonController;
 import controller.menu.MenuController;
-import controller.menu.PopupMenuControllerWithClosingCondition;
+import controller.menu.PopupMenuControllerWithTimePassedReaction;
 import controller.menu.builder.MenuControllerBuilder;
 import controller.menu.builder.PopupMenuControllerBuilder;
 import model.Position;
@@ -43,7 +43,7 @@ public class CropFieldGrowingMenuControllerBuilder extends PopupMenuControllerBu
             }
         };
 
-        return new PopupMenuControllerWithClosingCondition(menu, this.controller,
+        return new PopupMenuControllerWithTimePassedReaction(menu, this.controller,
                 this.controller.getGameControllerState(), closingCondition);
     }
 

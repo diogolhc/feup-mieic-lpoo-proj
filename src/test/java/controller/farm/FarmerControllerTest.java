@@ -1,5 +1,6 @@
 package controller.farm;
 
+import controller.farm.element.entity.FarmerController;
 import gui.GUI;
 import model.Position;
 import model.farm.Farm;

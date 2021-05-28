@@ -2,7 +2,11 @@ package controller.menu.builder.stockyard;
 
 import controller.GameController;
 import controller.command.*;
-import controller.menu.ButtonController;
+import controller.command.controller_state.OpenPopupMenuCommand;
+import controller.command.farm.stockyard.BuyAnimalCommand;
+import controller.command.farm.stockyard.FeedAnimalsCommand;
+import controller.command.farm.stockyard.SellAnimalCommand;
+import controller.menu.element.ButtonController;
 import controller.menu.builder.PopupMenuControllerBuilder;
 import controller.menu.builder.info.AlertMenuControllerBuilder;
 import model.Position;
@@ -69,7 +73,7 @@ public class FeedAnimalsMenuControllerBuilder extends PopupMenuControllerBuilder
                 .elseIf(() -> this.farm.getInventory().getAmount(this.stockyard.getLivestockType().getFoodCrop()) < this.stockyard.getFeedQuantity())
                 .ifTrue(new OpenPopupMenuCommand(this.controller, notEnoughCropAlert))
                 .ifFalse(new CompoundCommand()
-                        .addCommand(new FeedAnimalsCommand(this.stockyard, this.farm.getInventory(), crop))
+                        .addCommand(new FeedAnimalsCommand(this.stockyard, this.farm.getInventory()))
                         .addCommand(super.getClosePopupMenuCommand()));
 
         buttons.add(new ButtonController(feedAnimalsButton, feedAnimalsCommand));

@@ -2,10 +2,7 @@ package controller.command;
 
 import controller.GameController;
 import controller.GameControllerState;
-import controller.menu.PopupMenuController;
-import gui.GUI;
-import model.menu.Menu;
-import org.junit.jupiter.api.Assertions;
+import controller.command.controller_state.SetControllerStateCommand;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

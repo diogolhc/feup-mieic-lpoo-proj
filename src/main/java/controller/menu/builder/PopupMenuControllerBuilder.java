@@ -2,8 +2,8 @@ package controller.menu.builder;
 
 import controller.GameController;
 import controller.command.Command;
-import controller.command.SetControllerStateCommand;
-import controller.menu.ButtonController;
+import controller.command.controller_state.SetControllerStateCommand;
+import controller.menu.element.ButtonController;
 import controller.menu.MenuController;
 import controller.menu.PopupMenuController;
 import model.Position;

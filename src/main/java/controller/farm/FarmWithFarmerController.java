@@ -1,8 +1,9 @@
 package controller.farm;
 
 import controller.GameController;
-import controller.command.OpenPopupMenuCommand;
-import controller.farm.building.*;
+import controller.command.controller_state.OpenPopupMenuCommand;
+import controller.farm.element.building.*;
+import controller.farm.element.entity.FarmerController;
 import controller.menu.builder.PauseMenuControllerBuilder;
 import controller.menu.builder.PopupMenuControllerBuilder;
 import gui.GUI;

@@ -1,5 +1,6 @@
 package controller.farm;
 
+import controller.farm.element.entity.NewBuildingController;
 import controller.menu.MenuController;
 import controller.menu.builder.MenuControllerBuilder;
 import controller.menu.builder.info.AlertMenuControllerBuilder;

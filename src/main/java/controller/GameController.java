@@ -9,7 +9,7 @@ import model.farm.Farm;
 import java.io.IOException;
 
 public class GameController implements MouseListener {
-    private static final int FPS = 50;
+    public static final int FPS = 50;
     private GameControllerState gameControllerState;
     private GUI gui;
     private boolean running;
@@ -23,11 +23,6 @@ public class GameController implements MouseListener {
     public GameController(GUI gui, GameControllerState initialState) {
         this(gui);
         this.gameControllerState = initialState;
-    }
-
-    public GameController(GUI gui, Farm farm) {
-        this(gui);
-        this.gameControllerState = new FarmWithFarmerController(farm, this, 1);
     }
 
     public void setGameControllerState(GameControllerState state) {

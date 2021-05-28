@@ -1,7 +1,7 @@
 package controller.command;
 
 public class ConditionalCommand implements Command {
-    private ConditionalCommandCondition condition;
+    private final ConditionalCommandCondition condition;
     private Command ifTrueCommand;
     private Command ifFalseCommand;
 

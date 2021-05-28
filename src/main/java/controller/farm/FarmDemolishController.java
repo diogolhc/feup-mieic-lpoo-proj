@@ -1,6 +1,7 @@
 package controller.farm;
 
-import controller.farm.building.*;
+import controller.farm.element.building.*;
+import controller.farm.element.entity.DemolishMarkerController;
 import gui.GUI;
 import model.Position;
 import model.farm.entity.Entity;

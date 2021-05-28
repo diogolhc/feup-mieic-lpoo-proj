@@ -2,6 +2,7 @@ package controller.command;
 
 import controller.GameController;
 import controller.GameControllerState;
+import controller.command.controller_state.OpenPopupMenuCommand;
 import controller.menu.PopupMenuController;
 import controller.menu.builder.PopupMenuControllerBuilder;
 import gui.GUI;

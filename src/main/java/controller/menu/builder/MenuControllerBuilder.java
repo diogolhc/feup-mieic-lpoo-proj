@@ -1,6 +1,6 @@
 package controller.menu.builder;
 
-import controller.menu.ButtonController;
+import controller.menu.element.ButtonController;
 import controller.menu.MenuController;
 import gui.Color;
 import model.Position;

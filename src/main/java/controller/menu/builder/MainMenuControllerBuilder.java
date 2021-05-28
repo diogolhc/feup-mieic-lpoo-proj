@@ -2,12 +2,12 @@ package controller.menu.builder;
 
 import controller.GameController;
 import controller.command.*;
-import controller.menu.ButtonController;
+import controller.command.game.ExitGameCommand;
+import controller.command.game.LoadGameCommand;
+import controller.command.game.NewGameCommand;
+import controller.menu.element.ButtonController;
 import controller.menu.MainMenuController;
-import controller.menu.MenuController;
 import model.Position;
-import model.farm.Farm;
-import model.farm.builder.NewGameFarmBuilder;
 import model.menu.Button;
 import model.menu.Menu;
 

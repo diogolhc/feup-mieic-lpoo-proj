@@ -254,11 +254,11 @@ Only some of the commands and respective receivers were included in the diagram.
 ![diagrams/implementation_p3.png](diagrams/implementation_p3.png)
 
 These classes can be found in the following files:
-- [ButtonController](../src/main/java/controller/menu/ButtonController.java)
+- [ButtonController](../src/main/java/controller/menu/element/ButtonController.java)
 - [Button](../src/main/java/model/menu/Button.java)
 - [Command](../src/main/java/controller/command/Command.java)
 - [CompoundCommand](../src/main/java/controller/command/CompoundCommand.java)
-- [HarvestCropCommand](../src/main/java/controller/command/HarvestCropCommand.java)
+- [HarvestCropCommand](../src/main/java/controller/command/crop_field/HarvestCropCommand.java)
 - [PlantCropCommand](../src/main/java/controller/command/PlantCropCommand.java)
 - [OpenPopupMenuCommand](../src/main/java/controller/command/OpenPopupMenuCommand.java)
 - [SetControllerStateCommand](../src/main/java/controller/command/SetControllerStateCommand.java)
@@ -315,7 +315,7 @@ The following diagram shows how the pattern’s roles were mapped to the applica
 These classes can be found in the following files:
 - [Command](../src/main/java/controller/command/Command.java)
 - [CompoundCommand](../src/main/java/controller/command/CompoundCommand.java)
-- [HarvestCropCommand](../src/main/java/controller/command/HarvestCropCommand.java)
+- [HarvestCropCommand](../src/main/java/controller/command/crop_field/HarvestCropCommand.java)
 - [SetControllerStateCommand](../src/main/java/controller/command/SetControllerStateCommand.java)
 
 #### Consequences

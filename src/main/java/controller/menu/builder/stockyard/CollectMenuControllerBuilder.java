@@ -1,10 +1,10 @@
 package controller.menu.builder.stockyard;
 
 import controller.GameController;
-import controller.command.CollectStockyardCommand;
+import controller.command.farm.stockyard.CollectStockyardCommand;
 import controller.command.Command;
 import controller.command.CompoundCommand;
-import controller.menu.ButtonController;
+import controller.menu.element.ButtonController;
 import controller.menu.builder.PopupMenuControllerBuilder;
 import model.Position;
 import model.farm.Inventory;

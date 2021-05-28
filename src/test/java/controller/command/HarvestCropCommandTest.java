@@ -1,5 +1,6 @@
 package controller.command;
 
+import controller.command.farm.crop_field.HarvestCropCommand;
 import model.Position;
 import model.farm.Inventory;
 import model.farm.building.CropField;

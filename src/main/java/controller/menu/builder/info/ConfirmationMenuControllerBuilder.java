@@ -4,7 +4,7 @@ import controller.GameController;
 import controller.command.Command;
 import controller.command.CompoundCommand;
 import controller.command.NoOperationCommand;
-import controller.menu.ButtonController;
+import controller.menu.element.ButtonController;
 import model.Position;
 import model.menu.Button;
 

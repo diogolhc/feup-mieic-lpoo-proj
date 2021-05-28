@@ -1,11 +1,9 @@
 package controller.menu.builder.info;
 
 import controller.GameController;
-import controller.menu.ButtonController;
 import controller.menu.builder.PopupMenuControllerBuilder;
 import gui.Color;
 import model.Position;
-import model.menu.Button;
 import model.menu.label.Label;
 
 import java.util.ArrayList;

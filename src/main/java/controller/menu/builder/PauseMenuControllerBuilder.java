@@ -2,8 +2,11 @@ package controller.menu.builder;
 
 import controller.GameController;
 import controller.command.*;
+import controller.command.controller_state.OpenPopupMenuCommand;
+import controller.command.controller_state.SetControllerStateCommand;
 import controller.menu.*;
 import controller.menu.builder.info.ConfirmationMenuControllerBuilder;
+import controller.menu.element.ButtonController;
 import model.Position;
 import model.menu.Button;
 import model.menu.Menu;

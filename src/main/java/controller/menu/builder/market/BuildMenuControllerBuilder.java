@@ -2,12 +2,12 @@ package controller.menu.builder.market;
 
 import controller.GameController;
 import controller.command.Command;
-import controller.command.OpenPopupMenuCommand;
-import controller.command.SetControllerStateCommand;
+import controller.command.controller_state.OpenPopupMenuCommand;
+import controller.command.controller_state.SetControllerStateCommand;
 import controller.farm.FarmController;
 import controller.farm.FarmDemolishController;
 import controller.farm.FarmNewBuildingController;
-import controller.menu.ButtonController;
+import controller.menu.element.ButtonController;
 import controller.menu.builder.info.AlertMenuControllerBuilder;
 import controller.menu.builder.PopupMenuControllerBuilder;
 import model.Position;
