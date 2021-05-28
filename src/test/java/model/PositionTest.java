@@ -1,8 +1,16 @@
 package model;
 
+import net.jqwik.api.ForAll;
+import net.jqwik.api.Property;
+import net.jqwik.api.Provide;
+import net.jqwik.api.constraints.IntRange;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 public class PositionTest {
     private Position position;
@@ -39,15 +47,94 @@ public class PositionTest {
     @Test
     void getTranslated() {
         Assertions.assertEquals(new Position(10, 10), position.getTranslated(new Position(6, 2)));
-        Assertions.assertEquals(new Position(4, 8), position.getTranslated(new Position(0, 0)));
         Assertions.assertEquals(new Position(0, 0), position.getTranslated(new Position(-4, -8)));
     }
 
     @Test
     void getRelativeTo() {
-        Assertions.assertEquals(position, position.getRelativeTo(new Position(0, 0)));
-        Assertions.assertEquals(new Position(0, 0), position.getRelativeTo(position));
         Assertions.assertEquals(new Position(0, 3), position.getRelativeTo(new Position(4, 5)));
         Assertions.assertEquals(new Position(-1, -1), position.getRelativeTo(new Position(5, 9)));
+    }
+
+    @Property
+    void getTranslatedZero(@ForAll int x, @ForAll int y) {
+        position = new Position(x, y);
+        Assertions.assertEquals(position.getTranslated(new Position(0, 0)), position);
+    }
+
+    @Property
+    void getRelativeToItself(@ForAll int x, @ForAll int y) {
+        position = new Position(x, y);
+        Assertions.assertEquals(position.getRelativeTo(position), new Position(0, 0));
+    }
+
+    @Property
+    void getRelativeToOrigin(@ForAll int x, @ForAll int y) {
+        position = new Position(x, y);
+        Assertions.assertEquals(position.getRelativeTo(new Position(0, 0)), position);
+    }
+
+    @Property
+    void getLeftAndGetRightCancel(@ForAll int x, @ForAll int y, @ForAll List<@IntRange(max = 3) Integer> moves) {
+        final int left = 0;
+        final int right = 1;
+        final int up = 2;
+        final int down = 3;
+
+        position = new Position(x, y);
+        int numLeft = Collections.frequency(moves, left);
+        int numRight = Collections.frequency(moves, right);
+        int deltaRL = numRight - numLeft;
+
+        for (int move: moves) {
+            switch (move) {
+                case left:
+                    position = position.getLeft();
+                    break;
+                case right:
+                    position = position.getRight();
+                    break;
+                case up:
+                    position = position.getUp();
+                    break;
+                case down:
+                    position = position.getDown();
+                    break;
+            }
+        }
+
+        Assertions.assertEquals(position.getX(), x + deltaRL);
+    }
+
+    @Property
+    void getUpAndGetDownCancel(@ForAll int x, @ForAll int y, @ForAll List<@IntRange(max = 3) Integer> moves) {
+        final int left = 0;
+        final int right = 1;
+        final int up = 2;
+        final int down = 3;
+
+        position = new Position(x, y);
+        int numUp = Collections.frequency(moves, up);
+        int numDown = Collections.frequency(moves, down);
+        int deltaUD = numDown - numUp;
+
+        for (int move: moves) {
+            switch (move) {
+                case left:
+                    position = position.getLeft();
+                    break;
+                case right:
+                    position = position.getRight();
+                    break;
+                case up:
+                    position = position.getUp();
+                    break;
+                case down:
+                    position = position.getDown();
+                    break;
+            }
+        }
+
+        Assertions.assertEquals(position.getY(), y + deltaUD);
     }
 }
