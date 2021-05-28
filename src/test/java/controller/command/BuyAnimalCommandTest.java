@@ -28,23 +28,45 @@ public class BuyAnimalCommandTest {
         farm = new Farm(10, 10);
         farm.setCurrency(new Currency(100));
         livestock = Mockito.mock(Livestock.class);
+
+        Mockito.when(livestock.getMaxNumAnimals()).thenReturn(5);
+
         stockyard = new Stockyard(new Position(0, 0), livestock);
+        stockyard.setState(stateNotProducing);
+
         Mockito.when(stockyard.getLivestockType().getAnimalBuyPrice()).thenReturn(new Currency(10));
         Mockito.when(stockyard.getLivestockType().getProducedItem()).thenReturn(new AnimalProduct("MILK"));
-
         command = new BuyAnimalCommand(farm, stockyard.getAnimals(), new Currency(10));
     }
 
 
     @Test
     public void execute() {
-        stockyard.setState(stateNotProducing);
         Assertions.assertEquals(0, stockyard.getAnimals().getSize());
+        Assertions.assertEquals(100, farm.getCurrency().getCoins());
+
         command.execute();
 
         Assertions.assertSame(stateNotProducing, stockyard.getState());
         Assertions.assertEquals(90, farm.getCurrency().getCoins());
+
         Assertions.assertEquals(1, stockyard.getAnimals().getSize());
+    }
+
+
+    @Test
+    public void executeMaxAnimals() {
+        Assertions.assertEquals(0, stockyard.getAnimals().getSize());
+
+        command.execute();
+        command.execute();
+        command.execute();
+        command.execute();
+        command.execute();
+        command.execute();
+
+        Assertions.assertTrue(stockyard.getAnimals().isFull());
+        Assertions.assertEquals(5, stockyard.getAnimals().getSize());
     }
 
 }

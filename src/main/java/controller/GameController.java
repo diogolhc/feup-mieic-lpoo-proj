@@ -1,10 +1,8 @@
 package controller;
 
-import controller.farm.FarmWithFarmerController;
 import gui.GUI;
 import gui.MouseListener;
 import model.Position;
-import model.farm.Farm;
 
 import java.io.IOException;
 
