@@ -35,8 +35,9 @@ public class HUDViewer {
     private void drawText(InGameTime time, Weather weather, Wallet wallet, GUI gui) {
         StringDrawer infoDrawer = new StringDrawer(gui, HUD_BACKGROUND_COLOR, Color.WHITE);
         infoDrawer.draw(new Position(0, this.y), time.getDayTimeString());
-        infoDrawer.draw(new Position(18, this.y), weather.getName());
 
+        infoDrawer.draw(new Position(InGameTime.DAY_TIME_STRING_SIZE + 4, this.y), weather.getName());
+        
         StringDrawer currencyDrawer = new StringDrawer(gui, HUD_BACKGROUND_COLOR, CURRENCY_COLOR);
         Position currencyPosition = new Position(this.width - Currency.MAX_STRING_LENGTH, this.y);
         currencyDrawer.draw(currencyPosition, wallet.getCurrency().toStringPadded());
