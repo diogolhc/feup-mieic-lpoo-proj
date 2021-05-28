@@ -2,10 +2,10 @@ package controller.command;
 
 import controller.command.farm.crop_field.RemoveCropCommand;
 import model.Position;
-import model.farm.building.CropField;
-import model.farm.building.crop_field_state.NotPlanted;
-import model.farm.building.crop_field_state.Planted;
-import model.farm.building.crop_field_state.ReadyToHarvest;
+import model.farm.building.crop_field.CropField;
+import model.farm.building.crop_field.state.NotPlanted;
+import model.farm.building.crop_field.state.Planted;
+import model.farm.building.crop_field.state.ReadyToHarvest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

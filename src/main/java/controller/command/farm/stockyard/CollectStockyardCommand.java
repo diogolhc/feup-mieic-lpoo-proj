@@ -2,9 +2,9 @@ package controller.command.farm.stockyard;
 
 import controller.command.Command;
 import model.farm.Inventory;
-import model.farm.building.Stockyard;
-import model.farm.building.stockyard_state.NotProducing;
-import model.farm.building.stockyard_state.ReadyToCollect;
+import model.farm.building.stockyard.Stockyard;
+import model.farm.building.stockyard.state.NotProducing;
+import model.farm.building.stockyard.state.ReadyToCollect;
 import model.farm.data.item.AnimalProduct;
 
 public class CollectStockyardCommand implements Command {

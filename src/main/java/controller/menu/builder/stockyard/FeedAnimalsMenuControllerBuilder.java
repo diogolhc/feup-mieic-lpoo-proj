@@ -11,7 +11,9 @@ import controller.menu.builder.PopupMenuControllerBuilder;
 import controller.menu.builder.info.AlertMenuControllerBuilder;
 import model.Position;
 import model.farm.Farm;
-import model.farm.building.Stockyard;
+import model.farm.building.stockyard.Stockyard;
+import model.farm.building.stockyard.StockyardAnimals;
+import model.farm.data.Livestock;
 import model.farm.data.item.Crop;
 import model.menu.Button;
 import model.menu.label.Label;
@@ -19,14 +21,18 @@ import model.menu.label.Label;
 import java.util.List;
 
 public class FeedAnimalsMenuControllerBuilder extends PopupMenuControllerBuilder {
-    private Farm farm;
-    private Stockyard stockyard;
-    private Crop crop;
+    private final Livestock livestockType;
+    private final Farm farm;
+    private final Stockyard stockyard;
+    private final Crop crop;
+    private final StockyardAnimals animals;
 
     public FeedAnimalsMenuControllerBuilder(GameController gameController, Farm farm, Stockyard stockyard, Crop crop) {
         super(gameController);
         this.farm = farm;
         this.stockyard = stockyard;
+        this.animals = stockyard.getAnimals();
+        this.livestockType = stockyard.getLivestockType();
         this.crop = crop;
     }
 
@@ -47,30 +53,30 @@ public class FeedAnimalsMenuControllerBuilder extends PopupMenuControllerBuilder
                 "NOT ENOUGH " + this.stockyard.getLivestockType().getFoodCrop().getName());
 
         Button buyAnimalButton = new Button(new Position(1, 6), "BUY");
-        ConditionalCommand buyAnimalCommand = new ConditionalCommand(() -> this.stockyard.isFull());
+        ConditionalCommand buyAnimalCommand = new ConditionalCommand(() -> this.animals.isFull());
         buyAnimalCommand
                 .ifTrue(new OpenPopupMenuCommand(this.controller, stockyardFullAlert))
                 .elseIf(() -> !this.farm.getCurrency().canBuy(this.stockyard.getLivestockType().getAnimalBuyPrice()))
                 .ifTrue(new OpenPopupMenuCommand(this.controller, notEnoughMoneyAlert))
-                .ifFalse(new BuyAnimalCommand(this.farm, this.stockyard));
+                .ifFalse(new BuyAnimalCommand(this.farm, this.stockyard.getAnimals(), this.livestockType.getAnimalBuyPrice()));
 
         buttons.add(new ButtonController(buyAnimalButton, buyAnimalCommand));
 
 
         Button sellAnimalButton = new Button(new Position(16, 6), "SELL");
-        ConditionalCommand sellAnimalCommand = new ConditionalCommand(() -> this.stockyard.isEmpty());
+        ConditionalCommand sellAnimalCommand = new ConditionalCommand(() -> this.animals.isEmpty());
         sellAnimalCommand
                 .ifTrue(new OpenPopupMenuCommand(this.controller, stockyardEmptyAlert))
-                .ifFalse(new SellAnimalCommand(this.farm, this.stockyard));
+                .ifFalse(new SellAnimalCommand(this.farm, this.animals, this.livestockType.getAnimalSellPrice()));
 
         buttons.add(new ButtonController(sellAnimalButton, sellAnimalCommand));
 
 
         Button feedAnimalsButton = new Button(new Position(1, 12), "FEED");
-        ConditionalCommand feedAnimalsCommand = new ConditionalCommand(() -> this.stockyard.isEmpty());
+        ConditionalCommand feedAnimalsCommand = new ConditionalCommand(() -> this.animals.isEmpty());
         feedAnimalsCommand
                 .ifTrue(new OpenPopupMenuCommand(this.controller, stockyardEmptyAlert))
-                .elseIf(() -> this.farm.getInventory().getAmount(this.stockyard.getLivestockType().getFoodCrop()) < this.stockyard.getFeedQuantity())
+                .elseIf(() -> this.farm.getInventory().getAmount(this.stockyard.getLivestockType().getFoodCrop()) < this.stockyard.getRequiredFood())
                 .ifTrue(new OpenPopupMenuCommand(this.controller, notEnoughCropAlert))
                 .ifFalse(new CompoundCommand()
                         .addCommand(new FeedAnimalsCommand(this.stockyard, this.farm.getInventory()))
@@ -89,7 +95,7 @@ public class FeedAnimalsMenuControllerBuilder extends PopupMenuControllerBuilder
                 new Position(1, 4),
                 () -> String.format("%1$sS: %2$d/%3$d",
                         this.stockyard.getLivestockType().getAnimalName(),
-                        this.stockyard.getAnimals().size(),
+                        this.animals.getSize(),
                         this.stockyard.getLivestockType().getMaxNumAnimals())
         ));
 
@@ -120,12 +126,12 @@ public class FeedAnimalsMenuControllerBuilder extends PopupMenuControllerBuilder
         labels.add(new Label(
                 new Position(8, 13),
                 () -> {
-                    if (this.stockyard.isEmpty()) {
+                    if (this.animals.isEmpty()) {
                         return this.stockyard.getLivestockType().getAnimalName() + "S";
                     } else {
                         return this.stockyard.getLivestockType().getFoodCrop().getName()
                                 + " x"
-                                + this.stockyard.getLivestockType().getRequiredFood() * this.stockyard.getAnimals().size();
+                                + this.stockyard.getLivestockType().getRequiredFood() * this.animals.getSize();
                     }
                 }
         ));
@@ -133,12 +139,12 @@ public class FeedAnimalsMenuControllerBuilder extends PopupMenuControllerBuilder
         labels.add(new Label(
                 new Position(1, 16),
                 () -> {
-                    if (this.stockyard.isEmpty()) {
+                    if (this.animals.isEmpty()) {
                         return "STOCKYARD IS EMPTY";
                     } else {
                         return String.format("PRODUCES: %1$s %2$s IN %3$s",
                                 this.stockyard.getLivestockType().getProducedItem().getName(),
-                                "x" + this.stockyard.getLivestockType().getProducedItem().getBaseProducedAmount() * this.stockyard.getAnimals().size(),
+                                "x" + this.stockyard.getLivestockType().getProducedItem().getBaseProducedAmount() * this.animals.getSize(),
                                 this.stockyard.getLivestockType().getProducedItem().getProductionTime().getTimerString());
                     }
                 }

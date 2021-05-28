@@ -10,8 +10,8 @@ import gui.GUI;
 import model.Position;
 import model.farm.Farm;
 import model.farm.building.BuildingSet;
-import model.farm.building.CropField;
-import model.farm.building.Stockyard;
+import model.farm.building.crop_field.CropField;
+import model.farm.building.stockyard.Stockyard;
 import viewer.GameViewer;
 import viewer.farm.FarmWithFarmerViewer;
 

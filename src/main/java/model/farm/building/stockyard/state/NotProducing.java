@@ -1,4 +1,4 @@
-package model.farm.building.stockyard_state;
+package model.farm.building.stockyard.state;
 
 import gui.Color;
 import model.InGameTime;

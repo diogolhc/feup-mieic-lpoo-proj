@@ -1,8 +1,8 @@
-package model.farm.building.stockyard_state;
+package model.farm.building.stockyard.state;
 
 import gui.Color;
 import model.InGameTime;
-import model.farm.building.Stockyard;
+import model.farm.building.stockyard.Stockyard;
 
 public class ReadyToCollect implements StockyardState{
     private Stockyard stockyard;

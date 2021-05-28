@@ -7,7 +7,7 @@ import controller.menu.element.ButtonController;
 import controller.menu.builder.PopupMenuControllerBuilder;
 import model.Position;
 import model.farm.Inventory;
-import model.farm.building.CropField;
+import model.farm.building.crop_field.CropField;
 import model.menu.Button;
 import model.menu.label.Label;
 
