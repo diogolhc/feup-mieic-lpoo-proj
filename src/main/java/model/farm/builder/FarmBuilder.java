@@ -26,6 +26,8 @@ public abstract class FarmBuilder {
         farm.addWeatherTypes(this.getWeatherStates());
         farm.setCurrentWeather(farm.getWeatherTypes().get(0));
 
+        farm.setCurrency(new Currency(99999));
+
         return farm;
     }
 
