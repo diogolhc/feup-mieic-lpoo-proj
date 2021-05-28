@@ -48,8 +48,8 @@ public class StopProducingCommandTest {
     @Test
     public void execute() {
         stockyard.setState(stateProducing);
+        Assertions.assertTrue(stockyard.getState() instanceof Producing);
 
-        Assertions.assertSame(stateProducing, stockyard.getState());
         Assertions.assertEquals(0, inventory.getAmount(animalProduct));
         Assertions.assertEquals(0, stateProducing.getCollectAmount());
 
