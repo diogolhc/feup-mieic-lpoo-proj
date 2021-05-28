@@ -1,4 +1,4 @@
-package controller.menu.builder.stockyard;
+package controller.menu.builder.building.stockyard;
 
 import controller.GameController;
 import controller.command.farm.stockyard.CollectStockyardCommand;
@@ -25,26 +25,15 @@ public class CollectMenuControllerBuilder extends PopupMenuControllerBuilder {
     }
 
     @Override
-    protected List<Label> getLabels() {
-        List<Label> labels = super.getLabels();
-
-        labels.add(new Label(
-                new Position(1, 4),
-                () -> "PRODUCT: " + stockyard.getLivestockType().getProducedItem().getName()
-        ));
-
-        labels.add( new Label(
-                new Position(1, 5),
-                () -> "QUANTITY: " + stockyard.getState().getCollectAmount()
-        ));
-
-        return labels;
-    }
-
-    @Override
     protected List<ButtonController> getButtons() {
         List<ButtonController> buttons = super.getButtons();
 
+        addCollectButton(buttons);
+
+        return buttons;
+    }
+
+    private void addCollectButton(List<ButtonController> buttons) {
         Button collectButton = new Button(new Position(1, 7), "COLLECT");
 
         Command collectButtonCommand = new CompoundCommand()
@@ -52,8 +41,30 @@ public class CollectMenuControllerBuilder extends PopupMenuControllerBuilder {
                 .addCommand(super.getClosePopupMenuCommand());
 
         buttons.add(new ButtonController(collectButton, collectButtonCommand));
+    }
 
-        return buttons;
+    @Override
+    protected List<Label> getLabels() {
+        List<Label> labels = super.getLabels();
+
+        addProductLabel(labels);
+        addQuantityLabel(labels);
+
+        return labels;
+    }
+
+    private void addProductLabel(List<Label> labels) {
+        labels.add(new Label(
+                new Position(1, 4),
+                () -> "PRODUCT: " + stockyard.getLivestockType().getProducedItem().getName()
+        ));
+    }
+
+    private void addQuantityLabel(List<Label> labels) {
+        labels.add( new Label(
+                new Position(1, 5),
+                () -> "QUANTITY: " + stockyard.getState().getCollectAmount()
+        ));
     }
 
     @Override

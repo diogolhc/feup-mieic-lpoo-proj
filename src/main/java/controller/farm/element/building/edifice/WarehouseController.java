@@ -1,9 +1,10 @@
-package controller.farm.element.building;
+package controller.farm.element.building.edifice;
 
 import controller.GameController;
 import controller.command.Command;
 import controller.command.controller_state.OpenPopupMenuCommand;
 import controller.menu.builder.*;
+import controller.menu.builder.building.WarehouseMenuControllerBuilder;
 import model.farm.Farm;
 import model.farm.building.Edifice;
 

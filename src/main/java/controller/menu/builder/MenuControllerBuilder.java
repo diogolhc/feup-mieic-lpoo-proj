@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class MenuControllerBuilder {
+    public final static Color DEFAULT_MENU_COLOR = new Color("#222222");
+
     public MenuController buildMenu(Position position) {
         Menu menu = new Menu();
         menu.setTitle(this.getTitle());
@@ -27,11 +29,6 @@ public abstract class MenuControllerBuilder {
             menuController.addButton(buttonController);
         }
 
-        menu.setTopLeftPosition(new Position(
-                (40 - menu.getWidth())/2,
-                (21 - menu.getHeight())/2
-        ));
-
         return menuController;
     }
 
@@ -47,6 +44,12 @@ public abstract class MenuControllerBuilder {
         return this.buildMenu(position);
     }
 
+    protected abstract String getTitle();
+
+    protected abstract int getWidth();
+
+    protected abstract int getHeight();
+
     protected abstract MenuController getMenuController(Menu menu);
 
     protected List<ButtonController> getButtons() {
@@ -57,13 +60,7 @@ public abstract class MenuControllerBuilder {
         return new ArrayList<>();
     }
 
-    protected abstract int getHeight();
-
-    protected abstract int getWidth();
-
-    protected abstract String getTitle();
-
     protected Color getColor() {
-        return new Color("#222222");
+        return DEFAULT_MENU_COLOR;
     }
 }

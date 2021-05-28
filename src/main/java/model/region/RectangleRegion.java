@@ -17,8 +17,8 @@ public class RectangleRegion implements Region {
         return this.topLeft;
     }
 
-    public RectangleRegion getTranslated(Position position) {
-        return new RectangleRegion(this.topLeft.getTranslated(position), this.width, this.height);
+    public RectangleRegion getAt(Position position) {
+        return new RectangleRegion(position, this.width, this.height);
     }
 
     public int getHeight() {

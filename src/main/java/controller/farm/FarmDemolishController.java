@@ -1,7 +1,10 @@
 package controller.farm;
 
 import controller.farm.element.building.*;
-import controller.farm.element.entity.DemolishMarkerController;
+import controller.farm.element.building.edifice.HouseController;
+import controller.farm.element.building.edifice.MarketController;
+import controller.farm.element.building.edifice.WarehouseController;
+import controller.farm.element.entity.keyboard_reactor.DemolishMarkerController;
 import gui.GUI;
 import model.Position;
 import model.farm.entity.Entity;
@@ -27,7 +30,7 @@ public class FarmDemolishController extends FarmController {
         if (action == GUI.KEYBOARD_ACTION.BACK) this.returnToFarmerController();
         if (action == GUI.KEYBOARD_ACTION.INTERACT) this.reactDemolish();
         DemolishMarkerController demolishMarkerController = new DemolishMarkerController(this.farm, this.demolishMarker);
-        demolishMarkerController.doAction(action);
+        demolishMarkerController.reactKeyboard(action);
     }
 
     private void returnToFarmerController() {

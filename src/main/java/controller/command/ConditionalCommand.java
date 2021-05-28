@@ -1,15 +1,15 @@
 package controller.command;
 
 public class ConditionalCommand implements Command {
-    private final ConditionalCommandCondition condition;
+    private final Condition condition;
     private Command ifTrueCommand;
     private Command ifFalseCommand;
 
-    public interface ConditionalCommandCondition {
+    public interface Condition {
         boolean evaluate();
     }
 
-    public ConditionalCommand(ConditionalCommandCondition condition) {
+    public ConditionalCommand(Condition condition) {
         this.condition = condition;
         this.ifTrueCommand = new NoOperationCommand();
         this.ifFalseCommand = new NoOperationCommand();
@@ -25,7 +25,7 @@ public class ConditionalCommand implements Command {
         return this;
     }
 
-    public ConditionalCommand elseIf(ConditionalCommandCondition condition) {
+    public ConditionalCommand elseIf(Condition condition) {
         ConditionalCommand command = new ConditionalCommand(condition);
         this.ifFalseCommand = command;
         return command;

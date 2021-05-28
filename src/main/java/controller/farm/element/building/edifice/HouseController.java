@@ -1,11 +1,11 @@
-package controller.farm.element.building;
+package controller.farm.element.building.edifice;
 
 import controller.GameController;
 import controller.command.Command;
 import controller.command.controller_state.OpenPopupMenuCommand;
 import controller.farm.FarmController;
 import controller.menu.builder.PopupMenuControllerBuilder;
-import controller.menu.builder.HouseMenuControllerBuilder;
+import controller.menu.builder.building.HouseMenuControllerBuilder;
 import model.farm.building.Edifice;
 
 public class HouseController extends EdificeController {
@@ -19,6 +19,7 @@ public class HouseController extends EdificeController {
     public Command getInteractionCommand(Edifice house) {
         if (this.controller.getGameControllerState() instanceof FarmController) {
             FarmController farmController = (FarmController) this.controller.getGameControllerState();
+
             PopupMenuControllerBuilder menuControllerBuilder = new HouseMenuControllerBuilder(
                     this.controller, farmController, house, SLEEP_RATE_MULTIPLIER);
             return new OpenPopupMenuCommand(this.controller, menuControllerBuilder);

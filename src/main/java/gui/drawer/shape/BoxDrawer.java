@@ -21,9 +21,9 @@ public class BoxDrawer {
     }
 
     public void draw(Position position, int width, int height) {
-        drawHorizontalEdges(position, width, height);
-        drawVerticalEdges(position, width, height);
-        drawCorner(position, width, height);
+        this.drawHorizontalEdges(position, width, height);
+        this.drawVerticalEdges(position, width, height);
+        this.drawCorner(position, width, height);
     }
 
     private void drawHorizontalEdges(Position position, int width, int height) {

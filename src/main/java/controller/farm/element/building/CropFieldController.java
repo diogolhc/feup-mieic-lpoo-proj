@@ -15,9 +15,9 @@ import model.farm.building.crop_field.CropField;
 import model.farm.building.crop_field.state.NotPlanted;
 import model.farm.building.crop_field.state.Planted;
 import model.farm.building.crop_field.state.ReadyToHarvest;
-import controller.menu.builder.crop_field.CropFieldGrowingMenuControllerBuilder;
-import controller.menu.builder.crop_field.HarvestMenuControllerBuilder;
-import controller.menu.builder.crop_field.PlantCropMenuControllerBuilder;
+import controller.menu.builder.building.crop_field.CropFieldGrowingMenuControllerBuilder;
+import controller.menu.builder.building.crop_field.HarvestMenuControllerBuilder;
+import controller.menu.builder.building.crop_field.PlantCropMenuControllerBuilder;
 
 public class CropFieldController extends BuildingController<CropField> {
     private final GameController controller;

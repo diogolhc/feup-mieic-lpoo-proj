@@ -12,7 +12,9 @@ import java.util.Collections;
 import java.util.List;
 
 public class InfoMenuControllerBuilder extends PopupMenuControllerBuilder {
-    private String title;
+    public static final Color INFO_MENU_COLOR = new Color("#2C2C2C");
+
+    private final String title;
     private final List<String> lines;
     private final int messageHeight;
     private final int messageWidth;
@@ -22,12 +24,12 @@ public class InfoMenuControllerBuilder extends PopupMenuControllerBuilder {
         this.title = title;
 
         this.lines = Arrays.asList(message.split("\n"));
-        List<Integer> lineWidths = new ArrayList<>();
+        int longestLine = 0;
         for (String line: this.lines) {
-            lineWidths.add(line.length());
+            longestLine = Math.max(longestLine, line.length());
         }
-        this.messageHeight = lineWidths.size();
-        this.messageWidth = Collections.max(lineWidths);
+        this.messageHeight = this.lines.size();
+        this.messageWidth = longestLine;
     }
 
     @Override
@@ -60,6 +62,6 @@ public class InfoMenuControllerBuilder extends PopupMenuControllerBuilder {
 
     @Override
     protected Color getColor() {
-        return new Color("#2C2C2C");
+        return INFO_MENU_COLOR;
     }
 }

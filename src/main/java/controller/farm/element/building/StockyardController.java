@@ -10,10 +10,10 @@ import controller.farm.FarmWithFarmerController;
 import controller.command.Command;
 import controller.farm.element.entity.AnimalController;
 import controller.menu.builder.PopupMenuControllerBuilder;
-import controller.menu.builder.stockyard.CollectMenuControllerBuilder;
-import controller.menu.builder.stockyard.FeedAnimalsMenuControllerBuilder;
-//import controller.menu.builder.stockyard.ProducingMenuControllerBuilder;
-import controller.menu.builder.stockyard.ProducingMenuControllerBuilder;
+import controller.menu.builder.building.stockyard.CollectMenuControllerBuilder;
+import controller.menu.builder.building.stockyard.FeedAnimalsMenuControllerBuilder;
+//import controller.menu.builder.building.stockyard.ProducingMenuControllerBuilder;
+import controller.menu.builder.building.stockyard.ProducingMenuControllerBuilder;
 import model.InGameTime;
 import model.farm.building.stockyard.StockyardAnimals;
 import model.farm.entity.Animal;
@@ -70,7 +70,7 @@ public class StockyardController extends BuildingController<Stockyard> {
             animalController.reactTimePassed(animal, elapsedTime);
         }
 
-        stockyard.getState().setRemainingTime(stockyard.getState().getRemainingTime().subtract(elapsedTime));
+        stockyard.setRemainingTime(stockyard.getRemainingTime().subtract(elapsedTime));
         stockyard.changeCollectAmount(this.farm.getCurrentWeather().getEffect(elapsedTime));
     }
 }
