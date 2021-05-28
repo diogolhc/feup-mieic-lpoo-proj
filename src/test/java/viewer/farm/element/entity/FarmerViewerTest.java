@@ -1,4 +1,4 @@
-package gui.drawer.entity;
+package viewer.farm.element.entity;
 
 import gui.Color;
 import gui.GUI;
@@ -8,10 +8,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import viewer.farm.element.entity.FarmerViewer;
+
 
 public class FarmerViewerTest {
-
     private GUI gui;
     private Color backgroundColors[][] = new Color[10][10];
     private Color foregroundColors[][] = new Color[10][10];
@@ -95,8 +94,8 @@ public class FarmerViewerTest {
 
         Color expectedBg[][] = cloneSquareBidimensionalArray(this.backgroundColors);
         Entity farmer = new Entity(new Position(2, 3));
-        FarmerViewer drawer = new FarmerViewer();
-        drawer.draw(farmer, gui);
+        FarmerViewer viewer = new FarmerViewer();
+        viewer.draw(farmer, gui);
 
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
@@ -133,8 +132,8 @@ public class FarmerViewerTest {
         Color expectedBg[][] = cloneSquareBidimensionalArray(this.backgroundColors);
 
         Entity farmer = new Entity(new Position(4, 6));
-        FarmerViewer drawer = new FarmerViewer();
-        drawer.draw(farmer, gui);
+        FarmerViewer viewer = new FarmerViewer();
+        viewer.draw(farmer, gui);
 
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
@@ -150,6 +149,5 @@ public class FarmerViewerTest {
             }
         }
     }
-
 
 }

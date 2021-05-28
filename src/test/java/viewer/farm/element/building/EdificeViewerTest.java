@@ -1,4 +1,4 @@
-package gui.drawer.entity;
+package viewer.farm.element.building;
 
 import gui.Color;
 import gui.GUI;
@@ -7,10 +7,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import viewer.farm.element.building.EdificeViewer;
+
 
 class EdificeViewerTest {
-
     private GUI gui;
     private Color backgroundColors[][] = new Color[10][10];
     private Color foregroundColors[][] = new Color[10][10];
@@ -87,8 +86,8 @@ class EdificeViewerTest {
         Color WALL = new Color("#eeeeef");
         Color ROOF = new Color("#c20000");
 
-        EdificeViewer drawer = new EdificeViewer(ROOF);
-        drawer.draw(new Position(0, 0), gui);
+        EdificeViewer viewer = new EdificeViewer(ROOF);
+        viewer.draw(new Position(0, 0), gui);
 
         Color expectedBg[][] = {
                 {BLACK, ROOF, ROOF, ROOF, ROOF, ROOF, BLACK, BLACK, BLACK, BLACK},
@@ -133,8 +132,9 @@ class EdificeViewerTest {
         Color WALL = new Color("#eeeeef");
         Color ROOF = new Color("#c20000");
 
-        EdificeViewer drawer = new EdificeViewer(ROOF);
-        drawer.draw(new Position(2, 2), gui);
+
+        EdificeViewer viewer = new EdificeViewer( ROOF);
+        viewer.draw(new Position(2, 2), gui);
 
         Color expectedBg[][] = {
                 {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
@@ -169,5 +169,4 @@ class EdificeViewerTest {
 
         Assertions.assertEquals(BLACK, this.foregroundColors[7][6]);
     }
-
 }
