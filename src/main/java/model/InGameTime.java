@@ -2,27 +2,31 @@ package model;
 
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.Random;
 
 public class InGameTime implements Comparable<InGameTime>, Serializable {
     private final int minutes;
 
     public InGameTime(int minutes) {
+        if (minutes < 0) minutes = 0;
         this.minutes = minutes;
     }
 
     public InGameTime(int day, int hour, int minute) {
-        this(minute + (hour + day*24)*60);
+        this(minute + (hour + day * 24) * 60);
     }
 
     public InGameTime() {
         this(0);
     }
 
-    public InGameTime(InGameTime growTime) {
-        this.minutes = growTime.minutes;
+    public InGameTime(InGameTime time) {
+        this.minutes = time.minutes;
     }
 
     public static InGameTime getRandom(InGameTime min, InGameTime max) {
+        if (min.compareTo(max) > 0) throw new IllegalArgumentException("min in range cannot be larger than max");
+
         int delta = max.minutes - min.minutes;
         return new InGameTime(min.minutes + (int) (Math.random() * delta));
     }
@@ -34,7 +38,7 @@ public class InGameTime implements Comparable<InGameTime>, Serializable {
         } else if (tokens.length == 3) {
             return new InGameTime(Integer.parseInt(tokens[0]), Integer.parseInt(tokens[1]), Integer.parseInt(tokens[2]));
         } else {
-            throw new IllegalArgumentException("Can't parse string " + s + " as IngamTime.");
+            throw new IllegalArgumentException("Can't parse string " + s + " as IngameTime.");
         }
     }
 
@@ -59,9 +63,7 @@ public class InGameTime implements Comparable<InGameTime>, Serializable {
     }
 
     public InGameTime subtract(InGameTime inGameTime) {
-        int minutes = this.minutes - inGameTime.minutes;
-        if (minutes < 0) minutes = 0;
-        return new InGameTime(minutes);
+        return new InGameTime(this.minutes - inGameTime.minutes);
     }
 
     public String getDayTimeString() {
