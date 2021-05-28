@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FarmDemolishController extends FarmController {
-    private Entity demolishMarker;
+    private final Entity demolishMarker;
 
     public FarmDemolishController(FarmController farmController) {
         super(farmController);
@@ -24,17 +24,11 @@ public class FarmDemolishController extends FarmController {
 
     @Override
     public void reactKeyboard(GUI.KEYBOARD_ACTION action) {
-        if (action == GUI.KEYBOARD_ACTION.BACK) returnToFarmerController();
-        if (action == GUI.KEYBOARD_ACTION.INTERACT) reactDemolish();
+        if (action == GUI.KEYBOARD_ACTION.BACK) this.returnToFarmerController();
+        if (action == GUI.KEYBOARD_ACTION.INTERACT) this.reactDemolish();
         DemolishMarkerController demolishMarkerController = new DemolishMarkerController(this.farm, this.demolishMarker);
         demolishMarkerController.doAction(action);
     }
-
-    @Override
-    public void reactMouseMovement(Position position) {}
-
-    @Override
-    public void reactMouseClick(Position position) {}
 
     private void returnToFarmerController() {
         this.controller.setGameControllerState(new FarmWithFarmerController(this));

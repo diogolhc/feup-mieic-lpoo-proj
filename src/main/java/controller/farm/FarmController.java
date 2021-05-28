@@ -7,15 +7,16 @@ import controller.farm.element.WeatherController;
 import controller.farm.element.building.CropFieldController;
 import controller.farm.element.building.*;
 import model.InGameTime;
+import model.Position;
 import model.farm.Farm;
 import model.farm.building.crop_field.CropField;
 import model.farm.building.stockyard.Stockyard;
 
 public abstract class FarmController implements GameControllerState {
-    protected Farm farm;
-    protected GameController controller;
-    protected TimeConverter timeConverter;
-    protected WeatherController weatherController;
+    protected final Farm farm;
+    protected final GameController controller;
+    private final TimeConverter timeConverter;
+    private final WeatherController weatherController;
 
     public FarmController(FarmController farmController) {
         this.farm = farmController.farm;
@@ -36,18 +37,24 @@ public abstract class FarmController implements GameControllerState {
     }
 
     @Override
+    public void reactMouseMovement(Position position) {}
+
+    @Override
+    public void reactMouseClick(Position position) {}
+
+    @Override
     public void reactTimePassed(long elapsedTimeSinceLastFrame) {
         InGameTime elapsedTime = this.timeConverter.convert(elapsedTimeSinceLastFrame);
 
         this.farm.setTime(this.farm.getTime().add(elapsedTime));
 
         CropFieldController cropFieldController = new CropFieldController(this.controller, this.farm);
-        for (CropField cropField : this.farm.getBuildings().getCropFields()) {
+        for (CropField cropField: this.farm.getBuildings().getCropFields()) {
             cropFieldController.reactTimePassed(cropField, elapsedTime);
         }
 
         StockyardController stockyardController = new StockyardController(this.controller, this.farm);
-        for (Stockyard stockyard : this.farm.getBuildings().getStockyards()) {
+        for (Stockyard stockyard: this.farm.getBuildings().getStockyards()) {
             stockyardController.reactTimePassed(stockyard, elapsedTime);
         }
 

@@ -39,9 +39,8 @@ public class FarmWithFarmerController extends FarmController {
     public void reactMouseClick(Position position) {}
 
     private void pauseGame() {
-        PopupMenuControllerBuilder menuControllerBuilder;
-        menuControllerBuilder = new PauseMenuControllerBuilder(this.controller);
-        new OpenPopupMenuCommand(this.controller, menuControllerBuilder).execute();
+        PopupMenuControllerBuilder pauseMenu = new PauseMenuControllerBuilder(this.controller);
+        new OpenPopupMenuCommand(this.controller, pauseMenu).execute();
     }
 
     private void reactInteraction() {

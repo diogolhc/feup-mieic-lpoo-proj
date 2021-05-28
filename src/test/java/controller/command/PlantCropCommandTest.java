@@ -4,6 +4,7 @@ import controller.command.farm.crop_field.PlantCropCommand;
 import model.Position;
 import model.farm.Currency;
 import model.farm.Farm;
+import model.farm.Wallet;
 import model.farm.building.crop_field.CropField;
 import model.farm.data.item.Crop;
 import model.farm.building.crop_field.state.CropFieldState;
@@ -16,7 +17,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 public class PlantCropCommandTest {
-    private Farm farm;
+    private Wallet wallet;
     private CropField cropField;
     private ReadyToHarvest stateReady;
     private Planted statePlanted;
@@ -29,12 +30,11 @@ public class PlantCropCommandTest {
         stateReady = Mockito.mock(ReadyToHarvest.class);
         statePlanted = Mockito.mock(Planted.class);
         stateNotPlanted = Mockito.mock(NotPlanted.class);
-        farm = new Farm(10,10);
-        farm.setCurrency(new Currency(100));
+        wallet = new Wallet(new Currency(100));
         cropField = new CropField(new Position(0, 0));
         crop = Mockito.mock(Crop.class);
         Mockito.when(crop.getPlantPrice()).thenReturn(new Currency(10));
-        command = new PlantCropCommand(farm, cropField, crop);
+        command = new PlantCropCommand(wallet, cropField, crop);
     }
 
     @Test
@@ -42,7 +42,7 @@ public class PlantCropCommandTest {
         cropField.setState(stateReady);
         command.execute();
         Assertions.assertSame(stateReady, cropField.getState());
-        Assertions.assertEquals(100, farm.getWallet().getCurrency().getCoins());
+        Assertions.assertEquals(100, wallet.getCurrency().getCoins());
     }
 
     @Test
@@ -52,7 +52,7 @@ public class PlantCropCommandTest {
         CropFieldState newState = cropField.getState();
         Assertions.assertTrue(newState instanceof Planted);
         Assertions.assertSame(crop, newState.getCrop());
-        Assertions.assertEquals(90, farm.getWallet().getCurrency().getCoins());
+        Assertions.assertEquals(90, wallet.getCurrency().getCoins());
     }
 
     @Test
@@ -60,6 +60,6 @@ public class PlantCropCommandTest {
         cropField.setState(statePlanted);
         command.execute();
         Assertions.assertSame(statePlanted, cropField.getState());
-        Assertions.assertEquals(100, farm.getWallet().getCurrency().getCoins());
+        Assertions.assertEquals(100, wallet.getCurrency().getCoins());
     }
 }
