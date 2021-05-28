@@ -80,11 +80,12 @@ class EdificeViewerTest {
     @Test
     void drawAtOrigin() {
         Color BLACK = Color.BLACK;
-        Color PATH = new Color("#be9b7b");
-        Color FLOOR = new Color("#777777");
-        Color DOOR = new Color("#82490b");
-        Color WALL = new Color("#eeeeef");
+        Color PATH = Color.HIGHLIGHTED_FLOOR;
+        Color FLOOR = EdificeViewer.FLOOR_COLOR;
+        Color DOOR = EdificeViewer.DOOR_COLOR;
+        Color WALL = EdificeViewer.WALL_COLOR;
         Color ROOF = new Color("#c20000");
+
 
         EdificeViewer viewer = new EdificeViewer(ROOF);
         viewer.draw(new Position(0, 0), gui);
@@ -126,10 +127,10 @@ class EdificeViewerTest {
     @Test
     void drawOtherPosition() {
         Color BLACK = Color.BLACK;
-        Color PATH = new Color("#be9b7b");
-        Color FLOOR = new Color("#777777");
-        Color DOOR = new Color("#82490b");
-        Color WALL = new Color("#eeeeef");
+        Color PATH = Color.HIGHLIGHTED_FLOOR;
+        Color FLOOR = EdificeViewer.FLOOR_COLOR;
+        Color DOOR = EdificeViewer.DOOR_COLOR;
+        Color WALL = EdificeViewer.WALL_COLOR;
         Color ROOF = new Color("#c20000");
 
 

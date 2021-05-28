@@ -88,9 +88,8 @@ class CropFieldViewerTest {
     void drawNoCropAtOrigin() {
         this.cropField = new CropField(new Position(0, 0));
         Color BLACK = Color.BLACK;
-        Color WHITE = Color.WHITE;
-        Color PATH = new Color("#be9b7b");
-        Color SOIL_COLOR = new Color("#372201");
+        Color PATH = Color.HIGHLIGHTED_FLOOR;
+        Color SOIL_COLOR = CropFieldViewer.SOIL_COLOR;
 
         CropFieldViewer viewer = new CropFieldViewer();
         viewer.draw(cropField, gui);
@@ -120,9 +119,8 @@ class CropFieldViewerTest {
     void drawNoCropAtPosition() {
         this.cropField = new CropField(new Position(2, 2));
         Color BLACK = Color.BLACK;
-        Color WHITE = Color.WHITE;
-        Color PATH = new Color("#be9b7b");
-        Color SOIL_COLOR = new Color("#372201");
+        Color PATH = Color.HIGHLIGHTED_FLOOR;
+        Color SOIL_COLOR = CropFieldViewer.SOIL_COLOR;
 
         CropFieldViewer viewer = new CropFieldViewer();
         viewer.draw(cropField, gui);
@@ -152,8 +150,8 @@ class CropFieldViewerTest {
     @Test
     void drawWithCrop() {
         Color BLACK = Color.BLACK;
-        Color PATH = new Color("#be9b7b");
-        Color SOIL_COLOR = new Color("#372201");
+        Color PATH = Color.HIGHLIGHTED_FLOOR;
+        Color SOIL_COLOR = CropFieldViewer.SOIL_COLOR;
         Color STAGE_COLOR = new Color("#696606");
 
         Crop crop = new Crop("WHEAT");
