@@ -14,8 +14,6 @@ public class StopProducingStockyardCommand implements Command {
 
     @Override
     public void execute() {
-        if (this.stockyard.getState() instanceof Producing) {
-            this.stockyard.setState(new NotProducing());
-        }
+        this.stockyard.setState(new NotProducing());
     }
 }

@@ -22,7 +22,7 @@ public class NewGameCommand implements Command {
     @Override
     public void execute() {
         try {
-            Farm farm =  new NewGameFarmBuilder().buildFarm();
+            Farm farm = new NewGameFarmBuilder().buildFarm();
             this.gameController.setGameControllerState(
                     new FarmWithFarmerController(farm, this.gameController, 1));
         } catch (IOException | URISyntaxException e) {
@@ -31,5 +31,4 @@ public class NewGameCommand implements Command {
             new OpenPopupMenuCommand(this.gameController, alert).execute();
         }
     }
-
 }

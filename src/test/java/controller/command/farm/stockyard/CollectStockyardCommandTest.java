@@ -20,9 +20,8 @@ public class CollectStockyardCommandTest {
     private Producing stateProducing;
     private ReadyToCollect stateReadyToCollect;
     private AnimalProduct animalProduct;
-    private Command command;
-    private Livestock livestock;
     private Inventory inventory;
+    private Command command;
 
     @BeforeEach
     public void setUp() {
@@ -30,42 +29,24 @@ public class CollectStockyardCommandTest {
         stateNotProducing = Mockito.mock(NotProducing.class);
         stateProducing = Mockito.mock(Producing.class);
 
-        livestock = Mockito.mock(Livestock.class);
-        Mockito.when(livestock.getMaxNumAnimals()).thenReturn(5);
+        inventory = Mockito.mock(Inventory.class);
+
+        stockyard = new Stockyard(new Position(0, 0), Mockito.mock(Livestock.class));
 
         animalProduct = Mockito.mock(AnimalProduct.class);
-        inventory = new Inventory(500);
-        inventory.storeItem(animalProduct, 0);
-
-        stockyard = new Stockyard(new Position(0, 0), livestock);
-
         Mockito.when(stockyard.getLivestockType().getProducedItem()).thenReturn(animalProduct);
-        Mockito.when(stateReadyToCollect.getCollectAmount()).thenReturn(stockyard.getAnimals().getSize() * 10);
+        Mockito.when(stateReadyToCollect.getCollectAmount()).thenReturn(10);
         command = new CollectStockyardCommand(inventory, stockyard);
     }
 
     @Test
     public void executeReady() {
         stockyard.setState(stateReadyToCollect);
-        Assertions.assertTrue(stockyard.getState() instanceof ReadyToCollect);
-
-        Assertions.assertEquals(0, inventory.getAmount(animalProduct));
-        Assertions.assertEquals(0, stateReadyToCollect.getCollectAmount());
-
-        stockyard.getAnimals().addAnimal();
-        stockyard.getAnimals().addAnimal();
-        stockyard.getAnimals().addAnimal();
-        Mockito.when(stateReadyToCollect.getCollectAmount()).thenReturn(stockyard.getAnimals().getSize() * 10);
-
-        Assertions.assertEquals(3, stockyard.getAnimals().getSize());
-        Assertions.assertEquals(30, stateReadyToCollect.getCollectAmount());
 
         command.execute();
 
-        Assertions.assertNotEquals(stateReadyToCollect, stockyard.getState());
         Assertions.assertTrue(stockyard.getState() instanceof NotProducing);
-
-        Assertions.assertEquals(30, inventory.getAmount(animalProduct));
+        Mockito.verify(inventory, Mockito.times(1)).storeItem(animalProduct, 10);
     }
 
     @Test
@@ -73,6 +54,7 @@ public class CollectStockyardCommandTest {
         stockyard.setState(stateNotProducing);
         command.execute();
         Assertions.assertSame(stateNotProducing, stockyard.getState());
+        Mockito.verifyNoInteractions(inventory);
     }
 
     @Test
@@ -80,5 +62,6 @@ public class CollectStockyardCommandTest {
         stockyard.setState(stateProducing);
         command.execute();
         Assertions.assertSame(stateProducing, stockyard.getState());
+        Mockito.verifyNoInteractions(inventory);
     }
 }

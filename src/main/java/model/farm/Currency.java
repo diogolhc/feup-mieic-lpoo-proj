@@ -1,6 +1,7 @@
 package model.farm;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Currency implements Serializable {
     public static final int MAX_CURRENCY = 999999;
@@ -40,5 +41,18 @@ public class Currency implements Serializable {
 
     public Currency multiply(int amount) {
         return new Currency(this.coins * amount);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || this.getClass() != o.getClass()) return false;
+        Currency currency = (Currency) o;
+        return this.coins == currency.coins;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.coins);
     }
 }
