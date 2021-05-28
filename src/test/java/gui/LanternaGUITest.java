@@ -39,14 +39,17 @@ class LanternaGUITest {
         }
 
         Mockito.when(screen.newTextGraphics()).thenReturn(tg);
+
         Mockito.doAnswer(invocation -> {
             this.currentBackgroundColor = invocation.getArgument(0);
             return tg;
         }).when(tg).setBackgroundColor(Mockito.any());
+
         Mockito.doAnswer(invocation -> {
             this.currentForegroundColor = invocation.getArgument(0);
             return tg;
         }).when(tg).setForegroundColor(Mockito.any());
+
         Mockito.doAnswer(invocation -> {
             int x = invocation.getArgument(0);
             int y = invocation.getArgument(1);
@@ -56,6 +59,7 @@ class LanternaGUITest {
             this.characters[x][y] = c;
             return tg;
         }).when(tg).setCharacter(Mockito.anyInt(), Mockito.anyInt(), Mockito.anyChar());
+
         Mockito.when(tg.getCharacter(Mockito.anyInt(), Mockito.anyInt())).thenAnswer(invocation -> {
             int x = invocation.getArgument(0);
             int y = invocation.getArgument(1);

@@ -1,15 +1,16 @@
-package gui.drawer.entity;
+package viewer.farm.element.entity;
 
 import gui.Color;
 import gui.GUI;
 import model.Position;
+import model.farm.entity.Entity;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-public class FarmerDrawerTest {
-    /*
+
+public class FarmerViewerTest {
     private GUI gui;
     private Color backgroundColors[][] = new Color[10][10];
     private Color foregroundColors[][] = new Color[10][10];
@@ -92,9 +93,9 @@ public class FarmerDrawerTest {
         Color FARMER_COLOR = new Color("#223366");
 
         Color expectedBg[][] = cloneSquareBidimensionalArray(this.backgroundColors);
-
-        FarmerDrawer drawer = new FarmerDrawer(gui);
-        drawer.draw(new Position(2, 3));
+        Entity farmer = new Entity(new Position(2, 3));
+        FarmerViewer viewer = new FarmerViewer();
+        viewer.draw(farmer, gui);
 
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
@@ -130,8 +131,9 @@ public class FarmerDrawerTest {
 
         Color expectedBg[][] = cloneSquareBidimensionalArray(this.backgroundColors);
 
-        FarmerDrawer drawer = new FarmerDrawer(gui);
-        drawer.draw(new Position(4, 6));
+        Entity farmer = new Entity(new Position(4, 6));
+        FarmerViewer viewer = new FarmerViewer();
+        viewer.draw(farmer, gui);
 
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
@@ -148,5 +150,4 @@ public class FarmerDrawerTest {
         }
     }
 
-     */
 }

@@ -30,7 +30,7 @@ public class InGameTimeTest {
 
     @Test
     public void testStringFormat() {
-        Assertions.assertEquals("DAY 003  02:01", time.toString());
+        Assertions.assertEquals("DAY 003  02:01", time.getDayTimeString());
     }
 
     @Test

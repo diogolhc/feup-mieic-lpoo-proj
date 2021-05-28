@@ -1,21 +1,28 @@
-package gui.drawer.entity;
+package viewer.farm.element.building;
 
 import gui.Color;
 import gui.GUI;
+import model.InGameTime;
 import model.Position;
+import model.farm.building.CropField;
+import model.farm.building.crop_field_state.CropFieldState;
+import model.farm.building.crop_field_state.ReadyToHarvest;
+import model.farm.data.item.Crop;
+import model.farm.data.item.CropGrowthStage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-public class CropFieldDrawerTest {
-    /*
+
+class CropFieldViewerTest {
     private GUI gui;
     private Color backgroundColors[][] = new Color[10][10];
     private Color foregroundColors[][] = new Color[10][10];
     private char characters[][] = new char[10][10];
     private Color currentBackgroundColor = Color.BLACK;
     private Color currentForegroundColor = Color.WHITE;
+    private CropField cropField;
 
     @BeforeEach
     void setUp() {
@@ -79,13 +86,14 @@ public class CropFieldDrawerTest {
 
     @Test
     void drawNoCropAtOrigin() {
+        this.cropField = new CropField(new Position(0, 0));
         Color BLACK = Color.BLACK;
         Color WHITE = Color.WHITE;
         Color PATH = new Color("#be9b7b");
         Color SOIL_COLOR = new Color("#372201");
 
-        CropFieldDrawer drawer = new CropFieldDrawer(gui);
-        drawer.draw(new Position(0, 0), WHITE, ' ');
+        CropFieldViewer viewer = new CropFieldViewer();
+        viewer.draw(cropField, gui);
 
         Color expectedBg[][] = {
                 {PATH, PATH, PATH, PATH, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
@@ -110,13 +118,14 @@ public class CropFieldDrawerTest {
 
     @Test
     void drawNoCropAtPosition() {
+        this.cropField = new CropField(new Position(2, 2));
         Color BLACK = Color.BLACK;
         Color WHITE = Color.WHITE;
         Color PATH = new Color("#be9b7b");
         Color SOIL_COLOR = new Color("#372201");
 
-        CropFieldDrawer drawer = new CropFieldDrawer(gui);
-        drawer.draw(new Position(2, 2), WHITE, ' ');
+        CropFieldViewer viewer = new CropFieldViewer();
+        viewer.draw(cropField, gui);
 
         Color expectedBg[][] = {
                 {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
@@ -147,8 +156,14 @@ public class CropFieldDrawerTest {
         Color SOIL_COLOR = new Color("#372201");
         Color STAGE_COLOR = new Color("#696606");
 
-        CropFieldDrawer drawer = new CropFieldDrawer(gui);
-        drawer.draw(new Position(2, 2), STAGE_COLOR, '#');
+        Crop crop = new Crop("WHEAT");
+        crop.addGrowthStage(new CropGrowthStage(new InGameTime(0), '#', STAGE_COLOR));
+        CropFieldState state = new ReadyToHarvest(cropField, crop, 5);
+        this.cropField = new CropField(new Position(2, 2));
+        this.cropField.setState(state);
+
+        CropFieldViewer viewer = new CropFieldViewer();
+        viewer.draw(cropField, gui);
 
         Color expectedBg[][] = {
                 {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
@@ -187,5 +202,4 @@ public class CropFieldDrawerTest {
         Assertions.assertEquals(STAGE_COLOR, this.foregroundColors[4][4]);
     }
 
-     */
 }
