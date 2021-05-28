@@ -53,27 +53,27 @@ public class FeedAnimalsMenuControllerBuilder extends PopupMenuControllerBuilder
                 "NOT ENOUGH " + this.stockyard.getLivestockType().getFoodCrop().getName());
 
         Button buyAnimalButton = new Button(new Position(1, 6), "BUY");
-        ConditionalCommand buyAnimalCommand = new ConditionalCommand(() -> this.animals.isFull());
+        ConditionalCommand buyAnimalCommand = new ConditionalCommand(this.animals::isFull);
         buyAnimalCommand
                 .ifTrue(new OpenPopupMenuCommand(this.controller, stockyardFullAlert))
-                .elseIf(() -> !this.farm.getCurrency().canBuy(this.stockyard.getLivestockType().getAnimalBuyPrice()))
+                .elseIf(() -> !this.farm.getWallet().canBuy(this.stockyard.getLivestockType().getAnimalBuyPrice()))
                 .ifTrue(new OpenPopupMenuCommand(this.controller, notEnoughMoneyAlert))
-                .ifFalse(new BuyAnimalCommand(this.farm, this.stockyard.getAnimals(), this.livestockType.getAnimalBuyPrice()));
+                .ifFalse(new BuyAnimalCommand(this.farm.getWallet(), this.stockyard.getAnimals(), this.livestockType.getAnimalBuyPrice()));
 
         buttons.add(new ButtonController(buyAnimalButton, buyAnimalCommand));
 
 
         Button sellAnimalButton = new Button(new Position(16, 6), "SELL");
-        ConditionalCommand sellAnimalCommand = new ConditionalCommand(() -> this.animals.isEmpty());
+        ConditionalCommand sellAnimalCommand = new ConditionalCommand(this.animals::isEmpty);
         sellAnimalCommand
                 .ifTrue(new OpenPopupMenuCommand(this.controller, stockyardEmptyAlert))
-                .ifFalse(new SellAnimalCommand(this.farm, this.animals, this.livestockType.getAnimalSellPrice()));
+                .ifFalse(new SellAnimalCommand(this.farm.getWallet(), this.animals, this.livestockType.getAnimalSellPrice()));
 
         buttons.add(new ButtonController(sellAnimalButton, sellAnimalCommand));
 
 
         Button feedAnimalsButton = new Button(new Position(1, 12), "FEED");
-        ConditionalCommand feedAnimalsCommand = new ConditionalCommand(() -> this.animals.isEmpty());
+        ConditionalCommand feedAnimalsCommand = new ConditionalCommand(this.animals::isEmpty);
         feedAnimalsCommand
                 .ifTrue(new OpenPopupMenuCommand(this.controller, stockyardEmptyAlert))
                 .elseIf(() -> this.farm.getInventory().getAmount(this.stockyard.getLivestockType().getFoodCrop()) < this.stockyard.getRequiredFood())

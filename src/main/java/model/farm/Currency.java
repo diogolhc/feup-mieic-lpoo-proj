@@ -19,10 +19,6 @@ public class Currency implements Serializable {
         return this.coins;
     }
 
-    public boolean canBuy(Currency currency) {
-        return this.coins >= currency.coins;
-    }
-
     public String toStringPadded() {
         String coinString = this.toString();
         int numberOfZeros = MAX_STRING_LENGTH - coinString.length();

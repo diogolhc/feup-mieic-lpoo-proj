@@ -17,7 +17,7 @@ public abstract class FarmBuilder {
         Farm farm = new Farm(this.getWidth(), this.getHeight(), this.getBuildings());
         farm.setFarmer(this.getFarmer());
         farm.setTime(this.getTime());
-        farm.setCurrency(this.getCurrency());
+        farm.setWallet(this.getWallet());
         farm.setInventory(this.getInventory());
 
         List<Crop> cropTypes = this.getCropTypes();
@@ -26,7 +26,7 @@ public abstract class FarmBuilder {
         farm.addWeatherTypes(this.getWeatherStates());
         farm.setCurrentWeather(farm.getWeatherTypes().get(0));
 
-        farm.setCurrency(new Currency(99999));
+        farm.getWallet().receive(new Currency(99999));
 
         return farm;
     }
@@ -41,7 +41,7 @@ public abstract class FarmBuilder {
 
     protected abstract InGameTime getTime();
 
-    protected abstract Currency getCurrency();
+    protected abstract Wallet getWallet();
 
     protected abstract Inventory getInventory();
 

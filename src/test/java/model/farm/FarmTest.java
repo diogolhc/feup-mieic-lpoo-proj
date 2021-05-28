@@ -12,7 +12,9 @@ public class FarmTest {
     @BeforeEach
     void setUp() {
         farm = new Farm(40, 20);
-        farm.getBuildings().setHousePosition(new Position(1, 1));
+        farm.getBuildings().setHousePosition(new Position(2, 1));
+        farm.getBuildings().setMarketPosition(new Position(9, 1));
+        farm.getBuildings().setWarehousePosition(new Position(16, 1));
     }
 
     @Test
@@ -20,9 +22,9 @@ public class FarmTest {
         Assertions.assertTrue(farm.isTraversable(new Position(38, 18)));
         Assertions.assertTrue(farm.isTraversable(new Position(10, 10)));
         Assertions.assertTrue(farm.isTraversable(new Position(3, 7)));
-        Assertions.assertTrue(farm.isTraversable(new Position(1, 1)));
-        Assertions.assertTrue(farm.isTraversable(new Position(farm.getHeight() - 2, 1)));
-        Assertions.assertTrue(farm.isTraversable(new Position(10, 3)));
+        Assertions.assertTrue(farm.isTraversable(new Position(2, 1)));
+        Assertions.assertTrue(farm.isTraversable(new Position(1, farm.getHeight() - 2)));
+        Assertions.assertTrue(farm.isTraversable(new Position(10, 8)));
     }
 
     @Test
@@ -41,7 +43,12 @@ public class FarmTest {
 
     @Test
     void obstructedByBuilding() {
-        Assertions.assertFalse(farm.isTraversable(new Position(4, 4)));
+        Assertions.assertFalse(farm.isTraversable(new Position(2, 2)));
         Assertions.assertFalse(farm.isTraversable(new Position(3, 6)));
+        Assertions.assertFalse(farm.isTraversable(new Position(9, 2)));
+        Assertions.assertFalse(farm.isTraversable(new Position(12, 5)));
+        Assertions.assertFalse(farm.isTraversable(new Position(16, 3)));
+        Assertions.assertFalse(farm.isTraversable(new Position(20, 4)));
+
     }
 }

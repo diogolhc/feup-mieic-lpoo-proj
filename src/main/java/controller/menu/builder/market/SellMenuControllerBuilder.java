@@ -33,17 +33,17 @@ public class SellMenuControllerBuilder extends PopupMenuControllerBuilder {
             int currentX = x;
 
             Button sell1Button = new Button(new Position(currentX, y), "x1");
-            Command sell1Command = new SellItemCommand(this.farm, item, 1);
+            Command sell1Command = new SellItemCommand(this.farm.getWallet(), this.farm.getInventory(), item, 1);
             buttons.add(new ButtonController(sell1Button, sell1Command));
 
             currentX += sell1Button.getWidth() + 1;
             Button sell10Button = new Button(new Position(currentX, y), "x10");
-            Command sell10Command = new SellItemCommand(this.farm, item, 10);
+            Command sell10Command = new SellItemCommand(this.farm.getWallet(), this.farm.getInventory(), item, 10);
             buttons.add(new ButtonController(sell10Button, sell10Command));
 
             currentX += sell10Button.getWidth() + 1;
             Button sell100Button = new Button(new Position(currentX, y), "x100");
-            Command sell100Command = new SellItemCommand(this.farm, item, 100);
+            Command sell100Command = new SellItemCommand(this.farm.getWallet(), this.farm.getInventory(), item, 100);
             buttons.add(new ButtonController(sell100Button, sell100Command));
             y += 5;
             if (y >= 20) {

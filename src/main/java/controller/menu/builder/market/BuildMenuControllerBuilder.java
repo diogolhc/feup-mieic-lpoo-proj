@@ -47,7 +47,7 @@ public class BuildMenuControllerBuilder extends PopupMenuControllerBuilder {
         for (Buildable building: this.buildingCatalog) {
             Button buildButton = new Button(new Position(1, y), building.getName());
             Command buildCommand;
-            if (this.farm.getCurrency().canBuy(building.getBuildPrice())) {
+            if (this.farm.getWallet().canBuy(building.getBuildPrice())) {
                 buildCommand = new SetControllerStateCommand(this.controller, new FarmNewBuildingController(
                         this.farmController, building));
             } else {

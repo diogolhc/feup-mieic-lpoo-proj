@@ -7,6 +7,7 @@ import gui.drawer.shape.FilledRectangleDrawer;
 import model.InGameTime;
 import model.Position;
 import model.farm.Currency;
+import model.farm.Wallet;
 import model.farm.building.*;
 import model.farm.Farm;
 import model.farm.building.Edifice;
@@ -31,7 +32,7 @@ public abstract class FarmViewer extends GameViewer {
         this.drawFences(this.farm, gui);
 
         HUDViewer hudViewer = new HUDViewer(this.farm.getHeight(), this.farm.getWidth());
-        this.drawHUD(this.farm.getTime(), this.farm.getCurrentWeather(), this.farm.getCurrency(), hudViewer, gui);
+        this.drawHUD(this.farm.getTime(), this.farm.getCurrentWeather(), this.farm.getWallet(), hudViewer, gui);
     }
 
     private void drawBackground(Farm farm, GUI gui) {
@@ -44,8 +45,8 @@ public abstract class FarmViewer extends GameViewer {
         fencesDrawer.draw(new Position(0, 0), farm.getWidth(), farm.getHeight());
     }
 
-    private void drawHUD(InGameTime time, Weather weather, Currency currency, HUDViewer hudViewer, GUI gui) {
-        hudViewer.draw(time, weather, currency, gui);
+    private void drawHUD(InGameTime time, Weather weather, Wallet wallet, HUDViewer hudViewer, GUI gui) {
+        hudViewer.draw(time, weather, wallet, gui);
     }
 
     private void drawBuildings(BuildingSet buildings, GUI gui) {

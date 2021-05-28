@@ -3,23 +3,26 @@ package controller.command.farm;
 import controller.command.Command;
 import model.farm.Currency;
 import model.farm.Farm;
+import model.farm.Inventory;
+import model.farm.Wallet;
 import model.farm.data.item.Item;
 
 public class SellItemCommand implements Command {
-    private final Farm farm;
+    private final Inventory inventory;
     private final Item item;
     private final int amount;
+    private final Wallet wallet;
 
-    public SellItemCommand(Farm farm, Item item, int amount) {
-        this.farm = farm;
+    public SellItemCommand(Wallet wallet, Inventory inventory, Item item, int amount) {
+        this.wallet = wallet;
+        this.inventory = inventory;
         this.item = item;
         this.amount = amount;
     }
 
     @Override
     public void execute() {
-        int soldAmount = this.farm.getInventory().removeItem(this.item, this.amount);
-        Currency soldValue = this.item.getSellPrice().multiply(soldAmount);
-        this.farm.setCurrency(this.farm.getCurrency().add(soldValue));
+        int soldAmount = inventory.removeItem(this.item, this.amount);
+        this.wallet.receive(this.item.getSellPrice().multiply(soldAmount));
     }
 }

@@ -47,8 +47,6 @@ public class BuildingSet implements Serializable {
         for (Building building: this.getAllBuildings()) {
             if (building.getUntraversableRegion().contains(position)) return false;
         }
-
-
         return true;
     }
 
