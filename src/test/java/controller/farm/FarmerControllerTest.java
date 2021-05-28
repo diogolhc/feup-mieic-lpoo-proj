@@ -1,6 +1,6 @@
 package controller.farm;
 
-import controller.farm.element.entity.FarmerController;
+import controller.farm.element.entity.keyboard_reactor.FarmerController;
 import gui.GUI;
 import model.Position;
 import model.farm.Farm;

@@ -15,6 +15,7 @@ import model.region.Region;
 import java.util.Objects;
 
 public class Stockyard extends Buildable {
+    public static final Position ANIMALS_REGION_OFFSET = new Position(2, 1);
     private final Livestock livestockType;
     private final StockyardAnimals animals;
     private StockyardState state;
@@ -22,7 +23,10 @@ public class Stockyard extends Buildable {
     public Stockyard(Position topLeft, Livestock livestockType) {
         super(topLeft);
         this.livestockType = livestockType;
-        this.animals = new StockyardAnimals(getAnimalsRegion(), this.livestockType.getMaxNumAnimals());
+        RectangleRegion animalsRegion = new RectangleRegion(
+                ANIMALS_REGION_OFFSET, this.getWidth() - 3, this.getHeight() - 2
+        );
+        this.animals = new StockyardAnimals(animalsRegion, this.livestockType.getMaxNumAnimals());
         this.state = new NotProducing();
     }
 
@@ -62,15 +66,7 @@ public class Stockyard extends Buildable {
     @Override
     public void setTopLeftPosition(Position topLeft) {
         super.setTopLeftPosition(topLeft);
-        this.animals.setAnimalsRegion(getAnimalsRegion());
-    }
-
-    private RectangleRegion getAnimalsRegion() {
-        return new RectangleRegion(
-                this.getTopLeftPosition().getTranslated(new Position(2, 1)),
-                this.getWidth() - 3,
-                this.getHeight() - 2
-        );
+        this.animals.setAnimalsRegionPosition(topLeft.getTranslated(ANIMALS_REGION_OFFSET));
     }
 
     public StockyardAnimals getAnimals() {
@@ -85,7 +81,7 @@ public class Stockyard extends Buildable {
         return this.livestockType.getRequiredFood() * this.animals.getSize();
     }
 
-    public double getBaseProducedAmount() {
+    public int getBaseProducedAmount() {
         return this.livestockType.getProducedItem().getBaseProducedAmount() * this.animals.getSize();
     }
 

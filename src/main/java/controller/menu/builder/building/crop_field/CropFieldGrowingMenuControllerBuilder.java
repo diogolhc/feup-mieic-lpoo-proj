@@ -1,8 +1,10 @@
-package controller.menu.builder.crop_field;
+package controller.menu.builder.building.crop_field;
 
 import controller.GameController;
 import controller.command.Command;
 import controller.command.CompoundCommand;
+import controller.command.ConditionalCommand;
+import controller.command.controller_state.SetControllerStateCommand;
 import controller.command.farm.crop_field.RemoveCropCommand;
 import controller.menu.element.ButtonController;
 import controller.menu.MenuController;
@@ -37,11 +39,8 @@ public class CropFieldGrowingMenuControllerBuilder extends PopupMenuControllerBu
         MenuController harvestMenuController = harvestMenuControllerBuilder.buildMenuCentered(
                 controller.getWindowWidth(), controller.getWindowHeight());
 
-        Command closingCondition = () -> {
-            if (cropField.getState() instanceof ReadyToHarvest) {
-                this.controller.setGameControllerState(harvestMenuController);
-            }
-        };
+        Command closingCondition = new ConditionalCommand(() -> cropField.getState() instanceof ReadyToHarvest)
+                .ifTrue(new SetControllerStateCommand(this.controller, harvestMenuController));
 
         return new PopupMenuControllerWithTimePassedReaction(menu, this.controller,
                 this.controller.getGameControllerState(), closingCondition);
@@ -51,35 +50,49 @@ public class CropFieldGrowingMenuControllerBuilder extends PopupMenuControllerBu
     protected List<ButtonController> getButtons() {
         List<ButtonController> buttons = super.getButtons();
 
+        addRemoveCropCommand(buttons);
+
+        return buttons;
+    }
+
+    private void addRemoveCropCommand(List<ButtonController> buttons) {
         Button removeCropButton = new Button(new Position(1, 8), "REMOVE CROP");
         Command removeCropButtonCommand = new CompoundCommand()
                 .addCommand(new RemoveCropCommand(cropField))
                 .addCommand(super.getClosePopupMenuCommand());
         buttons.add(new ButtonController(removeCropButton, removeCropButtonCommand));
-
-        return buttons;
     }
 
     @Override
     protected List<Label> getLabels() {
         List<Label> labels = super.getLabels();
 
+        addCropTypeLabel(labels);
+        addRemainingTimeLabel(labels);
+        addQuantityLabel(labels);
+
+        return labels;
+    }
+
+    private void addCropTypeLabel(List<Label> labels) {
         labels.add(new Label(
                 new Position(1, 4),
                 () -> "CROP: " + cropField.getState().getCrop().getName()
         ));
+    }
 
+    private void addRemainingTimeLabel(List<Label> labels) {
         labels.add(new Label(
                 new Position(1, 5),
                 () -> "REMAINING TIME: " + cropField.getRemainingTime().getTimerString()
         ));
+    }
 
+    private void addQuantityLabel(List<Label> labels) {
         labels.add( new Label(
                 new Position(1, 6),
                 () -> "QUANTITY: " + cropField.getHarvestAmount()
         ));
-
-        return labels;
     }
 
     @Override

@@ -4,7 +4,7 @@ import gui.Color;
 import model.InGameTime;
 import model.farm.building.stockyard.Stockyard;
 
-public class ReadyToCollect implements StockyardState{
+public class ReadyToCollect implements StockyardState {
     private Stockyard stockyard;
     private double collectAmount; // double so that small but in great quantity changes can have an effect
 

@@ -3,7 +3,10 @@ package controller.farm;
 import controller.GameController;
 import controller.command.controller_state.OpenPopupMenuCommand;
 import controller.farm.element.building.*;
-import controller.farm.element.entity.FarmerController;
+import controller.farm.element.building.edifice.HouseController;
+import controller.farm.element.building.edifice.MarketController;
+import controller.farm.element.building.edifice.WarehouseController;
+import controller.farm.element.entity.keyboard_reactor.FarmerController;
 import controller.menu.builder.PauseMenuControllerBuilder;
 import controller.menu.builder.PopupMenuControllerBuilder;
 import gui.GUI;
@@ -53,7 +56,7 @@ public class FarmWithFarmerController extends FarmController {
         }
 
         StockyardController stockyardController = new StockyardController(this.controller, this.farm);
-        for (Stockyard stockyard : farmBuildings.getStockyards()) {
+        for (Stockyard stockyard: farmBuildings.getStockyards()) {
             stockyardController.reactInteraction(stockyard, farmerPosition);
         }
 

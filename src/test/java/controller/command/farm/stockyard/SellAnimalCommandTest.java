@@ -5,6 +5,7 @@ import model.Position;
 import model.farm.Currency;
 import model.farm.Wallet;
 import model.farm.building.stockyard.Stockyard;
+import model.farm.building.stockyard.StockyardAnimals;
 import model.farm.building.stockyard.state.NotProducing;
 import model.farm.data.Livestock;
 import org.junit.jupiter.api.Assertions;
@@ -14,60 +15,38 @@ import org.mockito.Mockito;
 
 public class SellAnimalCommandTest {
     private Wallet wallet;
-    private Stockyard stockyard;
-    private NotProducing stateNotProducing;
+    private Currency price;
+    private StockyardAnimals stockyardAnimals;
     private Command command;
-    private Livestock livestock;
 
 
     @BeforeEach
     public void setUp() {
-        stateNotProducing = Mockito.mock(NotProducing.class);
-        wallet = new Wallet(new Currency(100));
-        livestock = Mockito.mock(Livestock.class);
+        wallet = Mockito.mock(Wallet.class);
+        stockyardAnimals = Mockito.mock(StockyardAnimals.class);
+        price = Mockito.mock(Currency.class);
 
-        Mockito.when(livestock.getMaxNumAnimals()).thenReturn(5);
-
-        stockyard = new Stockyard(new Position(0, 0), livestock);
-        stockyard.setState(stateNotProducing);
-        stockyard.getAnimals().addAnimal();
-        stockyard.getAnimals().addAnimal();
-        stockyard.getAnimals().addAnimal();
-        stockyard.getAnimals().addAnimal();
-        stockyard.getAnimals().addAnimal();
-
-        Mockito.when(stockyard.getLivestockType().getAnimalSellPrice()).thenReturn(new Currency(10));
-
-        command = new SellAnimalCommand(wallet, stockyard.getAnimals(), new Currency(10));
+        command = new SellAnimalCommand(wallet, stockyardAnimals, price);
     }
 
     @Test
     public void execute() {
-        Assertions.assertEquals(5, stockyard.getAnimals().getSize());
-        Assertions.assertEquals(100, wallet.getCurrency().getCoins());
+        Mockito.when(stockyardAnimals.isEmpty()).thenReturn(false);
 
         command.execute();
 
-        Assertions.assertSame(stateNotProducing, stockyard.getState());
-        Assertions.assertEquals(110, wallet.getCurrency().getCoins());
-
-        Assertions.assertEquals(4, stockyard.getAnimals().getSize());
+        Mockito.verify(wallet, Mockito.times(1)).receive(price);
+        Mockito.verify(stockyardAnimals, Mockito.times(1)).removeAnimal();
     }
 
 
     @Test
-    public void executeMaxAnimals() {
-        Assertions.assertEquals(5, stockyard.getAnimals().getSize());
+    public void executeEmpty() {
+        Mockito.when(stockyardAnimals.isEmpty()).thenReturn(true);
 
         command.execute();
-        command.execute();
-        command.execute();
-        command.execute();
-        command.execute();
-        command.execute();
 
-        Assertions.assertTrue(stockyard.getAnimals().isEmpty());
-        Assertions.assertEquals(0, stockyard.getAnimals().getSize());
-        Assertions.assertEquals(150, wallet.getCurrency().getCoins());
+        Mockito.verifyNoInteractions(wallet);
+        Mockito.verify(stockyardAnimals, Mockito.never()).removeAnimal();
     }
 }

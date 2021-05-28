@@ -1,11 +1,13 @@
-package controller.menu.builder;
+package controller.menu.builder.building;
 
 import controller.GameController;
+import controller.menu.builder.PopupMenuControllerBuilder;
 import model.Position;
 import model.farm.Farm;
 import model.farm.Inventory;
 import model.farm.data.item.Item;
 import model.menu.label.Label;
+import model.menu.label.LabelText;
 
 import java.util.List;
 
@@ -23,24 +25,30 @@ public class WarehouseMenuControllerBuilder extends PopupMenuControllerBuilder {
     protected List<Label> getLabels() {
         List<Label> labels = super.getLabels();
 
-        labels.add(new Label(
-                new Position(1, 4),
-                () -> "USED SPACE: " + inventory.getOccupied() + "/" + inventory.getCapacity()
-        ));
-
-        int y = 6;
-        for (Item item: items) {
-            labels.add(new Label(
-                    new Position(1, y),
-                    () -> String.format("%1$-7s %2$6s",
-                            item.getName(),
-                            "x" + this.inventory.getAmount(item)
-                    )
-            ));
-            y += 1;
-        }
+        addSpaceUsedLabel(labels);
+        addAllItemsLabels(labels);
 
         return labels;
+    }
+
+    private void addSpaceUsedLabel(List<Label> labels) {
+        labels.add(new Label(new Position(1, 4),
+                () -> "USED SPACE: " + inventory.getOccupied() + "/" + inventory.getCapacity()));
+    }
+
+    private void addAllItemsLabels(List<Label> labels) {
+        int y = 6;
+        for (Item item: items) {
+            addItemLabel(labels, new Position(1, y), item);
+            y += 1;
+        }
+    }
+
+    private void addItemLabel(List<Label> labels, Position position, Item item) {
+        labels.add(new Label(position, () -> String.format("%1$-7s %2$6s",
+                item.getName(),
+                "x" + this.inventory.getAmount(item)
+        )));
     }
 
     @Override

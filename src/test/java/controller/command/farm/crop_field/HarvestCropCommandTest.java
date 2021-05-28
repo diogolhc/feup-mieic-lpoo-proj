@@ -7,6 +7,7 @@ import model.farm.building.crop_field.CropField;
 import model.farm.building.crop_field.state.NotPlanted;
 import model.farm.building.crop_field.state.Planted;
 import model.farm.building.crop_field.state.ReadyToHarvest;
+import model.farm.data.item.Crop;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,10 +24,13 @@ public class HarvestCropCommandTest {
     @BeforeEach
     public void setUp() {
         stateReady = Mockito.mock(ReadyToHarvest.class);
+        Mockito.when(stateReady.getCrop()).thenReturn(Mockito.mock(Crop.class));
+        Mockito.when(stateReady.getHarvestAmount()).thenReturn(5);
         statePlanted = Mockito.mock(Planted.class);
         stateNotPlanted = Mockito.mock(NotPlanted.class);
+        inventory = Mockito.mock(Inventory.class);
+
         cropField = new CropField(new Position(0, 0));
-        inventory = new Inventory(200);
         command = new HarvestCropCommand(inventory, cropField);
     }
 
@@ -35,6 +39,8 @@ public class HarvestCropCommandTest {
         cropField.setState(stateReady);
         command.execute();
         Assertions.assertTrue(cropField.getState() instanceof NotPlanted);
+        Mockito.verify(inventory, Mockito.times(1))
+                .storeItem(stateReady.getCrop(), stateReady.getHarvestAmount());
     }
 
     @Test
@@ -42,6 +48,7 @@ public class HarvestCropCommandTest {
         cropField.setState(stateNotPlanted);
         command.execute();
         Assertions.assertSame(stateNotPlanted, cropField.getState());
+        Mockito.verifyNoInteractions(inventory);
     }
 
     @Test
@@ -49,13 +56,6 @@ public class HarvestCropCommandTest {
         cropField.setState(statePlanted);
         command.execute();
         Assertions.assertSame(statePlanted, cropField.getState());
-    }
-
-    @Test
-    public void executeReadyInventory() {
-        cropField.setState(stateReady);
-        int harvestAmount = cropField.getHarvestAmount();
-        command.execute();
-        Assertions.assertEquals(harvestAmount, inventory.getAmount(cropField.getState().getCrop()));
+        Mockito.verifyNoInteractions(inventory);
     }
 }

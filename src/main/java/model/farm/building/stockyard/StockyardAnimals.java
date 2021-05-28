@@ -67,11 +67,11 @@ public class StockyardAnimals implements Serializable {
         return false;
     }
 
-    public void setAnimalsRegion(RectangleRegion region) {
-        this.animalsRegion = region;
-    }
-
     public boolean canAnimalMoveTo(Position position) {
         return this.animalsRegion.contains(position) && !this.isAnimalAt(position);
+    }
+
+    public void setAnimalsRegionPosition(Position position) {
+        this.animalsRegion = animalsRegion.getAt(position);
     }
 }

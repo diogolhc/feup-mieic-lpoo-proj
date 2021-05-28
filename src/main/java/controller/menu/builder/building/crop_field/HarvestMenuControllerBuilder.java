@@ -1,4 +1,4 @@
-package controller.menu.builder.crop_field;
+package controller.menu.builder.building.crop_field;
 
 import controller.GameController;
 import controller.command.*;
@@ -24,34 +24,44 @@ public class HarvestMenuControllerBuilder extends PopupMenuControllerBuilder {
     }
 
     @Override
-    protected List<Label> getLabels() {
-        List<Label> labels = super.getLabels();
-
-        labels.add(new Label(
-                new Position(1, 4),
-                () -> "CROP: " + cropField.getState().getCrop().getName()
-        ));
-
-
-        labels.add( new Label(
-                new Position(1, 5),
-                () -> "QUANTITY: " + cropField.getHarvestAmount()
-        ));
-
-        return labels;
-    }
-
-    @Override
     protected List<ButtonController> getButtons() {
         List<ButtonController> buttons = super.getButtons();
 
+        addHarvestButton(buttons);
+
+        return buttons;
+    }
+
+    private void addHarvestButton(List<ButtonController> buttons) {
         Button harvestButton = new Button(new Position(1, 7), "HARVEST");
         Command harvestButtonCommand = new CompoundCommand()
                 .addCommand(new HarvestCropCommand(inventory, cropField))
                 .addCommand(super.getClosePopupMenuCommand());
         buttons.add(new ButtonController(harvestButton, harvestButtonCommand));
+    }
 
-        return buttons;
+    @Override
+    protected List<Label> getLabels() {
+        List<Label> labels = super.getLabels();
+
+        addCropTypeLabel(labels);
+        addQuantityLabel(labels);
+
+        return labels;
+    }
+
+    private void addCropTypeLabel(List<Label> labels) {
+        labels.add(new Label(
+                new Position(1, 4),
+                () -> "CROP: " + cropField.getState().getCrop().getName()
+        ));
+    }
+
+    private void addQuantityLabel(List<Label> labels) {
+        labels.add( new Label(
+                new Position(1, 5),
+                () -> "QUANTITY: " + cropField.getHarvestAmount()
+        ));
     }
 
     @Override

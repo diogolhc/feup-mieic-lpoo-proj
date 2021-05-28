@@ -23,11 +23,19 @@ public class PauseMenuControllerBuilder extends PopupMenuControllerBuilder {
     protected List<ButtonController> getButtons() {
         List<ButtonController> buttons = super.getButtons();
 
+        addReturnToMainMenuButton(buttons);
+
+        return buttons;
+    }
+
+    private void addReturnToMainMenuButton(List<ButtonController> buttons) {
         Button returnToMainMenuButton = new Button(new Position(1, 4), "MAIN MENU");
         PopupMenuControllerBuilder confirmationPopup = new ConfirmationMenuControllerBuilder(
                 this.controller,
                 "RETURN TO MAIN MENU",
-                "ARE YOU SURE YOU WANT TO EXIT?\nYOUR PROGRESS WILL NOT BE SAVED\nUNLESS YOU SAVE AT THE HOUSE FIRST")
+                "ARE YOU SURE YOU WANT TO EXIT?\n"
+                + "YOUR PROGRESS WILL NOT BE SAVED\n"
+                + "UNLESS YOU SAVE AT THE HOUSE FIRST")
                 .setYesCommand(new SetControllerStateCommand(
                         this.controller,
                         new MainMenuControllerBuilder(this.controller).buildMenu()
@@ -35,8 +43,6 @@ public class PauseMenuControllerBuilder extends PopupMenuControllerBuilder {
         Command returnToMainMenuCommand = new OpenPopupMenuCommand(this.controller, confirmationPopup);
 
         buttons.add(new ButtonController(returnToMainMenuButton, returnToMainMenuCommand));
-
-        return buttons;
     }
 
     @Override

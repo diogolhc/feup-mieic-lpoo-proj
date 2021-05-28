@@ -8,11 +8,15 @@ public class SetTimeRateCommandTest {
 
     @Test
     public void execute() {
-        int base = 10;
+        int base = 17;
+        int rate = 19;
+
         TimeConverter timeConverter = new TimeConverter(base);
-        int rate = 15;
+
         SetTimeRateCommand command = new SetTimeRateCommand(timeConverter, rate);
+
+        Assertions.assertNotEquals(base * rate, timeConverter.getRate());
         command.execute();
-        Assertions.assertEquals(150, timeConverter.getRate());
+        Assertions.assertEquals(base * rate, timeConverter.getRate());
     }
 }

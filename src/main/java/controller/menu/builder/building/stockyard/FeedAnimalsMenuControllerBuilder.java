@@ -1,4 +1,4 @@
-package controller.menu.builder.stockyard;
+package controller.menu.builder.building.stockyard;
 
 import controller.GameController;
 import controller.command.*;
@@ -9,7 +9,9 @@ import controller.command.farm.stockyard.SellAnimalCommand;
 import controller.menu.element.ButtonController;
 import controller.menu.builder.PopupMenuControllerBuilder;
 import controller.menu.builder.info.AlertMenuControllerBuilder;
+import model.InGameTime;
 import model.Position;
+import model.farm.Currency;
 import model.farm.Farm;
 import model.farm.building.stockyard.Stockyard;
 import model.farm.building.stockyard.StockyardAnimals;
@@ -40,117 +42,166 @@ public class FeedAnimalsMenuControllerBuilder extends PopupMenuControllerBuilder
     protected List<ButtonController> getButtons() {
         List<ButtonController> buttons = super.getButtons();
 
-        PopupMenuControllerBuilder notEnoughMoneyAlert = new AlertMenuControllerBuilder(this.controller,
-                "NOT ENOUGH MONEY");
+        addBuyAnimalButton(buttons);
+        addSellAnimalButton(buttons);
+        addFeedButton(buttons);
 
+        return buttons;
+    }
+
+    private void addBuyAnimalButton(List<ButtonController> buttons) {
         PopupMenuControllerBuilder stockyardFullAlert = new AlertMenuControllerBuilder(this.controller,
                 "STOCKYARD IS FULL");
 
-        PopupMenuControllerBuilder stockyardEmptyAlert = new AlertMenuControllerBuilder(this.controller,
-                "STOCKYARD IS EMPTY");
+        PopupMenuControllerBuilder notEnoughMoneyAlert = new AlertMenuControllerBuilder(this.controller,
+                "NOT ENOUGH MONEY");
 
-        PopupMenuControllerBuilder notEnoughCropAlert = new AlertMenuControllerBuilder(this.controller,
-                "NOT ENOUGH " + this.stockyard.getLivestockType().getFoodCrop().getName());
+        Currency buyPrice = this.livestockType.getAnimalBuyPrice();
 
         Button buyAnimalButton = new Button(new Position(1, 6), "BUY");
         ConditionalCommand buyAnimalCommand = new ConditionalCommand(this.animals::isFull);
         buyAnimalCommand
                 .ifTrue(new OpenPopupMenuCommand(this.controller, stockyardFullAlert))
-                .elseIf(() -> !this.farm.getWallet().canBuy(this.stockyard.getLivestockType().getAnimalBuyPrice()))
+                .elseIf(getCannotBuyAnimalCondition())
                 .ifTrue(new OpenPopupMenuCommand(this.controller, notEnoughMoneyAlert))
-                .ifFalse(new BuyAnimalCommand(this.farm.getWallet(), this.stockyard.getAnimals(), this.livestockType.getAnimalBuyPrice()));
+                .ifFalse(new BuyAnimalCommand(this.farm.getWallet(), this.stockyard.getAnimals(), buyPrice));
 
         buttons.add(new ButtonController(buyAnimalButton, buyAnimalCommand));
+    }
 
+    private ConditionalCommand.Condition getCannotBuyAnimalCondition() {
+        return () -> !this.farm.getWallet().canBuy(this.stockyard.getLivestockType().getAnimalBuyPrice());
+    }
+
+    private void addSellAnimalButton(List<ButtonController> buttons) {
+        PopupMenuControllerBuilder stockyardEmptyAlert = new AlertMenuControllerBuilder(this.controller,
+                "STOCKYARD IS EMPTY");
+
+        Currency sellPrice = this.livestockType.getAnimalSellPrice();
 
         Button sellAnimalButton = new Button(new Position(16, 6), "SELL");
         ConditionalCommand sellAnimalCommand = new ConditionalCommand(this.animals::isEmpty);
         sellAnimalCommand
                 .ifTrue(new OpenPopupMenuCommand(this.controller, stockyardEmptyAlert))
-                .ifFalse(new SellAnimalCommand(this.farm.getWallet(), this.animals, this.livestockType.getAnimalSellPrice()));
+                .ifFalse(new SellAnimalCommand(this.farm.getWallet(), this.animals, sellPrice));
 
         buttons.add(new ButtonController(sellAnimalButton, sellAnimalCommand));
+    }
 
+    private void addFeedButton(List<ButtonController> buttons) {
+        PopupMenuControllerBuilder stockyardEmptyAlert = new AlertMenuControllerBuilder(this.controller,
+                "STOCKYARD IS EMPTY");
+
+        PopupMenuControllerBuilder notEnoughFoodAlert = new AlertMenuControllerBuilder(this.controller,
+                "NOT ENOUGH " + this.stockyard.getLivestockType().getFoodCrop().getName());
 
         Button feedAnimalsButton = new Button(new Position(1, 12), "FEED");
         ConditionalCommand feedAnimalsCommand = new ConditionalCommand(this.animals::isEmpty);
         feedAnimalsCommand
                 .ifTrue(new OpenPopupMenuCommand(this.controller, stockyardEmptyAlert))
-                .elseIf(() -> this.farm.getInventory().getAmount(this.stockyard.getLivestockType().getFoodCrop()) < this.stockyard.getRequiredFood())
-                .ifTrue(new OpenPopupMenuCommand(this.controller, notEnoughCropAlert))
+                .elseIf(getNotEnoughFoodCondition())
+                .ifTrue(new OpenPopupMenuCommand(this.controller, notEnoughFoodAlert))
                 .ifFalse(new CompoundCommand()
                         .addCommand(new FeedAnimalsCommand(this.stockyard, this.farm.getInventory()))
                         .addCommand(super.getClosePopupMenuCommand()));
 
         buttons.add(new ButtonController(feedAnimalsButton, feedAnimalsCommand));
+    }
 
-        return buttons;
+    private ConditionalCommand.Condition getNotEnoughFoodCondition() {
+        return () -> {
+            int amount = this.farm.getInventory().getAmount(this.stockyard.getLivestockType().getFoodCrop());
+            return amount < this.stockyard.getRequiredFood();
+        };
     }
 
     @Override
     protected List<Label> getLabels() {
         List<Label> labels = super.getLabels();
 
+        addNumAnimalsLabel(labels);
+        addBuyAnimalCostLabel(labels);
+        addSellAnimalReturnLabel(labels);
+        addFoodInInventoryLabel(labels);
+        addProductionRequirementLabel(labels);
+        addProductionInfoLabel(labels);
+
+        return labels;
+    }
+
+    private void addNumAnimalsLabel(List<Label> labels) {
         labels.add(new Label(
                 new Position(1, 4),
                 () -> String.format("%1$sS: %2$d/%3$d",
-                        this.stockyard.getLivestockType().getAnimalName(),
+                        this.livestockType.getAnimalName(),
                         this.animals.getSize(),
-                        this.stockyard.getLivestockType().getMaxNumAnimals())
+                        this.livestockType.getMaxNumAnimals())
         ));
+    }
 
+    private void addBuyAnimalCostLabel(List<Label> labels) {
         labels.add(new Label(new Position(7, 6), "COSTS"));
         labels.add(new Label(
                 new Position(7, 7),
-                () -> String.format(
-                        "%1$5s",
-                        this.stockyard.getLivestockType().getAnimalBuyPrice())
+                () -> String.format("%1$5s", this.livestockType.getAnimalBuyPrice())
         ));
+    }
 
+    private void addSellAnimalReturnLabel(List<Label> labels) {
         labels.add(new Label(new Position(23, 6), "RETURN"));
         labels.add(new Label(
                 new Position(23, 7),
-                () -> String.format(
-                        "%1$6s",
-                        this.stockyard.getLivestockType().getAnimalSellPrice())
+                () -> String.format("%1$6s", this.livestockType.getAnimalSellPrice())
         ));
+    }
 
+    private void addFoodInInventoryLabel(List<Label> labels) {
         labels.add(new Label(
                 new Position(1, 10),
-                () -> String.format("%1$s: %2$s",
-                        this.stockyard.getLivestockType().getFoodCrop().getName(),
-                        "x" + this.farm.getInventory().getAmount(this.stockyard.getLivestockType().getFoodCrop()))
-        ));
+                () -> {
+                    String foodName = this.livestockType.getFoodCrop().getName();
+                    int amount = this.farm.getInventory().getAmount(this.livestockType.getFoodCrop());
 
+                    return String.format("%1$s: %2$s", foodName, "x" + amount);
+                }
+        ));
+    }
+
+    private void addProductionRequirementLabel(List<Label> labels) {
         labels.add(new Label(new Position(8, 12), "NEEDS"));
         labels.add(new Label(
                 new Position(8, 13),
                 () -> {
                     if (this.animals.isEmpty()) {
-                        return this.stockyard.getLivestockType().getAnimalName() + "S";
+                        return this.livestockType.getAnimalName() + "S";
                     } else {
-                        return this.stockyard.getLivestockType().getFoodCrop().getName()
-                                + " x"
-                                + this.stockyard.getLivestockType().getRequiredFood() * this.animals.getSize();
+                        String foodName = this.livestockType.getFoodCrop().getName();
+                        int foodRequirement = this.stockyard.getRequiredFood();
+
+                        return foodName + " x" + foodRequirement;
                     }
                 }
         ));
+    }
 
+    private void addProductionInfoLabel(List<Label> labels) {
         labels.add(new Label(
                 new Position(1, 16),
                 () -> {
                     if (this.animals.isEmpty()) {
                         return "STOCKYARD IS EMPTY";
                     } else {
+                        String itemName = this.livestockType.getProducedItem().getName();
+                        int itemAmount = this.stockyard.getBaseProducedAmount();
+                        InGameTime productionTime = this.livestockType.getProducedItem().getProductionTime();
+
                         return String.format("PRODUCES: %1$s %2$s IN %3$s",
-                                this.stockyard.getLivestockType().getProducedItem().getName(),
-                                "x" + this.stockyard.getLivestockType().getProducedItem().getBaseProducedAmount() * this.animals.getSize(),
-                                this.stockyard.getLivestockType().getProducedItem().getProductionTime().getTimerString());
+                                itemName,
+                                "x" + itemAmount,
+                                productionTime.getTimerString());
                     }
                 }
         ));
-
-        return labels;
     }
 
     @Override

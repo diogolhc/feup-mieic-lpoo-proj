@@ -13,7 +13,7 @@ import model.menu.Menu;
 import java.util.List;
 
 public abstract class PopupMenuControllerBuilder extends MenuControllerBuilder {
-    protected GameController controller;
+    protected final GameController controller;
 
     public PopupMenuControllerBuilder(GameController controller) {
         this.controller = controller;
@@ -32,9 +32,13 @@ public abstract class PopupMenuControllerBuilder extends MenuControllerBuilder {
     protected List<ButtonController> getButtons() {
         List<ButtonController> buttons = super.getButtons();
 
-        Button closeMenuButton = new Button(new Position(this.getWidth() - 3, 0), "X");
-        buttons.add(new ButtonController(closeMenuButton, this.getClosePopupMenuCommand()));
+        addCloseMenuButton(buttons);
 
         return buttons;
+    }
+
+    private void addCloseMenuButton(List<ButtonController> buttons) {
+        Button closeMenuButton = new Button(new Position(this.getWidth() - 3, 0), "X");
+        buttons.add(new ButtonController(closeMenuButton, this.getClosePopupMenuCommand()));
     }
 }

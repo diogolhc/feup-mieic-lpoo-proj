@@ -1,13 +1,10 @@
 package controller.farm;
 
 import controller.command.controller_state.OpenPopupMenuCommand;
-import controller.farm.element.entity.NewBuildingController;
-import controller.menu.MenuController;
-import controller.menu.builder.MenuControllerBuilder;
+import controller.farm.element.entity.keyboard_reactor.NewBuildingController;
 import controller.menu.builder.PopupMenuControllerBuilder;
 import controller.menu.builder.info.AlertMenuControllerBuilder;
 import gui.GUI;
-import model.Position;
 import model.farm.building.Buildable;
 import model.farm.building.crop_field.CropField;
 import model.farm.building.stockyard.Stockyard;
@@ -27,7 +24,7 @@ public class FarmNewBuildingController extends FarmController {
         if (action == GUI.KEYBOARD_ACTION.BACK) this.returnToFarmerController();
         if (action == GUI.KEYBOARD_ACTION.INTERACT) this.reactInteraction();
         NewBuildingController newBuildingController = new NewBuildingController(this.farm, this.newBuilding);
-        newBuildingController.doAction(action);
+        newBuildingController.reactKeyboard(action);
     }
 
     private void returnToFarmerController() {

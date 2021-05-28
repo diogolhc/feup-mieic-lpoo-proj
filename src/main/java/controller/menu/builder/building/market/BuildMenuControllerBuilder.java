@@ -1,7 +1,8 @@
-package controller.menu.builder.market;
+package controller.menu.builder.building.market;
 
 import controller.GameController;
 import controller.command.Command;
+import controller.command.ConditionalCommand;
 import controller.command.controller_state.OpenPopupMenuCommand;
 import controller.command.controller_state.SetControllerStateCommand;
 import controller.farm.FarmController;
@@ -28,10 +29,11 @@ public class BuildMenuControllerBuilder extends PopupMenuControllerBuilder {
     private List<Buildable> buildingCatalog;
     private static final Position NEW_BUILDING_STARTING_POSITION = new Position(1, 1);
 
-    public BuildMenuControllerBuilder(GameController controller, FarmController farmController, Farm farm) {
+    public BuildMenuControllerBuilder(GameController controller, FarmController farmController) {
         super(controller);
         this.farmController = farmController;
-        this.farm = farm;
+        this.farm = farmController.getFarm();
+
         this.buildingCatalog = new ArrayList<>();
         this.buildingCatalog.add(new CropField(NEW_BUILDING_STARTING_POSITION));
         for (Livestock livestockType: this.farm.getLivestockTypes()) {
@@ -43,47 +45,61 @@ public class BuildMenuControllerBuilder extends PopupMenuControllerBuilder {
     protected List<ButtonController> getButtons() {
         List<ButtonController> buttons = super.getButtons();
 
-        int y = 4;
-        for (Buildable building: this.buildingCatalog) {
-            Button buildButton = new Button(new Position(1, y), building.getName());
-            Command buildCommand;
-            if (this.farm.getWallet().canBuy(building.getBuildPrice())) {
-                buildCommand = new SetControllerStateCommand(this.controller, new FarmNewBuildingController(
-                        this.farmController, building));
-            } else {
-                buildCommand = new OpenPopupMenuCommand(this.controller,
-                        new AlertMenuControllerBuilder(this.controller, "NOT ENOUGH MONEY"));
-            }
-            buttons.add(new ButtonController(buildButton, buildCommand));
-
-            y += 4;
-        }
-
-        Button demolishButton = new Button(new Position(24, 4), "DEMOLISH");
-        Command demolishCommand;
-        demolishCommand = new SetControllerStateCommand(this.controller, new FarmDemolishController(this.farmController));
-        buttons.add(new ButtonController(demolishButton, demolishCommand));
-
-        y += 4;
+        addAllBuildButtons(buttons);
+        addDemolishButton(buttons, new Position(24, 4));
 
         return buttons;
+    }
+
+    private void addAllBuildButtons(List<ButtonController> buttons) {
+        int y = 4;
+        for (Buildable building: this.buildingCatalog) {
+            addBuildBuildingButton(buttons, new Position(1, y), building);
+            y += 4;
+        }
+    }
+
+    private void addBuildBuildingButton(List<ButtonController> buttons, Position position, Buildable building) {
+        FarmController buildController = new FarmNewBuildingController(this.farmController, building);
+        PopupMenuControllerBuilder notEnoughMoneyAlert = new AlertMenuControllerBuilder(this.controller,
+                "NOT ENOUGH MONEY");
+
+        Button buildButton = new Button(position, building.getName());
+        Command buildCommand = new ConditionalCommand(() -> this.farm.getWallet().canBuy(building.getBuildPrice()))
+                .ifTrue(new SetControllerStateCommand(this.controller, buildController))
+                .ifFalse(new OpenPopupMenuCommand(this.controller, notEnoughMoneyAlert));
+        buttons.add(new ButtonController(buildButton, buildCommand));
+    }
+
+    private void addDemolishButton(List<ButtonController> buttons, Position position) {
+        FarmController demolishController = new FarmDemolishController(this.farmController);
+
+        Button demolishButton = new Button(position, "DEMOLISH");
+        Command demolishCommand;
+        demolishCommand = new SetControllerStateCommand(this.controller, demolishController);
+        buttons.add(new ButtonController(demolishButton, demolishCommand));
     }
 
     @Override
     protected List<Label> getLabels() {
         List<Label> labels = super.getLabels();
 
+        addAllBuildPriceLabels(labels);
+
+        return labels;
+    }
+
+    private void addAllBuildPriceLabels(List<Label> labels) {
         int y = 5;
         for (Buildable building: this.buildingCatalog) {
-            labels.add(new Label(
-                    new Position(16, y),
-                    () -> building.getBuildPrice().toString()
-            ));
+            addBuildPriceLabel(labels, new Position(16, y), building);
 
             y += 4;
         }
+    }
 
-        return labels;
+    private void addBuildPriceLabel(List<Label> labels, Position position, Buildable building) {
+        labels.add(new Label(position, () -> building.getBuildPrice().toString()));
     }
 
     @Override

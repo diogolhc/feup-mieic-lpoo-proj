@@ -1,8 +1,10 @@
-package controller.menu.builder.stockyard;
+package controller.menu.builder.building.stockyard;
 
 import controller.GameController;
 import controller.command.Command;
 import controller.command.CompoundCommand;
+import controller.command.ConditionalCommand;
+import controller.command.controller_state.SetControllerStateCommand;
 import controller.command.farm.stockyard.StopProducingStockyardCommand;
 import controller.menu.element.ButtonController;
 import controller.menu.MenuController;
@@ -37,11 +39,8 @@ public class ProducingMenuControllerBuilder extends PopupMenuControllerBuilder {
         MenuController collectMenuController = collectMenuControllerBuilder.buildMenuCentered(
                 controller.getWindowWidth(), controller.getWindowHeight());
 
-        Command closingCondition = () -> {
-            if (stockyard.getState() instanceof ReadyToCollect) {
-                this.controller.setGameControllerState(collectMenuController);
-            }
-        };
+        Command closingCondition = new ConditionalCommand(() -> stockyard.getState() instanceof ReadyToCollect)
+            .ifTrue(new SetControllerStateCommand(this.controller, collectMenuController));
 
         return new PopupMenuControllerWithTimePassedReaction(menu, this.controller,
                 this.controller.getGameControllerState(), closingCondition);
@@ -51,6 +50,12 @@ public class ProducingMenuControllerBuilder extends PopupMenuControllerBuilder {
     protected List<ButtonController> getButtons() {
         List<ButtonController> buttons = super.getButtons();
 
+        addStopProducingButton(buttons);
+
+        return buttons;
+    }
+
+    private void addStopProducingButton(List<ButtonController> buttons) {
         Button stopProducingButton = new Button(new Position(1, 8), "STOP PRODUCING");
 
         Command stopProducingButtonCommand = new CompoundCommand()
@@ -58,31 +63,38 @@ public class ProducingMenuControllerBuilder extends PopupMenuControllerBuilder {
                 .addCommand(super.getClosePopupMenuCommand());
 
         buttons.add(new ButtonController(stopProducingButton, stopProducingButtonCommand));
-
-        return buttons;
     }
 
     @Override
     protected List<Label> getLabels() {
         List<Label> labels = super.getLabels();
 
+        addItemBeingProducedLabel(labels);
+        addRemainingTimeLabel(labels);
+        addQuantityLabel(labels);
+
+        return labels;
+    }
+
+    private void addItemBeingProducedLabel(List<Label> labels) {
         labels.add(new Label(
                 new Position(1, 4),
                 () -> "PRODUCT: " + this.stockyard.getLivestockType().getProducedItem().getName()
         ));
+    }
 
+    private void addRemainingTimeLabel(List<Label> labels) {
         labels.add(new Label(
                 new Position(1, 5),
                 () -> "REMAINING TIME: " + stockyard.getState().getRemainingTime().getTimerString()
         ));
+    }
 
+    private void addQuantityLabel(List<Label> labels) {
         labels.add( new Label(
                 new Position(1, 6),
                 () -> "QUANTITY: " + stockyard.getState().getCollectAmount()
         ));
-
-
-        return labels;
     }
 
     @Override

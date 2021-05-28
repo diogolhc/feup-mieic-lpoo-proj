@@ -1,11 +1,11 @@
-package controller.farm.element.building;
+package controller.farm.element.building.edifice;
 
 import controller.GameController;
 import controller.command.Command;
 import controller.command.controller_state.OpenPopupMenuCommand;
 import controller.farm.FarmController;
 import controller.menu.builder.PopupMenuControllerBuilder;
-import controller.menu.builder.market.MarketMenuControllerBuilder;
+import controller.menu.builder.building.market.MarketMenuControllerBuilder;
 import model.farm.Farm;
 import model.farm.building.Edifice;
 
@@ -21,8 +21,8 @@ public class MarketController extends EdificeController {
     public Command getInteractionCommand(Edifice market) {
         if (this.controller.getGameControllerState() instanceof FarmController) {
             FarmController farmController = (FarmController) this.controller.getGameControllerState();
-            PopupMenuControllerBuilder menuControllerBuilder = new MarketMenuControllerBuilder(
-                    this.controller, this.farm, farmController);
+
+            PopupMenuControllerBuilder menuControllerBuilder = new MarketMenuControllerBuilder(this.controller, farmController);
             return new OpenPopupMenuCommand(this.controller, menuControllerBuilder);
         } else {
             // This never happens because the interaction command is retrieved after

@@ -29,7 +29,8 @@ public class PlantCropCommandTest {
         stateReady = Mockito.mock(ReadyToHarvest.class);
         statePlanted = Mockito.mock(Planted.class);
         stateNotPlanted = Mockito.mock(NotPlanted.class);
-        wallet = new Wallet(new Currency(100));
+        wallet = Mockito.mock(Wallet.class);
+
         cropField = new CropField(new Position(0, 0));
         crop = Mockito.mock(Crop.class);
         Mockito.when(crop.getPlantPrice()).thenReturn(new Currency(10));
@@ -41,7 +42,7 @@ public class PlantCropCommandTest {
         cropField.setState(stateReady);
         command.execute();
         Assertions.assertSame(stateReady, cropField.getState());
-        Assertions.assertEquals(100, wallet.getCurrency().getCoins());
+        Mockito.verifyNoInteractions(wallet);
     }
 
     @Test
@@ -51,7 +52,7 @@ public class PlantCropCommandTest {
         CropFieldState newState = cropField.getState();
         Assertions.assertTrue(newState instanceof Planted);
         Assertions.assertSame(crop, newState.getCrop());
-        Assertions.assertEquals(90, wallet.getCurrency().getCoins());
+        Mockito.verify(wallet, Mockito.times(1)).spend(crop.getPlantPrice());
     }
 
     @Test
@@ -59,6 +60,6 @@ public class PlantCropCommandTest {
         cropField.setState(statePlanted);
         command.execute();
         Assertions.assertSame(statePlanted, cropField.getState());
-        Assertions.assertEquals(100, wallet.getCurrency().getCoins());
+        Mockito.verifyNoInteractions(wallet);
     }
 }

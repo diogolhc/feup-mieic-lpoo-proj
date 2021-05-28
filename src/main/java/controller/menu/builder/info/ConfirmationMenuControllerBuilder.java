@@ -32,7 +32,7 @@ public class ConfirmationMenuControllerBuilder extends InfoMenuControllerBuilder
                 .addCommand(this.yesCommand);
         buttons.add(new ButtonController(yesButton, yesCommand));
 
-        buttonX += 6;
+        buttonX += yesButton.getWidth() + 1;
         Button noButton = new Button(new Position(buttonX, buttonY), "NO");
         Command noCommand = new CompoundCommand()
                 .addCommand(this.getClosePopupMenuCommand())
@@ -49,11 +49,7 @@ public class ConfirmationMenuControllerBuilder extends InfoMenuControllerBuilder
 
     @Override
     protected int getWidth() {
-        if (super.getWidth() >= 12) {
-            return super.getWidth();
-        } else {
-            return 12;
-        }
+        return Math.max(super.getWidth(), 12);
     }
 
     public ConfirmationMenuControllerBuilder setYesCommand(Command yesCommand) {

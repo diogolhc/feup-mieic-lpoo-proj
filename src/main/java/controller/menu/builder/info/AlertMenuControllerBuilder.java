@@ -31,10 +31,6 @@ public class AlertMenuControllerBuilder extends InfoMenuControllerBuilder {
 
     @Override
     protected int getWidth() {
-        if (super.getWidth() >= 6) {
-            return super.getWidth();
-        } else {
-            return 6;
-        }
+        return Math.max(super.getWidth(), 6);
     }
 }
