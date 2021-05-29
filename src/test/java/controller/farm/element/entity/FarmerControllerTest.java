@@ -1,4 +1,4 @@
-package controller.farm;
+package controller.farm.element.entity;
 
 import controller.farm.element.entity.keyboard_reactor.FarmerController;
 import gui.GUI;
