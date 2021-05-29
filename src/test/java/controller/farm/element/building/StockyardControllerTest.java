@@ -6,7 +6,6 @@ import controller.menu.PopupMenuController;
 import model.InGameTime;
 import model.Position;
 import model.farm.Farm;
-import model.farm.building.crop_field.state.NotPlanted;
 import model.farm.building.stockyard.Stockyard;
 import model.farm.building.stockyard.state.NotProducing;
 import model.farm.building.stockyard.state.Producing;
