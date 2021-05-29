@@ -23,8 +23,17 @@ public class Livestock implements Serializable {
 
     public static Livestock parseLivestockType(List<Crop> cropTypes, List<String> lines) {
         Livestock livestock = new Livestock();
+        if (lines.size() != 3) {
+            throw new IllegalArgumentException("Parsing Livestock requires exactly 3 lines; got " + lines.size());
+        }
 
         String[] tokens = lines.get(0).split(" ");
+        if (tokens.length != 8) {
+            throw new IllegalArgumentException("First line must have exactly 8 values; got " + tokens.length);
+        }
+        if (tokens[1].length() != 1) {
+            throw new IllegalArgumentException("Expected char; got" + tokens[1]);
+        }
         livestock.animalName = tokens[0];
         livestock.animalChar = tokens[1].charAt(0);
         livestock.stockyardWidth = Integer.parseInt(tokens[2]);
@@ -39,7 +48,14 @@ public class Livestock implements Serializable {
         livestock.animalSellPrice = new Currency(Integer.parseInt(tokens[7]));
 
         tokens = lines.get(1).split(" ");
-        livestock.foodCrop = cropTypes.get(cropTypes.indexOf(new Crop(tokens[0])));
+        if (tokens.length != 2) {
+            throw new IllegalArgumentException("First line must have exactly 2 values; got " + tokens.length);
+        }
+        int foodIndex = cropTypes.indexOf(new Crop(tokens[0]));
+        if (foodIndex == -1) {
+            throw new IllegalArgumentException("Crop not recognized: " + tokens[0]);
+        }
+        livestock.foodCrop = cropTypes.get(foodIndex);
         livestock.requiredFood = Integer.parseInt(tokens[1]);
 
         livestock.producedItem = AnimalProduct.parseAnimalProduct(lines.get(2));
