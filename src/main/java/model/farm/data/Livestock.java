@@ -7,6 +7,7 @@ import model.farm.data.item.Crop;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 public class Livestock implements Serializable {
     private String animalName;
@@ -29,7 +30,7 @@ public class Livestock implements Serializable {
 
         String[] tokens = lines.get(0).split(" ");
         if (tokens.length != 8) {
-            throw new IllegalArgumentException("First line must have exactly 8 values; got " + tokens.length);
+            throw new IllegalArgumentException("Line must have exactly 8 values; got " + tokens.length);
         }
         if (tokens[1].length() != 1) {
             throw new IllegalArgumentException("Expected char; got" + tokens[1]);
@@ -49,7 +50,7 @@ public class Livestock implements Serializable {
 
         tokens = lines.get(1).split(" ");
         if (tokens.length != 2) {
-            throw new IllegalArgumentException("First line must have exactly 2 values; got " + tokens.length);
+            throw new IllegalArgumentException("Line must have exactly 2 values; got " + tokens.length);
         }
         int foodIndex = cropTypes.indexOf(new Crop(tokens[0]));
         if (foodIndex == -1) {
