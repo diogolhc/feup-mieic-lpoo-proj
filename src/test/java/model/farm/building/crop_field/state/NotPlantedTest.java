@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 public class NotPlantedTest {
     private NotPlanted state;
-    private InGameTime zero = new InGameTime(0);
+    private final InGameTime zero = new InGameTime(0);
 
     @BeforeEach
     void setUp() {
