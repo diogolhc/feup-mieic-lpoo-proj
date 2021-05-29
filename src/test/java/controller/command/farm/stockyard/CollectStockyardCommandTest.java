@@ -22,16 +22,19 @@ public class CollectStockyardCommandTest {
     private AnimalProduct animalProduct;
     private Inventory inventory;
     private Command command;
+    private Livestock livestock;
 
     @BeforeEach
     public void setUp() {
         stateReadyToCollect = Mockito.mock(ReadyToCollect.class);
         stateNotProducing = Mockito.mock(NotProducing.class);
         stateProducing = Mockito.mock(Producing.class);
-
         inventory = Mockito.mock(Inventory.class);
+        livestock = Mockito.mock(Livestock.class);
+        Mockito.when(livestock.getStockyardWidth()).thenReturn(4);
+        Mockito.when(livestock.getStockyardHeight()).thenReturn(4);
 
-        stockyard = new Stockyard(new Position(0, 0), Mockito.mock(Livestock.class));
+        stockyard = new Stockyard(new Position(0, 0), livestock);
 
         animalProduct = Mockito.mock(AnimalProduct.class);
         Mockito.when(stockyard.getLivestockType().getProducedItem()).thenReturn(animalProduct);

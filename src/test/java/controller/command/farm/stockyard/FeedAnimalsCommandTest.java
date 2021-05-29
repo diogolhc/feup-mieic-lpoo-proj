@@ -36,6 +36,8 @@ public class FeedAnimalsCommandTest {
         inventory = Mockito.mock(Inventory.class);
 
         Livestock livestock = Mockito.mock(Livestock.class);
+        Mockito.when(livestock.getStockyardWidth()).thenReturn(4);
+        Mockito.when(livestock.getStockyardHeight()).thenReturn(4);
         Mockito.when(livestock.getMaxNumAnimals()).thenReturn(1);
         Mockito.when(livestock.getFoodCrop()).thenReturn(crop);
         Mockito.when(livestock.getRequiredFood()).thenReturn(10);

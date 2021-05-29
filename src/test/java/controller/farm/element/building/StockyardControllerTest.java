@@ -31,6 +31,8 @@ public class StockyardControllerTest {
     @BeforeEach
     public void setUp() {
         livestock = Mockito.mock(Livestock.class);
+        Mockito.when(livestock.getStockyardWidth()).thenReturn(4);
+        Mockito.when(livestock.getStockyardHeight()).thenReturn(4);
         Mockito.when(livestock.getFoodCrop()).thenReturn(new Crop("WHEAT"));
         AnimalProduct product = Mockito.mock(AnimalProduct.class);
         Mockito.when(livestock.getProducedItem()).thenReturn(product);
