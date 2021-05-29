@@ -13,7 +13,7 @@ public class Currency implements Serializable {
     }
 
     public Currency(int coins) {
-        this.coins = Math.min(coins, MAX_COINS);
+        this.coins = Math.max(0, Math.min(coins, MAX_COINS));
     }
 
     public int getCoins() {

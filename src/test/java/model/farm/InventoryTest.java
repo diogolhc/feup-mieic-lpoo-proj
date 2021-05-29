@@ -1,6 +1,9 @@
 package model.farm;
 
+import model.Position;
 import model.farm.data.item.Item;
+import model.region.RectangleRegion;
+import net.jqwik.api.Property;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,6 +24,15 @@ public class InventoryTest {
 
         inventory.storeItem(item1, 1);
         inventory.storeItem(item2, 5);
+    }
+
+    @Property
+    public void negativeCapacityThrows() {
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> new Inventory(-1));
+
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> new Inventory(-100));
     }
 
     @Test

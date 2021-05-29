@@ -15,6 +15,12 @@ public class CurrencyTest {
         Assertions.assertEquals(new Currency(Currency.MAX_COINS), new Currency(Integer.MAX_VALUE));
     }
 
+    @Test
+    public void negativeCurrency() {
+        Assertions.assertEquals(new Currency(0), new Currency(-1000000));
+        Assertions.assertEquals(new Currency(0), new Currency(-1));
+    }
+
     @Property
     public void toStringPadded(@ForAll@Positive@IntRange(max = Currency.MAX_COINS) int coins) {
         Currency currency = new Currency(coins);

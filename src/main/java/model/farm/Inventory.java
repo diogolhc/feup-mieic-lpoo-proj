@@ -16,6 +16,7 @@ public class Inventory implements Serializable {
     }
 
     public Inventory(int capacity) {
+        if (capacity < 0) throw new IllegalArgumentException("Negative capacity");
         this.capacity = capacity;
         this.occupied = 0;
         this.items = new HashMap<>();

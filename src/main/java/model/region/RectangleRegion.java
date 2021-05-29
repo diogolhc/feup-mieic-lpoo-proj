@@ -8,6 +8,9 @@ public class RectangleRegion implements Region {
     private final int height;
 
     public RectangleRegion(Position topLeft, int width, int height) {
+        if (width <= 0) throw new IllegalArgumentException("Region width not positive");
+        if (height <= 0) throw new IllegalArgumentException("Region height not positive");
+
         this.topLeft = topLeft;
         this.width = width;
         this.height = height;
