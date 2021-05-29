@@ -1,5 +1,6 @@
 package model.farm;
 
+import net.jqwik.api.AfterFailureMode;
 import net.jqwik.api.ForAll;
 import net.jqwik.api.Property;
 import net.jqwik.api.constraints.IntRange;
@@ -15,7 +16,7 @@ public class CurrencyTest {
     }
 
     @Property
-    public void toStringPadded(@ForAll @Positive @IntRange(max = Currency.MAX_COINS) int coins) {
+    public void toStringPadded(@ForAll@Positive@IntRange(max = Currency.MAX_COINS) int coins) {
         Currency currency = new Currency(coins);
         String paddedString = currency.toStringPadded();
         int len = paddedString.length();
