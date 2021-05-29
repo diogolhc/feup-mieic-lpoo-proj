@@ -10,7 +10,7 @@ import org.mockito.Mockito;
 
 public class ReadyToHarvestTest {
     private ReadyToHarvest state;
-    private InGameTime zero = new InGameTime(0);
+    private final InGameTime zero = new InGameTime(0);
 
     @BeforeEach
     void setUp() {
