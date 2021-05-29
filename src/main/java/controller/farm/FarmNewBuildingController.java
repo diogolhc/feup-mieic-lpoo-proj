@@ -1,13 +1,16 @@
 package controller.farm;
 
+import controller.GameController;
 import controller.command.controller_state.OpenPopupMenuCommand;
 import controller.farm.element.entity.keyboard_reactor.NewBuildingController;
 import controller.menu.builder.PopupMenuControllerBuilder;
 import controller.menu.builder.info.AlertMenuControllerBuilder;
 import gui.GUI;
+import model.farm.Farm;
 import model.farm.building.Buildable;
 import model.farm.building.crop_field.CropField;
 import model.farm.building.stockyard.Stockyard;
+import model.farm.entity.Entity;
 import viewer.GameViewer;
 import viewer.farm.FarmNewBuildingViewer;
 
@@ -16,6 +19,12 @@ public class FarmNewBuildingController extends FarmController {
 
     public FarmNewBuildingController(FarmController farmController, Buildable newBuilding) {
         super(farmController);
+        this.newBuilding = newBuilding;
+    }
+
+    public FarmNewBuildingController(Farm farm, GameController controller, long realSecToGameMinutesRate,
+                                  Buildable newBuilding) {
+        super(farm, controller, realSecToGameMinutesRate);
         this.newBuilding = newBuilding;
     }
 

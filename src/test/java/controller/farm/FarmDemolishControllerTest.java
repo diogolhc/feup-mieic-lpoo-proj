@@ -2,7 +2,6 @@ package controller.farm;
 
 import controller.GameController;
 import controller.menu.PauseMenuController;
-import controller.menu.PopupMenuController;
 import gui.GUI;
 import model.InGameTime;
 import model.Position;
@@ -10,22 +9,20 @@ import model.farm.Farm;
 import model.farm.building.Building;
 import model.farm.building.BuildingSet;
 import model.farm.building.Edifice;
+import model.farm.building.crop_field.CropField;
 import model.farm.building.stockyard.Stockyard;
 import model.farm.data.Weather;
-import model.farm.building.crop_field.CropField;
 import model.farm.entity.Entity;
 import model.region.RectangleRegion;
-import model.region.Region;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
-public class FarmWithFarmerControllerTest {
+public class FarmDemolishControllerTest {
     private Farm farm;
-    private FarmWithFarmerController controller;
+    private FarmDemolishController controller;
     private GameController gameController;
+    private Entity marker;
 
     @BeforeEach
     public void setUp() {
@@ -34,35 +31,34 @@ public class FarmWithFarmerControllerTest {
         farm = new Farm(6, 8, buildings);
         farm.setTime(new InGameTime(0, 0, 0));
         farm.setCurrentWeather(new Weather("SUNNY"));
-        farm.setFarmer(Mockito.mock(Entity.class));
-        Mockito.when(farm.getFarmer().getPosition()).thenReturn(new Position(0, 0));
+        marker = Mockito.mock(Entity.class);
+        Mockito.when(marker.getPosition()).thenReturn(new Position(0, 0));
         gameController = Mockito.mock(GameController.class);
-        controller = new FarmWithFarmerController(farm, gameController, 1);
+        controller = new FarmDemolishController(farm, gameController, 1, marker);
     }
 
     @Test
-    public void pause() {
+    public void back() {
         Mockito.verifyNoInteractions(gameController);
         controller.reactKeyboard(GUI.KEYBOARD_ACTION.BACK);
         Mockito.verify(gameController, Mockito.times(1))
-                .setGameControllerState(Mockito.any(PauseMenuController.class));
+                .setGameControllerState(Mockito.any(FarmWithFarmerController.class));
     }
 
     @Test
-    public void farmerReactsToKeyboard() {
-        Entity farmer = farm.getFarmer();
-        Mockito.verifyNoInteractions(farmer);
+    public void markerReactsToKeyboard() {
+        Mockito.verifyNoInteractions(marker);
         controller.reactKeyboard(GUI.KEYBOARD_ACTION.MOVE_RIGHT);
-        Mockito.verify(farmer, Mockito.times(1)).getPosition();
+        Mockito.verify(marker, Mockito.times(1)).getPosition();
     }
 
     @Test
-    public void reactInteraction() {
+    public void reactDemolish() {
         farm.getBuildings().addCropField(Mockito.mock(CropField.class));
         farm.getBuildings().addStockyard(Mockito.mock(Stockyard.class));
 
         for (Building building: farm.getBuildings().getAllBuildings()) {
-            Mockito.when(building.getInteractiveRegion()).thenReturn(position -> false);
+            Mockito.when(building.getOccupiedRegion()).thenReturn(new RectangleRegion(new Position(0, 0), 1, 1));
         }
 
         controller.reactKeyboard(GUI.KEYBOARD_ACTION.MOVE_RIGHT);
@@ -71,7 +67,7 @@ public class FarmWithFarmerControllerTest {
         }
         controller.reactKeyboard(GUI.KEYBOARD_ACTION.INTERACT);
         for (Building building: farm.getBuildings().getAllBuildings()) {
-            Mockito.verify(building, Mockito.times(1)).getInteractiveRegion();
+            Mockito.verify(building, Mockito.times(1)).getOccupiedRegion();
         }
     }
 }
