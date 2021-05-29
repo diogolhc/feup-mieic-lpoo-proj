@@ -24,6 +24,12 @@ public class NewGameFarmBuilder extends FarmBuilder {
     private final List<String> livestockLines;
     private final List<String> weatherLines;
 
+    public NewGameFarmBuilder(List<String> crops, List<String> livestocks, List<String> weathers) {
+        this.cropsLines = crops;
+        this.livestockLines = livestocks;
+        this.weatherLines = weathers;
+    }
+
     public NewGameFarmBuilder() throws IOException, URISyntaxException {
         URL resource = NewGameFarmBuilder.class.getResource("/game/crops.data");
         BufferedReader br = new BufferedReader(new FileReader(resource.toURI().getPath()));
@@ -96,6 +102,9 @@ public class NewGameFarmBuilder extends FarmBuilder {
         int currentLine = 0;
         while (currentLine < this.weatherLines.size()){
             String[] tokens = this.weatherLines.get(currentLine++).split(" ");
+            if (tokens.length != 2) {
+                throw new IllegalArgumentException("Line must have exactly 2 values; got " + tokens.length);
+            }
 
             String name = tokens[0];
             double weatherEffect = Double.parseDouble(tokens[1]);
@@ -110,7 +119,15 @@ public class NewGameFarmBuilder extends FarmBuilder {
             }
 
             tokens = this.weatherLines.get(currentLine++).split(" ");
+            if (tokens.length < 1) {
+                throw new IllegalArgumentException("Line must have at least one value; got " + tokens.length);
+            }
             int numChanges = Integer.parseInt(tokens[0]);
+            int expectedTokens = numChanges * 2 + 1;
+            if (tokens.length != expectedTokens) {
+                throw new IllegalArgumentException("Line must have exactly "
+                        + expectedTokens + " values; got " + tokens.length);
+            }
 
             for (int j = 0; j < numChanges; j++) {
                 String name2 = tokens[2*j + 1];
@@ -154,6 +171,9 @@ public class NewGameFarmBuilder extends FarmBuilder {
         int currentLine = 0;
         while (currentLine < this.cropsLines.size()) {
             String[] tokens = this.cropsLines.get(currentLine++).split(" ");
+            if (tokens.length != 5) {
+                throw new IllegalArgumentException("Line must have exactly 5 values; got " + tokens.length);
+            }
 
             Crop crop = new Crop(tokens[0]);
             int numberOfStages = Integer.parseInt(tokens[1]);

@@ -24,7 +24,7 @@ public class CropGrowthStage implements Comparable<CropGrowthStage>, Serializabl
     public static CropGrowthStage parseGrowthStage(String s) {
         String tokens[] = s.split(" ");
         if (tokens.length != 3) {
-            throw new IllegalArgumentException("First line must have exactly 3 values; got " + tokens.length);
+            throw new IllegalArgumentException("Line must have exactly 3 values; got " + tokens.length);
         }
         if (tokens[1].length() != 1) {
             throw new IllegalArgumentException("Expected char; got" + tokens[1]);

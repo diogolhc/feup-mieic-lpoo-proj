@@ -6,6 +6,7 @@ import model.InGameTime;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class Weather implements Serializable {
     private final String name;
@@ -45,8 +46,13 @@ public class Weather implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || this.getClass() != o.getClass()) return false;
         Weather weather = (Weather) o;
-        return this.name.equals(weather.getName());
+        return Objects.equals(this.name, weather.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.name);
     }
 }
