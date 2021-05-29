@@ -88,13 +88,13 @@ public class UnderlinedStringDrawerTest {
         Color FRONT2 = new Color("#FEDCBA");
         Color FRONT3 = new Color("#FEDEBA");
 
-        char character1 = '_';
-        char character2 = '-';
-        char character3 = '=';
+        char c1 = '_';
+        char c2 = '-';
+        char c3 = '=';
 
-        UnderlinedStringDrawer drawer = new UnderlinedStringDrawer(gui, BACK1, FRONT1, character1);
-        UnderlinedStringDrawer drawer2 = new UnderlinedStringDrawer(gui, BACK2, FRONT2, character2);
-        UnderlinedStringDrawer drawer3 = new UnderlinedStringDrawer(gui, BACK3, FRONT3, character3);
+        UnderlinedStringDrawer drawer = new UnderlinedStringDrawer(gui, BACK1, FRONT1, c1);
+        UnderlinedStringDrawer drawer2 = new UnderlinedStringDrawer(gui, BACK2, FRONT2, c2);
+        UnderlinedStringDrawer drawer3 = new UnderlinedStringDrawer(gui, BACK3, FRONT3, c3);
 
         drawer.draw(new Position(5, 7), "HELLO");
         drawer2.draw(new Position(0, 0), "HI");
@@ -128,14 +128,14 @@ public class UnderlinedStringDrawerTest {
 
         char expectedChars[][] = {
                 {'H', 'I', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {character2, character2, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                {c2, c2, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', 'O', 'I', 'E', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', character3, character3, character3, ' ', ' ', ' ', ' '},
+                {' ', ' ', ' ', c3, c3, c3, ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', 'H', 'E', 'L', 'L', 'O'},
-                {' ', ' ', ' ', ' ', ' ', character1, character1, character1, character1, character1},
+                {' ', ' ', ' ', ' ', ' ', c1, c1, c1, c1, c1},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
         };
 

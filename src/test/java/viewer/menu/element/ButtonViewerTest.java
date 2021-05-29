@@ -24,8 +24,8 @@ class ButtonViewerTest {
 
         this.button = Mockito.mock(Button.class);
         Mockito.when(this.button.getTopLeft()).thenReturn(new Position(1,0));
-        Mockito.when(this.button.getTitle()).thenReturn("BUTTON");
-        Mockito.when(this.button.getHeight()).thenReturn(3);
+        Mockito.when(this.button.getTitle()).thenReturn("BT");
+        Mockito.when(this.button.getHeight()).thenReturn(Button.BUTTON_HEIGHT);
         Mockito.when(this.button.getWidth()).thenReturn(8);
     }
 
@@ -59,7 +59,7 @@ class ButtonViewerTest {
                 {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
                 {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
                 {WHITE, FOREGROUND, FOREGROUND, FOREGROUND, FOREGROUND, FOREGROUND, FOREGROUND, FOREGROUND, FOREGROUND, WHITE},
-                {WHITE, FOREGROUND, FOREGROUND, FOREGROUND, FOREGROUND, FOREGROUND, FOREGROUND, FOREGROUND, FOREGROUND, WHITE},
+                {WHITE, FOREGROUND, null, null, FOREGROUND, FOREGROUND, null, null, FOREGROUND, WHITE},
                 {WHITE, FOREGROUND, FOREGROUND, FOREGROUND, FOREGROUND, FOREGROUND, FOREGROUND, FOREGROUND, FOREGROUND, WHITE},
                 {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
                 {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
@@ -72,7 +72,7 @@ class ButtonViewerTest {
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', '+', '-', '-', '-', '-', '-', '-', '+', ' '},
-                {' ', '|', 'B', 'U', 'T', 'T', 'O', 'N', '|', ' '},
+                {' ', '|', ' ', ' ', 'B', 'T', ' ', ' ', '|', ' '},
                 {' ', '+', '-', '-', '-', '-', '-', '-', '+', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
@@ -82,9 +82,14 @@ class ButtonViewerTest {
         };
 
         for (int i = 0; i < 10; i++) {
-            Assertions.assertArrayEquals(expectedBg[i], this.backgroundColors[i]);
-            Assertions.assertArrayEquals(expectedFg[i], this.foregroundColors[i]);
-            Assertions.assertArrayEquals(expectedChars[i], this.characters[i]);
+            for (int j = 0; j < 10; j++) {
+                Assertions.assertEquals(expectedBg[i][j], this.backgroundColors[i][j]);
+                Assertions.assertEquals(expectedChars[i][j], this.characters[i][j]);
+
+                if (expectedFg[i][j] != null) {
+                    Assertions.assertEquals(expectedFg[i][j], this.foregroundColors[i][j]);
+                }
+            }
         }
 
     }
@@ -119,7 +124,7 @@ class ButtonViewerTest {
                 {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
                 {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
                 {WHITE, FOREGROUND, FOREGROUND, FOREGROUND, FOREGROUND, FOREGROUND, FOREGROUND, FOREGROUND, FOREGROUND, WHITE},
-                {WHITE, FOREGROUND, FOREGROUND, FOREGROUND, FOREGROUND, FOREGROUND, FOREGROUND, FOREGROUND, FOREGROUND, WHITE},
+                {WHITE, FOREGROUND, null, null, FOREGROUND, FOREGROUND, null, null, FOREGROUND, WHITE},
                 {WHITE, FOREGROUND, FOREGROUND, FOREGROUND, FOREGROUND, FOREGROUND, FOREGROUND, FOREGROUND, FOREGROUND, WHITE},
                 {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
                 {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
@@ -132,7 +137,7 @@ class ButtonViewerTest {
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', '+', '-', '-', '-', '-', '-', '-', '+', ' '},
-                {' ', '|', 'B', 'U', 'T', 'T', 'O', 'N', '|', ' '},
+                {' ', '|', ' ', ' ', 'B', 'T', ' ', ' ', '|', ' '},
                 {' ', '+', '-', '-', '-', '-', '-', '-', '+', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
@@ -142,10 +147,16 @@ class ButtonViewerTest {
         };
 
         for (int i = 0; i < 10; i++) {
-            Assertions.assertArrayEquals(expectedBg[i], this.backgroundColors[i]);
-            Assertions.assertArrayEquals(expectedFg[i], this.foregroundColors[i]);
-            Assertions.assertArrayEquals(expectedChars[i], this.characters[i]);
+            for (int j = 0; j < 10; j++) {
+                Assertions.assertEquals(expectedBg[i][j], this.backgroundColors[i][j]);
+                Assertions.assertEquals(expectedChars[i][j], this.characters[i][j]);
+
+                if (expectedFg[i][j] != null) {
+                    Assertions.assertEquals(expectedFg[i][j], this.foregroundColors[i][j]);
+                }
+            }
         }
+
 
     }
 }

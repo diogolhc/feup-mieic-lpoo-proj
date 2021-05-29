@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 public class VerticalLineDrawerTest {
-
     private GUI gui;
     private Color backgroundColors[][] = new Color[10][10];
     private Color foregroundColors[][] = new Color[10][10];
@@ -20,7 +19,6 @@ public class VerticalLineDrawerTest {
     void setUp() {
         this.gui = new GUIMockTestHelper(backgroundColors, foregroundColors, characters).mock();
     }
-
 
     @Test
     void drawAtOrigin() {
@@ -96,11 +94,11 @@ public class VerticalLineDrawerTest {
                     Assertions.assertEquals(BACK, backgroundColors[i][j]);
                     Assertions.assertEquals(FRONT, foregroundColors[i][j]);
                     Assertions.assertEquals('x', characters[i][j]);
-                } else if (j == 7 && i >= 2 && i <= 5) {    // drawer2
+                } else if (j == 7 && i >= 2 && i <= 5) {
                     Assertions.assertEquals(BACK2, backgroundColors[i][j]);
                     Assertions.assertEquals(FRONT2, foregroundColors[i][j]);
                     Assertions.assertEquals('y', characters[i][j]);
-                } else if (j == 6 && i >= 6 && i <= 8) {    // drawer3
+                } else if (j == 6 && i >= 6 && i <= 8) {
                     Assertions.assertEquals(BACK3, backgroundColors[i][j]);
                     Assertions.assertEquals(FRONT3, foregroundColors[i][j]);
                     Assertions.assertEquals('z', characters[i][j]);

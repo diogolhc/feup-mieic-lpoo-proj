@@ -30,19 +30,19 @@ class MenuTitleViewerTest {
     }
 
     @Test
-    void draw() {
+    void drawRelativeToMenu() {
         Color BLACK = Color.BLACK;
         Color WHITE = Color.WHITE;
         Color TITLE = MenuTitleViewer.TITLE_COLOR;
 
         MenuTitleViewer viewer = new MenuTitleViewer();
-        viewer.draw(this.menu, new Position(0,0), this.gui);
+        viewer.draw(this.menu, new Position(0,2), this.gui);
 
         Color expectedBg[][] = {
-                {BLACK, BLACK, menuColor, menuColor, menuColor, menuColor, menuColor, BLACK, BLACK, BLACK},
-                {BLACK, BLACK, menuColor, menuColor, menuColor, menuColor, menuColor, BLACK, BLACK, BLACK},
                 {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
                 {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, menuColor, menuColor, menuColor, menuColor, menuColor, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, menuColor, menuColor, menuColor, menuColor, menuColor, BLACK, BLACK, BLACK},
                 {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
                 {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
                 {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
@@ -52,10 +52,10 @@ class MenuTitleViewerTest {
         };
 
         Color expectedFg[][] = {
-                {WHITE, WHITE, TITLE, TITLE, TITLE, TITLE, TITLE, WHITE, WHITE, WHITE},
-                {WHITE, WHITE, TITLE, TITLE, TITLE, TITLE, TITLE, WHITE, WHITE, WHITE},
                 {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
                 {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
+                {WHITE, WHITE, TITLE, TITLE, TITLE, TITLE, TITLE, WHITE, WHITE, WHITE},
+                {WHITE, WHITE, TITLE, TITLE, TITLE, TITLE, TITLE, WHITE, WHITE, WHITE},
                 {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
                 {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
                 {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
@@ -65,10 +65,10 @@ class MenuTitleViewerTest {
         };
 
         char expectedChars[][] = {
+                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', 'T', 'I', 'T', 'L', 'E', ' ', ' ', ' '},
                 {' ', ' ', '-', '-', '-', '-', '-', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
@@ -82,7 +82,5 @@ class MenuTitleViewerTest {
             Assertions.assertArrayEquals(expectedFg[i], this.foregroundColors[i]);
             Assertions.assertArrayEquals(expectedChars[i], this.characters[i]);
         }
-
     }
-
 }

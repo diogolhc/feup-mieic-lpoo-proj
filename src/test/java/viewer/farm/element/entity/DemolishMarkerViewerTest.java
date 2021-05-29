@@ -46,12 +46,30 @@ class DemolishMarkerViewerTest {
         Color MARKER_COLOR = DemolishMarkerViewer.MARKER_COLOR;
         char MARKER_CHAR = DemolishMarkerViewer.MARKER_CHAR;
 
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                foregroundColors[i][j] = Color.BLACK;
+            }
+        }
+
         Entity marker = Mockito.mock(Entity.class);
         Mockito.when(marker.getPosition()).thenReturn(new Position(6,6));
 
         DemolishMarkerViewer demolishMarkerViewer = new DemolishMarkerViewer();
         demolishMarkerViewer.draw(this.buildings, marker, this.gui);
 
+        Color expectedFg[][] = {
+                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, WHITE, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
+        };
 
         Color expectedBg[][] = {
                 {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
@@ -80,11 +98,10 @@ class DemolishMarkerViewerTest {
         };
 
         for (int i = 0; i < 10; i++) {
+            Assertions.assertArrayEquals(expectedFg[i], this.foregroundColors[i]);
             Assertions.assertArrayEquals(expectedBg[i], this.backgroundColors[i]);
             Assertions.assertArrayEquals(expectedChars[i], this.characters[i]);
         }
-
-        Assertions.assertEquals(WHITE, this.foregroundColors[6][6]);
     }
 
     @Test
@@ -95,16 +112,35 @@ class DemolishMarkerViewerTest {
         Color TARGET_COLOR = DemolishMarkerViewer.TARGETED_COLOR;
         char MARKER_CHAR = DemolishMarkerViewer.MARKER_CHAR;
 
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                foregroundColors[i][j] = Color.BLACK;
+            }
+        }
+
         Entity marker = Mockito.mock(Entity.class);
-        Mockito.when(marker.getPosition()).thenReturn(new Position(1,1));
+        Mockito.when(marker.getPosition()).thenReturn(new Position(3,1));
 
         DemolishMarkerViewer demolishMarkerViewer = new DemolishMarkerViewer();
         demolishMarkerViewer.draw(this.buildings, marker, this.gui);
 
 
+        Color expectedFg[][] = {
+                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
+                {BLACK, null, null, WHITE, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
+                {BLACK, null, null, null, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
+                {BLACK, null, null, null, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
+        };
+
         Color expectedBg[][] = {
                 {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
-                {BLACK, MARKER_COLOR, TARGET_COLOR, TARGET_COLOR, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
+                {BLACK, TARGET_COLOR, TARGET_COLOR, MARKER_COLOR, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
                 {BLACK, TARGET_COLOR, TARGET_COLOR, TARGET_COLOR, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
                 {BLACK, TARGET_COLOR, TARGET_COLOR, TARGET_COLOR, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
                 {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
@@ -117,7 +153,7 @@ class DemolishMarkerViewerTest {
 
         char expectedChars[][] = {
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-                {' ', MARKER_CHAR, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+                {' ', ' ', ' ', MARKER_CHAR, ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
                 {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
@@ -129,11 +165,14 @@ class DemolishMarkerViewerTest {
         };
 
         for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                if (expectedFg[i][j] != null) {
+                    Assertions.assertEquals(expectedFg[i][j], this.foregroundColors[i][j]);
+                }
+            }
             Assertions.assertArrayEquals(expectedBg[i], this.backgroundColors[i]);
             Assertions.assertArrayEquals(expectedChars[i], this.characters[i]);
         }
-
-        Assertions.assertEquals(WHITE, this.foregroundColors[1][1]);
     }
 
 }

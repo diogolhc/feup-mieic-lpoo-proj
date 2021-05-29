@@ -10,7 +10,6 @@ import org.mockito.Mockito;
 public class StringDrawerTest {
     private GUI gui;
 
-
     @BeforeEach
     void setUp() {
         this.gui = Mockito.mock(GUI.class);

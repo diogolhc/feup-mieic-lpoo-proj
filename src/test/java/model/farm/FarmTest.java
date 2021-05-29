@@ -31,14 +31,13 @@ public class FarmTest {
     }
 
     @Property
-    void getInsideRegion(@ForAll @IntRange(min = 3) int width, @ForAll @IntRange(min = 3) int height) {
+    void getInsideRegionMustBeInsideFarm(
+            @ForAll @IntRange(min = 3) int width,
+            @ForAll @IntRange(min = 3) int height) {
         farm = new Farm(width, height, buildingSet);
         RectangleRegion inside = farm.getInsideRegion();
 
-        // The inside region must always be contained in the region that covers the whole farm
         Assertions.assertTrue(new RectangleRegion(new Position(0, 0), width, height).contains(inside));
-        Assertions.assertEquals(width - 2, inside.getWidth());
-        Assertions.assertEquals(height - 2, inside.getHeight());
     }
 
     @Test

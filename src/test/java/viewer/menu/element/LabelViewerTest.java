@@ -37,7 +37,7 @@ class LabelViewerTest {
 
 
     @Test
-    void draw() {
+    void drawRelativeToMenu() {
         Color BLACK = Color.BLACK;
         Color WHITE = Color.WHITE;
         Color LABEL = LabelViewer.LABEL_TEXT_COLOR;

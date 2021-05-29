@@ -1,4 +1,4 @@
-package viewer.farm.element.entity;
+package viewer.farm;
 
 import gui.Color;
 import gui.GUI;
@@ -83,5 +83,4 @@ class RestingMarkerViewerTest {
         }
 
     }
-
 }
