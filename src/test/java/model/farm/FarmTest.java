@@ -10,6 +10,7 @@ import model.farm.data.item.Crop;
 import model.region.RectangleRegion;
 import net.jqwik.api.ForAll;
 import net.jqwik.api.Property;
+import net.jqwik.api.constraints.IntRange;
 import net.jqwik.api.constraints.Positive;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -30,7 +31,7 @@ public class FarmTest {
     }
 
     @Property
-    void getInsideRegion(@ForAll @Positive int width, @ForAll @Positive int height) {
+    void getInsideRegion(@ForAll @IntRange(min = 3) int width, @ForAll @IntRange(min = 3) int height) {
         farm = new Farm(width, height, buildingSet);
         RectangleRegion inside = farm.getInsideRegion();
 

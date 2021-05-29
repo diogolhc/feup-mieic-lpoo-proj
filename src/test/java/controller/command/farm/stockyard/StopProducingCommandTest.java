@@ -20,14 +20,19 @@ public class StopProducingCommandTest {
     private Producing stateProducing;
     private ReadyToCollect stateReadyToCollect;
     private Command command;
+    private Livestock livestock;
 
     @BeforeEach
     public void setUp() {
         stateReadyToCollect = Mockito.mock(ReadyToCollect.class);
         stateNotProducing = Mockito.mock(NotProducing.class);
         stateProducing = Mockito.mock(Producing.class);
+        livestock = Mockito.mock(Livestock.class);
+        Mockito.when(livestock.getStockyardWidth()).thenReturn(4);
+        Mockito.when(livestock.getStockyardHeight()).thenReturn(4);
 
-        stockyard = new Stockyard(new Position(0, 0), Mockito.mock(Livestock.class));
+
+        stockyard = new Stockyard(new Position(0, 0), livestock);
 
         Mockito.when(stateProducing.getCollectAmount()).thenReturn(stockyard.getAnimals().getSize() * 10);
 
