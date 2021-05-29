@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class RectangleRegionTest {
-
     @Test
     public void negativeOrZeroSizeThrows() {
         Assertions.assertThrows(IllegalArgumentException.class,

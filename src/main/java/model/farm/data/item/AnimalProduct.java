@@ -18,6 +18,9 @@ public class AnimalProduct extends Item {
 
     public static AnimalProduct parseAnimalProduct(String s) {
         String[] tokens = s.split(" ");
+        if (tokens.length != 4) {
+            throw new IllegalArgumentException("First line must have exactly 4 values; got " + tokens.length);
+        }
         AnimalProduct product = new AnimalProduct(tokens[0]);
         product.productionTime = InGameTime.parseTimerString(tokens[1]);
         product.baseProducedAmount = Integer.parseInt(tokens[2]);
