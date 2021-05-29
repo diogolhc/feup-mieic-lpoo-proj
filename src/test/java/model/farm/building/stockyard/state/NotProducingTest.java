@@ -24,4 +24,13 @@ class NotProducingTest {
         Assertions.assertEquals(zero, state.getRemainingTime());
     }
 
+
+    @Test
+    void changeCollectAmountIsNoOp() {
+        Assertions.assertEquals(0, state.getCollectAmount());
+        state.changeCollectAmount(90);
+        Assertions.assertEquals(0, state.getCollectAmount());
+        state.changeCollectAmount(-15);
+        Assertions.assertEquals(0, state.getCollectAmount());
+    }
 }

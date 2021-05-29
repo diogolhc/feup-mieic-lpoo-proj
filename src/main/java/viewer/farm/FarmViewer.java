@@ -6,7 +6,6 @@ import gui.drawer.shape.BoxDrawer;
 import gui.drawer.shape.FilledRectangleDrawer;
 import model.InGameTime;
 import model.Position;
-import model.farm.Currency;
 import model.farm.Wallet;
 import model.farm.building.*;
 import model.farm.Farm;

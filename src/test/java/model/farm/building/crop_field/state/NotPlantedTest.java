@@ -22,4 +22,13 @@ public class NotPlantedTest {
         state.setRemainingTime(new InGameTime(0));
         Assertions.assertEquals(zero, state.getRemainingTime());
     }
+
+    @Test
+    void changeHarvestAmountIsNoOp() {
+        Assertions.assertEquals(0, state.getHarvestAmount());
+        state.changeHarvestAmount(90);
+        Assertions.assertEquals(0, state.getHarvestAmount());
+        state.changeHarvestAmount(-15);
+        Assertions.assertEquals(0, state.getHarvestAmount());
+    }
 }

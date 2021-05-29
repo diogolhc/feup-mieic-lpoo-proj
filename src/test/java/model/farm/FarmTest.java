@@ -1,9 +1,7 @@
 package model.farm;
 
 import model.Position;
-import model.farm.building.Building;
 import model.farm.building.BuildingSet;
-import model.farm.building.Edifice;
 import model.farm.data.Livestock;
 import model.farm.data.item.AnimalProduct;
 import model.farm.data.item.Crop;
@@ -11,11 +9,9 @@ import model.region.RectangleRegion;
 import net.jqwik.api.ForAll;
 import net.jqwik.api.Property;
 import net.jqwik.api.constraints.IntRange;
-import net.jqwik.api.constraints.Positive;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;

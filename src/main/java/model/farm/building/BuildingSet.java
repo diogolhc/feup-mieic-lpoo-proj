@@ -18,6 +18,14 @@ public class BuildingSet implements Serializable {
     private final Edifice market;
     private final Edifice warehouse;
 
+    public BuildingSet(Edifice house, Edifice market, Edifice warehouse) {
+        this.house = house;
+        this.market = market;
+        this.warehouse = warehouse;
+        this.cropFields = new HashSet<>();
+        this.stockyards = new HashSet<>();
+    }
+
     public BuildingSet() {
         this.house = new Edifice("HOUSE");
         this.market = new Edifice("MARKET");

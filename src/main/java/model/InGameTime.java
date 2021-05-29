@@ -20,10 +20,6 @@ public class InGameTime implements Comparable<InGameTime>, Serializable {
         this(0);
     }
 
-    public InGameTime(InGameTime time) {
-        this.minutes = time.minutes;
-    }
-
     public static InGameTime getRandom(InGameTime min, InGameTime max) {
         if (min.compareTo(max) > 0) throw new IllegalArgumentException("min in range cannot be larger than max");
 

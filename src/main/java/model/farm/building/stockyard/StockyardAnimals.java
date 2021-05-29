@@ -74,4 +74,8 @@ public class StockyardAnimals implements Serializable {
     public void setAnimalsRegionPosition(Position position) {
         this.animalsRegion = animalsRegion.getAt(position);
     }
+
+    public RectangleRegion getRegion() {
+        return this.animalsRegion;
+    }
 }

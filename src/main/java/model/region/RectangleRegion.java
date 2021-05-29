@@ -2,6 +2,8 @@ package model.region;
 
 import model.Position;
 
+import java.util.Objects;
+
 public class RectangleRegion implements Region {
     private final Position topLeft;
     private final int width;
@@ -68,5 +70,23 @@ public class RectangleRegion implements Region {
         if (x < 0 || x >= this.width) return false;
         if (y < 0 || y >= this.height) return false;
         return true;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || this.getClass() != o.getClass()) return false;
+        RectangleRegion that = (RectangleRegion) o;
+        return this.width == that.width && this.height == that.height && Objects.equals(this.topLeft, that.topLeft);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.topLeft, this.width, this.height);
+    }
+
+    @Override
+    public String toString() {
+        return "RectangleRegion(" + topLeft + ", " + width + "x" + height + ')';
     }
 }
