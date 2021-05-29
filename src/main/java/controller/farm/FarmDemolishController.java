@@ -1,5 +1,6 @@
 package controller.farm;
 
+import controller.GameController;
 import controller.farm.element.building.*;
 import controller.farm.element.building.edifice.HouseController;
 import controller.farm.element.building.edifice.MarketController;
@@ -7,6 +8,7 @@ import controller.farm.element.building.edifice.WarehouseController;
 import controller.farm.element.entity.keyboard_reactor.DemolishMarkerController;
 import gui.GUI;
 import model.Position;
+import model.farm.Farm;
 import model.farm.entity.Entity;
 import model.farm.building.BuildingSet;
 import model.farm.building.crop_field.CropField;
@@ -23,6 +25,11 @@ public class FarmDemolishController extends FarmController {
     public FarmDemolishController(FarmController farmController) {
         super(farmController);
         this.demolishMarker = new Entity(new Position(1, 1));
+    }
+
+    public FarmDemolishController(Farm farm, GameController controller, long realSecToGameMinutesRate, Entity marker) {
+        super(farm, controller, realSecToGameMinutesRate);
+        this.demolishMarker = marker;
     }
 
     @Override
