@@ -134,7 +134,7 @@ public class LanternaGUI implements GUI {
 
     @Override
     public Color getForegroundColor(int x, int y) {
-        return new Color(this.getTextColorString(this.graphics.getCharacter(x, y).getBackgroundColor()));
+        return new Color(this.getTextColorString(this.graphics.getCharacter(x, y).getForegroundColor()));
     }
 
     @Override

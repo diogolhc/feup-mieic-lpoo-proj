@@ -13,6 +13,7 @@ public class Color implements Serializable {
     public static final Color HIGHLIGHTED_FLOOR = new Color("#be9b7b");
 
     private final String color;
+
     public Color(String color) {
         Pattern colorPattern = Pattern.compile("#([0-9a-fA-F]{6})");
         Matcher m = colorPattern.matcher(color);

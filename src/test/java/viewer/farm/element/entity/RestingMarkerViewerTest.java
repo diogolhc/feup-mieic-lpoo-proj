@@ -1,4 +1,4 @@
-package viewer.farm.element;
+package viewer.farm.element.entity;
 
 import gui.Color;
 import gui.GUI;
@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import viewer.farm.element.RestingMarkerViewer;
 
 
 class RestingMarkerViewerTest {
