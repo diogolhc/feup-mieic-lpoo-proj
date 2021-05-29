@@ -1,23 +1,8 @@
 package controller.command;
 
-import controller.GameController;
-import controller.command.controller_state.OpenPopupMenuCommand;
-import controller.command.farm.stockyard.SellAnimalCommand;
-import controller.menu.MenuController;
-import controller.menu.builder.PopupMenuControllerBuilder;
-import controller.menu.builder.info.AlertMenuControllerBuilder;
-import gui.GUI;
-import model.Position;
-import model.farm.Currency;
-import model.farm.Wallet;
-import model.farm.building.stockyard.Stockyard;
-import model.farm.building.stockyard.state.NotProducing;
-import model.farm.data.Livestock;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import static org.mockito.Mockito.verify;
 
 public class ConditionalCommandTest {
     private ConditionalCommand conditionalCommand;
