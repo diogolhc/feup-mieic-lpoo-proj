@@ -12,6 +12,6 @@ public class ExitGameCommand implements Command {
 
     @Override
     public void execute() {
-        gameController.endGame();
+        gameController.setRunning(false);
     }
 }

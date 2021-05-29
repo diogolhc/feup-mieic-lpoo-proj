@@ -38,8 +38,8 @@ public class GameController implements MouseListener {
         return this.gameControllerState;
     }
 
-    public void endGame() {
-        this.running = false;
+    public void setRunning(boolean running) {
+        this.running = running;
     }
 
     public void run() throws IOException {
@@ -63,7 +63,7 @@ public class GameController implements MouseListener {
 
         GUI.KEYBOARD_ACTION action = this.gui.getNextKeyboardAction();
         if (action == GUI.KEYBOARD_ACTION.QUIT) {
-            this.endGame();
+            this.setRunning(false);
             return;
         }
 
@@ -99,9 +99,5 @@ public class GameController implements MouseListener {
 
     public int getWindowHeight() {
         return this.gui.getWindowHeight();
-    }
-
-    public void setRunning(boolean running) {
-        this.running = running;
     }
 }

@@ -3,6 +3,7 @@ package controller;
 import gui.GUI;
 import gui.MouseListener;
 import model.Position;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -35,6 +36,23 @@ public class GameControllerTest {
     }
 
     @Test
+    public void run() throws IOException {
+        Mockito.when(gui.getNextKeyboardAction()).thenReturn(
+                GUI.KEYBOARD_ACTION.NONE,
+                GUI.KEYBOARD_ACTION.NONE,
+                GUI.KEYBOARD_ACTION.INTERACT,
+                GUI.KEYBOARD_ACTION.MOVE_LEFT,
+                GUI.KEYBOARD_ACTION.QUIT);
+
+        controller.run();
+
+        Mockito.verify(viewer, Mockito.times(5)).drawScreen(gui);
+        Mockito.verify(state, Mockito.times(2)).reactKeyboard(GUI.KEYBOARD_ACTION.NONE);
+        Mockito.verify(state, Mockito.times(1)).reactKeyboard(GUI.KEYBOARD_ACTION.MOVE_LEFT);
+        Mockito.verify(state, Mockito.never()).reactKeyboard(GUI.KEYBOARD_ACTION.QUIT);
+    }
+
+    @Test
     public void runFrame() throws IOException {
         controller.runFrame(50);
 
@@ -51,16 +69,20 @@ public class GameControllerTest {
     }
 
     @Test
-    public void run() throws IOException {
-        Mockito.when(gui.getNextKeyboardAction()).thenReturn(
-                GUI.KEYBOARD_ACTION.NONE, GUI.KEYBOARD_ACTION.NONE, GUI.KEYBOARD_ACTION.INTERACT, GUI.KEYBOARD_ACTION.MOVE_LEFT, GUI.KEYBOARD_ACTION.QUIT);
+    public void setStateWhileRunning() {
+        this.controller.setRunning(true);
+        this.controller.setGameControllerState(Mockito.mock(GameControllerState.class));
+        Assertions.assertNotEquals(state, this.controller.getGameControllerState());
+        Mockito.verify(state, Mockito.times(1)).reactChangeState();
+        Mockito.verify(this.controller.getGameControllerState(), Mockito.times(1))
+                .reactMouseMovement(Mockito.any());
+    }
 
-        controller.run();
-
-        Mockito.verify(viewer, Mockito.times(5)).drawScreen(gui);
-        Mockito.verify(state, Mockito.times(2)).reactKeyboard(GUI.KEYBOARD_ACTION.NONE);
-        Mockito.verify(state, Mockito.times(1)).reactKeyboard(GUI.KEYBOARD_ACTION.MOVE_LEFT);
-        Mockito.verify(state, Mockito.never()).reactKeyboard(GUI.KEYBOARD_ACTION.QUIT);
+    @Test
+    public void setStateWhileNotRunning() {
+        this.controller.setGameControllerState(Mockito.mock(GameControllerState.class));
+        Assertions.assertNotEquals(state, this.controller.getGameControllerState());
+        Mockito.verifyNoInteractions(state);
     }
 
     @Test
@@ -75,5 +97,12 @@ public class GameControllerTest {
         this.controller.setRunning(true);
         this.mouseListener.onMouseClick(5, 7);
         Mockito.verify(state, Mockito.times(1)).reactMouseClick(new Position(5, 7));
+    }
+
+    @Test
+    public void doNotReactToMouseWhileNotRunning() {
+        this.mouseListener.onMouseMovement(4, 9);
+        this.mouseListener.onMouseClick(5, 7);
+        Mockito.verifyNoInteractions(state);
     }
 }

@@ -18,6 +18,9 @@ class TimeConverterTest {
         this.timeConverter.setRateMultiplier(3);
 
         Assertions.assertEquals(6, this.timeConverter.getRate());
+
+        this.timeConverter.setRateMultiplier(8);
+        Assertions.assertEquals(16, this.timeConverter.getRate());
     }
 
     @Test
@@ -34,23 +37,21 @@ class TimeConverterTest {
 
     @Test
     void convertSeveralTimes() {
-        this.timeConverter.convert(100);
-        this.timeConverter.convert(100);
-        this.timeConverter.convert(100);
-        this.timeConverter.convert(100);
-
+        Assertions.assertEquals(new InGameTime(0), this.timeConverter.convert(100));
+        Assertions.assertEquals(new InGameTime(0), this.timeConverter.convert(100));
+        Assertions.assertEquals(new InGameTime(0), this.timeConverter.convert(100));
+        Assertions.assertEquals(new InGameTime(0), this.timeConverter.convert(100));
         Assertions.assertEquals(new InGameTime(1), this.timeConverter.convert(300));
+        Assertions.assertEquals(new InGameTime(3), this.timeConverter.convert(1300));
     }
 
     @Test
     void convertSeveralTimesWithAccelerate() {
         this.timeConverter.setRateMultiplier(3);
 
-        this.timeConverter.convert(100);
-        this.timeConverter.convert(100);
-        this.timeConverter.convert(100);
-
+        Assertions.assertEquals(new InGameTime(0), this.timeConverter.convert(100));
+        Assertions.assertEquals(new InGameTime(1), this.timeConverter.convert(100));
+        Assertions.assertEquals(new InGameTime(0), this.timeConverter.convert(100));
         Assertions.assertEquals(new InGameTime(3), this.timeConverter.convert(400));
     }
-
 }
