@@ -44,7 +44,6 @@ public class FeedAnimalsCommandTest {
         stockyard = new Stockyard(new Position(0, 0), livestock);
 
         stockyard.getAnimals().addAnimal(new Position(0, 0));
-        Assertions.assertEquals(stockyard.getAnimals().getSize(), 1);
 
         command = new FeedAnimalsCommand(stockyard, inventory);
     }

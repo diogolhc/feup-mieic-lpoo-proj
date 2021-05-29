@@ -5,7 +5,6 @@ import java.util.Objects;
 import java.util.Random;
 
 public class InGameTime implements Comparable<InGameTime>, Serializable {
-    public final static int DAY_TIME_STRING_SIZE = 14;
     private final int minutes;
 
     public InGameTime(int minutes) {

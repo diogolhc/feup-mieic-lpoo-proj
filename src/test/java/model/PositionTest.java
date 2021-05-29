@@ -59,19 +59,19 @@ public class PositionTest {
     @Property
     void getTranslatedZero(@ForAll int x, @ForAll int y) {
         position = new Position(x, y);
-        Assertions.assertEquals(position.getTranslated(new Position(0, 0)), position);
+        Assertions.assertEquals(position, position.getTranslated(new Position(0, 0)));
     }
 
     @Property
     void getRelativeToItself(@ForAll int x, @ForAll int y) {
         position = new Position(x, y);
-        Assertions.assertEquals(position.getRelativeTo(position), new Position(0, 0));
+        Assertions.assertEquals(new Position(0, 0), position.getRelativeTo(position));
     }
 
     @Property
     void getRelativeToOrigin(@ForAll int x, @ForAll int y) {
         position = new Position(x, y);
-        Assertions.assertEquals(position.getRelativeTo(new Position(0, 0)), position);
+        Assertions.assertEquals(position, position.getRelativeTo(new Position(0, 0)));
     }
 
     @Property
@@ -103,7 +103,7 @@ public class PositionTest {
             }
         }
 
-        Assertions.assertEquals(position.getX(), x + deltaRL);
+        Assertions.assertEquals(x + deltaRL, position.getX());
     }
 
     @Property
@@ -135,6 +135,6 @@ public class PositionTest {
             }
         }
 
-        Assertions.assertEquals(position.getY(), y + deltaUD);
+        Assertions.assertEquals(y + deltaUD, position.getY());
     }
 }

@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class Currency implements Serializable {
-    public static final int MAX_CURRENCY = 999999;
+    public static final int MAX_COINS = 999999;
     public static final int MAX_STRING_LENGTH = 7;
     private final int coins;
 
@@ -13,7 +13,7 @@ public class Currency implements Serializable {
     }
 
     public Currency(int coins) {
-        this.coins = Math.min(coins, MAX_CURRENCY);
+        this.coins = Math.min(coins, MAX_COINS);
     }
 
     public int getCoins() {

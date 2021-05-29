@@ -22,18 +22,16 @@ public class ButtonTest {
     }
 
     @Test
-    public void contains() {
-        button = new Button(new Position(6, 1), "test");
-        Assertions.assertTrue(button.contains(new Position(6, 1)));
-        Assertions.assertTrue(button.contains(new Position(6, 2)));
-        Assertions.assertTrue(button.contains(new Position(6, 3)));
-        Assertions.assertTrue(button.contains(new Position(8, 2)));
-        Assertions.assertTrue(button.contains(new Position(11, 1)));
-
-        Assertions.assertFalse(button.contains(new Position(5, 1)));
-        Assertions.assertFalse(button.contains(new Position(6, 0)));
-        Assertions.assertFalse(button.contains(new Position(6, 4)));
-        Assertions.assertFalse(button.contains(new Position(0, 0)));
-        Assertions.assertFalse(button.contains(new Position(12, 1)));
+    public void getWidthFixed() {
+        button = new Button(new Position(0, 0), "", 5);
+        Assertions.assertEquals(5, button.getWidth());
+        button = new Button(new Position(0, 0), "a", 5);
+        Assertions.assertEquals(5, button.getWidth());
+        button = new Button(new Position(0, 0), "BFA", 5);
+        Assertions.assertEquals(5, button.getWidth());
+        button = new Button(new Position(0, 0), "fafj", 5);
+        Assertions.assertEquals(6, button.getWidth());
+        button = new Button(new Position(0, 0), "foobar", 5);
+        Assertions.assertEquals(8, button.getWidth());
     }
 }
