@@ -25,7 +25,7 @@ public class LivestockTest {
     @Test
     public void parseLivestockType() {
         List<String> lines = Arrays.asList(
-                "ANIMAL a 1 2 3 4 5 6",
+                "ANIMAL a 11 12 3 4 5 6",
                 "c1 7",
                 "PRODUCT 01:23 8 9"
         );
@@ -33,8 +33,8 @@ public class LivestockTest {
         Livestock livestock = Livestock.parseLivestockType(crops, lines);
         Assertions.assertEquals("ANIMAL", livestock.getAnimalName());
         Assertions.assertEquals('a', livestock.getAnimalChar());
-        Assertions.assertEquals(1, livestock.getStockyardWidth());
-        Assertions.assertEquals(2, livestock.getStockyardHeight());
+        Assertions.assertEquals(11, livestock.getStockyardWidth());
+        Assertions.assertEquals(12, livestock.getStockyardHeight());
         Assertions.assertEquals(3, livestock.getMaxNumAnimals());
         Assertions.assertEquals(new Currency(4), livestock.getBuildPrice());
         Assertions.assertEquals(new Currency(5), livestock.getAnimalBuyPrice());
