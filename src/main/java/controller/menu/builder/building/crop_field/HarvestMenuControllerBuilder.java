@@ -53,7 +53,7 @@ public class HarvestMenuControllerBuilder extends PopupMenuControllerBuilder {
     private void addCropTypeLabel(List<Label> labels) {
         labels.add(new Label(
                 new Position(1, 4),
-                () -> "CROP: " + cropField.getState().getCrop().getName()
+                () -> "CROP: " + cropField.getCrop().getName()
         ));
     }
 

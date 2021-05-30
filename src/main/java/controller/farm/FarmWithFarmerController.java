@@ -60,10 +60,10 @@ public class FarmWithFarmerController extends FarmController {
             stockyardController.reactInteraction(stockyard, farmerPosition);
         }
 
-        HouseController houseController = new HouseController(this.controller);
+        HouseController houseController = new HouseController(this.controller, this);
         houseController.reactInteraction(farmBuildings.getHouse(), farmerPosition);
 
-        MarketController marketController = new MarketController(this.controller, this.farm);
+        MarketController marketController = new MarketController(this.controller, this);
         marketController.reactInteraction(farmBuildings.getMarket(), farmerPosition);
 
         WarehouseController warehouseController = new WarehouseController(this.controller, this.farm);

@@ -26,16 +26,14 @@ public class FeedAnimalsMenuControllerBuilder extends PopupMenuControllerBuilder
     private final Livestock livestockType;
     private final Farm farm;
     private final Stockyard stockyard;
-    private final Crop crop;
     private final StockyardAnimals animals;
 
-    public FeedAnimalsMenuControllerBuilder(GameController gameController, Farm farm, Stockyard stockyard, Crop crop) {
+    public FeedAnimalsMenuControllerBuilder(GameController gameController, Farm farm, Stockyard stockyard) {
         super(gameController);
         this.farm = farm;
         this.stockyard = stockyard;
         this.animals = stockyard.getAnimals();
         this.livestockType = stockyard.getLivestockType();
-        this.crop = crop;
     }
 
     @Override

@@ -60,10 +60,10 @@ public class FarmDemolishController extends FarmController {
             stockyardController.reactDemolish(stockyard, demolishPosition);
         }
 
-        HouseController houseController = new HouseController(this.controller);
+        HouseController houseController = new HouseController(this.controller, this);
         houseController.reactDemolish(farmBuildings.getHouse(), demolishPosition);
 
-        MarketController marketController = new MarketController(this.controller, this.farm);
+        MarketController marketController = new MarketController(this.controller, this);
         marketController.reactDemolish(farmBuildings.getMarket(), demolishPosition);
 
         WarehouseController warehouseController = new WarehouseController(this.controller, this.farm);

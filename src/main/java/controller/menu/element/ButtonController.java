@@ -30,4 +30,8 @@ public class ButtonController {
     public Button getButton() {
         return this.button;
     }
+
+    public Command getCommand() {
+        return this.command;
+    }
 }

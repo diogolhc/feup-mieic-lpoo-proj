@@ -10,26 +10,17 @@ import model.farm.Farm;
 import model.farm.building.Edifice;
 
 public class MarketController extends EdificeController {
-    private final Farm farm;
+    private final FarmController farmController;
 
-    public MarketController(GameController controller, Farm farm) {
+    public MarketController(GameController controller, FarmController farmController) {
         super(controller);
-        this.farm = farm;
+        this.farmController = farmController;
     }
 
     @Override
     public Command getInteractionCommand(Edifice market) {
-        if (this.controller.getGameControllerState() instanceof FarmController) {
-            FarmController farmController = (FarmController) this.controller.getGameControllerState();
-
-            PopupMenuControllerBuilder menuControllerBuilder = new MarketMenuControllerBuilder(
-                    this.controller, farmController, market);
-            return new OpenPopupMenuCommand(this.controller, menuControllerBuilder);
-        } else {
-            // This never happens because the interaction command is retrieved after
-            // a farmer interaction (which happens in FarmWithFarmerController)
-            throw new RuntimeException(
-                    "LOGIC ERROR: Open market in invalid state: " + this.controller.getGameControllerState().getClass().toString());
-        }
+        PopupMenuControllerBuilder menuControllerBuilder = new MarketMenuControllerBuilder(
+                this.controller, this.farmController, market);
+        return new OpenPopupMenuCommand(this.controller, menuControllerBuilder);
     }
 }

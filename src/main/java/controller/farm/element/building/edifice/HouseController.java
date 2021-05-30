@@ -10,24 +10,17 @@ import model.farm.building.Edifice;
 
 public class HouseController extends EdificeController {
     public static final int SLEEP_RATE_MULTIPLIER = 15;
+    private FarmController farmController;
 
-    public HouseController(GameController controller) {
+    public HouseController(GameController controller, FarmController farmController) {
         super(controller);
+        this.farmController = farmController;
     }
 
     @Override
     public Command getInteractionCommand(Edifice house) {
-        if (this.controller.getGameControllerState() instanceof FarmController) {
-            FarmController farmController = (FarmController) this.controller.getGameControllerState();
-
-            PopupMenuControllerBuilder menuControllerBuilder = new HouseMenuControllerBuilder(
-                    this.controller, farmController, house, SLEEP_RATE_MULTIPLIER);
-            return new OpenPopupMenuCommand(this.controller, menuControllerBuilder);
-        } else {
-            // This never happens because the interaction command is retrieved after
-            // a farmer interaction (which happens in FarmWithFarmerController)
-            throw new RuntimeException(
-                    "LOGIC ERROR: Open market in invalid state: " + this.controller.getGameControllerState().getClass().toString());
-        }
+        PopupMenuControllerBuilder menuControllerBuilder = new HouseMenuControllerBuilder(
+                this.controller, this.farmController, house, SLEEP_RATE_MULTIPLIER);
+        return new OpenPopupMenuCommand(this.controller, menuControllerBuilder);
     }
 }

@@ -50,12 +50,12 @@ public class CropFieldGrowingMenuControllerBuilder extends PopupMenuControllerBu
     protected List<ButtonController> getButtons() {
         List<ButtonController> buttons = super.getButtons();
 
-        addRemoveCropCommand(buttons);
+        addRemoveCropButton(buttons);
 
         return buttons;
     }
 
-    private void addRemoveCropCommand(List<ButtonController> buttons) {
+    private void addRemoveCropButton(List<ButtonController> buttons) {
         Button removeCropButton = new Button(new Position(1, 8), "REMOVE CROP");
         Command removeCropButtonCommand = new CompoundCommand()
                 .addCommand(new RemoveCropCommand(cropField))

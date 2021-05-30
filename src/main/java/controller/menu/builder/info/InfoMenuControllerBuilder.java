@@ -50,7 +50,7 @@ public class InfoMenuControllerBuilder extends PopupMenuControllerBuilder {
 
     @Override
     protected int getWidth() {
-        return messageWidth + 2;
+        return Math.max(messageWidth + 2, this.title.length() + 5);
     }
 
     @Override

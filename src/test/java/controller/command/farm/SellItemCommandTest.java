@@ -16,14 +16,12 @@ public class SellItemCommandTest {
     private Inventory inventory;
     private Wallet wallet;
     private Command command;
-    private Currency price;
 
     @BeforeEach
     public void setUp() {
         item = Mockito.mock(Item.class);
         wallet = Mockito.mock(Wallet.class);
         inventory = new Inventory(100);
-        price = Mockito.mock(Currency.class);
 
         Mockito.when(item.getSellPrice()).thenReturn(new Currency(10));
         command = new SellItemCommand(wallet, inventory, item, 5);
