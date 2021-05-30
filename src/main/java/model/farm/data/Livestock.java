@@ -1,13 +1,11 @@
 package model.farm.data;
 
-import model.InGameTime;
 import model.farm.Currency;
 import model.farm.data.item.AnimalProduct;
 import model.farm.data.item.Crop;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Objects;
 
 public class Livestock implements Serializable {
     private String animalName;
