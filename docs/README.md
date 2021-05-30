@@ -192,7 +192,7 @@ confirmation windows inside popup menus.
 
 ### Action of the buttons
 //TODO isto precisa de ser revisto uma vez que os botões deixaram de guardar os comandos,
-passadno eles a estar nos ButtonController
+passando eles a estar nos ButtonController
 #### Problem in Context
 The menus are composed of a list of buttons and labels. Each button is intended
 to produce a certain action specific to that button on click. This means that
