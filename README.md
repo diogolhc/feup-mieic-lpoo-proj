@@ -9,6 +9,9 @@ The main objective is to earn money by selling the items produced in the farm, a
 
 This project was developed by Diogo Costa (up201906731@edu.fe.up.pt), Pedro Gonçalo Correia (up201905348@edu.fe.up.pt) and Rui Alves (up201905853@edu.fe.up.pt) for LPOO 2020-21.
 
+![docs/farmville.gif](docs/farmville.gif)
+
+
 ## Screenshots
 
 ![docs/screenshots/main_menu.png](docs/screenshots/main_menu.png)
