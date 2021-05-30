@@ -656,7 +656,6 @@ extracting the common methods into this new interface. This interface could be i
 states analogous to the states already mentioned for the cropfields and stockyards. These classes would implement the logic that is common to both cases.
 Finally, concrete states can extend the respective abstract state and implement the methods that are specific to the cropfield or stockyard, respectively.
 
-
 ### Data Class
 
 The [Farm](../src/main/java/model/farm/Farm.java) class is a **Data Class** since its only 
@@ -687,8 +686,6 @@ interface nullifying the need for the [PositionRegion](../src/main/java/model/re
 might not be worth it, because both classes are semantically different, even if the implementation of [PositionRegion](../src/main/java/model/region/PositionRegion.java)
 is too simple.
 
-
-
 ## SOLVED CODE SMELLS
 In this section we describe the code smells identified in the intermediate report
 and how we solved them.
@@ -711,7 +708,7 @@ After that, FarmerDrawer was removed.
 
 ### Data class
 
-The classes that were in [model.weather](https://github.com/FEUP-LPOO-2021/lpoo-2021-g35/tree/intermediate/src/main/java/model/weather)  
+The classes that were in [model.weather](https://github.com/FEUP-LPOO-2021/lpoo-2021-g35/tree/intermediate/src/main/java/model/weather)
 and in [model.farm.building.crop_field.crop](https://github.com/FEUP-LPOO-2021/lpoo-2021-g35/tree/intermediate/src/main/java/model/farm/building/crop_field/crop)
 were **Data classes** that only stored constants and included getters for
 those constants. These classes only bloated the code and were replaced
