@@ -22,76 +22,76 @@ public class ButtonControllerTest {
 
     @BeforeEach
     public void setUp() {
-        button1 = new Button(new Position(1, 1), "B1");
-        button2 = new Button(new Position(1, 5), "B2");
-        button3 = new Button(new Position(5, 5), "B3");
+        this.button1 = new Button(new Position(1, 1), "B1");
+        this.button2 = new Button(new Position(1, 5), "B2");
+        this.button3 = new Button(new Position(5, 5), "B3");
 
-        command1 = Mockito.mock(Command.class);
-        command2 = Mockito.mock(Command.class);
-        command3 = Mockito.mock(Command.class);
+        this.command1 = Mockito.mock(Command.class);
+        this.command2 = Mockito.mock(Command.class);
+        this.command3 = Mockito.mock(Command.class);
 
-        controller1 = new ButtonController(button1, command1);
-        controller2 = new ButtonController(button2, command2);
-        controller3 = new ButtonController(button3, command3);
+        this.controller1 = new ButtonController(this.button1, this.command1);
+        this.controller2 = new ButtonController(this.button2, this.command2);
+        this.controller3 = new ButtonController(this.button3, this.command3);
     }
 
     @Test
     public void reactMouseMovement() {
         Position position = new Position(0, 0);
-        controller1.reactMouseMovement(position);
-        Assertions.assertFalse(button1.isSelected());
-        controller2.reactMouseMovement(position);
-        Assertions.assertFalse(button2.isSelected());
-        controller3.reactMouseMovement(position);
-        Assertions.assertFalse(button3.isSelected());
+        this.controller1.reactMouseMovement(position);
+        Assertions.assertFalse(this.button1.isSelected());
+        this.controller2.reactMouseMovement(position);
+        Assertions.assertFalse(this.button2.isSelected());
+        this.controller3.reactMouseMovement(position);
+        Assertions.assertFalse(this.button3.isSelected());
 
         position = new Position(2, 3);
-        controller1.reactMouseMovement(position);
-        Assertions.assertTrue(button1.isSelected());
-        controller2.reactMouseMovement(position);
-        Assertions.assertFalse(button2.isSelected());
-        controller3.reactMouseMovement(position);
-        Assertions.assertFalse(button3.isSelected());
+        this.controller1.reactMouseMovement(position);
+        Assertions.assertTrue(this.button1.isSelected());
+        this.controller2.reactMouseMovement(position);
+        Assertions.assertFalse(this.button2.isSelected());
+        this.controller3.reactMouseMovement(position);
+        Assertions.assertFalse(this.button3.isSelected());
 
         position = new Position(5, 5);
-        controller1.reactMouseMovement(position);
-        Assertions.assertFalse(button1.isSelected());
-        controller2.reactMouseMovement(position);
-        Assertions.assertFalse(button2.isSelected());
-        controller3.reactMouseMovement(position);
-        Assertions.assertTrue(button3.isSelected());
+        this.controller1.reactMouseMovement(position);
+        Assertions.assertFalse(this.button1.isSelected());
+        this.controller2.reactMouseMovement(position);
+        Assertions.assertFalse(this.button2.isSelected());
+        this.controller3.reactMouseMovement(position);
+        Assertions.assertTrue(this.button3.isSelected());
 
         // Movement should never cause commands to execute
-        Mockito.verify(command1, Mockito.never()).execute();
-        Mockito.verify(command2, Mockito.never()).execute();
-        Mockito.verify(command3, Mockito.never()).execute();
+        Mockito.verify(this.command1, Mockito.never()).execute();
+        Mockito.verify(this.command2, Mockito.never()).execute();
+        Mockito.verify(this.command3, Mockito.never()).execute();
     }
 
     @Test
     public void reactMouseClick() {
         Position position = new Position(0, 2);
-        controller1.reactMouseClick(position);
-        Mockito.verify(command1, Mockito.never()).execute();
-        controller2.reactMouseClick(position);
-        Mockito.verify(command2, Mockito.never()).execute();
-        controller3.reactMouseClick(position);
-        Mockito.verify(command3, Mockito.never()).execute();
+        this.controller1.reactMouseClick(position);
+        Mockito.verify(this.command1, Mockito.never()).execute();
+        this.controller2.reactMouseClick(position);
+        Mockito.verify(this.command2, Mockito.never()).execute();
+        this.controller3.reactMouseClick(position);
+        Mockito.verify(this.command3, Mockito.never()).execute();
 
         position = new Position(1, 3);
-        controller1.reactMouseClick(position);
-        Mockito.verify(command1, Mockito.times(1)).execute();
-        controller2.reactMouseClick(position);
-        Mockito.verify(command2, Mockito.never()).execute();
-        controller3.reactMouseClick(position);
-        Mockito.verify(command3, Mockito.never()).execute();
+        this.controller1.reactMouseClick(position);
+        Mockito.verify(this.command1, Mockito.times(1)).execute();
+        this.controller2.reactMouseClick(position);
+        Mockito.verify(this.command2, Mockito.never()).execute();
+        this.controller3.reactMouseClick(position);
+        Mockito.verify(this.command3, Mockito.never()).execute();
 
         position = new Position(5, 7);
-        controller1.reactMouseClick(position);
-        Mockito.verify(command1, Mockito.times(1)).execute();
-        controller2.reactMouseClick(position);
-        Mockito.verify(command2, Mockito.never()).execute();
-        controller3.reactMouseClick(position);
-        Mockito.verify(command3, Mockito.times(1)).execute();
+        this.controller1.reactMouseClick(position);
+        Mockito.verify(this.command1, Mockito.times(1)).execute();
+        this.controller2.reactMouseClick(position);
+        Mockito.verify(this.command2, Mockito.never()).execute();
+        this.controller3.reactMouseClick(position);
+        Mockito.verify(this.command3, Mockito.times(1)).execute();
     }
 
 }

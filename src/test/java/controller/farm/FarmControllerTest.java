@@ -20,14 +20,14 @@ public class FarmControllerTest {
 
     @BeforeEach
     public void setUp() {
-        farm = new Farm(20, 20);
-        farm.setTime(new InGameTime(0, 0, 0));
-        farm.setCurrentWeather(new Weather("SUNNY"));
-        cropField = Mockito.mock(CropField.class);
-        Mockito.when(cropField.getRemainingTime()).thenReturn(new InGameTime(0));
-        farm.getBuildings().addCropField(cropField);
-        gameController = Mockito.mock(GameController.class);
-        controller = new FarmController(farm, gameController, 1) {
+        this.farm = new Farm(20, 20);
+        this.farm.setTime(new InGameTime(0, 0, 0));
+        this.farm.setCurrentWeather(new Weather("SUNNY"));
+        this.cropField = Mockito.mock(CropField.class);
+        Mockito.when(this.cropField.getRemainingTime()).thenReturn(new InGameTime(0));
+        this.farm.getBuildings().addCropField(this.cropField);
+        this.gameController = Mockito.mock(GameController.class);
+        this.controller = new FarmController(this.farm, this.gameController, 1) {
             @Override
             public void reactKeyboard(GUI.KEYBOARD_ACTION action) {}
 
@@ -40,19 +40,19 @@ public class FarmControllerTest {
 
     @Test
     public void reactTimePassed() {
-        controller.reactTimePassed(67000);
-        Assertions.assertEquals(new InGameTime(0, 1, 7), farm.getTime());
-        controller.reactTimePassed(1000);
-        Assertions.assertEquals(new InGameTime(0, 1, 8), farm.getTime());
-        controller.reactTimePassed(1700);
-        Assertions.assertEquals(new InGameTime(0, 1, 9), farm.getTime());
-        controller.reactTimePassed(400);
-        Assertions.assertEquals(new InGameTime(0, 1, 10), farm.getTime());
+        this.controller.reactTimePassed(67000);
+        Assertions.assertEquals(new InGameTime(0, 1, 7), this.farm.getTime());
+        this.controller.reactTimePassed(1000);
+        Assertions.assertEquals(new InGameTime(0, 1, 8), this.farm.getTime());
+        this.controller.reactTimePassed(1700);
+        Assertions.assertEquals(new InGameTime(0, 1, 9), this.farm.getTime());
+        this.controller.reactTimePassed(400);
+        Assertions.assertEquals(new InGameTime(0, 1, 10), this.farm.getTime());
     }
 
     @Test
     public void reactTimePassedNotifyCropField() {
-        controller.reactTimePassed(67000);
-        Mockito.verify(cropField, Mockito.times(1)).setRemainingTime(Mockito.any(InGameTime.class));
+        this.controller.reactTimePassed(67000);
+        Mockito.verify(this.cropField, Mockito.times(1)).setRemainingTime(Mockito.any(InGameTime.class));
     }
 }

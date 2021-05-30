@@ -12,25 +12,25 @@ class NotProducingTest {
 
     @BeforeEach
     void setUp() {
-        state = new NotProducing();
+        this.state = new NotProducing();
     }
 
     @Test
     void setRemainingTimeIsNoOp() {
-        Assertions.assertEquals(zero, state.getRemainingTime());
-        state.setRemainingTime(new InGameTime(20));
-        Assertions.assertEquals(zero, state.getRemainingTime());
-        state.setRemainingTime(new InGameTime(0));
-        Assertions.assertEquals(zero, state.getRemainingTime());
+        Assertions.assertEquals(this.zero, this.state.getRemainingTime());
+        this.state.setRemainingTime(new InGameTime(20));
+        Assertions.assertEquals(this.zero, this.state.getRemainingTime());
+        this.state.setRemainingTime(new InGameTime(0));
+        Assertions.assertEquals(this.zero, this.state.getRemainingTime());
     }
 
 
     @Test
     void changeCollectAmountIsNoOp() {
-        Assertions.assertEquals(0, state.getCollectAmount());
-        state.changeCollectAmount(90);
-        Assertions.assertEquals(0, state.getCollectAmount());
-        state.changeCollectAmount(-15);
-        Assertions.assertEquals(0, state.getCollectAmount());
+        Assertions.assertEquals(0, this.state.getCollectAmount());
+        this.state.changeCollectAmount(90);
+        Assertions.assertEquals(0, this.state.getCollectAmount());
+        this.state.changeCollectAmount(-15);
+        Assertions.assertEquals(0, this.state.getCollectAmount());
     }
 }

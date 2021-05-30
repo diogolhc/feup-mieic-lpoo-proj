@@ -16,8 +16,8 @@ public class ConfirmationMenuControllerBuilder extends InfoMenuControllerBuilder
 
     public ConfirmationMenuControllerBuilder(GameController controller, String title, String message) {
         super(controller, title, message);
-        yesCommand = new NoOperationCommand();
-        noCommand = new NoOperationCommand();
+        this.yesCommand = new NoOperationCommand();
+        this.noCommand = new NoOperationCommand();
     }
 
     @Override

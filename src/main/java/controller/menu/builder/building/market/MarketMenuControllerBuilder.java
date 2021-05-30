@@ -67,6 +67,6 @@ public class MarketMenuControllerBuilder extends PopupMenuControllerBuilder {
 
     @Override
     public String getTitle() {
-        return market.getName();
+        return this.market.getName();
     }
 }

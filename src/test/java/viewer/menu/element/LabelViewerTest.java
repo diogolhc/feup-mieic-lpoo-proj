@@ -22,7 +22,7 @@ class LabelViewerTest {
 
     @BeforeEach
     void setUp() {
-        this.gui = new GUIMockTestHelper(backgroundColors, foregroundColors, characters).mock();
+        this.gui = new GUIMockTestHelper(this.backgroundColors, this.foregroundColors, this.characters).mock();
 
         this.label = Mockito.mock(Label.class);
         Mockito.when(this.label.getString()).thenReturn("LABEL");
@@ -32,7 +32,7 @@ class LabelViewerTest {
 
         this.menu = Mockito.mock(Menu.class);
         Mockito.when(this.menu.getTopLeftPosition()).thenReturn(new Position(1,1));
-        Mockito.when(this.menu.getColor()).thenReturn(menuColor);
+        Mockito.when(this.menu.getColor()).thenReturn(this.menuColor);
     }
 
 
@@ -48,7 +48,7 @@ class LabelViewerTest {
 
         Color expectedBg[][] = {
                 {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
-                {BLACK, BLACK, menuColor, menuColor, menuColor, menuColor, menuColor, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, this.menuColor, this.menuColor, this.menuColor, this.menuColor, this.menuColor, BLACK, BLACK, BLACK},
                 {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
                 {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
                 {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},

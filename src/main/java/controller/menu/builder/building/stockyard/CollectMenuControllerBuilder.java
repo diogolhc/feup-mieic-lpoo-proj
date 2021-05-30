@@ -37,7 +37,7 @@ public class CollectMenuControllerBuilder extends PopupMenuControllerBuilder {
         Button collectButton = new Button(new Position(1, 7), "COLLECT");
 
         Command collectButtonCommand = new CompoundCommand()
-                .addCommand(new CollectStockyardCommand(inventory, stockyard))
+                .addCommand(new CollectStockyardCommand(this.inventory, this.stockyard))
                 .addCommand(super.getClosePopupMenuCommand());
 
         buttons.add(new ButtonController(collectButton, collectButtonCommand));
@@ -56,14 +56,14 @@ public class CollectMenuControllerBuilder extends PopupMenuControllerBuilder {
     private void addProductLabel(List<Label> labels) {
         labels.add(new Label(
                 new Position(1, 4),
-                () -> "PRODUCT: " + stockyard.getLivestockType().getProducedItem().getName()
+                () -> "PRODUCT: " + this.stockyard.getLivestockType().getProducedItem().getName()
         ));
     }
 
     private void addQuantityLabel(List<Label> labels) {
         labels.add( new Label(
                 new Position(1, 5),
-                () -> "QUANTITY: " + stockyard.getState().getCollectAmount()
+                () -> "QUANTITY: " + this.stockyard.getState().getCollectAmount()
         ));
     }
 

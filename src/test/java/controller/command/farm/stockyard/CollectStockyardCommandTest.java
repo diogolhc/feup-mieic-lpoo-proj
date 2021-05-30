@@ -26,45 +26,45 @@ public class CollectStockyardCommandTest {
 
     @BeforeEach
     public void setUp() {
-        stateReadyToCollect = Mockito.mock(ReadyToCollect.class);
-        stateNotProducing = Mockito.mock(NotProducing.class);
-        stateProducing = Mockito.mock(Producing.class);
-        inventory = Mockito.mock(Inventory.class);
-        livestock = Mockito.mock(Livestock.class);
-        Mockito.when(livestock.getStockyardWidth()).thenReturn(4);
-        Mockito.when(livestock.getStockyardHeight()).thenReturn(4);
+        this.stateReadyToCollect = Mockito.mock(ReadyToCollect.class);
+        this.stateNotProducing = Mockito.mock(NotProducing.class);
+        this.stateProducing = Mockito.mock(Producing.class);
+        this.inventory = Mockito.mock(Inventory.class);
+        this.livestock = Mockito.mock(Livestock.class);
+        Mockito.when(this.livestock.getStockyardWidth()).thenReturn(4);
+        Mockito.when(this.livestock.getStockyardHeight()).thenReturn(4);
 
-        stockyard = new Stockyard(new Position(0, 0), livestock);
+        this.stockyard = new Stockyard(new Position(0, 0), this.livestock);
 
-        animalProduct = Mockito.mock(AnimalProduct.class);
-        Mockito.when(stockyard.getLivestockType().getProducedItem()).thenReturn(animalProduct);
-        Mockito.when(stateReadyToCollect.getCollectAmount()).thenReturn(10);
-        command = new CollectStockyardCommand(inventory, stockyard);
+        this.animalProduct = Mockito.mock(AnimalProduct.class);
+        Mockito.when(this.stockyard.getLivestockType().getProducedItem()).thenReturn(this.animalProduct);
+        Mockito.when(this.stateReadyToCollect.getCollectAmount()).thenReturn(10);
+        this.command = new CollectStockyardCommand(this.inventory, this.stockyard);
     }
 
     @Test
     public void executeReady() {
-        stockyard.setState(stateReadyToCollect);
+        this.stockyard.setState(this.stateReadyToCollect);
 
-        command.execute();
+        this.command.execute();
 
-        Assertions.assertTrue(stockyard.getState() instanceof NotProducing);
-        Mockito.verify(inventory, Mockito.times(1)).storeItem(animalProduct, 10);
+        Assertions.assertTrue(this.stockyard.getState() instanceof NotProducing);
+        Mockito.verify(this.inventory, Mockito.times(1)).storeItem(this.animalProduct, 10);
     }
 
     @Test
     public void executeNotProducing() {
-        stockyard.setState(stateNotProducing);
-        command.execute();
-        Assertions.assertSame(stateNotProducing, stockyard.getState());
-        Mockito.verifyNoInteractions(inventory);
+        this.stockyard.setState(this.stateNotProducing);
+        this.command.execute();
+        Assertions.assertSame(this.stateNotProducing, this.stockyard.getState());
+        Mockito.verifyNoInteractions(this.inventory);
     }
 
     @Test
     public void executeProducing() {
-        stockyard.setState(stateProducing);
-        command.execute();
-        Assertions.assertSame(stateProducing, stockyard.getState());
-        Mockito.verifyNoInteractions(inventory);
+        this.stockyard.setState(this.stateProducing);
+        this.command.execute();
+        Assertions.assertSame(this.stateProducing, this.stockyard.getState());
+        Mockito.verifyNoInteractions(this.inventory);
     }
 }

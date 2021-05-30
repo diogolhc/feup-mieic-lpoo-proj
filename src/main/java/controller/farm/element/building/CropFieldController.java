@@ -37,7 +37,7 @@ public class CropFieldController extends BuildingController<CropField> {
         } else if (cropField.getState() instanceof Planted) {
             menuControllerBuilder = new CropFieldGrowingMenuControllerBuilder(this.controller, this.farm, cropField);
         } else if (cropField.getState() instanceof ReadyToHarvest) {
-            menuControllerBuilder = new HarvestMenuControllerBuilder(this.controller, farm.getInventory(), cropField);
+            menuControllerBuilder = new HarvestMenuControllerBuilder(this.controller, this.farm.getInventory(), cropField);
         } else {
             // This should never happen
             throw new RuntimeException(

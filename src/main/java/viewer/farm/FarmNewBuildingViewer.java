@@ -20,6 +20,6 @@ public class FarmNewBuildingViewer extends FarmViewer {
     }
 
     private void drawNewBuildingZone(Building newBuilding, NewBuildingZoneViewer zoneViewer, GUI gui) {
-        zoneViewer.draw(farm.getBuildings(), newBuilding, gui);
+        zoneViewer.draw(this.farm.getBuildings(), newBuilding, gui);
     }
 }

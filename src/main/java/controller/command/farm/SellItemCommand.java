@@ -1,8 +1,6 @@
 package controller.command.farm;
 
 import controller.command.Command;
-import model.farm.Currency;
-import model.farm.Farm;
 import model.farm.Inventory;
 import model.farm.Wallet;
 import model.farm.data.item.Item;
@@ -22,7 +20,7 @@ public class SellItemCommand implements Command {
 
     @Override
     public void execute() {
-        int soldAmount = inventory.removeItem(this.item, this.amount);
+        int soldAmount = this.inventory.removeItem(this.item, this.amount);
         this.wallet.receive(this.item.getSellPrice().multiply(soldAmount));
     }
 }

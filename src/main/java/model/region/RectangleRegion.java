@@ -27,11 +27,11 @@ public class RectangleRegion implements Region {
     }
 
     public int getHeight() {
-        return height;
+        return this.height;
     }
 
     public int getWidth() {
-        return width;
+        return this.width;
     }
 
     public boolean intersects(RectangleRegion region) {
@@ -87,6 +87,6 @@ public class RectangleRegion implements Region {
 
     @Override
     public String toString() {
-        return "RectangleRegion(" + topLeft + ", " + width + "x" + height + ')';
+        return "RectangleRegion(" + this.topLeft + ", " + this.width + "x" + this.height + ')';
     }
 }

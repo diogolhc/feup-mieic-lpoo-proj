@@ -2,7 +2,6 @@ package model.farm.building.stockyard;
 
 
 import model.Position;
-import model.farm.Currency;
 import model.farm.building.stockyard.state.NotProducing;
 import model.farm.data.Livestock;
 import model.farm.data.item.AnimalProduct;
@@ -27,74 +26,74 @@ class StockyardTest {
         Mockito.when(livestock.getProducedItem()).thenReturn(Mockito.mock(AnimalProduct.class));
         Mockito.when(livestock.getProducedItem().getBaseProducedAmount()).thenReturn(10);
         Mockito.when(livestock.getRequiredFood()).thenReturn(5);
-        stockyard = new Stockyard(position, livestock);
+        this.stockyard = new Stockyard(position, livestock);
     }
 
     @Test
     void getDefaultState() {
-        Assertions.assertTrue(stockyard.getState() instanceof NotProducing);
+        Assertions.assertTrue(this.stockyard.getState() instanceof NotProducing);
         Assertions.assertEquals(
                 new RectangleRegion(new Position(7, 10), 1, 2),
-                stockyard.getAnimals().getRegion()
+                this.stockyard.getAnimals().getRegion()
         );
     }
 
     @Test
     void getUntraversableRegion() {
-        Region region = stockyard.getUntraversableRegion();
+        Region region = this.stockyard.getUntraversableRegion();
         Assertions.assertTrue(region instanceof RectangleRegion);
         Assertions.assertEquals(new RectangleRegion(new Position(6, 9), 3, 4), region);
-        Mockito.when(stockyard.getLivestockType().getStockyardHeight()).thenReturn(8);
-        Mockito.when(stockyard.getLivestockType().getStockyardWidth()).thenReturn(5);
-        stockyard = new Stockyard(new Position(6, 10), stockyard.getLivestockType());
-        region = stockyard.getUntraversableRegion();
+        Mockito.when(this.stockyard.getLivestockType().getStockyardHeight()).thenReturn(8);
+        Mockito.when(this.stockyard.getLivestockType().getStockyardWidth()).thenReturn(5);
+        this.stockyard = new Stockyard(new Position(6, 10), this.stockyard.getLivestockType());
+        region = this.stockyard.getUntraversableRegion();
         Assertions.assertEquals(new RectangleRegion(new Position(7, 10), 4, 8), region);
     }
 
     @Test
     void getInteractiveRegion() {
-        Region region = stockyard.getInteractiveRegion();
+        Region region = this.stockyard.getInteractiveRegion();
         Assertions.assertTrue(region instanceof PositionRegion);
         Assertions.assertTrue(region.contains(new Position(5, 12)));
-        Mockito.when(stockyard.getLivestockType().getStockyardHeight()).thenReturn(8);
-        Mockito.when(stockyard.getLivestockType().getStockyardWidth()).thenReturn(5);
-        stockyard = new Stockyard(new Position(6, 10), stockyard.getLivestockType());
-        region = stockyard.getInteractiveRegion();
+        Mockito.when(this.stockyard.getLivestockType().getStockyardHeight()).thenReturn(8);
+        Mockito.when(this.stockyard.getLivestockType().getStockyardWidth()).thenReturn(5);
+        this.stockyard = new Stockyard(new Position(6, 10), this.stockyard.getLivestockType());
+        region = this.stockyard.getInteractiveRegion();
         Assertions.assertTrue(region.contains(new Position(6, 13)));
     }
 
     @Test
     void producedAmountDependsOnNumAnimals() {
-        Assertions.assertEquals(0, stockyard.getBaseProducedAmount());
-        stockyard.getAnimals().addAnimal(new Position(0, 0));
-        Assertions.assertEquals(10, stockyard.getBaseProducedAmount());
-        stockyard.getAnimals().addAnimal(new Position(0, 0));
-        Assertions.assertEquals(20, stockyard.getBaseProducedAmount());
-        stockyard.getAnimals().addAnimal(new Position(0, 0));
-        Assertions.assertEquals(30, stockyard.getBaseProducedAmount());
-        stockyard.getAnimals().addAnimal(new Position(0, 0));
-        Assertions.assertEquals(40, stockyard.getBaseProducedAmount());
+        Assertions.assertEquals(0, this.stockyard.getBaseProducedAmount());
+        this.stockyard.getAnimals().addAnimal(new Position(0, 0));
+        Assertions.assertEquals(10, this.stockyard.getBaseProducedAmount());
+        this.stockyard.getAnimals().addAnimal(new Position(0, 0));
+        Assertions.assertEquals(20, this.stockyard.getBaseProducedAmount());
+        this.stockyard.getAnimals().addAnimal(new Position(0, 0));
+        Assertions.assertEquals(30, this.stockyard.getBaseProducedAmount());
+        this.stockyard.getAnimals().addAnimal(new Position(0, 0));
+        Assertions.assertEquals(40, this.stockyard.getBaseProducedAmount());
     }
 
     @Test
     void requiredFoodDependsOnNumAnimals() {
-        Assertions.assertEquals(0, stockyard.getRequiredFood());
-        stockyard.getAnimals().addAnimal(new Position(0, 0));
-        Assertions.assertEquals(5, stockyard.getRequiredFood());
-        stockyard.getAnimals().addAnimal(new Position(0, 0));
-        Assertions.assertEquals(10, stockyard.getRequiredFood());
-        stockyard.getAnimals().addAnimal(new Position(0, 0));
-        Assertions.assertEquals(15, stockyard.getRequiredFood());
-        stockyard.getAnimals().addAnimal(new Position(0, 0));
-        Assertions.assertEquals(20, stockyard.getRequiredFood());
+        Assertions.assertEquals(0, this.stockyard.getRequiredFood());
+        this.stockyard.getAnimals().addAnimal(new Position(0, 0));
+        Assertions.assertEquals(5, this.stockyard.getRequiredFood());
+        this.stockyard.getAnimals().addAnimal(new Position(0, 0));
+        Assertions.assertEquals(10, this.stockyard.getRequiredFood());
+        this.stockyard.getAnimals().addAnimal(new Position(0, 0));
+        Assertions.assertEquals(15, this.stockyard.getRequiredFood());
+        this.stockyard.getAnimals().addAnimal(new Position(0, 0));
+        Assertions.assertEquals(20, this.stockyard.getRequiredFood());
     }
 
     @Test
     void setTopLeftPositionUpdatesAnimals() {
-        stockyard.setTopLeftPosition(new Position(9, 9));
+        this.stockyard.setTopLeftPosition(new Position(9, 9));
         Assertions.assertEquals(
                 new RectangleRegion(new Position(11, 10), 1, 2),
-                stockyard.getAnimals().getRegion()
+                this.stockyard.getAnimals().getRegion()
         );
     }
 }

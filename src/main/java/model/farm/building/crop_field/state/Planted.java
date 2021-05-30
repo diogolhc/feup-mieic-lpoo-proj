@@ -19,7 +19,7 @@ public class Planted implements CropFieldState {
 
     @Override
     public InGameTime getRemainingTime() {
-        return timeRemaining;
+        return this.timeRemaining;
     }
 
     @Override

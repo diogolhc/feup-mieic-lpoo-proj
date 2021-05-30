@@ -18,8 +18,8 @@ public class ConfirmationMenuControllerBuilderTest {
 
     @Test
     public void buildMenu() {
-        builder = new ConfirmationMenuControllerBuilder(Mockito.mock(GameController.class), "CONFIRM", "YES OR NO?");
-        MenuController menuController = builder.buildMenu(new Position(0, 0));
+        this.builder = new ConfirmationMenuControllerBuilder(Mockito.mock(GameController.class), "CONFIRM", "YES OR NO?");
+        MenuController menuController = this.builder.buildMenu(new Position(0, 0));
 
         Assertions.assertTrue(menuController instanceof PopupMenuController);
         Assertions.assertEquals("CONFIRM", menuController.getMenu().getTitle());
@@ -36,9 +36,9 @@ public class ConfirmationMenuControllerBuilderTest {
 
     @Test
     public void buildMenuMultilineMessage() {
-        builder = new ConfirmationMenuControllerBuilder(Mockito.mock(GameController.class), "CONFIRM",
+        this.builder = new ConfirmationMenuControllerBuilder(Mockito.mock(GameController.class), "CONFIRM",
                 "MESSAGE TEST\nMESSAGE\nTHE BIGGEST LINE OF ALL\nsmall");
-        MenuController menuController = builder.buildMenu(new Position(0, 0));
+        MenuController menuController = this.builder.buildMenu(new Position(0, 0));
 
         Assertions.assertEquals(25, menuController.getMenu().getWidth());
         Assertions.assertEquals(13, menuController.getMenu().getHeight());
@@ -46,8 +46,8 @@ public class ConfirmationMenuControllerBuilderTest {
 
     @Test
     public void buildMenuSmallMessage() {
-        builder = new ConfirmationMenuControllerBuilder(Mockito.mock(GameController.class), "YES?", "hi");
-        MenuController menuController = builder.buildMenu(new Position(0, 0));
+        this.builder = new ConfirmationMenuControllerBuilder(Mockito.mock(GameController.class), "YES?", "hi");
+        MenuController menuController = this.builder.buildMenu(new Position(0, 0));
 
         Assertions.assertEquals(12, menuController.getMenu().getWidth());
         Assertions.assertEquals(10, menuController.getMenu().getHeight());
@@ -55,8 +55,8 @@ public class ConfirmationMenuControllerBuilderTest {
 
     @Test
     public void buildMenuEmptyMessage() {
-        builder = new ConfirmationMenuControllerBuilder(Mockito.mock(GameController.class), "", "");
-        MenuController menuController = builder.buildMenu(new Position(0, 0));
+        this.builder = new ConfirmationMenuControllerBuilder(Mockito.mock(GameController.class), "", "");
+        MenuController menuController = this.builder.buildMenu(new Position(0, 0));
 
         Assertions.assertEquals(12, menuController.getMenu().getWidth());
         Assertions.assertEquals(10, menuController.getMenu().getHeight());
@@ -67,10 +67,10 @@ public class ConfirmationMenuControllerBuilderTest {
         GameController gameController = Mockito.mock(GameController.class);
         Command yesCommand = Mockito.mock(Command.class);
         Command noCommand = Mockito.mock(Command.class);
-        builder = new ConfirmationMenuControllerBuilder(gameController, "CONFIRM", "YES OR NO?")
+        this.builder = new ConfirmationMenuControllerBuilder(gameController, "CONFIRM", "YES OR NO?")
             .setYesCommand(yesCommand)
             .setNoCommand(noCommand);
-        MenuController menuController = builder.buildMenu(new Position(0, 0));
+        MenuController menuController = this.builder.buildMenu(new Position(0, 0));
 
         Assertions.assertTrue(menuController instanceof PopupMenuController);
         Assertions.assertEquals("CONFIRM", menuController.getMenu().getTitle());

@@ -23,13 +23,13 @@ public class PopupMenuController extends MenuController {
     }
 
     private void closePopup() {
-        this.gameController.setGameControllerState(backState);
+        this.gameController.setGameControllerState(this.backState);
     }
 
     @Override
     public void reactTimePassed(long elapsedTimeSinceLastFrame) {
         // By default, popups do not stop the time passing of the things in the background
-        backState.reactTimePassed(elapsedTimeSinceLastFrame);
+        this.backState.reactTimePassed(elapsedTimeSinceLastFrame);
     }
 
     @Override

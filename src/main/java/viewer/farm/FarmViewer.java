@@ -9,7 +9,6 @@ import model.Position;
 import model.farm.Wallet;
 import model.farm.building.*;
 import model.farm.Farm;
-import model.farm.building.Edifice;
 import model.farm.building.crop_field.CropField;
 import model.farm.building.stockyard.Stockyard;
 import model.farm.data.Weather;

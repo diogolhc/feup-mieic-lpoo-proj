@@ -2,13 +2,11 @@ package controller.command.farm.stockyard;
 
 import controller.command.Command;
 import model.Position;
-import model.farm.Inventory;
 import model.farm.building.stockyard.Stockyard;
 import model.farm.building.stockyard.state.NotProducing;
 import model.farm.building.stockyard.state.Producing;
 import model.farm.building.stockyard.state.ReadyToCollect;
 import model.farm.data.Livestock;
-import model.farm.data.item.AnimalProduct;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,45 +22,45 @@ public class StopProducingCommandTest {
 
     @BeforeEach
     public void setUp() {
-        stateReadyToCollect = Mockito.mock(ReadyToCollect.class);
-        stateNotProducing = Mockito.mock(NotProducing.class);
-        stateProducing = Mockito.mock(Producing.class);
-        livestock = Mockito.mock(Livestock.class);
-        Mockito.when(livestock.getStockyardWidth()).thenReturn(4);
-        Mockito.when(livestock.getStockyardHeight()).thenReturn(4);
+        this.stateReadyToCollect = Mockito.mock(ReadyToCollect.class);
+        this.stateNotProducing = Mockito.mock(NotProducing.class);
+        this.stateProducing = Mockito.mock(Producing.class);
+        this.livestock = Mockito.mock(Livestock.class);
+        Mockito.when(this.livestock.getStockyardWidth()).thenReturn(4);
+        Mockito.when(this.livestock.getStockyardHeight()).thenReturn(4);
 
 
-        stockyard = new Stockyard(new Position(0, 0), livestock);
+        this.stockyard = new Stockyard(new Position(0, 0), this.livestock);
 
-        Mockito.when(stateProducing.getCollectAmount()).thenReturn(stockyard.getAnimals().getSize() * 10);
+        Mockito.when(this.stateProducing.getCollectAmount()).thenReturn(this.stockyard.getAnimals().getSize() * 10);
 
-        command = new StopProducingStockyardCommand(stockyard);
+        this.command = new StopProducingStockyardCommand(this.stockyard);
     }
 
     @Test
     public void executeReady() {
-        stockyard.setState(stateReadyToCollect);
+        this.stockyard.setState(this.stateReadyToCollect);
 
-        command.execute();
+        this.command.execute();
 
-        Assertions.assertTrue(stockyard.getState() instanceof NotProducing);
+        Assertions.assertTrue(this.stockyard.getState() instanceof NotProducing);
     }
 
     @Test
     public void executeNotProducing() {
-        stockyard.setState(stateNotProducing);
+        this.stockyard.setState(this.stateNotProducing);
 
-        command.execute();
+        this.command.execute();
 
-        Assertions.assertTrue(stockyard.getState() instanceof NotProducing);
+        Assertions.assertTrue(this.stockyard.getState() instanceof NotProducing);
     }
 
     @Test
     public void executeProducing() {
-        stockyard.setState(stateProducing);
+        this.stockyard.setState(this.stateProducing);
 
-        command.execute();
+        this.command.execute();
 
-        Assertions.assertTrue(stockyard.getState() instanceof NotProducing);
+        Assertions.assertTrue(this.stockyard.getState() instanceof NotProducing);
     }
 }

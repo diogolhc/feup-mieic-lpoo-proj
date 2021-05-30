@@ -7,7 +7,6 @@ import model.Position;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 public class BoxDrawerTest {
     private GUI gui;
@@ -17,7 +16,7 @@ public class BoxDrawerTest {
 
     @BeforeEach
     void setUp() {
-        this.gui = new GUIMockTestHelper(backgroundColors, foregroundColors, characters).mock();
+        this.gui = new GUIMockTestHelper(this.backgroundColors, this.foregroundColors, this.characters).mock();
     }
 
     @Test
@@ -31,7 +30,7 @@ public class BoxDrawerTest {
         char VERTICAL_LINE = '|';
         char CORNER_LINE = '+';
     
-        BoxDrawer boxDrawer = new BoxDrawer(gui, BACK, FRONT);
+        BoxDrawer boxDrawer = new BoxDrawer(this.gui, BACK, FRONT);
         boxDrawer.draw(new Position(0, 0), 5, 5);
 
         Color expectedBg[][] = {
@@ -93,8 +92,8 @@ public class BoxDrawerTest {
         char VERTICAL_LINE = '|';
         char CORNER_LINE = '+';
 
-        BoxDrawer boxDrawer = new BoxDrawer(gui, BACK, FRONT);
-        BoxDrawer boxDrawer2 = new BoxDrawer(gui, BACK2, FRONT2);
+        BoxDrawer boxDrawer = new BoxDrawer(this.gui, BACK, FRONT);
+        BoxDrawer boxDrawer2 = new BoxDrawer(this.gui, BACK2, FRONT2);
 
         boxDrawer.draw(new Position(0, 0), 5, 5);
         boxDrawer2.draw(new Position(3, 3), 4, 4);

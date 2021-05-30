@@ -35,7 +35,7 @@ public class HarvestMenuControllerBuilder extends PopupMenuControllerBuilder {
     private void addHarvestButton(List<ButtonController> buttons) {
         Button harvestButton = new Button(new Position(1, 7), "HARVEST");
         Command harvestButtonCommand = new CompoundCommand()
-                .addCommand(new HarvestCropCommand(inventory, cropField))
+                .addCommand(new HarvestCropCommand(this.inventory, this.cropField))
                 .addCommand(super.getClosePopupMenuCommand());
         buttons.add(new ButtonController(harvestButton, harvestButtonCommand));
     }
@@ -53,14 +53,14 @@ public class HarvestMenuControllerBuilder extends PopupMenuControllerBuilder {
     private void addCropTypeLabel(List<Label> labels) {
         labels.add(new Label(
                 new Position(1, 4),
-                () -> "CROP: " + cropField.getCrop().getName()
+                () -> "CROP: " + this.cropField.getCrop().getName()
         ));
     }
 
     private void addQuantityLabel(List<Label> labels) {
         labels.add( new Label(
                 new Position(1, 5),
-                () -> "QUANTITY: " + cropField.getHarvestAmount()
+                () -> "QUANTITY: " + this.cropField.getHarvestAmount()
         ));
     }
 

@@ -8,7 +8,6 @@ import model.farm.entity.Entity;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 
 public class FarmerViewerTest {
@@ -29,7 +28,7 @@ public class FarmerViewerTest {
 
     @BeforeEach
     void setUp() {
-        this.gui = new GUIMockTestHelper(backgroundColors, foregroundColors, characters).mock();
+        this.gui = new GUIMockTestHelper(this.backgroundColors, this.foregroundColors, this.characters).mock();
     }
 
     @Test
@@ -40,7 +39,7 @@ public class FarmerViewerTest {
         Color expectedBg[][] = cloneSquareBidimensionalArray(this.backgroundColors);
         Entity farmer = new Entity(new Position(2, 3));
         FarmerViewer viewer = new FarmerViewer();
-        viewer.draw(farmer, gui);
+        viewer.draw(farmer, this.gui);
 
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
@@ -78,7 +77,7 @@ public class FarmerViewerTest {
 
         Entity farmer = new Entity(new Position(4, 6));
         FarmerViewer viewer = new FarmerViewer();
-        viewer.draw(farmer, gui);
+        viewer.draw(farmer, this.gui);
 
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {

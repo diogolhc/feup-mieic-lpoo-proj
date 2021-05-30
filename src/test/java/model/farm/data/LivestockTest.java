@@ -16,9 +16,9 @@ public class LivestockTest {
 
     @BeforeEach
     public void setUp() {
-        crops = new ArrayList<>();
+        this.crops = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            crops.add(new Crop("c" + i));
+            this.crops.add(new Crop("c" + i));
         }
     }
 
@@ -30,7 +30,7 @@ public class LivestockTest {
                 "PRODUCT 01:23 8 9"
         );
 
-        Livestock livestock = Livestock.parseLivestockType(crops, lines);
+        Livestock livestock = Livestock.parseLivestockType(this.crops, lines);
         Assertions.assertEquals("ANIMAL", livestock.getAnimalName());
         Assertions.assertEquals('a', livestock.getAnimalChar());
         Assertions.assertEquals(11, livestock.getStockyardWidth());
@@ -39,55 +39,55 @@ public class LivestockTest {
         Assertions.assertEquals(new Currency(4), livestock.getBuildPrice());
         Assertions.assertEquals(new Currency(5), livestock.getAnimalBuyPrice());
         Assertions.assertEquals(new Currency(6), livestock.getAnimalSellPrice());
-        Assertions.assertEquals(crops.get(1), livestock.getFoodCrop());
+        Assertions.assertEquals(this.crops.get(1), livestock.getFoodCrop());
         Assertions.assertEquals(7, livestock.getRequiredFood());
         Assertions.assertEquals(new AnimalProduct("PRODUCT"), livestock.getProducedItem());
     }
 
     @Test
     public void parseLivestockTypeInvalid() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> Livestock.parseLivestockType(crops, Arrays.asList(
+        Assertions.assertThrows(IllegalArgumentException.class, () -> Livestock.parseLivestockType(this.crops, Arrays.asList(
                 "ANIMAL a 1 2 3 4 5 6",
                 "c1 7"
         )));
 
-        Assertions.assertThrows(IllegalArgumentException.class, () -> Livestock.parseLivestockType(crops, Arrays.asList(
+        Assertions.assertThrows(IllegalArgumentException.class, () -> Livestock.parseLivestockType(this.crops, Arrays.asList(
                 "ANIMAL ab 1 2 3 4 5 6",
                 "c1 7",
                 "PRODUCT 01:23 8 9"
         )));
 
-        Assertions.assertThrows(IllegalArgumentException.class, () -> Livestock.parseLivestockType(crops, Arrays.asList(
+        Assertions.assertThrows(IllegalArgumentException.class, () -> Livestock.parseLivestockType(this.crops, Arrays.asList(
                 "ANIMAL ab 1 2 3 4 5",
                 "c1 7",
                 "PRODUCT 01:23 8 9"
         )));
 
-        Assertions.assertThrows(IllegalArgumentException.class, () -> Livestock.parseLivestockType(crops, Arrays.asList(
+        Assertions.assertThrows(IllegalArgumentException.class, () -> Livestock.parseLivestockType(this.crops, Arrays.asList(
                 "ANIMAL ab 1 2 3 4 5 6 7",
                 "c1 7",
                 "PRODUCT 01:23 8 9"
         )));
 
-        Assertions.assertThrows(IllegalArgumentException.class, () -> Livestock.parseLivestockType(crops, Arrays.asList(
+        Assertions.assertThrows(IllegalArgumentException.class, () -> Livestock.parseLivestockType(this.crops, Arrays.asList(
                 "ANIMAL ab 1 2 3 4 5 6",
                 "unknown 7",
                 "PRODUCT 01:23 8 9"
         )));
 
-        Assertions.assertThrows(IllegalArgumentException.class, () -> Livestock.parseLivestockType(crops, Arrays.asList(
+        Assertions.assertThrows(IllegalArgumentException.class, () -> Livestock.parseLivestockType(this.crops, Arrays.asList(
                 "ANIMAL ab 1 2 3 4 5 6",
                 "",
                 "PRODUCT 01:23 8 9"
         )));
 
-        Assertions.assertThrows(IllegalArgumentException.class, () -> Livestock.parseLivestockType(crops, Arrays.asList(
+        Assertions.assertThrows(IllegalArgumentException.class, () -> Livestock.parseLivestockType(this.crops, Arrays.asList(
                 "ANIMAL ab 1 2 3 4 5 6",
                 "c2 7 8",
                 "PRODUCT 01:23 8 9"
         )));
 
-        Assertions.assertThrows(IllegalArgumentException.class, () -> Livestock.parseLivestockType(crops, Arrays.asList(
+        Assertions.assertThrows(IllegalArgumentException.class, () -> Livestock.parseLivestockType(this.crops, Arrays.asList(
                 "ANIMAL ab 1 2 3 4 5 6",
                 "c3",
                 "PRODUCT 01:23 8 9"

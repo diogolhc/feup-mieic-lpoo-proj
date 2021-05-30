@@ -13,7 +13,6 @@ import model.farm.data.item.CropGrowthStage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 
 class CropFieldViewerTest {
@@ -25,7 +24,7 @@ class CropFieldViewerTest {
 
     @BeforeEach
     void setUp() {
-        this.gui = new GUIMockTestHelper(backgroundColors, foregroundColors, characters).mock();
+        this.gui = new GUIMockTestHelper(this.backgroundColors, this.foregroundColors, this.characters).mock();
     }
 
 
@@ -37,7 +36,7 @@ class CropFieldViewerTest {
         Color SOIL_COLOR = CropFieldViewer.SOIL_COLOR;
 
         CropFieldViewer viewer = new CropFieldViewer();
-        viewer.draw(cropField, gui);
+        viewer.draw(this.cropField, this.gui);
 
         Color expectedBg[][] = {
                 {PATH, PATH, PATH, PATH, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
@@ -68,7 +67,7 @@ class CropFieldViewerTest {
         Color SOIL_COLOR = CropFieldViewer.SOIL_COLOR;
 
         CropFieldViewer viewer = new CropFieldViewer();
-        viewer.draw(cropField, gui);
+        viewer.draw(this.cropField, this.gui);
 
         Color expectedBg[][] = {
                 {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
@@ -101,12 +100,12 @@ class CropFieldViewerTest {
 
         Crop crop = new Crop("WHEAT");
         crop.addGrowthStage(new CropGrowthStage(new InGameTime(0), '#', STAGE_COLOR));
-        CropFieldState state = new ReadyToHarvest(cropField, crop, 5);
+        CropFieldState state = new ReadyToHarvest(this.cropField, crop, 5);
         this.cropField = new CropField(new Position(2, 2));
         this.cropField.setState(state);
 
         CropFieldViewer viewer = new CropFieldViewer();
-        viewer.draw(cropField, gui);
+        viewer.draw(this.cropField, this.gui);
 
         Color expectedBg[][] = {
                 {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},

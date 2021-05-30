@@ -7,7 +7,6 @@ import controller.command.controller_state.OpenPopupMenuCommand;
 import controller.command.controller_state.SetControllerStateCommand;
 import controller.farm.FarmDemolishController;
 import controller.farm.FarmWithFarmerController;
-import controller.command.Command;
 import controller.farm.element.entity.AnimalController;
 import controller.menu.builder.PopupMenuControllerBuilder;
 import controller.menu.builder.building.stockyard.CollectMenuControllerBuilder;
@@ -39,9 +38,9 @@ public class StockyardController extends BuildingController<Stockyard> {
         if (stockyard.getState() instanceof NotProducing) {
             menuControllerBuilder = new FeedAnimalsMenuControllerBuilder(this.controller, this.farm, stockyard);
         } else if ( stockyard.getState() instanceof Producing) {
-            menuControllerBuilder = new ProducingMenuControllerBuilder(this.controller, farm, stockyard);
+            menuControllerBuilder = new ProducingMenuControllerBuilder(this.controller, this.farm, stockyard);
         } else if (stockyard.getState() instanceof ReadyToCollect) {
-            menuControllerBuilder = new CollectMenuControllerBuilder(this.controller, farm.getInventory(), stockyard);
+            menuControllerBuilder = new CollectMenuControllerBuilder(this.controller, this.farm.getInventory(), stockyard);
         } else {
             // This should never happen
             throw new RuntimeException(

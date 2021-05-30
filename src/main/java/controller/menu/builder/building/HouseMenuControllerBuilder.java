@@ -66,6 +66,6 @@ public class HouseMenuControllerBuilder extends PopupMenuControllerBuilder {
 
     @Override
     public String getTitle() {
-        return house.getName();
+        return this.house.getName();
     }
 }

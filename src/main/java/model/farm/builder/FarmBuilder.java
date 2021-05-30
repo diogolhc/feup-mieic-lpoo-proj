@@ -2,11 +2,9 @@ package model.farm.builder;
 
 import model.InGameTime;
 import model.farm.*;
-import model.farm.Farm;
 import model.farm.building.BuildingSet;
 import model.farm.data.Livestock;
 import model.farm.entity.Entity;
-import model.farm.Inventory;
 import model.farm.data.item.Crop;
 import model.farm.data.Weather;
 

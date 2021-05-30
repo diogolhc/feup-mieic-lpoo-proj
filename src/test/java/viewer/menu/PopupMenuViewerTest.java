@@ -7,9 +7,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InOrder;
 import org.mockito.Mockito;
-import viewer.GameViewer;
-
-import java.io.IOException;
 
 public class PopupMenuViewerTest {
     private GUI gui;
@@ -19,22 +16,22 @@ public class PopupMenuViewerTest {
 
     @BeforeEach
     void setUp() {
-        gui = Mockito.mock(GUI.class);
-        backViewer = Mockito.mock(MenuViewer.class);
-        menu = Mockito.mock(Menu.class);
-        Mockito.when(menu.getTopLeftPosition()).thenReturn(new Position(0, 0));
-        Mockito.when(menu.getTitle()).thenReturn("");
-        viewer = new PopupMenuViewer(menu, backViewer);
+        this.gui = Mockito.mock(GUI.class);
+        this.backViewer = Mockito.mock(MenuViewer.class);
+        this.menu = Mockito.mock(Menu.class);
+        Mockito.when(this.menu.getTopLeftPosition()).thenReturn(new Position(0, 0));
+        Mockito.when(this.menu.getTitle()).thenReturn("");
+        this.viewer = new PopupMenuViewer(this.menu, this.backViewer);
     }
 
     @Test
     void drawBackViewerBeforePopup() {
-        viewer.draw(gui);
+        this.viewer.draw(this.gui);
 
         // Menu is accessed when drawing the popup
         // so this access must happen after drawing the backViewer
-        InOrder verifier = Mockito.inOrder(menu, backViewer);
-        verifier.verify(backViewer).draw(gui);
-        verifier.verify(menu).getTopLeftPosition();
+        InOrder verifier = Mockito.inOrder(this.menu, this.backViewer);
+        verifier.verify(this.backViewer).draw(this.gui);
+        verifier.verify(this.menu).getTopLeftPosition();
     }
 }

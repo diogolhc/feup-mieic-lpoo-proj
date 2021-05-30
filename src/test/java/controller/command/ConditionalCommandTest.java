@@ -11,99 +11,99 @@ public class ConditionalCommandTest {
 
     @BeforeEach
     public void setUp() {
-        command1 = Mockito.mock(Command.class);
-        command2 = Mockito.mock(Command.class);
+        this.command1 = Mockito.mock(Command.class);
+        this.command2 = Mockito.mock(Command.class);
     }
 
     @Test
     public void executeTrue() {
-        conditionalCommand = new ConditionalCommand(() -> true)
-                .ifTrue(command1)
-                .ifFalse(command2);
+        this.conditionalCommand = new ConditionalCommand(() -> true)
+                .ifTrue(this.command1)
+                .ifFalse(this.command2);
 
-        conditionalCommand.execute();
+        this.conditionalCommand.execute();
 
-        Mockito.verify(command1, Mockito.times(1)).execute();
-        Mockito.verify(command2, Mockito.never()).execute();
+        Mockito.verify(this.command1, Mockito.times(1)).execute();
+        Mockito.verify(this.command2, Mockito.never()).execute();
     }
 
     @Test
     public void executeFalse() {
-        conditionalCommand = new ConditionalCommand(() -> false)
-                .ifTrue(command1)
-                .ifFalse(command2);
+        this.conditionalCommand = new ConditionalCommand(() -> false)
+                .ifTrue(this.command1)
+                .ifFalse(this.command2);
 
-        conditionalCommand.execute();
+        this.conditionalCommand.execute();
 
-        Mockito.verify(command1, Mockito.never()).execute();
-        Mockito.verify(command2, Mockito.times(1)).execute();
+        Mockito.verify(this.command1, Mockito.never()).execute();
+        Mockito.verify(this.command2, Mockito.times(1)).execute();
     }
 
     @Test
     public void executeElseIfTrue() {
-        conditionalCommand = new ConditionalCommand(() -> false);
-        conditionalCommand
-                .ifTrue(command1)
+        this.conditionalCommand = new ConditionalCommand(() -> false);
+        this.conditionalCommand
+                .ifTrue(this.command1)
                 .elseIf(() -> true)
-                .ifTrue(command2)
-                .ifFalse(command1);
+                .ifTrue(this.command2)
+                .ifFalse(this.command1);
 
-        conditionalCommand.execute();
+        this.conditionalCommand.execute();
 
-        Mockito.verify(command1, Mockito.never()).execute();
-        Mockito.verify(command2, Mockito.times(1)).execute();
+        Mockito.verify(this.command1, Mockito.never()).execute();
+        Mockito.verify(this.command2, Mockito.times(1)).execute();
     }
 
     @Test
     public void executeElseIfFalse() {
-        conditionalCommand = new ConditionalCommand(() -> false);
-        conditionalCommand
-                .ifTrue(command1)
+        this.conditionalCommand = new ConditionalCommand(() -> false);
+        this.conditionalCommand
+                .ifTrue(this.command1)
                 .elseIf(() -> false)
-                .ifTrue(command1)
-                .ifFalse(command2);
+                .ifTrue(this.command1)
+                .ifFalse(this.command2);
 
-        conditionalCommand.execute();
+        this.conditionalCommand.execute();
 
-        Mockito.verify(command1, Mockito.never()).execute();
-        Mockito.verify(command2, Mockito.times(1)).execute();
+        Mockito.verify(this.command1, Mockito.never()).execute();
+        Mockito.verify(this.command2, Mockito.times(1)).execute();
     }
 
     @Test
     public void executeElseIfShortcircuit() {
-        conditionalCommand = new ConditionalCommand(() -> true);
-        conditionalCommand
-                .ifTrue(command2)
+        this.conditionalCommand = new ConditionalCommand(() -> true);
+        this.conditionalCommand
+                .ifTrue(this.command2)
                 .elseIf(() -> false)
-                .ifTrue(command1)
-                .ifFalse(command1);
+                .ifTrue(this.command1)
+                .ifFalse(this.command1);
 
-        conditionalCommand.execute();
+        this.conditionalCommand.execute();
 
-        Mockito.verify(command1, Mockito.never()).execute();
-        Mockito.verify(command2, Mockito.times(1)).execute();
+        Mockito.verify(this.command1, Mockito.never()).execute();
+        Mockito.verify(this.command2, Mockito.times(1)).execute();
     }
 
     @Test
     public void executeNestedElseIf() {
-        conditionalCommand = new ConditionalCommand(() -> false);
-        conditionalCommand
-                .ifTrue(command1)
+        this.conditionalCommand = new ConditionalCommand(() -> false);
+        this.conditionalCommand
+                .ifTrue(this.command1)
                 .elseIf(() -> false)
-                .ifTrue(command1)
+                .ifTrue(this.command1)
                 .elseIf(() -> false)
-                .ifTrue(command1)
+                .ifTrue(this.command1)
                 .elseIf(() -> true)
-                .ifTrue(command2)
+                .ifTrue(this.command2)
                 .elseIf(() -> true)
-                .ifTrue(command1)
+                .ifTrue(this.command1)
                 .elseIf(() -> false)
-                .ifTrue(command1)
-                .ifFalse(command1);
+                .ifTrue(this.command1)
+                .ifFalse(this.command1);
 
-        conditionalCommand.execute();
+        this.conditionalCommand.execute();
 
-        Mockito.verify(command1, Mockito.never()).execute();
-        Mockito.verify(command2, Mockito.times(1)).execute();
+        Mockito.verify(this.command1, Mockito.never()).execute();
+        Mockito.verify(this.command2, Mockito.times(1)).execute();
     }
 }

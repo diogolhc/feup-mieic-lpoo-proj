@@ -1,6 +1,5 @@
 package model.farm.data.item;
 
-import gui.Color;
 import model.InGameTime;
 import model.farm.Currency;
 import org.junit.jupiter.api.Assertions;

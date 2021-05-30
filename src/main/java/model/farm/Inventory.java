@@ -35,7 +35,7 @@ public class Inventory implements Serializable {
     }
 
     public int getAmount(Item item) {
-        Integer amount = items.get(item);
+        Integer amount = this.items.get(item);
         if (amount == null) {
             return 0;
         } else {
@@ -45,24 +45,24 @@ public class Inventory implements Serializable {
 
     public void storeItem(Item item, int amount) {
         // Discards items that can't be stored
-        if (occupied + amount > capacity) {
-            amount = capacity - occupied;
+        if (this.occupied + amount > this.capacity) {
+            amount = this.capacity - this.occupied;
         }
 
-        occupied += amount;
-        items.put(item, getAmount(item) + amount);
+        this.occupied += amount;
+        this.items.put(item, getAmount(item) + amount);
     }
 
     public int removeItem(Item item, int amount) {
         int currentAmount = getAmount(item);
         if (amount >= currentAmount) {
             amount = currentAmount;
-            items.remove(item);
+            this.items.remove(item);
         } else {
-            items.put(item, currentAmount - amount);
+            this.items.put(item, currentAmount - amount);
         }
 
-        occupied -= amount;
+        this.occupied -= amount;
         return amount;
     }
 }

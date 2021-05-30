@@ -1,17 +1,10 @@
 package controller.command.farm.stockyard;
 
 import controller.command.Command;
-import model.Position;
 import model.farm.Currency;
 
 import model.farm.Wallet;
-import model.farm.building.stockyard.Stockyard;
 import model.farm.building.stockyard.StockyardAnimals;
-import model.farm.building.stockyard.state.NotProducing;
-import model.farm.data.Livestock;
-import model.farm.data.item.AnimalProduct;
-import model.region.RectangleRegion;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -24,33 +17,33 @@ public class BuyAnimalCommandTest {
 
     @BeforeEach
     public void setUp() {
-        wallet = Mockito.mock(Wallet.class);
-        stockyardAnimals = Mockito.mock(StockyardAnimals.class);
-        price = Mockito.mock(Currency.class);
+        this.wallet = Mockito.mock(Wallet.class);
+        this.stockyardAnimals = Mockito.mock(StockyardAnimals.class);
+        this.price = Mockito.mock(Currency.class);
 
-        command = new BuyAnimalCommand(wallet, stockyardAnimals, price);
+        this.command = new BuyAnimalCommand(this.wallet, this.stockyardAnimals, this.price);
     }
 
 
     @Test
     public void execute() {
-        Mockito.when(stockyardAnimals.isFull()).thenReturn(false);
+        Mockito.when(this.stockyardAnimals.isFull()).thenReturn(false);
 
-        command.execute();
+        this.command.execute();
 
-        Mockito.verify(wallet, Mockito.times(1)).spend(price);
-        Mockito.verify(stockyardAnimals, Mockito.times(1)).addAnimal();
+        Mockito.verify(this.wallet, Mockito.times(1)).spend(this.price);
+        Mockito.verify(this.stockyardAnimals, Mockito.times(1)).addAnimal();
     }
 
 
     @Test
     public void executeFull() {
-        Mockito.when(stockyardAnimals.isFull()).thenReturn(true);
+        Mockito.when(this.stockyardAnimals.isFull()).thenReturn(true);
 
-        command.execute();
+        this.command.execute();
 
-        Mockito.verifyNoInteractions(wallet);
-        Mockito.verify(stockyardAnimals, Mockito.never()).addAnimal();
+        Mockito.verifyNoInteractions(this.wallet);
+        Mockito.verify(this.stockyardAnimals, Mockito.never()).addAnimal();
     }
 
 }

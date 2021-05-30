@@ -20,13 +20,13 @@ class MenuTitleViewerTest {
 
     @BeforeEach
     void setUp() {
-        this.gui = new GUIMockTestHelper(backgroundColors, foregroundColors, characters).mock();
+        this.gui = new GUIMockTestHelper(this.backgroundColors, this.foregroundColors, this.characters).mock();
 
-        menuColor = new Color("#012345");
-        menu = Mockito.mock(Menu.class);
-        Mockito.when(menu.getColor()).thenReturn(menuColor);
-        Mockito.when(menu.getTitle()).thenReturn("TITLE");
-        Mockito.when(menu.getTopLeftPosition()).thenReturn(new Position(2,0));
+        this.menuColor = new Color("#012345");
+        this.menu = Mockito.mock(Menu.class);
+        Mockito.when(this.menu.getColor()).thenReturn(this.menuColor);
+        Mockito.when(this.menu.getTitle()).thenReturn("TITLE");
+        Mockito.when(this.menu.getTopLeftPosition()).thenReturn(new Position(2,0));
     }
 
     @Test
@@ -41,8 +41,8 @@ class MenuTitleViewerTest {
         Color expectedBg[][] = {
                 {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
                 {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
-                {BLACK, BLACK, menuColor, menuColor, menuColor, menuColor, menuColor, BLACK, BLACK, BLACK},
-                {BLACK, BLACK, menuColor, menuColor, menuColor, menuColor, menuColor, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, this.menuColor, this.menuColor, this.menuColor, this.menuColor, this.menuColor, BLACK, BLACK, BLACK},
+                {BLACK, BLACK, this.menuColor, this.menuColor, this.menuColor, this.menuColor, this.menuColor, BLACK, BLACK, BLACK},
                 {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
                 {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},
                 {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},

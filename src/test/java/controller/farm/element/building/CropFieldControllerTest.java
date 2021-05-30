@@ -36,16 +36,16 @@ public class CropFieldControllerTest {
 
     @BeforeEach
     public void setUp() {
-        cropField = new CropField(new Position(10, 10));
-        gameController = Mockito.mock(GameController.class);
-        farm = Mockito.mock(Farm.class);
-        cropFieldController = new CropFieldController(gameController, farm);
+        this.cropField = new CropField(new Position(10, 10));
+        this.gameController = Mockito.mock(GameController.class);
+        this.farm = Mockito.mock(Farm.class);
+        this.cropFieldController = new CropFieldController(this.gameController, this.farm);
     }
 
     @Test
     public void getInteractionCommandNotPlanted() {
-        cropField.setState(new NotPlanted());
-        Command command = cropFieldController.getInteractionCommand(cropField);
+        this.cropField.setState(new NotPlanted());
+        Command command = this.cropFieldController.getInteractionCommand(this.cropField);
         Assertions.assertTrue(command instanceof OpenPopupMenuCommand);
         OpenPopupMenuCommand openPopupMenuCommand = (OpenPopupMenuCommand) command;
         Assertions.assertTrue(openPopupMenuCommand.getMenuBuilder() instanceof PlantCropMenuControllerBuilder);
@@ -53,8 +53,8 @@ public class CropFieldControllerTest {
 
     @Test
     public void getInteractionCommandPlanted() {
-        cropField.setState(new Planted(cropField, Mockito.mock(Crop.class)));
-        Command command = cropFieldController.getInteractionCommand(cropField);
+        this.cropField.setState(new Planted(this.cropField, Mockito.mock(Crop.class)));
+        Command command = this.cropFieldController.getInteractionCommand(this.cropField);
         Assertions.assertTrue(command instanceof OpenPopupMenuCommand);
         OpenPopupMenuCommand openPopupMenuCommand = (OpenPopupMenuCommand) command;
         Assertions.assertTrue(openPopupMenuCommand.getMenuBuilder() instanceof CropFieldGrowingMenuControllerBuilder);
@@ -62,8 +62,8 @@ public class CropFieldControllerTest {
 
     @Test
     public void getInteractionCommandReadyToHarvest() {
-        cropField.setState(new ReadyToHarvest(cropField, Mockito.mock(Crop.class), 1));
-        Command command = cropFieldController.getInteractionCommand(cropField);
+        this.cropField.setState(new ReadyToHarvest(this.cropField, Mockito.mock(Crop.class), 1));
+        Command command = this.cropFieldController.getInteractionCommand(this.cropField);
         Assertions.assertTrue(command instanceof OpenPopupMenuCommand);
         OpenPopupMenuCommand openPopupMenuCommand = (OpenPopupMenuCommand) command;
         Assertions.assertTrue(openPopupMenuCommand.getMenuBuilder() instanceof HarvestMenuControllerBuilder);
@@ -71,26 +71,26 @@ public class CropFieldControllerTest {
 
     @Test
     public void getInteractionCommandUnknownState() {
-        cropField.setState(Mockito.mock(CropFieldState.class));
+        this.cropField.setState(Mockito.mock(CropFieldState.class));
         Assertions.assertThrows(RuntimeException.class,
-                () -> cropFieldController.getInteractionCommand(cropField));
+                () -> this.cropFieldController.getInteractionCommand(this.cropField));
     }
 
     @Test
     public void getDemolishCommand() {
-        Mockito.when(gameController.getGameControllerState()).thenReturn(Mockito.mock(FarmDemolishController.class));
+        Mockito.when(this.gameController.getGameControllerState()).thenReturn(Mockito.mock(FarmDemolishController.class));
 
         BuildingSet buildings = new BuildingSet();
-        buildings.addCropField(cropField);
+        buildings.addCropField(this.cropField);
         buildings.addCropField(Mockito.mock(CropField.class));
         buildings.addCropField(Mockito.mock(CropField.class));
-        Mockito.when(farm.getBuildings()).thenReturn(buildings);
+        Mockito.when(this.farm.getBuildings()).thenReturn(buildings);
 
-        Command command = cropFieldController.getDemolishCommand(cropField);
+        Command command = this.cropFieldController.getDemolishCommand(this.cropField);
         Assertions.assertTrue(command instanceof CompoundCommand);
         CompoundCommand compoundCommand = (CompoundCommand) command;
         compoundCommand.getCommands().get(0).execute();
-        Assertions.assertFalse(buildings.getCropFields().contains(cropField));
+        Assertions.assertFalse(buildings.getCropFields().contains(this.cropField));
 
         Assertions.assertTrue(compoundCommand.getCommands().get(1) instanceof SetControllerStateCommand);
         SetControllerStateCommand setControllerStateCommand = (SetControllerStateCommand) compoundCommand.getCommands().get(1);
@@ -99,32 +99,32 @@ public class CropFieldControllerTest {
 
     @Test
     public void getDemolishCommandOtherController() {
-        Mockito.when(gameController.getGameControllerState()).thenReturn(Mockito.mock(GameControllerState.class));
+        Mockito.when(this.gameController.getGameControllerState()).thenReturn(Mockito.mock(GameControllerState.class));
 
         BuildingSet buildings = new BuildingSet();
-        buildings.addCropField(cropField);
+        buildings.addCropField(this.cropField);
         buildings.addCropField(Mockito.mock(CropField.class));
         buildings.addCropField(Mockito.mock(CropField.class));
-        Mockito.when(farm.getBuildings()).thenReturn(buildings);
+        Mockito.when(this.farm.getBuildings()).thenReturn(buildings);
 
-        Command command = cropFieldController.getDemolishCommand(cropField);
+        Command command = this.cropFieldController.getDemolishCommand(this.cropField);
         Assertions.assertTrue(command instanceof CompoundCommand);
         CompoundCommand compoundCommand = (CompoundCommand) command;
         compoundCommand.getCommands().get(0).execute();
-        Assertions.assertFalse(buildings.getCropFields().contains(cropField));
+        Assertions.assertFalse(buildings.getCropFields().contains(this.cropField));
 
         Assertions.assertTrue(compoundCommand.getCommands().get(1) instanceof SetControllerStateCommand);
         SetControllerStateCommand setControllerStateCommand = (SetControllerStateCommand) compoundCommand.getCommands().get(1);
-        Assertions.assertSame(gameController.getGameControllerState(), setControllerStateCommand.getControllerState());
+        Assertions.assertSame(this.gameController.getGameControllerState(), setControllerStateCommand.getControllerState());
     }
 
     @Test
     public void getDemolishCommandSingleCropField() {
         BuildingSet buildings = new BuildingSet();
-        buildings.addCropField(cropField);
-        Mockito.when(farm.getBuildings()).thenReturn(buildings);
+        buildings.addCropField(this.cropField);
+        Mockito.when(this.farm.getBuildings()).thenReturn(buildings);
 
-        Command command = cropFieldController.getDemolishCommand(cropField);
+        Command command = this.cropFieldController.getDemolishCommand(this.cropField);
         Assertions.assertTrue(command instanceof OpenPopupMenuCommand);
         OpenPopupMenuCommand openPopupMenuCommand = (OpenPopupMenuCommand) command;
         Assertions.assertTrue(openPopupMenuCommand.getMenuBuilder() instanceof AlertMenuControllerBuilder);
@@ -135,11 +135,11 @@ public class CropFieldControllerTest {
         Crop crop = Mockito.mock(Crop.class);
         Mockito.when(crop.getGrowTime()).thenReturn(new InGameTime(0, 2, 0));
         Mockito.when(crop.getBaseHarvestAmount()).thenReturn(1);
-        Mockito.when(farm.getCurrentWeather()).thenReturn(Mockito.mock(Weather.class));
-        Mockito.when(farm.getCurrentWeather().getEffect(Mockito.any())).thenReturn(1.5);
-        cropField.setState(new Planted(cropField, crop));
-        cropFieldController.reactTimePassed(cropField, new InGameTime(0, 1, 30));
-        Assertions.assertEquals(new InGameTime(0, 0, 30), cropField.getRemainingTime());
-        Assertions.assertEquals(2, cropField.getHarvestAmount());
+        Mockito.when(this.farm.getCurrentWeather()).thenReturn(Mockito.mock(Weather.class));
+        Mockito.when(this.farm.getCurrentWeather().getEffect(Mockito.any())).thenReturn(1.5);
+        this.cropField.setState(new Planted(this.cropField, crop));
+        this.cropFieldController.reactTimePassed(this.cropField, new InGameTime(0, 1, 30));
+        Assertions.assertEquals(new InGameTime(0, 0, 30), this.cropField.getRemainingTime());
+        Assertions.assertEquals(2, this.cropField.getHarvestAmount());
     }
 }

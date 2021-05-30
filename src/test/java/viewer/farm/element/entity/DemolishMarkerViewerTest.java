@@ -25,7 +25,7 @@ class DemolishMarkerViewerTest {
 
     @BeforeEach
     void setUp() {
-        this.gui = new GUIMockTestHelper(backgroundColors, foregroundColors, characters).mock();
+        this.gui = new GUIMockTestHelper(this.backgroundColors, this.foregroundColors, this.characters).mock();
 
 
         this.buildings = Mockito.mock(BuildingSet.class);
@@ -48,7 +48,7 @@ class DemolishMarkerViewerTest {
 
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
-                foregroundColors[i][j] = Color.BLACK;
+                this.foregroundColors[i][j] = Color.BLACK;
             }
         }
 
@@ -114,7 +114,7 @@ class DemolishMarkerViewerTest {
 
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
-                foregroundColors[i][j] = Color.BLACK;
+                this.foregroundColors[i][j] = Color.BLACK;
             }
         }
 

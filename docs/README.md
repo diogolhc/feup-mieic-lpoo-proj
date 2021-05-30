@@ -245,7 +245,7 @@ In order to conserve the **Single Responsibility Principle**, it is also importa
 to separate the creation of each menu from the menu controller and model themselves.
 
 #### The Pattern
-We created an abstract class [MenuControllerBuilder](../src/main/java/controller/menu/builder/MenuControllerBuilder.java)  
+We created an abstract class [MenuControllerBuilder](../src/main/java/controller/menu/builder/MenuControllerBuilder.java)
 based on **Factory Method** to build the menus. This class is responsible for
 building a menu and declares several factory methods (to get the menu width, height,
 buttons, labels, etc.) to be implemented in subclasses.
@@ -267,15 +267,14 @@ factory methods) is a product.
 ![diagrams/implementation_p3.png](diagrams/implementation_p3.png)
 
 These classes can be found in the following files:
-- [GameControllerState](../src/main/java/controller/GameControllerState.java)
 - [MenuController](../src/main/java/controller/menu/MenuController.java)
 - [MainMenuController](../src/main/java/controller/menu/MainMenuController.java)
 - [PopupMenuController](../src/main/java/controller/menu/PopupMenuController.java)
-- [FarmController](../src/main/java/controller/farm/FarmController.java)
-- [FarmWithFarmerController](../src/main/java/controller/farm/FarmWithFarmerController.java)
-- [FarmDemolishController](../src/main/java/controller/farm/FarmDemolishController.java)
-- [FarmNewBuildingController](../src/main/java/controller/farm/FarmNewBuildingController.java)
-- [FarmRestingController](../src/main/java/controller/farm/FarmRestingController.java)
+- [MenuControllerBuilder](../src/main/java/controller/menu/builder/MenuControllerBuilder.java)
+- [HouseMenuControllerBuilder](../src/main/java/controller/menu/builder/building/HouseMenuControllerBuilder.java)
+- [MainMenuControllerBuilder](../src/main/java/controller/menu/builder/MainMenuControllerBuilder.java)
+- [ButtonController](../src/main/java/controller/menu/element/ButtonController.java)
+- [Label](../src/main/java/model/menu/label/Label.java)
 
 #### Consequences
 This approach has the following benefits:
@@ -327,6 +326,10 @@ These classes can be found in the following files:
 - [CropField](../src/main/java/model/farm/building/crop_field/CropField.java)
 - [Wallet](../src/main/java/model/farm/Wallet.java)
 - [GameController](../src/main/java/controller/GameController.java)
+
+Note that a similar design was implemented in [FarmBuilder](../src/main/java/model/farm/builder/FarmBuilder.java)
+to build a new [Farm](../src/main/java/model/farm/Farm.java). In that case, the
+only concrete creator is [NewGameFarmBuilder](../src/main/java/model/farm/builder/NewGameFarmBuilder.java).
 
 #### Consequences
 The use of the Command pattern to solve this problem has the following benefits:
@@ -512,6 +515,121 @@ thus preserving the **Single Responsibility Principle**.
 - The Command of the interaction for each building is independent from the
 others, thus preserving the **Open/Closed Principle** as new buildings can
 be inserted without breaking existing code.
+
+### Regions
+#### Problem in Context
+There were many places in the program where there were logic to check if something
+is within a given region. However, many of those regions were rectangles, which led
+to code duplication.
+Some examples included:
+- https://github.com/FEUP-LPOO-2021/lpoo-2021-g35/blob/339e1591dcd5b80f1ded20a2c2dc974649c64b4d/src/main/java/model/menu/Button.java#L32
+- https://github.com/FEUP-LPOO-2021/lpoo-2021-g35/blob/339e1591dcd5b80f1ded20a2c2dc974649c64b4d/src/main/java/model/farm/building/crop_field/CropField.java#L47
+- https://github.com/FEUP-LPOO-2021/lpoo-2021-g35/blob/339e1591dcd5b80f1ded20a2c2dc974649c64b4d/src/main/java/model/farm/Farm.java#L34
+
+#### The Solution
+To solve this problem we refactored the code, creating a new interface to represent
+a region. We then created classes to represent the types of regions needed, most notably
+the rectangle. Instead of repeating the logic of checking whether something is inside a rectangle or some other region,
+the rest of the code now creates a Region and uses it to do the needed checks.
+
+#### Implementation
+The following diagram shows the relevant classes in the solution of this problem, plus two  
+examples of the regions being used (in Button and in BuildingController).
+![diagrams/implementation_p9.png](diagrams/implementation_p9.png)
+
+These classes can be found in the following files:
+- [BuildingController](../src/main/java/controller/farm/element/building/BuildingController.java)
+- [Button](../src/main/java/model/menu/Button.java)
+- [Region](../src/main/java/model/region/Region.java)
+- [EdificeUntraversableRegion](../src/main/java/model/region/EdificeUntraversableRegion.java)
+- [PositionRegion](../src/main/java/model/region/PositionRegion.java)
+- [RectangleRegion](../src/main/java/model/region/RectangleRegion.java)
+
+#### Consequences
+- This approach reduces **code duplication**.
+- This approach is in favor of the **Single Responsibility Principle** because
+logic to calculate if something is within a region is separated from the rest of the code.
+- It's easy to create new types of regions as needed, thus preserving the **Open/Closed Principle**.
+
+### CropField States
+#### Problem in Context
+Depending on whether there is a crop or not planted on the crop field, and whether it is
+ready to harvest, the behavior of some methods of the crop field should be different.
+Besides that, the crop field must become ready to harvest when the time reaches zero or
+not planted when the harvest amount reaches zero.
+An analogous problem exists in the stockyard, for the products of the animals.
+
+#### The Pattern
+To solve this problem we used the **State Pattern**.
+Each crop field has a state, declared as an interface, and there are three concrete possible states:
+not planted, planted, and ready to harvest.
+
+In this way, the **Single Responsibility Principle** is conserved, because each class is responsible
+only for the behavior of its state, and the **Open/Closed Principle**, as it is possible to add more states
+without modifying existing ones.
+
+A very similar solution was used for the stockyard, as the problem was similar.
+
+#### Implementation
+The following diagram shows how the pattern’s roles were mapped to the application classes.
+For brevity, only the case of the crop field (not the stockyard) was included, as both are very similar:
+![diagrams/implementation_p10.png](diagrams/implementation_p10.png)
+
+These classes can be found in the following files:
+- [CropField](../src/main/java/model/farm/building/crop_field/CropField.java)
+- [CropFieldState](../src/main/java/model/farm/building/crop_field/state/CropFieldState.java)
+- [NotPlanted](../src/main/java/model/farm/building/crop_field/state/NotPlanted.java)
+- [Planted](../src/main/java/model/farm/building/crop_field/state/Planted.java)
+- [ReadyToHarvest](../src/main/java/model/farm/building/crop_field/state/ReadyToHarvest.java)
+
+A very similar application of the state pattern, but for stockyards, can be found in the module:
+- [model.farm.building.stockyard](../src/main/java/model/farm/building/stockyard)
+
+#### Consequences
+- The possible states become explicit in the code, instead of relying
+on flags and conditionals. The code is more organized and it is easier to navigate
+to each state's logic.
+- Polymorphism is used to select the correct state. New states can be added simply
+by creating a new class implementing GameControllerState with the desired functionality.
+
+### KeyboardReactor for elements controlled by the user
+#### Problem in Context
+Because there are many elements that may be controlled by the user (albeit only one at a time),
+such as the farmer, the demolish marker and new buildings, the code for the respective controllers
+was very similar, as can be seen in:
+- [FarmerController](https://github.com/FEUP-LPOO-2021/lpoo-2021-g35/blob/2bc7422c87c0d863c1d6e27c40b26e7a1d4f595d/src/main/java/controller/farm/FarmerController.java#L7)
+- [DemolishMarkerController](https://github.com/FEUP-LPOO-2021/lpoo-2021-g35/blob/2bc7422c87c0d863c1d6e27c40b26e7a1d4f595d/src/main/java/controller/farm/DemolishMarkerController.java#L9)
+- [NewBuildingController](https://github.com/FEUP-LPOO-2021/lpoo-2021-g35/blob/2bc7422c87c0d863c1d6e27c40b26e7a1d4f595d/src/main/java/controller/farm/NewBuildingController.java#L8)
+
+#### The Pattern
+To solve this problem we used the **Template Method Pattern**. A new abstract class with the
+common functionality was created and all three problematic classes became subclasses of this new one.
+
+Two step methods were created in the base class, *getEntityPosition()* and *moveEntity(Position position)*,
+implemented in the three subclasses with the logic specific to each. In this way, **code duplication was reduced**.
+
+Those steps are used by the super class in its template method *reactKeyboard(GUI.KEYBOARD_ACTION action)*.
+
+#### Implementation
+The following diagram shows how the pattern’s roles were mapped to the application classes.
+![diagrams/implementation_p11.png](diagrams/implementation_p11.png)
+
+These classes can be found in the following files:
+- [KeyboardReactorEntityController](../src/main/java/controller/farm/element/entity/keyboard_reactor/KeyboardReactorEntityController.java)
+- [FarmerController](../src/main/java/controller/farm/element/entity/keyboard_reactor/FarmerController.java)
+- [DemolishMarkerController](../src/main/java/controller/farm/element/entity/keyboard_reactor/DemolishMarkerController.java)
+- [NewBuildingController](../src/main/java/controller/farm/element/entity/keyboard_reactor/NewBuildingController.java)
+
+Note that the FarmerController uses the farmer inside the Farm model, because the farmer must always
+exist (even if not being controlled or shown in the screen) so that when the control returns to the
+farmer, it is still in the same position.
+
+#### Consequences
+- This pattern reduced code duplication.
+- The concrete classes only have to implement their specific part of the algorithm,
+which is in favor of the **Single Responsibility Principle**.
+- New similar controllers controlled by the user may be added without having to duplicate code or changing
+existing classes.
 
 ## KNOWN CODE SMELLS AND REFACTORING SUGGESTIONS
 

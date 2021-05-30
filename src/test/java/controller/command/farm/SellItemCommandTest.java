@@ -19,35 +19,35 @@ public class SellItemCommandTest {
 
     @BeforeEach
     public void setUp() {
-        item = Mockito.mock(Item.class);
-        wallet = Mockito.mock(Wallet.class);
-        inventory = new Inventory(100);
+        this.item = Mockito.mock(Item.class);
+        this.wallet = Mockito.mock(Wallet.class);
+        this.inventory = new Inventory(100);
 
-        Mockito.when(item.getSellPrice()).thenReturn(new Currency(10));
-        command = new SellItemCommand(wallet, inventory, item, 5);
+        Mockito.when(this.item.getSellPrice()).thenReturn(new Currency(10));
+        this.command = new SellItemCommand(this.wallet, this.inventory, this.item, 5);
     }
 
     @Test
     public void execute() {
-        inventory.storeItem(item, 10);
-        Assertions.assertEquals(10, inventory.getAmount(item));
+        this.inventory.storeItem(this.item, 10);
+        Assertions.assertEquals(10, this.inventory.getAmount(this.item));
 
-        Mockito.verify(wallet, Mockito.never()).receive(Mockito.any());
-        command.execute();
+        Mockito.verify(this.wallet, Mockito.never()).receive(Mockito.any());
+        this.command.execute();
 
-        Mockito.verify(wallet, Mockito.times(1)).receive(new Currency(50));
+        Mockito.verify(this.wallet, Mockito.times(1)).receive(new Currency(50));
 
-        Assertions.assertEquals(5, inventory.getAmount(item));
+        Assertions.assertEquals(5, this.inventory.getAmount(this.item));
     }
 
     @Test
     public void executeLessAmount() {
-        inventory.storeItem(item, 3);
+        this.inventory.storeItem(this.item, 3);
 
-        Mockito.verify(wallet, Mockito.never()).receive(Mockito.any());
-        command.execute();
-        Mockito.verify(wallet, Mockito.times(1)).receive(new Currency(30));
+        Mockito.verify(this.wallet, Mockito.never()).receive(Mockito.any());
+        this.command.execute();
+        Mockito.verify(this.wallet, Mockito.times(1)).receive(new Currency(30));
 
-        Assertions.assertEquals(0, inventory.getAmount(item));
+        Assertions.assertEquals(0, this.inventory.getAmount(this.item));
     }
 }

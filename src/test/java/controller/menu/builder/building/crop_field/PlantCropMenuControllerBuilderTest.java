@@ -2,26 +2,18 @@ package controller.menu.builder.building.crop_field;
 
 import controller.GameController;
 import controller.GameControllerState;
-import controller.command.CompoundCommand;
-import controller.command.farm.crop_field.PlantCropCommand;
-import controller.farm.FarmNewBuildingController;
 import controller.menu.MenuController;
 import controller.menu.PopupMenuController;
 import controller.menu.builder.MenuControllerBuilder;
-import controller.menu.builder.building.WarehouseMenuControllerBuilder;
 import gui.Color;
 import model.InGameTime;
 import model.farm.Currency;
 import model.farm.Farm;
-import model.farm.Inventory;
 import model.farm.Wallet;
-import model.farm.building.Edifice;
 import model.farm.building.crop_field.CropField;
-import model.farm.building.crop_field.state.CropFieldState;
 import model.farm.building.crop_field.state.NotPlanted;
 import model.farm.data.item.Crop;
 import model.farm.data.item.CropGrowthStage;
-import model.farm.data.item.Item;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -39,8 +31,8 @@ public class PlantCropMenuControllerBuilderTest {
 
     @BeforeEach
     public void setUp() {
-        farm = Mockito.mock(Farm.class);
-        gameController = Mockito.mock(GameController.class);
+        this.farm = Mockito.mock(Farm.class);
+        this.gameController = Mockito.mock(GameController.class);
 
         List<Crop> crops = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
@@ -52,16 +44,16 @@ public class PlantCropMenuControllerBuilderTest {
             crops.add(crop);
         }
 
-        Mockito.when(farm.getCropTypes()).thenReturn(crops);
+        Mockito.when(this.farm.getCropTypes()).thenReturn(crops);
 
-        cropField = Mockito.mock(CropField.class);
-        Mockito.when(cropField.getState()).thenReturn(Mockito.mock(NotPlanted.class));
-        builder = new PlantCropMenuControllerBuilder(gameController, farm, cropField);
+        this.cropField = Mockito.mock(CropField.class);
+        Mockito.when(this.cropField.getState()).thenReturn(Mockito.mock(NotPlanted.class));
+        this.builder = new PlantCropMenuControllerBuilder(this.gameController, this.farm, this.cropField);
     }
 
     @Test
     public void buildMenu() {
-        MenuController menuController = builder.buildMenu();
+        MenuController menuController = this.builder.buildMenu();
 
         Assertions.assertTrue(menuController.getMenu().getButtons().stream().anyMatch(button ->
                 button.getTitle().equals("c0")));
@@ -83,8 +75,8 @@ public class PlantCropMenuControllerBuilderTest {
 
     @Test
     public void canAffordCrop() {
-        Mockito.when(farm.getWallet()).thenReturn(new Wallet(new Currency(10)));
-        MenuController menuController = builder.buildMenu();
+        Mockito.when(this.farm.getWallet()).thenReturn(new Wallet(new Currency(10)));
+        MenuController menuController = this.builder.buildMenu();
 
         menuController
                 .getButtons()
@@ -92,14 +84,14 @@ public class PlantCropMenuControllerBuilderTest {
                 .filter(buttonController -> buttonController.getButton().getTitle().equals("c0"))
                 .forEach(buttonController -> {
                     buttonController.getCommand().execute();
-                    Mockito.verify(cropField, Mockito.times(1)).setState(Mockito.any());
+                    Mockito.verify(this.cropField, Mockito.times(1)).setState(Mockito.any());
                 });
     }
 
     @Test
     public void cannotAffordBuildable() {
-        Mockito.when(farm.getWallet()).thenReturn(new Wallet(new Currency(10)));
-        MenuController menuController = builder.buildMenu();
+        Mockito.when(this.farm.getWallet()).thenReturn(new Wallet(new Currency(10)));
+        MenuController menuController = this.builder.buildMenu();
 
         menuController
                 .getButtons()
@@ -108,9 +100,9 @@ public class PlantCropMenuControllerBuilderTest {
                 .forEach(buttonController -> {
                     buttonController.getCommand().execute();
                     ArgumentCaptor<GameControllerState> captor = ArgumentCaptor.forClass(GameControllerState.class);
-                    Mockito.verify(gameController, Mockito.times(1)).setGameControllerState(captor.capture());
+                    Mockito.verify(this.gameController, Mockito.times(1)).setGameControllerState(captor.capture());
                     Assertions.assertTrue(captor.getValue() instanceof PopupMenuController);
-                    Mockito.verify(cropField, Mockito.never()).setState(Mockito.any());
+                    Mockito.verify(this.cropField, Mockito.never()).setState(Mockito.any());
                 });
     }
 }

@@ -3,7 +3,6 @@ package model.farm.builder;
 import model.InGameTime;
 import model.farm.Currency;
 import model.farm.Farm;
-import model.farm.data.Livestock;
 import model.farm.data.Weather;
 import model.farm.data.item.Crop;
 import model.farm.data.item.CropGrowthStage;
@@ -25,7 +24,7 @@ public class NewGameFarmBuilderTest {
 
     @BeforeEach
     public void setUp() {
-        cropsData = Arrays.asList(
+        this.cropsData = Arrays.asList(
                 "c1 3 10 20 30",
                 "00:00 a #000001",
                 "00:01 b #000002",
@@ -34,25 +33,25 @@ public class NewGameFarmBuilderTest {
                 "00:00 d #000004",
                 "00:02 e #000005"
         );
-        crops = new ArrayList<>();
+        this.crops = new ArrayList<>();
         Crop crop = new Crop("c1");
         crop.setPlantPrice(new Currency(10));
         crop.setBaseHarvestAmount(20);
         crop.setSellPrice(new Currency(30));
-        crop.addGrowthStage(CropGrowthStage.parseGrowthStage(cropsData.get(1)));
-        crop.addGrowthStage(CropGrowthStage.parseGrowthStage(cropsData.get(2)));
-        crop.addGrowthStage(CropGrowthStage.parseGrowthStage(cropsData.get(3)));
-        crops.add(crop);
+        crop.addGrowthStage(CropGrowthStage.parseGrowthStage(this.cropsData.get(1)));
+        crop.addGrowthStage(CropGrowthStage.parseGrowthStage(this.cropsData.get(2)));
+        crop.addGrowthStage(CropGrowthStage.parseGrowthStage(this.cropsData.get(3)));
+        this.crops.add(crop);
 
         crop = new Crop("c2");
         crop.setPlantPrice(new Currency(11));
         crop.setBaseHarvestAmount(21);
         crop.setSellPrice(new Currency(31));
-        crop.addGrowthStage(CropGrowthStage.parseGrowthStage(cropsData.get(5)));
-        crop.addGrowthStage(CropGrowthStage.parseGrowthStage(cropsData.get(6)));
-        crops.add(crop);
+        crop.addGrowthStage(CropGrowthStage.parseGrowthStage(this.cropsData.get(5)));
+        crop.addGrowthStage(CropGrowthStage.parseGrowthStage(this.cropsData.get(6)));
+        this.crops.add(crop);
 
-        livestocksData = Arrays.asList(
+        this.livestocksData = Arrays.asList(
                 "a1 A 40 50 60 70 80 90",
                 "c1 30",
                 "p1 01:01 100 110",
@@ -61,7 +60,7 @@ public class NewGameFarmBuilderTest {
                 "p2 01:02 101 111"
         );
 
-        weathersData = Arrays.asList(
+        this.weathersData = Arrays.asList(
                 "w1 0.1",
                 "1 w2 0.01",
                 "w2 0.2",
@@ -69,7 +68,7 @@ public class NewGameFarmBuilderTest {
                 "w3 -0.3",
                 "2 w2 0.04 w1 0.05"
         );
-        weathers = new ArrayList<>();
+        this.weathers = new ArrayList<>();
         Weather weather1 = new Weather("w1", 0.1);
         Weather weather2 = new Weather("w2", 0.2);
         Weather weather3 = new Weather("w3", -0.3);
@@ -78,19 +77,19 @@ public class NewGameFarmBuilderTest {
         weather2.addWeatherChangeProbability(weather3, 0.03);
         weather3.addWeatherChangeProbability(weather2, 0.04);
         weather3.addWeatherChangeProbability(weather1, 0.05);
-        weathers.add(weather1);
-        weathers.add(weather2);
-        weathers.add(weather3);
-        startingWeather = weather1;
+        this.weathers.add(weather1);
+        this.weathers.add(weather2);
+        this.weathers.add(weather3);
+        this.startingWeather = weather1;
     }
 
     @Test
     public void buildCropTypes() {
-        FarmBuilder builder = new NewGameFarmBuilder(cropsData, livestocksData, weathersData);
+        FarmBuilder builder = new NewGameFarmBuilder(this.cropsData, this.livestocksData, this.weathersData);
         Farm farm = builder.buildFarm();
 
-        for (int i = 0; i < crops.size(); i++) {
-            Crop expected = crops.get(i);
+        for (int i = 0; i < this.crops.size(); i++) {
+            Crop expected = this.crops.get(i);
             Crop actual = farm.getCropTypes().get(i);
             Assertions.assertEquals(expected.getName(), actual.getName());
             Assertions.assertEquals(expected.getPlantPrice(), actual.getPlantPrice());
@@ -106,7 +105,7 @@ public class NewGameFarmBuilderTest {
 
     @Test
     public void buildLivestockTypes() {
-        FarmBuilder builder = new NewGameFarmBuilder(cropsData, livestocksData, weathersData);
+        FarmBuilder builder = new NewGameFarmBuilder(this.cropsData, this.livestocksData, this.weathersData);
         Farm farm = builder.buildFarm();
 
         Assertions.assertEquals(2, farm.getLivestockTypes().size());
@@ -116,18 +115,18 @@ public class NewGameFarmBuilderTest {
 
     @Test
     public void buildWeatherTypes() {
-        FarmBuilder builder = new NewGameFarmBuilder(cropsData, livestocksData, weathersData);
+        FarmBuilder builder = new NewGameFarmBuilder(this.cropsData, this.livestocksData, this.weathersData);
         Farm farm = builder.buildFarm();
 
-        for (int i = 0; i < weathers.size(); i++) {
-            Weather expected = weathers.get(i);
+        for (int i = 0; i < this.weathers.size(); i++) {
+            Weather expected = this.weathers.get(i);
             Weather actual = farm.getWeatherTypes().get(i);
             Assertions.assertEquals(expected.getName(), actual.getName());
             Assertions.assertEquals(expected.getEffect(new InGameTime(1)), actual.getEffect(new InGameTime(1)));
             Assertions.assertEquals(expected.getWeatherChangeProbabilities(), actual.getWeatherChangeProbabilities());
         }
 
-        Assertions.assertEquals(startingWeather, farm.getCurrentWeather());
+        Assertions.assertEquals(this.startingWeather, farm.getCurrentWeather());
     }
 
     @Test
@@ -156,13 +155,13 @@ public class NewGameFarmBuilderTest {
                 "00:00 d #000004",
                 "00:02 e #000005"
         );
-        FarmBuilder builder1 = new NewGameFarmBuilder(invalidCrops1, livestocksData, weathersData);
+        FarmBuilder builder1 = new NewGameFarmBuilder(invalidCrops1, this.livestocksData, this.weathersData);
         Assertions.assertThrows(IllegalArgumentException.class, () -> builder1.buildFarm());
 
-        FarmBuilder builder2 = new NewGameFarmBuilder(invalidCrops2, livestocksData, weathersData);
+        FarmBuilder builder2 = new NewGameFarmBuilder(invalidCrops2, this.livestocksData, this.weathersData);
         Assertions.assertThrows(IllegalArgumentException.class, () -> builder2.buildFarm());
 
-        FarmBuilder builder3 = new NewGameFarmBuilder(invalidCrops3, livestocksData, weathersData);
+        FarmBuilder builder3 = new NewGameFarmBuilder(invalidCrops3, this.livestocksData, this.weathersData);
         Assertions.assertThrows(IllegalArgumentException.class, () -> builder3.buildFarm());
     }
 
@@ -187,13 +186,13 @@ public class NewGameFarmBuilderTest {
                 "1 w1 0.02"
         );
 
-        FarmBuilder builder1 = new NewGameFarmBuilder(cropsData, livestocksData, invalidWeathers1);
+        FarmBuilder builder1 = new NewGameFarmBuilder(this.cropsData, this.livestocksData, invalidWeathers1);
         Assertions.assertThrows(IllegalArgumentException.class, () -> builder1.buildFarm());
 
-        FarmBuilder builder2 = new NewGameFarmBuilder(cropsData, livestocksData, invalidWeathers2);
+        FarmBuilder builder2 = new NewGameFarmBuilder(this.cropsData, this.livestocksData, invalidWeathers2);
         Assertions.assertThrows(IllegalArgumentException.class, () -> builder2.buildFarm());
 
-        FarmBuilder builder3 = new NewGameFarmBuilder(cropsData, livestocksData, invalidWeathers3);
+        FarmBuilder builder3 = new NewGameFarmBuilder(this.cropsData, this.livestocksData, invalidWeathers3);
         Assertions.assertThrows(IllegalArgumentException.class, () -> builder3.buildFarm());
     }
 }

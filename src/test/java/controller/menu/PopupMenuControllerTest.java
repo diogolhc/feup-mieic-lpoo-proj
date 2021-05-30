@@ -17,27 +17,27 @@ public class PopupMenuControllerTest {
 
     @BeforeEach
     public void setUp() {
-        menu = Mockito.mock(Menu.class);
-        backState = Mockito.mock(GameControllerState.class);
-        gameController = Mockito.mock(GameController.class);
-        popupMenuController = new PopupMenuController(menu, gameController, backState);
+        this.menu = Mockito.mock(Menu.class);
+        this.backState = Mockito.mock(GameControllerState.class);
+        this.gameController = Mockito.mock(GameController.class);
+        this.popupMenuController = new PopupMenuController(this.menu, this.gameController, this.backState);
     }
 
     @Test
     public void reactKeyboard() {
-        popupMenuController.reactKeyboard(GUI.KEYBOARD_ACTION.INTERACT);
-        Mockito.verifyNoInteractions(gameController);
-        popupMenuController.reactKeyboard(GUI.KEYBOARD_ACTION.BACK);
-        Mockito.verify(gameController, Mockito.times(1)).setGameControllerState(backState);
+        this.popupMenuController.reactKeyboard(GUI.KEYBOARD_ACTION.INTERACT);
+        Mockito.verifyNoInteractions(this.gameController);
+        this.popupMenuController.reactKeyboard(GUI.KEYBOARD_ACTION.BACK);
+        Mockito.verify(this.gameController, Mockito.times(1)).setGameControllerState(this.backState);
 
         // Popup should disable keyboard reactions of backState
-        Mockito.verify(backState, Mockito.never()).reactKeyboard(Mockito.any());
+        Mockito.verify(this.backState, Mockito.never()).reactKeyboard(Mockito.any());
     }
 
     @Test
     public void reactTimePassed() {
         // Popup should not disable passage of time of backState
-        popupMenuController.reactTimePassed(20);
-        Mockito.verify(backState, Mockito.times(1)).reactTimePassed(20);
+        this.popupMenuController.reactTimePassed(20);
+        Mockito.verify(this.backState, Mockito.times(1)).reactTimePassed(20);
     }
 }

@@ -48,7 +48,7 @@ public class GameController implements MouseListener {
         int frameTime = 1000/FPS;
         long lastFrameStartTime = System.currentTimeMillis();
 
-        while (running) {
+        while (this.running) {
             long startTime = System.currentTimeMillis();
             this.runFrame(startTime - lastFrameStartTime);
             this.sleepRestOfFrame(frameTime, startTime);
@@ -59,7 +59,7 @@ public class GameController implements MouseListener {
     }
 
     public void runFrame(long elapsedTimeSinceLastFrame) throws IOException {
-        this.gameControllerState.getViewer().drawScreen(gui);
+        this.gameControllerState.getViewer().drawScreen(this.gui);
 
         GUI.KEYBOARD_ACTION action = this.gui.getNextKeyboardAction();
         if (action == GUI.KEYBOARD_ACTION.QUIT) {

@@ -8,7 +8,6 @@ import model.region.RectangleRegion;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
 public class DemolishMarkerControllerTest {
@@ -18,82 +17,82 @@ public class DemolishMarkerControllerTest {
 
     @BeforeEach
     public void setUp() {
-        demolishMarker = new Entity(new Position(10, 10));
-        farm = Mockito.mock(Farm.class);
-        Mockito.when(farm.getFarmer()).thenReturn(demolishMarker);
+        this.demolishMarker = new Entity(new Position(10, 10));
+        this.farm = Mockito.mock(Farm.class);
+        Mockito.when(this.farm.getFarmer()).thenReturn(this.demolishMarker);
         RectangleRegion region = Mockito.mock(RectangleRegion.class);
-        Mockito.when(farm.getInsideRegion()).thenReturn(region);
+        Mockito.when(this.farm.getInsideRegion()).thenReturn(region);
         Mockito.when(region.contains(Mockito.any(Position.class))).thenReturn(true);
 
-        controller = new DemolishMarkerController(farm, demolishMarker);
+        this.controller = new DemolishMarkerController(this.farm, this.demolishMarker);
     }
 
     @Test
     public void moveUp() {
-        controller.reactKeyboard(GUI.KEYBOARD_ACTION.MOVE_UP);
-        Assertions.assertEquals(new Position(10, 9), demolishMarker.getPosition());
-        controller.reactKeyboard(GUI.KEYBOARD_ACTION.MOVE_UP);
-        Assertions.assertEquals(new Position(10, 8), demolishMarker.getPosition());
+        this.controller.reactKeyboard(GUI.KEYBOARD_ACTION.MOVE_UP);
+        Assertions.assertEquals(new Position(10, 9), this.demolishMarker.getPosition());
+        this.controller.reactKeyboard(GUI.KEYBOARD_ACTION.MOVE_UP);
+        Assertions.assertEquals(new Position(10, 8), this.demolishMarker.getPosition());
     }
 
     @Test
     public void moveDown() {
-        controller.reactKeyboard(GUI.KEYBOARD_ACTION.MOVE_DOWN);
-        Assertions.assertEquals(new Position(10, 11), demolishMarker.getPosition());
-        controller.reactKeyboard(GUI.KEYBOARD_ACTION.MOVE_DOWN);
-        Assertions.assertEquals(new Position(10, 12), demolishMarker.getPosition());
+        this.controller.reactKeyboard(GUI.KEYBOARD_ACTION.MOVE_DOWN);
+        Assertions.assertEquals(new Position(10, 11), this.demolishMarker.getPosition());
+        this.controller.reactKeyboard(GUI.KEYBOARD_ACTION.MOVE_DOWN);
+        Assertions.assertEquals(new Position(10, 12), this.demolishMarker.getPosition());
     }
 
     @Test
     public void moveLeft() {
-        controller.reactKeyboard(GUI.KEYBOARD_ACTION.MOVE_LEFT);
-        Assertions.assertEquals(new Position(9, 10), demolishMarker.getPosition());
-        controller.reactKeyboard(GUI.KEYBOARD_ACTION.MOVE_LEFT);
-        Assertions.assertEquals(new Position(8, 10), demolishMarker.getPosition());
+        this.controller.reactKeyboard(GUI.KEYBOARD_ACTION.MOVE_LEFT);
+        Assertions.assertEquals(new Position(9, 10), this.demolishMarker.getPosition());
+        this.controller.reactKeyboard(GUI.KEYBOARD_ACTION.MOVE_LEFT);
+        Assertions.assertEquals(new Position(8, 10), this.demolishMarker.getPosition());
     }
 
     @Test
     public void moveRight() {
-        controller.reactKeyboard(GUI.KEYBOARD_ACTION.MOVE_RIGHT);
-        Assertions.assertEquals(new Position(11, 10), demolishMarker.getPosition());
-        controller.reactKeyboard(GUI.KEYBOARD_ACTION.MOVE_RIGHT);
-        Assertions.assertEquals(new Position(12, 10), demolishMarker.getPosition());
+        this.controller.reactKeyboard(GUI.KEYBOARD_ACTION.MOVE_RIGHT);
+        Assertions.assertEquals(new Position(11, 10), this.demolishMarker.getPosition());
+        this.controller.reactKeyboard(GUI.KEYBOARD_ACTION.MOVE_RIGHT);
+        Assertions.assertEquals(new Position(12, 10), this.demolishMarker.getPosition());
     }
 
     @Test
     public void noMove() {
-        controller.reactKeyboard(GUI.KEYBOARD_ACTION.NONE);
-        controller.reactKeyboard(GUI.KEYBOARD_ACTION.INTERACT);
-        controller.reactKeyboard(GUI.KEYBOARD_ACTION.QUIT);
-        controller.reactKeyboard(GUI.KEYBOARD_ACTION.BACK);
-        Mockito.verifyNoInteractions(farm);
-        Assertions.assertEquals(new Position(10, 10), demolishMarker.getPosition());
+        this.controller.reactKeyboard(GUI.KEYBOARD_ACTION.NONE);
+        this.controller.reactKeyboard(GUI.KEYBOARD_ACTION.INTERACT);
+        this.controller.reactKeyboard(GUI.KEYBOARD_ACTION.QUIT);
+        this.controller.reactKeyboard(GUI.KEYBOARD_ACTION.BACK);
+        Mockito.verifyNoInteractions(this.farm);
+        Assertions.assertEquals(new Position(10, 10), this.demolishMarker.getPosition());
     }
 
     @Test
     public void cantMove() {
-        Mockito.when(farm.getInsideRegion().contains(Mockito.any(Position.class))).thenReturn(false);
-        controller.reactKeyboard(GUI.KEYBOARD_ACTION.MOVE_UP);
-        Assertions.assertEquals(new Position(10, 10), demolishMarker.getPosition());
-        controller.reactKeyboard(GUI.KEYBOARD_ACTION.MOVE_DOWN);
-        Assertions.assertEquals(new Position(10, 10), demolishMarker.getPosition());
-        controller.reactKeyboard(GUI.KEYBOARD_ACTION.MOVE_RIGHT);
-        Assertions.assertEquals(new Position(10, 10), demolishMarker.getPosition());
-        controller.reactKeyboard(GUI.KEYBOARD_ACTION.MOVE_LEFT);
-        Assertions.assertEquals(new Position(10, 10), demolishMarker.getPosition());
+        Mockito.when(this.farm.getInsideRegion().contains(Mockito.any(Position.class))).thenReturn(false);
+        this.controller.reactKeyboard(GUI.KEYBOARD_ACTION.MOVE_UP);
+        Assertions.assertEquals(new Position(10, 10), this.demolishMarker.getPosition());
+        this.controller.reactKeyboard(GUI.KEYBOARD_ACTION.MOVE_DOWN);
+        Assertions.assertEquals(new Position(10, 10), this.demolishMarker.getPosition());
+        this.controller.reactKeyboard(GUI.KEYBOARD_ACTION.MOVE_RIGHT);
+        Assertions.assertEquals(new Position(10, 10), this.demolishMarker.getPosition());
+        this.controller.reactKeyboard(GUI.KEYBOARD_ACTION.MOVE_LEFT);
+        Assertions.assertEquals(new Position(10, 10), this.demolishMarker.getPosition());
     }
 
     @Test
     public void canOnlyMoveLeft() {
-        Mockito.when(farm.getInsideRegion().contains(Mockito.any(Position.class))).thenReturn(false);
-        Mockito.when(farm.getInsideRegion().contains(new Position(9, 10))).thenReturn(true);
-        controller.reactKeyboard(GUI.KEYBOARD_ACTION.MOVE_UP);
-        Assertions.assertEquals(new Position(10, 10), demolishMarker.getPosition());
-        controller.reactKeyboard(GUI.KEYBOARD_ACTION.MOVE_DOWN);
-        Assertions.assertEquals(new Position(10, 10), demolishMarker.getPosition());
-        controller.reactKeyboard(GUI.KEYBOARD_ACTION.MOVE_RIGHT);
-        Assertions.assertEquals(new Position(10, 10), demolishMarker.getPosition());
-        controller.reactKeyboard(GUI.KEYBOARD_ACTION.MOVE_LEFT);
-        Assertions.assertEquals(new Position(9, 10), demolishMarker.getPosition());
+        Mockito.when(this.farm.getInsideRegion().contains(Mockito.any(Position.class))).thenReturn(false);
+        Mockito.when(this.farm.getInsideRegion().contains(new Position(9, 10))).thenReturn(true);
+        this.controller.reactKeyboard(GUI.KEYBOARD_ACTION.MOVE_UP);
+        Assertions.assertEquals(new Position(10, 10), this.demolishMarker.getPosition());
+        this.controller.reactKeyboard(GUI.KEYBOARD_ACTION.MOVE_DOWN);
+        Assertions.assertEquals(new Position(10, 10), this.demolishMarker.getPosition());
+        this.controller.reactKeyboard(GUI.KEYBOARD_ACTION.MOVE_RIGHT);
+        Assertions.assertEquals(new Position(10, 10), this.demolishMarker.getPosition());
+        this.controller.reactKeyboard(GUI.KEYBOARD_ACTION.MOVE_LEFT);
+        Assertions.assertEquals(new Position(9, 10), this.demolishMarker.getPosition());
     }
 }

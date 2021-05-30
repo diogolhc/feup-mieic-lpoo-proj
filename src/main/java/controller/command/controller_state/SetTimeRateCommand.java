@@ -14,7 +14,7 @@ public class SetTimeRateCommand implements Command {
 
     @Override
     public void execute() {
-        this.timeConverter.setRateMultiplier(rate);
+        this.timeConverter.setRateMultiplier(this.rate);
     }
 
 }

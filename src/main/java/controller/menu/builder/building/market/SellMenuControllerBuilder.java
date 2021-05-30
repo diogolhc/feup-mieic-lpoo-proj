@@ -35,7 +35,7 @@ public class SellMenuControllerBuilder extends PopupMenuControllerBuilder {
     private void addAllItemsSellButtons(List<ButtonController> buttons) {
         int x = 1;
         int y = 5;
-        for (Item item: items) {
+        for (Item item: this.items) {
             addItemSellButtons(buttons, new Position(x, y), item);
 
             y += 5;
@@ -78,7 +78,7 @@ public class SellMenuControllerBuilder extends PopupMenuControllerBuilder {
     private void addAllItemsInfoLabels(List<Label> labels) {
         int x = 1;
         int y = 4;
-        for (Item item: items) {
+        for (Item item: this.items) {
             addItemInfoLabel(labels, new Position(x, y), item);
 
             y += 5;

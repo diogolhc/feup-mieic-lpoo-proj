@@ -9,7 +9,6 @@ import model.menu.Button;
 import model.menu.Menu;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public abstract class MenuController implements GameControllerState {
@@ -42,14 +41,14 @@ public abstract class MenuController implements GameControllerState {
     @Override
     public void reactMouseMovement(Position position) {
         for (ButtonController buttonController: this.buttonControllers) {
-            buttonController.reactMouseMovement(position.getRelativeTo(menu.getTopLeftPosition()));
+            buttonController.reactMouseMovement(position.getRelativeTo(this.menu.getTopLeftPosition()));
         }
     }
 
     @Override
     public void reactMouseClick(Position position) {
         for (ButtonController buttonController: this.buttonControllers) {
-            buttonController.reactMouseClick(position.getRelativeTo(menu.getTopLeftPosition()));
+            buttonController.reactMouseClick(position.getRelativeTo(this.menu.getTopLeftPosition()));
         }
     }
 

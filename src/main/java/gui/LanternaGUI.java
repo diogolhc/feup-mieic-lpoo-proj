@@ -42,7 +42,7 @@ public class LanternaGUI implements GUI {
         this.windowWidth = width;
         this.windowHeight = height;
         this.terminal = this.createTerminal(width, height, fontConfig);
-        this.screen = this.createScreen(terminal);
+        this.screen = this.createScreen(this.terminal);
         this.graphics = this.screen.newTextGraphics();
     }
 
@@ -176,21 +176,21 @@ public class LanternaGUI implements GUI {
     public MouseAdapter getMouseAdapter(MouseListener mouseListener) {
         return new MouseAdapter() {
             private void updateMousePosition(MouseEvent e) {
-                mouseX = e.getX()/LanternaGUI.CHAR_SIZE;
-                mouseY = e.getY()/LanternaGUI.CHAR_SIZE;
+                LanternaGUI.this.mouseX = e.getX()/LanternaGUI.CHAR_SIZE;
+                LanternaGUI.this.mouseY = e.getY()/LanternaGUI.CHAR_SIZE;
             }
 
             @Override
             public void mouseClicked(MouseEvent e) {
                 updateMousePosition(e);
-                mouseListener.onMouseClick(mouseX, mouseY);
+                mouseListener.onMouseClick(LanternaGUI.this.mouseX, LanternaGUI.this.mouseY);
 
             }
 
             @Override
             public void mouseMoved(MouseEvent e) {
                 updateMousePosition(e);
-                mouseListener.onMouseMovement(mouseX, mouseY);
+                mouseListener.onMouseMovement(LanternaGUI.this.mouseX, LanternaGUI.this.mouseY);
             }
 
             @Override
@@ -199,7 +199,7 @@ public class LanternaGUI implements GUI {
                 // update position so that buttons are selected/unselected
                 // correctly.
                 updateMousePosition(e);
-                mouseListener.onMouseMovement(mouseX, mouseY);
+                mouseListener.onMouseMovement(LanternaGUI.this.mouseX, LanternaGUI.this.mouseY);
             }
         };
     }
@@ -214,10 +214,10 @@ public class LanternaGUI implements GUI {
 
     @Override
     public int getMouseX() {
-        return mouseX;
+        return this.mouseX;
     }
 
     public int getMouseY() {
-        return mouseY;
+        return this.mouseY;
     }
 }

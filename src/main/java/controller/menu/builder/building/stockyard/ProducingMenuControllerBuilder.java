@@ -37,9 +37,9 @@ public class ProducingMenuControllerBuilder extends PopupMenuControllerBuilder {
                 this.controller, this.farm.getInventory(), this.stockyard);
 
         MenuController collectMenuController = collectMenuControllerBuilder.buildMenuCentered(
-                controller.getWindowWidth(), controller.getWindowHeight());
+                this.controller.getWindowWidth(), this.controller.getWindowHeight());
 
-        Command closingCondition = new ConditionalCommand(() -> stockyard.getState() instanceof ReadyToCollect)
+        Command closingCondition = new ConditionalCommand(() -> this.stockyard.getState() instanceof ReadyToCollect)
             .ifTrue(new SetControllerStateCommand(this.controller, collectMenuController));
 
         return new PopupMenuControllerWithTimePassedReaction(menu, this.controller,
@@ -59,7 +59,7 @@ public class ProducingMenuControllerBuilder extends PopupMenuControllerBuilder {
         Button stopProducingButton = new Button(new Position(1, 8), "STOP PRODUCING");
 
         Command stopProducingButtonCommand = new CompoundCommand()
-                .addCommand(new StopProducingStockyardCommand(stockyard))
+                .addCommand(new StopProducingStockyardCommand(this.stockyard))
                 .addCommand(super.getClosePopupMenuCommand());
 
         buttons.add(new ButtonController(stopProducingButton, stopProducingButtonCommand));
@@ -86,14 +86,14 @@ public class ProducingMenuControllerBuilder extends PopupMenuControllerBuilder {
     private void addRemainingTimeLabel(List<Label> labels) {
         labels.add(new Label(
                 new Position(1, 5),
-                () -> "REMAINING TIME: " + stockyard.getRemainingTime().getTimerString()
+                () -> "REMAINING TIME: " + this.stockyard.getRemainingTime().getTimerString()
         ));
     }
 
     private void addQuantityLabel(List<Label> labels) {
         labels.add( new Label(
                 new Position(1, 6),
-                () -> "QUANTITY: " + stockyard.getState().getCollectAmount()
+                () -> "QUANTITY: " + this.stockyard.getState().getCollectAmount()
         ));
     }
 

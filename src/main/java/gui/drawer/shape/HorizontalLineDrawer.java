@@ -22,11 +22,11 @@ public class HorizontalLineDrawer {
     }
 
     public void draw(Position position, int length) {
-        this.gui.setForegroundColor(foregroundColor);
-        this.gui.setBackgroundColor(backgroundColor);
+        this.gui.setForegroundColor(this.foregroundColor);
+        this.gui.setBackgroundColor(this.backgroundColor);
 
         for (int i = 0; i < length; i++) {
-            this.gui.drawChar(position.getX(), position.getY(), character);
+            this.gui.drawChar(position.getX(), position.getY(), this.character);
             position = position.getRight();
         }
     }

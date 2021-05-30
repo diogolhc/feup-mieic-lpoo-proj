@@ -1,7 +1,6 @@
 package controller.command.farm.crop_field;
 
 import controller.command.Command;
-import model.farm.Farm;
 import model.farm.Wallet;
 import model.farm.building.crop_field.CropField;
 import model.farm.data.item.Crop;
@@ -22,7 +21,7 @@ public class PlantCropCommand implements Command {
     @Override
     public void execute() {
         if (this.cropField.getState() instanceof NotPlanted) {
-            this.cropField.setState(new Planted(cropField, this.crop));
+            this.cropField.setState(new Planted(this.cropField, this.crop));
             this.wallet.spend(this.crop.getPlantPrice());
         }
     }
