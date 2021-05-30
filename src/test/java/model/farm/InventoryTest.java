@@ -26,10 +26,11 @@ public class InventoryTest {
         inventory.storeItem(item2, 5);
     }
 
-    @Property
-    public void negativeCapacityThrows(@ForAll @Negative int n) {
-        Assertions.assertThrows(IllegalArgumentException.class,
-                () -> new Inventory(n));
+    @Test
+    public void negativeCapacityThrows() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> new Inventory(-5));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> new Inventory(-1));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> new Inventory(-500));
     }
 
     @Test

@@ -17,6 +17,11 @@ public class WeatherController {
         this.farm = farm;
     }
 
+    public WeatherController(Farm farm, InGameTime nextMinute) {
+        this.nextMinute = nextMinute;
+        this.farm = farm;
+    }
+
     public void reactTimePassed(InGameTime time) {
         this.nextMinute = this.nextMinute.subtract(time);
         if (this.nextMinute.getMinute() <= 0) {
@@ -25,7 +30,7 @@ public class WeatherController {
         }
     }
 
-    private void updateWeatherState(double chance) {
+    public void updateWeatherState(double chance) {
         Map<Weather, Double> probabilities = this.farm.getCurrentWeather().getWeatherChangeProbabilities();
 
         double acum = 0;
@@ -37,6 +42,9 @@ public class WeatherController {
                 break;
             }
         }
+    }
 
+    public InGameTime getNextMinute() {
+        return this.nextMinute;
     }
 }
