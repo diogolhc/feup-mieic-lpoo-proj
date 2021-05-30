@@ -55,7 +55,7 @@ the in game time go faster so that the player doesn't have to wait so long for
 the crops to grow or the animals to produce.
 - **Saving and loading game** - The house may also be used to save the current game state,
 which will be stored in a file to be loaded at a later time.
-**Popup Menus** - Popup menus are UI elements with labels and buttons that may be
+- **Popup Menus** - Popup menus are UI elements with labels and buttons that may be
 clicked with the mouse (and are highlighted when hovered with the mouse).
 These popups do not occupy the whole screen, so it is still possible to see
 part of the farm behind it. While a popup is opened, time in the farm passes as normal,
@@ -636,9 +636,9 @@ existing classes.
 ### Alternative Classes with Different Interfaces
 
 The [CropFieldState](../src/main/java/model/farm/building/crop_field/state/CropFieldState.java)
-and [StockYardState](../src/main/java/model/farm/building/stockyard/state/StockyardState.java) interfaces
+and [StockyardState](../src/main/java/model/farm/building/stockyard/state/StockyardState.java) interfaces
 have a great number of common methods. Even though some of them have different names, the semantics are the same.
-Furthermore, both interfaces have the same number of classes that implement them with very similar meanings.
+Furthermore, the classes that implement both interfaces have very similar logic.
 [CropFieldState](../src/main/java/model/farm/building/crop_field/state/CropFieldState.java) is implemented by
 [NotPlanted](../src/main/java/model/farm/building/crop_field/state/NotPlanted.java),
 [Planted](../src/main/java/model/farm/building/crop_field/state/Planted.java) and
@@ -650,24 +650,11 @@ Furthermore, both interfaces have the same number of classes that implement them
 lead also to **Duplicate Code**.
 
 To solve this problem, since both interfaces have very similar methods, we should start by **Rename Method** to make
-the similar methods have also the same name. After that, we could have the [CropField](../src/main/java/model/farm/building/crop_field/CropField.java) 
-and [Stockyard](../src/main/java/model/farm/building/stockyard/Stockyard.java) implement an interface: *Produceable*,
-with *setState()* method so that we could merge both [CropFieldState](../src/main/java/model/farm/building/crop_field/state/CropFieldState.java)
-and [StockYardState](../src/main/java/model/farm/building/stockyard/state/StockyardState.java) interfaces alongside with its respective class
-implementations into a single interface and a single set of States: NotProducing, Producing and ReadyToCollect.
-
-
-### Lazy Class
-
-The [PositionRegion](../src/main/java/model/region/PositionRegion.java) class was designed to represent a region with a single position.
-Thus, it ended up having an instance of a [Position](../src/main/java/model/Position.java) and implementing only a single and simple method of
-the [Region](../src/main/java/model/region/Region.java) interface. This was done also for future development of methods in
-[Region](../src/main/java/model/region/Region.java) interface or in [PositionRegion](../src/main/java/model/region/PositionRegion.java) class itself,
-but no further features were added.
-
-To tackle this problem we could make [Position](../src/main/java/model/Position.java)
-class implement the [Region](../src/main/java/model/region/Region.java)
-interface nullifying the need for the [PositionRegion](../src/main/java/model/region/PositionRegion.java) class.
+the similar methods have also the same name. After that, we could have [CropFieldState](../src/main/java/model/farm/building/crop_field/state/CropFieldState.java)
+and [StockyardState](../src/main/java/model/farm/building/stockyard/state/StockyardState.java) extend a common interface: *Produceable*,
+extracting the common methods into this new interface. This interface could be implemented by three abstract classes, representing the three
+states analogous to the states already mentioned for the cropfields and stockyards. These classes would implement the logic that is common to both cases.
+Finally, concrete states can extend the respective abstract state and implement the methods that are specific to the cropfield or stockyard, respectively.
 
 
 ### Data Class
@@ -675,14 +662,30 @@ interface nullifying the need for the [PositionRegion](../src/main/java/model/re
 The [Farm](../src/main/java/model/farm/Farm.java) class is a **Data Class** since its only 
 responsibility is to store fields and access them with getters and setters. Furthermore, since it has 
 a great number of attributes it forces the class to have also a great number of setters and getters making it
-some kind of a **Large Class** too, bloating the code.
+**Large Class** too, bloating the code.
 
 To solve this *smell*, we could use **Move Field** and **Move Method** from [Farm](../src/main/java/model/farm/Farm.java)
 to the respective controllers of the attributes moved. For example, the [*Weather*](../src/main/java/model/farm/data/Weather.java) 
-field could be moved to the [WeatherController](../src/main/java/controller/farm/element/WeatherController.java)
+attribute could be moved to the [WeatherController](../src/main/java/controller/farm/element/WeatherController.java)
 eliminating the need for the [WeatherController](../src/main/java/controller/farm/element/WeatherController.java) 
-to have an instance of the whole farm. This problem, the farm being present in several controllers is also
-present in other controllers.
+to have an instance of the whole farm.
+
+This could be applied to other controllers, so that each controller would have an instance of the
+respective model (similar to what [ButtonController](../src/main/java/controller/menu/element/ButtonController.java) currently does)
+and also of the respective viewer, manipulating the model and calling the viewer when necessary. In that case the instances
+of the controllers would have to be stored, instead of being created each time they are used.
+
+### Lazy Class
+
+The [PositionRegion](../src/main/java/model/region/PositionRegion.java) class was designed to represent a region with a single position.
+Thus, it ended up having an instance of a [Position](../src/main/java/model/Position.java) and implementing only a single and simple method of
+the [Region](../src/main/java/model/region/Region.java) interface.
+
+To tackle this problem we could make [Position](../src/main/java/model/Position.java)
+class implement the [Region](../src/main/java/model/region/Region.java)
+interface nullifying the need for the [PositionRegion](../src/main/java/model/region/PositionRegion.java) class. However this
+might not be worth it, because both classes are semantically different, even if the implementation of [PositionRegion](../src/main/java/model/region/PositionRegion.java)
+is too simple.
 
 
 
