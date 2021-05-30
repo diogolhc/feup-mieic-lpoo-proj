@@ -86,7 +86,7 @@ public class ProducingMenuControllerBuilder extends PopupMenuControllerBuilder {
     private void addRemainingTimeLabel(List<Label> labels) {
         labels.add(new Label(
                 new Position(1, 5),
-                () -> "REMAINING TIME: " + stockyard.getState().getRemainingTime().getTimerString()
+                () -> "REMAINING TIME: " + stockyard.getRemainingTime().getTimerString()
         ));
     }
 
