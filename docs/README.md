@@ -670,6 +670,21 @@ class implement the [Region](../src/main/java/model/region/Region.java)
 interface nullifying the need for the [PositionRegion](../src/main/java/model/region/PositionRegion.java) class.
 
 
+### Data Class
+
+The [Farm](../src/main/java/model/farm/Farm.java) class is a **Data Class** since its only 
+responsibility is to store fields and access them with getters and setters. Furthermore, since it has 
+a great number of attributes it forces the class to have also a great number of setters and getters making it
+some kind of a **Large Class** too, bloating the code.
+
+To solve this *smell*, we could use **Move Field** and **Move Method** from [Farm](../src/main/java/model/farm/Farm.java)
+to the respective controllers of the attributes moved. For example, the [*Weather*](../src/main/java/model/farm/data/Weather.java) 
+field could be moved to the [WeatherController](../src/main/java/controller/farm/element/WeatherController.java)
+eliminating the need for the [WeatherController](../src/main/java/controller/farm/element/WeatherController.java) 
+to have an instance of the whole farm. This problem, the farm being present in several controllers is also
+present in other controllers.
+
+
 
 ## SOLVED CODE SMELLS
 ### Middle man
