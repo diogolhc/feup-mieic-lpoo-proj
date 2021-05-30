@@ -21,7 +21,7 @@ class RestingMarkerViewerTest {
 
     @BeforeEach
     void setUp() {
-        this.gui = new GUIMockTestHelper(backgroundColors, foregroundColors, characters).mock();
+        this.gui = new GUIMockTestHelper(this.backgroundColors, this.foregroundColors, this.characters).mock();
 
         this.house = Mockito.mock(Edifice.class);
         Mockito.when(this.house.getTopLeftPosition()).thenReturn(new Position(1,1));

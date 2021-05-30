@@ -2,7 +2,6 @@ package controller.menu;
 
 import controller.GameController;
 import controller.command.Command;
-import controller.command.NoOperationCommand;
 import controller.menu.element.ButtonController;
 import model.Position;
 import model.menu.Button;
@@ -10,7 +9,6 @@ import model.menu.Menu;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import viewer.GameViewer;
 
@@ -24,9 +22,9 @@ public class MenuControllerTest {
 
     @BeforeEach
     public void setUp() {
-        menu = new Menu();
-        gameController = Mockito.mock(GameController.class);
-        controller = new MenuController(menu, gameController) {
+        this.menu = new Menu();
+        this.gameController = Mockito.mock(GameController.class);
+        this.controller = new MenuController(this.menu, this.gameController) {
             @Override
             public void reactTimePassed(long elapsedTimeSinceLastFrame) {}
 
@@ -41,24 +39,24 @@ public class MenuControllerTest {
     public void addButton() {
         Button button = Mockito.mock(Button.class);
         ButtonController buttonController = new ButtonController(button, Mockito.mock(Command.class));
-        controller.addButton(buttonController);
-        Assertions.assertTrue(menu.getButtons().contains(button));
+        this.controller.addButton(buttonController);
+        Assertions.assertTrue(this.menu.getButtons().contains(button));
     }
 
     @Test
     public void reactMouseMovement() {
-        menu.setTopLeftPosition(new Position(4, 6));
+        this.menu.setTopLeftPosition(new Position(4, 6));
         List<ButtonController> buttonControllers = new ArrayList<>();
         buttonControllers.add(Mockito.mock(ButtonController.class));
         buttonControllers.add(Mockito.mock(ButtonController.class));
         buttonControllers.add(Mockito.mock(ButtonController.class));
 
         for (ButtonController buttonController: buttonControllers) {
-            controller.addButton(buttonController);
+            this.controller.addButton(buttonController);
         }
 
         Position position = new Position(6, 7);
-        controller.reactMouseMovement(position);
+        this.controller.reactMouseMovement(position);
         for (ButtonController buttonController: buttonControllers) {
             Mockito.verify(buttonController, Mockito.times(1))
                     .reactMouseMovement(Mockito.eq(new Position(2, 1)));
@@ -67,18 +65,18 @@ public class MenuControllerTest {
 
     @Test
     public void reactMouseClick() {
-        menu.setTopLeftPosition(new Position(7, 4));
+        this.menu.setTopLeftPosition(new Position(7, 4));
         List<ButtonController> buttonControllers = new ArrayList<>();
         buttonControllers.add(Mockito.mock(ButtonController.class));
         buttonControllers.add(Mockito.mock(ButtonController.class));
         buttonControllers.add(Mockito.mock(ButtonController.class));
 
         for (ButtonController buttonController: buttonControllers) {
-            controller.addButton(buttonController);
+            this.controller.addButton(buttonController);
         }
 
         Position position = new Position(5, 5);
-        controller.reactMouseClick(position);
+        this.controller.reactMouseClick(position);
         for (ButtonController buttonController: buttonControllers) {
             Mockito.verify(buttonController, Mockito.times(1))
                     .reactMouseClick(Mockito.eq(new Position(-2, 1)));
@@ -93,10 +91,10 @@ public class MenuControllerTest {
             if (i % 3 == 1) button.select();
             ButtonController buttonController = new ButtonController(button, Mockito.mock(Command.class));
             buttons.add(button);
-            controller.addButton(buttonController);
+            this.controller.addButton(buttonController);
         }
 
-        controller.reactChangeState();
+        this.controller.reactChangeState();
         for (Button button: buttons) {
             Assertions.assertFalse(button.isSelected());
         }

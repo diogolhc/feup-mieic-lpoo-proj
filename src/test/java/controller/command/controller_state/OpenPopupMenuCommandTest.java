@@ -1,9 +1,7 @@
 package controller.command.controller_state;
 
 import controller.GameController;
-import controller.GameControllerState;
 import controller.command.controller_state.OpenPopupMenuCommand;
-import controller.menu.MenuController;
 import controller.menu.PopupMenuController;
 import controller.menu.builder.PopupMenuControllerBuilder;
 import gui.GUI;
@@ -23,21 +21,21 @@ public class OpenPopupMenuCommandTest {
         Mockito.when(gui.getWindowWidth()).thenReturn(30);
         Mockito.when(gui.getWindowHeight()).thenReturn(20);
 
-        gameController = new GameController(gui);
-        menuControllerBuilder = Mockito.mock(PopupMenuControllerBuilder.class);
+        this.gameController = new GameController(gui);
+        this.menuControllerBuilder = Mockito.mock(PopupMenuControllerBuilder.class);
 
-        Mockito.when(menuControllerBuilder.buildMenuCentered(30, 20))
+        Mockito.when(this.menuControllerBuilder.buildMenuCentered(30, 20))
                 .thenReturn(Mockito.mock(PopupMenuController.class));
 
-        command = new OpenPopupMenuCommand(gameController, menuControllerBuilder);
+        this.command = new OpenPopupMenuCommand(this.gameController, this.menuControllerBuilder);
     }
 
     @Test
     public void execute() {
-        Assertions.assertFalse(gameController.getGameControllerState() instanceof PopupMenuController);
+        Assertions.assertFalse(this.gameController.getGameControllerState() instanceof PopupMenuController);
 
-        command.execute();
+        this.command.execute();
 
-        Assertions.assertTrue(gameController.getGameControllerState() instanceof PopupMenuController);
+        Assertions.assertTrue(this.gameController.getGameControllerState() instanceof PopupMenuController);
     }
 }

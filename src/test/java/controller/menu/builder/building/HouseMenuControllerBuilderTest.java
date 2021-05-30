@@ -1,12 +1,9 @@
 package controller.menu.builder.building;
 
 import controller.GameController;
-import controller.command.controller_state.SetTimeRateCommand;
 import controller.farm.FarmController;
 import controller.menu.MenuController;
-import controller.menu.PopupMenuController;
 import controller.menu.builder.MenuControllerBuilder;
-import controller.menu.builder.PauseMenuControllerBuilder;
 import model.Position;
 import model.farm.building.Edifice;
 import org.junit.jupiter.api.Assertions;
@@ -19,7 +16,7 @@ public class HouseMenuControllerBuilderTest {
 
     @BeforeEach
     public void setUp() {
-        builder = new HouseMenuControllerBuilder(
+        this.builder = new HouseMenuControllerBuilder(
                 Mockito.mock(GameController.class),
                 Mockito.mock(FarmController.class),
                 new Edifice("TEST"),
@@ -28,7 +25,7 @@ public class HouseMenuControllerBuilderTest {
 
     @Test
     public void buildMenu() {
-        MenuController menuController = builder.buildMenu(new Position(0, 0));
+        MenuController menuController = this.builder.buildMenu(new Position(0, 0));
         Assertions.assertEquals("TEST", menuController.getMenu().getTitle());
         Assertions.assertEquals(3, menuController.getMenu().getButtons().size());
         Assertions.assertTrue(menuController

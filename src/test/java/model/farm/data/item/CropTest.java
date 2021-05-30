@@ -16,70 +16,70 @@ public class CropTest {
 
     @BeforeEach
     void setUp() {
-        crop = new Crop("CROP");
+        this.crop = new Crop("CROP");
 
-        growthStages = new ArrayList<>();
-        growthStages.add(new CropGrowthStage(new InGameTime(0), 'a', new Color("#000001")));
-        growthStages.add(new CropGrowthStage(new InGameTime(5), 'b', new Color("#000002")));
-        growthStages.add(new CropGrowthStage(new InGameTime(6), 'c', new Color("#000003")));
-        growthStages.add(new CropGrowthStage(new InGameTime(8), 'd', new Color("#000004")));
-        growthStages.add(new CropGrowthStage(new InGameTime(20), 'e', new Color("#000005")));
+        this.growthStages = new ArrayList<>();
+        this.growthStages.add(new CropGrowthStage(new InGameTime(0), 'a', new Color("#000001")));
+        this.growthStages.add(new CropGrowthStage(new InGameTime(5), 'b', new Color("#000002")));
+        this.growthStages.add(new CropGrowthStage(new InGameTime(6), 'c', new Color("#000003")));
+        this.growthStages.add(new CropGrowthStage(new InGameTime(8), 'd', new Color("#000004")));
+        this.growthStages.add(new CropGrowthStage(new InGameTime(20), 'e', new Color("#000005")));
     }
 
     @Test
     void getGrowthTime() {
-        crop.addGrowthStage(growthStages.get(0));
-        Assertions.assertEquals(new InGameTime(0), crop.getGrowTime());
-        crop.addGrowthStage(growthStages.get(2));
-        Assertions.assertEquals(new InGameTime(6), crop.getGrowTime());
-        crop.addGrowthStage(growthStages.get(1));
-        Assertions.assertEquals(new InGameTime(6), crop.getGrowTime());
-        crop.addGrowthStage(growthStages.get(4));
-        Assertions.assertEquals(new InGameTime(20), crop.getGrowTime());
-        crop.addGrowthStage(growthStages.get(3));
-        Assertions.assertEquals(new InGameTime(20), crop.getGrowTime());
+        this.crop.addGrowthStage(this.growthStages.get(0));
+        Assertions.assertEquals(new InGameTime(0), this.crop.getGrowTime());
+        this.crop.addGrowthStage(this.growthStages.get(2));
+        Assertions.assertEquals(new InGameTime(6), this.crop.getGrowTime());
+        this.crop.addGrowthStage(this.growthStages.get(1));
+        Assertions.assertEquals(new InGameTime(6), this.crop.getGrowTime());
+        this.crop.addGrowthStage(this.growthStages.get(4));
+        Assertions.assertEquals(new InGameTime(20), this.crop.getGrowTime());
+        this.crop.addGrowthStage(this.growthStages.get(3));
+        Assertions.assertEquals(new InGameTime(20), this.crop.getGrowTime());
     }
 
     @Test
     void getGrowthStage() {
-        for (CropGrowthStage growthStage: growthStages) {
-            crop.addGrowthStage(growthStage);
+        for (CropGrowthStage growthStage: this.growthStages) {
+            this.crop.addGrowthStage(growthStage);
         }
 
-        Assertions.assertSame(growthStages.get(0), crop.getCurrentGrowthStage(new InGameTime(0)));
-        Assertions.assertSame(growthStages.get(1), crop.getCurrentGrowthStage(new InGameTime(1)));
-        Assertions.assertSame(growthStages.get(1), crop.getCurrentGrowthStage(new InGameTime(3)));
-        Assertions.assertSame(growthStages.get(1), crop.getCurrentGrowthStage(new InGameTime(4)));
-        Assertions.assertSame(growthStages.get(1), crop.getCurrentGrowthStage(new InGameTime(5)));
-        Assertions.assertSame(growthStages.get(2), crop.getCurrentGrowthStage(new InGameTime(6)));
-        Assertions.assertSame(growthStages.get(3), crop.getCurrentGrowthStage(new InGameTime(7)));
-        Assertions.assertSame(growthStages.get(3), crop.getCurrentGrowthStage(new InGameTime(8)));
-        Assertions.assertSame(growthStages.get(4), crop.getCurrentGrowthStage(new InGameTime(15)));
-        Assertions.assertSame(growthStages.get(4), crop.getCurrentGrowthStage(new InGameTime(20)));
-        Assertions.assertSame(growthStages.get(4), crop.getCurrentGrowthStage(new InGameTime(21)));
-        Assertions.assertNotSame(growthStages.get(3), crop.getCurrentGrowthStage(new InGameTime(2)));
+        Assertions.assertSame(this.growthStages.get(0), this.crop.getCurrentGrowthStage(new InGameTime(0)));
+        Assertions.assertSame(this.growthStages.get(1), this.crop.getCurrentGrowthStage(new InGameTime(1)));
+        Assertions.assertSame(this.growthStages.get(1), this.crop.getCurrentGrowthStage(new InGameTime(3)));
+        Assertions.assertSame(this.growthStages.get(1), this.crop.getCurrentGrowthStage(new InGameTime(4)));
+        Assertions.assertSame(this.growthStages.get(1), this.crop.getCurrentGrowthStage(new InGameTime(5)));
+        Assertions.assertSame(this.growthStages.get(2), this.crop.getCurrentGrowthStage(new InGameTime(6)));
+        Assertions.assertSame(this.growthStages.get(3), this.crop.getCurrentGrowthStage(new InGameTime(7)));
+        Assertions.assertSame(this.growthStages.get(3), this.crop.getCurrentGrowthStage(new InGameTime(8)));
+        Assertions.assertSame(this.growthStages.get(4), this.crop.getCurrentGrowthStage(new InGameTime(15)));
+        Assertions.assertSame(this.growthStages.get(4), this.crop.getCurrentGrowthStage(new InGameTime(20)));
+        Assertions.assertSame(this.growthStages.get(4), this.crop.getCurrentGrowthStage(new InGameTime(21)));
+        Assertions.assertNotSame(this.growthStages.get(3), this.crop.getCurrentGrowthStage(new InGameTime(2)));
     }
 
     @Test
     void getGrowthShuffled() {
         List<CropGrowthStage> shuffled = new ArrayList<>();
-        shuffled.addAll(growthStages);
+        shuffled.addAll(this.growthStages);
         Collections.shuffle(shuffled);
         for (CropGrowthStage growthStage: shuffled) {
-            crop.addGrowthStage(growthStage);
+            this.crop.addGrowthStage(growthStage);
         }
 
-        Assertions.assertSame(growthStages.get(0), crop.getCurrentGrowthStage(new InGameTime(0)));
-        Assertions.assertSame(growthStages.get(1), crop.getCurrentGrowthStage(new InGameTime(1)));
-        Assertions.assertSame(growthStages.get(1), crop.getCurrentGrowthStage(new InGameTime(3)));
-        Assertions.assertSame(growthStages.get(1), crop.getCurrentGrowthStage(new InGameTime(4)));
-        Assertions.assertSame(growthStages.get(1), crop.getCurrentGrowthStage(new InGameTime(5)));
-        Assertions.assertSame(growthStages.get(2), crop.getCurrentGrowthStage(new InGameTime(6)));
-        Assertions.assertSame(growthStages.get(3), crop.getCurrentGrowthStage(new InGameTime(7)));
-        Assertions.assertSame(growthStages.get(3), crop.getCurrentGrowthStage(new InGameTime(8)));
-        Assertions.assertSame(growthStages.get(4), crop.getCurrentGrowthStage(new InGameTime(15)));
-        Assertions.assertSame(growthStages.get(4), crop.getCurrentGrowthStage(new InGameTime(20)));
-        Assertions.assertSame(growthStages.get(4), crop.getCurrentGrowthStage(new InGameTime(21)));
-        Assertions.assertNotSame(growthStages.get(3), crop.getCurrentGrowthStage(new InGameTime(2)));
+        Assertions.assertSame(this.growthStages.get(0), this.crop.getCurrentGrowthStage(new InGameTime(0)));
+        Assertions.assertSame(this.growthStages.get(1), this.crop.getCurrentGrowthStage(new InGameTime(1)));
+        Assertions.assertSame(this.growthStages.get(1), this.crop.getCurrentGrowthStage(new InGameTime(3)));
+        Assertions.assertSame(this.growthStages.get(1), this.crop.getCurrentGrowthStage(new InGameTime(4)));
+        Assertions.assertSame(this.growthStages.get(1), this.crop.getCurrentGrowthStage(new InGameTime(5)));
+        Assertions.assertSame(this.growthStages.get(2), this.crop.getCurrentGrowthStage(new InGameTime(6)));
+        Assertions.assertSame(this.growthStages.get(3), this.crop.getCurrentGrowthStage(new InGameTime(7)));
+        Assertions.assertSame(this.growthStages.get(3), this.crop.getCurrentGrowthStage(new InGameTime(8)));
+        Assertions.assertSame(this.growthStages.get(4), this.crop.getCurrentGrowthStage(new InGameTime(15)));
+        Assertions.assertSame(this.growthStages.get(4), this.crop.getCurrentGrowthStage(new InGameTime(20)));
+        Assertions.assertSame(this.growthStages.get(4), this.crop.getCurrentGrowthStage(new InGameTime(21)));
+        Assertions.assertNotSame(this.growthStages.get(3), this.crop.getCurrentGrowthStage(new InGameTime(2)));
     }
 }

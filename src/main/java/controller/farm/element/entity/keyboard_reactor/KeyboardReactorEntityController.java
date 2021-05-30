@@ -2,7 +2,6 @@ package controller.farm.element.entity.keyboard_reactor;
 
 import gui.GUI;
 import model.Position;
-import model.farm.Farm;
 
 public abstract class KeyboardReactorEntityController {
     public void reactKeyboard(GUI.KEYBOARD_ACTION action) {

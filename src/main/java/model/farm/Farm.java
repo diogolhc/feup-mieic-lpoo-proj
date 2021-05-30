@@ -68,7 +68,7 @@ public class Farm implements Serializable {
     }
 
     public Weather getCurrentWeather() {
-        return currentWeather;
+        return this.currentWeather;
     }
 
     public void setFarmer(Entity farmer) {
@@ -92,7 +92,7 @@ public class Farm implements Serializable {
     }
 
     public InGameTime getTime() {
-        return time;
+        return this.time;
     }
 
     public void setWallet(Wallet wallet) {
@@ -116,13 +116,13 @@ public class Farm implements Serializable {
     }
 
     public List<Livestock> getLivestockTypes() {
-        return livestockTypes;
+        return this.livestockTypes;
     }
 
     public List<Item> getAllItems() {
         List<Item> items = new ArrayList<>();
         items.addAll(this.cropTypes);
-        for (Livestock livestock: livestockTypes) {
+        for (Livestock livestock: this.livestockTypes) {
             items.add(livestock.getProducedItem());
         }
         return items;

@@ -15,7 +15,7 @@ public class MenuControllerBuilderTest {
 
     @BeforeEach
     public void setUp() {
-        builder = new MenuControllerBuilder() {
+        this.builder = new MenuControllerBuilder() {
             @Override
             protected String getTitle() {
                 return "TEST";
@@ -48,7 +48,7 @@ public class MenuControllerBuilderTest {
 
     @Test
     public void buildMenu() {
-        Menu menu = builder.buildMenu(new Position(4, 7)).getMenu();
+        Menu menu = this.builder.buildMenu(new Position(4, 7)).getMenu();
         Assertions.assertEquals("TEST", menu.getTitle());
         Assertions.assertEquals(5, menu.getWidth());
         Assertions.assertEquals(3, menu.getHeight());
@@ -60,9 +60,9 @@ public class MenuControllerBuilderTest {
 
     @Test
     public void buildMenuCentered() {
-        Menu menu = builder.buildMenuCentered(20, 25).getMenu();
+        Menu menu = this.builder.buildMenuCentered(20, 25).getMenu();
         Assertions.assertEquals(new Position(7, 11), menu.getTopLeftPosition());
-        menu = builder.buildMenuCentered(15, 20).getMenu();
+        menu = this.builder.buildMenuCentered(15, 20).getMenu();
         Assertions.assertEquals(new Position(5, 8), menu.getTopLeftPosition());
     }
 }

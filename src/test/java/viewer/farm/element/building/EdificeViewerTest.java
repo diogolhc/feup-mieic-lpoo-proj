@@ -7,7 +7,6 @@ import model.Position;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 
 class EdificeViewerTest {
@@ -18,7 +17,7 @@ class EdificeViewerTest {
 
     @BeforeEach
     void setUp() {
-        this.gui = new GUIMockTestHelper(backgroundColors, foregroundColors, characters).mock();
+        this.gui = new GUIMockTestHelper(this.backgroundColors, this.foregroundColors, this.characters).mock();
     }
 
 
@@ -33,7 +32,7 @@ class EdificeViewerTest {
 
 
         EdificeViewer viewer = new EdificeViewer(ROOF);
-        viewer.draw(new Position(0, 0), gui);
+        viewer.draw(new Position(0, 0), this.gui);
 
         Color expectedBg[][] = {
                 {BLACK, ROOF, ROOF, ROOF, ROOF, ROOF, BLACK, BLACK, BLACK, BLACK},
@@ -80,7 +79,7 @@ class EdificeViewerTest {
 
 
         EdificeViewer viewer = new EdificeViewer( ROOF);
-        viewer.draw(new Position(2, 2), gui);
+        viewer.draw(new Position(2, 2), this.gui);
 
         Color expectedBg[][] = {
                 {BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK, BLACK},

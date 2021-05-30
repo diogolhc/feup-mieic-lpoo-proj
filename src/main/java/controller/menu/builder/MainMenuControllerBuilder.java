@@ -33,25 +33,25 @@ public class MainMenuControllerBuilder extends MenuControllerBuilder {
 
     private void addNewGameButton(List<ButtonController> buttons) {
         Button newGameButton = new Button(new Position(10, 6), "NEW GAME");
-        Command newGameCommand = new NewGameCommand(gameController);
+        Command newGameCommand = new NewGameCommand(this.gameController);
         buttons.add(new ButtonController(newGameButton, newGameCommand));
     }
 
     private void addLoadGameButton(List<ButtonController> buttons) {
         Button loadGameButton = new Button(new Position(10, 11), "LOAD GAME");
-        Command loadGameCommand = new LoadGameCommand(gameController, "save.data");
+        Command loadGameCommand = new LoadGameCommand(this.gameController, "save.data");
         buttons.add(new ButtonController(loadGameButton, loadGameCommand));
     }
 
     private void addExitButton(List<ButtonController> buttons) {
         Button exitGameButton = new Button(new Position(10, 16), "EXIT");
-        Command exitGameCommand = new ExitGameCommand(gameController);
+        Command exitGameCommand = new ExitGameCommand(this.gameController);
         buttons.add(new ButtonController(exitGameButton, exitGameCommand));
     }
 
     @Override
     protected MainMenuController getMenuController(Menu menu) {
-        return new MainMenuController(menu, gameController);
+        return new MainMenuController(menu, this.gameController);
     }
 
     @Override

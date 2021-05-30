@@ -8,7 +8,6 @@ import controller.menu.builder.MenuControllerBuilder;
 import model.InGameTime;
 import model.Position;
 import model.farm.Farm;
-import model.farm.Inventory;
 import model.farm.building.crop_field.CropField;
 import model.farm.building.crop_field.state.CropFieldState;
 import model.farm.building.crop_field.state.ReadyToHarvest;
@@ -17,7 +16,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
 public class CropFieldGrowingMenuControllerBuilderTest {
@@ -28,11 +26,11 @@ public class CropFieldGrowingMenuControllerBuilderTest {
 
     @BeforeEach
     public void setUp() {
-        gameController = Mockito.mock(GameController.class);
-        Mockito.when(gameController.getGameControllerState()).thenReturn(Mockito.mock(GameControllerState.class));
-        farm = Mockito.mock(Farm.class);
-        cropField = new CropField(new Position(0, 0));
-        cropField.setState(new CropFieldState() {
+        this.gameController = Mockito.mock(GameController.class);
+        Mockito.when(this.gameController.getGameControllerState()).thenReturn(Mockito.mock(GameControllerState.class));
+        this.farm = Mockito.mock(Farm.class);
+        this.cropField = new CropField(new Position(0, 0));
+        this.cropField.setState(new CropFieldState() {
             @Override
             public InGameTime getRemainingTime() {
                 return new InGameTime(5);
@@ -54,12 +52,12 @@ public class CropFieldGrowingMenuControllerBuilderTest {
                 return new Crop("TEST CROP");
             }
         });
-        builder = new CropFieldGrowingMenuControllerBuilder(gameController, farm, cropField);
+        this.builder = new CropFieldGrowingMenuControllerBuilder(this.gameController, this.farm, this.cropField);
     }
 
     @Test
     public void buildMenu() {
-        MenuController menuController = builder.buildMenu();
+        MenuController menuController = this.builder.buildMenu();
 
         Assertions.assertTrue(menuController.getMenu().getButtons().stream().anyMatch(button ->
                 button.getTitle().equals("REMOVE CROP")));
@@ -74,15 +72,15 @@ public class CropFieldGrowingMenuControllerBuilderTest {
 
     @Test
     public void menuChangesWhenReady() {
-        MenuController menuController = builder.buildMenu();
+        MenuController menuController = this.builder.buildMenu();
 
         menuController.reactTimePassed(5);
-        Mockito.verify(gameController, Mockito.never()).setGameControllerState(Mockito.any());
-        cropField.setState(Mockito.mock(ReadyToHarvest.class));
+        Mockito.verify(this.gameController, Mockito.never()).setGameControllerState(Mockito.any());
+        this.cropField.setState(Mockito.mock(ReadyToHarvest.class));
         menuController.reactTimePassed(5);
 
         ArgumentCaptor< GameControllerState > captor = ArgumentCaptor.forClass(GameControllerState.class);
-        Mockito.verify(gameController, Mockito.times(1)).setGameControllerState(captor.capture());
+        Mockito.verify(this.gameController, Mockito.times(1)).setGameControllerState(captor.capture());
         Assertions.assertTrue(captor.getValue() instanceof PopupMenuController);
     }
 }

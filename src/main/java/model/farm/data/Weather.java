@@ -24,7 +24,7 @@ public class Weather implements Serializable {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public double getEffect(InGameTime elapsedTime) {

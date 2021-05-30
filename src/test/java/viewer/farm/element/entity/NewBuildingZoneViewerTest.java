@@ -22,7 +22,7 @@ class NewBuildingZoneViewerTest {
 
     @BeforeEach
     void setUp() {
-        this.gui = new GUIMockTestHelper(backgroundColors, foregroundColors, characters).mock();
+        this.gui = new GUIMockTestHelper(this.backgroundColors, this.foregroundColors, this.characters).mock();
 
         this.buildings = Mockito.mock(BuildingSet.class);
         this.newBuilding = Mockito.mock(Building.class);

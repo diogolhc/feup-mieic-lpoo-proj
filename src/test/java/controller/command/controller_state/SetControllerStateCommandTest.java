@@ -3,7 +3,6 @@ package controller.command.controller_state;
 import controller.GameController;
 import controller.GameControllerState;
 import controller.command.controller_state.SetControllerStateCommand;
-import controller.menu.PopupMenuController;
 import gui.GUI;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,18 +16,18 @@ public class SetControllerStateCommandTest {
 
     @BeforeEach
     public void setUp() {
-        state = Mockito.mock(GameControllerState.class);
-        gameController = new GameController(Mockito.mock(GUI.class));
+        this.state = Mockito.mock(GameControllerState.class);
+        this.gameController = new GameController(Mockito.mock(GUI.class));
 
-        command = new SetControllerStateCommand(gameController, state);
+        this.command = new SetControllerStateCommand(this.gameController, this.state);
     }
 
     @Test
     public void execute() {
-        Assertions.assertFalse(gameController.getGameControllerState() == state);
+        Assertions.assertFalse(this.gameController.getGameControllerState() == this.state);
 
-        command.execute();
+        this.command.execute();
 
-        Assertions.assertTrue(gameController.getGameControllerState() == state);
+        Assertions.assertTrue(this.gameController.getGameControllerState() == this.state);
     }
 }

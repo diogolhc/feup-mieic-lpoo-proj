@@ -13,27 +13,27 @@ public class Position implements Serializable {
     }
 
     public Position getLeft() {
-        return new Position(x - 1, y);
+        return new Position(this.x - 1, this.y);
     }
 
     public Position getRight() {
-        return new Position(x + 1, y);
+        return new Position(this.x + 1, this.y);
     }
 
     public Position getUp() {
-        return new Position(x, y - 1);
+        return new Position(this.x, this.y - 1);
     }
 
     public Position getDown() {
-        return new Position(x, y + 1);
+        return new Position(this.x, this.y + 1);
     }
 
     public int getX() {
-        return x;
+        return this.x;
     }
 
     public int getY() {
-        return y;
+        return this.y;
     }
 
     public Position getTranslated(Position position) {
@@ -63,12 +63,12 @@ public class Position implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Position position = (Position) o;
-        return x == position.x && y == position.y;
+        return this.x == position.x && this.y == position.y;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(x, y);
+        return Objects.hash(this.x, this.y);
     }
 
     @Override

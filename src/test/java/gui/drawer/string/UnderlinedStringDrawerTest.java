@@ -7,8 +7,6 @@ import model.Position;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestFactory;
-import org.mockito.Mockito;
 
 public class UnderlinedStringDrawerTest {
     private GUI gui;
@@ -18,7 +16,7 @@ public class UnderlinedStringDrawerTest {
 
     @BeforeEach
     void setUp() {
-        this.gui = new GUIMockTestHelper(backgroundColors, foregroundColors, characters).mock();
+        this.gui = new GUIMockTestHelper(this.backgroundColors, this.foregroundColors, this.characters).mock();
     }
 
     @Test
@@ -28,7 +26,7 @@ public class UnderlinedStringDrawerTest {
         Color FRONT = new Color("#FEDCBA");
         Color WHITE = Color.WHITE;
 
-        UnderlinedStringDrawer drawer = new UnderlinedStringDrawer(gui, BACK, FRONT, '_');
+        UnderlinedStringDrawer drawer = new UnderlinedStringDrawer(this.gui, BACK, FRONT, '_');
         drawer.draw(new Position(5, 7), "HELLO");
 
         Color expectedBg[][] = {
@@ -92,9 +90,9 @@ public class UnderlinedStringDrawerTest {
         char c2 = '-';
         char c3 = '=';
 
-        UnderlinedStringDrawer drawer = new UnderlinedStringDrawer(gui, BACK1, FRONT1, c1);
-        UnderlinedStringDrawer drawer2 = new UnderlinedStringDrawer(gui, BACK2, FRONT2, c2);
-        UnderlinedStringDrawer drawer3 = new UnderlinedStringDrawer(gui, BACK3, FRONT3, c3);
+        UnderlinedStringDrawer drawer = new UnderlinedStringDrawer(this.gui, BACK1, FRONT1, c1);
+        UnderlinedStringDrawer drawer2 = new UnderlinedStringDrawer(this.gui, BACK2, FRONT2, c2);
+        UnderlinedStringDrawer drawer3 = new UnderlinedStringDrawer(this.gui, BACK3, FRONT3, c3);
 
         drawer.draw(new Position(5, 7), "HELLO");
         drawer2.draw(new Position(0, 0), "HI");

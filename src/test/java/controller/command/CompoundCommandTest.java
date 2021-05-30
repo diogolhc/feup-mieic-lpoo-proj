@@ -15,40 +15,40 @@ public class CompoundCommandTest {
 
     @BeforeEach
     public void setUp() {
-        command1 = Mockito.mock(Command.class);
-        command2 = Mockito.mock(Command.class);
-        command3 = Mockito.mock(Command.class);
+        this.command1 = Mockito.mock(Command.class);
+        this.command2 = Mockito.mock(Command.class);
+        this.command3 = Mockito.mock(Command.class);
 
-        compoundCommand1 = new CompoundCommand();
-        compoundCommand1.addCommand(command1);
-        compoundCommand1.addCommand(command2);
+        this.compoundCommand1 = new CompoundCommand();
+        this.compoundCommand1.addCommand(this.command1);
+        this.compoundCommand1.addCommand(this.command2);
 
-        compoundCommand2 = new CompoundCommand();
+        this.compoundCommand2 = new CompoundCommand();
 
-        compoundCommand3 = new CompoundCommand();
-        compoundCommand3.addCommand(command3);
-        compoundCommand3.addCommand(compoundCommand1);
-        compoundCommand3.addCommand(compoundCommand2);
-        compoundCommand3.addCommand(command1);
+        this.compoundCommand3 = new CompoundCommand();
+        this.compoundCommand3.addCommand(this.command3);
+        this.compoundCommand3.addCommand(this.compoundCommand1);
+        this.compoundCommand3.addCommand(this.compoundCommand2);
+        this.compoundCommand3.addCommand(this.command1);
     }
 
     @Test
     public void executeFlat() {
-        compoundCommand1.execute();
-        InOrder verifier = Mockito.inOrder(command1, command2, command3);
-        verifier.verify(command1).execute();
-        verifier.verify(command2).execute();
+        this.compoundCommand1.execute();
+        InOrder verifier = Mockito.inOrder(this.command1, this.command2, this.command3);
+        verifier.verify(this.command1).execute();
+        verifier.verify(this.command2).execute();
         verifier.verifyNoMoreInteractions();
     }
 
     @Test
     public void executeNested() {
-        compoundCommand3.execute();
-        InOrder verifier = Mockito.inOrder(command1, command2, command3);
-        verifier.verify(command3).execute();
-        verifier.verify(command1).execute();
-        verifier.verify(command2).execute();
-        verifier.verify(command1).execute();
+        this.compoundCommand3.execute();
+        InOrder verifier = Mockito.inOrder(this.command1, this.command2, this.command3);
+        verifier.verify(this.command3).execute();
+        verifier.verify(this.command1).execute();
+        verifier.verify(this.command2).execute();
+        verifier.verify(this.command1).execute();
         verifier.verifyNoMoreInteractions();
     }
 }

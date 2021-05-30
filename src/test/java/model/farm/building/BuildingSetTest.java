@@ -29,48 +29,48 @@ public class BuildingSetTest {
     @BeforeEach
     @BeforeProperty
     public void setUp() {
-        house = Mockito.mock(Edifice.class);
-        market = Mockito.mock(Edifice.class);
-        warehouse = Mockito.mock(Edifice.class);
-        buildingSet = new BuildingSet(house, market, warehouse);
+        this.house = Mockito.mock(Edifice.class);
+        this.market = Mockito.mock(Edifice.class);
+        this.warehouse = Mockito.mock(Edifice.class);
+        this.buildingSet = new BuildingSet(this.house, this.market, this.warehouse);
 
-        cropFields = new ArrayList<>();
-        cropFields.add(Mockito.mock(CropField.class));
-        cropFields.add(Mockito.mock(CropField.class));
-        cropFields.add(Mockito.mock(CropField.class));
+        this.cropFields = new ArrayList<>();
+        this.cropFields.add(Mockito.mock(CropField.class));
+        this.cropFields.add(Mockito.mock(CropField.class));
+        this.cropFields.add(Mockito.mock(CropField.class));
 
-        stockyards = new ArrayList<>();
-        stockyards.add(Mockito.mock(Stockyard.class));
-        stockyards.add(Mockito.mock(Stockyard.class));
+        this.stockyards = new ArrayList<>();
+        this.stockyards.add(Mockito.mock(Stockyard.class));
+        this.stockyards.add(Mockito.mock(Stockyard.class));
 
-        for (CropField cropField: cropFields) {
-            buildingSet.addCropField(cropField);
+        for (CropField cropField: this.cropFields) {
+            this.buildingSet.addCropField(cropField);
         }
-        for (Stockyard stockyard: stockyards) {
-            buildingSet.addStockyard(stockyard);
+        for (Stockyard stockyard: this.stockyards) {
+            this.buildingSet.addStockyard(stockyard);
         }
 
-        buildings = new ArrayList<>();
-        buildings.add(house);
-        buildings.add(market);
-        buildings.add(warehouse);
-        buildings.addAll(cropFields);
-        buildings.addAll(stockyards);
+        this.buildings = new ArrayList<>();
+        this.buildings.add(this.house);
+        this.buildings.add(this.market);
+        this.buildings.add(this.warehouse);
+        this.buildings.addAll(this.cropFields);
+        this.buildings.addAll(this.stockyards);
     }
 
     @Property
     public void isTraversableWhenNoUntraversableRegionContainsPosition(
             @ForAll @Size(value = 8) List<Boolean> traversable) {
         for (int i = 0; i < 8; i++) {
-            Building building = buildings.get(i);
+            Building building = this.buildings.get(i);
             boolean b = traversable.get(i);
             Mockito.when(building.getUntraversableRegion()).thenReturn((Region) position -> b);
         }
 
         if (traversable.contains(true)) {
-            Assertions.assertFalse(buildingSet.isTraversable(Mockito.mock(Position.class)));
+            Assertions.assertFalse(this.buildingSet.isTraversable(Mockito.mock(Position.class)));
         } else {
-            Assertions.assertTrue(buildingSet.isTraversable(Mockito.mock(Position.class)));
+            Assertions.assertTrue(this.buildingSet.isTraversable(Mockito.mock(Position.class)));
         }
     }
 
@@ -78,7 +78,7 @@ public class BuildingSetTest {
     public void isOccupiedWhenIntersectsAtLeastOneOccupiedRegion(
             @ForAll @Size(value = 8) List<Boolean> traversable) {
         for (int i = 0; i < 8; i++) {
-            Building building = buildings.get(i);
+            Building building = this.buildings.get(i);
             boolean b = traversable.get(i);
             RectangleRegion region = Mockito.mock(RectangleRegion.class);
             Mockito.when(region.intersects(Mockito.any(RectangleRegion.class))).thenReturn(b);
@@ -86,31 +86,31 @@ public class BuildingSetTest {
         }
 
         if (traversable.contains(true)) {
-            Assertions.assertTrue(buildingSet.isOccupied(Mockito.mock(RectangleRegion.class)));
+            Assertions.assertTrue(this.buildingSet.isOccupied(Mockito.mock(RectangleRegion.class)));
         } else {
-            Assertions.assertFalse(buildingSet.isOccupied(Mockito.mock(RectangleRegion.class)));
+            Assertions.assertFalse(this.buildingSet.isOccupied(Mockito.mock(RectangleRegion.class)));
         }
     }
 
     @Test
     public void getDemolishableBuildings() {
-        List<Building> demolishable = buildingSet.getDemolishableBuildings();
+        List<Building> demolishable = this.buildingSet.getDemolishableBuildings();
         Assertions.assertEquals(5, demolishable.size());
-        Assertions.assertTrue(demolishable.containsAll(cropFields));
-        Assertions.assertTrue(demolishable.containsAll(stockyards));
-        Assertions.assertFalse(demolishable.contains(house));
-        Assertions.assertFalse(demolishable.contains(market));
-        Assertions.assertFalse(demolishable.contains(warehouse));
+        Assertions.assertTrue(demolishable.containsAll(this.cropFields));
+        Assertions.assertTrue(demolishable.containsAll(this.stockyards));
+        Assertions.assertFalse(demolishable.contains(this.house));
+        Assertions.assertFalse(demolishable.contains(this.market));
+        Assertions.assertFalse(demolishable.contains(this.warehouse));
     }
 
     @Test
     public void getAlBuildings() {
-        List<Building> all = buildingSet.getAllBuildings();
+        List<Building> all = this.buildingSet.getAllBuildings();
         Assertions.assertEquals(8, all.size());
-        Assertions.assertTrue(all.containsAll(cropFields));
-        Assertions.assertTrue(all.containsAll(stockyards));
-        Assertions.assertTrue(all.contains(house));
-        Assertions.assertTrue(all.contains(market));
-        Assertions.assertTrue(all.contains(warehouse));
+        Assertions.assertTrue(all.containsAll(this.cropFields));
+        Assertions.assertTrue(all.containsAll(this.stockyards));
+        Assertions.assertTrue(all.contains(this.house));
+        Assertions.assertTrue(all.contains(this.market));
+        Assertions.assertTrue(all.contains(this.warehouse));
     }
 }

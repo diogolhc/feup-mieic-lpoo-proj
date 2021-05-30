@@ -1,6 +1,5 @@
 package controller.farm.element.entity.keyboard_reactor;
 
-import gui.GUI;
 import model.farm.Farm;
 import model.Position;
 

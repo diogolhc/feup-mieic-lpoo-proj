@@ -44,7 +44,7 @@ class StockyardViewerTest {
 
     @BeforeEach
     void setUp() {
-        this.gui = new GUIMockTestHelper(backgroundColors, foregroundColors, characters).mock();
+        this.gui = new GUIMockTestHelper(this.backgroundColors, this.foregroundColors, this.characters).mock();
 
 
         this.livestock = Mockito.mock(Livestock.class);
@@ -67,7 +67,7 @@ class StockyardViewerTest {
         Color FENCE = Color.WOOD;
 
         StockyardViewer viewer = new StockyardViewer();
-        viewer.draw(stockyard, gui);
+        viewer.draw(this.stockyard, this.gui);
 
         Color expectedFg[][] = {
                 {WHITE, FENCE, FENCE, FENCE, FENCE, WHITE, WHITE, WHITE, WHITE, WHITE},
@@ -132,7 +132,7 @@ class StockyardViewerTest {
         Color FENCE = Color.WOOD;
 
         StockyardViewer viewer = new StockyardViewer();
-        viewer.draw(stockyard, gui);
+        viewer.draw(this.stockyard, this.gui);
 
         Color expectedFg[][] = {
                 {WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE, WHITE},
@@ -198,7 +198,7 @@ class StockyardViewerTest {
         char expectedChars[][] = cloneSquareBidimensionalArray(this.characters);
 
         StockyardViewer viewer = new StockyardViewer();
-        viewer.draw(stockyard, gui);
+        viewer.draw(this.stockyard, this.gui);
 
         GUI expectedGUI = new GUIMockTestHelper(expectedBg, expectedFg, expectedChars).mock();
         AnimalViewer animalViewer = new AnimalViewer();

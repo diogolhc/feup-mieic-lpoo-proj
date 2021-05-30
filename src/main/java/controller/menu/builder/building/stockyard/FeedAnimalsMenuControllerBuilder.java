@@ -16,7 +16,6 @@ import model.farm.Farm;
 import model.farm.building.stockyard.Stockyard;
 import model.farm.building.stockyard.StockyardAnimals;
 import model.farm.data.Livestock;
-import model.farm.data.item.Crop;
 import model.menu.Button;
 import model.menu.label.Label;
 

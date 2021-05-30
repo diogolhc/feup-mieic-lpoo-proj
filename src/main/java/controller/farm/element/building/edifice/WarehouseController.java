@@ -19,7 +19,7 @@ public class WarehouseController extends EdificeController {
     @Override
     public Command getInteractionCommand(Edifice warehouse) {
         PopupMenuControllerBuilder menuControllerBuilder = new WarehouseMenuControllerBuilder(
-                this.controller, farm, warehouse);
+                this.controller, this.farm, warehouse);
         return new OpenPopupMenuCommand(this.controller, menuControllerBuilder);
     }
 }

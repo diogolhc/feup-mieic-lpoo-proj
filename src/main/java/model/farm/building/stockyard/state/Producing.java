@@ -24,7 +24,7 @@ public class Producing implements StockyardState {
     public void setRemainingTime(InGameTime time) {
         this.timeRemaining = time;
         if (this.timeRemaining.getMinute() <= 0) {
-            this.stockyard.setState(new ReadyToCollect(stockyard, this.collectAmount));
+            this.stockyard.setState(new ReadyToCollect(this.stockyard, this.collectAmount));
         }
     }
 

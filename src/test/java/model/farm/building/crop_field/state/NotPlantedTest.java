@@ -11,24 +11,24 @@ public class NotPlantedTest {
 
     @BeforeEach
     void setUp() {
-        state = new NotPlanted();
+        this.state = new NotPlanted();
     }
 
     @Test
     void setRemainingTimeIsNoOp() {
-        Assertions.assertEquals(zero, state.getRemainingTime());
-        state.setRemainingTime(new InGameTime(20));
-        Assertions.assertEquals(zero, state.getRemainingTime());
-        state.setRemainingTime(new InGameTime(0));
-        Assertions.assertEquals(zero, state.getRemainingTime());
+        Assertions.assertEquals(this.zero, this.state.getRemainingTime());
+        this.state.setRemainingTime(new InGameTime(20));
+        Assertions.assertEquals(this.zero, this.state.getRemainingTime());
+        this.state.setRemainingTime(new InGameTime(0));
+        Assertions.assertEquals(this.zero, this.state.getRemainingTime());
     }
 
     @Test
     void changeHarvestAmountIsNoOp() {
-        Assertions.assertEquals(0, state.getHarvestAmount());
-        state.changeHarvestAmount(90);
-        Assertions.assertEquals(0, state.getHarvestAmount());
-        state.changeHarvestAmount(-15);
-        Assertions.assertEquals(0, state.getHarvestAmount());
+        Assertions.assertEquals(0, this.state.getHarvestAmount());
+        this.state.changeHarvestAmount(90);
+        Assertions.assertEquals(0, this.state.getHarvestAmount());
+        this.state.changeHarvestAmount(-15);
+        Assertions.assertEquals(0, this.state.getHarvestAmount());
     }
 }

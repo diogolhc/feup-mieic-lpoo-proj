@@ -26,40 +26,40 @@ public class PlantCropCommandTest {
 
     @BeforeEach
     public void setUp() {
-        stateReady = Mockito.mock(ReadyToHarvest.class);
-        statePlanted = Mockito.mock(Planted.class);
-        stateNotPlanted = Mockito.mock(NotPlanted.class);
-        wallet = Mockito.mock(Wallet.class);
+        this.stateReady = Mockito.mock(ReadyToHarvest.class);
+        this.statePlanted = Mockito.mock(Planted.class);
+        this.stateNotPlanted = Mockito.mock(NotPlanted.class);
+        this.wallet = Mockito.mock(Wallet.class);
 
-        cropField = new CropField(new Position(0, 0));
-        crop = Mockito.mock(Crop.class);
-        Mockito.when(crop.getPlantPrice()).thenReturn(new Currency(10));
-        command = new PlantCropCommand(wallet, cropField, crop);
+        this.cropField = new CropField(new Position(0, 0));
+        this.crop = Mockito.mock(Crop.class);
+        Mockito.when(this.crop.getPlantPrice()).thenReturn(new Currency(10));
+        this.command = new PlantCropCommand(this.wallet, this.cropField, this.crop);
     }
 
     @Test
     public void executeReady() {
-        cropField.setState(stateReady);
-        command.execute();
-        Assertions.assertSame(stateReady, cropField.getState());
-        Mockito.verifyNoInteractions(wallet);
+        this.cropField.setState(this.stateReady);
+        this.command.execute();
+        Assertions.assertSame(this.stateReady, this.cropField.getState());
+        Mockito.verifyNoInteractions(this.wallet);
     }
 
     @Test
     public void executeNotPlanted() {
-        cropField.setState(stateNotPlanted);
-        command.execute();
-        CropFieldState newState = cropField.getState();
+        this.cropField.setState(this.stateNotPlanted);
+        this.command.execute();
+        CropFieldState newState = this.cropField.getState();
         Assertions.assertTrue(newState instanceof Planted);
-        Assertions.assertSame(crop, newState.getCrop());
-        Mockito.verify(wallet, Mockito.times(1)).spend(crop.getPlantPrice());
+        Assertions.assertSame(this.crop, newState.getCrop());
+        Mockito.verify(this.wallet, Mockito.times(1)).spend(this.crop.getPlantPrice());
     }
 
     @Test
     public void executePlanted() {
-        cropField.setState(statePlanted);
-        command.execute();
-        Assertions.assertSame(statePlanted, cropField.getState());
-        Mockito.verifyNoInteractions(wallet);
+        this.cropField.setState(this.statePlanted);
+        this.command.execute();
+        Assertions.assertSame(this.statePlanted, this.cropField.getState());
+        Mockito.verifyNoInteractions(this.wallet);
     }
 }

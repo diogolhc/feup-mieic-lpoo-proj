@@ -1,13 +1,9 @@
 package controller.command.controller_state;
 
 import controller.GameController;
-import controller.GameControllerState;
 import controller.command.Command;
 import controller.menu.MenuController;
 import controller.menu.builder.PopupMenuControllerBuilder;
-import model.Position;
-
-import static java.awt.SystemColor.menu;
 
 public class OpenPopupMenuCommand implements Command {
     private final GameController controller;
@@ -20,8 +16,8 @@ public class OpenPopupMenuCommand implements Command {
 
     @Override
     public void execute() {
-        MenuController popupController = menuBuilder.buildMenuCentered(
-                controller.getWindowWidth(), controller.getWindowHeight());
+        MenuController popupController = this.menuBuilder.buildMenuCentered(
+                this.controller.getWindowWidth(), this.controller.getWindowHeight());
 
         this.controller.setGameControllerState(popupController);
     }

@@ -16,7 +16,7 @@ public class PopupMenuViewer extends MenuViewer {
 
     @Override
     public void draw(GUI gui) {
-        backViewer.draw(gui);
+        this.backViewer.draw(gui);
         super.draw(gui);
     }
 

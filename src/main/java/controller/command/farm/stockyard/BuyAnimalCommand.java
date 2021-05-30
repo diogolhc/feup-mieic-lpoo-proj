@@ -2,9 +2,7 @@ package controller.command.farm.stockyard;
 
 import controller.command.Command;
 import model.farm.Currency;
-import model.farm.Farm;
 import model.farm.Wallet;
-import model.farm.building.stockyard.Stockyard;
 import model.farm.building.stockyard.StockyardAnimals;
 
 public class BuyAnimalCommand implements Command {
@@ -22,7 +20,7 @@ public class BuyAnimalCommand implements Command {
     public void execute() {
         if (!this.stockyardAnimals.isFull()) {
             this.stockyardAnimals.addAnimal();
-            this.wallet.spend(price);
+            this.wallet.spend(this.price);
         }
     }
 }

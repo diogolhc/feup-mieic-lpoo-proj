@@ -1,6 +1,5 @@
 package model.farm;
 
-import net.jqwik.api.AfterFailureMode;
 import net.jqwik.api.ForAll;
 import net.jqwik.api.Property;
 import net.jqwik.api.constraints.IntRange;

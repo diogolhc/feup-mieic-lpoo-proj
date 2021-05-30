@@ -2,7 +2,6 @@ package model;
 
 import java.io.Serializable;
 import java.util.Objects;
-import java.util.Random;
 
 public class InGameTime implements Comparable<InGameTime>, Serializable {
     private final int minutes;
@@ -39,19 +38,19 @@ public class InGameTime implements Comparable<InGameTime>, Serializable {
     }
 
     public int getMinute() {
-        return minutes;
+        return this.minutes;
     }
 
     public int getDay() {
-        return minutes / 60 / 24;
+        return this.minutes / 60 / 24;
     }
 
     public int getHourOfDay() {
-        return (minutes / 60) % 24;
+        return (this.minutes / 60) % 24;
     }
 
     public int getMinuteOfHour() {
-        return minutes % 60;
+        return this.minutes % 60;
     }
 
     public InGameTime add(InGameTime inGameTime) {

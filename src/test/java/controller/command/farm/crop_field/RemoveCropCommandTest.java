@@ -20,31 +20,31 @@ public class RemoveCropCommandTest {
 
     @BeforeEach
     public void setUp() {
-        stateReady = Mockito.mock(ReadyToHarvest.class);
-        statePlanted = Mockito.mock(Planted.class);
-        stateNotPlanted = Mockito.mock(NotPlanted.class);
-        cropField = new CropField(new Position(0, 0));
-        command = new RemoveCropCommand(cropField);
+        this.stateReady = Mockito.mock(ReadyToHarvest.class);
+        this.statePlanted = Mockito.mock(Planted.class);
+        this.stateNotPlanted = Mockito.mock(NotPlanted.class);
+        this.cropField = new CropField(new Position(0, 0));
+        this.command = new RemoveCropCommand(this.cropField);
     }
 
     @Test
     public void executeReady() {
-        cropField.setState(stateReady);
-        command.execute();
-        Assertions.assertTrue(cropField.getState() instanceof NotPlanted);
+        this.cropField.setState(this.stateReady);
+        this.command.execute();
+        Assertions.assertTrue(this.cropField.getState() instanceof NotPlanted);
     }
 
     @Test
     public void executeNotPlanted() {
-        cropField.setState(stateNotPlanted);
-        command.execute();
-        Assertions.assertTrue(cropField.getState() instanceof NotPlanted);
+        this.cropField.setState(this.stateNotPlanted);
+        this.command.execute();
+        Assertions.assertTrue(this.cropField.getState() instanceof NotPlanted);
     }
 
     @Test
     public void executePlanted() {
-        cropField.setState(statePlanted);
-        command.execute();
-        Assertions.assertTrue(cropField.getState() instanceof NotPlanted);
+        this.cropField.setState(this.statePlanted);
+        this.command.execute();
+        Assertions.assertTrue(this.cropField.getState() instanceof NotPlanted);
     }
 }

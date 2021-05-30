@@ -14,7 +14,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class WarehouseMenuControllerBuilderTest {
@@ -24,9 +23,9 @@ public class WarehouseMenuControllerBuilderTest {
 
     @BeforeEach
     public void setUp() {
-        farm = Mockito.mock(Farm.class);
-        inventory = new Inventory(500);
-        Mockito.when(farm.getInventory()).thenReturn(inventory);
+        this.farm = Mockito.mock(Farm.class);
+        this.inventory = new Inventory(500);
+        Mockito.when(this.farm.getInventory()).thenReturn(this.inventory);
     }
 
     @Test
@@ -47,11 +46,11 @@ public class WarehouseMenuControllerBuilderTest {
             });
         }
 
-        Mockito.when(farm.getAllItems()).thenReturn(items);
-        inventory.storeItem(items.get(1), 200);
+        Mockito.when(this.farm.getAllItems()).thenReturn(items);
+        this.inventory.storeItem(items.get(1), 200);
 
-        builder = new WarehouseMenuControllerBuilder(Mockito.mock(GameController.class), farm, new Edifice("TEST"));
-        MenuController menuController = builder.buildMenu();
+        this.builder = new WarehouseMenuControllerBuilder(Mockito.mock(GameController.class), this.farm, new Edifice("TEST"));
+        MenuController menuController = this.builder.buildMenu();
         Assertions.assertEquals("TEST", menuController.getMenu().getTitle());
         Assertions.assertTrue(menuController.getMenu().getLabels().stream().anyMatch(label ->
                 label.getString().equals("USED SPACE: 200/500")));
@@ -66,10 +65,10 @@ public class WarehouseMenuControllerBuilderTest {
 
     @Test
     public void buildMenuEmpty() {
-        Mockito.when(farm.getAllItems()).thenReturn(new ArrayList<>());
+        Mockito.when(this.farm.getAllItems()).thenReturn(new ArrayList<>());
 
-        builder = new WarehouseMenuControllerBuilder(Mockito.mock(GameController.class), farm, new Edifice("TEST"));
-        MenuController menuController = builder.buildMenu();
+        this.builder = new WarehouseMenuControllerBuilder(Mockito.mock(GameController.class), this.farm, new Edifice("TEST"));
+        MenuController menuController = this.builder.buildMenu();
         Assertions.assertEquals("TEST", menuController.getMenu().getTitle());
         Assertions.assertTrue(menuController.getMenu().getLabels().stream().anyMatch(label ->
                 label.getString().equals("USED SPACE: 0/500")));

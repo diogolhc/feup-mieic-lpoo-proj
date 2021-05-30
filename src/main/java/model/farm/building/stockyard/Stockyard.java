@@ -60,7 +60,7 @@ public class Stockyard extends Buildable {
 
     @Override
     public String getName() {
-        return livestockType.getAnimalName() + " S.Y.";
+        return this.livestockType.getAnimalName() + " S.Y.";
     }
 
     @Override
@@ -90,7 +90,7 @@ public class Stockyard extends Buildable {
     }
 
     public StockyardState getState() {
-        return state;
+        return this.state;
     }
 
     public InGameTime getRemainingTime() {

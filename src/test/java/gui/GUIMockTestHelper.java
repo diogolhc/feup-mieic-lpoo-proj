@@ -52,8 +52,8 @@ public class GUIMockTestHelper {
             int x = invocation.getArgument(0);
             int y = invocation.getArgument(1);
             char c = invocation.getArgument(2);
-            this.backgroundColors[y][x] = currentBackgroundColor;
-            this.foregroundColors[y][x] = currentForegroundColor;
+            this.backgroundColors[y][x] = this.currentBackgroundColor;
+            this.foregroundColors[y][x] = this.currentForegroundColor;
             this.characters[y][x] = c;
             return null;
         }).when(gui).drawChar(Mockito.anyInt(), Mockito.anyInt(), Mockito.anyChar());
@@ -64,8 +64,8 @@ public class GUIMockTestHelper {
             int y = invocation.getArgument(1);
             for (int i = 0; i < s.length(); i++) {
                 char c = s.charAt(i);
-                this.backgroundColors[y][x] = currentBackgroundColor;
-                this.foregroundColors[y][x] = currentForegroundColor;
+                this.backgroundColors[y][x] = this.currentBackgroundColor;
+                this.foregroundColors[y][x] = this.currentForegroundColor;
                 this.characters[y][x] = c;
                 x += 1;
             }

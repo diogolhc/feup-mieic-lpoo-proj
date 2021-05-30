@@ -37,9 +37,9 @@ public class CropFieldGrowingMenuControllerBuilder extends PopupMenuControllerBu
                 this.controller, this.farm.getInventory(), this.cropField);
 
         MenuController harvestMenuController = harvestMenuControllerBuilder.buildMenuCentered(
-                controller.getWindowWidth(), controller.getWindowHeight());
+                this.controller.getWindowWidth(), this.controller.getWindowHeight());
 
-        Command closingCondition = new ConditionalCommand(() -> cropField.getState() instanceof ReadyToHarvest)
+        Command closingCondition = new ConditionalCommand(() -> this.cropField.getState() instanceof ReadyToHarvest)
                 .ifTrue(new SetControllerStateCommand(this.controller, harvestMenuController));
 
         return new PopupMenuControllerWithTimePassedReaction(menu, this.controller,
@@ -58,7 +58,7 @@ public class CropFieldGrowingMenuControllerBuilder extends PopupMenuControllerBu
     private void addRemoveCropButton(List<ButtonController> buttons) {
         Button removeCropButton = new Button(new Position(1, 8), "REMOVE CROP");
         Command removeCropButtonCommand = new CompoundCommand()
-                .addCommand(new RemoveCropCommand(cropField))
+                .addCommand(new RemoveCropCommand(this.cropField))
                 .addCommand(super.getClosePopupMenuCommand());
         buttons.add(new ButtonController(removeCropButton, removeCropButtonCommand));
     }
@@ -77,21 +77,21 @@ public class CropFieldGrowingMenuControllerBuilder extends PopupMenuControllerBu
     private void addCropTypeLabel(List<Label> labels) {
         labels.add(new Label(
                 new Position(1, 4),
-                () -> "CROP: " + cropField.getState().getCrop().getName()
+                () -> "CROP: " + this.cropField.getState().getCrop().getName()
         ));
     }
 
     private void addRemainingTimeLabel(List<Label> labels) {
         labels.add(new Label(
                 new Position(1, 5),
-                () -> "REMAINING TIME: " + cropField.getRemainingTime().getTimerString()
+                () -> "REMAINING TIME: " + this.cropField.getRemainingTime().getTimerString()
         ));
     }
 
     private void addQuantityLabel(List<Label> labels) {
         labels.add( new Label(
                 new Position(1, 6),
-                () -> "QUANTITY: " + cropField.getHarvestAmount()
+                () -> "QUANTITY: " + this.cropField.getHarvestAmount()
         ));
     }
 

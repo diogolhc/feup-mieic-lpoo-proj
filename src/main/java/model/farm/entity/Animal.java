@@ -3,8 +3,6 @@ package model.farm.entity;
 import model.InGameTime;
 import model.Position;
 
-import java.io.Serializable;
-
 public class Animal extends Entity {
     private InGameTime idleTime;
 
@@ -14,7 +12,7 @@ public class Animal extends Entity {
     }
 
     public InGameTime getIdleTime() {
-        return idleTime;
+        return this.idleTime;
     }
 
     public void setIdleTime(InGameTime idleTime) {

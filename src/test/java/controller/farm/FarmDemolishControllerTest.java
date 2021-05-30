@@ -1,7 +1,6 @@
 package controller.farm;
 
 import controller.GameController;
-import controller.menu.PauseMenuController;
 import gui.GUI;
 import model.InGameTime;
 import model.Position;
@@ -28,45 +27,45 @@ public class FarmDemolishControllerTest {
     public void setUp() {
         BuildingSet buildings = new BuildingSet(
                 Mockito.mock(Edifice.class), Mockito.mock(Edifice.class), Mockito.mock(Edifice.class));
-        farm = new Farm(6, 8, buildings);
-        farm.setTime(new InGameTime(0, 0, 0));
-        farm.setCurrentWeather(new Weather("SUNNY"));
-        marker = Mockito.mock(Entity.class);
-        Mockito.when(marker.getPosition()).thenReturn(new Position(0, 0));
-        gameController = Mockito.mock(GameController.class);
-        controller = new FarmDemolishController(farm, gameController, 1, marker);
+        this.farm = new Farm(6, 8, buildings);
+        this.farm.setTime(new InGameTime(0, 0, 0));
+        this.farm.setCurrentWeather(new Weather("SUNNY"));
+        this.marker = Mockito.mock(Entity.class);
+        Mockito.when(this.marker.getPosition()).thenReturn(new Position(0, 0));
+        this.gameController = Mockito.mock(GameController.class);
+        this.controller = new FarmDemolishController(this.farm, this.gameController, 1, this.marker);
     }
 
     @Test
     public void back() {
-        Mockito.verifyNoInteractions(gameController);
-        controller.reactKeyboard(GUI.KEYBOARD_ACTION.BACK);
-        Mockito.verify(gameController, Mockito.times(1))
+        Mockito.verifyNoInteractions(this.gameController);
+        this.controller.reactKeyboard(GUI.KEYBOARD_ACTION.BACK);
+        Mockito.verify(this.gameController, Mockito.times(1))
                 .setGameControllerState(Mockito.any(FarmWithFarmerController.class));
     }
 
     @Test
     public void markerReactsToKeyboard() {
-        Mockito.verifyNoInteractions(marker);
-        controller.reactKeyboard(GUI.KEYBOARD_ACTION.MOVE_RIGHT);
-        Mockito.verify(marker, Mockito.times(1)).getPosition();
+        Mockito.verifyNoInteractions(this.marker);
+        this.controller.reactKeyboard(GUI.KEYBOARD_ACTION.MOVE_RIGHT);
+        Mockito.verify(this.marker, Mockito.times(1)).getPosition();
     }
 
     @Test
     public void reactDemolish() {
-        farm.getBuildings().addCropField(Mockito.mock(CropField.class));
-        farm.getBuildings().addStockyard(Mockito.mock(Stockyard.class));
+        this.farm.getBuildings().addCropField(Mockito.mock(CropField.class));
+        this.farm.getBuildings().addStockyard(Mockito.mock(Stockyard.class));
 
-        for (Building building: farm.getBuildings().getAllBuildings()) {
+        for (Building building: this.farm.getBuildings().getAllBuildings()) {
             Mockito.when(building.getOccupiedRegion()).thenReturn(new RectangleRegion(new Position(0, 0), 1, 1));
         }
 
-        controller.reactKeyboard(GUI.KEYBOARD_ACTION.MOVE_RIGHT);
-        for (Building building: farm.getBuildings().getAllBuildings()) {
+        this.controller.reactKeyboard(GUI.KEYBOARD_ACTION.MOVE_RIGHT);
+        for (Building building: this.farm.getBuildings().getAllBuildings()) {
             Mockito.verifyNoInteractions(building);
         }
-        controller.reactKeyboard(GUI.KEYBOARD_ACTION.INTERACT);
-        for (Building building: farm.getBuildings().getAllBuildings()) {
+        this.controller.reactKeyboard(GUI.KEYBOARD_ACTION.INTERACT);
+        for (Building building: this.farm.getBuildings().getAllBuildings()) {
             Mockito.verify(building, Mockito.times(1)).getOccupiedRegion();
         }
     }

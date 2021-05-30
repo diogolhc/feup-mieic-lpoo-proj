@@ -20,7 +20,7 @@ public class DemolishMarkerController extends KeyboardReactorEntityController {
 
     @Override
     protected void moveEntity(Position position) {
-        if (farm.getInsideRegion().contains(position)) {
+        if (this.farm.getInsideRegion().contains(position)) {
             this.marker.setPosition(position);
         }
     }

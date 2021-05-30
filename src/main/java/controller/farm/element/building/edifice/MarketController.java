@@ -6,7 +6,6 @@ import controller.command.controller_state.OpenPopupMenuCommand;
 import controller.farm.FarmController;
 import controller.menu.builder.PopupMenuControllerBuilder;
 import controller.menu.builder.building.market.MarketMenuControllerBuilder;
-import model.farm.Farm;
 import model.farm.building.Edifice;
 
 public class MarketController extends EdificeController {

@@ -35,14 +35,14 @@ public class AnimalProduct extends Item {
 
     @Override
     public Currency getSellPrice() {
-        return sellPrice;
+        return this.sellPrice;
     }
 
     public InGameTime getProductionTime() {
-        return productionTime;
+        return this.productionTime;
     }
 
     public int getBaseProducedAmount() {
-        return baseProducedAmount;
+        return this.baseProducedAmount;
     }
 }

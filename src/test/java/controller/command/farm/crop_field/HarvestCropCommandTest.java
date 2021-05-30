@@ -23,39 +23,39 @@ public class HarvestCropCommandTest {
 
     @BeforeEach
     public void setUp() {
-        stateReady = Mockito.mock(ReadyToHarvest.class);
-        Mockito.when(stateReady.getCrop()).thenReturn(Mockito.mock(Crop.class));
-        Mockito.when(stateReady.getHarvestAmount()).thenReturn(5);
-        statePlanted = Mockito.mock(Planted.class);
-        stateNotPlanted = Mockito.mock(NotPlanted.class);
-        inventory = Mockito.mock(Inventory.class);
+        this.stateReady = Mockito.mock(ReadyToHarvest.class);
+        Mockito.when(this.stateReady.getCrop()).thenReturn(Mockito.mock(Crop.class));
+        Mockito.when(this.stateReady.getHarvestAmount()).thenReturn(5);
+        this.statePlanted = Mockito.mock(Planted.class);
+        this.stateNotPlanted = Mockito.mock(NotPlanted.class);
+        this.inventory = Mockito.mock(Inventory.class);
 
-        cropField = new CropField(new Position(0, 0));
-        command = new HarvestCropCommand(inventory, cropField);
+        this.cropField = new CropField(new Position(0, 0));
+        this.command = new HarvestCropCommand(this.inventory, this.cropField);
     }
 
     @Test
     public void executeReady() {
-        cropField.setState(stateReady);
-        command.execute();
-        Assertions.assertTrue(cropField.getState() instanceof NotPlanted);
-        Mockito.verify(inventory, Mockito.times(1))
-                .storeItem(stateReady.getCrop(), stateReady.getHarvestAmount());
+        this.cropField.setState(this.stateReady);
+        this.command.execute();
+        Assertions.assertTrue(this.cropField.getState() instanceof NotPlanted);
+        Mockito.verify(this.inventory, Mockito.times(1))
+                .storeItem(this.stateReady.getCrop(), this.stateReady.getHarvestAmount());
     }
 
     @Test
     public void executeNotPlanted() {
-        cropField.setState(stateNotPlanted);
-        command.execute();
-        Assertions.assertSame(stateNotPlanted, cropField.getState());
-        Mockito.verifyNoInteractions(inventory);
+        this.cropField.setState(this.stateNotPlanted);
+        this.command.execute();
+        Assertions.assertSame(this.stateNotPlanted, this.cropField.getState());
+        Mockito.verifyNoInteractions(this.inventory);
     }
 
     @Test
     public void executePlanted() {
-        cropField.setState(statePlanted);
-        command.execute();
-        Assertions.assertSame(statePlanted, cropField.getState());
-        Mockito.verifyNoInteractions(inventory);
+        this.cropField.setState(this.statePlanted);
+        this.command.execute();
+        Assertions.assertSame(this.statePlanted, this.cropField.getState());
+        Mockito.verifyNoInteractions(this.inventory);
     }
 }

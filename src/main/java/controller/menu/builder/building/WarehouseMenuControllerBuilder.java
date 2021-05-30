@@ -35,12 +35,12 @@ public class WarehouseMenuControllerBuilder extends PopupMenuControllerBuilder {
 
     private void addSpaceUsedLabel(List<Label> labels) {
         labels.add(new Label(new Position(1, 4),
-                () -> "USED SPACE: " + inventory.getOccupied() + "/" + inventory.getCapacity()));
+                () -> "USED SPACE: " + this.inventory.getOccupied() + "/" + this.inventory.getCapacity()));
     }
 
     private void addAllItemsLabels(List<Label> labels) {
         int y = 6;
-        for (Item item: items) {
+        for (Item item: this.items) {
             addItemLabel(labels, new Position(1, y), item);
             y += 1;
         }
@@ -55,7 +55,7 @@ public class WarehouseMenuControllerBuilder extends PopupMenuControllerBuilder {
 
     @Override
     protected int getHeight() {
-        return 7 + items.size();
+        return 7 + this.items.size();
     }
 
     @Override
@@ -65,6 +65,6 @@ public class WarehouseMenuControllerBuilder extends PopupMenuControllerBuilder {
 
     @Override
     public String getTitle() {
-        return warehouse.getName();
+        return this.warehouse.getName();
     }
 }

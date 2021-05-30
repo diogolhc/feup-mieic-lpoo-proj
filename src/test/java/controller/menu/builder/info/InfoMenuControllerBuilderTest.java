@@ -4,10 +4,8 @@ import controller.GameController;
 import controller.menu.MenuController;
 import controller.menu.PopupMenuController;
 import controller.menu.builder.MenuControllerBuilder;
-import controller.menu.builder.PauseMenuControllerBuilder;
 import model.Position;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -16,8 +14,8 @@ public class InfoMenuControllerBuilderTest {
 
     @Test
     public void buildMenu() {
-        builder = new InfoMenuControllerBuilder(Mockito.mock(GameController.class), "TITLE", "MESSAGE TEST");
-        MenuController menuController = builder.buildMenu(new Position(0, 0));
+        this.builder = new InfoMenuControllerBuilder(Mockito.mock(GameController.class), "TITLE", "MESSAGE TEST");
+        MenuController menuController = this.builder.buildMenu(new Position(0, 0));
         Assertions.assertTrue(menuController instanceof PopupMenuController);
         Assertions.assertEquals("TITLE", menuController.getMenu().getTitle());
         Assertions.assertEquals(1, menuController.getMenu().getLabels().size());
@@ -32,9 +30,9 @@ public class InfoMenuControllerBuilderTest {
 
     @Test
     public void buildMenuMultilineMessage() {
-        builder = new InfoMenuControllerBuilder(Mockito.mock(GameController.class), "TITLE",
+        this.builder = new InfoMenuControllerBuilder(Mockito.mock(GameController.class), "TITLE",
                 "MESSAGE TEST\nMESSAGE\nTHE BIGGEST LINE OF ALL\nsmall");
-        MenuController menuController = builder.buildMenu(new Position(0, 0));
+        MenuController menuController = this.builder.buildMenu(new Position(0, 0));
 
         Assertions.assertEquals(25, menuController.getMenu().getWidth());
         Assertions.assertEquals(9, menuController.getMenu().getHeight());
@@ -42,8 +40,8 @@ public class InfoMenuControllerBuilderTest {
 
     @Test
     public void buildMenuSmallMessage() {
-        builder = new InfoMenuControllerBuilder(Mockito.mock(GameController.class), "TITLE", "hi");
-        MenuController menuController = builder.buildMenu(new Position(0, 0));
+        this.builder = new InfoMenuControllerBuilder(Mockito.mock(GameController.class), "TITLE", "hi");
+        MenuController menuController = this.builder.buildMenu(new Position(0, 0));
 
         Assertions.assertEquals(10, menuController.getMenu().getWidth());
         Assertions.assertEquals(6, menuController.getMenu().getHeight());
@@ -51,8 +49,8 @@ public class InfoMenuControllerBuilderTest {
 
     @Test
     public void buildMenuEmptyMessage() {
-        builder = new InfoMenuControllerBuilder(Mockito.mock(GameController.class), "TEST", "");
-        MenuController menuController = builder.buildMenu(new Position(0, 0));
+        this.builder = new InfoMenuControllerBuilder(Mockito.mock(GameController.class), "TEST", "");
+        MenuController menuController = this.builder.buildMenu(new Position(0, 0));
 
         Assertions.assertEquals(9, menuController.getMenu().getWidth());
         Assertions.assertEquals(6, menuController.getMenu().getHeight());

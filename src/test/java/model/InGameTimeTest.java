@@ -5,7 +5,6 @@ import net.jqwik.api.Property;
 import net.jqwik.api.constraints.IntRange;
 import net.jqwik.api.constraints.Positive;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
@@ -30,10 +29,10 @@ public class InGameTimeTest {
     public void testGetDayAndTimeOfDay(@ForAll @Positive @IntRange(max = 999) int day,
                                        @ForAll @Positive @IntRange(max = 23) int hour,
                                        @ForAll @Positive @IntRange(max = 59) int minute) {
-        time = new InGameTime(day, hour, minute);
-        Assertions.assertEquals(day, time.getDay());
-        Assertions.assertEquals(hour, time.getHourOfDay());
-        Assertions.assertEquals(minute, time.getMinuteOfHour());
+        this.time = new InGameTime(day, hour, minute);
+        Assertions.assertEquals(day, this.time.getDay());
+        Assertions.assertEquals(hour, this.time.getHourOfDay());
+        Assertions.assertEquals(minute, this.time.getMinuteOfHour());
     }
 
     @Test
@@ -62,22 +61,22 @@ public class InGameTimeTest {
 
     @Test
     public void testDayTimeString() {
-        time = new InGameTime(3,2, 1);
-        Assertions.assertEquals("DAY 003  02:01", time.getDayTimeString());
-        time = new InGameTime(0, 5, 40);
-        Assertions.assertEquals("DAY 000  05:40", time.getDayTimeString());
-        time = new InGameTime(0, 2, 2);
-        Assertions.assertEquals("DAY 000  02:02", time.getDayTimeString());
+        this.time = new InGameTime(3,2, 1);
+        Assertions.assertEquals("DAY 003  02:01", this.time.getDayTimeString());
+        this.time = new InGameTime(0, 5, 40);
+        Assertions.assertEquals("DAY 000  05:40", this.time.getDayTimeString());
+        this.time = new InGameTime(0, 2, 2);
+        Assertions.assertEquals("DAY 000  02:02", this.time.getDayTimeString());
     }
 
     @Test
     public void testTimerString() {
-        time = new InGameTime(3,2, 1);
-        Assertions.assertEquals("3:02:01", time.getTimerString());
-        time = new InGameTime(0, 5, 40);
-        Assertions.assertEquals("05:40", time.getTimerString());
-        time = new InGameTime(0, 2, 2);
-        Assertions.assertEquals("02:02", time.getTimerString());
+        this.time = new InGameTime(3,2, 1);
+        Assertions.assertEquals("3:02:01", this.time.getTimerString());
+        this.time = new InGameTime(0, 5, 40);
+        Assertions.assertEquals("05:40", this.time.getTimerString());
+        this.time = new InGameTime(0, 2, 2);
+        Assertions.assertEquals("02:02", this.time.getTimerString());
     }
 
     @Property
