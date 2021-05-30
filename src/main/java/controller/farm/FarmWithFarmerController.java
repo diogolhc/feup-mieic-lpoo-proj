@@ -35,12 +35,6 @@ public class FarmWithFarmerController extends FarmController {
         farmerController.reactKeyboard(action);
     }
 
-    @Override
-    public void reactMouseMovement(Position position) {}
-
-    @Override
-    public void reactMouseClick(Position position) {}
-
     private void pauseGame() {
         PopupMenuControllerBuilder pauseMenu = new PauseMenuControllerBuilder(this.controller);
         new OpenPopupMenuCommand(this.controller, pauseMenu).execute();
