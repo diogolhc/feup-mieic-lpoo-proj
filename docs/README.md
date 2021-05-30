@@ -633,6 +633,42 @@ existing classes.
 
 ## KNOWN CODE SMELLS AND REFACTORING SUGGESTIONS
 
+### Alternative Classes with Different Interfaces
+
+The [CropFieldState](../src/main/java/model/farm/building/crop_field/state/CropFieldState.java)
+and [StockYardState](../src/main/java/model/farm/building/stockyard/state/StockyardState.java) interfaces
+have a great number of common methods. Even though some of them have different names, the semantics are the same.
+Furthermore, both interfaces have the same number of classes that implement them with very similar meanings.
+[CropFieldState](../src/main/java/model/farm/building/crop_field/state/CropFieldState.java) is implemented by
+[NotPlanted](../src/main/java/model/farm/building/crop_field/state/NotPlanted.java),
+[Planted](../src/main/java/model/farm/building/crop_field/state/Planted.java) and
+[ReadyToHarvest](../src/main/java/model/farm/building/crop_field/state/ReadyToHarvest.java) while
+[StockYardState](../src/main/java/model/farm/building/stockyard/state/StockyardState.java) is implemented by
+[NotProducing](../src/main/java/model/farm/building/stockyard/state/NotProducing.java),
+[Producing](../src/main/java/model/farm/building/stockyard/state/Producing.java) and
+[ReadyToCollect](../src/main/java/model/farm/building/stockyard/state/ReadyToCollect.java). These two different implementations
+lead also to **Duplicate Code**.
+
+To solve this problem, since both interfaces have very similar methods, we should start by **Rename Method** to make
+the similar methods have also the same name. After that, we could have the [CropField](../src/main/java/model/farm/building/crop_field/CropField.java) 
+and [Stockyard](../src/main/java/model/farm/building/stockyard/Stockyard.java) implement an interface: *Produceable*,
+with *setState()* method so that we could merge both [CropFieldState](../src/main/java/model/farm/building/crop_field/state/CropFieldState.java)
+and [StockYardState](../src/main/java/model/farm/building/stockyard/state/StockyardState.java) interfaces alongside with its respective class
+implementations into a single interface and a single set of States: NotProducing, Producing and ReadyToCollect.
+
+
+### Lazy Class
+
+The [PositionRegion](../src/main/java/model/region/PositionRegion.java) class was designed to represent a region with a single position.
+Thus, it ended up having an instance of a [Position](../src/main/java/model/Position.java) and implementing only a single and simple method of
+the [Region](../src/main/java/model/region/Region.java) interface. This was done also for future development of methods in
+[Region](../src/main/java/model/region/Region.java) interface or in [PositionRegion](../src/main/java/model/region/PositionRegion.java) class itself,
+but no further features were added.
+
+To tackle this problem we could make [Position](../src/main/java/model/Position.java)
+class implement the [Region](../src/main/java/model/region/Region.java)
+interface nullifying the need for the [PositionRegion](../src/main/java/model/region/PositionRegion.java) class.
+
 
 
 ## SOLVED CODE SMELLS
