@@ -110,7 +110,7 @@ public class SellMenuControllerBuilder extends PopupMenuControllerBuilder {
     }
 
     @Override
-    protected String getTitle() {
+    public String getTitle() {
         return "SELL";
     }
 }

@@ -25,4 +25,8 @@ public class OpenPopupMenuCommand implements Command {
 
         this.controller.setGameControllerState(popupController);
     }
+
+    public PopupMenuControllerBuilder getMenuBuilder() {
+        return this.menuBuilder;
+    }
 }

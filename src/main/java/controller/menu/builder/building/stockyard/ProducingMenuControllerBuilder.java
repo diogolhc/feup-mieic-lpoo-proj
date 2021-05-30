@@ -108,7 +108,7 @@ public class ProducingMenuControllerBuilder extends PopupMenuControllerBuilder {
     }
 
     @Override
-    protected String getTitle() {
+    public String getTitle() {
         return "PRODUCING";
     }
 }

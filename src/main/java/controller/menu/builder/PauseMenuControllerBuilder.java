@@ -61,7 +61,7 @@ public class PauseMenuControllerBuilder extends PopupMenuControllerBuilder {
     }
 
     @Override
-    protected String getTitle() {
+    public String getTitle() {
         return "PAUSED GAME";
     }
 }

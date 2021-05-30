@@ -21,4 +21,8 @@ public class CompoundCommand implements Command {
             command.execute();
         }
     }
+
+    public List<Command> getCommands() {
+        return this.commands;
+    }
 }

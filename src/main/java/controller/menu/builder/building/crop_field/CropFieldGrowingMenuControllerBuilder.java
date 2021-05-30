@@ -106,7 +106,7 @@ public class CropFieldGrowingMenuControllerBuilder extends PopupMenuControllerBu
     }
 
     @Override
-    protected String getTitle() {
+    public String getTitle() {
         return "GROWING";
     }
 }

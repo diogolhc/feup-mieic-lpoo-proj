@@ -75,7 +75,7 @@ public class HarvestMenuControllerBuilder extends PopupMenuControllerBuilder {
     }
 
     @Override
-    protected String getTitle() {
+    public String getTitle() {
         return "READY TO HARVEST";
     }
 }

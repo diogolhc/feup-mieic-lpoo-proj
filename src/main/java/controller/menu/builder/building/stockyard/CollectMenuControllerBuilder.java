@@ -78,7 +78,7 @@ public class CollectMenuControllerBuilder extends PopupMenuControllerBuilder {
     }
 
     @Override
-    protected String getTitle() {
+    public String getTitle() {
         return "READY TO COLLECT";
     }
 }

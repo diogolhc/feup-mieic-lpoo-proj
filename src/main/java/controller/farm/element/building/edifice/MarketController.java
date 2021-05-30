@@ -22,7 +22,8 @@ public class MarketController extends EdificeController {
         if (this.controller.getGameControllerState() instanceof FarmController) {
             FarmController farmController = (FarmController) this.controller.getGameControllerState();
 
-            PopupMenuControllerBuilder menuControllerBuilder = new MarketMenuControllerBuilder(this.controller, farmController);
+            PopupMenuControllerBuilder menuControllerBuilder = new MarketMenuControllerBuilder(
+                    this.controller, farmController, market);
             return new OpenPopupMenuCommand(this.controller, menuControllerBuilder);
         } else {
             // This never happens because the interaction command is retrieved after

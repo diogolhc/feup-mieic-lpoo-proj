@@ -128,7 +128,7 @@ public class PlantCropMenuControllerBuilder extends PopupMenuControllerBuilder {
     }
 
     @Override
-    protected String getTitle() {
+    public String getTitle() {
         return "PLANT";
     }
 }

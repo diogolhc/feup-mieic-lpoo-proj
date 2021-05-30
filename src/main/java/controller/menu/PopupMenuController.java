@@ -15,15 +15,15 @@ public class PopupMenuController extends MenuController {
         this.backState = backState;
     }
 
-    public void closePopup() {
-        this.gameController.setGameControllerState(backState);
-    }
-
     @Override
     public void reactKeyboard(GUI.KEYBOARD_ACTION action) {
         if (action == GUI.KEYBOARD_ACTION.BACK) {
             this.closePopup();
         }
+    }
+
+    private void closePopup() {
+        this.gameController.setGameControllerState(backState);
     }
 
     @Override

@@ -33,8 +33,12 @@ public class StockyardAnimals implements Serializable {
     }
 
     public void addAnimal(Position animalPosition) {
+        this.addAnimal(new Animal(animalPosition));
+    }
+
+    public void addAnimal(Animal animal) {
         if (this.animals.size() < this.maxNumAnimals) {
-            this.animals.add(new Animal(animalPosition));
+            this.animals.add(animal);
         }
     }
 
