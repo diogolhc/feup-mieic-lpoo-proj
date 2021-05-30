@@ -11,8 +11,52 @@ This project was developed by Diogo Costa (up201906731@edu.fe.up.pt), Pedro Gon√
 
 ## Screenshots
 
-![docs/screenshots/farm.png](docs/screenshots/farm.png)
+![docs/screenshots/main_menu.png](docs/screenshots/main_menu.png)
 
-![docs/screenshots/popup_menu.png](docs/screenshots/popup_menu.png)
+![docs/screenshots/farm_overview.png](docs/screenshots/farm_overview.png)
 
-![docs/screenshots/crop_growing.png](docs/screenshots/crop_growing.png)
+![docs/screenshots/plant_menu.png](docs/screenshots/plant_menu.png)
+
+![docs/screenshots/growing_menu.png](docs/screenshots/growing_menu.png)
+
+![docs/screenshots/house_menu.png](docs/screenshots/house_menu.png)
+
+![docs/screenshots/resting.png](docs/screenshots/resting.png)
+
+![docs/screenshots/ready_to_harvest_menu.png](docs/screenshots/ready_to_harvest_menu.png)
+
+![docs/screenshots/game_save.png](docs/screenshots/game_save.png)
+
+![docs/screenshots/stockyard_cow_menu.png](docs/screenshots/stockyard_cow_menu.png)
+
+![docs/screenshots/stockyard_cow_producing_menu.png](docs/screenshots/stockyard_cow_producing_menu.png)
+
+![docs/screenshots/stockyard_cow_ready_to_collect_menu.png](docs/screenshots/stockyard_cow_ready_to_collect_menu.png)
+
+![docs/screenshots/stockyard_chicken_menu.png](docs/screenshots/stockyard_chicken_menu.png)
+
+![docs/screenshots/stockyard_chicken_producing_menu.png](docs/screenshots/stockyard_chicken_producing_menu.png)
+
+![docs/screenshots/stockyard_chicken_ready_to_collect_menu.png](docs/screenshots/stockyard_chicken_ready_to_collect_menu.png)
+
+![docs/screenshots/market_menu.png](docs/screenshots/market_menu.png)
+
+![docs/screenshots/sell_menu.png](docs/screenshots/sell_menu.png)
+
+![docs/screenshots/build_menu.png](docs/screenshots/build_menu.png)
+
+![docs/screenshots/new_building_blocked.png](docs/screenshots/new_building_blocked.png)
+
+![docs/screenshots/new_building_free.png](docs/screenshots/new_building_free.png)
+
+![docs/screenshots/demolish_house.png](docs/screenshots/demolish_house.png)
+
+![docs/screenshots/demolish_house_warning.png](docs/screenshots/demolish_house_warning.png)
+
+![docs/screenshots/demolish_selected.png](docs/screenshots/demolish_selected.png)
+
+![docs/screenshots/warehouse.png](docs/screenshots/warehouse.png)
+
+![docs/screenshots/paused_game_menu.png](docs/screenshots/paused_game_menu.png)
+
+![docs/screenshots/return_to_main_menu_menu.png](docs/screenshots/return_to_main_menu_menu.png)
