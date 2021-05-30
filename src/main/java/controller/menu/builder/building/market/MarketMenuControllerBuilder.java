@@ -8,6 +8,7 @@ import controller.menu.element.ButtonController;
 import controller.menu.builder.PopupMenuControllerBuilder;
 import model.Position;
 import model.farm.Farm;
+import model.farm.building.Edifice;
 import model.menu.Button;
 
 import java.util.List;
@@ -15,11 +16,13 @@ import java.util.List;
 public class MarketMenuControllerBuilder extends PopupMenuControllerBuilder {
     private final Farm farm;
     private FarmController farmController;
+    private Edifice market;
 
-    public MarketMenuControllerBuilder(GameController controller, FarmController farmController) {
+    public MarketMenuControllerBuilder(GameController controller, FarmController farmController, Edifice market) {
         super(controller);
         this.farm = farmController.getFarm();
         this.farmController = farmController;
+        this.market = market;
     }
 
     @Override
@@ -63,7 +66,7 @@ public class MarketMenuControllerBuilder extends PopupMenuControllerBuilder {
     }
 
     @Override
-    protected String getTitle() {
-        return "MARKET";
+    public String getTitle() {
+        return market.getName();
     }
 }

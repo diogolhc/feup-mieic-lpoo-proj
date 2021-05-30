@@ -5,20 +5,22 @@ import controller.menu.builder.PopupMenuControllerBuilder;
 import model.Position;
 import model.farm.Farm;
 import model.farm.Inventory;
+import model.farm.building.Edifice;
 import model.farm.data.item.Item;
 import model.menu.label.Label;
-import model.menu.label.LabelText;
 
 import java.util.List;
 
 public class WarehouseMenuControllerBuilder extends PopupMenuControllerBuilder {
     private final Inventory inventory;
+    private Edifice warehouse;
     private final List<Item> items;
 
-    public WarehouseMenuControllerBuilder(GameController controller, Farm farm) {
+    public WarehouseMenuControllerBuilder(GameController controller, Farm farm, Edifice warehouse) {
         super(controller);
         this.items = farm.getAllItems();
         this.inventory = farm.getInventory();
+        this.warehouse = warehouse;
     }
 
     @Override
@@ -62,7 +64,7 @@ public class WarehouseMenuControllerBuilder extends PopupMenuControllerBuilder {
     }
 
     @Override
-    protected String getTitle() {
-        return "WAREHOUSE";
+    public String getTitle() {
+        return warehouse.getName();
     }
 }

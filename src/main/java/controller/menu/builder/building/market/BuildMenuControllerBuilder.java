@@ -113,7 +113,7 @@ public class BuildMenuControllerBuilder extends PopupMenuControllerBuilder {
     }
 
     @Override
-    protected String getTitle() {
+    public String getTitle() {
         return "BUILD";
     }
 }

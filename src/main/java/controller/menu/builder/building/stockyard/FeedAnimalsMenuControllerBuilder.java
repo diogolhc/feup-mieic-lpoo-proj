@@ -215,7 +215,7 @@ public class FeedAnimalsMenuControllerBuilder extends PopupMenuControllerBuilder
     }
 
     @Override
-    protected String getTitle() {
+    public String getTitle() {
         return "STOCKYARD";
     }
 }

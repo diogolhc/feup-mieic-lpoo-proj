@@ -44,6 +44,7 @@ public abstract class MenuController implements GameControllerState {
     @Override
     public void reactMouseClick(Position position) {
         for (ButtonController buttonController: this.buttonControllers) {
+            Position relative = position.getRelativeTo(menu.getTopLeftPosition());
             buttonController.reactMouseClick(position.getRelativeTo(menu.getTopLeftPosition()));
         }
     }

@@ -6,9 +6,7 @@ import gui.Color;
 import model.Position;
 import model.menu.label.Label;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class InfoMenuControllerBuilder extends PopupMenuControllerBuilder {
@@ -56,7 +54,7 @@ public class InfoMenuControllerBuilder extends PopupMenuControllerBuilder {
     }
 
     @Override
-    protected String getTitle() {
+    public String getTitle() {
         return this.title;
     }
 

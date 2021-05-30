@@ -1,4 +1,4 @@
-package controller.menu;
+package controller.menu.element;
 
 import controller.command.Command;
 import controller.menu.element.ButtonController;
@@ -53,7 +53,7 @@ public class ButtonControllerTest {
         controller3.reactMouseMovement(position);
         Assertions.assertFalse(button3.isSelected());
 
-        position = new Position(5, 6);
+        position = new Position(5, 5);
         controller1.reactMouseMovement(position);
         Assertions.assertFalse(button1.isSelected());
         controller2.reactMouseMovement(position);

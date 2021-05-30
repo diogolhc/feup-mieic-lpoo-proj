@@ -65,7 +65,7 @@ public class MainMenuControllerBuilder extends MenuControllerBuilder {
     }
 
     @Override
-    protected String getTitle() {
+    public String getTitle() {
         return "FARMVILLE";
     }
 }

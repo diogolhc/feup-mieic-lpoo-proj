@@ -17,4 +17,8 @@ public class SetControllerStateCommand implements Command {
     public void execute() {
         this.controller.setGameControllerState(this.controllerState);
     }
+
+    public GameControllerState getControllerState() {
+        return this.controllerState;
+    }
 }

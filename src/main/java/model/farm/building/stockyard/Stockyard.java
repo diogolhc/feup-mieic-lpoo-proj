@@ -101,6 +101,10 @@ public class Stockyard extends Buildable {
         this.state.setRemainingTime(time);
     }
 
+    public int getCollectAmount() {
+        return this.state.getCollectAmount();
+    }
+
     public void changeCollectAmount(double quantity) {
         this.state.changeCollectAmount(quantity);
     }
