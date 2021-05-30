@@ -106,6 +106,15 @@ while resting (it's easier to rest in a comfortable house). Upgrading the
 market will increase the sell price of items and decrease the building price
 and upgrade price (for tools and edifices). Upgrading the warehouse will increase its capacity.
 
+### Tools menu
+
+![docs/mockups/tools_menu.png](mockups/tools_menu.png)
+
+### Upgrade menu
+
+![docs/mockups/upgrade_menu.png](mockups/upgrade_menu.png)
+
+
 ## DESIGN
 
 ### Transition between screens (for example between the game and menus)
