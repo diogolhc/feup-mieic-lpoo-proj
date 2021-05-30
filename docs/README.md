@@ -636,15 +636,17 @@ existing classes.
 
 
 ## SOLVED CODE SMELLS
+In this section we describe the code smells identified in the intermediate report
+and how we solved them.
+
 ### Middle man
 
-Many of the viewer classes (for example, [FarmerViewer](../src/main/java/viewer/farm/element/entity/FarmerViewer.java))
+Many of the viewer classes (for example, [FarmerViewer](https://github.com/FEUP-LPOO-2021/lpoo-2021-g35/blob/339e1591dcd5b80f1ded20a2c2dc974649c64b4d/src/main/java/viewer/farm/FarmerViewer.java#L7))
 were **Middle Men** as their sole purpose was to delegate the drawing work
 to the respective drawer (gui) class. This added needless complexity to the program
 and also made testing the viewers harder (if the viewer is just delegating
 work to the drawer, its tests would be almost identical to the ones of the
 drawer and it couldn't be tested isolated from the drawer).
-//TODO isto continua a ser verdade :(
 
 To improve the code, we used the **Inline Class** refactor,
 inlining the respective drawer class into the viewer class. In the concrete
@@ -655,7 +657,8 @@ After that, FarmerDrawer was removed.
 
 ### Data class
 
-The classes that were in model.weather and in model.farm.crop
+The classes that were in [model.weather](https://github.com/FEUP-LPOO-2021/lpoo-2021-g35/tree/intermediate/src/main/java/model/weather)  
+and in [model.farm.building.crop_field.crop](https://github.com/FEUP-LPOO-2021/lpoo-2021-g35/tree/intermediate/src/main/java/model/farm/building/crop_field/crop)
 were **Data classes** that only stored constants and included getters for
 those constants. These classes only bloated the code and were replaced
 with concrete instances of a single class.
@@ -667,7 +670,7 @@ was then loaded from the file.
 
 ### Duplicate code
 
-The classes that were in controller.weather.state had very similar logic in their 
+The classes that were in [controller.weather.state](https://github.com/FEUP-LPOO-2021/lpoo-2021-g35/tree/intermediate/src/main/java/controller/farm/weather/state) had very similar logic in their
 *updateWeather* methods. Besides being **Duplicate code**, it was a 
 **long chain of if statements** that made it harder
 to add more weathers or modify the behavior of existing ones.
@@ -679,7 +682,7 @@ of weather change. This means that the weather instance passed to *updateWeather
 contains the information relative to those probabilities. The chained
 if statements were replaced with a for loop iterating through all probabilities and
 respective weather changes. Then, we used **Collapse Hierarchy** to merge
-all the classes in controller.weather.state, because at that point they had 
+all the classes in [controller.weather.state](https://github.com/FEUP-LPOO-2021/lpoo-2021-g35/tree/intermediate/src/main/java/controller/farm/weather/state), because at that point they had
 identical *updateWeather* methods. Finally, the resulting class was inlined 
 in [WeatherController](../src/main/java/controller/farm/element/WeatherController.java)
 because it no longer made sense to have a state and thus both classes had the
